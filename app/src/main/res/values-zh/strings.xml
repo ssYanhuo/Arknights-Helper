@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">明日方舟助手</string>
+    <string name="action_settings">设置</string>
+    <string name="start_game">正在启动悬浮窗服务和游戏……</string>
+</resources>
