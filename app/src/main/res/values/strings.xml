@@ -12,5 +12,60 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
-    <string name="start_game">Game starting...</string>
+    <string name="start_game">Game and service starting...</string>
+    <string name="notification_title">Background service running</string>
+    <string name="notification_text">Tap to stop service</string>
+    <string name="notification_channel">Overlay notification</string>
+    <string name="tab_title_hr">HR Calculator</string>
+    <string name="tab_title_material">Material Calculator</string>
+    <string name="tab_title_exp">EXP Calculator</string>
+    <string name="tab_title_hide">Close</string>
+
+    <string name="hr_selector_star">Rate:</string>
+    <string name="hr_star_1" translatable="false">1★</string>
+    <string name="hr_star_2" translatable="false">2★</string>
+    <string name="hr_star_3" translatable="false">3★</string>
+    <string name="hr_star_4" translatable="false">4★</string>
+    <string name="hr_star_5" translatable="false">5★</string>
+    <string name="hr_star_6" translatable="false">6★</string>
+
+    <string name="hr_selector_qualification">Qualification:</string>
+    <string name="hr_qualification_1" translatable="false">新手</string>
+    <string name="hr_qualification_2" translatable="false">资深干员</string>
+    <string name="hr_qualification_3" translatable="false">高级资深干员</string>
+
+    <string name="hr_selector_position">Position:</string>
+    <string name="hr_position_near" translatable="false">近战位</string>
+    <string name="hr_position_distant" translatable="false">远程位</string>
+
+    <string name="hr_selector_sex">Sex:</string>
+    <string name="hr_sex_male" translatable="false">男性干员</string>
+    <string name="hr_sex_female" translatable="false">女性干员</string>
+
+    <string name="hr_selector_class">Class:</string>
+    <string name="hr_class_vanguard" translatable="false">先锋干员</string>
+    <string name="hr_class_sniper" translatable="false">狙击干员</string>
+    <string name="hr_class_medic" translatable="false">医疗干员</string>
+    <string name="hr_class_caster" translatable="false">术师干员</string>
+    <string name="hr_class_guard" translatable="false">近卫干员</string>
+    <string name="hr_class_defender" translatable="false">重装干员</string>
+    <string name="hr_class_supporter" translatable="false">辅助干员</string>
+    <string name="hr_class_specialist" translatable="false">特种干员</string>
+
+    <string name="hr_selector_tag">Tag:</string>
+    <string name="hr_tag_zhiliao" translatable="false">治疗</string>
+    <string name="hr_tag_zhiyuan" translatable="false">支援</string>
+    <string name="hr_tag_shuchu" translatable="false">输出</string>
+    <string name="hr_tag_qungong" translatable="false">群攻</string>
+    <string name="hr_tag_jiansu" translatable="false">减速</string>
+    <string name="hr_tag_shengcun" translatable="false">生存</string>
+    <string name="hr_tag_fanghu" translatable="false">防护</string>
+    <string name="hr_tag_xveruo" translatable="false">削弱</string>
+    <string name="hr_tag_weiyi" translatable="false">位移</string>
+    <string name="hr_tag_kongchang" translatable="false">控场</string>
+    <string name="hr_tag_baofa" translatable="false">爆发</string>
+    <string name="hr_tag_zhaohuan" translatable="false">召唤</string>
+    <string name="hr_tag_kuaisufuhuo" translatable="false">快速复活</string>
+    <string name="hr_tag_feiyonghuifu" translatable="false">费用回复</string>
+    <string name="hr_description">You can choose 3 tags at most execpt stars.\nData from @Graue Neko</string>
 </resources>

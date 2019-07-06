@@ -1,10 +1,13 @@
-package com.ssyanhuo.arknightshelper;
+package com.ssyanhuo.arknightshelper.mainactivity;
 
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.util.Log;
 import android.view.View;
 
 import androidx.core.view.GravityCompat;
@@ -13,19 +16,23 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.ssyanhuo.arknightshelper.overlay.BackendService;
+import com.ssyanhuo.arknightshelper.R;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.Menu;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final String TAG = "MainActivity";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -36,7 +43,22 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Snackbar.make(view, R.string.start_game, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-
+                Intent intent1 = new Intent(getApplicationContext(), BackendService.class);
+                try{
+                    startService(intent1);
+                }catch (Exception e){
+                    Log.e("Akrnights Helper", "Start service failed!", e);
+                }
+                Intent intent2 = new Intent(Intent.ACTION_MAIN);
+                intent2.addCategory(Intent.CATEGORY_LAUNCHER);
+                ComponentName componentName = new ComponentName("com.hypergryph.arknights", "com.u8.sdk.U8UnityContext");
+                intent2.setComponent(componentName);
+                try{
+                    //startActivity(intent2);
+                }catch (Exception e){
+                    Log.e(TAG, "Start game failed!", e);
+                }
+                FragmentManager fragmentManager = getSupportFragmentManager();
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

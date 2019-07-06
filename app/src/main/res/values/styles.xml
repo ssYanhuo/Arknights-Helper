@@ -16,5 +16,46 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.FloatingWindow" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
 
+    <style name="AppTheme.CheckBox.Blue" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@drawable/checkbox_background_blue</item>
+        <item name="android:button">@null</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:minWidth">@dimen/activity_horizontal_margin</item>
+    </style>
+    <style name="AppTheme.CheckBox.Yellow" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@drawable/checkbox_background_yellow</item>
+        <item name="android:button">@null</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:minWidth">@dimen/activity_horizontal_margin</item>
+    </style>
+    <style name="AppTheme.CheckBox.Green" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@drawable/checkbox_background_green</item>
+        <item name="android:button">@null</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:minWidth">@dimen/activity_horizontal_margin</item>
+    </style>
+    <style name="AppTheme.CheckBox.Red" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@drawable/checkbox_background_red</item>
+        <item name="android:button">@null</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:minWidth">@dimen/activity_horizontal_margin</item>
+    </style>
+    <style name="AppTheme.CheckBox.Cyan" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@drawable/checkbox_background_cyan</item>
+        <item name="android:button">@null</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:minWidth">@dimen/activity_horizontal_margin</item>
+    </style>
+    <style name="AppTheme.CheckBox.Lime" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@drawable/checkbox_background_lime</item>
+        <item name="android:button">@null</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:minWidth">@dimen/activity_horizontal_margin</item>
+    </style>
 </resources>

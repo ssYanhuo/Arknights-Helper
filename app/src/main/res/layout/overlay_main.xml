@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#99000000"
+    android:theme="@style/Theme.AppCompat">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.FloatingWindow">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_title_hr" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_title_exp" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_title_material" />
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_title_hide"/>
+    </com.google.android.material.tabs.TabLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/hr_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:scrollbars="horizontal">
+
+            <TextView
+                android:id="@+id/hr_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hr_description"/>
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/hr_selector_star"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_selector_star" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_star_1"
+                        style="@style/AppTheme.CheckBox.Blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_star_1" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_star_2"
+                        style="@style/AppTheme.CheckBox.Blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_star_2" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_star_3"
+                        style="@style/AppTheme.CheckBox.Blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_star_3" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_star_4"
+                        style="@style/AppTheme.CheckBox.Blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_star_4" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_star_5"
+                        style="@style/AppTheme.CheckBox.Blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_star_5" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_star_6"
+                        style="@style/AppTheme.CheckBox.Blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_star_6" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/hr_selector_qualification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_selector_qualification" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_qualification_1"
+                        style="@style/AppTheme.CheckBox.Yellow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_qualification_1" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_qualification_2"
+                        style="@style/AppTheme.CheckBox.Yellow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_qualification_2" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_qualification_3"
+                        style="@style/AppTheme.CheckBox.Yellow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_qualification_3" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/hr_selector_position"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_selector_position" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_position_near"
+                        style="@style/AppTheme.CheckBox.Green"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_position_near" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_position_distant"
+                        style="@style/AppTheme.CheckBox.Green"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_position_distant" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/hr_selector_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_selector_sex" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_sex_male"
+                        style="@style/AppTheme.CheckBox.Red"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_sex_male" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_sex_female"
+                        style="@style/AppTheme.CheckBox.Red"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_sex_female" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/hr_selector_class"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:scrollbars="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_selector_class" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_class_vanguard"
+                        style="@style/AppTheme.CheckBox.Cyan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_class_vanguard" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_class_sniper"
+                        style="@style/AppTheme.CheckBox.Cyan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_class_sniper" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_class_medic"
+                        style="@style/AppTheme.CheckBox.Cyan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_class_medic" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_class_caster"
+                        style="@style/AppTheme.CheckBox.Cyan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_class_caster" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_class_guard"
+                        style="@style/AppTheme.CheckBox.Cyan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_class_guard" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_class_defender"
+                        style="@style/AppTheme.CheckBox.Cyan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_class_defender" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_class_supporter"
+                        style="@style/AppTheme.CheckBox.Cyan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_class_supporter" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_class_specialist"
+                        style="@style/AppTheme.CheckBox.Cyan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_class_specialist" />
+
+            </LinearLayout>
+            </HorizontalScrollView>
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/hr_selector_extra"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:scrollbars="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_selector_tag" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_class_zhiliao"
+                        style="@style/AppTheme.CheckBox.Lime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_tag_zhiliao" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_class_zhiyuan"
+                        style="@style/AppTheme.CheckBox.Lime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_tag_zhiyuan" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_class_shuchu"
+                        style="@style/AppTheme.CheckBox.Lime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_tag_shuchu" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_class_qungong"
+                        style="@style/AppTheme.CheckBox.Lime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_tag_qungong" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_class_jiansu"
+                        style="@style/AppTheme.CheckBox.Lime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_tag_jiansu" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_class_shengcun"
+                        style="@style/AppTheme.CheckBox.Lime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_tag_shengcun" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_class_fanghu"
+                        style="@style/AppTheme.CheckBox.Lime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_tag_fanghu" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_class_xveruo"
+                        style="@style/AppTheme.CheckBox.Lime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_tag_xveruo" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_class_weiyi"
+                        style="@style/AppTheme.CheckBox.Lime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_tag_weiyi" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_class_kongcchang"
+                        style="@style/AppTheme.CheckBox.Lime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_tag_kongchang" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_class_baofa"
+                        style="@style/AppTheme.CheckBox.Lime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_tag_baofa" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_class_zhaohuan"
+                        style="@style/AppTheme.CheckBox.Lime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_tag_zhaohuan" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_class_kuaisufuhuo"
+                        style="@style/AppTheme.CheckBox.Lime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_tag_kuaisufuhuo" />
+
+                    <CheckBox
+                        android:id="@+id/hr_checkbox_class_feiyonghuifu"
+                        style="@style/AppTheme.CheckBox.Lime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hr_tag_feiyonghuifu" />
+
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:id="@+id/exp_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="即将到来"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/material_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="即将到来"/>
+    </LinearLayout>
+
+</LinearLayout>

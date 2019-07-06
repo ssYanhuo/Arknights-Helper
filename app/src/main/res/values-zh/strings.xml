@@ -2,5 +2,19 @@
 <resources>
     <string name="app_name">明日方舟助手</string>
     <string name="action_settings">设置</string>
-    <string name="start_game">正在启动悬浮窗服务和游戏……</string>
+    <string name="start_game">正在与Arknights Helper™取得神经连接……</string>
+    <string name="notification_title">已连接到Arknights Helper™</string>
+    <string name="notification_text">点击来结束服务</string>
+    <string name="notification_channel">悬浮窗通知</string>
+    <string name="tab_title_hr">公开招募</string>
+    <string name="tab_title_material">材料计算</string>
+    <string name="tab_title_exp">经验计算</string>
+    <string name="tab_title_hide">关闭</string>
+    <string name="hr_selector_star">星级：</string>
+    <string name="hr_selector_qualification">资质：</string>
+    <string name="hr_selector_position">位置：</string>
+    <string name="hr_selector_sex">性别：</string>
+    <string name="hr_selector_class">种类：</string>
+    <string name="hr_selector_tag">词缀：</string>
+    <string name="hr_description">除星级外，最多可选 3 个标签，星级默认全选。\n数据来自 @Graue Neko</string>
 </resources>
