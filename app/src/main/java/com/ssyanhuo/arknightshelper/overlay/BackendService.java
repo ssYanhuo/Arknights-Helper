@@ -25,6 +25,7 @@ import android.widget.CompoundButton;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,8 +34,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONPObject;
 import com.google.android.material.tabs.TabLayout;
 import com.ssyanhuo.arknightshelper.R;
+import com.ssyanhuo.arknightshelper.utiliy.DpUtiliy;
+import com.ssyanhuo.arknightshelper.utiliy.JsonUtility;
+
+import org.json.JSONArray;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -49,7 +56,15 @@ public class BackendService extends Service {
     LinearLayout linearLayout_material;
     Button button;
     ArrayList<CheckBox> checkBoxes;
-    ArrayList<ArrayList<String>> selcetedItems;
+    ArrayList<String> selectedStar;
+    ArrayList<String> selectedQualification;
+    ArrayList<String> selectedPosition;
+    ArrayList<String> selectedSex;
+    ArrayList<String> selectedType;
+    ArrayList<String> selectedTag;
+    String hrJson;
+    String expJson;
+    String materialJson;
     final int HR = 0;
     final int EXP = 1;
     final int MATERIAL = 2;
@@ -59,20 +74,10 @@ public class BackendService extends Service {
         return null;
     }
 
-    public static int dip2px(Context context, float dpValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
-    }
-
-    public static int px2dip(Context context, float pxValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (pxValue / scale + 0.5f);
-    }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        Toast.makeText(getApplicationContext(), "started", Toast.LENGTH_SHORT).show();
         Intent notificationIntent = new Intent(this, BroadcastReceiver.class).setAction("com.ssyanhuo.arknightshelper.stopservice");
         notificationIntent.putExtra("action", "stopservice");
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -82,14 +87,14 @@ public class BackendService extends Service {
             NotificationChannel notificationChannel = new NotificationChannel("notification", getString(R.string.notification_channel), NotificationManager.IMPORTANCE_LOW);
             notificationManager.createNotificationChannel(notificationChannel);
             builder
-                    .setSmallIcon(R.drawable.ic_launcher_foreground)
+                    .setSmallIcon(R.mipmap.ic_launcher)
                     .setContentTitle(getString(R.string.notification_title))
                     .setContentText(getString(R.string.notification_text))
                     .setContentIntent(pendingIntent)
                     .setChannelId("notification");
         }else {
             builder
-                    .setSmallIcon(R.drawable.ic_launcher_foreground)
+                    .setSmallIcon(R.mipmap.ic_launcher)
                     .setContentTitle(getString(R.string.notification_title))
                     .setContentText(getString(R.string.notification_text))
                     .setContentIntent(pendingIntent);
@@ -112,8 +117,8 @@ public class BackendService extends Service {
 
     public void startFloatingButton(){
         layoutParams.format = PixelFormat.RGBA_8888;
-        layoutParams.width = dip2px(getApplicationContext(), 48);
-        layoutParams.height = dip2px(getApplicationContext(), 48);
+        layoutParams.width = DpUtiliy.dip2px(getApplicationContext(), 48);
+        layoutParams.height = DpUtiliy.dip2px(getApplicationContext(), 48);
         layoutParams.gravity = Gravity.LEFT | Gravity.TOP;
         layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
         layoutParams.x = 0;
@@ -161,6 +166,7 @@ public class BackendService extends Service {
     public void showFloatingWindow(){
         checkBoxes = new ArrayList<>();
         linearLayout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.overlay_main, null);
+        hrJson = JsonUtility.getJsonString(getApplicationContext(), "data/hr.json");
         windowManager.removeView(button);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
@@ -199,6 +205,8 @@ public class BackendService extends Service {
                     case CLOSE:
                         hideFloatingWindow();
                         break;
+                    default:
+                        break;
                 }
             }
 
@@ -212,12 +220,27 @@ public class BackendService extends Service {
 
             }
         });
-        getAllCheckboxes(linearLayout_hr);
+        Hr.hideResult((LinearLayout) linearLayout_hr.findViewById(R.id.hr_result_content));
+        selectedStar = new ArrayList<>();
+        selectedQualification = new ArrayList<>();
+        selectedPosition = new ArrayList<>();
+        selectedSex = new ArrayList<>();
+        selectedType = new ArrayList<>();
+        selectedTag = new ArrayList<>();
+        Hr.getAllCheckboxes(checkBoxes, linearLayout_hr);
         for(int i = 0; i < checkBoxes.size(); i++){
             checkBoxes.get(i).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
+                    Hr.getSelectedItems(checkBoxes, selectedStar, selectedQualification, selectedPosition, selectedSex, selectedType, selectedTag);
+                    if (!Hr.isFewerThan3(selectedQualification, selectedPosition, selectedSex, selectedType, selectedTag)){
+                        compoundButton.setChecked(false);
+                    }
+                    ArrayList<JSONObject> result = Hr.getResult(hrJson, selectedStar, selectedQualification, selectedPosition, selectedSex, selectedType, selectedTag);
+                    Hr.showResult(result, (LinearLayout)linearLayout_hr.findViewById(R.id.hr_result_content), getApplicationContext());
+                    if(selectedStar.size() + selectedQualification.size() + selectedPosition.size() + selectedSex.size() + selectedType.size() + selectedTag.size() == 0){
+                        Hr.hideResult((LinearLayout) linearLayout_hr.findViewById(R.id.hr_result_content));
+                    }
                 }
             });
         }
@@ -247,7 +270,7 @@ public class BackendService extends Service {
         windowManager.removeView(linearLayout);
         startFloatingButton();
     }
-
+    //旧的方法，已经移动到单独的类里面
     public void getAllCheckboxes(View view){
         ViewGroup viewGroup = (ViewGroup)view;
         for(int i = 0; i < viewGroup.getChildCount(); i++){
@@ -260,11 +283,53 @@ public class BackendService extends Service {
             }
         }
     }
-
+    public void getSelectedItems(){
+        for(int i = 0; i < checkBoxes.size(); i++){
+            selectedStar.clear();
+            selectedQualification.clear();
+            selectedPosition.clear();
+            selectedSex.clear();
+            selectedType.clear();
+            selectedTag.clear();
+            CheckBox checkBox = checkBoxes.get(i);
+            if (!checkBox.isChecked()){continue;}
+            View parentView = (View)checkBox.getParent();
+            String item = String.valueOf(parentView.getTag());
+            switch (item){
+                case "star":
+                    selectedStar.add(String.valueOf(checkBox.getTag()));
+                    break;
+                case "qualification":
+                    selectedQualification.add(String.valueOf(checkBox.getTag()));
+                    break;
+                case "position":
+                    selectedPosition.add(String.valueOf(checkBox.getTag()));
+                    break;
+                case "sex":
+                    selectedSex.add(String.valueOf(checkBox.getTag()));
+                    break;
+                case "type":
+                    selectedType.add(String.valueOf(checkBox.getTag()));
+                    break;
+                case "tag":
+                    selectedTag.add(String.valueOf(checkBox.getTag()));
+                    break;
+                default:
+                    break;
+            }
+            if (selectedStar.size() == 0){
+                selectedStar.add("1");
+                selectedStar.add("2");
+                selectedStar.add("3");
+                selectedStar.add("4");
+                selectedStar.add("5");
+                selectedStar.add("6");
+            }
+        }
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Toast.makeText(getApplicationContext(), "stoped", Toast.LENGTH_SHORT).show();
         System.exit(0);
     }
 }

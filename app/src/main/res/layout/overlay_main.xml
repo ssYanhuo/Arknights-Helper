@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="#99000000"
     android:theme="@style/Theme.AppCompat">
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_main"
         android:layout_width="match_parent"
@@ -57,7 +56,8 @@
                     android:id="@+id/hr_selector_star"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:scrollbars="horizontal">
+                    android:scrollbars="horizontal"
+                    android:tag="star">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -69,42 +69,48 @@
                         style="@style/AppTheme.CheckBox.Blue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_star_1" />
+                        android:text="@string/hr_star_1"
+                        android:tag="1"/>
 
                     <CheckBox
                         android:id="@+id/hr_checkbox_star_2"
                         style="@style/AppTheme.CheckBox.Blue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_star_2" />
+                        android:text="@string/hr_star_2"
+                        android:tag="2"/>
 
                     <CheckBox
                         android:id="@+id/hr_checkbox_star_3"
                         style="@style/AppTheme.CheckBox.Blue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_star_3" />
+                        android:text="@string/hr_star_3"
+                        android:tag="3"/>
 
                     <CheckBox
                         android:id="@+id/hr_checkbox_star_4"
                         style="@style/AppTheme.CheckBox.Blue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_star_4" />
+                        android:text="@string/hr_star_4"
+                        android:tag="4"/>
 
                     <CheckBox
                         android:id="@+id/hr_checkbox_star_5"
                         style="@style/AppTheme.CheckBox.Blue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_star_5" />
+                        android:text="@string/hr_star_5"
+                        android:tag="5"/>
 
                     <CheckBox
                         android:id="@+id/hr_checkbox_star_6"
                         style="@style/AppTheme.CheckBox.Blue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_star_6" />
+                        android:text="@string/hr_star_6"
+                        android:tag="6"/>
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -115,7 +121,8 @@
                     android:id="@+id/hr_selector_qualification"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:tag="qualification">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -127,21 +134,24 @@
                         style="@style/AppTheme.CheckBox.Yellow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_qualification_1" />
+                        android:text="@string/hr_qualification_1"
+                        android:tag="新手"/>
 
                     <CheckBox
                         android:id="@+id/hr_checkbox_qualification_2"
                         style="@style/AppTheme.CheckBox.Yellow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_qualification_2" />
+                        android:text="@string/hr_qualification_2"
+                        android:tag="资深干员"/>
 
                     <CheckBox
                         android:id="@+id/hr_checkbox_qualification_3"
                         style="@style/AppTheme.CheckBox.Yellow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_qualification_3" />
+                        android:text="@string/hr_qualification_3"
+                        android:tag="高级资深干员"/>
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -152,7 +162,8 @@
                     android:id="@+id/hr_selector_position"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:tag="position">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -164,14 +175,16 @@
                         style="@style/AppTheme.CheckBox.Green"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_position_near" />
+                        android:text="@string/hr_position_near"
+                        android:tag="近战位"/>
 
                     <CheckBox
                         android:id="@+id/hr_checkbox_position_distant"
                         style="@style/AppTheme.CheckBox.Green"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_position_distant" />
+                        android:text="@string/hr_position_distant"
+                        android:tag="远程位"/>
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -182,7 +195,8 @@
                     android:id="@+id/hr_selector_sex"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:tag="sex">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -193,14 +207,16 @@
                         style="@style/AppTheme.CheckBox.Red"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_sex_male" />
+                        android:text="@string/hr_sex_male"
+                        android:tag="男"/>
 
                     <CheckBox
                         android:id="@+id/hr_checkbox_sex_female"
                         style="@style/AppTheme.CheckBox.Red"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_sex_female" />
+                        android:text="@string/hr_sex_female"
+                        android:tag="女"/>
                 </LinearLayout>
             </HorizontalScrollView>
 
@@ -208,72 +224,81 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <LinearLayout
-                    android:id="@+id/hr_selector_class"
+                    android:id="@+id/hr_selector_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:scrollbars="horizontal">
+                    android:scrollbars="horizontal"
+                    android:tag="type">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_selector_class" />
+                        android:text="@string/hr_selector_type" />
 
                     <CheckBox
-                        android:id="@+id/hr_checkbox_class_vanguard"
+                        android:id="@+id/hr_checkbox_type_vanguard"
                         style="@style/AppTheme.CheckBox.Cyan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_class_vanguard" />
+                        android:text="@string/hr_type_vanguard"
+                        android:tag="先锋"/>
 
                     <CheckBox
-                        android:id="@+id/hr_checkbox_class_sniper"
+                        android:id="@+id/hr_checkbox_type_sniper"
                         style="@style/AppTheme.CheckBox.Cyan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_class_sniper" />
+                        android:text="@string/hr_type_sniper"
+                        android:tag="狙击"/>
 
                     <CheckBox
-                        android:id="@+id/hr_checkbox_class_medic"
+                        android:id="@+id/hr_checkbox_type_medic"
                         style="@style/AppTheme.CheckBox.Cyan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_class_medic" />
+                        android:text="@string/hr_type_medic"
+                        android:tag="医疗"/>
 
                     <CheckBox
-                        android:id="@+id/hr_checkbox_class_caster"
+                        android:id="@+id/hr_checkbox_type_caster"
                         style="@style/AppTheme.CheckBox.Cyan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_class_caster" />
+                        android:text="@string/hr_type_caster"
+                        android:tag="术师"/>
 
                     <CheckBox
-                        android:id="@+id/hr_checkbox_class_guard"
+                        android:id="@+id/hr_checkbox_type_guard"
                         style="@style/AppTheme.CheckBox.Cyan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_class_guard" />
+                        android:text="@string/hr_type_guard"
+                        android:tag="近卫"/>
 
                     <CheckBox
-                        android:id="@+id/hr_checkbox_class_defender"
+                        android:id="@+id/hr_checkbox_type_defender"
                         style="@style/AppTheme.CheckBox.Cyan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_class_defender" />
+                        android:text="@string/hr_type_defender"
+                        android:tag="重装"/>
 
                     <CheckBox
-                        android:id="@+id/hr_checkbox_class_supporter"
+                        android:id="@+id/hr_checkbox_type_supporter"
                         style="@style/AppTheme.CheckBox.Cyan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_class_supporter" />
+                        android:text="@string/hr_type_supporter"
+                        android:tag="辅助"/>
 
                     <CheckBox
-                        android:id="@+id/hr_checkbox_class_specialist"
+                        android:id="@+id/hr_checkbox_type_specialist"
                         style="@style/AppTheme.CheckBox.Cyan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_class_specialist" />
+                        android:text="@string/hr_type_specialist"
+                        android:tag="特种"/>
 
             </LinearLayout>
             </HorizontalScrollView>
@@ -282,11 +307,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <LinearLayout
-                    android:id="@+id/hr_selector_extra"
+                    android:id="@+id/hr_selector_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:scrollbars="horizontal">
+                    android:scrollbars="horizontal"
+                    android:tag="tag">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -294,103 +320,141 @@
                         android:text="@string/hr_selector_tag" />
 
                     <CheckBox
-                        android:id="@+id/hr_checkbox_class_zhiliao"
+                        android:id="@+id/hr_checkbox_type_zhiliao"
                         style="@style/AppTheme.CheckBox.Lime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_tag_zhiliao" />
+                        android:text="@string/hr_tag_zhiliao"
+                        android:tag="治疗"/>
 
                     <CheckBox
-                        android:id="@+id/hr_checkbox_class_zhiyuan"
+                        android:id="@+id/hr_checkbox_type_zhiyuan"
                         style="@style/AppTheme.CheckBox.Lime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_tag_zhiyuan" />
+                        android:text="@string/hr_tag_zhiyuan"
+                        android:tag="支援"/>
 
                     <CheckBox
-                        android:id="@+id/hr_checkbox_class_shuchu"
+                        android:id="@+id/hr_checkbox_type_shuchu"
                         style="@style/AppTheme.CheckBox.Lime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_tag_shuchu" />
+                        android:text="@string/hr_tag_shuchu"
+                        android:tag="输出"/>
 
                     <CheckBox
-                        android:id="@+id/hr_checkbox_class_qungong"
+                        android:id="@+id/hr_checkbox_type_qungong"
                         style="@style/AppTheme.CheckBox.Lime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_tag_qungong" />
+                        android:text="@string/hr_tag_qungong"
+                        android:tag="群攻"/>
 
                     <CheckBox
-                        android:id="@+id/hr_checkbox_class_jiansu"
+                        android:id="@+id/hr_checkbox_type_jiansu"
                         style="@style/AppTheme.CheckBox.Lime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_tag_jiansu" />
+                        android:text="@string/hr_tag_jiansu"
+                        android:tag="减速"/>
 
                     <CheckBox
-                        android:id="@+id/hr_checkbox_class_shengcun"
+                        android:id="@+id/hr_checkbox_type_shengcun"
                         style="@style/AppTheme.CheckBox.Lime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_tag_shengcun" />
+                        android:text="@string/hr_tag_shengcun"
+                        android:tag="生存"/>
 
                     <CheckBox
-                        android:id="@+id/hr_checkbox_class_fanghu"
+                        android:id="@+id/hr_checkbox_type_fanghu"
                         style="@style/AppTheme.CheckBox.Lime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_tag_fanghu" />
+                        android:text="@string/hr_tag_fanghu"
+                        android:tag="防护"/>
 
                     <CheckBox
-                        android:id="@+id/hr_checkbox_class_xveruo"
+                        android:id="@+id/hr_checkbox_type_xveruo"
                         style="@style/AppTheme.CheckBox.Lime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_tag_xveruo" />
+                        android:text="@string/hr_tag_xveruo"
+                        android:tag="削弱"/>
 
                     <CheckBox
-                        android:id="@+id/hr_checkbox_class_weiyi"
+                        android:id="@+id/hr_checkbox_type_weiyi"
                         style="@style/AppTheme.CheckBox.Lime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_tag_weiyi" />
+                        android:text="@string/hr_tag_weiyi"
+                        android:tag="位移"/>
 
                     <CheckBox
-                        android:id="@+id/hr_checkbox_class_kongcchang"
+                        android:id="@+id/hr_checkbox_type_kongcchang"
                         style="@style/AppTheme.CheckBox.Lime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_tag_kongchang" />
+                        android:text="@string/hr_tag_kongchang"
+                        android:tag="控场"/>
 
                     <CheckBox
-                        android:id="@+id/hr_checkbox_class_baofa"
+                        android:id="@+id/hr_checkbox_type_baofa"
                         style="@style/AppTheme.CheckBox.Lime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_tag_baofa" />
+                        android:text="@string/hr_tag_baofa"
+                        android:tag="爆发"/>
 
                     <CheckBox
-                        android:id="@+id/hr_checkbox_class_zhaohuan"
+                        android:id="@+id/hr_checkbox_type_zhaohuan"
                         style="@style/AppTheme.CheckBox.Lime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_tag_zhaohuan" />
+                        android:text="@string/hr_tag_zhaohuan"
+                        android:tag="召唤"/>
 
                     <CheckBox
-                        android:id="@+id/hr_checkbox_class_kuaisufuhuo"
+                        android:id="@+id/hr_checkbox_type_kuaisufuhuo"
                         style="@style/AppTheme.CheckBox.Lime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_tag_kuaisufuhuo" />
+                        android:text="@string/hr_tag_kuaisufuhuo"
+                        android:tag="快速复活"/>
 
                     <CheckBox
-                        android:id="@+id/hr_checkbox_class_feiyonghuifu"
+                        android:id="@+id/hr_checkbox_type_feiyonghuifu"
                         style="@style/AppTheme.CheckBox.Lime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/hr_tag_feiyonghuifu" />
+                        android:text="@string/hr_tag_feiyonghuifu"
+                        android:tag="费用回复"/>
 
+                </LinearLayout>
+            </HorizontalScrollView>
+
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin">
+                <LinearLayout
+                    android:id="@+id/hr_result_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/hr_result"/>
+                    <LinearLayout
+                        android:id="@+id/hr_result"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                    </LinearLayout>
                 </LinearLayout>
             </HorizontalScrollView>
         </LinearLayout>
@@ -403,7 +467,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="即将到来"/>
+            android:gravity="center_horizontal"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:text="@string/overlay_coming"/>
     </LinearLayout>
 
     <LinearLayout
@@ -414,7 +480,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="即将到来"/>
+            android:gravity="center_horizontal"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:text="@string/overlay_coming"/>
     </LinearLayout>
 
 </LinearLayout>

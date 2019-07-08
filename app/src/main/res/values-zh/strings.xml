@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">明日方舟助手</string>
     <string name="action_settings">设置</string>
-    <string name="start_game">正在与Arknights Helper™取得神经连接……</string>
+    <string name="start_game">正在启动Arknights Helper™ 引擎……</string>
     <string name="notification_title">已连接到Arknights Helper™</string>
     <string name="notification_text">点击来结束服务</string>
     <string name="notification_channel">悬浮窗通知</string>
@@ -14,7 +14,34 @@
     <string name="hr_selector_qualification">资质：</string>
     <string name="hr_selector_position">位置：</string>
     <string name="hr_selector_sex">性别：</string>
-    <string name="hr_selector_class">种类：</string>
+    <string name="hr_selector_type">种类：</string>
     <string name="hr_selector_tag">词缀：</string>
     <string name="hr_description">除星级外，最多可选 3 个标签，星级默认全选。\n数据来自 @Graue Neko</string>
+    <string name="hr_result">结果：</string>
+    <string name="hr_result_empty">并没有找到结果</string>
+    <string name="card_state_correct">Arknights Helper™ 正常运行中，未检测到错误</string>
+    <string name="menu_exit">退出</string>
+    <string name="menu_about">关于</string>
+    <string name="nav_header_image_desc">应用图标</string>
+    <string name="title_activity_about">关于</string>
+    <string name="navigation_drawer_close">关闭了侧边栏</string>
+    <string name="navigation_drawer_open">打开了侧边栏</string>
+    <string name="no_overlay_permission_error">Arknights Helper™ 引擎启动失败：缺少显示悬浮窗权限</string>
+    <string name="no_overlay_permission_action">授予权限</string>
+    <string name="nav_header_subtitle" translatable="false">By 三生烟火</string>
+    <string name="author_name">三生烟火</string>
+    <string name="go_github">前往我的Github主页</string>
+    <string name="about_author_image_desc">作者头像</string>
+    <string name="go_project">前往项目主页</string>
+    <string name="go_project_desc">提交问题或数据</string>
+    <string name="go_release">前往项目发布页</string>
+    <string name="go_release_desc">获取最新版本</string>
+    <string name="about_thanks">鸣谢</string>
+    <string name="about_thanks_list">\@Graue Neko, @明日方舟WIKI\n以及所有的Doctor。</string>
+    <string name="about_version">版本号</string>
+    <string name="about_version_desc">正在获取……</string>
+    <string name="start_two_apps">检测到多个载体，请博士手动选择</string>
+    <string name="game_official">官方</string>
+    <string name="game_bilibili">"哔哩哔哩 "</string>
+    <string name="overlay_coming">即将到来……</string>
 </resources>

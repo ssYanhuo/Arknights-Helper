@@ -2,17 +2,11 @@
     <string name="app_name">Arknights Helper</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_subtitle" translatable="false">By ssYanhuo</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_subtitle">By ssYanhuo</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
-    <string name="start_game">Game and service starting...</string>
+
+    <string name="start_game">Starting Game and service…</string>
     <string name="notification_title">Background service running</string>
     <string name="notification_text">Tap to stop service</string>
     <string name="notification_channel">Overlay notification</string>
@@ -42,15 +36,15 @@
     <string name="hr_sex_male" translatable="false">男性干员</string>
     <string name="hr_sex_female" translatable="false">女性干员</string>
 
-    <string name="hr_selector_class">Class:</string>
-    <string name="hr_class_vanguard" translatable="false">先锋干员</string>
-    <string name="hr_class_sniper" translatable="false">狙击干员</string>
-    <string name="hr_class_medic" translatable="false">医疗干员</string>
-    <string name="hr_class_caster" translatable="false">术师干员</string>
-    <string name="hr_class_guard" translatable="false">近卫干员</string>
-    <string name="hr_class_defender" translatable="false">重装干员</string>
-    <string name="hr_class_supporter" translatable="false">辅助干员</string>
-    <string name="hr_class_specialist" translatable="false">特种干员</string>
+    <string name="hr_selector_type">Class:</string>
+    <string name="hr_type_vanguard" translatable="false">先锋干员</string>
+    <string name="hr_type_sniper" translatable="false">狙击干员</string>
+    <string name="hr_type_medic" translatable="false">医疗干员</string>
+    <string name="hr_type_caster" translatable="false">术师干员</string>
+    <string name="hr_type_guard" translatable="false">近卫干员</string>
+    <string name="hr_type_defender" translatable="false">重装干员</string>
+    <string name="hr_type_supporter" translatable="false">辅助干员</string>
+    <string name="hr_type_specialist" translatable="false">特种干员</string>
 
     <string name="hr_selector_tag">Tag:</string>
     <string name="hr_tag_zhiliao" translatable="false">治疗</string>
@@ -68,4 +62,38 @@
     <string name="hr_tag_kuaisufuhuo" translatable="false">快速复活</string>
     <string name="hr_tag_feiyonghuifu" translatable="false">费用回复</string>
     <string name="hr_description">You can choose 3 tags at most execpt stars.\nData from @Graue Neko</string>
+    <string name="hr_result">Result:</string>
+    <string name="hr_result_empty">Noting found.</string>
+    <string name="card_state_correct">Arknights Helper™ self-checking finished, no error found.</string>
+    <string name="title_activity_about">About</string>
+    <string name="menu_about">About</string>
+    <string name="menu_exit">Exit</string>
+    <string name="nav_header_image_desc">App icon</string>
+    <string name="no_overlay_permission_error">Arknights Helper™ engine start failed: Overlay permission not granted</string>
+    <string name="no_overlay_permission_action">Go setting</string>
+    <string name="author_name">ssYanhuo</string>
+    <string name="go_github">Visit my Github home page</string>
+    <string name="about_author_image_desc">Author avatar</string>
+    <string name="go_project">Visit this project\'s page</string>
+    <string name="go_project_desc">Submit issues and new data</string>
+    <string name="go_release">Visit this project\'s release page</string>
+    <string name="go_release_desc">Get lastest verison</string>
+    <string name="about_thanks">Thanks</string>
+    <string name="about_thanks_list">\@Graue Neko, @Arknights WIKI\nAnd all Doctors.</string>
+    <string name="about_version">Version</string>
+    <string name="about_version_desc">Getting…</string>
+    <string name="easter_text_1" translatable="false">我好像做了一个梦。\n</string>
+    <string name="easter_text_2" translatable="false">\n梦里的我在天上。\n</string>
+    <string name="easter_text_3" translatable="false">\n光芒似乎被剥离了，眼前漆黑一片。\n</string>
+    <string name="easter_text_4" translatable="false">\n我不知所措，希望能做些什么。\n</string>
+    <string name="easter_text_5" translatable="false">\n风铃的声响划破寂静。\n</string>
+    <string name="easter_text_6" translatable="false">\n循着声音的方向，我感受到了大家汇聚的思念。\n</string>
+    <string name="easter_text_7" translatable="false">\n我伸出了双手，像是有了魔力一般。\n</string>
+    <string name="easter_text_8" translatable="false">\n五颜六色的星星从我指间涌出，点亮了世界。\n</string>
+    <string name="easter_text_9" translatable="false">\n我想，我触碰到了未来。\n</string>
+    <string name="easter_text_10" translatable="false">\nBy @Bilibili</string>
+    <string name="start_two_apps">More than one game were found, please select one</string>
+    <string name="game_official">Official</string>
+    <string name="game_bilibili">Bilibili</string>
+    <string name="overlay_coming">Coming soon…</string>
 </resources>
