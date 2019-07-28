@@ -12,27 +12,53 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/main_state_card">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/main_state">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="196dp"
-                android:background="#000000"
-                android:src="@drawable/ic_check_circle"
-                android:padding="@dimen/activity_horizontal_margin"/>
-
+                android:background="@color/colorAccent"
+                android:src="@drawable/ic_check_checking"
+                android:padding="@dimen/activity_horizontal_margin"
+                android:id="@+id/main_state_img"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/card_state_correct"
+                android:text="@string/update_state_checking"
                 android:textAlignment="center"
                 android:padding="@dimen/activity_horizontal_margin"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:id="@+id/main_state_text"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        app:layout_constraintTop_toBottomOf="@id/main_state_card">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/main_start_without_game">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/start_without_game" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

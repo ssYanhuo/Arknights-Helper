@@ -1,6 +1,5 @@
 package com.ssyanhuo.arknightshelper.overlay;
 
-import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -12,38 +11,24 @@ import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.IBinder;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.Switch;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.JSONPObject;
 import com.google.android.material.tabs.TabLayout;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.utiliy.DpUtiliy;
 import com.ssyanhuo.arknightshelper.utiliy.JsonUtility;
+import com.ssyanhuo.arknightshelper.utiliy.BroadcastReceiver;
 
-import org.json.JSONArray;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -55,6 +40,7 @@ public class BackendService extends Service {
     LinearLayout linearLayout_exp;
     LinearLayout linearLayout_material;
     Button button;
+    //公开招募
     ArrayList<CheckBox> checkBoxes;
     ArrayList<String> selectedStar;
     ArrayList<String> selectedQualification;
@@ -62,6 +48,9 @@ public class BackendService extends Service {
     ArrayList<String> selectedSex;
     ArrayList<String> selectedType;
     ArrayList<String> selectedTag;
+    //经验计算
+    //TODO 变量放在类里面
+    //材料计算
     String hrJson;
     String expJson;
     String materialJson;
@@ -69,6 +58,7 @@ public class BackendService extends Service {
     final int EXP = 1;
     final int MATERIAL = 2;
     final int CLOSE = 3;
+    final String TAG = "BackgroundService";
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -79,12 +69,13 @@ public class BackendService extends Service {
     public void onCreate() {
         super.onCreate();
         Intent notificationIntent = new Intent(this, BroadcastReceiver.class).setAction("com.ssyanhuo.arknightshelper.stopservice");
-        notificationIntent.putExtra("action", "stopservice");
+        notificationIntent.putExtra("action", "StopService");
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification.Builder builder = new Notification.Builder(this);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             NotificationChannel notificationChannel = new NotificationChannel("notification", getString(R.string.notification_channel), NotificationManager.IMPORTANCE_LOW);
+            assert notificationManager != null;
             notificationManager.createNotificationChannel(notificationChannel);
             builder
                     .setSmallIcon(R.mipmap.ic_launcher)
@@ -164,14 +155,13 @@ public class BackendService extends Service {
     }
 
     public void showFloatingWindow(){
-        checkBoxes = new ArrayList<>();
         linearLayout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.overlay_main, null);
         hrJson = JsonUtility.getJsonString(getApplicationContext(), "data/hr.json");
         windowManager.removeView(button);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         int rotation = windowManager.getDefaultDisplay().getRotation();
-        layoutParams.gravity = Gravity.RIGHT | Gravity.TOP;
+        layoutParams.gravity = Gravity.END | Gravity.TOP;
         layoutParams.x = 0;
         layoutParams.y = 0;
         if(rotation == 1 || rotation == 3){
@@ -220,30 +210,37 @@ public class BackendService extends Service {
 
             }
         });
-        Hr.hideResult((LinearLayout) linearLayout_hr.findViewById(R.id.hr_result_content));
+        //公开招募部分
+        //TODO 方法放在类里面
+        final Hr hr = new Hr();
+        hr.hideResult((LinearLayout) linearLayout_hr.findViewById(R.id.hr_result_content));
+        checkBoxes = new ArrayList<>();
         selectedStar = new ArrayList<>();
         selectedQualification = new ArrayList<>();
         selectedPosition = new ArrayList<>();
         selectedSex = new ArrayList<>();
         selectedType = new ArrayList<>();
         selectedTag = new ArrayList<>();
-        Hr.getAllCheckboxes(checkBoxes, linearLayout_hr);
+        hr.getAllCheckboxes(checkBoxes, linearLayout_hr);
         for(int i = 0; i < checkBoxes.size(); i++){
             checkBoxes.get(i).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    Hr.getSelectedItems(checkBoxes, selectedStar, selectedQualification, selectedPosition, selectedSex, selectedType, selectedTag);
-                    if (!Hr.isFewerThan3(selectedQualification, selectedPosition, selectedSex, selectedType, selectedTag)){
+                    hr.getSelectedItems(checkBoxes, selectedStar, selectedQualification, selectedPosition, selectedSex, selectedType, selectedTag);
+                    if (!hr.isFewerThan3(selectedQualification, selectedPosition, selectedSex, selectedType, selectedTag)){
                         compoundButton.setChecked(false);
                     }
-                    ArrayList<JSONObject> result = Hr.getResult(hrJson, selectedStar, selectedQualification, selectedPosition, selectedSex, selectedType, selectedTag);
-                    Hr.showResult(result, (LinearLayout)linearLayout_hr.findViewById(R.id.hr_result_content), getApplicationContext());
-                    if(selectedStar.size() + selectedQualification.size() + selectedPosition.size() + selectedSex.size() + selectedType.size() + selectedTag.size() == 0){
-                        Hr.hideResult((LinearLayout) linearLayout_hr.findViewById(R.id.hr_result_content));
+                    ArrayList<JSONObject> result = hr.getResult(hrJson, selectedStar, selectedQualification, selectedPosition, selectedSex, selectedType, selectedTag);
+                    hr.showResult(result, (LinearLayout)linearLayout_hr.findViewById(R.id.hr_result_content), (ScrollView) linearLayout_hr.findViewById(R.id.hr_result_content).getParent().getParent().getParent(), getApplicationContext());if(selectedStar.size() + selectedQualification.size() + selectedPosition.size() + selectedSex.size() + selectedType.size() + selectedTag.size() == 0){
+                        hr.hideResult((LinearLayout) linearLayout_hr.findViewById(R.id.hr_result_content));
                     }
                 }
             });
         }
+        //经验计算部分
+        //TODO 方法放在类里面
+        Exp exp = new Exp();
+        exp.init(linearLayout_exp);
     }
     public void changeFloatingWindowContent(int i){
         switch (i){
@@ -269,63 +266,6 @@ public class BackendService extends Service {
     public void hideFloatingWindow(){
         windowManager.removeView(linearLayout);
         startFloatingButton();
-    }
-    //旧的方法，已经移动到单独的类里面
-    public void getAllCheckboxes(View view){
-        ViewGroup viewGroup = (ViewGroup)view;
-        for(int i = 0; i < viewGroup.getChildCount(); i++){
-            if(viewGroup.getChildAt(i) instanceof CheckBox){
-                checkBoxes.add((CheckBox) viewGroup.getChildAt(i));
-            }else if(viewGroup.getChildAt(i) instanceof HorizontalScrollView){
-                getAllCheckboxes(viewGroup.getChildAt(i));
-            }else if(viewGroup.getChildAt(i) instanceof LinearLayout){
-                getAllCheckboxes(viewGroup.getChildAt(i));
-            }
-        }
-    }
-    public void getSelectedItems(){
-        for(int i = 0; i < checkBoxes.size(); i++){
-            selectedStar.clear();
-            selectedQualification.clear();
-            selectedPosition.clear();
-            selectedSex.clear();
-            selectedType.clear();
-            selectedTag.clear();
-            CheckBox checkBox = checkBoxes.get(i);
-            if (!checkBox.isChecked()){continue;}
-            View parentView = (View)checkBox.getParent();
-            String item = String.valueOf(parentView.getTag());
-            switch (item){
-                case "star":
-                    selectedStar.add(String.valueOf(checkBox.getTag()));
-                    break;
-                case "qualification":
-                    selectedQualification.add(String.valueOf(checkBox.getTag()));
-                    break;
-                case "position":
-                    selectedPosition.add(String.valueOf(checkBox.getTag()));
-                    break;
-                case "sex":
-                    selectedSex.add(String.valueOf(checkBox.getTag()));
-                    break;
-                case "type":
-                    selectedType.add(String.valueOf(checkBox.getTag()));
-                    break;
-                case "tag":
-                    selectedTag.add(String.valueOf(checkBox.getTag()));
-                    break;
-                default:
-                    break;
-            }
-            if (selectedStar.size() == 0){
-                selectedStar.add("1");
-                selectedStar.add("2");
-                selectedStar.add("3");
-                selectedStar.add("4");
-                selectedStar.add("5");
-                selectedStar.add("6");
-            }
-        }
     }
     @Override
     public void onDestroy() {

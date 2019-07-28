@@ -5,6 +5,7 @@
     <color name="colorPrimary">#2C2C2C</color>
     <color name="colorPrimaryDark">#1A1A1A</color>
     <color name="colorAccent">#FF9800</color>
+    <color name="colorError">#E91E1E</color>
     <color name="colorCheckBoxChecked">#FFFFFF</color>
     <color name="colorCheckBoxBlue">#03A9F4</color>
     <color name="colorCheckBoxYellow">#FFC107</color>

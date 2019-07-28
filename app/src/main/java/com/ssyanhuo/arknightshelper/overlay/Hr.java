@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -20,16 +20,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ssyanhuo.arknightshelper.R;
 
-
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Hr {
-    private static String TAG = "Hr";
-    public static void getAllCheckboxes(ArrayList<CheckBox> checkBoxes, View view){
+    private final String TAG = "Hr";
+    public  void getAllCheckboxes(ArrayList<CheckBox> checkBoxes, View view){
         ViewGroup viewGroup = (ViewGroup)view;
         for(int i = 0; i < viewGroup.getChildCount(); i++){
             if(viewGroup.getChildAt(i) instanceof CheckBox){
@@ -41,7 +36,7 @@ public class Hr {
             }
         }
     }
-    public static void getSelectedItems(ArrayList<CheckBox> checkBoxes, ArrayList<String> selectedStar, ArrayList<String> selectedQualification, ArrayList<String> selectedPosition, ArrayList<String> selectedSex, ArrayList<String> selectedType, ArrayList<String> selectedTag){
+    public void getSelectedItems(ArrayList<CheckBox> checkBoxes, ArrayList<String> selectedStar, ArrayList<String> selectedQualification, ArrayList<String> selectedPosition, ArrayList<String> selectedSex, ArrayList<String> selectedType, ArrayList<String> selectedTag){
         selectedStar.clear();
         selectedQualification.clear();
         selectedPosition.clear();
@@ -79,13 +74,13 @@ public class Hr {
         }
     }
 
-    public static boolean isFewerThan3(ArrayList<String> selectedQualification, ArrayList<String> selectedPosition, ArrayList<String> selectedSex, ArrayList<String> selectedType, ArrayList<String> selectedTag){
+    public boolean isFewerThan3(ArrayList<String> selectedQualification, ArrayList<String> selectedPosition, ArrayList<String> selectedSex, ArrayList<String> selectedType, ArrayList<String> selectedTag){
         int num = selectedQualification.size() + selectedPosition.size() + selectedSex.size() + selectedType.size() + selectedTag.size();
         return (num <= 3);
     }
 
 
-    public static ArrayList<JSONObject> getResult(String jsonString, ArrayList<String> selectedStar, ArrayList<String> selectedQualification, ArrayList<String> selectedPosition, ArrayList<String> selectedSex, ArrayList<String> selectedType, ArrayList<String> selectedTag){
+    public ArrayList<JSONObject> getResult(String jsonString, ArrayList<String> selectedStar, ArrayList<String> selectedQualification, ArrayList<String> selectedPosition, ArrayList<String> selectedSex, ArrayList<String> selectedType, ArrayList<String> selectedTag){
         ArrayList<JSONObject> result = new ArrayList<>();
         JSONArray jsonArray = JSON.parseArray(jsonString);
         selectedTag.addAll(selectedQualification);
@@ -117,11 +112,11 @@ public class Hr {
         return result;
     }
 
-    public static void hideResult(LinearLayout linearLayout){
+    public void hideResult(LinearLayout linearLayout){
         linearLayout.setVisibility(View.GONE);
     }
 
-    public static void showResult(ArrayList<JSONObject> result, LinearLayout linearLayout, Context context){
+    public void showResult(ArrayList<JSONObject> result, LinearLayout linearLayout, ScrollView scrollView, Context context){
         LinearLayout resultLayout = linearLayout.findViewById(R.id.hr_result);
         resultLayout.removeAllViews();
         linearLayout.setVisibility(View.VISIBLE);
@@ -157,5 +152,6 @@ public class Hr {
             button.setTag("hr_result");
             resultLayout.addView(button);
         }
+        scrollView.fullScroll(ScrollView.FOCUS_DOWN);
     }
 }

@@ -3,6 +3,10 @@ package com.ssyanhuo.arknightshelper.utiliy;
 import android.content.Context;
 import android.util.Log;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,5 +28,8 @@ public class JsonUtility {
             Log.e(TAG, "Read JSON failed!:" + e);
             return null;
         }
+    }
+    public static JSONObject getJsonObject(Context context, String jsonString){
+        return JSON.parseObject(jsonString);
     }
 }

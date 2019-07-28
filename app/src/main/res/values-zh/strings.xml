@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">明日方舟助手</string>
     <string name="action_settings">设置</string>
-    <string name="start_game">正在启动Arknights Helper™ 引擎……</string>
-    <string name="notification_title">已连接到Arknights Helper™</string>
+    <string name="start_game">正在启动 Arknights Helper™ 引擎……</string>
+    <string name="notification_title">已连接到 Arknights Helper™</string>
     <string name="notification_text">点击来结束服务</string>
     <string name="notification_channel">悬浮窗通知</string>
     <string name="tab_title_hr">公开招募</string>
@@ -16,10 +16,10 @@
     <string name="hr_selector_sex">性别：</string>
     <string name="hr_selector_type">种类：</string>
     <string name="hr_selector_tag">词缀：</string>
-    <string name="hr_description">除星级外，最多可选 3 个标签，星级默认全选。\n数据来自 @Graue Neko</string>
+    <string name="hr_desc">除星级外，最多可选 3 个标签，星级默认全选。\n数据来自 @Graue Neko</string>
     <string name="hr_result">结果：</string>
     <string name="hr_result_empty">并没有找到结果</string>
-    <string name="card_state_correct">Arknights Helper™ 正常运行中，未检测到错误</string>
+    <string name="update_state_correct">Arknights Helper™ 正常运行中，未检测到错误</string>
     <string name="menu_exit">退出</string>
     <string name="menu_about">关于</string>
     <string name="nav_header_image_desc">应用图标</string>
@@ -44,4 +44,27 @@
     <string name="game_official">官方</string>
     <string name="game_bilibili">"哔哩哔哩 "</string>
     <string name="overlay_coming">即将到来……</string>
+    <string name="start_without_game">点击这里，独立启动 Arknights Helper™ 引擎</string>
+    <string name="exp_star">星级：</string>
+    <string name="exp_exp" translatable="false">经验副本：</string>
+    <string name="exp_money" translatable="false">龙门币副本：</string>
+    <string name="exp_stage_now">当前精英化：</string>
+    <string name="exp_desc">长按按钮可以选择最大或最小值。\n数据来自 @Graue Neko</string>
+    <string name="exp_point_now">当前经验（上取整）：</string>
+    <string name="exp_level_now">当前等级：</string>
+    <string name="exp_stage_target">目标精英化：</string>
+    <string name="exp_level_target">目标等级：</string>
+    <string name="exp_result">结果：</string>
+    <string name="exp_result_money">龙门币：</string>
+    <string name="exp_result_exp">经验：</string>
+    <string name="exp_result_stamina">理智：</string>
+    <string name="exp_round_exp">（LS场数）</string>
+    <string name="exp_round_money">（CE场数）</string>
+    <string name="exp_money_upgrade">（升级）</string>
+    <string name="exp_money_evolve">（精英化）</string>
+    <string name="update_state_checking">正在连接到 Github™ 中枢检查更新……</string>
+    <string name="update_state_error">检查更新时出现问题</string>
+    <string name="update_state_need_update">发现 Arknights Helper™ 引擎存在更新，点击获取最新版本</string>
+    <string name="update_intent_error">无法连接到 Coolapk™ 数据中心，是否前往备用数据中心 Github™ 获取更新？</string>
+    <string name="update_go_github">前往Github</string>
 </resources>
