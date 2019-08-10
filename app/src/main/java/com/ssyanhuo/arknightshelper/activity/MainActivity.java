@@ -1,6 +1,5 @@
 package com.ssyanhuo.arknightshelper.activity;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.DialogInterface;
@@ -8,44 +7,41 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
-import android.view.View;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.view.GravityCompat;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.material.navigation.NavigationView;
-import com.ssyanhuo.arknightshelper.overlay.BackendService;
-import com.ssyanhuo.arknightshelper.R;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
+import com.ssyanhuo.arknightshelper.R;
+import com.ssyanhuo.arknightshelper.overlay.BackendService;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.concurrent.TimeoutException;
+
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -194,7 +190,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        final FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -218,6 +214,30 @@ public class MainActivity extends AppCompatActivity
         //View的更新并非线程安全，需要从子线程post一个Runnable，下面是这个Runnable的Handler
         handler = new Handler();
         checkApplicationUpdate();
+
+        MaterialShowcaseSequence materialShowcaseSequence = new MaterialShowcaseSequence(this);
+
+        materialShowcaseSequence.addSequenceItem(new MaterialShowcaseView.Builder(this)
+                .setTarget(fab)
+                .setContentText(R.string.showcase_start)
+                .setShapePadding((int) getResources().getDimension(R.dimen.activity_horizontal_margin))
+                .setDelay(500)
+                .setMaskColour(Color.parseColor("#DD1A1A1A"))
+                .setDismissOnTouch(true)
+                .renderOverNavigationBar()
+                .build());
+        materialShowcaseSequence.addSequenceItem(new MaterialShowcaseView.Builder(this)
+                .setTarget(toolbar.getChildAt(1))
+                .setContentText(R.string.showcase_menu)
+                .setShapePadding((int) getResources().getDimension(R.dimen.activity_horizontal_margin))
+                .setDelay(500)
+                .setMaskColour(Color.parseColor("#DD1A1A1A"))
+                .setDismissOnTouch(true)
+                .renderOverNavigationBar()
+                .build());
+
+        materialShowcaseSequence.singleUse("FIRST_RUN");
+        materialShowcaseSequence.start();
     }
 
     @Override
@@ -249,7 +269,7 @@ public class MainActivity extends AppCompatActivity
         UpdateRunnable updateRunnable = new UpdateRunnable();
         new Thread(updateRunnable).start();
     }
-    public void changeUpdateState(int state){
+    public void changeUpdateState(int state, @Nullable final String versionName, @Nullable final String releaseNote){
         TextView textView = findViewById(R.id.main_state_text);
         ImageView imageView = findViewById(R.id.main_state_img);
         LinearLayout linearLayout = findViewById(R.id.main_state);
@@ -265,27 +285,40 @@ public class MainActivity extends AppCompatActivity
                 textView.setTextColor(getResources().getColor(R.color.colorAccent));
                 imageView.setBackground(getDrawable(R.color.colorAccent));
                 imageView.setImageResource(R.drawable.ic_check_attention);
+
+
                 linearLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        try{
-                            Uri uri = Uri.parse("market://details?id=" + getPackageName());
-                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                            intent.setPackage("com.coolapk.market");
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            startActivity(intent);
-                        }catch (Exception e){
-                            Log.e(TAG, "Call Coolapk failed:" + e);
-                            Snackbar.make(view, R.string.update_intent_error, Snackbar.LENGTH_INDEFINITE).setAction(getResources().getString(R.string.update_go_github), new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    Uri uri = Uri.parse("https://github.com/ssYanhuo/Arknights-Helper/releases");
-                                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                                    startActivity(intent);
-                                }
-                            }).show();
-                        }
+                        new AlertDialog.Builder(MainActivity.this)
+                                .setTitle(getResources().getString(R.string.update_dialog_title) + " - " + versionName)
+                                .setMessage(releaseNote)
+                                .setPositiveButton(R.string.update_dialog_yes, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        try{
+                                            Uri uri = Uri.parse("market://details?id=" + getPackageName());
+                                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                            intent.setPackage("com.coolapk.market");
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            startActivity(intent);
+                                            startActivity(intent);
+                                        }catch (Exception e){
+                                            Log.e(TAG, "Call Coolapk failed:" + e);
+                                            Intent intent = new Intent();
+                                            intent.setAction(Intent.ACTION_VIEW);
+                                            intent.setData(Uri.parse("http://www.coolapk.com/apk/com.ssyanhuo.arknightshelper"));
+                                            startActivity(intent);
+                                        }
+                                    }
+                                })
+                                .setNeutralButton(R.string.update_dialog_no, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                })
+                                .show();
                     }
                 });
                 linearLayout.setFocusable(true);
@@ -303,7 +336,86 @@ public class MainActivity extends AppCompatActivity
         final int STATE_UP_TO_DATE = 0;
         final int STATE_NEED_UPDATE = 1;
         final int STATE_ERROR = 2;
+
+        PackageManager packageManager = getPackageManager();
+        String prop;
+        String versionCode;
+        String versionName;
+        String releaseNote;
+
         @Override
+        public void run() {
+
+            try{
+                //取得当前版本号
+                PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);
+                int versionCurrent = packageInfo.versionCode;
+                //从Github获取最新版本号
+                URL url = new URL("https://raw.githubusercontent.com/ssYanhuo/Arknights-Helper/master/versioninfo");
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("GET");
+                httpURLConnection.setConnectTimeout(10000);
+                httpURLConnection.setReadTimeout(10000);
+                InputStream inputStream = httpURLConnection.getInputStream();
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                byte[] buffer = new byte[1024];
+                int len;
+                while ((len = inputStream.read(buffer)) != -1){
+                    outputStream.write(buffer, 0,len);
+                }
+                inputStream.close();
+                byte[] data = outputStream.toByteArray();
+                prop = new String(data, StandardCharsets.UTF_8);
+                //不在同一语句中截取，否则可能截取到前面的换行
+                versionCode = prop.substring(prop.indexOf("versionCode") + 12);
+                versionCode = versionCode.substring(0, versionCode.indexOf("\n") - 1);
+                versionName = prop.substring(prop.indexOf("versionName") + 12);
+                versionName= versionName.substring(0, versionName.indexOf("\n") - 1);
+                releaseNote = prop.substring(prop.indexOf("releaseNote") + 12);
+                Log.i(TAG, "Latest version: " + versionCode);
+                int versionLatest = Integer.valueOf(versionCode);
+                if(versionCurrent < versionLatest){
+                    Runnable runnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            Runnable runnable1 = new Runnable() {
+                                @Override
+                                public void run() {
+                                    changeUpdateState(STATE_NEED_UPDATE, versionName, releaseNote);
+                                }
+                            };
+                            handler.post(runnable1);
+                        }
+                    };
+                    runnable.run();
+                }else {
+                    Runnable runnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            Runnable runnable1 = new Runnable() {
+                                @Override
+                                public void run() {
+                                    changeUpdateState(STATE_UP_TO_DATE, null, null);
+                                }
+                            };
+                            handler.post(runnable1);
+                        }
+                    };
+                    runnable.run();
+                }
+            }catch (Exception e){
+                //获取当前版本号失败，我也不知道啥情况下会失败orz
+                Runnable runnable1 = new Runnable() {
+                    @Override
+                    public void run() {
+                        changeUpdateState(STATE_ERROR, null, null);
+                    }
+                };
+                handler.post(runnable1);
+                Log.e(TAG, "Version check failed: " + e);
+            }
+        }
+        /*@Override
         public void run() {
             //应用启动时检查更新，状态面板显示正在连接到Github
             //检查到更新，状态面板修改颜色并提醒更新
@@ -314,7 +426,8 @@ public class MainActivity extends AppCompatActivity
                 PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);
                 int versionCurrent = packageInfo.versionCode;
                 //从Github获取最新版本号
-                URL url = new URL("https://raw.githubusercontent.com/ssYanhuo/Arknights-Helper/master/app/build.gradle");
+                //URL url = new URL("https://raw.githubusercontent.com/ssYanhuo/Arknights-Helper/master/app/build.gradle");
+                URL url = new URL("http://192.168.1.101/build.gradle");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("GET");
                 httpURLConnection.setConnectTimeout(10000);
@@ -340,7 +453,7 @@ public class MainActivity extends AppCompatActivity
                             Runnable runnable1 = new Runnable() {
                                 @Override
                                 public void run() {
-                                    changeUpdateState(STATE_NEED_UPDATE);
+                                    changeUpdateState(STATE_NEED_UPDATE, "info");
                                 }
                             };
                             handler.post(runnable1);
@@ -354,7 +467,7 @@ public class MainActivity extends AppCompatActivity
                             Runnable runnable1 = new Runnable() {
                                 @Override
                                 public void run() {
-                                    changeUpdateState(STATE_UP_TO_DATE);
+                                    changeUpdateState(STATE_UP_TO_DATE, null);
                                 }
                             };
                             handler.post(runnable1);
@@ -367,12 +480,13 @@ public class MainActivity extends AppCompatActivity
                 Runnable runnable1 = new Runnable() {
                     @Override
                     public void run() {
-                        changeUpdateState(STATE_ERROR);
+                        changeUpdateState(STATE_ERROR, null);
                     }
                 };
                 handler.post(runnable1);
                 Log.e(TAG, "Version check failed: " + e);
             }
-        }
+        }*/
+
     }
 }

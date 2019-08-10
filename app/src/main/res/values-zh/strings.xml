@@ -37,7 +37,7 @@
     <string name="go_release">前往项目发布页</string>
     <string name="go_release_desc">获取最新版本</string>
     <string name="about_thanks">鸣谢</string>
-    <string name="about_thanks_list">\@Graue Neko, @明日方舟WIKI\n以及所有的Doctor。</string>
+    <string name="about_thanks_list">\@Graue Neko, @明日方舟WIKI, @deano2390\n以及所有的Doctor。</string>
     <string name="about_version">版本号</string>
     <string name="about_version_desc">正在获取……</string>
     <string name="start_two_apps">检测到多个载体，请博士手动选择</string>
@@ -67,4 +67,9 @@
     <string name="update_state_need_update">发现 Arknights Helper™ 引擎存在更新，点击获取最新版本</string>
     <string name="update_intent_error">无法连接到 Coolapk™ 数据中心，是否前往备用数据中心 Github™ 获取更新？</string>
     <string name="update_go_github">前往Github</string>
+    <string name="showcase_start">点击这里，\n启动游戏和 Arknights Helper™ 引擎</string>
+    <string name="showcase_menu">更多功能请打开侧边栏</string>
+    <string name="update_dialog_yes">更新</string>
+    <string name="update_dialog_title">更新内容</string>
+    <string name="update_dialog_no">取消</string>
 </resources>

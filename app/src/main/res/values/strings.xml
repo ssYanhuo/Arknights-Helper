@@ -79,7 +79,7 @@
     <string name="go_release">Visit this project\'s release page</string>
     <string name="go_release_desc">Get lastest version</string>
     <string name="about_thanks">Thanks</string>
-    <string name="about_thanks_list">\@Graue Neko, @Arknights WIKI\nAnd all Doctors.</string>
+    <string name="about_thanks_list">\@Graue Neko, @Arknights WIKI, @deano2390\nAnd all Doctors.</string>
     <string name="about_version">Version</string>
     <string name="about_version_desc">Getting…</string>
     <string name="easter_text_1" translatable="false">我好像做了一个梦。\n</string>
@@ -143,4 +143,9 @@
     <string name="update_state_need_update">New version for Arknights Helper™ now available, click here to update</string>
     <string name="update_intent_error">Unable to call Coolapk to handle this update, do you want to go to Github release page?</string>
     <string name="update_go_github">Go to Github</string>
+    <string name="showcase_start">Tap here to start engine</string>
+    <string name="showcase_menu">About, check updates and more…</string>
+    <string name="update_dialog_yes">Update</string>
+    <string name="update_dialog_no">Cancel</string>
+    <string name="update_dialog_title">Release note</string>
 </resources>
