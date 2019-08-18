@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity
             try{
                 startService(intent1);
             }catch (Exception e){
-                Log.e("Akrnights Helper", "Start service failed!", e);
+                Log.e(TAG, "Start service failed!", e);
             }
             if(startGame){
                 final Intent intent2 = new Intent(Intent.ACTION_MAIN);
@@ -229,6 +229,15 @@ public class MainActivity extends AppCompatActivity
         materialShowcaseSequence.addSequenceItem(new MaterialShowcaseView.Builder(this)
                 .setTarget(toolbar.getChildAt(1))
                 .setContentText(R.string.showcase_menu)
+                .setShapePadding((int) getResources().getDimension(R.dimen.activity_horizontal_margin))
+                .setDelay(500)
+                .setMaskColour(Color.parseColor("#DD1A1A1A"))
+                .setDismissOnTouch(true)
+                .renderOverNavigationBar()
+                .build());
+        materialShowcaseSequence.addSequenceItem(new MaterialShowcaseView.Builder(this)
+                .setTarget(toolbar)
+                .setContentText(R.string.showcase_tile)
                 .setShapePadding((int) getResources().getDimension(R.dimen.activity_horizontal_margin))
                 .setDelay(500)
                 .setMaskColour(Color.parseColor("#DD1A1A1A"))
@@ -415,78 +424,5 @@ public class MainActivity extends AppCompatActivity
                 Log.e(TAG, "Version check failed: " + e);
             }
         }
-        /*@Override
-        public void run() {
-            //应用启动时检查更新，状态面板显示正在连接到Github
-            //检查到更新，状态面板修改颜色并提醒更新
-            //没有更新，状态面板修改颜色并提醒未检测到错误
-            PackageManager packageManager = getPackageManager();
-            try{
-                //取得当前版本号
-                PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);
-                int versionCurrent = packageInfo.versionCode;
-                //从Github获取最新版本号
-                //URL url = new URL("https://raw.githubusercontent.com/ssYanhuo/Arknights-Helper/master/app/build.gradle");
-                URL url = new URL("http://192.168.1.101/build.gradle");
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setRequestMethod("GET");
-                httpURLConnection.setConnectTimeout(10000);
-                httpURLConnection.setReadTimeout(10000);
-                InputStream inputStream = httpURLConnection.getInputStream();
-                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                byte[] buffer = new byte[1024];
-                int len;
-                while ((len = inputStream.read(buffer)) != -1){
-                    outputStream.write(buffer, 0,len);
-                }
-                inputStream.close();
-                byte[] data = outputStream.toByteArray();
-                String prop = new String(data, StandardCharsets.UTF_8);
-                String tmp1 = prop.substring(prop.indexOf("versionCode") + 12);
-                String tmp2 = tmp1.substring(0, 1);
-                Log.i(TAG, "Latest version: " + tmp2);
-                int versionLatest = Integer.valueOf(tmp2);
-                if(versionCurrent < versionLatest){
-                    Runnable runnable = new Runnable() {
-                        @Override
-                        public void run() {
-                            Runnable runnable1 = new Runnable() {
-                                @Override
-                                public void run() {
-                                    changeUpdateState(STATE_NEED_UPDATE, "info");
-                                }
-                            };
-                            handler.post(runnable1);
-                        }
-                    };
-                    runnable.run();
-                }else {
-                    Runnable runnable = new Runnable() {
-                        @Override
-                        public void run() {
-                            Runnable runnable1 = new Runnable() {
-                                @Override
-                                public void run() {
-                                    changeUpdateState(STATE_UP_TO_DATE, null);
-                                }
-                            };
-                            handler.post(runnable1);
-                        }
-                    };
-                    runnable.run();
-                }
-            }catch (Exception e){
-                //获取当前版本号失败，我也不知道啥情况下会失败orz
-                Runnable runnable1 = new Runnable() {
-                    @Override
-                    public void run() {
-                        changeUpdateState(STATE_ERROR, null);
-                    }
-                };
-                handler.post(runnable1);
-                Log.e(TAG, "Version check failed: " + e);
-            }
-        }*/
-
     }
 }

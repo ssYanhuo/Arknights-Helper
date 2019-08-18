@@ -152,4 +152,10 @@ public class AboutActivity extends AppCompatActivity {
         intent.setData(Uri.parse("http://github.com/ssYanhuo/Arknights-Helper/releases"));
         startActivity(intent);
     }
+    public void goQQ(View view){
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("http://jq.qq.com/?_wv=1027&k=5bPf1xW"));
+        startActivity(intent);
+    }
 }

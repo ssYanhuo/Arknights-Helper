@@ -110,6 +110,27 @@
                             android:layout_height="wrap_content"
                             android:text="@string/go_release_desc"/>
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/about_go_qq"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="goQQ"
+                        android:padding="@dimen/activity_horizontal_margin"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/go_qq"
+                            android:textColor="@color/colorTextPrimary"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/go_qq_desc"/>
+                    </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView

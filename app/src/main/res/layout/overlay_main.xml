@@ -40,17 +40,6 @@
         android:layout_height="wrap_content">
         <include layout="@layout/content_exp"/>
     </ScrollView>
-    <LinearLayout
-        android:id="@+id/material_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:paddingTop="@dimen/activity_horizontal_margin"
-            android:text="@string/overlay_coming"/>
-    </LinearLayout>
-
+    <!--完成后应该使用ScrollView-->
+        <include layout="@layout/content_material_temp"/>
 </LinearLayout>

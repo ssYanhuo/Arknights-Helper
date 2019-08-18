@@ -1,4 +1,7 @@
-versionCode 3
-versionName Alpha-2.1
-releaseNote 优化了更新提醒方式
-添加首次启动引导
+versionCode 4
+versionName Alpha-3.0
+releaseNote 增加通知栏磁贴支持（Android 7.0+）
+公开招募长按结果反向查询
+材料掉率查询（Beta）
+添加反馈群链接（侧边栏-关于）
+*Easter Egg*

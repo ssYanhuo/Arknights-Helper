@@ -6,24 +6,35 @@ import android.graphics.Typeface;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import androidx.cardview.widget.CardView;
+import androidx.core.widget.PopupWindowCompat;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ssyanhuo.arknightshelper.R;
+import com.zyyoona7.popup.EasyPopup;
+import com.zyyoona7.popup.XGravity;
+import com.zyyoona7.popup.YGravity;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Hr {
     private final String TAG = "Hr";
+    private EasyPopup easyPopup;
     public  void getAllCheckboxes(ArrayList<CheckBox> checkBoxes, View view){
         ViewGroup viewGroup = (ViewGroup)view;
         for(int i = 0; i < viewGroup.getChildCount(); i++){
@@ -116,7 +127,8 @@ public class Hr {
         linearLayout.setVisibility(View.GONE);
     }
 
-    public void showResult(ArrayList<JSONObject> result, LinearLayout linearLayout, ScrollView scrollView, Context context){
+    public void showResult(ArrayList<JSONObject> result, LinearLayout linearLayout, ScrollView scrollView, final Context context){
+
         LinearLayout resultLayout = linearLayout.findViewById(R.id.hr_result);
         resultLayout.removeAllViews();
         linearLayout.setVisibility(View.VISIBLE);
@@ -129,7 +141,7 @@ public class Hr {
             resultLayout.addView(textView);
         }
         for (int j = 0; j < result.size(); j++) {
-            JSONObject jsonObject = result.get(j);
+            final JSONObject jsonObject = result.get(j);
             Button button = LayoutInflater.from(context).inflate(R.layout.hr_result_button, null).findViewById(R.id.hr_result_button);
             switch (jsonObject.getInteger("level")) {
                 case 6:
@@ -150,6 +162,43 @@ public class Hr {
             }
             button.setText(jsonObject.getString("name"));
             button.setTag("hr_result");
+            button.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                    switch (motionEvent.getAction()){
+                        case MotionEvent.ACTION_DOWN:
+                            CardView cardView = (CardView) LayoutInflater.from(context).inflate(context.getResources().getLayout(R.layout.detail_popup), null);
+                            TextView textView = cardView.findViewById(R.id.detail_text);
+                            JSONArray jsonArray = jsonObject.getJSONArray("tags");
+                            String tags = "";
+                            for (int i = 0; i < jsonArray.size(); i++){
+                                tags += jsonArray.getString(i);
+                                if (i != jsonArray.size() - 1){
+                                    tags += " ";
+                                }
+                            }
+                            tags += "\n" + jsonObject.getString("characteristic") + "\n" + jsonObject.getString("type") + "干员";
+                            textView.setText(tags);
+                            easyPopup = EasyPopup.create(context)
+                                    .setContentView(cardView)
+                                    .apply();
+                             easyPopup.showAtAnchorView(view, YGravity.ABOVE, XGravity.CENTER);
+                             break;
+                        case MotionEvent.ACTION_UP:
+                            easyPopup.dismiss();
+                            break;
+                        case MotionEvent.ACTION_CANCEL:
+                            easyPopup.dismiss();
+                            break;
+                        default:
+                            break;
+                    }
+
+
+                    return false;
+                }
+            });
             resultLayout.addView(button);
         }
         scrollView.fullScroll(ScrollView.FOCUS_DOWN);

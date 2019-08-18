@@ -1,21 +1,16 @@
 package com.ssyanhuo.arknightshelper.overlay;
 
-import android.nfc.Tag;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.staticdata.StaticData;
@@ -23,7 +18,6 @@ import com.ssyanhuo.arknightshelper.utiliy.JsonUtility;
 import com.ssyanhuo.arknightshelper.widget.NumberSelector;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeoutException;
 
 public class Exp {
     public ArrayList<NumberSelector> numberSelectors;

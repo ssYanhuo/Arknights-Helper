@@ -241,6 +241,8 @@ public class BackendService extends Service {
         //TODO 方法放在类里面
         Exp exp = new Exp();
         exp.init(linearLayout_exp);
+        MaterialTemp materialTemp = new MaterialTemp();
+        materialTemp.init(linearLayout_material);
     }
     public void changeFloatingWindowContent(int i){
         switch (i){

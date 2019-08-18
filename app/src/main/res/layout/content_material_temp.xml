@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:id="@+id/material_content"
+    android:layerType="software">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="！功能尚未完成，仅供测试，需要横屏状态！\n目前数据来自 penguin-stats.io @AlvISsReimu 等团队成员"/>
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:id="@+id/webview_progress"
+        android:layout_margin="0dp"
+        android:padding="0dp"/>
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/webview_tmp"
+        android:layerType="software"
+        android:layout_margin="0dp"/>
+</LinearLayout>

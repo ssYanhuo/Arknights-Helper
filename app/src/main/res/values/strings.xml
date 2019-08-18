@@ -11,7 +11,7 @@
     <string name="notification_text">Tap to stop service</string>
     <string name="notification_channel">Overlay notification</string>
     <string name="tab_title_hr">HR Calculator</string>
-    <string name="tab_title_material">Material Calculator</string>
+    <string name="tab_title_material">Drop Probability(Beta)</string>
     <string name="tab_title_exp">EXP Calculator</string>
     <string name="tab_title_hide">Close</string>
 
@@ -61,7 +61,7 @@
     <string name="hr_tag_zhaohuan" translatable="false">召唤</string>
     <string name="hr_tag_kuaisufuhuo" translatable="false">快速复活</string>
     <string name="hr_tag_feiyonghuifu" translatable="false">费用回复</string>
-    <string name="hr_desc">You can choose 3 tags at most execpt stars.\nData from @Graue Neko</string>
+    <string name="hr_desc">You can choose 3 tags at most execpt stars.\nLong press characters for more info.\nData from @Graue Neko</string>
     <string name="hr_result">Result:</string>
     <string name="hr_result_empty">Noting found.</string>
     <string name="update_state_correct">Arknights Helper™ self-checking finished, no error found.</string>
@@ -79,7 +79,7 @@
     <string name="go_release">Visit this project\'s release page</string>
     <string name="go_release_desc">Get lastest version</string>
     <string name="about_thanks">Thanks</string>
-    <string name="about_thanks_list">\@Graue Neko, @Arknights WIKI, @deano2390\nAnd all Doctors.</string>
+    <string name="about_thanks_list">\@Graue Neko, @Arknights WIKI, @deano2390, @zyyoona7, @企鹅数据\nAnd all Doctors.</string>
     <string name="about_version">Version</string>
     <string name="about_version_desc">Getting…</string>
     <string name="easter_text_1" translatable="false">我好像做了一个梦。\n</string>
@@ -148,4 +148,7 @@
     <string name="update_dialog_yes">Update</string>
     <string name="update_dialog_no">Cancel</string>
     <string name="update_dialog_title">Release note</string>
+    <string name="showcase_tile">For android 7.0+, you can add QS tile to notification panel</string>
+    <string name="go_qq">Join QQ group</string>
+    <string name="go_qq_desc">Questions, get beta, submit issues or just chatting!</string>
 </resources>

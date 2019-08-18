@@ -13,7 +13,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".activity.AboutActivity"
             android:label="@string/title_activity_about"
@@ -36,6 +37,16 @@
                 <action android:name="com.ssyanhuo.arknightshelper.stopservice" />
             </intent-filter>
         </receiver>
+
+        <service
+            android:name=".utiliy.QSTileService"
+            android:label="@string/app_name"
+            android:icon="@drawable/ic_build"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
