@@ -250,16 +250,22 @@ public class BackendService extends Service {
                 linearLayout_hr.setVisibility(View.VISIBLE);
                 linearLayout_exp.setVisibility(View.GONE);
                 linearLayout_material.setVisibility(View.GONE);
+                layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+                windowManager.updateViewLayout(linearLayout, layoutParams);
                 break;
             case EXP:
                 linearLayout_hr.setVisibility(View.GONE);
                 linearLayout_exp.setVisibility(View.VISIBLE);
                 linearLayout_material.setVisibility(View.GONE);
+                layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+                windowManager.updateViewLayout(linearLayout, layoutParams);
                 break;
             case MATERIAL:
                 linearLayout_hr.setVisibility(View.GONE);
                 linearLayout_exp.setVisibility(View.GONE);
                 linearLayout_material.setVisibility(View.VISIBLE);
+                layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;
+                windowManager.updateViewLayout(linearLayout, layoutParams);
                 break;
             default:
                 break;

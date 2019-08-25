@@ -1,8 +1,4 @@
-versionCode 4
-versionName Alpha-3.0
-releaseNote 增加通知栏磁贴支持（Android 7.0+）
-公开招募长按结果反向查询
-材料掉率查询（Beta）
-添加反馈群链接（侧边栏-关于）
-发现了魅族机型存在悬浮窗无法显示的情况，可在设置中手动打开悬浮窗权限，下个版本将进行修复
-*Easter Egg*
+versionCode 5
+versionName Alpha-3.1
+releaseNote 尝试修复Flyme系统无法获取悬浮窗权限的问题
+尝试修复企鹅物流无法登录的问题
