@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="@dimen/activity_horizontal_margin">
+    android:padding="@dimen/activity_horizontal_margin"
+    android:descendantFocusability="blocksDescendants">
     <TextView
         android:id="@+id/exp_description"
         android:layout_width="match_parent"

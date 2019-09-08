@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -47,8 +48,20 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     final String TAG = "MainActivity";
     Handler handler;
+    SharedPreferences sharedPreferences;
     public void startEngine(View view, boolean startGame){
         Snackbar.make(view, R.string.start_game, Snackbar.LENGTH_LONG).show();
+        sharedPreferences = getSharedPreferences("Config", MODE_PRIVATE);
+        if((Build.BRAND.equals("Meizu") || Build.BRAND.equals("MEIZU")) && sharedPreferences.getBoolean("firstRun", true)){
+            Snackbar.make(view, "魅族用户请手动前往系统设置授予应用悬浮窗权限", Snackbar.LENGTH_INDEFINITE).show();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("firstRun", false);
+            editor.apply();
+            return;
+        }
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("firstRun", false);
+        editor.apply();
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             if(Settings.canDrawOverlays(getApplicationContext())){
                 Intent intent1 = new Intent(getApplicationContext(), BackendService.class);

@@ -16,7 +16,7 @@
     <string name="hr_selector_sex">性别：</string>
     <string name="hr_selector_type">种类：</string>
     <string name="hr_selector_tag">词缀：</string>
-    <string name="hr_desc">除星级外，最多可选 3 个标签，星级默认全选。\n长按干员查看更多信息。\n数据来自 @Graue Neko</string>
+    <string name="hr_desc_exact">除星级外，最多可选 3 个标签，只显示完全符合需求的干员。\n长按干员查看更多信息，点击这里切换查询方式。\n数据来自 @Graue Neko</string>
     <string name="hr_result">结果：</string>
     <string name="hr_result_empty">并没有找到结果</string>
     <string name="update_state_correct">Arknights Helper™ 正常运行中，未检测到错误</string>
@@ -40,7 +40,7 @@
     <string name="about_thanks_list">\@Graue Neko, @明日方舟WIKI, @deano2390, @zyyoona7, @企鹅数据\n以及所有的Doctor们。</string>
     <string name="about_version">版本号</string>
     <string name="about_version_desc">正在获取……</string>
-    <string name="start_two_apps">检测到多个载体，请博士手动选择</string>
+    <string name="start_two_apps">检测到多个客户端，请手动选择</string>
     <string name="game_official">官方</string>
     <string name="game_bilibili">"哔哩哔哩 "</string>
     <string name="overlay_coming">即将到来……</string>
@@ -62,10 +62,10 @@
     <string name="exp_round_money">（CE场数）</string>
     <string name="exp_money_upgrade">（升级）</string>
     <string name="exp_money_evolve">（精英化）</string>
-    <string name="update_state_checking">正在连接到 Github™ 中枢检查更新……</string>
+    <string name="update_state_checking">正在连接到 Github™ 数据中心检查更新……</string>
     <string name="update_state_error">检查更新时出现问题</string>
     <string name="update_state_need_update">发现 Arknights Helper™ 引擎存在更新，点击获取最新版本</string>
-    <string name="update_intent_error">无法连接到 Coolapk™ 数据中心，是否前往备用数据中心 Github™ 获取更新？</string>
+    <string name="update_intent_error">无法调取 Coolapk™ 数据中心，是否前往备用数据中心 Github™ 获取更新？</string>
     <string name="update_go_github">前往Github</string>
     <string name="showcase_start">点击这里，\n启动游戏和 Arknights Helper™ 引擎</string>
     <string name="showcase_menu">更多功能请打开侧边栏</string>
@@ -75,4 +75,12 @@
     <string name="showcase_tile">Android 7.0 及以上用户可添加快速设置图块到通知面板</string>
     <string name="go_qq">加入QQ群</string>
     <string name="go_qq_desc">教程、测试版本、交流……</string>
+    <string name="hr_method_selector_desc">选择一种查询方式。\n日后可以修改该选项。</string>
+    <string name="hr_method_selector_title_fuzzy">模糊查询</string>
+    <string name="hr_method_selector_title_exact">精确查询</string>
+    <string name="hr_method_selector_title_exact_desc">只显示完全符合需求的干员。</string>
+    <string name="hr_method_selector_title_fuzzy_desc">显示所有可能的招募结果，包括部分标签被划掉的情况。</string>
+    <string name="hr_desc_fuzzy">除星级外，最多可选 5 个标签，将列出所有可能的干员组合。\n长按干员查看更多信息，点击这里切换查询方式。\n数据来自 @Graue Neko</string>
+    <string name="hr_method_selector_button_to_fuzzy">切换到模糊查询</string>
+    <string name="hr_method_selector_button_to_exact">切换到精确查询</string>
 </resources>

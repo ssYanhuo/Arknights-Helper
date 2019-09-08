@@ -1,5 +1,7 @@
 package com.ssyanhuo.arknightshelper.overlay;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -44,7 +46,7 @@ public class Exp {
             }
         }
     }
-    public void init(final View view){
+    public void init(Context context, final View view){
         jsonString = JsonUtility.getJsonString(view.getContext(), "data/exp.json");
         jsonObject = JsonUtility.getJsonObject(view.getContext(), jsonString);
         numberSelectors = new ArrayList<>();
@@ -115,6 +117,7 @@ public class Exp {
             levelTarget.setInt(maxLevelTarget);
         }
     }
+    @SuppressLint("SetTextI18n")
     public void showResult(View view){
         int money = 0;
         int exp = 0;
@@ -182,8 +185,6 @@ public class Exp {
         }else {
             showedOnce = true;
         }
-        ScrollView scrollView = (ScrollView) view.getParent();
-        scrollView.fullScroll(View.FOCUS_DOWN);
     }
     public int getMaxStage(int star){
         switch (star){

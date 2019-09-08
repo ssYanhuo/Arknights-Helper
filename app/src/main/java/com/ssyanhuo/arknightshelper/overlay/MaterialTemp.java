@@ -1,5 +1,6 @@
 package com.ssyanhuo.arknightshelper.overlay;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.net.http.SslError;
 import android.os.Build;
@@ -16,7 +17,7 @@ import com.ssyanhuo.arknightshelper.R;
 public class MaterialTemp {
     private WebView webView;
     private ProgressBar progressBar;
-    public void init(View view){
+    public void init(Context context, View view){
         progressBar = view.findViewById(R.id.webview_progress);
         webView = view.findViewById(R.id.webview_tmp);
         webView.setWebViewClient(new WebViewClient() {

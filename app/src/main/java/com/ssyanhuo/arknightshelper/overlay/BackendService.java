@@ -39,15 +39,12 @@ public class BackendService extends Service {
     LinearLayout linearLayout_hr;
     LinearLayout linearLayout_exp;
     LinearLayout linearLayout_material;
+    ScrollView scrollView_hr;
+    ScrollView scrollView_exp;
+    ScrollView scrollView_materrial;
     Button button;
     //公开招募
-    ArrayList<CheckBox> checkBoxes;
-    ArrayList<String> selectedStar;
-    ArrayList<String> selectedQualification;
-    ArrayList<String> selectedPosition;
-    ArrayList<String> selectedSex;
-    ArrayList<String> selectedType;
-    ArrayList<String> selectedTag;
+
     //经验计算
     //TODO 变量放在类里面
     //材料计算
@@ -111,7 +108,7 @@ public class BackendService extends Service {
         layoutParams.width = DpUtiliy.dip2px(getApplicationContext(), 48);
         layoutParams.height = DpUtiliy.dip2px(getApplicationContext(), 48);
         layoutParams.gravity = Gravity.LEFT | Gravity.TOP;
-        layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+        layoutParams.flags = WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
         layoutParams.x = 0;
         layoutParams.y = 200;
         button = new Button(this);
@@ -156,7 +153,6 @@ public class BackendService extends Service {
 
     public void showFloatingWindow(){
         linearLayout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.overlay_main, null);
-        hrJson = JsonUtility.getJsonString(getApplicationContext(), "data/hr.json");
         windowManager.removeView(button);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
@@ -172,11 +168,15 @@ public class BackendService extends Service {
             layoutParams.width = displayMetrics.widthPixels;
         }
         windowManager.addView(linearLayout, layoutParams);
+        //实例化view
+        scrollView_hr = linearLayout.findViewById(R.id.scroll_hr);
+        scrollView_exp = linearLayout.findViewById(R.id.scroll_exp);
         linearLayout_hr = linearLayout.findViewById(R.id.hr_content);
         linearLayout_exp = linearLayout.findViewById(R.id.exp_content);
         linearLayout_material = linearLayout.findViewById(R.id.material_content);
-        linearLayout_hr.setVisibility(View.VISIBLE);
-        linearLayout_exp.setVisibility(View.GONE);
+        scrollView_hr.setVisibility(View.VISIBLE);
+        scrollView_exp.setVisibility(View.GONE);
+        //TODO-完成后把material改成scroll
         linearLayout_material.setVisibility(View.GONE);
         TabLayout tabLayout = linearLayout.findViewById(R.id.tab_main);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -210,56 +210,37 @@ public class BackendService extends Service {
 
             }
         });
-        //公开招募部分
-        //TODO 方法放在类里面
-        final Hr hr = new Hr();
-        hr.hideResult((LinearLayout) linearLayout_hr.findViewById(R.id.hr_result_content));
-        checkBoxes = new ArrayList<>();
-        selectedStar = new ArrayList<>();
-        selectedQualification = new ArrayList<>();
-        selectedPosition = new ArrayList<>();
-        selectedSex = new ArrayList<>();
-        selectedType = new ArrayList<>();
-        selectedTag = new ArrayList<>();
-        hr.getAllCheckboxes(checkBoxes, linearLayout_hr);
-        for(int i = 0; i < checkBoxes.size(); i++){
-            checkBoxes.get(i).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    hr.getSelectedItems(checkBoxes, selectedStar, selectedQualification, selectedPosition, selectedSex, selectedType, selectedTag);
-                    if (!hr.isFewerThan3(selectedQualification, selectedPosition, selectedSex, selectedType, selectedTag)){
-                        compoundButton.setChecked(false);
-                    }
-                    ArrayList<JSONObject> result = hr.getResult(hrJson, selectedStar, selectedQualification, selectedPosition, selectedSex, selectedType, selectedTag);
-                    hr.showResult(result, (LinearLayout)linearLayout_hr.findViewById(R.id.hr_result_content), (ScrollView) linearLayout_hr.findViewById(R.id.hr_result_content).getParent().getParent().getParent(), getApplicationContext());if(selectedStar.size() + selectedQualification.size() + selectedPosition.size() + selectedSex.size() + selectedType.size() + selectedTag.size() == 0){
-                        hr.hideResult((LinearLayout) linearLayout_hr.findViewById(R.id.hr_result_content));
-                    }
-                }
-            });
-        }
-        //经验计算部分
-        //TODO 方法放在类里面
+        //初始化
+        Hr hr = new Hr();
+        hr.init(getApplicationContext(), linearLayout_hr);
         Exp exp = new Exp();
-        exp.init(linearLayout_exp);
+        exp.init(getApplicationContext(), linearLayout_exp);
         MaterialTemp materialTemp = new MaterialTemp();
-        materialTemp.init(linearLayout_material);
+        materialTemp.init(getApplicationContext(), linearLayout_material);
     }
     public void changeFloatingWindowContent(int i){
         switch (i){
+            //TODO-完成后把material改成scroll
             case HR:
-                linearLayout_hr.setVisibility(View.VISIBLE);
-                linearLayout_exp.setVisibility(View.GONE);
+                scrollView_hr.setVisibility(View.VISIBLE);
+                scrollView_exp.setVisibility(View.GONE);
                 linearLayout_material.setVisibility(View.GONE);
+                layoutParams.flags = WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+                windowManager.updateViewLayout(linearLayout, layoutParams);
                 break;
             case EXP:
-                linearLayout_hr.setVisibility(View.GONE);
-                linearLayout_exp.setVisibility(View.VISIBLE);
+                scrollView_hr.setVisibility(View.GONE);
+                scrollView_exp.setVisibility(View.VISIBLE);
                 linearLayout_material.setVisibility(View.GONE);
+                layoutParams.flags = WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+                windowManager.updateViewLayout(linearLayout, layoutParams);
                 break;
             case MATERIAL:
-                linearLayout_hr.setVisibility(View.GONE);
-                linearLayout_exp.setVisibility(View.GONE);
+                scrollView_hr.setVisibility(View.GONE);
+                scrollView_exp.setVisibility(View.GONE);
                 linearLayout_material.setVisibility(View.VISIBLE);
+                layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;
+                windowManager.updateViewLayout(linearLayout, layoutParams);
                 break;
             default:
                 break;

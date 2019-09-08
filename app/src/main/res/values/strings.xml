@@ -61,7 +61,7 @@
     <string name="hr_tag_zhaohuan" translatable="false">召唤</string>
     <string name="hr_tag_kuaisufuhuo" translatable="false">快速复活</string>
     <string name="hr_tag_feiyonghuifu" translatable="false">费用回复</string>
-    <string name="hr_desc">You can choose 3 tags at most execpt stars.\nLong press characters for more info.\nData from @Graue Neko</string>
+    <string name="hr_desc_exact">You can choose 3 tags at most execpt stars, only show characters meet all requirements.\nLong press characters for more info, click here to change query mode.\nData from @Graue Neko</string>
     <string name="hr_result">Result:</string>
     <string name="hr_result_empty">Noting found.</string>
     <string name="update_state_correct">Arknights Helper™ self-checking finished, no error found.</string>
@@ -151,4 +151,12 @@
     <string name="showcase_tile">For android 7.0+, you can add QS tile to notification panel</string>
     <string name="go_qq">Join QQ group</string>
     <string name="go_qq_desc">Questions, get beta, submit issues or just chatting!</string>
+    <string name="hr_method_selector_desc">Please select a query method.\nYou can change this setting later.</string>
+    <string name="hr_method_selector_title_fuzzy">Fuzzy query</string>
+    <string name="hr_method_selector_title_exact">Exact query</string>
+    <string name="hr_method_selector_title_exact_desc">Only show characters exactly meet your requirements.</string>
+    <string name="hr_method_selector_title_fuzzy_desc">Show all characters meet at least one of your requirements.</string>
+    <string name="hr_desc_fuzzy">You can choose 5 tags at most execpt stars, will show all possible results.\nLong press characters for more info, click here to change query mode.\nData from @Graue Neko</string>
+    <string name="hr_method_selector_button_to_fuzzy">Change to fuzzy mode</string>
+    <string name="hr_method_selector_button_to_exact">Change to exact mode</string>
 </resources>
