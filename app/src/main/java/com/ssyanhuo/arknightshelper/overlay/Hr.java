@@ -33,6 +33,7 @@ import com.zyyoona7.popup.YGravity;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class Hr {
     private final String TAG = "Hr";
@@ -239,6 +240,9 @@ public class Hr {
                 matchedTags.addAll(JSONArray.parseArray(JSON.toJSONString(type)));
                 matchedTags.addAll(JSONArray.parseArray(JSON.toJSONString(sex)));
                 matchedTags.addAll(JSONArray.parseArray(JSON.toJSONString(tag)));
+                List list = JSONArray.parseArray(matchedTags.toJSONString());
+                Collections.sort(list);
+                matchedTags = JSONArray.parseArray(list.toString());
                 jsonObject.put("matchedTags", matchedTags);
                 result.add(jsonObject);
                 Log.i(TAG, "Found:" + name);
@@ -282,6 +286,9 @@ public class Hr {
                 case 5:
                     button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_red));
                     break;
+                case 3:
+                    button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_green));
+                    break;
                 case 2:
                 case 1:
                     button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_lime));
@@ -312,6 +319,7 @@ public class Hr {
                             textView.setText(tags);
                             easyPopup = EasyPopup.create(applicationContext)
                                     .setContentView(cardView)
+                                    .setFocusable(false)
                                     .apply();
                             easyPopup.showAtAnchorView(view, YGravity.ABOVE, XGravity.CENTER);
                              break;
@@ -355,6 +363,9 @@ public class Hr {
                 case 5:
                     button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_red));
                     break;
+                case 3:
+                    button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_green));
+                    break;
                 case 2:
                 case 1:
                     button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_lime));
@@ -385,6 +396,7 @@ public class Hr {
                             textView.setText(tags);
                             easyPopup = EasyPopup.create(applicationContext)
                                     .setContentView(cardView)
+                                    .setFocusable(false)
                                     .apply();
                             easyPopup.showAtAnchorView(view, YGravity.ABOVE, XGravity.CENTER);
                             break;

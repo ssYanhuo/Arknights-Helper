@@ -1,9 +1,10 @@
-versionCode 6
-versionName Alpha-3.2
-releaseNote 更新目标 SDK 为 Android Q
+versionCode 7
+versionName Alpha-3.3
+releaseNote 修复了公开招募查询干员信息窗口会意外获取焦点的问题
+公开招募查询 3★ 干员和 4★ 干员加以颜色区分
+修复了公开招募模糊查询结果标签重复的问题
+更新目标 SDK 为 Android Q
 添加公开招募模糊查询
 公开招募优先显示高星级干员
 暂时去除有时会很烦人的自动滚动
 重写了公开招募查询逻辑
-尝试修复Flyme系统无法获取悬浮窗权限的问题
-尝试修复企鹅物流无法登录的问题
