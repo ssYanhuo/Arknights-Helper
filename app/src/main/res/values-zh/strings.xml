@@ -83,4 +83,5 @@
     <string name="hr_desc_fuzzy">除星级外，最多可选 5 个标签，将列出所有可能的干员组合。\n长按干员查看更多信息，点击这里切换查询方式。\n数据来自 @Graue Neko</string>
     <string name="hr_method_selector_button_to_fuzzy">切换到模糊查询</string>
     <string name="hr_method_selector_button_to_exact">切换到精确查询</string>
+    <string name="title_activity_lab">实验室</string>
 </resources>

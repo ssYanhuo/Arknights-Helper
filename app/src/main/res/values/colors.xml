@@ -4,6 +4,7 @@
     <color name="colorTextSecondary">#313131</color>
     <color name="colorPrimary">#2C2C2C</color>
     <color name="colorPrimaryDark">#1A1A1A</color>
+    <color name="colorSurface">#1A1A1A</color>
     <color name="colorAccent">#FF9800</color>
     <color name="colorError">#E91E1E</color>
     <color name="colorCheckBoxChecked">#FFFFFF</color>

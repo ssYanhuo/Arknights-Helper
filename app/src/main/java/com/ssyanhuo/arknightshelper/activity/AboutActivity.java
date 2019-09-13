@@ -73,6 +73,14 @@ public class AboutActivity extends AppCompatActivity {
                     LinearLayout easterLinearlayout = findViewById(R.id.about_easter);
                     final TextView easterTextView = findViewById(R.id.about_easter_text);
                     easterLinearlayout.setVisibility(View.VISIBLE);
+                    easterLinearlayout.setLongClickable(true);
+                    easterLinearlayout.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View view) {
+                            goLab(view);
+                            return false;
+                        }
+                    });
                     Timer timer = new Timer();
                     TimerTask timerTask = new TimerTask() {
                         @Override
@@ -156,6 +164,10 @@ public class AboutActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
         intent.setData(Uri.parse("http://jq.qq.com/?_wv=1027&k=5bPf1xW"));
+        startActivity(intent);
+    }
+    public void goLab(View view){
+        Intent intent = new Intent(this, LabActivity.class);
         startActivity(intent);
     }
 }

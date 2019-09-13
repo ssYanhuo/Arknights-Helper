@@ -96,28 +96,6 @@
     <string name="game_official">Official</string>
     <string name="game_bilibili">Bilibili</string>
     <string name="overlay_coming">Coming soon…</string>
-    <string-array name="exp_list_star">
-        <item>6★</item>
-        <item>5★</item>
-        <item>4★</item>
-        <item>3★</item>
-        <item>2★</item>
-        <item>1★</item>
-    </string-array>
-    <string-array name="exp_list_exp">
-        <item>LS-5</item>
-        <item>LS-4</item>
-        <item>LS-3</item>
-        <item>LS-2</item>
-        <item>LS-1</item>
-    </string-array>
-    <string-array name="exp_list_money">
-        <item>CE-5</item>
-        <item>CE-4</item>
-        <item>CE-3</item>
-        <item>CE-2</item>
-        <item>CE-1</item>
-    </string-array>
     <string name="start_without_game">Click here, start Arknights Helper™ without game</string>
     <string name="exp_star">Star:</string>
     <string name="exp_exp">EXP Level:</string>
@@ -159,4 +137,27 @@
     <string name="hr_desc_fuzzy">You can choose 5 tags at most execpt stars, will show all possible results.\nLong press characters for more info, click here to change query mode.\nData from @Graue Neko</string>
     <string name="hr_method_selector_button_to_fuzzy">Change to fuzzy mode</string>
     <string name="hr_method_selector_button_to_exact">Change to exact mode</string>
+    <string-array name="exp_list_star">
+        <item>6★</item>
+        <item>5★</item>
+        <item>4★</item>
+        <item>3★</item>
+        <item>2★</item>
+        <item>1★</item>
+    </string-array>
+    <string-array name="exp_list_exp">
+        <item>LS-5</item>
+        <item>LS-4</item>
+        <item>LS-3</item>
+        <item>LS-2</item>
+        <item>LS-1</item>
+    </string-array>
+    <string-array name="exp_list_money">
+        <item>CE-5</item>
+        <item>CE-4</item>
+        <item>CE-3</item>
+        <item>CE-2</item>
+        <item>CE-1</item>
+    </string-array>
+    <string name="title_activity_lab">Laboratory</string>
 </resources>
