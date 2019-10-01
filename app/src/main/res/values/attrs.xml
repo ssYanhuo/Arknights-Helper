@@ -6,4 +6,13 @@
         <attr name="step" format="integer"/>
         <attr name="defaultValue" format="integer"/>
     </declare-styleable>
+    <declare-styleable name="LineWrapLayout">
+        <attr name="horizontal_spacing" format="dimension" />
+        <attr name="vertical_spacing" format="dimension" />
+        <attr name="child_width" format="dimension" />
+        <attr name="child_height" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="TableItem">
+
+    </declare-styleable>
 </resources>

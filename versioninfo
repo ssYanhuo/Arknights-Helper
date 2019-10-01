@@ -1,7 +1,7 @@
-versionCode 8
-versionName Alpha-3.4
-releaseNote 添加调试工具，用于提交错误报告
+versionCode 9
+versionName Beta-EarlyAutumn-1.0.0
+releaseNote 掉落查询正式上线
+应用已初步完成构建，进入Beta测试阶段
+修复了一些在竖屏模式下可能遇到的小问题
+添加调试工具，用于提交错误报告
 更新依赖库至最新版本
-公开招募查询 3★ 干员和 4★ 干员加以颜色区分
-更新目标 SDK 为 Android Q
-添加公开招募模糊查询

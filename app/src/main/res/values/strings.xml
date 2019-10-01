@@ -11,7 +11,7 @@
     <string name="notification_text">Tap to stop service</string>
     <string name="notification_channel">Overlay notification</string>
     <string name="tab_title_hr">HR Calculator</string>
-    <string name="tab_title_material">Drop Probability(Beta)</string>
+    <string name="tab_title_material">Drop Probability</string>
     <string name="tab_title_exp">EXP Calculator</string>
     <string name="tab_title_hide">Close</string>
 
@@ -79,7 +79,7 @@
     <string name="go_release">Visit this project\'s release page</string>
     <string name="go_release_desc">Get lastest version</string>
     <string name="about_thanks">Thanks</string>
-    <string name="about_thanks_list">\@Graue Neko, @Arknights WIKI, @deano2390, @zyyoona7, @企鹅数据\nAnd all Doctors.</string>
+    <string name="about_thanks_list">\@Graue Neko, @Arknights WIKI, @deano2390, @teisun, @zyyoona7, @企鹅数据\nAnd all Doctors.</string>
     <string name="about_version">Version</string>
     <string name="about_version_desc">Getting…</string>
     <string name="easter_text_1" translatable="false">我好像做了一个梦。\n</string>
@@ -159,5 +159,8 @@
         <item>CE-2</item>
         <item>CE-1</item>
     </string-array>
-    <string name="title_activity_lab">Laboratory</string>
+    <string name="title_activity_lab">Dreamland</string>
+    <string name="material_updater_desc">No data found, data not usable or need a update.\nPlease update your data.\nData from @Penguin Statics (penguin-stats.io)</string>
+    <string name="material_updater_update">Update</string>
+    <string name="material_desc" >Data from penguin-stats.io.</string>
 </resources>

@@ -41,7 +41,7 @@ public class BackendService extends Service {
     LinearLayout linearLayout_material;
     ScrollView scrollView_hr;
     ScrollView scrollView_exp;
-    ScrollView scrollView_materrial;
+    ScrollView scrollView_material;
     Button button;
     //公开招募
 
@@ -164,20 +164,20 @@ public class BackendService extends Service {
             layoutParams.height = displayMetrics.heightPixels;
             layoutParams.width = displayMetrics.widthPixels / 2;
         }else {
-            layoutParams.height = displayMetrics.heightPixels / 3;
+            layoutParams.height = displayMetrics.heightPixels / 2;
             layoutParams.width = displayMetrics.widthPixels;
         }
         windowManager.addView(linearLayout, layoutParams);
         //实例化view
         scrollView_hr = linearLayout.findViewById(R.id.scroll_hr);
         scrollView_exp = linearLayout.findViewById(R.id.scroll_exp);
+        scrollView_material = linearLayout.findViewById(R.id.scroll_material);
         linearLayout_hr = linearLayout.findViewById(R.id.hr_content);
         linearLayout_exp = linearLayout.findViewById(R.id.exp_content);
         linearLayout_material = linearLayout.findViewById(R.id.material_content);
         scrollView_hr.setVisibility(View.VISIBLE);
         scrollView_exp.setVisibility(View.GONE);
-        //TODO-完成后把material改成scroll
-        linearLayout_material.setVisibility(View.GONE);
+        scrollView_material.setVisibility(View.GONE);
         TabLayout tabLayout = linearLayout.findViewById(R.id.tab_main);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -215,30 +215,29 @@ public class BackendService extends Service {
         hr.init(getApplicationContext(), linearLayout_hr);
         Exp exp = new Exp();
         exp.init(getApplicationContext(), linearLayout_exp);
-        MaterialTemp materialTemp = new MaterialTemp();
-        materialTemp.init(getApplicationContext(), linearLayout_material);
+        Material material = new Material();
+        material.init(getApplicationContext(), linearLayout_material);
     }
     public void changeFloatingWindowContent(int i){
         switch (i){
-            //TODO-完成后把material改成scroll
             case HR:
                 scrollView_hr.setVisibility(View.VISIBLE);
                 scrollView_exp.setVisibility(View.GONE);
-                linearLayout_material.setVisibility(View.GONE);
+                scrollView_material.setVisibility(View.GONE);
                 layoutParams.flags = WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
                 windowManager.updateViewLayout(linearLayout, layoutParams);
                 break;
             case EXP:
                 scrollView_hr.setVisibility(View.GONE);
                 scrollView_exp.setVisibility(View.VISIBLE);
-                linearLayout_material.setVisibility(View.GONE);
+                scrollView_material.setVisibility(View.GONE);
                 layoutParams.flags = WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
                 windowManager.updateViewLayout(linearLayout, layoutParams);
                 break;
             case MATERIAL:
                 scrollView_hr.setVisibility(View.GONE);
                 scrollView_exp.setVisibility(View.GONE);
-                linearLayout_material.setVisibility(View.VISIBLE);
+                scrollView_material.setVisibility(View.VISIBLE);
                 layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;
                 windowManager.updateViewLayout(linearLayout, layoutParams);
                 break;

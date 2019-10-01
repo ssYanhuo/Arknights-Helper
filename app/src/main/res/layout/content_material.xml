@@ -1,6 +1,381 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:descendantFocusability="blocksDescendants">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/material_content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:descendantFocusability="blocksDescendants">
+    <TextView
+        android:id="@+id/material_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/material_desc"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+    <com.ssyanhuo.arknightshelper.widget.ChildScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="256dp"
+        android:id="@+id/material_selector_scroll"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="false">
+        <com.ssyanhuo.arknightshelper.widget.LineWrapLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:horizontal_spacing="@dimen/activity_horizontal_margin"
+            app:vertical_spacing="@dimen/activity_vertical_margin"
+            android:id="@+id/material_selector">
 
+            <RadioButton
+                android:id="@+id/material_item_exp_1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_01"
+                android:button="@null"
+                android:tag="2001" />
+
+            <RadioButton
+                android:id="@+id/material_item_exp_2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_02"
+                android:button="@null"
+                android:tag="2002" />
+
+            <RadioButton
+                android:id="@+id/material_item_exp_3"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_03"
+                android:button="@null"
+                android:tag="2003" />
+
+            <!--<RadioButton
+                android:id="@+id/material_item_exp_4"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_04"
+                android:button="@null"
+                android:tag="2004" />-->
+
+            <RadioButton
+                android:id="@+id/material_item_rock_1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_05"
+                android:button="@null"
+                android:tag="30011" />
+
+            <RadioButton
+                android:id="@+id/material_item_rock_2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_06"
+                android:button="@null"
+                android:tag="30012" />
+
+            <RadioButton
+                android:id="@+id/material_item_rock_3"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_07"
+                android:button="@null"
+                android:tag="30013" />
+
+            <RadioButton
+                android:id="@+id/material_item_rock_4"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_08"
+                android:button="@null"
+                android:tag="30014" />
+
+            <RadioButton
+                android:id="@+id/material_item_sugar_1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_09"
+                android:button="@null"
+                android:tag="30021" />
+
+            <RadioButton
+                android:id="@+id/material_item_sugar_2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_10"
+                android:button="@null"
+                android:tag="30022" />
+
+            <RadioButton
+                android:id="@+id/material_item_sugar_3"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_11"
+                android:button="@null"
+                android:tag="30023" />
+
+            <RadioButton
+                android:id="@+id/material_item_sugar_4"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_12"
+                android:button="@null"
+                android:tag="30024" />
+
+            <RadioButton
+                android:id="@+id/material_item_gold_1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_13"
+                android:button="@null"
+                android:tag="3003" />
+
+            <RadioButton
+                android:id="@+id/material_item_ester_1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_14"
+                android:button="@null"
+                android:tag="30031" />
+
+            <RadioButton
+                android:id="@+id/material_item_ester_2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_15"
+                android:button="@null"
+                android:tag="30032" />
+
+            <RadioButton
+                android:id="@+id/material_item_ester_3"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_16"
+                android:button="@null"
+                android:tag="30033" />
+
+            <RadioButton
+                android:id="@+id/material_item_ester_4"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_17"
+                android:button="@null"
+                android:tag="30034" />
+
+            <RadioButton
+                android:id="@+id/material_item_iron_1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_18"
+                android:button="@null"
+                android:tag="30041" />
+
+            <RadioButton
+                android:id="@+id/material_item_iron_2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_19"
+                android:button="@null"
+                android:tag="30042" />
+
+            <RadioButton
+                android:id="@+id/material_item_iron_3"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_20"
+                android:button="@null"
+                android:tag="30043" />
+
+            <RadioButton
+                android:id="@+id/material_item_iron_4"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_21"
+                android:button="@null"
+                android:tag="30044" />
+
+            <RadioButton
+                android:id="@+id/material_item_ketone_1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_22"
+                android:button="@null"
+                android:tag="30051" />
+
+            <RadioButton
+                android:id="@+id/material_item_ketone_2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_23"
+                android:button="@null"
+                android:tag="30052" />
+
+            <RadioButton
+                android:id="@+id/material_item_ketone_3"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_24"
+                android:button="@null"
+                android:tag="30053" />
+
+            <RadioButton
+                android:id="@+id/material_item_ketone_4"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_25"
+                android:button="@null"
+                android:tag="30054" />
+
+            <RadioButton
+                android:id="@+id/material_item_device_1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_26"
+                android:button="@null"
+                android:tag="30061" />
+
+            <RadioButton
+                android:id="@+id/material_item_device_2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_27"
+                android:button="@null"
+                android:tag="30062" />
+
+            <RadioButton
+                android:id="@+id/material_item_device_3"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_28"
+                android:button="@null"
+                android:tag="30063" />
+
+            <RadioButton
+                android:id="@+id/material_item_device_4"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_29"
+                android:button="@null"
+                android:tag="30064" />
+
+            <RadioButton
+                android:id="@+id/material_item_alcohol_1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_30"
+                android:button="@null"
+                android:tag="30073" />
+
+            <RadioButton
+                android:id="@+id/material_item_alcohol_2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_31"
+                android:button="@null"
+                android:tag="30074" />
+
+            <RadioButton
+                android:id="@+id/material_item_manganese_1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_32"
+                android:button="@null"
+                android:tag="30083" />
+
+            <RadioButton
+                android:id="@+id/material_item_manganese_2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_33"
+                android:button="@null"
+                android:tag="30084" />
+
+            <RadioButton
+                android:id="@+id/material_item_pg_1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_34"
+                android:button="@null"
+                android:tag="30093" />
+
+            <RadioButton
+                android:id="@+id/material_item_pg_2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_35"
+                android:button="@null"
+                android:tag="30094" />
+
+            <RadioButton
+                android:id="@+id/material_item_rma70_1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_36"
+                android:button="@null"
+                android:tag="30103" />
+
+            <RadioButton
+                android:id="@+id/material_item_rma70_2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_37"
+                android:button="@null"
+                android:tag="30104" />
+
+            <RadioButton
+                android:id="@+id/material_item_carbon_1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_38"
+                android:button="@null"
+                android:tag="3112" />
+
+            <RadioButton
+                android:id="@+id/material_item_carbon_2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_39"
+                android:button="@null"
+                android:tag="3113" />
+
+            <RadioButton
+                android:id="@+id/material_item_carbon_3"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_40"
+                android:button="@null"
+                android:tag="3114" />
+
+            <RadioButton
+                android:id="@+id/material_item_book_1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_41"
+                android:button="@null"
+                android:tag="3301" />
+
+            <RadioButton
+                android:id="@+id/material_item_book_2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_42"
+                android:button="@null"
+                android:tag="3302" />
+
+            <RadioButton
+                android:id="@+id/material_item_book_3"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/item_sprite_43"
+                android:button="@null"
+                android:tag="3303" />
+        </com.ssyanhuo.arknightshelper.widget.LineWrapLayout>
+    </com.ssyanhuo.arknightshelper.widget.ChildScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/material_result_content"
+        android:orientation="vertical">
+    </LinearLayout>
 </LinearLayout>
