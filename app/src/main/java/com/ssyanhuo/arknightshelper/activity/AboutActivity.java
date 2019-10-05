@@ -70,11 +70,11 @@ public class AboutActivity extends AppCompatActivity {
                 if(count >= 12){
                     count = 0;
                     showedEaster = true;
-                    LinearLayout easterLinearlayout = findViewById(R.id.about_easter);
+                    LinearLayout easterLinearLayout = findViewById(R.id.about_easter);
                     final TextView easterTextView = findViewById(R.id.about_easter_text);
-                    easterLinearlayout.setVisibility(View.VISIBLE);
-                    easterLinearlayout.setLongClickable(true);
-                    easterLinearlayout.setOnLongClickListener(new View.OnLongClickListener() {
+                    easterLinearLayout.setVisibility(View.VISIBLE);
+                    easterLinearLayout.setLongClickable(true);
+                    easterLinearLayout.setOnLongClickListener(new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View view) {
                             goLab(view);
