@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("firstRun", false);
         editor.apply();
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             if(Settings.canDrawOverlays(getApplicationContext())){
                 Intent intent1 = new Intent(getApplicationContext(), BackendService.class);
                 try{
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity
                     final Intent intent2 = new Intent(Intent.ACTION_MAIN);
                     intent2.addCategory(Intent.CATEGORY_LAUNCHER);
                     if(checkApplication("com.hypergryph.arknights") && checkApplication("com.hypergryph.arknights.bilibili")){
-                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.Theme_AppCompat_Light_Dialog_Alert);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.AppTheme_AlertDialog);
                         builder.setTitle(R.string.start_two_apps)
                                 .setPositiveButton(R.string.game_official, new DialogInterface.OnClickListener() {
                                     @Override
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity
                 final Intent intent2 = new Intent(Intent.ACTION_MAIN);
                 intent2.addCategory(Intent.CATEGORY_LAUNCHER);
                 if(checkApplication("com.hypergryph.arknights") && checkApplication("com.hypergryph.arknights.bilibili")){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.Theme_AppCompat_Light_Dialog_Alert);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.AppTheme);
                     builder.setTitle(R.string.start_two_apps)
                             .setPositiveButton(R.string.game_official, new DialogInterface.OnClickListener() {
                                 @Override

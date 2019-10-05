@@ -1,7 +1,6 @@
-versionCode 9
-versionName Beta-EarlyAutumn-1.0.0
-releaseNote 掉落查询正式上线
+versionCode 10
+versionName Beta-EarlyAutumn-1.0.1
+releaseNote 修复了部分系统不能正常启动悬浮窗的问题
+掉落查询正式上线
 应用已初步完成构建，进入Beta测试阶段
 修复了一些在竖屏模式下可能遇到的小问题
-添加调试工具，用于提交错误报告
-更新依赖库至最新版本

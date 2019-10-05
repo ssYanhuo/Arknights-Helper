@@ -43,14 +43,6 @@ public class BackendService extends Service {
     ScrollView scrollView_exp;
     ScrollView scrollView_material;
     Button button;
-    //公开招募
-
-    //经验计算
-    //TODO 变量放在类里面
-    //材料计算
-    String hrJson;
-    String expJson;
-    String materialJson;
     final int HR = 0;
     final int EXP = 1;
     final int MATERIAL = 2;
@@ -101,6 +93,8 @@ public class BackendService extends Service {
             layoutParams.type = WindowManager.LayoutParams.TYPE_PHONE;
         }
         startFloatingButton();
+        //预处理
+        floatingWindowPreProcess();
     }
 
     public void startFloatingButton(){
@@ -149,25 +143,11 @@ public class BackendService extends Service {
             }
         });
         windowManager.addView(button, layoutParams);
+
     }
 
-    public void showFloatingWindow(){
+    public void floatingWindowPreProcess(){
         linearLayout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.overlay_main, null);
-        windowManager.removeView(button);
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-        int rotation = windowManager.getDefaultDisplay().getRotation();
-        layoutParams.gravity = Gravity.END | Gravity.TOP;
-        layoutParams.x = 0;
-        layoutParams.y = 0;
-        if(rotation == 1 || rotation == 3){
-            layoutParams.height = displayMetrics.heightPixels;
-            layoutParams.width = displayMetrics.widthPixels / 2;
-        }else {
-            layoutParams.height = displayMetrics.heightPixels / 2;
-            layoutParams.width = displayMetrics.widthPixels;
-        }
-        windowManager.addView(linearLayout, layoutParams);
         //实例化view
         scrollView_hr = linearLayout.findViewById(R.id.scroll_hr);
         scrollView_exp = linearLayout.findViewById(R.id.scroll_exp);
@@ -218,6 +198,25 @@ public class BackendService extends Service {
         Material material = new Material();
         material.init(getApplicationContext(), linearLayout_material);
     }
+
+    public void showFloatingWindow(){
+        windowManager.removeView(button);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+        int rotation = windowManager.getDefaultDisplay().getRotation();
+        layoutParams.gravity = Gravity.END | Gravity.TOP;
+        layoutParams.x = 0;
+        layoutParams.y = 0;
+        if(rotation == 1 || rotation == 3){
+            layoutParams.height = displayMetrics.heightPixels;
+            layoutParams.width = displayMetrics.widthPixels / 2;
+        }else {
+            layoutParams.height = displayMetrics.heightPixels / 2;
+            layoutParams.width = displayMetrics.widthPixels;
+        }
+        windowManager.addView(linearLayout, layoutParams);
+
+    }
     public void changeFloatingWindowContent(int i){
         switch (i){
             case HR:
@@ -248,6 +247,7 @@ public class BackendService extends Service {
     public void hideFloatingWindow(){
         windowManager.removeView(linearLayout);
         startFloatingButton();
+        floatingWindowPreProcess();
     }
     @Override
     public void onDestroy() {
