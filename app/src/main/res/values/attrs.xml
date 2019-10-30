@@ -5,6 +5,7 @@
         <attr name="maxValue" format="integer"/>
         <attr name="step" format="integer"/>
         <attr name="defaultValue" format="integer"/>
+        <attr name="text" format="string"/>
     </declare-styleable>
     <declare-styleable name="LineWrapLayout">
         <attr name="horizontal_spacing" format="dimension" />
@@ -13,6 +14,7 @@
         <attr name="child_height" format="dimension" />
     </declare-styleable>
     <declare-styleable name="TableItem">
-
+    </declare-styleable>
+    <declare-styleable name="ItemDetailView">
     </declare-styleable>
 </resources>

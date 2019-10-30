@@ -7,8 +7,8 @@
     <string name="notification_text">点击来结束服务</string>
     <string name="notification_channel">悬浮窗通知</string>
     <string name="tab_title_hr">公开招募</string>
-    <string name="tab_title_material">掉落查询</string>
-    <string name="tab_title_exp">经验计算</string>
+    <string name="tab_title_drop">掉落查询</string>
+    <string name="tab_title_material">材料计算</string>
     <string name="tab_title_hide">关闭</string>
     <string name="hr_selector_star">星级：</string>
     <string name="hr_selector_qualification">资质：</string>
@@ -16,10 +16,12 @@
     <string name="hr_selector_sex">性别：</string>
     <string name="hr_selector_type">种类：</string>
     <string name="hr_selector_tag">词缀：</string>
-    <string name="hr_desc_exact">除星级外，最多可选 3 个标签，只显示完全符合需求的干员。\n长按干员查看更多信息，点击这里切换查询方式。\n数据来自 @Graue Neko</string>
-    <string name="hr_result">结果：</string>
+    <string name="hr_desc_exact_part_1">除星级外，最多可选 3 个标签，只显示完全符合需求的干员。\n长按干员查看更多信息。\n数据来自 @Graue Neko</string>
+    <string name="hr_result_title_part_1">结果：</string>
+    <string name="hr_result_title_part_2">清空全部</string>
     <string name="hr_result_empty">并没有找到结果</string>
     <string name="update_state_correct">Arknights Helper™ 正常运行中，未检测到错误</string>
+    <string name="update_state_beta">看起来你正在使用一个尚未发布的版本</string>
     <string name="menu_exit">退出</string>
     <string name="menu_about">关于</string>
     <string name="nav_header_image_desc">应用图标</string>
@@ -37,7 +39,7 @@
     <string name="go_release">前往项目发布页</string>
     <string name="go_release_desc">获取最新版本</string>
     <string name="about_thanks">鸣谢</string>
-    <string name="about_thanks_list">\@Graue Neko, @明日方舟WIKI, @deano2390, @teisun, @zyyoona7, @企鹅数据\n以及所有的Doctor们。</string>
+    <string name="about_thanks_list">\@Graue Neko, @明日方舟WIKI, @deano2390, @teisun, @zyyoona7, @企鹅数据，@tomcat\n以及所有的Doctor们。</string>
     <string name="about_version">版本号</string>
     <string name="about_version_desc">正在获取……</string>
     <string name="start_two_apps">检测到多个客户端，请手动选择</string>
@@ -45,23 +47,23 @@
     <string name="game_bilibili">"哔哩哔哩 "</string>
     <string name="overlay_coming">即将到来……</string>
     <string name="start_without_game">点击这里，独立启动 Arknights Helper™ 引擎</string>
-    <string name="exp_star">星级：</string>
-    <string name="exp_exp" translatable="false">经验副本：</string>
-    <string name="exp_money" translatable="false">龙门币副本：</string>
-    <string name="exp_stage_now">当前精英化：</string>
-    <string name="exp_desc">长按按钮可以选择最大或最小值。\n数据来自 @Graue Neko</string>
-    <string name="exp_point_now">当前经验（上取整）：</string>
-    <string name="exp_level_now">当前等级：</string>
-    <string name="exp_stage_target">目标精英化：</string>
-    <string name="exp_level_target">目标等级：</string>
-    <string name="exp_result">结果：</string>
-    <string name="exp_result_money">龙门币：</string>
-    <string name="exp_result_exp">经验：</string>
-    <string name="exp_result_stamina">理智：</string>
-    <string name="exp_round_exp">（LS场数）</string>
-    <string name="exp_round_money">（CE场数）</string>
-    <string name="exp_money_upgrade">（升级）</string>
-    <string name="exp_money_evolve">（精英化）</string>
+    <string name="material_star">星级：</string>
+    <string name="material_exp" translatable="false">经验副本：</string>
+    <string name="material_money" translatable="false">龙门币副本：</string>
+    <string name="material_stage_now">当前精英化：</string>
+    <string name="material_desc">长按按钮可以选择最大或最小值。\n数据来自 @Graue Neko</string>
+    <string name="material_point_now">当前经验（上取整）：</string>
+    <string name="material_level_now">等级：</string>
+    <string name="material_stage_target">目标精英化：</string>
+    <string name="material_level_target">等级：</string>
+    <string name="material_result">结果：</string>
+    <string name="material_result_money">龙门币：</string>
+    <string name="material_result_exp">经验：</string>
+    <string name="material_result_stamina">理智：</string>
+    <string name="material_round_exp">（LS场数）</string>
+    <string name="material_round_money">（CE场数）</string>
+    <string name="material_money_upgrade">（升级）</string>
+    <string name="material_money_evolve">（精英化）</string>
     <string name="update_state_checking">正在连接到 Github™ 数据中心检查更新……</string>
     <string name="update_state_error">检查更新时出现问题</string>
     <string name="update_state_need_update">发现 Arknights Helper™ 引擎存在更新，点击获取最新版本</string>
@@ -80,11 +82,18 @@
     <string name="hr_method_selector_title_exact">精确查询</string>
     <string name="hr_method_selector_title_exact_desc">只显示完全符合需求的干员。</string>
     <string name="hr_method_selector_title_fuzzy_desc">显示所有可能的招募结果，包括部分标签被划掉的情况。</string>
-    <string name="hr_desc_fuzzy">除星级外，最多可选 5 个标签，将列出所有可能的干员组合。\n长按干员查看更多信息，点击这里切换查询方式。\n数据来自 @Graue Neko</string>
+    <string name="hr_desc_fuzzy_part_1">除星级外，最多可选 5 个标签，将列出所有可能的干员组合。\n长按干员查看更多信息。\n数据来自 @Graue Neko</string>
     <string name="hr_method_selector_button_to_fuzzy">切换到模糊查询</string>
     <string name="hr_method_selector_button_to_exact">切换到精确查询</string>
     <string name="title_activity_lab">梦境</string>
-    <string name="material_updater_desc">掉落数据未下载、不可用或需要更新。\n请先更新数据。\n数据来自 @企鹅物流（penguin-stats.io）</string>
-    <string name="material_updater_update">更新数据</string>
-    <string name="material_desc" >数据来自 @企鹅数据 (penguin-stats.io)。</string>
+    <string name="drop_updater_desc">掉落数据未下载、不可用或需要更新。\n请先更新数据。\n数据来自 @企鹅物流（penguin-stats.io）</string>
+    <string name="drop_updater_update">更新数据</string>
+    <string name="drop_desc_part_1">数据来自 @企鹅数据 (penguin-stats.io)</string>
+    <string name="material_select">选择一位干员</string>
+    <string name="material_selector_desc">干员：</string>
+    <string name="material_selector_none">尚未选择</string>
+    <string name="material_selector_only_rare">仅稀有材料</string>
+    <string name="itemdetailview_go_query">掉落查询</string>
+    <string name="drop_desc_part_2">更新数据</string>
+    <string name="hr_desc_part_2">切换查询模式</string>
 </resources>

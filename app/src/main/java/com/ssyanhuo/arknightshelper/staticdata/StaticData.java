@@ -19,8 +19,8 @@ public class StaticData {
             public static final int CE_5 = 30;
             public static final int LS_5 = 30;
         }
-        public class limit{
-            public class stage{
+        public class Limit {
+            public class Stage {
                 public static final int STAR_1 = 0;
                 public static final int STAR_2 = 0;
                 public static final int STAR_3 = 1;

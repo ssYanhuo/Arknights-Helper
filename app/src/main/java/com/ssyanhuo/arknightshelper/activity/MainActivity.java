@@ -1,6 +1,5 @@
 package com.ssyanhuo.arknightshelper.activity;
 
-import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
@@ -40,6 +40,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
@@ -49,142 +51,155 @@ public class MainActivity extends AppCompatActivity
     final String TAG = "MainActivity";
     Handler handler;
     SharedPreferences sharedPreferences;
-    public void startEngine(View view, boolean startGame){
+    final int STATE_UP_TO_DATE = 0;
+    final int STATE_NEED_UPDATE = 1;
+    final int STATE_BETA = 2;
+    final int STATE_ERROR = -1;
+    public void startEngine(final View view, final boolean startGame){
         Snackbar.make(view, R.string.start_game, Snackbar.LENGTH_LONG).show();
         sharedPreferences = getSharedPreferences("Config", MODE_PRIVATE);
-        if((Build.BRAND.equals("Meizu") || Build.BRAND.equals("MEIZU")) && sharedPreferences.getBoolean("firstRun", true)){
-            Snackbar.make(view, "魅族用户请手动前往系统设置授予应用悬浮窗权限", Snackbar.LENGTH_INDEFINITE).show();
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("firstRun", false);
-            editor.apply();
-            return;
-        }
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("firstRun", false);
-        editor.apply();
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            if(Settings.canDrawOverlays(getApplicationContext())){
-                Intent intent1 = new Intent(getApplicationContext(), BackendService.class);
-                try{
-                    startService(intent1);
-                }catch (Exception e){
-                    Log.e("Akrnights Helper", "Start service failed!", e);
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                if((Build.BRAND.equals("Meizu") || Build.BRAND.equals("MEIZU")) && sharedPreferences.getBoolean("firstRun", true)){
+                    Snackbar.make(view, "魅族用户请手动前往系统设置授予应用悬浮窗权限", Snackbar.LENGTH_INDEFINITE).show();
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("firstRun", false);
+                    editor.apply();
+                    return;
                 }
-                if(startGame){
-                    final Intent intent2 = new Intent(Intent.ACTION_MAIN);
-                    intent2.addCategory(Intent.CATEGORY_LAUNCHER);
-                    if(checkApplication("com.hypergryph.arknights") && checkApplication("com.hypergryph.arknights.bilibili")){
-                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.AppTheme_AlertDialog);
-                        builder.setTitle(R.string.start_two_apps)
-                                .setPositiveButton(R.string.game_official, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        ComponentName componentName = new ComponentName("com.hypergryph.arknights", "com.u8.sdk.U8UnityContext");
-                                        intent2.setComponent(componentName);
-                                        try{
-                                            startActivity(intent2);
-                                        }catch (Exception e){
-                                            Log.e(TAG, "Start game failed!", e);
-                                        }
-                                    }
-                                })
-                                .setNeutralButton(R.string.game_bilibili, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        ComponentName componentName = new ComponentName("com.hypergryph.arknights.bilibili", "com.u8.sdk.SplashActivity");
-                                        intent2.setComponent(componentName);
-                                        try{
-                                            startActivity(intent2);
-                                        }catch (Exception e){
-                                            Log.e(TAG, "Start game failed!", e);
-                                        }
-                                    }
-                                }).show();
-                    }else if(checkApplication("com.hypergryph.arknights")){
-                        ComponentName componentName = new ComponentName("com.hypergryph.arknights", "com.u8.sdk.U8UnityContext");
-                        intent2.setComponent(componentName);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("firstRun", false);
+                editor.apply();
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    if(Settings.canDrawOverlays(getApplicationContext())){
+                        Intent intent1 = new Intent(getApplicationContext(), BackendService.class);
                         try{
-                            startActivity(intent2);
+                            startService(intent1);
                         }catch (Exception e){
-                            Log.e(TAG, "Start game failed!", e);
+                            Log.e("Akrnights Helper", "Start service failed!", e);
                         }
-                    }else if(checkApplication("com.hypergryph.arknights.bilibili")){
-                        ComponentName componentName = new ComponentName("com.hypergryph.arknights.bilibili", "com.u8.sdk.SplashActivity");
-                        intent2.setComponent(componentName);
-                        try{
-                            startActivity(intent2);
-                        }catch (Exception e){
-                            Log.e(TAG, "Start game failed!", e);
+                        if(startGame){
+                            final Intent intent2 = new Intent(Intent.ACTION_MAIN);
+                            intent2.addCategory(Intent.CATEGORY_LAUNCHER);
+                            if(checkApplication("com.hypergryph.arknights") && checkApplication("com.hypergryph.arknights.bilibili")){
+                                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.AppTheme_AlertDialog);
+                                builder.setTitle(R.string.start_two_apps)
+                                        .setPositiveButton(R.string.game_official, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                ComponentName componentName = new ComponentName("com.hypergryph.arknights", "com.u8.sdk.U8UnityContext");
+                                                intent2.setComponent(componentName);
+                                                try{
+                                                    startActivity(intent2);
+                                                }catch (Exception e){
+                                                    Log.e(TAG, "Start game failed!", e);
+                                                }
+                                            }
+                                        })
+                                        .setNeutralButton(R.string.game_bilibili, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                ComponentName componentName = new ComponentName("com.hypergryph.arknights.bilibili", "com.u8.sdk.SplashActivity");
+                                                intent2.setComponent(componentName);
+                                                try{
+                                                    startActivity(intent2);
+                                                }catch (Exception e){
+                                                    Log.e(TAG, "Start game failed!", e);
+                                                }
+                                            }
+                                        }).show();
+                            }else if(checkApplication("com.hypergryph.arknights")){
+                                ComponentName componentName = new ComponentName("com.hypergryph.arknights", "com.u8.sdk.U8UnityContext");
+                                intent2.setComponent(componentName);
+                                try{
+                                    startActivity(intent2);
+                                }catch (Exception e){
+                                    Log.e(TAG, "Start game failed!", e);
+                                }
+                            }else if(checkApplication("com.hypergryph.arknights.bilibili")){
+                                ComponentName componentName = new ComponentName("com.hypergryph.arknights.bilibili", "com.u8.sdk.SplashActivity");
+                                intent2.setComponent(componentName);
+                                try{
+                                    startActivity(intent2);
+                                }catch (Exception e){
+                                    Log.e(TAG, "Start game failed!", e);
+                                }
+                            }
+
                         }
+                    }else {
+                        Snackbar.make(view, R.string.no_overlay_permission_error, Snackbar.LENGTH_INDEFINITE).setAction(R.string.no_overlay_permission_action, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
+                                startActivity(intent);
+                            }
+                        }).show();
                     }
-
-                }
-            }else {
-                Snackbar.make(view, R.string.no_overlay_permission_error, Snackbar.LENGTH_INDEFINITE).setAction(R.string.no_overlay_permission_action, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
-                        startActivity(intent);
-                    }
-                }).show();
-            }
-        }else {
-            Intent intent1 = new Intent(getApplicationContext(), BackendService.class);
-            try{
-                startService(intent1);
-            }catch (Exception e){
-                Log.e(TAG, "Start service failed!", e);
-            }
-            if(startGame){
-                final Intent intent2 = new Intent(Intent.ACTION_MAIN);
-                intent2.addCategory(Intent.CATEGORY_LAUNCHER);
-                if(checkApplication("com.hypergryph.arknights") && checkApplication("com.hypergryph.arknights.bilibili")){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.AppTheme);
-                    builder.setTitle(R.string.start_two_apps)
-                            .setPositiveButton(R.string.game_official, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    ComponentName componentName = new ComponentName("com.hypergryph.arknights", "com.u8.sdk.U8UnityContext");
-                                    intent2.setComponent(componentName);
-                                    try{
-                                        startActivity(intent2);
-                                    }catch (Exception e){
-                                        Log.e(TAG, "Start game failed!", e);
-                                    }
-                                }
-                            })
-                            .setNeutralButton(R.string.game_bilibili, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    ComponentName componentName = new ComponentName("com.hypergryph.arknights.bilibili", "com.u8.sdk.SplashActivity");
-                                    intent2.setComponent(componentName);
-                                    try{
-                                        startActivity(intent2);
-                                    }catch (Exception e){
-                                        Log.e(TAG, "Start game failed!", e);
-                                    }
-                                }
-                            }).show();
-                }else if(checkApplication("com.hypergryph.arknights")){
-                    ComponentName componentName = new ComponentName("com.hypergryph.arknights", "com.u8.sdk.U8UnityContext");
-                    intent2.setComponent(componentName);
+                }else {
+                    Intent intent1 = new Intent(getApplicationContext(), BackendService.class);
                     try{
-                        startActivity(intent2);
+                        startService(intent1);
                     }catch (Exception e){
-                        Log.e(TAG, "Start game failed!", e);
+                        Log.e(TAG, "Start service failed!", e);
                     }
-                }else if(checkApplication("com.hypergryph.arknights.bilibili")){
-                    ComponentName componentName = new ComponentName("com.hypergryph.arknights.bilibili", "com.u8.sdk.SplashActivity");
-                    intent2.setComponent(componentName);
-                    try{
-                        startActivity(intent2);
-                    }catch (Exception e){
-                        Log.e(TAG, "Start game failed!", e);
+                    if(startGame){
+                        final Intent intent2 = new Intent(Intent.ACTION_MAIN);
+                        intent2.addCategory(Intent.CATEGORY_LAUNCHER);
+                        if(checkApplication("com.hypergryph.arknights") && checkApplication("com.hypergryph.arknights.bilibili")){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.AppTheme);
+                            builder.setTitle(R.string.start_two_apps)
+                                    .setPositiveButton(R.string.game_official, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            ComponentName componentName = new ComponentName("com.hypergryph.arknights", "com.u8.sdk.U8UnityContext");
+                                            intent2.setComponent(componentName);
+                                            try{
+                                                startActivity(intent2);
+                                            }catch (Exception e){
+                                                Log.e(TAG, "Start game failed!", e);
+                                            }
+                                        }
+                                    })
+                                    .setNeutralButton(R.string.game_bilibili, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            ComponentName componentName = new ComponentName("com.hypergryph.arknights.bilibili", "com.u8.sdk.SplashActivity");
+                                            intent2.setComponent(componentName);
+                                            try{
+                                                startActivity(intent2);
+                                            }catch (Exception e){
+                                                Log.e(TAG, "Start game failed!", e);
+                                            }
+                                        }
+                                    }).show();
+                        }else if(checkApplication("com.hypergryph.arknights")){
+                            ComponentName componentName = new ComponentName("com.hypergryph.arknights", "com.u8.sdk.U8UnityContext");
+                            intent2.setComponent(componentName);
+                            try{
+                                startActivity(intent2);
+                            }catch (Exception e){
+                                Log.e(TAG, "Start game failed!", e);
+                            }
+                        }else if(checkApplication("com.hypergryph.arknights.bilibili")){
+                            ComponentName componentName = new ComponentName("com.hypergryph.arknights.bilibili", "com.u8.sdk.SplashActivity");
+                            intent2.setComponent(componentName);
+                            try{
+                                startActivity(intent2);
+                            }catch (Exception e){
+                                Log.e(TAG, "Start game failed!", e);
+                            }
+                        }
+
                     }
                 }
-
+                Looper.loop();
             }
-        }
+        }, 500);
+
     }
     public boolean checkApplication(String packageName) {
         if (packageName == null || "".equals(packageName)){
@@ -296,13 +311,13 @@ public class MainActivity extends AppCompatActivity
         ImageView imageView = findViewById(R.id.main_state_img);
         LinearLayout linearLayout = findViewById(R.id.main_state);
         switch (state){
-            case 0:
+            case STATE_UP_TO_DATE:
                 textView.setText(getResources().getString(R.string.update_state_correct));
                 textView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                 imageView.setBackground(getDrawable(R.color.colorPrimaryDark));
                 imageView.setImageResource(R.drawable.ic_check_correct);
                 break;
-            case 1:
+            case STATE_NEED_UPDATE:
                 textView.setText(getResources().getString(R.string.update_state_need_update));
                 textView.setTextColor(getResources().getColor(R.color.colorAccent));
                 imageView.setBackground(getDrawable(R.color.colorAccent));
@@ -346,6 +361,22 @@ public class MainActivity extends AppCompatActivity
                 linearLayout.setFocusable(true);
                 linearLayout.setClickable(true);
                 break;
+            case STATE_BETA:
+                PackageManager packageManager = getPackageManager();
+                String string;
+                try {
+                    PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);
+                    string = getResources().getString(R.string.update_state_beta) + "(" + packageInfo.versionName + ")";
+                } catch (PackageManager.NameNotFoundException e) {
+                    string = getResources().getString(R.string.update_state_beta);
+                    e.printStackTrace();
+                }
+
+                textView.setText(string);
+                textView.setTextColor(getResources().getColor(R.color.colorAccent));
+                imageView.setBackground(getDrawable(R.color.colorAccent));
+                imageView.setImageResource(R.mipmap.ic_check_beta);
+                break;
             default:
                 textView.setText(getResources().getString(R.string.update_state_error));
                 textView.setTextColor(getResources().getColor(R.color.colorError));
@@ -355,10 +386,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
     private class UpdateRunnable implements Runnable{
-        final int STATE_UP_TO_DATE = 0;
-        final int STATE_NEED_UPDATE = 1;
-        final int STATE_ERROR = 2;
-
         PackageManager packageManager = getPackageManager();
         String prop;
         String versionCode;
@@ -410,7 +437,7 @@ public class MainActivity extends AppCompatActivity
                         }
                     };
                     runnable.run();
-                }else {
+                }else if(versionCurrent == versionLatest){
                     Runnable runnable = new Runnable() {
                         @Override
                         public void run() {
@@ -424,6 +451,14 @@ public class MainActivity extends AppCompatActivity
                         }
                     };
                     runnable.run();
+                }else {
+                    Runnable runnable1 = new Runnable() {
+                        @Override
+                        public void run() {
+                            changeUpdateState(STATE_BETA, null, null);
+                        }
+                    };
+                    handler.post(runnable1);
                 }
             }catch (Exception e){
                 //获取当前版本号失败，我也不知道啥情况下会失败orz

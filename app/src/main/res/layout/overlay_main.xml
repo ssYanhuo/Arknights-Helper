@@ -1,50 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#99000000"
-    android:theme="@style/AppTheme.FloatingWindow">
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_main"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@drawable/background_overlay_main"
+        android:theme="@style/AppTheme.FloatingWindow">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_main"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tab_title_hr" />
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tab_title_hr" />
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tab_title_exp" />
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tab_title_material" />
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tab_title_drop" />
+            </com.google.android.material.tabs.TabLayout>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_overlay_close"
+                android:id="@+id/overlay_close"
+                android:padding="@dimen/activity_horizontal_margin"
+                android:background="?android:attr/selectableItemBackground" />
+        </LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tab_title_material" />
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
+            android:id="@+id/scroll_hr">
+            <include layout="@layout/content_hr"/>
+        </ScrollView>
+        <ScrollView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tab_title_hide"/>
-    </com.google.android.material.tabs.TabLayout>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/scroll_hr">
-        <include layout="@layout/content_hr"/>
-    </ScrollView>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/scroll_exp">
-        <include layout="@layout/content_exp"/>
-    </ScrollView>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/scroll_material">
-        <include layout="@layout/content_material"/>
-    </ScrollView>
-</LinearLayout>
+            android:id="@+id/scroll_exp">
+            <include layout="@layout/content_material"/>
+        </ScrollView>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scroll_material">
+            <include layout="@layout/content_drop"/>
+        </ScrollView>
+    </LinearLayout>

@@ -1,273 +1,495 @@
 package com.ssyanhuo.arknightshelper.overlay;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
-import android.graphics.drawable.PaintDrawable;
-import android.os.Handler;
-import android.util.AttributeSet;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.ScrollView;
-import android.widget.TextView;
+import android.view.WindowManager;
+import android.widget.*;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ssyanhuo.arknightshelper.R;
-import com.ssyanhuo.arknightshelper.utiliy.DpUtiliy;
-import com.ssyanhuo.arknightshelper.utiliy.FileUtility;
+import com.ssyanhuo.arknightshelper.staticdata.StaticData;
+import com.ssyanhuo.arknightshelper.utiliy.JsonUtility;
+import com.ssyanhuo.arknightshelper.widget.ItemDetailView;
 import com.ssyanhuo.arknightshelper.widget.LineWrapLayout;
-import com.ssyanhuo.arknightshelper.widget.TableItem;
+import com.ssyanhuo.arknightshelper.widget.NumberSelector;
+import com.zyyoona7.popup.EasyPopup;
 
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Material {
-    final static String TAG = "Material";
-    final static String BASE_URL = "https://penguin-stats.io/PenguinStats";
-    final static String API_MATRIX = "/api/result/matrix";
-    final static String API_ITEMS = "/api/items";
-    final static String API_STAGES = "/api/stages";
-    JSONObject data_matrix;
-    JSONArray data_items;
-    JSONArray data_stages;
-    Context applicationContext;
-    View contentView;
-    Handler handler;
-    View updater;
-    ScrollView parentView;
-    ArrayList<RadioButton> radioButtons = new ArrayList<>();
-    Map<String, String> stageMap = new HashMap<>();
-    Map<String, Integer> costMap = new HashMap<>();
-    boolean isAltSelector = false;
+    public ArrayList<NumberSelector> numberSelectors;
+    private NumberSelector stageNow;
+    private NumberSelector levelNow;
+    private NumberSelector pointNow;
+    private NumberSelector stageTarget;
+    private NumberSelector levelTarget;
+    private String expJsonString;
+    private JSONObject expJsonObject;
+    private String characterJsonString;
+    private JSONObject characterJsonObject;
+    private int characterStar;
+    private boolean showedOnce = false;
+    private ScrollView selector;
+    private Context applicationContext;
+    //TODO 删除下面这个变量
+    private Map<String, Integer> characterIndexMap = new HashMap<>();
+    private final String TAG = "Material";
+    private LinearLayout rootLayout;
+    private LinearLayout placeHolder;
+    private View contentView;
+    private EasyPopup easyPopup;
+    private JSONObject charNow;
+    private JSONObject materialJsonObject;
+    private boolean onlyRare;
 
-    public void init(final Context context, View view){
+    public void getAllNumberSelectors(View view){
+        ViewGroup viewGroup = (ViewGroup)view;
+        for(int i = 0; i < viewGroup.getChildCount(); i++){
+            if(viewGroup.getChildAt(i) instanceof NumberSelector){
+                numberSelectors.add((NumberSelector) viewGroup.getChildAt(i));
+            }else if(viewGroup.getChildAt(i) instanceof HorizontalScrollView){
+                getAllNumberSelectors(viewGroup.getChildAt(i));
+            }else if(viewGroup.getChildAt(i) instanceof LinearLayout){
+                getAllNumberSelectors(viewGroup.getChildAt(i));
+            }else if(viewGroup.getChildAt(i) instanceof LineWrapLayout){
+                getAllNumberSelectors(viewGroup.getChildAt(i));
+            }
+        }
+    }
+    public void init(final Context context, final View view, LinearLayout backgroundLayout){
+        charNow = null;
         applicationContext = context;
+        rootLayout = backgroundLayout;
         contentView = view;
-        handler = new Handler();
-
-        try{
-            data_matrix = JSON.parseObject(FileUtility.readFile("matrix.json", applicationContext));
-            //下面两个是数组形式
-            data_items = JSON.parseArray(FileUtility.readFile("items.json", applicationContext));
-            data_stages = JSON.parseArray(FileUtility.readFile("stages.json", applicationContext));
-        } catch (Exception e){
-            e.printStackTrace();
-            Log.e(TAG, String.valueOf(e));
-            goUpdate();
-            return;
-        }
-
-        for (int i =0; i < data_stages.size(); i++){
-            JSONObject object = data_stages.getJSONObject(i);
-            stageMap.put(object.getString("stageId"), object.getString("code"));
-            costMap.put(object.getString("stageId"), object.getInteger("apCost"));
-        }
-        getAllRadioButtons(contentView);
-        for (int i = 0; i < radioButtons.size(); i++){
-            radioButtons.get(i).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        expJsonObject = JsonUtility.getJsonObject(applicationContext, JsonUtility.getJsonString(applicationContext, "data/exp.json"));
+        characterJsonObject = JsonUtility.getJsonObject(applicationContext, JsonUtility.getJsonString(applicationContext, "data/charMaterials.json"));
+        //characterJsonString = JsonUtility.getJsonString(applicationContext, "data/charMaterials.json");
+        materialJsonObject = JsonUtility.getJsonObject(applicationContext, JsonUtility.getJsonString(applicationContext, "data/material.json"));
+        numberSelectors = new ArrayList<>();
+        stageNow = view.findViewById(R.id.material_selector_stage_now);
+        levelNow = view.findViewById(R.id.material_selector_level_now);
+        stageTarget = view.findViewById(R.id.material_selector_stage_target);
+        levelTarget = view.findViewById(R.id.material_selector_level_target);
+        getAllNumberSelectors(view);
+        for (int i = 0; i < numberSelectors.size(); i++){
+            numberSelectors.get(i).editText.addTextChangedListener(new TextWatcher() {
                 @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked){
-                        for (int j = 0; j < radioButtons.size(); j++){
-                            radioButtons.get(j).setChecked(false);
-                        }
-                        buttonView.setChecked(true);
-                        Drawable[] drawables = new Drawable[2];
-                        PaintDrawable paintDrawable = new PaintDrawable(Color.argb(127, 255,255,255));
-                        paintDrawable.setCornerRadius(8);
-                        drawables[0] = paintDrawable;
-                        drawables[1] = buttonView.getBackground();
-                        LayerDrawable layerDrawable = new LayerDrawable(drawables);
-                        buttonView.setBackground(layerDrawable);
-                    }else {
-                        LayerDrawable layerDrawable = (LayerDrawable) buttonView.getBackground();
-                        buttonView.setBackground(layerDrawable.getDrawable(1)); }
-                    int item = Integer.parseInt(buttonView.getTag().toString());
-                    ArrayList<JSONObject> result = getResult(item);
-                    showResult(item, result);
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    checkValue();
+                    if (charNow != null){showResult();}
+
                 }
             });
         }
-    }
-
-
-    public ArrayList<JSONObject> getResult(int item){
-        ArrayList<JSONObject> result = new ArrayList<>();
-        JSONArray matrix = data_matrix.getJSONArray("matrix");
-
-        for (int i= 0; i < matrix.size(); i++){
-            int id;
-            try {//部分id并不是int
-                id = matrix.getJSONObject(i).getInteger("itemId");
-            }catch (NumberFormatException e){
-                continue;
-            }
-            if (id == item){
-                JSONObject object = matrix.getJSONObject(i);
-                float cost = costMap.get(object.getString("stageId")) * ((float)object.getInteger("times") / (float)object.getInteger("quantity"));
-                object.put("cost", String.valueOf(cost));
-                result.add(object);
+        selector = (ScrollView)LayoutInflater.from(applicationContext).inflate(R.layout.overlay_sub_material_selector, null);
+        ArrayList<String> characters = new ArrayList<>(characterJsonObject.keySet());
+        for(int i = 0; i < characters.size(); i++){
+            String name = characters.get(i);
+            JSONObject jsonObject = characterJsonObject.getJSONObject(name);
+            if(jsonObject.getString("profession").equals("其它")){continue;}
+            characterIndexMap.put(name, i);
+            Button button = new Button(applicationContext);
+            button.setText(name);
+            button.setMinWidth(applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin));
+            button.setTextColor(Color.BLACK);
+            button.setTag(jsonObject);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onCharacterSelected(v);
+                }
+            });
+            switch (jsonObject.getInteger("rarity")){
+                case 5:
+                    button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_yellow));
+                    ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_6)).addView(button);
+                    break;
+                case 4:
+                    button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_red));
+                    ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_5)).addView(button);
+                    break;
+                case 3:
+                    button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_blue));
+                    ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_4)).addView(button);
+                    break;
+                case 2:
+                    button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_green));
+                    ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_3)).addView(button);
+                    break;
+                case 1:
+                    button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_lime));
+                    ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_2)).addView(button);
+                    break;
+                case 0:
+                    button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_lime));
+                    ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_1)).addView(button);
+                    break;
+                default:
+                    button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_blue));
+                    break;
             }
         }
-        Collections.sort(result, new Comparator<JSONObject>() {
+        ((Switch)contentView.findViewById(R.id.material_rare)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public int compare(JSONObject o1, JSONObject o2) {
-                float e1 = o1.getFloat("cost");
-                float e2 = o2.getFloat("cost");
-                if (e1 > e2){return 1;}
-                else if(e1 == e2){return 0;}
-                else if(e1 < e2){return -1;}
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                onlyRare = isChecked;
+                if(charNow != null){
+                    checkValue();
+                    showResult();
+                }
+            }
+        });
+    }
+    public void checkValue(){
+        //不同星级时，精英化（目标+当前）最值随之变化，若变化前已经超出新值范围，则自动缩小为最值
+        int maxStage = getMaxStage(characterStar + 1);
+        stageNow.setMax(maxStage);
+        if(stageNow.getInt() > maxStage){
+            stageNow.setInt(maxStage);
+        }
+        stageTarget.setMax(maxStage);
+        if(stageTarget.getInt() > maxStage){
+            stageTarget.setInt(maxStage);
+        }
+        //目标精英化不小于当前
+        if(stageTarget.getInt() < stageNow.getInt()){
+            stageTarget.setInt(stageNow.getInt());
+        }
+        //同一精英化时，目标等级大于当前
+        if(stageNow.getInt() == stageTarget.getInt() && levelTarget.getInt() <= levelNow.getInt()){
+            levelTarget.setInt(levelNow.getInt() + 1);
+        }
+        //不同精英化时，等级（目标+当前）最值随之变化，若变化前已经超出新值范围，则自动缩小为最值，当前等级最大为最大等级减一
+        //先做精英化阶段修正，再获取最大等级，不然会GG
+        int maxLevelNow = expJsonObject.getJSONArray("maxLevel").getJSONArray(characterStar).getInteger(stageNow.getInt());
+        int maxLevelTarget = expJsonObject.getJSONArray("maxLevel").getJSONArray(characterStar).getInteger(stageTarget.getInt());
+        levelNow.setMax(maxLevelNow - 1);
+        if(levelNow.getInt() > maxLevelNow - 1){
+            levelNow.setInt(maxLevelNow - 1);
+        }
+        levelTarget.setMax(maxLevelTarget);
+        if(levelTarget.getInt() > maxLevelTarget){
+            levelTarget.setInt(maxLevelTarget);
+        }
+    }
+    @SuppressLint("SetTextI18n")
+    public void showResult(){
+        int money = 0;
+        int exp = 0;
+        int moneyEvolve = 0;
+        int moneyUpgrade = 0;
+        int moneyRound = 0;
+        int expRound = 0;
+        int moneyStamina = 0;
+        int expStamina = 0;
+        int stamina = 0;
+        int stageFrom = stageNow.getInt();
+        int stageTo = stageTarget.getInt();
+        int levelFrom = levelNow.getInt();
+        int levelTo = levelTarget.getInt();
+        if (stageTo - stageFrom <= 0){
+            moneyEvolve = 0;
+        }else if(stageTo - stageFrom >= 2){
+            moneyEvolve = expJsonObject.getJSONArray("evolveGoldCost").getJSONArray(characterStar).getInteger(0) + expJsonObject.getJSONArray("evolveGoldCost").getJSONArray(characterStar).getInteger(1);
+        }else if(stageTo - stageFrom == 1){
+            if (stageFrom == 0){
+                moneyEvolve = expJsonObject.getJSONArray("evolveGoldCost").getJSONArray(characterStar).getInteger(0);
+            }else if(stageFrom == 1){
+                moneyEvolve = expJsonObject.getJSONArray("evolveGoldCost").getJSONArray(characterStar).getInteger(1);
+            }
+        }
+        for (int stage = stageFrom; stage <= stageTo; stage++){
+            boolean isLastStage = stage == stageTo;
+            boolean isFirstStage = stage ==stageFrom;
+            if(isFirstStage && isLastStage){
+                for (int i = levelFrom; i < levelTo; i++){
+                    exp += expJsonObject.getJSONArray("characterExpMap").getJSONArray(stage).getInteger(i - 1);
+                    moneyUpgrade += expJsonObject.getJSONArray("characterUpgradeCostMap").getJSONArray(stage).getInteger(i - 1);
+                }
+            }else if(isFirstStage){
+                for (int i = levelFrom; i < expJsonObject.getJSONArray("maxLevel").getJSONArray(characterStar).getInteger(stage); i++){
+                    exp += expJsonObject.getJSONArray("characterExpMap").getJSONArray(stage).getInteger(i - 1);
+                    moneyUpgrade += expJsonObject.getJSONArray("characterUpgradeCostMap").getJSONArray(stage).getInteger(i - 1);
+                }
+            }else  if(isLastStage){
+                for (int i = 1; i < levelTo; i++){
+                    exp += expJsonObject.getJSONArray("characterExpMap").getJSONArray(stage).getInteger(i - 1);
+                    moneyUpgrade += expJsonObject.getJSONArray("characterUpgradeCostMap").getJSONArray(stage).getInteger(i - 1);
+                }
+            }else {
+                for (int i = 1; i < expJsonObject.getJSONArray("maxLevel").getJSONArray(characterStar).getInteger(stage); i++){
+                    exp += expJsonObject.getJSONArray("characterExpMap").getJSONArray(stage).getInteger(i - 1);
+                    moneyUpgrade += expJsonObject.getJSONArray("characterUpgradeCostMap").getJSONArray(stage).getInteger(i - 1);
+                }
+            }
+        }
+        expRound = (exp % StaticData.Exp.ExpLevel.LS_5 == 0) ? (exp / StaticData.Exp.ExpLevel.LS_5) : (exp / StaticData.Exp.ExpLevel.LS_5 + 1);
+        money = moneyEvolve + moneyUpgrade;
+        moneyRound = ((money - expRound * StaticData.Exp.MoneyLevel.LS_5) % StaticData.Exp.MoneyLevel.CE_5 == 0) ? ((money - expRound * StaticData.Exp.MoneyLevel.LS_5) / StaticData.Exp.MoneyLevel.CE_5) : ((money - expRound * StaticData.Exp.MoneyLevel.LS_5) / StaticData.Exp.MoneyLevel.CE_5  + 1);
+        expStamina = expRound * StaticData.Exp.Stamina.LS_5;
+        moneyStamina = moneyRound * StaticData.Exp.Stamina.CE_5;
+        stamina = expStamina + moneyStamina;
+        /*TextView expResult = view.findViewById(R.id.material_result_exp);
+        TextView moneyResult = view.findViewById(R.id.material_result_money);
+        TextView staminaResult = view.findViewById(R.id.material_result_stamina);
+        expResult.setText(String.valueOf(exp));
+        moneyResult.setText(money + " = " + moneyUpgrade + view.getContext().getResources().getString(R.string.material_money_upgrade) + " + " + moneyEvolve + view.getContext().getResources().getString(R.string.material_money_evolve));
+        staminaResult.setText(stamina + " = " + StaticData.Exp.Stamina.LS_5 + " * " + expRound + view.getContext().getResources().getString(R.string.material_round_exp) + " + " + StaticData.Exp.Stamina.CE_5 + " * " + moneyRound + view.getContext().getResources().getString(R.string.material_round_money));
+        */
+        LinearLayout resultContent = contentView.findViewById(R.id.material_result_content);
+        resultContent.removeAllViews();
+        ItemDetailView itemDetailView;
+
+        itemDetailView = new ItemDetailView(applicationContext);
+        itemDetailView.setItemName("龙门币（升级）");
+        itemDetailView.setImage(applicationContext.getResources().getDrawable(R.mipmap.gold));
+        itemDetailView.setNumber(moneyUpgrade);
+        resultContent.addView(itemDetailView);
+
+        if(moneyEvolve > 0){
+            itemDetailView = new ItemDetailView(applicationContext);
+            itemDetailView.setItemName("龙门币（精英化）");
+            itemDetailView.setImage(applicationContext.getResources().getDrawable(R.mipmap.gold));
+            itemDetailView.setNumber(moneyEvolve);
+            resultContent.addView(itemDetailView);
+        }
+
+        itemDetailView = new ItemDetailView(applicationContext);
+        itemDetailView.setItemName("经验");
+        itemDetailView.setImage(applicationContext.getResources().getDrawable(R.mipmap.sprite_exp_card_t4));
+        itemDetailView.setNumber(exp);
+        resultContent.addView(itemDetailView);
+
+        JSONArray evolveCosts = charNow.getJSONArray("evolveCosts");
+        if(evolveCosts.size() >= 2){
+            if (stageFrom == 0 && stageTo == 1){
+                JSONArray evolveCosts1 = evolveCosts.getJSONArray(1);
+                for (int i = 0; i < evolveCosts1.size(); i++){
+                    JSONObject item = evolveCosts1.getJSONObject(i);
+                    JSONObject material = materialJsonObject.getJSONObject(item.getString("id"));
+                    if(onlyRare && material.getInteger("rarity") <= 3){continue;}
+                    itemDetailView = new ItemDetailView(applicationContext);
+                    itemDetailView.setItemName(material.getString("name"));
+                    Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(material.getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
+                    itemDetailView.setImage(drawable);
+                    itemDetailView.setNumber(item.getInteger("count"));
+                    resultContent.addView(itemDetailView);
+                }
+            }
+            if (stageFrom == 1 && stageTo == 2){
+                JSONArray evolveCosts2 = evolveCosts.getJSONArray(2);
+                for (int i = 0; i < evolveCosts2.size(); i++){
+                    JSONObject item = evolveCosts2.getJSONObject(i);
+                    JSONObject material = materialJsonObject.getJSONObject(item.getString("id"));
+                    if(onlyRare && material.getInteger("rarity") <= 3){continue;}
+                    itemDetailView = new ItemDetailView(applicationContext);
+                    itemDetailView.setItemName(material.getString("name"));
+                    Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(material.getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
+                    itemDetailView.setImage(drawable);
+                    itemDetailView.setNumber(item.getInteger("count"));
+                    resultContent.addView(itemDetailView);
+                }
+            }
+            if (stageFrom == 0 && stageTo == 2){
+                JSONArray evolveCosts1 = evolveCosts.getJSONArray(1);
+                for (int i = 0; i < evolveCosts1.size(); i++){
+                    JSONObject item = evolveCosts1.getJSONObject(i);
+                    JSONObject material = materialJsonObject.getJSONObject(item.getString("id"));
+                    if(onlyRare && material.getInteger("rarity") <= 3){continue;}
+                    itemDetailView = new ItemDetailView(applicationContext);
+                    itemDetailView.setItemName(material.getString("name"));
+                    Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(material.getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
+                    itemDetailView.setImage(drawable);
+                    itemDetailView.setNumber(item.getInteger("count"));
+                    resultContent.addView(itemDetailView);
+                }
+                JSONArray evolveCosts2 = evolveCosts.getJSONArray(2);
+                for (int i = 0; i < evolveCosts2.size(); i++){
+                    JSONObject item = evolveCosts2.getJSONObject(i);
+                    JSONObject material = materialJsonObject.getJSONObject(item.getString("id"));
+                    if(onlyRare && material.getInteger("rarity") <= 3){continue;}
+                    itemDetailView = new ItemDetailView(applicationContext);
+                    itemDetailView.setItemName(material.getString("name"));
+                    Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(material.getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
+                    itemDetailView.setImage(drawable);
+                    itemDetailView.setNumber(item.getInteger("count"));
+                    resultContent.addView(itemDetailView);
+                }
+            }
+        }
+
+        contentView.findViewById(R.id.material_result_content).setVisibility(View.VISIBLE);
+
+    }
+    @SuppressLint("SetTextI18n")
+    public void onCharacterSelected(View characterBtn){
+        JSONObject jsonObject = (JSONObject) characterBtn.getTag();
+        charNow = jsonObject;
+        Drawable drawable = characterBtn.getBackground();
+        Button nowCharBtn = contentView.findViewById(R.id.material_character_now_btn);
+        characterBtn.setVisibility(View.VISIBLE);
+        nowCharBtn.setBackground(drawable);
+        nowCharBtn.setTag(jsonObject);
+        nowCharBtn.setText(jsonObject.getString("name"));
+        contentView.findViewById(R.id.material_character_select).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setClickable(false);
+                showSubWindow();
+            }
+        });
+        characterStar = jsonObject.getInteger("rarity");
+        checkValue();//检查当前值是否匹配新干员
+        showResult();
+        hideSubWindow();
+    }
+    public int getMaxStage(int star){
+        switch (star){
+            case 1:
+                return StaticData.Exp.Limit.Stage.STAR_1;
+            case 2:
+                return StaticData.Exp.Limit.Stage.STAR_2;
+            case 3:
+                return StaticData.Exp.Limit.Stage.STAR_3;
+            case 4:
+                return StaticData.Exp.Limit.Stage.STAR_4;
+            case 5:
+                return StaticData.Exp.Limit.Stage.STAR_5;
+            case 6:
+                return StaticData.Exp.Limit.Stage.STAR_6;
+            default:
                 return 0;
-            }
-        });
-        return result;
+        }
     }
+    public void isCurrentLayout(boolean current){
+        if (current){
+            if(charNow == null){showSubWindow();}
+            contentView.findViewById(R.id.material_character_select).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    v.setClickable(false);
+                    showSubWindow();
+                }
+            });
+        }else {
+            hideSubWindow();
+        }
+    }
+    public void showSubWindow(){
+        WindowManager windowManager = (WindowManager) applicationContext.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        assert windowManager != null;
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+        int rotation = windowManager.getDefaultDisplay().getRotation();
+        if(rotation == 0 || rotation == 3){selector.setBackgroundColor(Color.parseColor("#aa000000"));}
+        placeHolder = rootLayout.findViewWithTag("placeHolder");
+        placeHolder.removeAllViews();
+        placeHolder.addView(selector);
+        Animator animator = AnimatorInflater.loadAnimator(applicationContext, R.animator.anim_overlay_sub_show);
+        animator.setDuration(150);
+        animator.setTarget(selector);
+        animator.start();
+    }
+    public void hideSubWindow(){
 
-    public void showResult(int item, ArrayList<JSONObject> result){
-        ArrayList<String> stages = new ArrayList<>();
-        ArrayList<Integer> times = new ArrayList<>();
-        ArrayList<Integer> quantities = new ArrayList<>();
-        ArrayList<Float> costs = new ArrayList<>();
-        LinearLayout resultLayout = contentView.findViewById(R.id.material_result_content);
-        resultLayout.removeAllViews();
-        TableItem tableTitle = new TableItem(applicationContext, "关卡", "提交次数", "总共获得", "单个理智");
-        resultLayout.addView(tableTitle);
-        for (int i = 0; i < result.size(); i++){
-            JSONObject object = result.get(i);
-            if (object.getInteger("quantity") == 0){
-                continue;
-            }
-            String stageId = object.getString("stageId");
-            String stage = stageMap.get(stageId);
-            int time = object.getInteger("times");
-            int quantity = object.getInteger("quantity");
-            float cost = object.getFloat("cost");
-            stages.add(stage);
-            times.add(time);
-            quantities.add(quantity);
-            costs.add(cost);
-            TableItem tableItem = new TableItem(applicationContext, stage, time, quantity, cost);
-            resultLayout.addView(tableItem);
-        }
-        if (stages.size() == 0){
-            resultLayout.removeAllViews();
-            TextView textView =new TextView(applicationContext);
-            textView.setText("并没有找到结果");
-            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        }
-        setAltSelector();
-    }
-
-    public void setAltSelector(){
-        if (!isAltSelector){
-            ScrollView scrollView = contentView.findViewById(R.id.material_selector_scroll);
-            ViewGroup.LayoutParams params = scrollView.getLayoutParams();
-            params.height = DpUtiliy.dip2px(applicationContext, 128);
-            scrollView.setLayoutParams(params);
-            isAltSelector = true;
-        }
-    }
-
-    public  void getAllRadioButtons(View view){
-        ViewGroup viewGroup = (ViewGroup)view;
-        for(int i = 0; i < viewGroup.getChildCount(); i++){
-            if(viewGroup.getChildAt(i) instanceof RadioButton){
-                radioButtons.add((RadioButton) viewGroup.getChildAt(i));
-            }else if(viewGroup.getChildAt(i) instanceof LineWrapLayout){
-                getAllRadioButtons(viewGroup.getChildAt(i));
-            }else if(viewGroup.getChildAt(i) instanceof LinearLayout){
-                getAllRadioButtons(viewGroup.getChildAt(i));
-            }else if(viewGroup.getChildAt(i) instanceof ScrollView){
-                getAllRadioButtons(viewGroup.getChildAt(i));
-            }
-        }
-    }
-    public void goUpdate(){
-        parentView = (ScrollView) contentView.getParent();
-        updater = LayoutInflater.from(applicationContext).inflate(R.layout.content_material_updater, null);
-        parentView.removeAllViews();
-        parentView.addView(updater);
-        updater.findViewById(R.id.material_updater_update).setVisibility(View.VISIBLE);
-        updater.findViewById(R.id.material_updater_progress).setVisibility(View.GONE);
-        updater.findViewById(R.id.material_updater_update).setOnClickListener(new View.OnClickListener() {
+        placeHolder = rootLayout.findViewWithTag("placeHolder");
+        Animator animator = AnimatorInflater.loadAnimator(applicationContext, R.animator.anim_overlay_sub_hide);
+        animator.setDuration(150);
+        animator.setTarget(selector);
+        animator.addListener(new Animator.AnimatorListener() {
             @Override
-            public void onClick(View view) {
-                Thread thread = new Thread(new UpdateRunnable());
-                thread.start();
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                //重新初始化，不然会出现奇怪的问题
+                ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_6)).removeAllViews();
+                ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_5)).removeAllViews();
+                ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_4)).removeAllViews();
+                ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_3)).removeAllViews();
+                ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_2)).removeAllViews();
+                ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_1)).removeAllViews();
+                ArrayList<String> characters = new ArrayList<>(characterJsonObject.keySet());
+                for(int i = 0; i < characters.size(); i++){
+                    String name = characters.get(i);
+                    JSONObject jsonObject = characterJsonObject.getJSONObject(name);
+                    if(jsonObject.getString("profession").equals("其它")){continue;}
+                    characterIndexMap.put(name, i);
+                    Button button = new Button(applicationContext);
+                    button.setText(name);
+                    button.setMinWidth(applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin));
+                    button.setTag(jsonObject);
+                    button.setTextColor(Color.BLACK);
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            onCharacterSelected(v);
+                        }
+                    });
+                    switch (jsonObject.getInteger("rarity")){
+                        case 5:
+                            button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_yellow));
+                            ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_6)).addView(button);
+                            break;
+                        case 4:
+                            button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_red));
+                            ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_5)).addView(button);
+                            break;
+                        case 3:
+                            button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_blue));
+                            ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_4)).addView(button);
+                            break;
+                        case 2:
+                            button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_green));
+                            ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_3)).addView(button);
+                            break;
+                        case 1:
+                            button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_lime));
+                            ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_2)).addView(button);
+                            break;
+                        case 0:
+                            button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_lime));
+                            ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_1)).addView(button);
+                            break;
+                        default:
+                            button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_blue));
+                            break;
+                    }
+                }
+
+                placeHolder.removeAllViews();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
             }
         });
-    }
-    class UpdateRunnable implements Runnable{
-
-        @Override
-        public void run() {
-            try {
-
-                Runnable runnable = new Runnable(){
-
-                    @Override
-                    public void run() {
-                        updater.findViewById(R.id.material_updater_update).setVisibility(View.GONE);
-                        updater.findViewById(R.id.material_updater_progress).setVisibility(View.VISIBLE);
-
-                    }
-                };
-                handler.post(runnable);
-                FileUtility.writeFile(URLRequest(BASE_URL + API_MATRIX), "matrix.json", applicationContext);
-                FileUtility.writeFile(URLRequest(BASE_URL + API_ITEMS), "items.json", applicationContext);
-                FileUtility.writeFile(URLRequest(BASE_URL + API_STAGES), "stages.json", applicationContext);
-                data_matrix = JSON.parseObject(FileUtility.readFile("matrix.json", applicationContext));
-                //下面两个是数组形式
-                data_items = JSON.parseArray(FileUtility.readFile("items.json", applicationContext));
-                data_stages = JSON.parseArray(FileUtility.readFile("stages.json", applicationContext));
-                Runnable runnable1 = new Runnable(){
-
-                    @Override
-                    public void run() {
-                        parentView.removeAllViews();
-                        parentView.addView(contentView);
-                        init(applicationContext, contentView);
-                    }
-                };
-                handler.post(runnable1);
-            } catch (Exception e) {
-
-                Log.e(TAG, String.valueOf(e));
-            }
-        }
-        private String URLRequest(String site) throws Exception {
-            URL url = new URL(site);
-            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.setRequestMethod("GET");
-            httpURLConnection.setConnectTimeout(10000);
-            httpURLConnection.setReadTimeout(10000);
-            InputStream inputStream = httpURLConnection.getInputStream();
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            byte[] buffer = new byte[1024];
-            int len;
-            while ((len = inputStream.read(buffer)) != -1){
-                outputStream.write(buffer, 0,len);
-            }
-            inputStream.close();
-            byte[] data = outputStream.toByteArray();
-            return new String(data, StandardCharsets.UTF_8);
-        }
+        animator.start();
     }
 }

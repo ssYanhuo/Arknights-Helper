@@ -11,8 +11,8 @@
     <string name="notification_text">Tap to stop service</string>
     <string name="notification_channel">Overlay notification</string>
     <string name="tab_title_hr">HR Calculator</string>
-    <string name="tab_title_material">Drop Probability</string>
-    <string name="tab_title_exp">EXP Calculator</string>
+    <string name="tab_title_drop">Drop Probability</string>
+    <string name="tab_title_material">Material Calculator</string>
     <string name="tab_title_hide">Close</string>
 
     <string name="hr_selector_star">Star:</string>
@@ -61,10 +61,12 @@
     <string name="hr_tag_zhaohuan" translatable="false">召唤</string>
     <string name="hr_tag_kuaisufuhuo" translatable="false">快速复活</string>
     <string name="hr_tag_feiyonghuifu" translatable="false">费用回复</string>
-    <string name="hr_desc_exact">You can choose 3 tags at most execpt stars, only show characters meet all requirements.\nLong press characters for more info, click here to change query mode.\nData from @Graue Neko</string>
-    <string name="hr_result">Result:</string>
+    <string name="hr_desc_exact_part_1">You can choose 3 tags at most execpt stars, only show characters meet all requirements.\nLong press characters for more info.\nData from @Graue Neko</string>
+    <string name="hr_result_title_part_1">Result:</string>
+    <string name="hr_result_title_part_2">Clear</string>
     <string name="hr_result_empty">Noting found.</string>
     <string name="update_state_correct">Arknights Helper™ self-checking finished, no error found.</string>
+    <string name="update_state_beta">It seems that you are using a beta version of Arknights Helper™.</string>
     <string name="title_activity_about">About</string>
     <string name="menu_about">About</string>
     <string name="menu_exit">Exit</string>
@@ -79,7 +81,7 @@
     <string name="go_release">Visit this project\'s release page</string>
     <string name="go_release_desc">Get lastest version</string>
     <string name="about_thanks">Thanks</string>
-    <string name="about_thanks_list">\@Graue Neko, @Arknights WIKI, @deano2390, @teisun, @zyyoona7, @企鹅数据\nAnd all Doctors.</string>
+    <string name="about_thanks_list">\@Graue Neko, @Arknights WIKI, @deano2390, @teisun, @zyyoona7, @企鹅数据, @tomcat\nAnd all Doctors.</string>
     <string name="about_version">Version</string>
     <string name="about_version_desc">Getting…</string>
     <string name="easter_text_1" translatable="false">我好像做了一个梦。\n</string>
@@ -97,25 +99,25 @@
     <string name="game_bilibili">Bilibili</string>
     <string name="overlay_coming">Coming soon…</string>
     <string name="start_without_game">Click here, start Arknights Helper™ without game</string>
-    <string name="exp_star">Star:</string>
-    <string name="exp_exp">EXP Level:</string>
-    <string name="exp_money">Money Level:</string>
-    <string name="exp_stage_now">Your stage:</string>
+    <string name="material_star">Star:</string>
+    <string name="material_exp">EXP Level:</string>
+    <string name="material_money">Money Level:</string>
+    <string name="material_stage_now">Your stage:</string>
     <string name="button_plus" translatable="false">+</string>
     <string name="button_minus" translatable="false">-</string>
-    <string name="exp_desc">Long press button to select max or min number.\nData from @Graue Neko</string>
-    <string name="exp_level_now">Your level:</string>
-    <string name="exp_point_now">Your EXP points (roundup):</string>
-    <string name="exp_stage_target">Target stage:</string>
-    <string name="exp_level_target">Target level:</string>
-    <string name="exp_result">Result:</string>
-    <string name="exp_result_exp">Exp:</string>
-    <string name="exp_result_money">Money:</string>
-    <string name="exp_result_stamina">Stamina:</string>
-    <string name="exp_round_exp">(LS rounds)</string>
-    <string name="exp_round_money">(CE rounds)</string>
-    <string name="exp_money_upgrade">(Upgrade)</string>
-    <string name="exp_money_evolve">(Evolve)</string>
+    <string name="material_desc">Long press button to select max or min number.\nData from @Graue Neko</string>
+    <string name="material_level_now" translatable="false">Your level:</string>
+    <string name="material_point_now">Your EXP points (roundup):</string>
+    <string name="material_stage_target">Target stage:</string>
+    <string name="material_level_target">Target level:</string>
+    <string name="material_result">Result:</string>
+    <string name="material_result_exp">Exp:</string>
+    <string name="material_result_money">Money:</string>
+    <string name="material_result_stamina">Stamina:</string>
+    <string name="material_round_exp">(LS rounds)</string>
+    <string name="material_round_money">(CE rounds)</string>
+    <string name="material_money_upgrade">(Upgrade)</string>
+    <string name="material_money_evolve">(Evolve)</string>
     <string name="update_state_checking">Connecting to Github™ to check for updates…</string>
     <string name="update_state_error">Check for update failed</string>
     <string name="update_state_need_update">New version for Arknights Helper™ now available, click here to update</string>
@@ -134,33 +136,24 @@
     <string name="hr_method_selector_title_exact">Exact query</string>
     <string name="hr_method_selector_title_exact_desc">Only show characters exactly meet your requirements.</string>
     <string name="hr_method_selector_title_fuzzy_desc">Show all characters meet at least one of your requirements.</string>
-    <string name="hr_desc_fuzzy">You can choose 5 tags at most execpt stars, will show all possible results.\nLong press characters for more info, click here to change query mode.\nData from @Graue Neko</string>
+    <string name="hr_desc_fuzzy_part_1">You can choose 5 tags at most execpt stars, will show all possible results.\nLong press characters for more info.\nData from @Graue Neko</string>
     <string name="hr_method_selector_button_to_fuzzy">Change to fuzzy mode</string>
     <string name="hr_method_selector_button_to_exact">Change to exact mode</string>
-    <string-array name="exp_list_star">
-        <item>6★</item>
-        <item>5★</item>
-        <item>4★</item>
-        <item>3★</item>
-        <item>2★</item>
-        <item>1★</item>
-    </string-array>
-    <string-array name="exp_list_exp">
-        <item>LS-5</item>
-        <item>LS-4</item>
-        <item>LS-3</item>
-        <item>LS-2</item>
-        <item>LS-1</item>
-    </string-array>
-    <string-array name="exp_list_money">
-        <item>CE-5</item>
-        <item>CE-4</item>
-        <item>CE-3</item>
-        <item>CE-2</item>
-        <item>CE-1</item>
-    </string-array>
     <string name="title_activity_lab">Dreamland</string>
-    <string name="material_updater_desc">No data found, data not usable or need a update.\nPlease update your data.\nData from @Penguin Statics (penguin-stats.io)</string>
-    <string name="material_updater_update">Update</string>
-    <string name="material_desc" >Data from penguin-stats.io.</string>
+    <string name="drop_updater_desc">No data found, data not usable or need a update.\nPlease update your data.\nData from @Penguin Statics (penguin-stats.io)</string>
+    <string name="drop_updater_update">Update</string>
+    <string name="drop_desc_part_1" >Data from penguin-stats.io</string>
+    <string name="material_select">Select a character</string>
+    <string name="material_selector_desc">"Character: "</string>
+    <string name="material_star_1" translatable="false">1★</string>
+    <string name="material_star_2" translatable="false">2★</string>
+    <string name="material_star_3" translatable="false">3★</string>
+    <string name="material_star_4" translatable="false">4★</string>
+    <string name="material_star_5" translatable="false">5★</string>
+    <string name="material_star_6" translatable="false">6★</string>
+    <string name="material_selector_none">Not Selected</string>
+    <string name="material_selector_only_rare">Rare only</string>
+    <string name="itemdetailview_go_query">Query</string>
+    <string name="drop_desc_part_2">Update data</string>
+    <string name="hr_desc_part_2">Click here to change query mode.</string>
 </resources>

@@ -1,11 +1,14 @@
 package com.ssyanhuo.arknightshelper.overlay;
 
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.method.MovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -27,9 +30,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.utiliy.JsonUtility;
+import com.ssyanhuo.arknightshelper.widget.LineWrapLayout;
 import com.zyyoona7.popup.EasyPopup;
 import com.zyyoona7.popup.XGravity;
 import com.zyyoona7.popup.YGravity;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -97,6 +102,22 @@ public class Hr {
         }else {
             changeQueryMethod(MODE_FUZZY);
         }
+
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(applicationContext.getResources().getString(R.string.hr_result_title_part_2));
+        spannableStringBuilder.setSpan(new ClickableSpan() {
+            @Override
+            public void onClick(View widget) {
+                LinearLayout resultLayout = contentView.findViewById(R.id.hr_result);
+                resultLayout.removeAllViews();
+                for(int i = 0; i < checkBoxes.size(); i++){
+                    CheckBox checkBox = checkBoxes.get(i);
+                    checkBox.setChecked(false);
+                }
+            }
+        }, 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ((TextView)contentView.findViewById(R.id.hr_result_title)).append(" ");
+        ((TextView)contentView.findViewById(R.id.hr_result_title)).append(spannableStringBuilder);
+        ((TextView)contentView.findViewById(R.id.hr_result_title)).setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     public  void getAllCheckboxes(ArrayList<CheckBox> checkBoxes, View view){
@@ -107,6 +128,8 @@ public class Hr {
             }else if(viewGroup.getChildAt(i) instanceof HorizontalScrollView){
                 getAllCheckboxes(checkBoxes, viewGroup.getChildAt(i));
             }else if(viewGroup.getChildAt(i) instanceof LinearLayout){
+                getAllCheckboxes(checkBoxes, viewGroup.getChildAt(i));
+            }else if(viewGroup.getChildAt(i) instanceof LineWrapLayout){
                 getAllCheckboxes(checkBoxes, viewGroup.getChildAt(i));
             }
         }
@@ -481,13 +504,17 @@ public class Hr {
             editor.apply();
             fuzzy = false;
             TextView textView = contentView.findViewById(R.id.hr_description);
-            textView.setText(R.string.hr_desc_exact);
-            textView.setOnClickListener(new View.OnClickListener() {
+            textView.setText(R.string.hr_desc_exact_part_1);
+            textView.append(" ");
+            SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(applicationContext.getResources().getString(R.string.hr_desc_part_2));
+            spannableStringBuilder.setSpan(new ClickableSpan() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(View widget) {
                     changeQueryMethod(MODE_FUZZY);
                 }
-            });
+            }, 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            textView.append(spannableStringBuilder);
+            textView.setMovementMethod(LinkMovementMethod.getInstance());
         }else if(mode == MODE_FUZZY){
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("fuzzyQuery", true);
@@ -495,13 +522,17 @@ public class Hr {
             editor.apply();
             fuzzy = true;
             TextView textView = contentView.findViewById(R.id.hr_description);
-            textView.setText(R.string.hr_desc_fuzzy);
-            textView.setOnClickListener(new View.OnClickListener() {
+            textView.setText(R.string.hr_desc_fuzzy_part_1);
+            textView.append(" ");
+            SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(applicationContext.getResources().getString(R.string.hr_desc_part_2));
+            spannableStringBuilder.setSpan(new ClickableSpan() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(View widget) {
                     changeQueryMethod(MODE_EXACT);
                 }
-            });
+            }, 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            textView.append(spannableStringBuilder);
+            textView.setMovementMethod(LinkMovementMethod.getInstance());
         }
     }
 }

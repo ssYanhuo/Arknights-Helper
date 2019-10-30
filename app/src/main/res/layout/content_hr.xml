@@ -1,5 +1,5 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/hr_content"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,10 +14,7 @@
             android:id="@+id/hr_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/hr_desc_exact"
-            android:focusable="true"
-            android:clickable="true"
-            android:background="?android:attr/selectableItemBackground"/>
+            android:text="@string/hr_desc_exact_part_1" />
     </LinearLayout>
 
 
@@ -407,7 +404,6 @@
         </LinearLayout>
     </HorizontalScrollView>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -421,7 +417,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="@string/hr_result"/>
+                android:id="@+id/hr_result_title"
+                android:text="@string/hr_result_title_part_1"/>
             <LinearLayout
                 android:id="@+id/hr_result"
                 android:layout_width="match_parent"

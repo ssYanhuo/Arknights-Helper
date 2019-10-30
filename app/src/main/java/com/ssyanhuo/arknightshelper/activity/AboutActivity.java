@@ -108,7 +108,7 @@ public class AboutActivity extends AppCompatActivity {
                             }
                         }
                     };
-                    timer.schedule(timerTask, 1000,3000);
+                    timer.schedule(timerTask, 0,2000);
                 }
             }
         });

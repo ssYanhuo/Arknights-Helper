@@ -9,18 +9,18 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/material_updater_desc"
+        android:text="@string/drop_updater_desc"
         android:layout_marginBottom="@dimen/activity_vertical_margin"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/material_updater_update"
-        android:id="@+id/material_updater_update"
+        android:text="@string/drop_updater_update"
+        android:id="@+id/drop_updater_update"
         style="@style/AppTheme.CheckBox.Yellow"/>
 
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/material_updater_progress"
+        android:id="@+id/drop_updater_progress"
         android:visibility="gone" />
 </LinearLayout>

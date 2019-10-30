@@ -18,6 +18,8 @@ public class LineWrapLayout extends ViewGroup {
     private int line_height;
     private int hSpacing = 1;//子View之间的横向间隔
     private int vSpacing = 1;  //子View之间的纵向间隔
+    private int childWidth;
+    private int childHeight;
 
     public LineWrapLayout(Context context) {
         super(context);
@@ -30,6 +32,8 @@ public class LineWrapLayout extends ViewGroup {
         //
         hSpacing = a.getDimensionPixelSize(R.styleable.LineWrapLayout_horizontal_spacing, 15);
         vSpacing = a.getDimensionPixelSize(R.styleable.LineWrapLayout_vertical_spacing, 15);
+        childWidth = a.getLayoutDimension(R.styleable.LineWrapLayout_child_width, 128);
+        childHeight = a.getLayoutDimension(R.styleable.LineWrapLayout_child_height, 128);
         a.recycle();
     }
 
@@ -41,6 +45,8 @@ public class LineWrapLayout extends ViewGroup {
         hSpacing = a.getDimensionPixelSize(R.styleable.LineWrapLayout_horizontal_spacing, 15);
         //得到纵向间隔
         vSpacing = a.getDimensionPixelSize(R.styleable.LineWrapLayout_vertical_spacing, 15);
+        childWidth = a.getLayoutDimension(R.styleable.LineWrapLayout_child_width, -1);
+        childHeight = a.getLayoutDimension(R.styleable.LineWrapLayout_child_height, -1);
         a.recycle();
     }
 
@@ -67,10 +73,19 @@ public class LineWrapLayout extends ViewGroup {
             final View child = getChildAt(i);
             if (child.getVisibility() != GONE) {
                 final LayoutParams lp = child.getLayoutParams();
+                if (childWidth != -1){
+                    lp.width = childWidth;
+                    child.setMinimumWidth(childWidth);
+                }
+                if (childHeight != -1){
+                    lp.height = childHeight;
+                    child.setMinimumHeight(childHeight);
+                }
+                child.setLayoutParams(lp);
                 //算出子View宽的MeasureSpec值
-                int wSpec = MeasureSpec.makeMeasureSpec(lp.width, MeasureSpec.EXACTLY);
+                int wSpec = MeasureSpec.makeMeasureSpec(lp.width, MeasureSpec.UNSPECIFIED);
                 //算出子View高的MeasureSpec值
-                int hSpec = MeasureSpec.makeMeasureSpec(lp.height, MeasureSpec.EXACTLY);
+                int hSpec = MeasureSpec.makeMeasureSpec(lp.height, MeasureSpec.UNSPECIFIED);
                 //让子View记住自己宽高的MeasureSpec值,子View的
                 //onMeasure(int widthMeasureSpec,int heightMeasureSpec)
                 //函数传入的就是这里算出来的这两个值

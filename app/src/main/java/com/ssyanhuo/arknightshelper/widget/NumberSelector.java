@@ -21,6 +21,9 @@ public class NumberSelector extends LinearLayout {
     private int max = Integer.MAX_VALUE;
     private int step = 1;
     private int defaultValue = 0;
+    private String text = "";
+    private TextView textView;
+
     public NumberSelector(Context context) {
         super(context);
     }
@@ -31,11 +34,14 @@ public class NumberSelector extends LinearLayout {
         max = typedArray.getInt(R.styleable.NumberSelector_maxValue, Integer.MAX_VALUE);
         step = typedArray.getInt(R.styleable.NumberSelector_step, 1);
         defaultValue = typedArray.getInt(R.styleable.NumberSelector_defaultValue, 0);
+        text = typedArray.getString(R.styleable.NumberSelector_text);
         LayoutInflater.from(context).inflate(R.layout.view_numberselector, this);
         buttonMinus = findViewById(R.id.button_minus);
         buttonPlus = findViewById(R.id.button_plus);
         editText = findViewById(R.id.num_result);
         editText.setText(String.valueOf(defaultValue));
+        textView = this.findViewById(R.id.textView);
+        setText(text);
         buttonMinus.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,4 +92,7 @@ public class NumberSelector extends LinearLayout {
         }
     }
     public void setStep(int step) { this.step = step; }
+    public void setText(String text){
+        textView.setText(text);
+    }
 }

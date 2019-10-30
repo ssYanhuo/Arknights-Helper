@@ -7,9 +7,11 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.IBinder;
+import android.os.Looper;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -17,37 +19,42 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
-import com.alibaba.fastjson.JSONObject;
 import com.google.android.material.tabs.TabLayout;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.utiliy.DpUtiliy;
-import com.ssyanhuo.arknightshelper.utiliy.JsonUtility;
 import com.ssyanhuo.arknightshelper.utiliy.BroadcastReceiver;
 
-import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class BackendService extends Service {
     WindowManager windowManager;
-    WindowManager.LayoutParams layoutParams;
+    WindowManager.LayoutParams floatingWindowLayoutParams;
+    WindowManager.LayoutParams backgroundLayoutParams;
+    WindowManager.LayoutParams placeHolderLayoutParams;
     LinearLayout linearLayout;
     LinearLayout linearLayout_hr;
-    LinearLayout linearLayout_exp;
     LinearLayout linearLayout_material;
+    LinearLayout linearLayout_drop;
     ScrollView scrollView_hr;
     ScrollView scrollView_exp;
     ScrollView scrollView_material;
     Button button;
     final int HR = 0;
-    final int EXP = 1;
-    final int MATERIAL = 2;
-    final int CLOSE = 3;
+    final int MATERIAL = 1;
+    final int DROP = 2;
     final String TAG = "BackgroundService";
+    LinearLayout backgroundLayout;
+    LinearLayout placeHolder;
+    Hr hr = new Hr();
+    Material material = new Material();
+    Drop drop = new Drop();
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -86,25 +93,34 @@ public class BackendService extends Service {
         //启动悬浮窗
 
         windowManager = (WindowManager)getSystemService(WINDOW_SERVICE);
-        layoutParams = new WindowManager.LayoutParams();
+        floatingWindowLayoutParams = new WindowManager.LayoutParams();
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            layoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+            floatingWindowLayoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
         }else {
-            layoutParams.type = WindowManager.LayoutParams.TYPE_PHONE;
+            floatingWindowLayoutParams.type = WindowManager.LayoutParams.TYPE_PHONE;
         }
+        backgroundLayoutParams = new WindowManager.LayoutParams();
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            backgroundLayoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+        }else {
+            backgroundLayoutParams.type = WindowManager.LayoutParams.TYPE_PHONE;
+        }
+
+        backgroundLayoutParams.flags = WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+        placeHolderLayoutParams = new WindowManager.LayoutParams();
         startFloatingButton();
         //预处理
         floatingWindowPreProcess();
     }
 
     public void startFloatingButton(){
-        layoutParams.format = PixelFormat.RGBA_8888;
-        layoutParams.width = DpUtiliy.dip2px(getApplicationContext(), 48);
-        layoutParams.height = DpUtiliy.dip2px(getApplicationContext(), 48);
-        layoutParams.gravity = Gravity.LEFT | Gravity.TOP;
-        layoutParams.flags = WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-        layoutParams.x = 0;
-        layoutParams.y = 200;
+        floatingWindowLayoutParams.format = PixelFormat.RGBA_8888;
+        floatingWindowLayoutParams.width = DpUtiliy.dip2px(getApplicationContext(), 48);
+        floatingWindowLayoutParams.height = DpUtiliy.dip2px(getApplicationContext(), 48);
+        floatingWindowLayoutParams.gravity = Gravity.LEFT | Gravity.TOP;
+        floatingWindowLayoutParams.flags = WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+        floatingWindowLayoutParams.x = 0;
+        floatingWindowLayoutParams.y = 200;
         button = new Button(this);
         button.setBackground(getResources().getDrawable(R.mipmap.overlay_button));
         button.setOnTouchListener(new View.OnTouchListener() {
@@ -124,11 +140,11 @@ public class BackendService extends Service {
                         int movedY = nowY - y;
                         x = nowX;
                         y = nowY;
-                        layoutParams.x = layoutParams.x + movedX;
-                        layoutParams.y = layoutParams.y + movedY;
+                        floatingWindowLayoutParams.x = floatingWindowLayoutParams.x + movedX;
+                        floatingWindowLayoutParams.y = floatingWindowLayoutParams.y + movedY;
 
                         // 更新悬浮窗控件布局
-                        windowManager.updateViewLayout(view, layoutParams);
+                        windowManager.updateViewLayout(view, floatingWindowLayoutParams);
                         break;
                     default:
                         break;
@@ -142,19 +158,21 @@ public class BackendService extends Service {
                 showFloatingWindow();
             }
         });
-        windowManager.addView(button, layoutParams);
+        windowManager.addView(button, floatingWindowLayoutParams);
 
     }
 
     public void floatingWindowPreProcess(){
+        backgroundLayout = new LinearLayout(this);
+        placeHolder = new LinearLayout(this);
         linearLayout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.overlay_main, null);
         //实例化view
         scrollView_hr = linearLayout.findViewById(R.id.scroll_hr);
         scrollView_exp = linearLayout.findViewById(R.id.scroll_exp);
         scrollView_material = linearLayout.findViewById(R.id.scroll_material);
         linearLayout_hr = linearLayout.findViewById(R.id.hr_content);
-        linearLayout_exp = linearLayout.findViewById(R.id.exp_content);
         linearLayout_material = linearLayout.findViewById(R.id.material_content);
+        linearLayout_drop = linearLayout.findViewById(R.id.drop_content);
         scrollView_hr.setVisibility(View.VISIBLE);
         scrollView_exp.setVisibility(View.GONE);
         scrollView_material.setVisibility(View.GONE);
@@ -166,14 +184,11 @@ public class BackendService extends Service {
                     case HR:
                         changeFloatingWindowContent(HR);
                         break;
-                    case EXP:
-                        changeFloatingWindowContent(EXP);
-                        break;
                     case MATERIAL:
                         changeFloatingWindowContent(MATERIAL);
                         break;
-                    case CLOSE:
-                        hideFloatingWindow();
+                    case DROP:
+                        changeFloatingWindowContent(DROP);
                         break;
                     default:
                         break;
@@ -190,13 +205,17 @@ public class BackendService extends Service {
 
             }
         });
+        ImageButton imageButton = linearLayout.findViewById(R.id.overlay_close);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideFloatingWindow();
+            }
+        });
         //初始化
-        Hr hr = new Hr();
         hr.init(getApplicationContext(), linearLayout_hr);
-        Exp exp = new Exp();
-        exp.init(getApplicationContext(), linearLayout_exp);
-        Material material = new Material();
-        material.init(getApplicationContext(), linearLayout_material);
+        material.init(getApplicationContext(), linearLayout_material, backgroundLayout);
+        drop.init(getApplicationContext(), linearLayout_drop);
     }
 
     public void showFloatingWindow(){
@@ -204,18 +223,54 @@ public class BackendService extends Service {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         int rotation = windowManager.getDefaultDisplay().getRotation();
-        layoutParams.gravity = Gravity.END | Gravity.TOP;
-        layoutParams.x = 0;
-        layoutParams.y = 0;
-        if(rotation == 1 || rotation == 3){
-            layoutParams.height = displayMetrics.heightPixels;
-            layoutParams.width = displayMetrics.widthPixels / 2;
-        }else {
-            layoutParams.height = displayMetrics.heightPixels / 2;
-            layoutParams.width = displayMetrics.widthPixels;
+        floatingWindowLayoutParams.gravity = Gravity.RIGHT | Gravity.TOP;
+        floatingWindowLayoutParams.x = 0;
+        floatingWindowLayoutParams.y = 0;
+        //检测屏幕方向和是否全屏
+        if(rotation == 1 || rotation == 3){//横
+            floatingWindowLayoutParams.height = displayMetrics.heightPixels;
+            floatingWindowLayoutParams.width = displayMetrics.widthPixels / 2;
+            placeHolderLayoutParams.height = displayMetrics.heightPixels;
+            placeHolderLayoutParams.width = displayMetrics.widthPixels / 2;
+            backgroundLayout.setOrientation(LinearLayout.HORIZONTAL);
+            backgroundLayoutParams.height = displayMetrics.heightPixels;
+            backgroundLayoutParams.width = displayMetrics.widthPixels;
+            //是否优化状态栏区域的显示效果
+            if (rotation == 1){linearLayout.setBackgroundColor(Color.parseColor("#aa000000"));}
+        }else {//竖
+            floatingWindowLayoutParams.height = displayMetrics.heightPixels / 2;
+            floatingWindowLayoutParams.width = displayMetrics.widthPixels;
+            placeHolderLayoutParams.height = displayMetrics.heightPixels / 2;
+            placeHolderLayoutParams.width = displayMetrics.widthPixels;
+            backgroundLayoutParams.height = displayMetrics.heightPixels;
+            backgroundLayoutParams.width = displayMetrics.widthPixels;
+            backgroundLayout.setOrientation(LinearLayout.VERTICAL);
+            //关闭背景渐变
+            linearLayout.setBackgroundColor(Color.parseColor("#aa000000"));
         }
-        windowManager.addView(linearLayout, layoutParams);
+        linearLayout.setLayoutParams(floatingWindowLayoutParams);
+        backgroundLayoutParams.x = 0;
+        backgroundLayoutParams.y = 0;
+        backgroundLayoutParams.format = PixelFormat.RGBA_8888;
+        placeHolder.setLayoutParams(placeHolderLayoutParams);
+        placeHolder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideFloatingWindow();
+            }
+        });
+        LinearLayout phContent = new LinearLayout(this);
+        phContent.setTag("placeHolder");
+        placeHolder.addView(phContent);
+        if(rotation == 1 || rotation == 3){
+            backgroundLayout.addView(placeHolder);
+            backgroundLayout.addView(linearLayout);
+        }else {
+            backgroundLayout.addView(linearLayout);
+            backgroundLayout.addView(placeHolder);
+        }
 
+        windowManager.addView(backgroundLayout, backgroundLayoutParams);
     }
     public void changeFloatingWindowContent(int i){
         switch (i){
@@ -223,35 +278,51 @@ public class BackendService extends Service {
                 scrollView_hr.setVisibility(View.VISIBLE);
                 scrollView_exp.setVisibility(View.GONE);
                 scrollView_material.setVisibility(View.GONE);
-                layoutParams.flags = WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-                windowManager.updateViewLayout(linearLayout, layoutParams);
-                break;
-            case EXP:
-                scrollView_hr.setVisibility(View.GONE);
-                scrollView_exp.setVisibility(View.VISIBLE);
-                scrollView_material.setVisibility(View.GONE);
-                layoutParams.flags = WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-                windowManager.updateViewLayout(linearLayout, layoutParams);
+                material.isCurrentLayout(false);
                 break;
             case MATERIAL:
                 scrollView_hr.setVisibility(View.GONE);
+                scrollView_exp.setVisibility(View.VISIBLE);
+                scrollView_material.setVisibility(View.GONE);
+                material.isCurrentLayout(true);
+                break;
+            case DROP:
+                scrollView_hr.setVisibility(View.GONE);
                 scrollView_exp.setVisibility(View.GONE);
                 scrollView_material.setVisibility(View.VISIBLE);
-                layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;
-                windowManager.updateViewLayout(linearLayout, layoutParams);
+                material.isCurrentLayout(false);
                 break;
             default:
                 break;
         }
     }
     public void hideFloatingWindow(){
-        windowManager.removeView(linearLayout);
+        windowManager.removeView(backgroundLayout);
         startFloatingButton();
-        floatingWindowPreProcess();
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                floatingWindowPreProcess();
+                Looper.loop();
+            }
+        },1);
+
     }
     @Override
     public void onDestroy() {
         super.onDestroy();
-        System.exit(0);
+        try {
+            windowManager.removeView(button);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        try {
+            windowManager.removeView(backgroundLayout);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.gc();
     }
 }

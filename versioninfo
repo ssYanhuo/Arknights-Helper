@@ -1,6 +1,11 @@
-versionCode 10
-versionName Beta-EarlyAutumn-1.0.1
-releaseNote 修复了部分系统不能正常启动悬浮窗的问题（感谢 @iamydp）
-掉落查询正式上线
-应用已初步完成构建，进入Beta测试阶段
+versionCode 11
+versionName Beta-EarlyAutumn-2.0.0
+releaseNote 更新最新数据
+更换图标资源
+升级材料计算正式上线
+现在可以手动更新掉落概率信息
+尝试提升悬浮窗主窗口启动速度
+公开招募查询添加了更明显的切换查询方式提示
+现在点击悬浮窗主窗口外部可以自动关闭悬浮窗
+对全面屏用户做了UI优化
 修复了一些在竖屏模式下可能遇到的小问题

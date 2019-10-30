@@ -4,28 +4,33 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
-    android:addStatesFromChildren="true">
+    android:addStatesFromChildren="true"
+    android:theme="@style/AppTheme.FloatingWindow">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minHeight="@dimen/activity_vertical_margin"
-        android:minWidth="@dimen/activity_horizontal_margin"
+        android:minHeight="16dp"
+        android:minWidth="16dp"
         android:id="@+id/button_minus"
         android:text="@string/button_minus"/>
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="@dimen/activity_vertical_margin"
-        android:minWidth="@dimen/activity_horizontal_margin"
+        android:minWidth="20dp"
         android:id="@+id/num_result"
         android:background="@null"
         android:textAlignment="center"
-        android:inputType="none"/>
+        android:inputType="none" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minHeight="@dimen/activity_vertical_margin"
-        android:minWidth="@dimen/activity_horizontal_margin"
+        android:minHeight="16dp"
+        android:minWidth="16dp"
         android:id="@+id/button_plus"
         android:text="@string/button_plus"/>
 </LinearLayout>
