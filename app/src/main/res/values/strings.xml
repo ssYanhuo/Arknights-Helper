@@ -1,42 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Arknights Helper</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_subtitle">By ssYanhuo</string>
-    <string name="action_settings">Settings</string>
-
-
-    <string name="start_game">Starting Game and service…</string>
-    <string name="notification_title">Background service running</string>
-    <string name="notification_text">Tap to stop service</string>
-    <string name="notification_channel">Overlay notification</string>
-    <string name="tab_title_hr">HR Calculator</string>
-    <string name="tab_title_drop">Drop Probability</string>
-    <string name="tab_title_material">Material Calculator</string>
-    <string name="tab_title_hide">Close</string>
-
-    <string name="hr_selector_star">Star:</string>
+    <string name="app_name">明日方舟助手</string>
+    <string name="action_settings">设置</string>
+    <string name="start_game">正在启动 Arknights Helper™ 引擎……</string>
+    <string name="notification_title">已连接到 Arknights Helper™</string>
+    <string name="notification_text">点击来结束服务</string>
+    <string name="notification_channel">悬浮窗通知</string>
+    <string name="tab_title_hr">公开招募</string>
+    <string name="tab_title_drop">掉落查询</string>
+    <string name="tab_title_material">材料计算</string>
+    <string name="tab_title_hide">关闭</string>
+    <string name="hr_selector_star">星级：</string>
     <string name="hr_star_1" translatable="false">1★</string>
     <string name="hr_star_2" translatable="false">2★</string>
     <string name="hr_star_3" translatable="false">3★</string>
     <string name="hr_star_4" translatable="false">4★</string>
     <string name="hr_star_5" translatable="false">5★</string>
     <string name="hr_star_6" translatable="false">6★</string>
-
-    <string name="hr_selector_qualification">Qualification:</string>
+    <string name="hr_selector_qualification">资质：</string>
     <string name="hr_qualification_1" translatable="false">新手</string>
     <string name="hr_qualification_2" translatable="false">资深干员</string>
     <string name="hr_qualification_3" translatable="false">高级资深干员</string>
-
-    <string name="hr_selector_position">Position:</string>
+    <string name="hr_selector_position">位置：</string>
     <string name="hr_position_near" translatable="false">近战位</string>
     <string name="hr_position_distant" translatable="false">远程位</string>
-
-    <string name="hr_selector_sex">Sex:</string>
+    <string name="hr_selector_sex">性别：</string>
     <string name="hr_sex_male" translatable="false">男性干员</string>
     <string name="hr_sex_female" translatable="false">女性干员</string>
-
-    <string name="hr_selector_type">Class:</string>
+    <string name="hr_selector_type">种类：</string>
     <string name="hr_type_vanguard" translatable="false">先锋干员</string>
     <string name="hr_type_sniper" translatable="false">狙击干员</string>
     <string name="hr_type_medic" translatable="false">医疗干员</string>
@@ -45,8 +36,7 @@
     <string name="hr_type_defender" translatable="false">重装干员</string>
     <string name="hr_type_supporter" translatable="false">辅助干员</string>
     <string name="hr_type_specialist" translatable="false">特种干员</string>
-
-    <string name="hr_selector_tag">Tag:</string>
+    <string name="hr_selector_tag">词缀：</string>
     <string name="hr_tag_zhiliao" translatable="false">治疗</string>
     <string name="hr_tag_zhiyuan" translatable="false">支援</string>
     <string name="hr_tag_shuchu" translatable="false">输出</string>
@@ -61,29 +51,96 @@
     <string name="hr_tag_zhaohuan" translatable="false">召唤</string>
     <string name="hr_tag_kuaisufuhuo" translatable="false">快速复活</string>
     <string name="hr_tag_feiyonghuifu" translatable="false">费用回复</string>
-    <string name="hr_desc_exact_part_1">You can choose 3 tags at most execpt stars, only show characters meet all requirements.\nLong press characters for more info.\nData from @Graue Neko</string>
-    <string name="hr_result_title_part_1">Result:</string>
-    <string name="hr_result_title_part_2">Clear</string>
-    <string name="hr_result_empty">Noting found.</string>
-    <string name="update_state_correct">Arknights Helper™ self-checking finished, no error found.</string>
-    <string name="update_state_beta">It seems that you are using a beta version of Arknights Helper™.</string>
-    <string name="title_activity_about">About</string>
-    <string name="menu_about">About</string>
-    <string name="menu_exit">Exit</string>
-    <string name="nav_header_image_desc">App icon</string>
-    <string name="no_overlay_permission_error">Arknights Helper™ engine start failed: Overlay permission not granted</string>
-    <string name="no_overlay_permission_action">Go setting</string>
-    <string name="author_name">ssYanhuo</string>
-    <string name="go_github">Visit my Github home page</string>
-    <string name="about_author_image_desc">Author avatar</string>
-    <string name="go_project">Visit this project\'s page</string>
-    <string name="go_project_desc">Submit issues and new data</string>
-    <string name="go_release">Visit this project\'s release page</string>
-    <string name="go_release_desc">Get lastest version</string>
-    <string name="about_thanks">Thanks</string>
-    <string name="about_thanks_list">\@Graue Neko, @Arknights WIKI, @deano2390, @teisun, @zyyoona7, @企鹅数据, @tomcat\nAnd all Doctors.</string>
-    <string name="about_version">Version</string>
-    <string name="about_version_desc">Getting…</string>
+    <string name="hr_desc_part_1_exact">除星级外，最多可选 3 个标签，只显示完全符合需求的干员。\n长按干员查看更多信息。</string>
+
+    <string name="hr_desc_part_3">\n数据来自 @Graue Neko</string>
+    <string name="hr_result_title_part_1">结果：</string>
+    <string name="hr_result_title_part_2">清空全部</string>
+    <string name="hr_result_empty">并没有找到结果</string>
+    <string name="update_state_correct">Arknights Helper™ 正常运行中，未检测到错误</string>
+    <string name="update_state_beta">看起来你正在使用一个尚未发布的版本</string>
+    <string name="menu_exit">退出</string>
+    <string name="menu_about">关于</string>
+    <string name="nav_header_image_desc">应用图标</string>
+    <string name="title_activity_about">关于</string>
+    <string name="navigation_drawer_close">关闭了侧边栏</string>
+    <string name="navigation_drawer_open">打开了侧边栏</string>
+    <string name="no_overlay_permission_error">Arknights Helper™ 引擎启动失败：缺少显示悬浮窗权限</string>
+    <string name="no_overlay_permission_action">授予权限</string>
+    <string name="nav_header_subtitle">By 三生烟火</string>
+    <string name="author_name">三生烟火</string>
+    <string name="go_github">前往我的Github主页</string>
+    <string name="about_author_image_desc">作者头像</string>
+    <string name="go_project">前往项目主页</string>
+    <string name="go_project_desc">提交问题或数据</string>
+    <string name="go_release">前往项目发布页</string>
+    <string name="go_release_desc">获取最新版本</string>
+    <string name="about_thanks">鸣谢</string>
+    <string name="about_thanks_list">\@Graue Neko, @明日方舟WIKI, @deano2390, @teisun, @zyyoona7, @企鹅数据, @tomcat\n以及所有的Doctor们。</string>
+    <string name="about_version">版本号</string>
+    <string name="about_version_desc">正在获取……</string>
+    <string name="start_two_apps">检测到多个客户端，请手动选择</string>
+    <string name="game_official">官方</string>
+    <string name="game_bilibili">"哔哩哔哩 "</string>
+    <string name="overlay_coming">即将到来……</string>
+    <string name="start_without_game">点击这里，独立启动 Arknights Helper™ 引擎</string>
+    <string name="material_star">星级：</string>
+    <string name="material_exp">经验副本：</string>
+    <string name="material_money">龙门币副本：</string>
+    <string name="button_plus" translatable="false">+</string>
+    <string name="button_minus" translatable="false">-</string>
+    <string name="material_stage_now">当前精英化：</string>
+    <string name="material_desc">长按按钮可以选择最大或最小值。\n数据来自 @Graue Neko</string>
+    <string name="material_point_now">当前经验（上取整）：</string>
+    <string name="material_level_now">等级：</string>
+    <string name="material_stage_target">目标精英化：</string>
+    <string name="material_level_target">等级：</string>
+    <string name="material_result">结果：</string>
+    <string name="material_result_money">龙门币：</string>
+    <string name="material_result_exp">经验：</string>
+    <string name="material_result_stamina">理智：</string>
+    <string name="material_round_exp">（LS场数）</string>
+    <string name="material_round_money">（CE场数）</string>
+    <string name="material_money_upgrade">（升级）</string>
+    <string name="material_money_evolve">（精英化）</string>
+    <string name="update_state_checking">正在连接到 Github™ 数据中心检查更新……</string>
+    <string name="update_state_error">检查更新时出现问题</string>
+    <string name="update_state_need_update">发现 Arknights Helper™ 引擎存在更新，点击获取最新版本</string>
+    <string name="update_intent_error">无法调取 Coolapk™ 数据中心，是否前往备用数据中心 Github™ 获取更新？</string>
+    <string name="update_go_github">前往Github</string>
+    <string name="showcase_start">点击这里，\n启动游戏和 Arknights Helper™ 引擎</string>
+    <string name="showcase_menu">更多功能请打开侧边栏</string>
+    <string name="update_dialog_yes">更新</string>
+    <string name="update_dialog_title">更新内容</string>
+    <string name="update_dialog_no">取消</string>
+    <string name="showcase_tile">Android 7.0 及以上用户可添加快速设置图块到通知面板</string>
+    <string name="go_qq">加入QQ群</string>
+    <string name="go_qq_desc">教程、测试版本、交流……</string>
+    <string name="hr_method_selector_desc">选择一种查询方式。\n日后可以修改该选项。</string>
+    <string name="hr_method_selector_title_fuzzy">模糊查询</string>
+    <string name="hr_method_selector_title_exact">精确查询</string>
+    <string name="hr_method_selector_title_exact_desc">只显示完全符合需求的干员。</string>
+    <string name="hr_method_selector_title_fuzzy_desc">显示所有可能的招募结果，包括部分标签被划掉的情况。</string>
+    <string name="hr_desc_part_1_fuzzy">除星级外，最多可选 5 个标签，将列出所有可能的干员组合。\n长按干员查看更多信息。</string>
+    <string name="hr_method_selector_button_to_fuzzy">切换到模糊查询</string>
+    <string name="hr_method_selector_button_to_exact">切换到精确查询</string>
+    <string name="title_activity_lab">梦境</string>
+    <string name="drop_updater_desc">掉落数据未下载、不可用或需要更新。\n请先更新数据。\n数据来自 @企鹅物流（penguin-stats.io）</string>
+    <string name="drop_updater_update">更新数据</string>
+    <string name="drop_desc_part_1">数据来自 @企鹅数据 (penguin-stats.io)</string>
+    <string name="material_select">选择一位干员</string>
+    <string name="material_star_1" translatable="false">1★</string>
+    <string name="material_star_2" translatable="false">2★</string>
+    <string name="material_star_3" translatable="false">3★</string>
+    <string name="material_star_4" translatable="false">4★</string>
+    <string name="material_star_5" translatable="false">5★</string>
+    <string name="material_star_6" translatable="false">6★</string>
+    <string name="material_selector_desc">干员：</string>
+    <string name="material_selector_none">尚未选择</string>
+    <string name="material_selector_only_rare">仅稀有材料</string>
+    <string name="itemdetailview_go_query">掉落查询</string>
+    <string name="drop_desc_part_4">更新数据</string>
+    <string name="hr_desc_part_4">切换查询模式</string>
     <string name="easter_text_1" translatable="false">我好像做了一个梦。\n</string>
     <string name="easter_text_2" translatable="false">\n梦里的我在天上。\n</string>
     <string name="easter_text_3" translatable="false">\n光芒似乎被剥离了，眼前漆黑一片。\n</string>
@@ -94,66 +151,16 @@
     <string name="easter_text_8" translatable="false">\n五颜六色的星星从我指间涌出，点亮了世界。\n</string>
     <string name="easter_text_9" translatable="false">\n我想，我触碰到了未来。\n</string>
     <string name="easter_text_10" translatable="false">\nBy @Bilibili</string>
-    <string name="start_two_apps">More than one game were found, please select one</string>
-    <string name="game_official">Official</string>
-    <string name="game_bilibili">Bilibili</string>
-    <string name="overlay_coming">Coming soon…</string>
-    <string name="start_without_game">Click here, start Arknights Helper™ without game</string>
-    <string name="material_star">Star:</string>
-    <string name="material_exp">EXP Level:</string>
-    <string name="material_money">Money Level:</string>
-    <string name="material_stage_now">Your stage:</string>
-    <string name="button_plus" translatable="false">+</string>
-    <string name="button_minus" translatable="false">-</string>
-    <string name="material_desc">Long press button to select max or min number.\nData from @Graue Neko</string>
-    <string name="material_level_now" translatable="false">Your level:</string>
-    <string name="material_point_now">Your EXP points (roundup):</string>
-    <string name="material_stage_target">Target stage:</string>
-    <string name="material_level_target">Target level:</string>
-    <string name="material_result">Result:</string>
-    <string name="material_result_exp">Exp:</string>
-    <string name="material_result_money">Money:</string>
-    <string name="material_result_stamina">Stamina:</string>
-    <string name="material_round_exp">(LS rounds)</string>
-    <string name="material_round_money">(CE rounds)</string>
-    <string name="material_money_upgrade">(Upgrade)</string>
-    <string name="material_money_evolve">(Evolve)</string>
-    <string name="update_state_checking">Connecting to Github™ to check for updates…</string>
-    <string name="update_state_error">Check for update failed</string>
-    <string name="update_state_need_update">New version for Arknights Helper™ now available, click here to update</string>
-    <string name="update_intent_error">Unable to call Coolapk to handle this update, do you want to go to Github release page?</string>
-    <string name="update_go_github">Go to Github</string>
-    <string name="showcase_start">Tap here to start engine</string>
-    <string name="showcase_menu">About, check updates and more…</string>
-    <string name="update_dialog_yes">Update</string>
-    <string name="update_dialog_no">Cancel</string>
-    <string name="update_dialog_title">Release note</string>
-    <string name="showcase_tile">For android 7.0+, you can add QS tile to notification panel</string>
-    <string name="go_qq">Join QQ group</string>
-    <string name="go_qq_desc">Questions, get beta, submit issues or just chatting!</string>
-    <string name="hr_method_selector_desc">Please select a query method.\nYou can change this setting later.</string>
-    <string name="hr_method_selector_title_fuzzy">Fuzzy query</string>
-    <string name="hr_method_selector_title_exact">Exact query</string>
-    <string name="hr_method_selector_title_exact_desc">Only show characters exactly meet your requirements.</string>
-    <string name="hr_method_selector_title_fuzzy_desc">Show all characters meet at least one of your requirements.</string>
-    <string name="hr_desc_fuzzy_part_1">You can choose 5 tags at most execpt stars, will show all possible results.\nLong press characters for more info.\nData from @Graue Neko</string>
-    <string name="hr_method_selector_button_to_fuzzy">Change to fuzzy mode</string>
-    <string name="hr_method_selector_button_to_exact">Change to exact mode</string>
-    <string name="title_activity_lab">Dreamland</string>
-    <string name="drop_updater_desc">No data found, data not usable or need a update.\nPlease update your data.\nData from @Penguin Statics (penguin-stats.io)</string>
-    <string name="drop_updater_update">Update</string>
-    <string name="drop_desc_part_1" >Data from penguin-stats.io</string>
-    <string name="material_select">Select a character</string>
-    <string name="material_selector_desc">"Character: "</string>
-    <string name="material_star_1" translatable="false">1★</string>
-    <string name="material_star_2" translatable="false">2★</string>
-    <string name="material_star_3" translatable="false">3★</string>
-    <string name="material_star_4" translatable="false">4★</string>
-    <string name="material_star_5" translatable="false">5★</string>
-    <string name="material_star_6" translatable="false">6★</string>
-    <string name="material_selector_none">Not Selected</string>
-    <string name="material_selector_only_rare">Rare only</string>
-    <string name="itemdetailview_go_query">Query</string>
-    <string name="drop_desc_part_2">Update data</string>
-    <string name="hr_desc_part_2">Click here to change query mode.</string>
+    <string name="get_permission_storage_title">权限未授予</string>
+    <string name="get_permission_storage_content">截图识别、刷图规划等功能需要存储权限</string>
+    <string name="get_permission_storage_grant">授予</string>
+    <string name="get_permission_manually">前往应用管理手动授予</string>
+    <string name="hr_desc_part_2">截图识别</string>
+    <string name="hr_ocr_desc">最近的图片：</string>
+    <string name="hr_ocr_getting_result">正在获取结果……</string>
+    <string name="hr_ocr_result_succeed">识别结果：</string>
+    <string name="hr_ocr_error">出现了意外</string>
+    <string name="hr_ocr_succeed">标签数量：</string>
+    <string name="hr_ocr_loading">正在载入图片……</string>
+
 </resources>

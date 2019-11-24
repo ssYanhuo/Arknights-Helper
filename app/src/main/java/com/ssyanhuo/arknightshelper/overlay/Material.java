@@ -9,7 +9,6 @@ import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.staticdata.StaticData;
-import com.ssyanhuo.arknightshelper.utiliy.JsonUtility;
+import com.ssyanhuo.arknightshelper.utiliy.JSONUtility;
 import com.ssyanhuo.arknightshelper.widget.ItemDetailView;
 import com.ssyanhuo.arknightshelper.widget.LineWrapLayout;
 import com.ssyanhuo.arknightshelper.widget.NumberSelector;
@@ -73,10 +72,10 @@ public class Material {
         applicationContext = context;
         rootLayout = backgroundLayout;
         contentView = view;
-        expJsonObject = JsonUtility.getJsonObject(applicationContext, JsonUtility.getJsonString(applicationContext, "data/exp.json"));
-        characterJsonObject = JsonUtility.getJsonObject(applicationContext, JsonUtility.getJsonString(applicationContext, "data/charMaterials.json"));
+        expJsonObject = JSONUtility.getJSONObject(applicationContext, JSONUtility.getJSONString(applicationContext, "data/exp.json"));
+        characterJsonObject = JSONUtility.getJSONObject(applicationContext, JSONUtility.getJSONString(applicationContext, "data/charMaterials.json"));
         //characterJsonString = JsonUtility.getJsonString(applicationContext, "data/charMaterials.json");
-        materialJsonObject = JsonUtility.getJsonObject(applicationContext, JsonUtility.getJsonString(applicationContext, "data/material.json"));
+        materialJsonObject = JSONUtility.getJSONObject(applicationContext, JSONUtility.getJSONString(applicationContext, "data/material.json"));
         numberSelectors = new ArrayList<>();
         stageNow = view.findViewById(R.id.material_selector_stage_now);
         levelNow = view.findViewById(R.id.material_selector_level_now);
@@ -99,7 +98,7 @@ public class Material {
                 }
             });
         }
-        selector = (ScrollView)LayoutInflater.from(applicationContext).inflate(R.layout.overlay_sub_material_selector, null);
+        selector = (ScrollView)LayoutInflater.from(applicationContext).inflate(R.layout.content_material_sub_selector, null);
         ArrayList<String> characters = new ArrayList<>(characterJsonObject.keySet());
         for(int i = 0; i < characters.size(); i++){
             String name = characters.get(i);
@@ -379,7 +378,7 @@ public class Material {
                 return 0;
         }
     }
-    public void isCurrentLayout(boolean current){
+    public void isCurrentWindow(boolean current){
         if (current){
             if(charNow == null){showSubWindow();}
             contentView.findViewById(R.id.material_character_select).setOnClickListener(new View.OnClickListener() {
@@ -389,8 +388,9 @@ public class Material {
                     showSubWindow();
                 }
             });
-        }else {
-            hideSubWindow();
+        }else{
+            placeHolder = rootLayout.findViewWithTag("placeHolder");
+            placeHolder.removeAllViews();
         }
     }
     public void showSubWindow(){
@@ -476,8 +476,9 @@ public class Material {
                             break;
                     }
                 }
-
-                placeHolder.removeAllViews();
+                if (selector.getParent() != null){
+                    ((LinearLayout)selector.getParent()).removeView(selector);
+                }
             }
 
             @Override

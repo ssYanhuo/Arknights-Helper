@@ -24,8 +24,7 @@
         android:minWidth="20dp"
         android:id="@+id/num_result"
         android:background="@null"
-        android:textAlignment="center"
-        android:inputType="none" />
+        android:textAlignment="center" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

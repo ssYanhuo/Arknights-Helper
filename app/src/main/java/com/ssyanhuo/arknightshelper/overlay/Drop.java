@@ -108,7 +108,7 @@ public class Drop {
                 }
             });
         }
-        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(applicationContext.getResources().getString(R.string.drop_desc_part_1) + " " + applicationContext.getString(R.string.drop_desc_part_2));
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(applicationContext.getResources().getString(R.string.drop_desc_part_1) + " " + applicationContext.getString(R.string.drop_desc_part_4));
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(View widget) {
@@ -116,7 +116,7 @@ public class Drop {
                 goUpdate();
             }
         };
-        spannableStringBuilder.setSpan(clickableSpan, spannableStringBuilder.length() - applicationContext.getString(R.string.drop_desc_part_2).length(), spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        spannableStringBuilder.setSpan(clickableSpan, spannableStringBuilder.length() - applicationContext.getString(R.string.drop_desc_part_4).length(), spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
         ((TextView)contentView.findViewById(R.id.drop_description)).setText(spannableStringBuilder);
         ((TextView)contentView.findViewById(R.id.drop_description)).setMovementMethod(LinkMovementMethod.getInstance());
     }

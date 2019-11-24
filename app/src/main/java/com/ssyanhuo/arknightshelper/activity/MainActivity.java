@@ -1,9 +1,7 @@
 package com.ssyanhuo.arknightshelper.activity;
 
-import android.content.ComponentName;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.Manifest;
+import android.content.*;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -21,14 +19,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -40,6 +40,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.security.Permission;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -55,7 +56,36 @@ public class MainActivity extends AppCompatActivity
     final int STATE_NEED_UPDATE = 1;
     final int STATE_BETA = 2;
     final int STATE_ERROR = -1;
+    final int CODE_STORAGE = 1;
     public void startEngine(final View view, final boolean startGame){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+                AlertDialog.Builder builder=new AlertDialog.Builder(this);
+                builder.setCancelable(false)
+                        .setTitle(R.string.get_permission_storage_title)
+                        .setMessage(R.string.get_permission_storage_content)
+                        .setPositiveButton(R.string.get_permission_storage_grant, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, CODE_STORAGE);
+                            }
+                        })
+                        .setNeutralButton(R.string.get_permission_manually, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent();
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+                                intent.setData(Uri.fromParts("package", getPackageName(), null));
+                                startActivity(intent);
+                            }
+                        });
+                builder.show();
+                return;
+            }
+        }
+
+
         Snackbar.make(view, R.string.start_game, Snackbar.LENGTH_LONG).show();
         sharedPreferences = getSharedPreferences("Config", MODE_PRIVATE);
         Timer timer = new Timer();
@@ -222,6 +252,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 startEngine(view, true);
             }
         });
@@ -239,6 +270,11 @@ public class MainActivity extends AppCompatActivity
                 startEngine(view, false);
             }
         });
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, CODE_STORAGE);
+            }
+        }
         //View的更新并非线程安全，需要从子线程post一个Runnable，下面是这个Runnable的Handler
         handler = new Handler();
         checkApplicationUpdate();
@@ -302,6 +338,8 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
     public void checkApplicationUpdate(){
         UpdateRunnable updateRunnable = new UpdateRunnable();
         new Thread(updateRunnable).start();

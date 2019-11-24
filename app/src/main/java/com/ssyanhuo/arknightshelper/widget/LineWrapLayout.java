@@ -32,8 +32,8 @@ public class LineWrapLayout extends ViewGroup {
         //
         hSpacing = a.getDimensionPixelSize(R.styleable.LineWrapLayout_horizontal_spacing, 15);
         vSpacing = a.getDimensionPixelSize(R.styleable.LineWrapLayout_vertical_spacing, 15);
-        childWidth = a.getLayoutDimension(R.styleable.LineWrapLayout_child_width, 128);
-        childHeight = a.getLayoutDimension(R.styleable.LineWrapLayout_child_height, 128);
+        childWidth = a.getLayoutDimension(R.styleable.LineWrapLayout_child_width, 48);
+        childHeight = a.getLayoutDimension(R.styleable.LineWrapLayout_child_height, 48);
         a.recycle();
     }
 
@@ -45,8 +45,8 @@ public class LineWrapLayout extends ViewGroup {
         hSpacing = a.getDimensionPixelSize(R.styleable.LineWrapLayout_horizontal_spacing, 15);
         //得到纵向间隔
         vSpacing = a.getDimensionPixelSize(R.styleable.LineWrapLayout_vertical_spacing, 15);
-        childWidth = a.getLayoutDimension(R.styleable.LineWrapLayout_child_width, -1);
-        childHeight = a.getLayoutDimension(R.styleable.LineWrapLayout_child_height, -1);
+        childWidth = a.getLayoutDimension(R.styleable.LineWrapLayout_child_width, 48);
+        childHeight = a.getLayoutDimension(R.styleable.LineWrapLayout_child_height, 48);
         a.recycle();
     }
 

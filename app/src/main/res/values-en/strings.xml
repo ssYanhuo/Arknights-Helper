@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Arknights Helper</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_subtitle">By ssYanhuo</string>
+    <string name="action_settings">Settings</string>
+
+
+    <string name="start_game">Starting Game and service…</string>
+    <string name="notification_title">Background service running</string>
+    <string name="notification_text">Tap to stop service</string>
+    <string name="notification_channel">Overlay notification</string>
+    <string name="tab_title_hr">HR Calculator</string>
+    <string name="tab_title_drop">Drop Probability</string>
+    <string name="tab_title_material">Material Calculator</string>
+    <string name="tab_title_hide">Close</string>
+
+    <string name="hr_selector_star">Star:</string>
+
+
+    <string name="hr_selector_qualification">Qualification:</string>
+
+
+    <string name="hr_selector_position">Position:</string>
+
+
+    <string name="hr_selector_sex">Sex:</string>
+
+    <string name="hr_selector_type">Class:</string>
+
+    <string name="hr_selector_tag">Tag:</string>
+
+    <string name="hr_desc_part_1_exact">You can choose 3 tags at most execpt stars, only show characters meet all requirements.\nLong press characters for more info.</string>
+    <string name="hr_result_title_part_1">Result:</string>
+    <string name="hr_result_title_part_2">Clear</string>
+    <string name="hr_result_empty">Noting found.</string>
+    <string name="update_state_correct">Arknights Helper™ self-checking finished, no error found.</string>
+    <string name="update_state_beta">It seems that you are using a beta version of Arknights Helper™.</string>
+    <string name="title_activity_about">About</string>
+    <string name="menu_about">About</string>
+    <string name="menu_exit">Exit</string>
+    <string name="nav_header_image_desc">App icon</string>
+    <string name="no_overlay_permission_error">Arknights Helper™ engine start failed: Overlay permission not granted</string>
+    <string name="no_overlay_permission_action">Go setting</string>
+    <string name="author_name">ssYanhuo</string>
+    <string name="go_github">Visit my Github home page</string>
+    <string name="about_author_image_desc">Author avatar</string>
+    <string name="go_project">Visit this project\'s page</string>
+    <string name="go_project_desc">Submit issues and new data</string>
+    <string name="go_release">Visit this project\'s release page</string>
+    <string name="go_release_desc">Get lastest version</string>
+    <string name="about_thanks">Thanks</string>
+    <string name="about_thanks_list">\@Graue Neko, @Arknights WIKI, @deano2390, @teisun, @zyyoona7, @企鹅数据, @tomcat\nAnd all Doctors.</string>
+    <string name="about_version">Version</string>
+    <string name="about_version_desc">Loading…</string>
+    <string name="start_two_apps">More than one game were found, please select one</string>
+    <string name="game_official">Official</string>
+    <string name="game_bilibili">Bilibili</string>
+    <string name="overlay_coming">Coming soon…</string>
+    <string name="start_without_game">Click here, start Arknights Helper™ without game</string>
+    <string name="material_star">Star:</string>
+    <string name="material_exp">EXP Level:</string>
+    <string name="material_money">Money Level:</string>
+    <string name="material_stage_now">Your stage:</string>
+    <string name="material_desc">Long press button to select max or min number.\nData from @Graue Neko</string>
+    <string name="material_level_now">Your level:</string>
+    <string name="material_point_now">Your EXP points (roundup):</string>
+    <string name="material_stage_target">Target stage:</string>
+    <string name="material_level_target">Target level:</string>
+    <string name="material_result">Result:</string>
+    <string name="material_result_exp">Exp:</string>
+    <string name="material_result_money">Money:</string>
+    <string name="material_result_stamina">Stamina:</string>
+    <string name="material_round_exp">(LS rounds)</string>
+    <string name="material_round_money">(CE rounds)</string>
+    <string name="material_money_upgrade">(Upgrade)</string>
+    <string name="material_money_evolve">(Evolve)</string>
+    <string name="update_state_checking">Connecting to Github™ to check for updates…</string>
+    <string name="update_state_error">Check for update failed</string>
+    <string name="update_state_need_update">New version for Arknights Helper™ now available, click here to update</string>
+    <string name="update_intent_error">Unable to call Coolapk to handle this update, do you want to go to Github release page?</string>
+    <string name="update_go_github">Go to Github</string>
+    <string name="showcase_start">Tap here to start engine</string>
+    <string name="showcase_menu">About, check updates and more…</string>
+    <string name="update_dialog_yes">Update</string>
+    <string name="update_dialog_no">Cancel</string>
+    <string name="update_dialog_title">Release note</string>
+    <string name="showcase_tile">For android 7.0+, you can add QS tile to notification panel</string>
+    <string name="go_qq">Join QQ group</string>
+    <string name="go_qq_desc">Questions, get beta, submit issues or just chatting!</string>
+    <string name="hr_method_selector_desc">Please select a query method.\nYou can change this setting later.</string>
+    <string name="hr_method_selector_title_fuzzy">Fuzzy query</string>
+    <string name="hr_method_selector_title_exact">Exact query</string>
+    <string name="hr_method_selector_title_exact_desc">Only show characters exactly meet your requirements.</string>
+    <string name="hr_method_selector_title_fuzzy_desc">Show all characters meet at least one of your requirements.</string>
+    <string name="hr_desc_part_1_fuzzy">You can choose 5 tags at most execpt stars, will show all possible results.\nLong press characters for more info.</string>
+    <string name="hr_method_selector_button_to_fuzzy">Change to fuzzy mode</string>
+    <string name="hr_method_selector_button_to_exact">Change to exact mode</string>
+    <string name="title_activity_lab">Dreamland</string>
+    <string name="drop_updater_desc">No data found, data not usable or need a update.\nPlease update your data.\nData from @Penguin Statics (penguin-stats.io)</string>
+    <string name="drop_updater_update">Update</string>
+    <string name="drop_desc_part_1" >Data from penguin-stats.io</string>
+    <string name="material_select">Select a character</string>
+    <string name="material_selector_desc">"Character: "</string>
+    <string name="material_selector_none">Not Selected</string>
+    <string name="material_selector_only_rare">Rare only</string>
+    <string name="itemdetailview_go_query">Query</string>
+    <string name="drop_desc_part_4">Update data</string>
+    <string name="hr_desc_part_4">Click here to change query mode.</string>
+    <string name="get_permission_storage_title">Permission not granted</string>
+    <string name="get_permission_storage_content">Permission WRITE_EXTERNAL_STORAGE is needed</string>
+    <string name="get_permission_storage_grant">Grant</string>
+    <string name="get_permission_manually">Grant manually</string>
+    <string name="hr_desc_part_3">\nData from @Graue Neko</string>
+    <string name="hr_desc_part_2">Screenshot recognition</string>
+    <string name="hr_ocr_desc">Select a screenshot:</string>
+    <string name="hr_ocr_getting_result">Fetching result…</string>
+    <string name="hr_ocr_result_succeed">Result:</string>
+    <string name="hr_ocr_error">Something unexpected happened</string>
+    <string name="hr_ocr_succeed">Tag(s) :</string>
+    <string name="hr_ocr_loading">Loading images…</string>
+</resources>

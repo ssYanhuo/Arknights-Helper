@@ -2,25 +2,25 @@ package com.ssyanhuo.arknightshelper.staticdata;
 
 public class StaticData {
     public static class Exp{
-        public class Book{
+        public static class Book{
             public static final int EXP_BOOK_1 = 200;
             public static final int EXP_BOOK_2 = 400;
             public static final int EXP_BOOK_3 = 1000;
             public static final int EXP_BOOK_4 = 2000;
         }
-        public class ExpLevel{
+        public static class ExpLevel{
             public static final int LS_5 = 7400;
         }
-        public class MoneyLevel{
+        public static class MoneyLevel{
             public static final int CE_5 = 7500;
             public static final int LS_5 = 360;
         }
-        public class Stamina{
+        public static class Stamina{
             public static final int CE_5 = 30;
             public static final int LS_5 = 30;
         }
-        public class Limit {
-            public class Stage {
+        public static class Limit {
+            public static class Stage {
                 public static final int STAR_1 = 0;
                 public static final int STAR_2 = 0;
                 public static final int STAR_3 = 1;
@@ -29,5 +29,36 @@ public class StaticData {
                 public static final int STAR_6 = 2;
             }
         }
+    }
+    public static class HR{
+        public static String[] tagList = {"新手", 
+        "资深干员", 
+        "高级资深干员", 
+        "近战位", 
+        "远程位", 
+        "男性干员", 
+        "女性干员", 
+        "先锋干员", 
+        "狙击干员", 
+        "医疗干员", 
+        "术师干员", 
+        "近卫干员", 
+        "重装干员", 
+        "辅助干员", 
+        "特种干员", 
+        "治疗", 
+        "支援", 
+        "输出", 
+        "群攻", 
+        "减速", 
+        "生存",
+        "防护",
+        "削弱", 
+        "位移", 
+        "控场", 
+        "爆发", 
+        "召唤", 
+        "快速复活",
+        "费用回复"};
     }
 }

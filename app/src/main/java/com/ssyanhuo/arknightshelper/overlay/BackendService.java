@@ -7,9 +7,11 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.util.DisplayMetrics;
@@ -27,6 +29,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.utiliy.DpUtiliy;
 import com.ssyanhuo.arknightshelper.utiliy.BroadcastReceiver;
+import com.ssyanhuo.arknightshelper.utiliy.OCRUtility;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -51,6 +54,10 @@ public class BackendService extends Service {
     final String TAG = "BackgroundService";
     LinearLayout backgroundLayout;
     LinearLayout placeHolder;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    int orientation = -1;
+    boolean isFloatingWindowShowing = false;
     Hr hr = new Hr();
     Material material = new Material();
     Drop drop = new Drop();
@@ -74,14 +81,14 @@ public class BackendService extends Service {
             assert notificationManager != null;
             notificationManager.createNotificationChannel(notificationChannel);
             builder
-                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setSmallIcon(R.drawable.ic_notification)
                     .setContentTitle(getString(R.string.notification_title))
                     .setContentText(getString(R.string.notification_text))
                     .setContentIntent(pendingIntent)
                     .setChannelId("notification");
         }else {
             builder
-                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setSmallIcon(R.drawable.ic_notification)
                     .setContentTitle(getString(R.string.notification_title))
                     .setContentText(getString(R.string.notification_text))
                     .setContentIntent(pendingIntent);
@@ -108,9 +115,33 @@ public class BackendService extends Service {
 
         backgroundLayoutParams.flags = WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
         placeHolderLayoutParams = new WindowManager.LayoutParams();
+        sharedPreferences = getSharedPreferences("Config", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
         startFloatingButton();
         //预处理
         floatingWindowPreProcess();
+        OCRUtility.init(getApplicationContext());
+        final Handler handler = new Handler();
+        Timer orientationListener = new Timer();
+        orientationListener.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (isFloatingWindowShowing && getApplicationContext().getResources().getConfiguration().orientation != orientation){
+                    try{
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                hideFloatingWindow();
+                            }
+                        });
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        }, 1000, 1000);
     }
 
     public void startFloatingButton(){
@@ -119,8 +150,8 @@ public class BackendService extends Service {
         floatingWindowLayoutParams.height = DpUtiliy.dip2px(getApplicationContext(), 48);
         floatingWindowLayoutParams.gravity = Gravity.LEFT | Gravity.TOP;
         floatingWindowLayoutParams.flags = WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-        floatingWindowLayoutParams.x = 0;
-        floatingWindowLayoutParams.y = 200;
+        floatingWindowLayoutParams.x = sharedPreferences.getInt("lastX", 0);
+        floatingWindowLayoutParams.y = sharedPreferences.getInt("lastY", 200);
         button = new Button(this);
         button.setBackground(getResources().getDrawable(R.mipmap.overlay_button));
         button.setOnTouchListener(new View.OnTouchListener() {
@@ -146,6 +177,10 @@ public class BackendService extends Service {
                         // 更新悬浮窗控件布局
                         windowManager.updateViewLayout(view, floatingWindowLayoutParams);
                         break;
+                    case MotionEvent.ACTION_UP:
+                        editor.putInt("lastX", x);
+                        editor.putInt("lastY", y);
+                        editor.commit();
                     default:
                         break;
                 }
@@ -213,12 +248,14 @@ public class BackendService extends Service {
             }
         });
         //初始化
-        hr.init(getApplicationContext(), linearLayout_hr);
+        hr.init(getApplicationContext(), linearLayout_hr, backgroundLayout);
         material.init(getApplicationContext(), linearLayout_material, backgroundLayout);
         drop.init(getApplicationContext(), linearLayout_drop);
     }
 
     public void showFloatingWindow(){
+        orientation = getApplicationContext().getResources().getConfiguration().orientation;
+        isFloatingWindowShowing = true;
         windowManager.removeView(button);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
@@ -261,7 +298,10 @@ public class BackendService extends Service {
         });
         LinearLayout phContent = new LinearLayout(this);
         phContent.setTag("placeHolder");
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        phContent.setLayoutParams(layoutParams);
         placeHolder.addView(phContent);
+        backgroundLayout.removeAllViews();
         if(rotation == 1 || rotation == 3){
             backgroundLayout.addView(placeHolder);
             backgroundLayout.addView(linearLayout);
@@ -278,25 +318,29 @@ public class BackendService extends Service {
                 scrollView_hr.setVisibility(View.VISIBLE);
                 scrollView_exp.setVisibility(View.GONE);
                 scrollView_material.setVisibility(View.GONE);
-                material.isCurrentLayout(false);
+                hr.isCurrentWindow(true);
+                material.isCurrentWindow(false);
                 break;
             case MATERIAL:
                 scrollView_hr.setVisibility(View.GONE);
                 scrollView_exp.setVisibility(View.VISIBLE);
                 scrollView_material.setVisibility(View.GONE);
-                material.isCurrentLayout(true);
+                hr.isCurrentWindow(false);
+                material.isCurrentWindow(true);
                 break;
             case DROP:
                 scrollView_hr.setVisibility(View.GONE);
                 scrollView_exp.setVisibility(View.GONE);
                 scrollView_material.setVisibility(View.VISIBLE);
-                material.isCurrentLayout(false);
+                hr.isCurrentWindow(false);
+                material.isCurrentWindow(false);
                 break;
             default:
                 break;
         }
     }
     public void hideFloatingWindow(){
+        isFloatingWindowShowing = false;
         windowManager.removeView(backgroundLayout);
         startFloatingButton();
         Timer timer = new Timer();
@@ -323,6 +367,7 @@ public class BackendService extends Service {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.exit(0);
         System.gc();
     }
 }
