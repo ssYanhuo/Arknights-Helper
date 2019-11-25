@@ -34,7 +34,7 @@
     <string name="hr_desc_part_1_exact">You can choose 3 tags at most execpt stars, only show characters meet all requirements.\nLong press characters for more info.</string>
     <string name="hr_result_title_part_1">Result:</string>
     <string name="hr_result_title_part_2">Clear</string>
-    <string name="hr_result_empty">Noting found.</string>
+    <string name="hr_result_empty">Noting found or no meaningful tag was selected</string>
     <string name="update_state_correct">Arknights Helper™ self-checking finished, no error found.</string>
     <string name="update_state_beta">It seems that you are using a beta version of Arknights Helper™.</string>
     <string name="title_activity_about">About</string>

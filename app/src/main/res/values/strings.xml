@@ -56,7 +56,7 @@
     <string name="hr_desc_part_3">\n数据来自 @Graue Neko</string>
     <string name="hr_result_title_part_1">结果：</string>
     <string name="hr_result_title_part_2">清空全部</string>
-    <string name="hr_result_empty">并没有找到结果</string>
+    <string name="hr_result_empty">并没有找到结果或没有选择实例标签</string>
     <string name="update_state_correct">Arknights Helper™ 正常运行中，未检测到错误</string>
     <string name="update_state_beta">看起来你正在使用一个尚未发布的版本</string>
     <string name="menu_exit">退出</string>

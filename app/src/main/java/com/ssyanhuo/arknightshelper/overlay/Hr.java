@@ -233,7 +233,7 @@ public class Hr {
             boolean sexPaired = selectedSex.size() == sex.size() || selectedSex.size() == 0;
             boolean tagPaired = selectedTag.size() == tag.size() || selectedTag.size() == 0;
             if (typePaired && starPaired && sexPaired && tagPaired && !hidden) {
-                if ((!selectedStar.contains("6") || !selectedTag.contains("高级资深干员")) && star.equals("6")){continue;}
+                if ((!selectedStar.contains("6") && !selectedTag.contains("高级资深干员")) && star.equals("6")){continue;}
                 result.add(jsonObject);
                 Log.i(TAG, "Found:" + name);
             }
@@ -267,7 +267,7 @@ public class Hr {
             boolean sexPaired = sex.size() != 0;
             boolean tagPaired = tag.size() != 0;
             if ((typePaired || sexPaired || tagPaired) && !hidden && starPaired) {
-                if ((!selectedStar.contains("6") || !selectedTag.contains("高级资深干员")) && star.equals("6")){continue;}
+                if ((!selectedStar.contains("6") && !selectedTag.contains("高级资深干员")) && star.equals("6")){continue;}
                 JSONArray matchedTags = new JSONArray();
                 matchedTags.addAll(JSONArray.parseArray(JSON.toJSONString(type)));
                 matchedTags.addAll(JSONArray.parseArray(JSON.toJSONString(sex)));
