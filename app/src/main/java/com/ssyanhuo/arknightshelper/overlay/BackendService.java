@@ -178,8 +178,8 @@ public class BackendService extends Service {
                         windowManager.updateViewLayout(view, floatingWindowLayoutParams);
                         break;
                     case MotionEvent.ACTION_UP:
-                        editor.putInt("lastX", x);
-                        editor.putInt("lastY", y);
+                        editor.putInt("lastX", floatingWindowLayoutParams.x);
+                        editor.putInt("lastY", floatingWindowLayoutParams.y);
                         editor.commit();
                     default:
                         break;

@@ -1,9 +1,10 @@
-versionCode 13
-versionName Beta-DeepAutumn-2.1.1
+versionCode 14
+versionName Beta-DeepAutumn-2.1.2
 releaseNote [Fix]尝试修复公开招募不显示6★干员的问题(感谢 @一黛一露_我永远爱有纱)
+[Fix]保底高亮存在逻辑问题，将于下次更新修复后重新添加
+[Fix]尝试修复悬浮按钮飘移的问题(感谢 @MagicHomura)
 [New]公开招募截图识别正式上线
 [New]优化公开招募结果排序
-[New]公开招募存在保底方案时高亮显示(感谢 @没印象主义)
 [New]更换了通知栏图标
 [New]更换未本地化地区的默认语言为中文
 [New]现在悬浮按钮将从上次关闭的位置显示(感谢 @Spartan009Cirno)

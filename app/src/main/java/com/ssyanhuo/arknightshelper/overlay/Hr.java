@@ -476,6 +476,7 @@ public class Hr {
 
         }
         for (LinearLayout layout : resultLayouts){
+            //TODO 改
             for (int i = 0; i < layout.getChildCount(); i++){
                 HorizontalScrollView horizontalScrollView = layout.findViewWithTag("result_scroll");
                 if (horizontalScrollView != null){
@@ -494,7 +495,7 @@ public class Hr {
                         GradientDrawable drawable = new GradientDrawable();
                         drawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
                         drawable.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
-                        drawable.setColors(new int[]{Color.parseColor("#aaff9800"), Color.TRANSPARENT});
+                        //drawable.setColors(new int[]{Color.parseColor("#aaff9800"), Color.TRANSPARENT});
                         layout.setBackground(drawable);
                     }
                 }
