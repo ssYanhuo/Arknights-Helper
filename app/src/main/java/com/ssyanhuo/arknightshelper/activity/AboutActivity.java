@@ -78,7 +78,7 @@ public class AboutActivity extends AppCompatActivity {
                         @Override
                         public boolean onLongClick(View view) {
                             goLab(view);
-                            return false;
+                            return true;
                         }
                     });
                     Timer timer = new Timer();
@@ -108,7 +108,7 @@ public class AboutActivity extends AppCompatActivity {
                             }
                         }
                     };
-                    timer.schedule(timerTask, 0,2000);
+                    timer.schedule(timerTask, 0,1500);
                 }
             }
         });

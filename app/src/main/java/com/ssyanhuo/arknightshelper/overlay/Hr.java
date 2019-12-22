@@ -2,12 +2,12 @@ package com.ssyanhuo.arknightshelper.overlay;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Handler;
@@ -43,7 +43,6 @@ import com.zyyoona7.popup.XGravity;
 import com.zyyoona7.popup.YGravity;
 
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Hr {
@@ -69,13 +68,14 @@ public class Hr {
     boolean fuzzy;
     final int MODE_EXACT = 0;
     final int MODE_FUZZY = 1;
-    ArrayList<String> tmpArr = new ArrayList<>();
-    ArrayList<String> combinations = new ArrayList<>();
     private ScrollView selector;
     LinearLayout rootLayout;
     LinearLayout placeHolder;
     ArrayList<String> tagList = new ArrayList<>();
     ContextThemeWrapper contextThemeWrapper;
+    EasyPopup scrollToResultPopup;
+    private ArrayList<String> combineTempArr = new ArrayList<>();
+
     public void init(Context context, View view, LinearLayout backgroundLayout) {
         contentView = view;
         applicationContext = context;
@@ -172,7 +172,7 @@ public class Hr {
             }
             View parentView = (View) checkBox.getParent();
             String item = String.valueOf(parentView.getTag());
-            Log.i(TAG, "Selceted:" + checkBox.getTag());
+            Log.i(TAG, "Selected:" + checkBox.getTag());
             switch (item) {
                 case "star":
                     selectedStar.add(String.valueOf(checkBox.getTag()));
@@ -291,14 +291,10 @@ public class Hr {
 
     public void showResultExact(ArrayList<JSONObject> result) {
         LinearLayout linearLayout = contentView.findViewById(R.id.hr_result_content);
-        ScrollView scrollView = (ScrollView) linearLayout.getParent().getParent().getParent();
         LinearLayout resultLayout = linearLayout.findViewById(R.id.hr_result);
         resultLayout.removeAllViews();
         resultLayout.setOrientation(LinearLayout.HORIZONTAL);
-        HorizontalScrollView horizontalScrollView = new HorizontalScrollView(applicationContext);
-        resultLayout.addView(horizontalScrollView);
-        LinearLayout linearLayout1 = new LinearLayout(applicationContext);
-        horizontalScrollView.addView(linearLayout1);
+        LineWrapLayout lineWrapLayout = new LineWrapLayout(applicationContext);
         linearLayout.setVisibility(View.VISIBLE);
         if (result.size() == 0) {
             TextView textView = new TextView(applicationContext);
@@ -307,7 +303,9 @@ public class Hr {
             textView.setGravity(Gravity.CENTER);
             textView.setTypeface(null, Typeface.BOLD_ITALIC);
             resultLayout.addView(textView);
+            return;
         }
+        resultLayout.addView(lineWrapLayout);
         for (int j = 0; j < result.size(); j++) {
             final JSONObject jsonObject = result.get(j);
             Button button = LayoutInflater.from(applicationContext).inflate(R.layout.hr_result_button, null).findViewById(R.id.hr_result_button);
@@ -367,11 +365,11 @@ public class Hr {
                     return false;
                 }
             });
-            linearLayout1.addView(button);
+            lineWrapLayout.addView(button);
         }
     }
 
-    public void showResultFuzzy(ArrayList<JSONObject> result) {
+    public void showResultFuzzyOld(ArrayList<JSONObject> result) {
         ArrayList<LinearLayout> resultLayouts = new ArrayList<>();
         LinearLayout linearLayout = contentView.findViewById(R.id.hr_result_content);
         LinearLayout resultLayout = linearLayout.findViewById(R.id.hr_result);
@@ -445,15 +443,14 @@ public class Hr {
                     return false;
                 }
             });
-            LinearLayout layoutViewWithTag = resultLayout.findViewWithTag(String.valueOf(jsonObject.get("matchedTags")));
-            if (layoutViewWithTag != null) {
-                HorizontalScrollView horizontalScrollView = (HorizontalScrollView) layoutViewWithTag.getChildAt(1);
-                LinearLayout linearLayout1 = (LinearLayout) horizontalScrollView.getChildAt(0);
-                linearLayout1.addView(button);
+            LinearLayout resultViewWithTag = resultLayout.findViewWithTag(String.valueOf(jsonObject.get("matchedTags")));
+            if (resultViewWithTag != null) {
+                LineWrapLayout lineWrapLayout = (LineWrapLayout) resultViewWithTag.getChildAt(1);
+                lineWrapLayout.addView(button);
             } else {
-                layoutViewWithTag = new LinearLayout(applicationContext);
-                layoutViewWithTag.setTag(String.valueOf(jsonObject.get("matchedTags")));
-                layoutViewWithTag.setGravity(Gravity.CENTER_VERTICAL);
+                resultViewWithTag = new LinearLayout(applicationContext);
+                resultViewWithTag.setTag(String.valueOf(jsonObject.get("matchedTags")));
+                resultViewWithTag.setGravity(Gravity.CENTER_VERTICAL);
                 TextView textView = new TextView(applicationContext);
                 String tagsDesc = String.valueOf(jsonObject.get("matchedTags")).replace("\"男\"", "\"男性干员\"").replace("\"女\"", "\"女性干员\"").replace("[\"", "").replace("\",\"", "\n").replace("\"]", "");
                 textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -463,28 +460,188 @@ public class Hr {
                 textView.setTextColor(Color.LTGRAY);
                 textView.setText(tagsDesc);
                 textView.setTag("result_desc");
-                resultLayout.addView(layoutViewWithTag);
-                layoutViewWithTag.addView(textView);
-                HorizontalScrollView horizontalScrollView = new HorizontalScrollView(applicationContext);
-                horizontalScrollView.setTag("result_scroll");
-                layoutViewWithTag.addView(horizontalScrollView);
+                resultLayout.addView(resultViewWithTag);
+                resultViewWithTag.addView(textView);
+                LineWrapLayout lineWrapLayout = new LineWrapLayout(applicationContext);
+                lineWrapLayout.setTag("result_box");
+                resultViewWithTag.addView(lineWrapLayout);
                 LinearLayout linearLayout1 = new LinearLayout(applicationContext);
-                horizontalScrollView.addView(linearLayout1);
+                lineWrapLayout.addView(linearLayout1);
                 linearLayout1.addView(button);
-                resultLayouts.add(layoutViewWithTag);
+                resultLayouts.add(resultViewWithTag);
             }
 
         }
         for (LinearLayout layout : resultLayouts){
-            //TODO 改
             for (int i = 0; i < layout.getChildCount(); i++){
-                HorizontalScrollView horizontalScrollView = layout.findViewWithTag("result_scroll");
-                if (horizontalScrollView != null){
-                    LinearLayout content = (LinearLayout) horizontalScrollView.getChildAt(0);
+                LineWrapLayout lineWrapLayout = layout.findViewWithTag("result_box");
+                if (lineWrapLayout != null){
                     Set<Integer> stars = new HashSet<>();
-                    for (int j = 0; j < content.getChildCount(); j++){
-                        if (content.getChildAt(j) instanceof Button){
-                            Button button = (Button) content.getChildAt(j);
+                    for (int j = 0; j < lineWrapLayout.getChildCount(); j++){
+                        if (lineWrapLayout.getChildAt(j) instanceof Button){
+                        Button button = (Button) lineWrapLayout.getChildAt(j);
+                        JSONObject jsonObject = (JSONObject) button.getTag();
+                        stars.add(jsonObject.getInteger("level"));
+                    }
+                }
+                    if (!(stars.contains(1) || stars.contains(2) || stars.contains(3))){
+                        resultLayout.removeView(layout);
+                        resultLayout.addView(layout, 0);
+                        layout.getChildAt(0).setTag("senior");
+                    }
+                }
+            }
+        }
+        GradientDrawable drawableLight = new GradientDrawable();
+        drawableLight.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+        drawableLight.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
+        drawableLight.setColors(new int[]{Color.parseColor("#aaff9800"), Color.TRANSPARENT});
+        GradientDrawable drawableDark = new GradientDrawable();
+        drawableDark.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+        drawableDark.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
+        drawableDark.setColors(new int[]{Color.parseColor("#aaf57c00"), Color.TRANSPARENT});
+        for(int i = 0; i < resultLayout.getChildCount(); i++){
+            if(resultLayout.getChildAt(i) instanceof LinearLayout){
+                LinearLayout layout = (LinearLayout) resultLayout.getChildAt(i);
+                if(layout.getChildAt(0).getTag() != "senior"){
+                    layout.setBackgroundColor(Color.TRANSPARENT);
+                    if(i % 2 == 1){
+                        layout.setBackgroundColor(Color.argb(128, 0, 0, 0));
+                    }
+                }else {
+                    if(i % 2 == 1){
+                        layout.setBackground(drawableDark);
+                    }else {
+                        layout.setBackground(drawableLight);
+                    }
+                }
+            }
+        }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    public void showResultFuzzy(ArrayList<JSONObject> result) {
+        ArrayList<LinearLayout> resultLayouts = new ArrayList<>();
+        LinearLayout linearLayout = contentView.findViewById(R.id.hr_result_content);
+        LinearLayout resultLayout = linearLayout.findViewById(R.id.hr_result);
+        resultLayout.removeAllViews();
+        resultLayout.setOrientation(LinearLayout.VERTICAL);
+        linearLayout.setVisibility(View.VISIBLE);
+        if (result.size() == 0) {//无匹配
+            TextView textView = new TextView(applicationContext);
+            textView.setText(applicationContext.getText(R.string.hr_result_empty));
+            textView.setTextColor(Color.GRAY);
+            textView.setGravity(Gravity.CENTER);
+            textView.setTypeface(null, Typeface.BOLD_ITALIC);
+            resultLayout.addView(textView);
+        }
+        for (int j = 0; j < result.size(); j++) {//创建干员对象
+            final JSONObject jsonObject = result.get(j);
+            //解析结果数据
+            ArrayList<String> tags = new ArrayList<>();
+            JSONArray jsonArray = jsonObject.getJSONArray("matchedTags");
+            for(int i = 0; i < jsonArray.size(); i++){
+                tags.add(jsonArray.getString(i));
+            }
+            ArrayList<ArrayList<String>> matchedTags = CombinationUtility.combine(tags);
+            for(ArrayList<String> tagCom : matchedTags){
+                //存在高级标签但未选中时，不显示按钮
+                if (!tagCom.contains("高级资深干员") && jsonObject.getInteger("level") == 6){
+                    continue;
+                }
+                Button button = LayoutInflater.from(applicationContext).inflate(R.layout.hr_result_button, null).findViewById(R.id.hr_result_button);
+                switch (jsonObject.getInteger("level")) {
+                    case 6:
+                        button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_yellow));
+                        break;
+                    case 5:
+                        button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_red));
+                        break;
+                    case 3:
+                        button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_green));
+                        break;
+                    case 2:
+                    case 1:
+                        button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_lime));
+                        break;
+                    default:
+                        button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_blue));
+                        break;
+                }
+                button.setText(jsonObject.getString("name"));
+                button.setTag(jsonObject);
+                button.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                        switch (motionEvent.getAction()) {
+                            case MotionEvent.ACTION_DOWN:
+                                CardView cardView = (CardView) LayoutInflater.from(applicationContext).inflate(applicationContext.getResources().getLayout(R.layout.detail_popup), null);
+                                TextView textView = cardView.findViewById(R.id.detail_text);
+                                JSONArray jsonArray = jsonObject.getJSONArray("tags");
+                                String tags = "";
+                                for (int i = 0; i < jsonArray.size(); i++) {
+                                    tags += jsonArray.getString(i);
+                                    if (i != jsonArray.size() - 1) {
+                                        tags += " ";
+                                    }
+                                }
+                                tags += "\n" + jsonObject.getString("characteristic") + "\n" + jsonObject.getString("type") + "干员";
+                                textView.setText(tags);
+                                easyPopup = EasyPopup.create(applicationContext)
+                                        .setContentView(cardView)
+                                        .setFocusable(false)
+                                        .apply();
+                                easyPopup.showAtAnchorView(view, YGravity.ABOVE, XGravity.CENTER);
+                                break;
+                            case MotionEvent.ACTION_UP:
+                            case MotionEvent.ACTION_CANCEL:
+                                easyPopup.dismiss();
+                                break;
+                            default:
+                                break;
+                        }
+
+
+                        return false;
+                    }
+                });
+                LinearLayout resultViewWithTag = resultLayout.findViewWithTag(String.valueOf(tagCom));
+                if (resultViewWithTag != null) {
+                    LineWrapLayout lineWrapLayout = (LineWrapLayout) resultViewWithTag.getChildAt(1);
+                    lineWrapLayout.addView(button);
+                } else {
+                    resultViewWithTag = new LinearLayout(applicationContext);
+                    resultViewWithTag.setTag(String.valueOf(tagCom));
+                    resultViewWithTag.setGravity(Gravity.CENTER_VERTICAL);
+                    TextView textView = new TextView(applicationContext);
+                    String tagsDesc = String.valueOf(tagCom).replace("\"男\"", "\"男性干员\"").replace("\"女\"", "\"女性干员\"").replace("[\"", "").replace("\",\"", "\n").replace("\"]", "").replace("[", "").replace("]","").replace(", ", "\n");
+                    textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    int padding = applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
+                    textView.setWidth(6 * padding);
+                    textView.setLineSpacing(padding / 8, 1);
+                    textView.setTextColor(Color.LTGRAY);
+                    textView.setText(tagsDesc);
+                    textView.setTag("result_desc");
+                    resultLayout.addView(resultViewWithTag);
+                    resultViewWithTag.addView(textView);
+                    LineWrapLayout lineWrapLayout = new LineWrapLayout(applicationContext);
+                    lineWrapLayout.setTag("result_box");
+                    resultViewWithTag.addView(lineWrapLayout);
+                    lineWrapLayout.addView(button);
+                    resultLayouts.add(resultViewWithTag);
+                }
+            }
+        }
+        //奇怪的排序
+        for (LinearLayout layout : resultLayouts){
+            Set<Integer> stars = new HashSet<>();
+            for (int i = 0; i < layout.getChildCount(); i++){
+                LineWrapLayout lineWrapLayout = layout.findViewWithTag("result_box");
+                if (lineWrapLayout != null){
+                    for (int j = 0; j < lineWrapLayout.getChildCount(); j++){
+                        if (lineWrapLayout.getChildAt(j) instanceof Button){
+                            Button button = (Button) lineWrapLayout.getChildAt(j);
                             JSONObject jsonObject = (JSONObject) button.getTag();
                             stars.add(jsonObject.getInteger("level"));
                         }
@@ -492,16 +649,178 @@ public class Hr {
                     if (!(stars.contains(1) || stars.contains(2) || stars.contains(3))){
                         resultLayout.removeView(layout);
                         resultLayout.addView(layout, 0);
-                        GradientDrawable drawable = new GradientDrawable();
-                        drawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
-                        drawable.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
-                        //drawable.setColors(new int[]{Color.parseColor("#aaff9800"), Color.TRANSPARENT});
-                        layout.setBackground(drawable);
+                        layout.getChildAt(0).setTag("senior");
+                    }
+                }
+            }
+        }
+
+
+        for (LinearLayout layout : resultLayouts){
+            Set<Integer> stars = new HashSet<>();
+            for (int i = 0; i < layout.getChildCount(); i++){
+                if(!layout.getChildAt(0).getTag().equals("senior")){
+                    continue;
+                }
+                LineWrapLayout lineWrapLayout = layout.findViewWithTag("result_box");
+                if (lineWrapLayout != null){
+                    for (int j = 0; j < lineWrapLayout.getChildCount(); j++){
+                        if (lineWrapLayout.getChildAt(j) instanceof Button){
+                            Button button = (Button) lineWrapLayout.getChildAt(j);
+                            JSONObject jsonObject = (JSONObject) button.getTag();
+                            stars.add(jsonObject.getInteger("level"));
+                        }
+                    }
+                    if (stars.contains(4) && stars.size() == 1){
+                        resultLayout.removeView(layout);
+                        resultLayout.addView(layout, 0);
+                    }
+                }
+            }
+        }
+        for (LinearLayout layout : resultLayouts){
+            Set<Integer> stars = new HashSet<>();
+            for (int i = 0; i < layout.getChildCount(); i++){
+                if(!layout.getChildAt(0).getTag().equals("senior")){
+                    continue;
+                }
+                LineWrapLayout lineWrapLayout = layout.findViewWithTag("result_box");
+                if (lineWrapLayout != null){
+                    for (int j = 0; j < lineWrapLayout.getChildCount(); j++){
+                        if (lineWrapLayout.getChildAt(j) instanceof Button){
+                            Button button = (Button) lineWrapLayout.getChildAt(j);
+                            JSONObject jsonObject = (JSONObject) button.getTag();
+                            stars.add(jsonObject.getInteger("level"));
+                        }
+                    }
+                    if (stars.contains(5)){
+                        //Log.e(TAG, (String) ((Button) ((LineWrapLayout) layout.getChildAt(1)).getChildAt(1)).getText());
+                        resultLayout.removeView(layout);
+                        resultLayout.addView(layout, 0);
+                    }
+                }
+            }
+        }
+        for (LinearLayout layout : resultLayouts){
+            Set<Integer> stars = new HashSet<>();
+            for (int i = 0; i < layout.getChildCount(); i++){
+                if(!layout.getChildAt(0).getTag().equals("senior")){
+                    continue;
+                }
+                LineWrapLayout lineWrapLayout = layout.findViewWithTag("result_box");
+                if (lineWrapLayout != null){
+                    for (int j = 0; j < lineWrapLayout.getChildCount(); j++){
+                        if (lineWrapLayout.getChildAt(j) instanceof Button){
+                            Button button = (Button) lineWrapLayout.getChildAt(j);
+                            JSONObject jsonObject = (JSONObject) button.getTag();
+                            stars.add(jsonObject.getInteger("level"));
+                        }
+                    }
+                    if (stars.contains(5) && stars.size() == 1){
+                        resultLayout.removeView(layout);
+                        resultLayout.addView(layout, 0);
+                    }
+                }
+            }
+        }
+        for (LinearLayout layout : resultLayouts){
+            Set<Integer> stars = new HashSet<>();
+            for (int i = 0; i < layout.getChildCount(); i++){
+                if(!layout.getChildAt(0).getTag().equals("senior")){
+                    continue;
+                }
+                LineWrapLayout lineWrapLayout = layout.findViewWithTag("result_box");
+                if (lineWrapLayout != null){
+                    for (int j = 0; j < lineWrapLayout.getChildCount(); j++){
+                        if (lineWrapLayout.getChildAt(j) instanceof Button){
+                            Button button = (Button) lineWrapLayout.getChildAt(j);
+                            JSONObject jsonObject = (JSONObject) button.getTag();
+                            stars.add(jsonObject.getInteger("level"));
+                        }
+                    }
+                    if (stars.contains(6)){
+                        //Log.e(TAG, (String) ((Button) ((LineWrapLayout) layout.getChildAt(1)).getChildAt(1)).getText());
+                        resultLayout.removeView(layout);
+                        resultLayout.addView(layout, 0);
+                    }
+                }
+            }
+        }
+        for (LinearLayout layout : resultLayouts){
+            Set<Integer> stars = new HashSet<>();
+            for (int i = 0; i < layout.getChildCount(); i++){
+                if(!layout.getChildAt(0).getTag().equals("senior")){
+                    continue;
+                }
+                LineWrapLayout lineWrapLayout = layout.findViewWithTag("result_box");
+                if (lineWrapLayout != null){
+                    for (int j = 0; j < lineWrapLayout.getChildCount(); j++){
+                        if (lineWrapLayout.getChildAt(j) instanceof Button){
+                            Button button = (Button) lineWrapLayout.getChildAt(j);
+                            JSONObject jsonObject = (JSONObject) button.getTag();
+                            stars.add(jsonObject.getInteger("level"));
+                        }
+                    }
+                    if (stars.contains(6) && stars.size() == 1){
+                        resultLayout.removeView(layout);
+                        resultLayout.addView(layout, 0);
+                    }
+                }
+            }
+        }
+        GradientDrawable drawableLight = new GradientDrawable();
+        drawableLight.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+        drawableLight.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
+        drawableLight.setColors(new int[]{Color.parseColor("#aaff9800"), Color.TRANSPARENT});
+        GradientDrawable drawableDark = new GradientDrawable();
+        drawableDark.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+        drawableDark.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
+        drawableDark.setColors(new int[]{Color.parseColor("#aaad6700"), Color.TRANSPARENT});
+        for(int i = 0; i < resultLayout.getChildCount(); i++){
+            if(resultLayout.getChildAt(i) instanceof LinearLayout){
+                LinearLayout layout = (LinearLayout) resultLayout.getChildAt(i);
+                if(layout.getChildAt(0).getTag() != "senior"){
+                    layout.setBackgroundColor(Color.TRANSPARENT);
+                    if(i % 2 == 0){
+                        layout.setBackgroundColor(Color.argb(128, 128, 128, 128));
+                    }
+                }else {
+                    if(i % 2 == 1){
+                        layout.setBackground(drawableDark);
+                    }else {
+                        layout.setBackground(drawableLight);
                     }
                 }
             }
         }
     }
+
+    public ArrayList<ArrayList<String>> getAllCombinations(JSONArray strings){
+        ArrayList<ArrayList<String>> result = new ArrayList<>();
+        for(int i = 0; i < strings.size(); i++){
+            combine(0, strings.size(), strings, result);
+        }
+        return result;
+    }
+
+    public void combine(int index, int k, JSONArray arr, ArrayList<ArrayList<String>> result) {
+        if(k == 1){
+            for (int i = index; i < arr.size(); i++) {
+                combineTempArr.add(arr.getString(i));
+                result.add(new ArrayList<>(combineTempArr));
+                combineTempArr.remove((Object)arr.getString(i));
+            }
+        }else if(k > 1){
+            for (int i = index; i <= arr.size() - k; i++) {
+                combineTempArr.add(arr.getString(i)); //tmpArr都是临时性存储一下
+
+                combine(i + 1,k - 1, arr, result); //索引右移，内部循环，自然排除已经选择的元素
+                combineTempArr.remove((Object)arr.getString(i)); //tmpArr因为是临时存储的，上一个组合找出后就该释放空间，存储下一个元素继续拼接组合了
+            }
+        }
+    }
+
+
 
     public void selectQueryMethod() {
         //选择
@@ -732,6 +1051,7 @@ public class Hr {
             @Override
             public void onResult(GeneralResult generalResult) {
                 for (WordSimple wordSimple : generalResult.getWordList()) {
+                    Log.i(TAG, wordSimple.getWords());
                     //wordList.add(wordSimple.getWords());
                     for (String tag : StaticData.HR.tagList){
                         if (wordSimple.getWords().contains(tag)){

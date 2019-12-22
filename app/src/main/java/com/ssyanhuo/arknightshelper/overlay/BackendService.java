@@ -1,32 +1,31 @@
 package com.ssyanhuo.arknightshelper.overlay;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.*;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
-import android.os.Build;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Looper;
+import android.os.*;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
+import android.widget.*;
 
+import androidx.appcompat.app.AlertDialog;
 import com.google.android.material.tabs.TabLayout;
 import com.ssyanhuo.arknightshelper.R;
+import com.ssyanhuo.arknightshelper.activity.MainActivity;
+import com.ssyanhuo.arknightshelper.activity.SettingsActivity;
 import com.ssyanhuo.arknightshelper.utiliy.DpUtiliy;
 import com.ssyanhuo.arknightshelper.utiliy.BroadcastReceiver;
 import com.ssyanhuo.arknightshelper.utiliy.OCRUtility;
@@ -61,7 +60,11 @@ public class BackendService extends Service {
     Hr hr = new Hr();
     Material material = new Material();
     Drop drop = new Drop();
-
+    final String GAME_OFFICIAL = "0";
+    final String GAME_BILIBILI = "1";
+    final String GAME_MANUAL = "-1";
+    final String PACKAGE_OFFICIAL = "com.hypergryph.arknights";
+    final String PACKAGE_BILIBILI = "com.hypergryph.arknights.bilibili";
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -144,6 +147,7 @@ public class BackendService extends Service {
         }, 1000, 1000);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     public void startFloatingButton(){
         floatingWindowLayoutParams.format = PixelFormat.RGBA_8888;
         floatingWindowLayoutParams.width = DpUtiliy.dip2px(getApplicationContext(), 48);
@@ -155,14 +159,105 @@ public class BackendService extends Service {
         button = new Button(this);
         button.setBackground(getResources().getDrawable(R.mipmap.overlay_button));
         button.setOnTouchListener(new View.OnTouchListener() {
+            int downX;
+            int downY;
+            long downTime;
+            int upX;
+            int upY;
+            long upTime;
             int x;
             int y;
+            int lastX;
+            int lastY;
+            boolean touching;
+            Timer timer;
+            TimerTask timerTask;
+            Handler handler;
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
+                final SharedPreferences sharedPreferences;
+                sharedPreferences = getSharedPreferences("com.ssyanhuo.arknightshelper_preferences", MODE_PRIVATE);
+                handler = new Handler();
+                if (sharedPreferences.getBoolean("long_press_back_to_game", true)){
+                    timer = new Timer();
+                    timerTask = new TimerTask() {
+                        @Override
+                        public void run() {
+                            if ((Math.abs(downX - lastX) <= 10 && Math.abs(downY - lastY) <= 10) && touching){
+                                handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        touching = false;
+                                        final SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        boolean hasOfficial = checkApplication(PACKAGE_OFFICIAL);
+                                        boolean hasBilibili = checkApplication(PACKAGE_BILIBILI);
+                                        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+                                        assert vibrator != null;
+                                        if (vibrator.hasVibrator()){
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                                vibrator.vibrate(VibrationEffect.createOneShot(32, 128));
+                                            }else {
+                                                vibrator.vibrate(32);
+                                            }
+                                        }
+                                        if (!sharedPreferences.getString("game_version", GAME_MANUAL).equals(GAME_MANUAL)){
+                                            String game = sharedPreferences.getString("game_version", GAME_MANUAL);
+                                            Toast.makeText(getApplicationContext(), R.string.resume_game, Toast.LENGTH_SHORT).show();
+                                            switch (game){
+                                                case GAME_OFFICIAL:
+                                                    startActivity(getPackageManager().getLaunchIntentForPackage(PACKAGE_OFFICIAL));
+                                                    break;
+                                                case GAME_BILIBILI:
+                                                    startActivity(getPackageManager().getLaunchIntentForPackage(PACKAGE_BILIBILI));
+                                                    break;
+                                                default:
+                                                    break;
+                                            }
+                                        }else{
+                                            if (hasOfficial && hasBilibili){
+                                                Toast.makeText(getApplicationContext(), R.string.start_two_apps, Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                startActivity(intent);
+                                            }else if (hasOfficial){
+                                                try{
+                                                    editor.putString("game_version", GAME_MANUAL);
+                                                    editor.apply();
+                                                    Toast.makeText(getApplicationContext(), R.string.resume_game, Toast.LENGTH_SHORT).show();
+                                                    startActivity(getPackageManager().getLaunchIntentForPackage(PACKAGE_OFFICIAL));
+                                                }catch (Exception e){
+                                                    Log.e(TAG, "Start game failed!", e);
+                                                }
+                                            }else if (hasBilibili){
+                                                try{
+                                                    editor.putString("game_version", GAME_MANUAL);
+                                                    editor.apply();
+                                                    Toast.makeText(getApplicationContext(), R.string.resume_game, Toast.LENGTH_SHORT).show();
+                                                    startActivity(getPackageManager().getLaunchIntentForPackage(PACKAGE_BILIBILI));
+                                                }catch (Exception e){
+                                                    Log.e(TAG, "Start game failed!", e);
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
+
+                            }
+                        }
+                    };
+                }
+
                 switch (motionEvent.getAction()) {
                     case MotionEvent.ACTION_DOWN:
+                        touching = true;
+                        if (sharedPreferences.getBoolean("long_press_back_to_game", true)){
+                            timer.schedule(timerTask, 350);
+                        }
                         x = (int) motionEvent.getRawX();
                         y = (int) motionEvent.getRawY();
+                        downX = lastX = floatingWindowLayoutParams.x;
+                        downY = lastY = floatingWindowLayoutParams.y;
+                        downTime = System.currentTimeMillis();
                         break;
                     case MotionEvent.ACTION_MOVE:
                         int nowX = (int) motionEvent.getRawX();
@@ -171,26 +266,33 @@ public class BackendService extends Service {
                         int movedY = nowY - y;
                         x = nowX;
                         y = nowY;
-                        floatingWindowLayoutParams.x = floatingWindowLayoutParams.x + movedX;
-                        floatingWindowLayoutParams.y = floatingWindowLayoutParams.y + movedY;
-
+                        floatingWindowLayoutParams.x = lastX = floatingWindowLayoutParams.x + movedX;
+                        floatingWindowLayoutParams.y = lastY = floatingWindowLayoutParams.y + movedY;
                         // 更新悬浮窗控件布局
                         windowManager.updateViewLayout(view, floatingWindowLayoutParams);
                         break;
                     case MotionEvent.ACTION_UP:
-                        editor.putInt("lastX", floatingWindowLayoutParams.x);
-                        editor.putInt("lastY", floatingWindowLayoutParams.y);
-                        editor.commit();
+                        touching = false;
+                        try{
+                            timer.cancel();
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                        upX = floatingWindowLayoutParams.x;
+                        upY = floatingWindowLayoutParams.y;
+                        upTime = System.currentTimeMillis();
+                        editor.putInt("lastX", upX);
+                        editor.putInt("lastY", upY);
+                        editor.apply();
+                        if (Math.abs(downX - upX) <= 10 && Math.abs(downY - upY) <= 10){
+                            if (upTime - downTime <= 350){
+                                showFloatingWindow();
+                            }
+                        }
                     default:
                         break;
                 }
                 return false;
-            }
-        });
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showFloatingWindow();
             }
         });
         windowManager.addView(button, floatingWindowLayoutParams);
@@ -251,6 +353,25 @@ public class BackendService extends Service {
         hr.init(getApplicationContext(), linearLayout_hr, backgroundLayout);
         material.init(getApplicationContext(), linearLayout_material, backgroundLayout);
         drop.init(getApplicationContext(), linearLayout_drop);
+        //设置按钮可以点击
+        /*button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFloatingWindow();
+            }
+        });*/
+    }
+
+    private boolean checkApplication(String packageName) {
+        if (packageName == null || "".equals(packageName)){
+            return false;
+        }
+        try {
+            ApplicationInfo info = getPackageManager().getApplicationInfo(packageName, PackageManager.GET_UNINSTALLED_PACKAGES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
     }
 
     public void showFloatingWindow(){
@@ -290,12 +411,8 @@ public class BackendService extends Service {
         backgroundLayoutParams.y = 0;
         backgroundLayoutParams.format = PixelFormat.RGBA_8888;
         placeHolder.setLayoutParams(placeHolderLayoutParams);
-        placeHolder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideFloatingWindow();
-            }
-        });
+        placeHolder.setOnClickListener(null);
+
         LinearLayout phContent = new LinearLayout(this);
         phContent.setTag("placeHolder");
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -310,7 +427,30 @@ public class BackendService extends Service {
             backgroundLayout.addView(placeHolder);
         }
 
-        windowManager.addView(backgroundLayout, backgroundLayoutParams);
+        try{
+            windowManager.addView(backgroundLayout, backgroundLayoutParams);
+            Timer timer = new Timer();
+            final Handler handler = new Handler();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            placeHolder.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    hideFloatingWindow();
+                                }
+                            });
+                        }
+                    });
+
+                }
+            },250);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     public void changeFloatingWindowContent(int i){
         switch (i){
@@ -343,16 +483,19 @@ public class BackendService extends Service {
         isFloatingWindowShowing = false;
         windowManager.removeView(backgroundLayout);
         startFloatingButton();
+        final Handler handler = new Handler();
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Looper.prepare();
-                floatingWindowPreProcess();
-                Looper.loop();
-            }
-        },1);
-
+                handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    floatingWindowPreProcess();
+                }
+            });
+        }
+        }, 250);
     }
     @Override
     public void onDestroy() {

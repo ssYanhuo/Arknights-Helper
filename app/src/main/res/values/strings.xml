@@ -90,7 +90,7 @@
     <string name="button_plus" translatable="false">+</string>
     <string name="button_minus" translatable="false">-</string>
     <string name="material_stage_now">当前精英化：</string>
-    <string name="material_desc">长按按钮可以选择最大或最小值。\n数据来自 @Graue Neko</string>
+    <string name="material_desc">长按按钮可以选择最大或最小值，点击数字可以使用小键盘输入。\n数据来自 @Graue Neko</string>
     <string name="material_point_now">当前经验（上取整）：</string>
     <string name="material_level_now">等级：</string>
     <string name="material_stage_target">目标精英化：</string>
@@ -109,7 +109,7 @@
     <string name="update_intent_error">无法调取 Coolapk™ 数据中心，是否前往备用数据中心 Github™ 获取更新？</string>
     <string name="update_go_github">前往Github</string>
     <string name="showcase_start">点击这里，\n启动游戏和 Arknights Helper™ 引擎</string>
-    <string name="showcase_menu">更多功能请打开侧边栏</string>
+    <string name="showcase_menu">设置及更多功能请打开侧边栏</string>
     <string name="update_dialog_yes">更新</string>
     <string name="update_dialog_title">更新内容</string>
     <string name="update_dialog_no">取消</string>
@@ -162,5 +162,13 @@
     <string name="hr_ocr_error">出现了意外</string>
     <string name="hr_ocr_succeed">标签数量：</string>
     <string name="hr_ocr_loading">正在载入图片……</string>
-
+    <string name="menu_settings">设置</string>
+    <string name="title_activity_settings">设置</string>
+    <string name="settings_category_general">常规</string>
+    <string name="settings_summary_long_press_back_to_game">长按悬浮窗按钮返回游戏</string>
+    <string name="settings_title_game_version">游戏渠道</string>
+    <string name="start_game_remember_selection">记住本次选择</string>
+    <string name="settings_summary_game_version">仅在安装多个客户端时生效</string>
+    <string name="settings_title_long_press_back_to_game">快速返回</string>
+    <string name="resume_game">正在拉起游戏……</string>
 </resources>

@@ -190,13 +190,11 @@ public class Drop {
     }
 
     public void setAltSelector(){
-        if (!isAltSelector){
             ScrollView scrollView = contentView.findViewById(R.id.drop_selector_scroll);
             ViewGroup.LayoutParams params = scrollView.getLayoutParams();
             params.height = DpUtiliy.dip2px(applicationContext, 128);
             scrollView.setLayoutParams(params);
             isAltSelector = true;
-        }
     }
 
     public  void getAllRadioButtons(View view){
@@ -234,7 +232,6 @@ public class Drop {
         @Override
         public void run() {
             try {
-
                 Runnable runnable = new Runnable(){
 
                     @Override

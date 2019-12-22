@@ -14,25 +14,31 @@
             android:id="@+id/hr_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/hr_desc_part_1_exact" />
+            android:text="@string/hr_desc_part_1_exact"
+            android:background="?attr/selectableItemBackground"
+            android:focusable="true"
+            android:clickable="true"/>
     </LinearLayout>
 
 
 
-    <HorizontalScrollView
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hr_selector_star"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"/>
+        <com.ssyanhuo.arknightshelper.widget.LineWrapLayout
             android:id="@+id/hr_selector_star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scrollbars="horizontal"
-            android:tag="star">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/hr_selector_star" />
+            android:tag="star"
+            app:vertical_spacing="0dp"
+            app:horizontal_spacing="0dp">
 
             <CheckBox
                 android:id="@+id/hr_checkbox_star_1"
@@ -81,23 +87,27 @@
                 android:layout_height="wrap_content"
                 android:text="@string/hr_star_6"
                 android:tag="6"/>
-        </LinearLayout>
-    </HorizontalScrollView>
+        </com.ssyanhuo.arknightshelper.widget.LineWrapLayout>
+    </LinearLayout>
 
-    <HorizontalScrollView
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hr_selector_qualification"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"/>
+        <com.ssyanhuo.arknightshelper.widget.LineWrapLayout
             android:id="@+id/hr_selector_qualification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:tag="qualification">
+            android:tag="qualification"
+            app:horizontal_spacing="0dp"
+            app:vertical_spacing="0dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/hr_selector_qualification" />
 
             <CheckBox
                 android:id="@+id/hr_checkbox_qualification_1"
@@ -122,24 +132,27 @@
                 android:layout_height="wrap_content"
                 android:text="@string/hr_qualification_3"
                 android:tag="高级资深干员"/>
-        </LinearLayout>
-    </HorizontalScrollView>
+        </com.ssyanhuo.arknightshelper.widget.LineWrapLayout>
+    </LinearLayout>
 
-    <HorizontalScrollView
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hr_selector_position"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"/>
+
+        <com.ssyanhuo.arknightshelper.widget.LineWrapLayout
             android:id="@+id/hr_selector_position"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:tag="position">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/hr_selector_position" />
-
+            android:tag="position"
+            app:vertical_spacing="0dp"
+            app:horizontal_spacing="0dp">
             <CheckBox
                 android:id="@+id/hr_checkbox_position_near"
                 style="@style/AppTheme.CheckBox.Green"
@@ -155,22 +168,25 @@
                 android:layout_height="wrap_content"
                 android:text="@string/hr_position_distant"
                 android:tag="远程位"/>
-        </LinearLayout>
-    </HorizontalScrollView>
-
-    <HorizontalScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <LinearLayout
+        </com.ssyanhuo.arknightshelper.widget.LineWrapLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hr_selector_sex"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"/>
+        <com.ssyanhuo.arknightshelper.widget.LineWrapLayout
             android:id="@+id/hr_selector_sex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:tag="sex">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/hr_selector_sex" />
+            android:tag="sex"
+            app:horizontal_spacing="0dp"
+            app:vertical_spacing="0dp">
 
             <CheckBox
                 android:id="@+id/hr_checkbox_sex_male"
@@ -187,25 +203,27 @@
                 android:layout_height="wrap_content"
                 android:text="@string/hr_sex_female"
                 android:tag="女"/>
-        </LinearLayout>
-    </HorizontalScrollView>
+        </com.ssyanhuo.arknightshelper.widget.LineWrapLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    <HorizontalScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <LinearLayout
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hr_selector_type"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"/>
+
+        <com.ssyanhuo.arknightshelper.widget.LineWrapLayout
             android:id="@+id/hr_selector_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:scrollbars="horizontal"
-            android:tag="type">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/hr_selector_type" />
-
+            android:tag="type"
+            app:vertical_spacing="0dp"
+            app:horizontal_spacing="0dp">
             <CheckBox
                 android:id="@+id/hr_checkbox_type_vanguard"
                 style="@style/AppTheme.CheckBox.Cyan"
@@ -270,24 +288,25 @@
                 android:text="@string/hr_type_specialist"
                 android:tag="特种"/>
 
-        </LinearLayout>
-    </HorizontalScrollView>
-
-    <HorizontalScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:id="@+id/hr_selector_tag"
+        </com.ssyanhuo.arknightshelper.widget.LineWrapLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:scrollbars="horizontal"
-            android:tag="tag">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/hr_selector_tag" />
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:text="@string/hr_selector_tag" />
+        <com.ssyanhuo.arknightshelper.widget.LineWrapLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/hr_selector_tag"
+            android:tag="tag"
+            app:vertical_spacing="0dp"
+            app:horizontal_spacing="0dp">
 
             <CheckBox
                 android:id="@+id/hr_checkbox_type_zhiliao"
@@ -401,8 +420,9 @@
                 android:text="@string/hr_tag_feiyonghuifu"
                 android:tag="费用回复"/>
 
-        </LinearLayout>
-    </HorizontalScrollView>
+        </com.ssyanhuo.arknightshelper.widget.LineWrapLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -415,11 +435,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/hr_result_title"
                 android:text="@string/hr_result_title_part_1"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:background="?attr/selectableItemBackground"
+                android:focusable="true"
+                android:clickable="true"/>
             <LinearLayout
                 android:id="@+id/hr_result"
                 android:layout_width="match_parent"

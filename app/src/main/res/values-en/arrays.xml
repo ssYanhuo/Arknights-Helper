@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="settings_array_game">
+        <item>Official</item>
+        <item>BiliBili</item>
+        <item>Choose Manually</item>
+    </string-array>
+    <string-array name="settings_array_game_value">
+        <item>0</item>
+        <item>1</item>
+        <item>-1</item>
+    </string-array>
+</resources>

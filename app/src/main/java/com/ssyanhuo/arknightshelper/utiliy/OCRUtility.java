@@ -33,32 +33,4 @@ public class OCRUtility {
             }
         },context);
     }
-    @Deprecated
-    public static ArrayList<String> getOCRResult(Context context, String path) {
-        //final ArrayList<String> wordList = new ArrayList<>();
-        final ArrayList<String> tagList = new ArrayList<>();
-        GeneralParams params = new GeneralParams();
-        params.setDetectDirection(true);
-        params.setImageFile(new File(path));
-        OCR.getInstance(context).recognizeGeneral(params, new OnResultListener<GeneralResult>() {
-            @Override
-            public void onResult(GeneralResult generalResult) {
-                for (WordSimple wordSimple : generalResult.getWordList()) {
-                    //wordList.add(wordSimple.getWords());
-                    for (String tag : StaticData.HR.tagList){
-                        if (wordSimple.getWords().contains(tag)){
-                            tagList.add(wordSimple.getWords());
-                        }
-                    }
-                }
-                //wordList.retainAll(Arrays.asList(StaticData.HR.tagList));
-                Log.i(TAG, "OCR result: " + tagList.toString());
-            }
-            @Override
-            public void onError(OCRError ocrError) {
-                ocrError.printStackTrace();
-            }
-        });
-        return tagList;
-    }
 }
