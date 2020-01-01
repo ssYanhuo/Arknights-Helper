@@ -1,16 +1,11 @@
 package com.ssyanhuo.arknightshelper.widget;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.TypedArray;
-import android.nfc.Tag;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.ContextThemeWrapper;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 
 import androidx.cardview.widget.CardView;
@@ -44,7 +39,7 @@ public class NumberSelector extends LinearLayout {
         min = typedArray.getInt(R.styleable.NumberSelector_minValue, Integer.MIN_VALUE);
         max = typedArray.getInt(R.styleable.NumberSelector_maxValue, Integer.MAX_VALUE);
         step = typedArray.getInt(R.styleable.NumberSelector_step, 1);
-        defaultValue = typedArray.getInt(R.styleable.NumberSelector_defaultValue, 0);
+        defaultValue = typedArray.getInt(R.styleable.NumberSelector_defaultNum, 0);
         text = typedArray.getString(R.styleable.NumberSelector_text);
         LayoutInflater.from(context).inflate(R.layout.view_numberselector, this);
         buttonMinus = findViewById(R.id.button_minus);

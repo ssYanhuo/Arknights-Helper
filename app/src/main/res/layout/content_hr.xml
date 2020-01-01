@@ -174,41 +174,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/hr_selector_sex"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:paddingBottom="@dimen/activity_vertical_margin"/>
-        <com.ssyanhuo.arknightshelper.widget.LineWrapLayout
-            android:id="@+id/hr_selector_sex"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tag="sex"
-            app:horizontal_spacing="0dp"
-            app:vertical_spacing="0dp">
-
-            <CheckBox
-                android:id="@+id/hr_checkbox_sex_male"
-                style="@style/AppTheme.CheckBox.Red"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/hr_sex_male"
-                android:tag="男"/>
-
-            <CheckBox
-                android:id="@+id/hr_checkbox_sex_female"
-                style="@style/AppTheme.CheckBox.Red"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/hr_sex_female"
-                android:tag="女"/>
-        </com.ssyanhuo.arknightshelper.widget.LineWrapLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
@@ -224,69 +189,70 @@
             android:tag="type"
             app:vertical_spacing="0dp"
             app:horizontal_spacing="0dp">
+
             <CheckBox
                 android:id="@+id/hr_checkbox_type_vanguard"
-                style="@style/AppTheme.CheckBox.Cyan"
+                style="@style/AppTheme.CheckBox.Red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/hr_type_vanguard"
-                android:tag="先锋"/>
+                android:tag="先锋"
+                android:text="@string/hr_type_vanguard" />
 
             <CheckBox
                 android:id="@+id/hr_checkbox_type_sniper"
-                style="@style/AppTheme.CheckBox.Cyan"
+                style="@style/AppTheme.CheckBox.Red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/hr_type_sniper"
-                android:tag="狙击"/>
+                android:tag="狙击"
+                android:text="@string/hr_type_sniper" />
 
             <CheckBox
                 android:id="@+id/hr_checkbox_type_medic"
-                style="@style/AppTheme.CheckBox.Cyan"
+                style="@style/AppTheme.CheckBox.Red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/hr_type_medic"
-                android:tag="医疗"/>
+                android:tag="医疗"
+                android:text="@string/hr_type_medic" />
 
             <CheckBox
                 android:id="@+id/hr_checkbox_type_caster"
-                style="@style/AppTheme.CheckBox.Cyan"
+                style="@style/AppTheme.CheckBox.Red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/hr_type_caster"
-                android:tag="术师"/>
+                android:tag="术师"
+                android:text="@string/hr_type_caster" />
 
             <CheckBox
                 android:id="@+id/hr_checkbox_type_guard"
-                style="@style/AppTheme.CheckBox.Cyan"
+                style="@style/AppTheme.CheckBox.Red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/hr_type_guard"
-                android:tag="近卫"/>
+                android:tag="近卫"
+                android:text="@string/hr_type_guard" />
 
             <CheckBox
                 android:id="@+id/hr_checkbox_type_defender"
-                style="@style/AppTheme.CheckBox.Cyan"
+                style="@style/AppTheme.CheckBox.Red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/hr_type_defender"
-                android:tag="重装"/>
+                android:tag="重装"
+                android:text="@string/hr_type_defender" />
 
             <CheckBox
                 android:id="@+id/hr_checkbox_type_supporter"
-                style="@style/AppTheme.CheckBox.Cyan"
+                style="@style/AppTheme.CheckBox.Red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/hr_type_supporter"
-                android:tag="辅助"/>
+                android:tag="辅助"
+                android:text="@string/hr_type_supporter" />
 
             <CheckBox
                 android:id="@+id/hr_checkbox_type_specialist"
-                style="@style/AppTheme.CheckBox.Cyan"
+                style="@style/AppTheme.CheckBox.Red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/hr_type_specialist"
-                android:tag="特种"/>
+                android:tag="特种"
+                android:text="@string/hr_type_specialist" />
 
         </com.ssyanhuo.arknightshelper.widget.LineWrapLayout>
     </LinearLayout>
@@ -419,6 +385,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/hr_tag_feiyonghuifu"
                 android:tag="费用回复"/>
+            <CheckBox
+                android:id="@+id/hr_checkbox_type_zhiyuanjixie"
+                style="@style/AppTheme.CheckBox.Lime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hr_tag_zhiyuanjixie"
+                android:tag="支援机械"/>
 
         </com.ssyanhuo.arknightshelper.widget.LineWrapLayout>
 

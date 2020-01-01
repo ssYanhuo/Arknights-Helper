@@ -103,7 +103,7 @@
     <string name="material_round_money">（CE场数）</string>
     <string name="material_money_upgrade">（升级）</string>
     <string name="material_money_evolve">（精英化）</string>
-    <string name="update_state_checking">正在连接到 Github™ 数据中心检查更新……</string>
+    <string name="update_state_checking">正在检查更新……</string>
     <string name="update_state_error">检查更新时出现问题</string>
     <string name="update_state_need_update">发现 Arknights Helper™ 引擎存在更新，点击获取最新版本</string>
     <string name="update_intent_error">无法调取 Coolapk™ 数据中心，是否前往备用数据中心 Github™ 获取更新？</string>
@@ -171,4 +171,19 @@
     <string name="settings_summary_game_version">仅在安装多个客户端时生效</string>
     <string name="settings_title_long_press_back_to_game">快速返回</string>
     <string name="resume_game">正在拉起游戏……</string>
+    <string name="hr_tag_zhiyuanjixie" translatable="false">机械支援</string>
+    <string name="update_state_beta_finished">正式版已经发布，请点击此处更新到稳定版本</string>
+    <string name="settings_category_compatibility">兼容性</string>
+    <string name="settings_title_use_builtin_data">强制使用内置的数据文件</string>
+    <string name="settings_summary_use_builtin_data">将无法获取最新数据</string>
+    <string name="settings_title_update_site">数据源</string>
+    <string name="settings_summary_update_site">切换更新内容站点</string>
+
+    <string name="settings_summary_margin_fix">修正横屏游戏中悬浮窗不能完全贴边的问题，点击这里切换屏幕方向，再次点击进入全屏模式</string>
+    <string name="settings_title_margin_fix">边距修正</string>
+    <string name="tip_use_remote">可以连接到远程数据库来保持数据更新</string>
+    <string name="tip_use_remote_action">前往设置</string>
+    <string name="settings_data_update_success">操作成功完成</string>
+    <string name="settings_data_update_title">更新数据</string>
+    <string name="settings_title_update_data">立即更新数据</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.ssyanhuo.arknightshelper.overlay;
+package com.ssyanhuo.arknightshelper.service;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
@@ -21,20 +21,21 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.*;
 
-import androidx.appcompat.app.AlertDialog;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.ssyanhuo.arknightshelper.R;
-import com.ssyanhuo.arknightshelper.activity.MainActivity;
 import com.ssyanhuo.arknightshelper.activity.SettingsActivity;
+import com.ssyanhuo.arknightshelper.module.Drop;
+import com.ssyanhuo.arknightshelper.module.Hr;
+import com.ssyanhuo.arknightshelper.module.Material;
 import com.ssyanhuo.arknightshelper.utiliy.DpUtiliy;
-import com.ssyanhuo.arknightshelper.utiliy.BroadcastReceiver;
 import com.ssyanhuo.arknightshelper.utiliy.OCRUtility;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class BackendService extends Service {
+public class OverlayService extends Service {
     WindowManager windowManager;
     WindowManager.LayoutParams floatingWindowLayoutParams;
     WindowManager.LayoutParams backgroundLayoutParams;
@@ -74,6 +75,7 @@ public class BackendService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+
         Intent notificationIntent = new Intent(this, BroadcastReceiver.class).setAction("com.ssyanhuo.arknightshelper.stopservice");
         notificationIntent.putExtra("action", "StopService");
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -118,8 +120,11 @@ public class BackendService extends Service {
 
         backgroundLayoutParams.flags = WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
         placeHolderLayoutParams = new WindowManager.LayoutParams();
-        sharedPreferences = getSharedPreferences("Config", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("com.ssyanhuo.arknightshelper_preferences", MODE_PRIVATE);
         editor = sharedPreferences.edit();
+        int upCount = sharedPreferences.getInt("up_count", 0) + 1;
+        editor.putInt("up_count", upCount);
+        editor.apply();
         startFloatingButton();
         //预处理
         floatingWindowPreProcess();
@@ -200,7 +205,7 @@ public class BackendService extends Service {
                                                 vibrator.vibrate(32);
                                             }
                                         }
-                                        if (!sharedPreferences.getString("game_version", GAME_MANUAL).equals(GAME_MANUAL)){
+                                        if (sharedPreferences.getString("game_version", GAME_MANUAL).equals(GAME_OFFICIAL) || sharedPreferences.getString("game_version", GAME_MANUAL).equals(GAME_BILIBILI)){
                                             String game = sharedPreferences.getString("game_version", GAME_MANUAL);
                                             Toast.makeText(getApplicationContext(), R.string.resume_game, Toast.LENGTH_SHORT).show();
                                             switch (game){
@@ -387,14 +392,16 @@ public class BackendService extends Service {
         //检测屏幕方向和是否全屏
         if(rotation == 1 || rotation == 3){//横
             floatingWindowLayoutParams.height = displayMetrics.heightPixels;
-            floatingWindowLayoutParams.width = displayMetrics.widthPixels / 2;
+            floatingWindowLayoutParams.width = displayMetrics.widthPixels / 2 + sharedPreferences.getInt("margin_fix", 0);
             placeHolderLayoutParams.height = displayMetrics.heightPixels;
             placeHolderLayoutParams.width = displayMetrics.widthPixels / 2;
             backgroundLayout.setOrientation(LinearLayout.HORIZONTAL);
             backgroundLayoutParams.height = displayMetrics.heightPixels;
-            backgroundLayoutParams.width = displayMetrics.widthPixels;
+            backgroundLayoutParams.width = displayMetrics.widthPixels + sharedPreferences.getInt("margin_fix", 0);
             //是否优化状态栏区域的显示效果
-            if (rotation == 1){linearLayout.setBackgroundColor(Color.parseColor("#aa000000"));}
+            if (rotation == 1){
+                linearLayout.setBackgroundColor(Color.parseColor("#aa000000"));
+            }
         }else {//竖
             floatingWindowLayoutParams.height = displayMetrics.heightPixels / 2;
             floatingWindowLayoutParams.width = displayMetrics.widthPixels;

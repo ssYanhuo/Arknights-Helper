@@ -1,4 +1,4 @@
-package com.ssyanhuo.arknightshelper.utiliy;
+package com.ssyanhuo.arknightshelper.service;
 
 import android.annotation.TargetApi;
 import android.app.ActivityManager;
@@ -10,9 +10,6 @@ import android.provider.Settings;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import android.util.Log;
-
-import com.google.android.material.tabs.TabItem;
-import com.ssyanhuo.arknightshelper.overlay.BackendService;
 
 import java.util.List;
 import java.util.Timer;
@@ -37,7 +34,7 @@ public class QSTileService extends TileService {
                 List<ActivityManager.RunningServiceInfo> runningServiceInfoList = activityManager.getRunningServices(Integer.MAX_VALUE);
                 if(runningServiceInfoList.size() > 0 && tile != null){
                     for (int i = 0; i < runningServiceInfoList.size(); i++){
-                        if(runningServiceInfoList.get(i).service.getClassName().equals("com.ssyanhuo.arknightshelper.overlay.BackendService")){
+                        if(runningServiceInfoList.get(i).service.getClassName().equals("com.ssyanhuo.arknightshelper.overlay.OverlayService")){
                             tile.setState(Tile.STATE_ACTIVE);
                             tile.updateTile();
                             return;
@@ -64,13 +61,13 @@ public class QSTileService extends TileService {
         super.onClick();
         tile = getQsTile();
         if (tile == null){return;}
-        Intent intent = new Intent(getApplicationContext(), BackendService.class);
+        Intent intent = new Intent(getApplicationContext(), OverlayService.class);
         ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         assert activityManager != null;
         List<ActivityManager.RunningServiceInfo> runningServiceInfoList = activityManager.getRunningServices(Integer.MAX_VALUE);
         if(runningServiceInfoList.size() > 0){
             for (int i = 0; i < runningServiceInfoList.size(); i++){
-                if(runningServiceInfoList.get(i).service.getClassName().equals("com.ssyanhuo.arknightshelper.overlay.BackendService")){
+                if(runningServiceInfoList.get(i).service.getClassName().equals("com.ssyanhuo.arknightshelper.overlay.OverlayService")){
                     tile.setState(Tile.STATE_INACTIVE);
                     tile.updateTile();
                     stopService(intent);

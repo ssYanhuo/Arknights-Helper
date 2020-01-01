@@ -1,9 +1,10 @@
-package com.ssyanhuo.arknightshelper.overlay;
+package com.ssyanhuo.arknightshelper.module;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
@@ -19,12 +20,14 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.staticdata.StaticData;
+import com.ssyanhuo.arknightshelper.utiliy.FileUtility;
 import com.ssyanhuo.arknightshelper.utiliy.JSONUtility;
 import com.ssyanhuo.arknightshelper.widget.ItemDetailView;
 import com.ssyanhuo.arknightshelper.widget.LineWrapLayout;
 import com.ssyanhuo.arknightshelper.widget.NumberSelector;
 import com.zyyoona7.popup.EasyPopup;
 
+import java.io.IOException;
 import java.util.*;
 
 public class Material {
@@ -52,6 +55,8 @@ public class Material {
     private JSONObject charNow;
     private JSONObject materialJsonObject;
     private boolean onlyRare;
+    private SharedPreferences sharedPreferences;
+    private boolean builtin;
 
     public void getAllNumberSelectors(View view){
         ViewGroup viewGroup = (ViewGroup)view;
@@ -72,10 +77,15 @@ public class Material {
         applicationContext = context;
         rootLayout = backgroundLayout;
         contentView = view;
-        expJsonObject = JSONUtility.getJSONObject(applicationContext, JSONUtility.getJSONString(applicationContext, "data/exp.json"));
-        characterJsonObject = JSONUtility.getJSONObject(applicationContext, JSONUtility.getJSONString(applicationContext, "data/charMaterials.json"));
-        //characterJsonString = JsonUtility.getJsonString(applicationContext, "data/charMaterials.json");
-        materialJsonObject = JSONUtility.getJSONObject(applicationContext, JSONUtility.getJSONString(applicationContext, "data/material.json"));
+        sharedPreferences = applicationContext.getSharedPreferences("com.ssyanhuo.arknightshelper_preferences", Context.MODE_PRIVATE);
+        builtin = sharedPreferences.getBoolean("use_builtin_data", false);
+        try {
+            expJsonObject = JSONUtility.getJSONObject(applicationContext, FileUtility.readData("aklevel.json", applicationContext, builtin));
+            characterJsonObject = JSONUtility.getJSONObject(applicationContext, FileUtility.readData("charMaterials.json", applicationContext, builtin));
+            materialJsonObject = JSONUtility.getJSONObject(applicationContext, FileUtility.readData("material.json", applicationContext, builtin));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         numberSelectors = new ArrayList<>();
         stageNow = view.findViewById(R.id.material_selector_stage_now);
         levelNow = view.findViewById(R.id.material_selector_level_now);
@@ -160,6 +170,12 @@ public class Material {
     public void checkValue(){
         //不同星级时，精英化（目标+当前）最值随之变化，若变化前已经超出新值范围，则自动缩小为最值
         int maxStage = getMaxStage(characterStar + 1);
+        if (levelNow.getInt() == 0){
+            levelNow.setInt(1);
+        }
+        if (levelNow.getInt() == 0){
+            levelNow.setInt(levelNow.getInt() + 1);
+        }
         stageNow.setMax(maxStage);
         if(stageNow.getInt() > maxStage){
             stageNow.setInt(maxStage);

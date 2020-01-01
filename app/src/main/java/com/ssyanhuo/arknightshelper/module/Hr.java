@@ -1,4 +1,4 @@
-package com.ssyanhuo.arknightshelper.overlay;
+package com.ssyanhuo.arknightshelper.module;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
@@ -34,6 +34,7 @@ import com.baidu.ocr.sdk.exception.OCRError;
 import com.baidu.ocr.sdk.model.GeneralParams;
 import com.baidu.ocr.sdk.model.GeneralResult;
 import com.baidu.ocr.sdk.model.WordSimple;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.staticdata.StaticData;
 import com.ssyanhuo.arknightshelper.utiliy.*;
@@ -43,6 +44,7 @@ import com.zyyoona7.popup.XGravity;
 import com.zyyoona7.popup.YGravity;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public class Hr {
@@ -74,6 +76,7 @@ public class Hr {
     ArrayList<String> tagList = new ArrayList<>();
     ContextThemeWrapper contextThemeWrapper;
     EasyPopup scrollToResultPopup;
+    boolean builtin;
     private ArrayList<String> combineTempArr = new ArrayList<>();
 
     public void init(Context context, View view, LinearLayout backgroundLayout) {
@@ -81,12 +84,13 @@ public class Hr {
         applicationContext = context;
         rootLayout = backgroundLayout;
         hideResult(contentView.findViewById(R.id.hr_result_content));
-        sharedPreferences = applicationContext.getSharedPreferences("Config", Context.MODE_PRIVATE);
+        sharedPreferences = applicationContext.getSharedPreferences("com.ssyanhuo.arknightshelper_preferences", Context.MODE_PRIVATE);
         if (!sharedPreferences.getBoolean("queryMethodSelected", false)) {
             selectQueryMethod();
         } else if (sharedPreferences.getBoolean("fuzzyQuery", false)) {
             fuzzy = true;
         }
+        builtin = sharedPreferences.getBoolean("use_builtin_data", false);
         selector = (ScrollView) LayoutInflater.from(applicationContext).inflate(R.layout.content_hr_sub_ocr, null);
         checkBoxes = new ArrayList<>();
         selectedStar = new ArrayList<>();
@@ -95,7 +99,11 @@ public class Hr {
         selectedSex = new ArrayList<>();
         selectedType = new ArrayList<>();
         selectedTag = new ArrayList<>();
-        hrJson = JSONUtility.getJSONString(context, "data/hr.json");
+        try {
+            hrJson = FileUtility.readData("akhr.json", context, builtin);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         getAllCheckboxes(checkBoxes, view);
         for (int i = 0; i < checkBoxes.size(); i++) {
             checkBoxes.get(i).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -141,6 +149,14 @@ public class Hr {
         ((TextView) contentView.findViewById(R.id.hr_result_title)).setMovementMethod(LinkMovementMethod.getInstance());
         placeHolder = rootLayout.findViewWithTag("placeHolder");
         contextThemeWrapper = new ContextThemeWrapper(applicationContext, R.style.AppTheme_FloatingWindow);
+    }
+    //按星级排序
+    private class StarComparator implements Comparator<JSONObject>{
+
+        @Override
+        public int compare(JSONObject o1, JSONObject o2) {
+            return o2.getInteger(("level")) - o1.getInteger("level");
+        }
     }
 
     public void getAllCheckboxes(ArrayList<CheckBox> checkBoxes, View view) {
@@ -238,7 +254,7 @@ public class Hr {
                 Log.i(TAG, "Found:" + name);
             }
         }
-        Collections.reverse(result);//高星级放前面
+        Collections.sort(result, new StarComparator());//高星级放前面
         showResultExact(result);
     }
 
@@ -280,7 +296,7 @@ public class Hr {
                 Log.i(TAG, "Found:" + name);
             }
         }
-        Collections.reverse(result);//高星级放前面
+        Collections.sort(result, new StarComparator());//高星级放前面
         showResultFuzzy(result);
 
     }
@@ -366,156 +382,6 @@ public class Hr {
                 }
             });
             lineWrapLayout.addView(button);
-        }
-    }
-
-    public void showResultFuzzyOld(ArrayList<JSONObject> result) {
-        ArrayList<LinearLayout> resultLayouts = new ArrayList<>();
-        LinearLayout linearLayout = contentView.findViewById(R.id.hr_result_content);
-        LinearLayout resultLayout = linearLayout.findViewById(R.id.hr_result);
-        resultLayout.removeAllViews();
-        resultLayout.setOrientation(LinearLayout.VERTICAL);
-        linearLayout.setVisibility(View.VISIBLE);
-        if (result.size() == 0) {
-            TextView textView = new TextView(applicationContext);
-            textView.setText(applicationContext.getText(R.string.hr_result_empty));
-            textView.setTextColor(Color.GRAY);
-            textView.setGravity(Gravity.CENTER);
-            textView.setTypeface(null, Typeface.BOLD_ITALIC);
-            resultLayout.addView(textView);
-        }
-        for (int j = 0; j < result.size(); j++) {
-            final JSONObject jsonObject = result.get(j);
-            Button button = LayoutInflater.from(applicationContext).inflate(R.layout.hr_result_button, null).findViewById(R.id.hr_result_button);
-            switch (jsonObject.getInteger("level")) {
-                case 6:
-                    button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_yellow));
-                    break;
-                case 5:
-                    button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_red));
-                    break;
-                case 3:
-                    button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_green));
-                    break;
-                case 2:
-                case 1:
-                    button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_lime));
-                    break;
-                default:
-                    button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_blue));
-                    break;
-            }
-            button.setText(jsonObject.getString("name"));
-            button.setTag(jsonObject);
-            button.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-
-                    switch (motionEvent.getAction()) {
-                        case MotionEvent.ACTION_DOWN:
-                            CardView cardView = (CardView) LayoutInflater.from(applicationContext).inflate(applicationContext.getResources().getLayout(R.layout.detail_popup), null);
-                            TextView textView = cardView.findViewById(R.id.detail_text);
-                            JSONArray jsonArray = jsonObject.getJSONArray("tags");
-                            String tags = "";
-                            for (int i = 0; i < jsonArray.size(); i++) {
-                                tags += jsonArray.getString(i);
-                                if (i != jsonArray.size() - 1) {
-                                    tags += " ";
-                                }
-                            }
-                            tags += "\n" + jsonObject.getString("characteristic") + "\n" + jsonObject.getString("type") + "干员";
-                            textView.setText(tags);
-                            easyPopup = EasyPopup.create(applicationContext)
-                                    .setContentView(cardView)
-                                    .setFocusable(false)
-                                    .apply();
-                            easyPopup.showAtAnchorView(view, YGravity.ABOVE, XGravity.CENTER);
-                            break;
-                        case MotionEvent.ACTION_UP:
-                        case MotionEvent.ACTION_CANCEL:
-                            easyPopup.dismiss();
-                            break;
-                        default:
-                            break;
-                    }
-
-
-                    return false;
-                }
-            });
-            LinearLayout resultViewWithTag = resultLayout.findViewWithTag(String.valueOf(jsonObject.get("matchedTags")));
-            if (resultViewWithTag != null) {
-                LineWrapLayout lineWrapLayout = (LineWrapLayout) resultViewWithTag.getChildAt(1);
-                lineWrapLayout.addView(button);
-            } else {
-                resultViewWithTag = new LinearLayout(applicationContext);
-                resultViewWithTag.setTag(String.valueOf(jsonObject.get("matchedTags")));
-                resultViewWithTag.setGravity(Gravity.CENTER_VERTICAL);
-                TextView textView = new TextView(applicationContext);
-                String tagsDesc = String.valueOf(jsonObject.get("matchedTags")).replace("\"男\"", "\"男性干员\"").replace("\"女\"", "\"女性干员\"").replace("[\"", "").replace("\",\"", "\n").replace("\"]", "");
-                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                int padding = applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
-                textView.setWidth(6 * padding);
-                textView.setLineSpacing(padding / 8, 1);
-                textView.setTextColor(Color.LTGRAY);
-                textView.setText(tagsDesc);
-                textView.setTag("result_desc");
-                resultLayout.addView(resultViewWithTag);
-                resultViewWithTag.addView(textView);
-                LineWrapLayout lineWrapLayout = new LineWrapLayout(applicationContext);
-                lineWrapLayout.setTag("result_box");
-                resultViewWithTag.addView(lineWrapLayout);
-                LinearLayout linearLayout1 = new LinearLayout(applicationContext);
-                lineWrapLayout.addView(linearLayout1);
-                linearLayout1.addView(button);
-                resultLayouts.add(resultViewWithTag);
-            }
-
-        }
-        for (LinearLayout layout : resultLayouts){
-            for (int i = 0; i < layout.getChildCount(); i++){
-                LineWrapLayout lineWrapLayout = layout.findViewWithTag("result_box");
-                if (lineWrapLayout != null){
-                    Set<Integer> stars = new HashSet<>();
-                    for (int j = 0; j < lineWrapLayout.getChildCount(); j++){
-                        if (lineWrapLayout.getChildAt(j) instanceof Button){
-                        Button button = (Button) lineWrapLayout.getChildAt(j);
-                        JSONObject jsonObject = (JSONObject) button.getTag();
-                        stars.add(jsonObject.getInteger("level"));
-                    }
-                }
-                    if (!(stars.contains(1) || stars.contains(2) || stars.contains(3))){
-                        resultLayout.removeView(layout);
-                        resultLayout.addView(layout, 0);
-                        layout.getChildAt(0).setTag("senior");
-                    }
-                }
-            }
-        }
-        GradientDrawable drawableLight = new GradientDrawable();
-        drawableLight.setGradientType(GradientDrawable.LINEAR_GRADIENT);
-        drawableLight.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
-        drawableLight.setColors(new int[]{Color.parseColor("#aaff9800"), Color.TRANSPARENT});
-        GradientDrawable drawableDark = new GradientDrawable();
-        drawableDark.setGradientType(GradientDrawable.LINEAR_GRADIENT);
-        drawableDark.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
-        drawableDark.setColors(new int[]{Color.parseColor("#aaf57c00"), Color.TRANSPARENT});
-        for(int i = 0; i < resultLayout.getChildCount(); i++){
-            if(resultLayout.getChildAt(i) instanceof LinearLayout){
-                LinearLayout layout = (LinearLayout) resultLayout.getChildAt(i);
-                if(layout.getChildAt(0).getTag() != "senior"){
-                    layout.setBackgroundColor(Color.TRANSPARENT);
-                    if(i % 2 == 1){
-                        layout.setBackgroundColor(Color.argb(128, 0, 0, 0));
-                    }
-                }else {
-                    if(i % 2 == 1){
-                        layout.setBackground(drawableDark);
-                    }else {
-                        layout.setBackground(drawableLight);
-                    }
-                }
-            }
         }
     }
 
@@ -793,6 +659,12 @@ public class Hr {
                 }
             }
         }
+        FloatingActionButton fab = new FloatingActionButton(contextThemeWrapper);
+        fab.setMinimumHeight(64);
+        fab.setMinimumWidth(64);
+        fab.setX(40);
+        fab.setY(40);
+        rootLayout.addView(fab);
     }
 
     public ArrayList<ArrayList<String>> getAllCombinations(JSONArray strings){
@@ -824,7 +696,7 @@ public class Hr {
 
     public void selectQueryMethod() {
         //选择
-        final ScrollView parentView = (ScrollView) contentView.getParent();
+        final RelativeLayout parentView = (RelativeLayout) contentView.getParent();
         View methodSelector = LayoutInflater.from(applicationContext).inflate(R.layout.content_hr_method_selector, null);
         parentView.removeAllViews();
         parentView.addView(methodSelector);

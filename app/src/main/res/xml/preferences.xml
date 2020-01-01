@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory android:title="@string/settings_category_general">
+    <PreferenceCategory android:title="@string/settings_category_general" android:icon="@drawable/ic_settings_general">
 
         <SwitchPreference
             android:defaultValue="true"
@@ -9,12 +10,38 @@
             android:title="@string/settings_title_long_press_back_to_game"
             android:summary="@string/settings_summary_long_press_back_to_game"/>
         <ListPreference
-            android:defaultValue="3"
+            android:defaultValue="-1"
             android:entries="@array/settings_array_game"
             android:entryValues="@array/settings_array_game_value"
             android:key="game_version"
             android:title="@string/settings_title_game_version"
             android:summary="@string/settings_summary_game_version"/>
 
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/settings_category_compatibility" android:icon="@drawable/ic_settings_compatibility">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="use_builtin_data"
+            android:title="@string/settings_title_use_builtin_data"
+            android:summary="@string/settings_summary_use_builtin_data"/>
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/settings_array_update_site"
+            android:entryValues="@array/settings_array_update_site_value"
+            android:key="update_site"
+            android:title="@string/settings_title_update_site"
+            android:summary="@string/settings_summary_update_site"/>
+        <Preference
+            android:key="update_data"
+            android:title="@string/settings_title_update_data">
+        </Preference>
+        <SeekBarPreference
+            android:defaultValue="0"
+            android:key="margin_fix"
+            android:max="256"
+            android:summary="@string/settings_summary_margin_fix"
+            android:title="@string/settings_title_margin_fix"
+            app:min="-256" />
     </PreferenceCategory>
 </PreferenceScreen>

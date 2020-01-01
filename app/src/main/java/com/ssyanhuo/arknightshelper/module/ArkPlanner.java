@@ -1,4 +1,4 @@
-package com.ssyanhuo.arknightshelper.overlay;
+package com.ssyanhuo.arknightshelper.module;
 
 /*
 * ArkPlanner by ycremar at https://github.com/ycremar/ArkPlanner

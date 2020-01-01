@@ -10,4 +10,12 @@
         <item>1</item>
         <item>-1</item>
     </string-array>
+    <string-array name="settings_array_update_site">
+        <item>Gitee(China)</item>
+        <item>Github(Other Countries)</item>
+    </string-array>
+    <string-array name="settings_array_update_site_value">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
 </resources>

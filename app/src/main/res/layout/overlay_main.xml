@@ -42,18 +42,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/scroll_hr">
-            <include layout="@layout/content_hr"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <include layout="@layout/content_hr"/>
+            </RelativeLayout>
         </ScrollView>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/scroll_exp">
-            <include layout="@layout/content_material"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <include layout="@layout/content_material"/>
+            </RelativeLayout>
         </ScrollView>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/scroll_material">
-            <include layout="@layout/content_drop"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <include layout="@layout/content_drop"/>
+            </RelativeLayout>
         </ScrollView>
     </LinearLayout>

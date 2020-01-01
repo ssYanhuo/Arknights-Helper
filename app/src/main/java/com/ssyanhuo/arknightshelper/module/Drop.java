@@ -1,6 +1,8 @@
-package com.ssyanhuo.arknightshelper.overlay;
+package com.ssyanhuo.arknightshelper.module;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -17,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -24,6 +27,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ssyanhuo.arknightshelper.R;
+import com.ssyanhuo.arknightshelper.activity.SettingsActivity;
 import com.ssyanhuo.arknightshelper.utiliy.DpUtiliy;
 import com.ssyanhuo.arknightshelper.utiliy.FileUtility;
 import com.ssyanhuo.arknightshelper.widget.ChildScrollView;
@@ -54,22 +58,25 @@ public class Drop {
     View contentView;
     Handler handler;
     View updater;
-    ScrollView parentView;
+    RelativeLayout parentView;
     ArrayList<RadioButton> radioButtons = new ArrayList<>();
     Map<String, String> stageMap = new HashMap<>();
     Map<String, Integer> costMap = new HashMap<>();
     boolean isAltSelector = false;
+    boolean builtin;
+    SharedPreferences sharedPreferences;
 
     public void init(final Context context, View view){
         applicationContext = context;
         contentView = view;
         handler = new Handler();
-
+        sharedPreferences = applicationContext.getSharedPreferences("com.ssyanhuo.arknightshelper_preferences", Context.MODE_PRIVATE);
+        builtin = sharedPreferences.getBoolean("use_builtin_data", false);
         try{
-            data_matrix = JSON.parseObject(FileUtility.readFile("matrix.json", applicationContext));
+            data_matrix = JSON.parseObject(FileUtility.readData("matrix.json", applicationContext, builtin));
             //下面两个是数组形式
-            data_items = JSON.parseArray(FileUtility.readFile("items.json", applicationContext));
-            data_stages = JSON.parseArray(FileUtility.readFile("stages.json", applicationContext));
+            data_items = JSON.parseArray(FileUtility.readData("items.json", applicationContext, builtin));
+            data_stages = JSON.parseArray(FileUtility.readData("stages.json", applicationContext, builtin));
         } catch (Exception e){
             e.printStackTrace();
             Log.e(TAG, String.valueOf(e));
@@ -104,6 +111,10 @@ public class Drop {
                         buttonView.setBackground(layerDrawable.getDrawable(1)); }
                     int item = Integer.parseInt(buttonView.getTag().toString());
                     ArrayList<JSONObject> result = getResult(item);
+                    if (result == null){
+                        goUpdate();
+                        return;
+                    }
                     showResult(item, result);
                 }
             });
@@ -112,7 +123,6 @@ public class Drop {
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(View widget) {
-                Log.e(TAG, "!23");
                 goUpdate();
             }
         };
@@ -127,17 +137,20 @@ public class Drop {
         JSONArray matrix = data_matrix.getJSONArray("matrix");
 
         for (int i= 0; i < matrix.size(); i++){
-            int id;
+            int id = -1;
             try {//部分id并不是int
                 id = matrix.getJSONObject(i).getInteger("itemId");
             }catch (NumberFormatException e){
                 continue;
             }
-            if (id == item){
+            if (id == item){//TODO 用映射
                 JSONObject object = matrix.getJSONObject(i);
                 float cost = costMap.get(object.getString("stageId")) * ((float)object.getInteger("times") / (float)object.getInteger("quantity"));
                 object.put("cost", String.valueOf(cost));
                 result.add(object);
+            }
+            if(id == -1){
+                return null;
             }
         }
         Collections.sort(result, new Comparator<JSONObject>() {
@@ -214,72 +227,8 @@ public class Drop {
         }
     }
     public void goUpdate(){
-        parentView = (ScrollView) contentView.getParent();
-        updater = LayoutInflater.from(applicationContext).inflate(R.layout.content_drop_updater, null);
-        parentView.removeAllViews();
-        parentView.addView(updater);
-        updater.findViewById(R.id.drop_updater_update).setVisibility(View.VISIBLE);
-        updater.findViewById(R.id.drop_updater_progress).setVisibility(View.GONE);
-        updater.findViewById(R.id.drop_updater_update).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new Thread(new UpdateRunnable()).start();
-            }
-        });
-    }
-    class UpdateRunnable implements Runnable{
-
-        @Override
-        public void run() {
-            try {
-                Runnable runnable = new Runnable(){
-
-                    @Override
-                    public void run() {
-                        updater.findViewById(R.id.drop_updater_update).setVisibility(View.GONE);
-                        updater.findViewById(R.id.drop_updater_progress).setVisibility(View.VISIBLE);
-
-                    }
-                };
-                handler.post(runnable);
-                FileUtility.writeFile(URLRequest(BASE_URL + API_MATRIX), "matrix.json", applicationContext);
-                FileUtility.writeFile(URLRequest(BASE_URL + API_ITEMS), "items.json", applicationContext);
-                FileUtility.writeFile(URLRequest(BASE_URL + API_STAGES), "stages.json", applicationContext);
-                data_matrix = JSON.parseObject(FileUtility.readFile("matrix.json", applicationContext));
-                //下面两个是数组形式
-                data_items = JSON.parseArray(FileUtility.readFile("items.json", applicationContext));
-                data_stages = JSON.parseArray(FileUtility.readFile("stages.json", applicationContext));
-                Runnable runnable1 = new Runnable(){
-
-                    @Override
-                    public void run() {
-                        parentView.removeAllViews();
-                        parentView.addView(contentView);
-                        init(applicationContext, contentView);
-                    }
-                };
-                handler.post(runnable1);
-            } catch (Exception e) {
-
-                Log.e(TAG, String.valueOf(e));
-            }
-        }
-        private String URLRequest(String site) throws Exception {
-            URL url = new URL(site);
-            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.setRequestMethod("GET");
-            httpURLConnection.setConnectTimeout(10000);
-            httpURLConnection.setReadTimeout(10000);
-            InputStream inputStream = httpURLConnection.getInputStream();
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            byte[] buffer = new byte[1024];
-            int len;
-            while ((len = inputStream.read(buffer)) != -1){
-                outputStream.write(buffer, 0,len);
-            }
-            inputStream.close();
-            byte[] data = outputStream.toByteArray();
-            return new String(data, StandardCharsets.UTF_8);
-        }
+        Intent intent = new Intent(applicationContext, SettingsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        applicationContext.startActivity(intent);
     }
 }

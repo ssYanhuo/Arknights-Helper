@@ -76,7 +76,7 @@
     <string name="material_round_money">(CE rounds)</string>
     <string name="material_money_upgrade">(Upgrade)</string>
     <string name="material_money_evolve">(Evolve)</string>
-    <string name="update_state_checking">Connecting to Github™ to check for updates…</string>
+    <string name="update_state_checking">Checking updates…</string>
     <string name="update_state_error">Check for update failed</string>
     <string name="update_state_need_update">New version for Arknights Helper™ now available, click here to update</string>
     <string name="update_intent_error">Unable to call Coolapk to handle this update, do you want to go to Github release page?</string>
@@ -129,4 +129,17 @@
     <string name="settings_summary_game_version">Available when you installed more than one game</string>
     <string name="settings_title_long_press_back_to_game">Fast switch</string>
     <string name="resume_game">Starting game…</string>
+    <string name="update_state_beta_finished">Beta test finished, click here to update to stable version</string>
+    <string name="settings_category_compatibility">Compatibility</string>
+    <string name="settings_title_use_builtin_data">Only use built-in data</string>
+    <string name="settings_summary_use_builtin_data">Built-in data may be out of date</string>
+    <string name="settings_title_update_site">Update site</string>
+    <string name="settings_summary_update_site">Choose where updates come from</string>
+    <string name="settings_summary_margin_fix">Fix the floating window position error in landspace mode, click here to rotate screen, click again to enter fullscreen mode</string>
+    <string name="settings_title_margin_fix">Margin fix</string>
+    <string name="settings_data_update_success">Update finished!</string>
+    <string name="settings_data_update_title">Data update</string>
+    <string name="settings_title_update_data">Update data files now</string>
+    <string name="tip_use_remote">You can download remote data to keep your data files up to time</string>
+    <string name="tip_use_remote_action">Set it!</string>
 </resources>

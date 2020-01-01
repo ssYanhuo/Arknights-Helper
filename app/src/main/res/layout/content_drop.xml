@@ -325,6 +325,38 @@
                 android:tag="30104" />
 
             <RadioButton
+                android:id="@+id/drop_item_pgel_3"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/mtl_sl_pgel3"
+                android:button="@null"
+                android:tag="31013" />
+
+            <RadioButton
+                android:id="@+id/drop_item_pgel_4"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/mtl_sl_pgel4"
+                android:button="@null"
+                android:tag="31014" />
+
+            <RadioButton
+                android:id="@+id/drop_item_iam_3"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/mtl_sl_iam3"
+                android:button="@null"
+                android:tag="31023" />
+
+            <RadioButton
+                android:id="@+id/drop_item_iam_4"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/mtl_sl_iam4"
+                android:button="@null"
+                android:tag="31024" />
+
+            <RadioButton
                 android:id="@+id/drop_item_carbon_1"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -371,6 +403,7 @@
                 android:background="@mipmap/mtl_skill3"
                 android:button="@null"
                 android:tag="3303" />
+
         </com.ssyanhuo.arknightshelper.widget.LineWrapLayout>
 
     </com.ssyanhuo.arknightshelper.widget.ChildScrollView>
