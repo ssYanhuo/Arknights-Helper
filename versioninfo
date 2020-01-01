@@ -1,7 +1,8 @@
 versionCode 16
-versionName β2.1.4-MidWinter
-releaseNote [Info]本次更新会丢失部分设置，如公开招募查询方式等，建议更新后清除数据
-[Info]由于更改了检查更新服务器的文件结构，从下次更新起，β2.1.3-EarlyWinter前的版本不再能够检查更新
+versionName β-2.1.4-MidWinter
+releaseNote [Info]祝各位刀客塔元旦快乐！
+[Info]本次更新会丢失部分设置，如公开招募查询方式等，建议更新后清除数据
+[Info]由于更改了检查更新服务器的文件结构，从下次更新起，β-2.1.3-EarlyWinter前的版本不再能够检查更新
 [New]同步最新游戏数据、新增干员、标签和材料
 [New]更新设置菜单支持库
 [New]增加更新检查服务器选择，可使用国内服务器
