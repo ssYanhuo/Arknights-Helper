@@ -90,7 +90,7 @@ public class Hr {
         } else if (sharedPreferences.getBoolean("fuzzyQuery", false)) {
             fuzzy = true;
         }
-        builtin = sharedPreferences.getBoolean("use_builtin_data", false);
+        builtin = sharedPreferences.getBoolean("use_builtin_data", true);
         selector = (ScrollView) LayoutInflater.from(applicationContext).inflate(R.layout.content_hr_sub_ocr, null);
         checkBoxes = new ArrayList<>();
         selectedStar = new ArrayList<>();

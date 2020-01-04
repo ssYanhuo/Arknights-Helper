@@ -78,7 +78,7 @@ public class Material {
         rootLayout = backgroundLayout;
         contentView = view;
         sharedPreferences = applicationContext.getSharedPreferences("com.ssyanhuo.arknightshelper_preferences", Context.MODE_PRIVATE);
-        builtin = sharedPreferences.getBoolean("use_builtin_data", false);
+        builtin = sharedPreferences.getBoolean("use_builtin_data", true);
         try {
             expJsonObject = JSONUtility.getJSONObject(applicationContext, FileUtility.readData("aklevel.json", applicationContext, builtin));
             characterJsonObject = JSONUtility.getJSONObject(applicationContext, FileUtility.readData("charMaterials.json", applicationContext, builtin));

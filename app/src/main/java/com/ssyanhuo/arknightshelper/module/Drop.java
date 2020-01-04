@@ -71,7 +71,7 @@ public class Drop {
         contentView = view;
         handler = new Handler();
         sharedPreferences = applicationContext.getSharedPreferences("com.ssyanhuo.arknightshelper_preferences", Context.MODE_PRIVATE);
-        builtin = sharedPreferences.getBoolean("use_builtin_data", false);
+        builtin = sharedPreferences.getBoolean("use_builtin_data", true);
         try{
             data_matrix = JSON.parseObject(FileUtility.readData("matrix.json", applicationContext, builtin));
             //下面两个是数组形式
