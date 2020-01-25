@@ -48,6 +48,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -404,8 +405,22 @@ public class MainActivity extends AppCompatActivity
         switch (state){
             case STATE_UP_TO_DATE:
                 textView.setText(getResources().getString(R.string.update_state_correct));
-                textView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-                imageView.setBackground(getDrawable(R.color.colorPrimaryDark));
+                if(ThemeUtils.getThemeMode(getApplicationContext()) == ThemeUtils.THEME_NEW_YEAR){
+                    textView.setTextColor(getResources().getColor(R.color.colorAccent));
+                    imageView.setBackground(getDrawable(R.color.colorAccent));
+                    if (System.currentTimeMillis() >= 1579881600000.0 && System.currentTimeMillis() <= 1581177600000.0){
+                        boolean inChina = false;
+                            if (Locale.getDefault().getLanguage().contains("zh")){
+                                inChina = true;
+                            }
+                        if (inChina){
+                            textView.setText("祝各位刀客塔新年快乐！");
+                        }
+                    }
+                }else {
+                    textView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                    imageView.setBackground(getDrawable(R.color.colorPrimaryDark));
+                }
                 imageView.setImageResource(R.drawable.ic_check_correct);
                 break;
             case STATE_NEED_UPDATE:
