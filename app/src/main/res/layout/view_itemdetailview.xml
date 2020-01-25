@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:gravity="center_vertical"
-    android:theme="@style/AppTheme.FloatingWindow">
+    android:gravity="center_vertical">
     <ImageView
         android:layout_width="64dp"
         android:layout_height="64dp"

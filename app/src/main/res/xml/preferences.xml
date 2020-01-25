@@ -16,6 +16,13 @@
             android:key="game_version"
             android:title="@string/settings_title_game_version"
             android:summary="@string/settings_summary_game_version"/>
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/settings_array_theme"
+            android:entryValues="@array/settings_array_theme_value"
+            android:key="theme"
+            android:title="@string/settings_title_theme"
+            android:summary="@string/settings_summary_theme"/>
 
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/settings_category_compatibility" android:icon="@drawable/ic_settings_compatibility">

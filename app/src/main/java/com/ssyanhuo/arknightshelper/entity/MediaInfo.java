@@ -1,8 +1,7 @@
-package com.ssyanhuo.arknightshelper.utiliy;
+package com.ssyanhuo.arknightshelper.entity;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
+import android.net.Uri;
 
 public class MediaInfo {
         public Bitmap thumbnail;
@@ -10,4 +9,5 @@ public class MediaInfo {
         public String name;
         public String date;
         public int id;
+        public Uri uri;
 }

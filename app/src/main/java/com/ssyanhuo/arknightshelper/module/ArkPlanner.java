@@ -10,7 +10,7 @@ package com.ssyanhuo.arknightshelper.module;
 import android.content.Context;
 
 import com.alibaba.fastjson.JSONObject;
-import com.ssyanhuo.arknightshelper.utiliy.JSONUtility;
+import com.ssyanhuo.arknightshelper.utils.JSONUtils;
 
 public class ArkPlanner {
     int filter_freq;
@@ -33,13 +33,13 @@ public class ArkPlanner {
          */
         filter_freq = 20;
         filter_stages = null;
-        url_stats = "result/matrix?show_stage_details=true&show_item_details=true";
+        url_stats = "result/matrixTheme?show_stage_details=true&show_item_details=true";
         url_rules = "formula";
         path_stats = "data/matrix.json";
         path_rules = "data/formula.json";
         try{
-            material_probs = JSONUtility.getJSONObject(applicationContext, JSONUtility.getJSONString(applicationContext, path_stats));
-            convertion_rules = JSONUtility.getJSONObject(applicationContext, JSONUtility.getJSONString(applicationContext, path_rules));
+            material_probs = JSONUtils.getJSONObject(applicationContext, JSONUtils.getJSONString(applicationContext, path_stats));
+            convertion_rules = JSONUtils.getJSONObject(applicationContext, JSONUtils.getJSONString(applicationContext, path_rules));
         }catch (Exception e){
 
         }

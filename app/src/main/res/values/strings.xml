@@ -168,7 +168,7 @@
     <string name="settings_summary_long_press_back_to_game">长按悬浮窗按钮返回游戏</string>
     <string name="settings_title_game_version">游戏渠道</string>
     <string name="start_game_remember_selection">记住本次选择</string>
-    <string name="settings_summary_game_version">仅在安装多个客户端时生效</string>
+    <string name="settings_summary_game_version">仅在安装多个客户端时可用</string>
     <string name="settings_title_long_press_back_to_game">快速返回</string>
     <string name="resume_game">正在拉起游戏……</string>
     <string name="hr_tag_zhiyuanjixie" translatable="false">机械支援</string>
@@ -186,4 +186,26 @@
     <string name="settings_data_update_success">操作成功完成</string>
     <string name="settings_data_update_title">更新数据</string>
     <string name="settings_title_update_data">立即更新数据</string>
+    <string name="data_updater_fetching">正在获取……</string>
+    <string name="settings_title_theme">主题</string>
+    <string name="settings_summary_theme">可能需要重新启动应用才能完全生效</string>
+    <string name="notification_ticker">服务正在运行</string>
+    <string name="notification_action_home">返回应用</string>
+    <string name="tab_title_more">更多功能</string>
+    <string name="more_go_main_title">返回应用</string>
+    <string name="more_go_main_summary">前往主菜单</string>
+    <string name="more_go_setting_title">设置</string>
+    <string name="more_go_setting_summary">切换主题、更新数据</string>
+    <string name="more_go_qq_title">加入QQ群</string>
+    <string name="more_go_qq_summary">反馈和获取测试版本</string>
+    <string name="more_go_wiki_title">明日方舟WIKI</string>
+    <string name="more_go_wiki_summary">干员资料和最新信息</string>
+    <string name="more_go_tool_title">明日方舟工具箱™</string>
+    <string name="more_go_tool_summary" translatable="false">By Graue Neko</string>
+    <string name="more_go_statistics_title">企鹅数据™</string>
+    <string name="more_go_statistics_summary" translatable="false">By Penguin Statistics Team</string>
+    <string name="more_go_planner_title">刷图规划™</string>
+    <string name="more_go_planner_summary" translatable="false">By ycremar</string>
+    <string name="more_go_about_title">关于</string>
+    <string name="more_go_about_summary">更多你想知道的信息</string>
 </resources>

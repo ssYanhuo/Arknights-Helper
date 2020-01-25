@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/activity_horizontal_margin"
-    android:theme="@style/AppTheme.FloatingWindow">
+    android:theme="@style/AppTheme.Default.FloatingWindow">
 
     <TextView
         android:layout_width="match_parent"

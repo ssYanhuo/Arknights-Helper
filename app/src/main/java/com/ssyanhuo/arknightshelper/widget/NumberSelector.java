@@ -35,7 +35,7 @@ public class NumberSelector extends LinearLayout {
     public NumberSelector(final Context context, AttributeSet attributeSet){
         super(context, attributeSet);
         TypedArray typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.NumberSelector);
-        contextThemeWrapper = new ContextThemeWrapper(context, R.style.AppTheme_FloatingWindow);
+        contextThemeWrapper = new ContextThemeWrapper(context, R.style.AppTheme_Default_FloatingWindow);
         min = typedArray.getInt(R.styleable.NumberSelector_minValue, Integer.MIN_VALUE);
         max = typedArray.getInt(R.styleable.NumberSelector_maxValue, Integer.MAX_VALUE);
         step = typedArray.getInt(R.styleable.NumberSelector_step, 1);

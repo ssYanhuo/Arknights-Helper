@@ -1,5 +1,6 @@
 package com.ssyanhuo.arknightshelper.service;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.ActivityManager;
 import android.content.Context;
@@ -11,6 +12,7 @@ import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import android.util.Log;
 
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -34,7 +36,7 @@ public class QSTileService extends TileService {
                 List<ActivityManager.RunningServiceInfo> runningServiceInfoList = activityManager.getRunningServices(Integer.MAX_VALUE);
                 if(runningServiceInfoList.size() > 0 && tile != null){
                     for (int i = 0; i < runningServiceInfoList.size(); i++){
-                        if(runningServiceInfoList.get(i).service.getClassName().equals("com.ssyanhuo.arknightshelper.overlay.OverlayService")){
+                        if(runningServiceInfoList.get(i).service.getClassName().equals("com.ssyanhuo.arknightshelper.service.OverlayService")){
                             tile.setState(Tile.STATE_ACTIVE);
                             tile.updateTile();
                             return;
@@ -67,10 +69,15 @@ public class QSTileService extends TileService {
         List<ActivityManager.RunningServiceInfo> runningServiceInfoList = activityManager.getRunningServices(Integer.MAX_VALUE);
         if(runningServiceInfoList.size() > 0){
             for (int i = 0; i < runningServiceInfoList.size(); i++){
-                if(runningServiceInfoList.get(i).service.getClassName().equals("com.ssyanhuo.arknightshelper.overlay.OverlayService")){
-                    tile.setState(Tile.STATE_INACTIVE);
-                    tile.updateTile();
-                    stopService(intent);
+                if(runningServiceInfoList.get(i).service.getClassName().equals("com.ssyanhuo.arknightshelper.service.OverlayService")){
+                    try{
+                        tile.setState(Tile.STATE_INACTIVE);
+                        tile.updateTile();
+                        collapseStatusBar();
+                        stopService(intent);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                     return;
                 }
             }
@@ -85,9 +92,20 @@ public class QSTileService extends TileService {
         try{
             tile.setState(Tile.STATE_ACTIVE);
             tile.updateTile();
+            collapseStatusBar();
             startService(intent);
         }catch (Exception e){
             Log.e(TAG, "Start service failed!", e);
+        }
+    }
+    private void collapseStatusBar(){
+        try {
+            @SuppressLint("WrongConstant") Object statusBarManager = getApplicationContext().getSystemService("statusbar");
+            Method collapse;
+            collapse = statusBarManager.getClass().getMethod("collapsePanels");
+            collapse.invoke(statusBarManager);
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 }

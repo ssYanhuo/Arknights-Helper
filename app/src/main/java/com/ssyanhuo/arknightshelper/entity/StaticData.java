@@ -1,4 +1,4 @@
-package com.ssyanhuo.arknightshelper.staticdata;
+package com.ssyanhuo.arknightshelper.entity;
 
 public class StaticData {
     public static class Exp{

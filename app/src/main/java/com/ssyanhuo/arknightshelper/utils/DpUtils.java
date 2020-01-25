@@ -1,8 +1,8 @@
-package com.ssyanhuo.arknightshelper.utiliy;
+package com.ssyanhuo.arknightshelper.utils;
 
 import android.content.Context;
 
-public class DpUtiliy {
+public class DpUtils {
     public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);

@@ -1,17 +1,16 @@
-package com.ssyanhuo.arknightshelper.utiliy;
+package com.ssyanhuo.arknightshelper.utils;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class JSONUtility {
+public class JSONUtils {
     private static String TAG = "JsonUtility";
     public static String getJSONString(Context context, String path){
         try {

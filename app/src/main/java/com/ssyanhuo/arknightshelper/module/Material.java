@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
@@ -16,12 +17,15 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.*;
 
+import androidx.appcompat.view.ContextThemeWrapper;
+
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ssyanhuo.arknightshelper.R;
-import com.ssyanhuo.arknightshelper.staticdata.StaticData;
-import com.ssyanhuo.arknightshelper.utiliy.FileUtility;
-import com.ssyanhuo.arknightshelper.utiliy.JSONUtility;
+import com.ssyanhuo.arknightshelper.entity.StaticData;
+import com.ssyanhuo.arknightshelper.utils.FileUtils;
+import com.ssyanhuo.arknightshelper.utils.JSONUtils;
+import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
 import com.ssyanhuo.arknightshelper.widget.ItemDetailView;
 import com.ssyanhuo.arknightshelper.widget.LineWrapLayout;
 import com.ssyanhuo.arknightshelper.widget.NumberSelector;
@@ -57,7 +61,8 @@ public class Material {
     private boolean onlyRare;
     private SharedPreferences sharedPreferences;
     private boolean builtin;
-
+    private ContextThemeWrapper contextThemeWrapper;
+    WindowManager windowManager;
     public void getAllNumberSelectors(View view){
         ViewGroup viewGroup = (ViewGroup)view;
         for(int i = 0; i < viewGroup.getChildCount(); i++){
@@ -80,9 +85,9 @@ public class Material {
         sharedPreferences = applicationContext.getSharedPreferences("com.ssyanhuo.arknightshelper_preferences", Context.MODE_PRIVATE);
         builtin = sharedPreferences.getBoolean("use_builtin_data", true);
         try {
-            expJsonObject = JSONUtility.getJSONObject(applicationContext, FileUtility.readData("aklevel.json", applicationContext, builtin));
-            characterJsonObject = JSONUtility.getJSONObject(applicationContext, FileUtility.readData("charMaterials.json", applicationContext, builtin));
-            materialJsonObject = JSONUtility.getJSONObject(applicationContext, FileUtility.readData("material.json", applicationContext, builtin));
+            expJsonObject = JSONUtils.getJSONObject(applicationContext, FileUtils.readData("aklevel.json", applicationContext, builtin));
+            characterJsonObject = JSONUtils.getJSONObject(applicationContext, FileUtils.readData("charMaterials.json", applicationContext, builtin));
+            materialJsonObject = JSONUtils.getJSONObject(applicationContext, FileUtils.readData("material.json", applicationContext, builtin));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -91,6 +96,7 @@ public class Material {
         levelNow = view.findViewById(R.id.material_selector_level_now);
         stageTarget = view.findViewById(R.id.material_selector_stage_target);
         levelTarget = view.findViewById(R.id.material_selector_level_target);
+        contextThemeWrapper = new ContextThemeWrapper(applicationContext, ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_FLOATING_WINDOW, applicationContext));
         getAllNumberSelectors(view);
         for (int i = 0; i < numberSelectors.size(); i++){
             numberSelectors.get(i).editText.addTextChangedListener(new TextWatcher() {
@@ -108,7 +114,8 @@ public class Material {
                 }
             });
         }
-        selector = (ScrollView)LayoutInflater.from(applicationContext).inflate(R.layout.content_material_sub_selector, null);
+        windowManager = (WindowManager) applicationContext.getSystemService(Context.WINDOW_SERVICE);
+        selector = (ScrollView)LayoutInflater.from(contextThemeWrapper).inflate(R.layout.overlay_material_sub_selector, null);
         ArrayList<String> characters = new ArrayList<>(characterJsonObject.keySet());
         for(int i = 0; i < characters.size(); i++){
             String name = characters.get(i);
@@ -166,6 +173,25 @@ public class Material {
                 }
             }
         });
+        int backgroundColor;
+        if (ThemeUtils.getThemeMode(applicationContext) == ThemeUtils.THEME_NEW_YEAR){//太红了不好看
+            backgroundColor = ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, applicationContext) - Color.parseColor("#00501010"));
+        }else if (ThemeUtils.getThemeMode(applicationContext) == ThemeUtils.THEME_LIGHT){//太蓝了也不好看
+            backgroundColor = ThemeUtils.getColorWithAlpha(0.9f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY, applicationContext));
+        } else {
+            backgroundColor = ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, applicationContext));
+        }
+        GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, new int[]{backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, Color.TRANSPARENT});
+        gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+        selector.setBackground(gradientDrawable);
+        WindowManager windowManager = (WindowManager) applicationContext.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        assert windowManager != null;
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+        int rotation = windowManager.getDefaultDisplay().getRotation();
+        if (rotation == 0 || rotation == 3) {
+            selector.setBackgroundColor(backgroundColor);
+        }
     }
     public void checkValue(){
         //不同星级时，精英化（目标+当前）最值随之变化，若变化前已经超出新值范围，则自动缩小为最值
@@ -410,24 +436,47 @@ public class Material {
         }
     }
     public void showSubWindow(){
-        WindowManager windowManager = (WindowManager) applicationContext.getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         assert windowManager != null;
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         int rotation = windowManager.getDefaultDisplay().getRotation();
-        if(rotation == 0 || rotation == 3){selector.setBackgroundColor(Color.parseColor("#aa000000"));}
+        int backgroundColor;
+        if (ThemeUtils.getThemeMode(applicationContext) == ThemeUtils.THEME_NEW_YEAR){//太红了不好看
+            backgroundColor = ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, applicationContext) - Color.parseColor("#00501010"));
+        }else if (ThemeUtils.getThemeMode(applicationContext) == ThemeUtils.THEME_LIGHT){//太蓝了也不好看
+            backgroundColor = ThemeUtils.getColorWithAlpha(0.9f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY, applicationContext));
+        } else {
+            backgroundColor = ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, applicationContext));
+        }
+        GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, new int[]{backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, Color.TRANSPARENT});
+        gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+        selector.setBackground(gradientDrawable);
+        if(rotation == 0 || rotation == 3){selector.setBackgroundColor(backgroundColor);}
         placeHolder = rootLayout.findViewWithTag("placeHolder");
         placeHolder.removeAllViews();
         placeHolder.addView(selector);
-        Animator animator = AnimatorInflater.loadAnimator(applicationContext, R.animator.anim_overlay_sub_show);
+        Animator animator;
+        if (rotation == 0 || rotation == 2){
+            animator = AnimatorInflater.loadAnimator(applicationContext, R.animator.overlay_sub_show_portrait);
+        }else {
+            animator = AnimatorInflater.loadAnimator(applicationContext, R.animator.overlay_sub_show_landspace);
+        }
         animator.setDuration(150);
         animator.setTarget(selector);
         animator.start();
     }
     public void hideSubWindow(){
-
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        assert windowManager != null;
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+        int rotation = windowManager.getDefaultDisplay().getRotation();
         placeHolder = rootLayout.findViewWithTag("placeHolder");
-        Animator animator = AnimatorInflater.loadAnimator(applicationContext, R.animator.anim_overlay_sub_hide);
+        Animator animator;
+        if (rotation == 0 || rotation == 2){
+            animator = AnimatorInflater.loadAnimator(applicationContext, R.animator.overlay_sub_hide_portrait);
+        }else {
+            animator = AnimatorInflater.loadAnimator(applicationContext, R.animator.overlay_sub_hide_landspace);
+        }
         animator.setDuration(150);
         animator.setTarget(selector);
         animator.addListener(new Animator.AnimatorListener() {
@@ -445,6 +494,25 @@ public class Material {
                 ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_3)).removeAllViews();
                 ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_2)).removeAllViews();
                 ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_1)).removeAllViews();
+                int backgroundColor;
+                if (ThemeUtils.getThemeMode(applicationContext) == ThemeUtils.THEME_NEW_YEAR){//太红了不好看
+                    backgroundColor = ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, applicationContext) - Color.parseColor("#00501010"));
+                }else if (ThemeUtils.getThemeMode(applicationContext) == ThemeUtils.THEME_LIGHT){//太蓝了也不好看
+                    backgroundColor = ThemeUtils.getColorWithAlpha(0.9f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY, applicationContext));
+                } else {
+                    backgroundColor = ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, applicationContext));
+                }
+                GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, new int[]{backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, Color.TRANSPARENT});
+                gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+                selector.setBackground(gradientDrawable);
+                WindowManager windowManager = (WindowManager) applicationContext.getSystemService(Context.WINDOW_SERVICE);
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                assert windowManager != null;
+                windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+                int rotation = windowManager.getDefaultDisplay().getRotation();
+                if (rotation == 0 || rotation == 3) {
+                    selector.setBackgroundColor(backgroundColor);
+                }
                 ArrayList<String> characters = new ArrayList<>(characterJsonObject.keySet());
                 for(int i = 0; i < characters.size(); i++){
                     String name = characters.get(i);

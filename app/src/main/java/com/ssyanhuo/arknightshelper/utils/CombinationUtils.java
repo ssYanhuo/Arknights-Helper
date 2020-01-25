@@ -1,11 +1,9 @@
-package com.ssyanhuo.arknightshelper.utiliy;
-
-import android.util.Log;
+package com.ssyanhuo.arknightshelper.utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class CombinationUtility {
+public class CombinationUtils {
     public static ArrayList<ArrayList<String>> combine (ArrayList<String> array){
         ArrayList<ArrayList<String>> result = new ArrayList<>();
         int size = array.size();

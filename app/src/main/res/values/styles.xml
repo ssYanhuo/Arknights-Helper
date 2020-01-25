@@ -1,34 +1,77 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <!-- 默认主题 -->
+    <style name="AppTheme.Default" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.AlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme.Default.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <style name="AppTheme.FloatingWindow" parent="Theme.AppCompat">
+    <style name="AppTheme.Default.FloatingWindow" parent="Theme.AppCompat">
         <item name="android:textColor">#E0E0E0</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="AppTheme.Default.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <!-- 新年主题 -->
+    <style name="AppTheme.NewYear" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimaryNewYear</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkNewYear</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NewYear.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.NewYear.FloatingWindow" parent="Theme.AppCompat">
+        <item name="android:textColor">#E0E0E0</item>
+        <item name="colorPrimary">@color/colorPrimaryNewYear</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkNewYear</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NewYear.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <!-- 浅色主题 -->
+    <style name="AppTheme.Light" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/colorPrimaryLight</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkLight</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Light.FloatingWindow" parent="Theme.AppCompat.Light">
+        <item name="android:textColor">#000000</item>
+        <item name="colorPrimary">@color/colorPrimaryLight</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkLight</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.Default.FloatingButtonAnimation">
+        <item name="android:windowEnterAnimation">@animator/overlay_button_show</item>
+        <item name="android:windowExitAnimation">@animator/overlay_button_hide</item>
+    </style>
+    <style name="AppTheme.Default.FloatingWindowAnimation">
+        <item name="android:windowEnterAnimation">@animator/overlay_main_show</item>
+        <item name="android:windowExitAnimation">@animator/overlay_main_hide</item>
+    </style>
+
+    <style name="AppTheme.Light.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="AppTheme.CheckBox.Blue" parent="Widget.AppCompat.Button.Colored">
         <item name="android:background">@drawable/checkbox_background_blue</item>

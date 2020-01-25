@@ -4,8 +4,7 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
-    android:addStatesFromChildren="true"
-    android:theme="@style/AppTheme.FloatingWindow">
+    android:addStatesFromChildren="true">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

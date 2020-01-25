@@ -142,4 +142,23 @@
     <string name="settings_title_update_data">Update data files now</string>
     <string name="tip_use_remote">You can download remote data to keep your data files up to time</string>
     <string name="tip_use_remote_action">Set it!</string>
+    <string name="data_updater_fetching">Loading…</string>
+    <string name="settings_title_theme">Theme</string>
+    <string name="settings_summary_theme">Restart application to apply change.</string>
+    <string name="notification_action_home">Back to application</string>
+    <string name="notification_ticker">Service running</string>
+    <string name="tab_title_more">More</string>
+    <string name="more_go_about_summary">More infomation you want to know</string>
+    <string name="more_go_about_title">About</string>
+    <string name="more_go_main_summary">Go to main activity</string>
+    <string name="more_go_main_title">Back to application</string>
+    <string name="more_go_planner_title">ArkPlanner™</string>
+    <string name="more_go_qq_summary">Give feedback and get beta version</string>
+    <string name="more_go_qq_title">Join QQ group</string>
+    <string name="more_go_setting_summary">Change theme or update data</string>
+    <string name="more_go_setting_title">Settings</string>
+    <string name="more_go_statistics_title">Penguin Statistics™</string>
+    <string name="more_go_tool_title">Aktools™</string>
+    <string name="more_go_wiki_summary">Operators\' info and latest update notes</string>
+    <string name="more_go_wiki_title">PRTS™</string>
 </resources>

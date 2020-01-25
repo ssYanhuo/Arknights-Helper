@@ -13,7 +13,6 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
@@ -28,17 +27,13 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.activity.SettingsActivity;
-import com.ssyanhuo.arknightshelper.utiliy.DpUtiliy;
-import com.ssyanhuo.arknightshelper.utiliy.FileUtility;
+import com.ssyanhuo.arknightshelper.service.OverlayService;
+import com.ssyanhuo.arknightshelper.utils.DpUtils;
+import com.ssyanhuo.arknightshelper.utils.FileUtils;
 import com.ssyanhuo.arknightshelper.widget.ChildScrollView;
 import com.ssyanhuo.arknightshelper.widget.LineWrapLayout;
 import com.ssyanhuo.arknightshelper.widget.TableItem;
 
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -65,18 +60,20 @@ public class Drop {
     boolean isAltSelector = false;
     boolean builtin;
     SharedPreferences sharedPreferences;
+    OverlayService service;
 
-    public void init(final Context context, View view){
+    public void init(final Context context, View view, OverlayService service){
         applicationContext = context;
         contentView = view;
+        this.service = service;
         handler = new Handler();
         sharedPreferences = applicationContext.getSharedPreferences("com.ssyanhuo.arknightshelper_preferences", Context.MODE_PRIVATE);
         builtin = sharedPreferences.getBoolean("use_builtin_data", true);
         try{
-            data_matrix = JSON.parseObject(FileUtility.readData("matrix.json", applicationContext, builtin));
+            data_matrix = JSON.parseObject(FileUtils.readData("matrix.json", applicationContext, builtin));
             //下面两个是数组形式
-            data_items = JSON.parseArray(FileUtility.readData("items.json", applicationContext, builtin));
-            data_stages = JSON.parseArray(FileUtility.readData("stages.json", applicationContext, builtin));
+            data_items = JSON.parseArray(FileUtils.readData("items.json", applicationContext, builtin));
+            data_stages = JSON.parseArray(FileUtils.readData("stages.json", applicationContext, builtin));
         } catch (Exception e){
             e.printStackTrace();
             Log.e(TAG, String.valueOf(e));
@@ -205,7 +202,7 @@ public class Drop {
     public void setAltSelector(){
             ScrollView scrollView = contentView.findViewById(R.id.drop_selector_scroll);
             ViewGroup.LayoutParams params = scrollView.getLayoutParams();
-            params.height = DpUtiliy.dip2px(applicationContext, 128);
+            params.height = DpUtils.dip2px(applicationContext, 128);
             scrollView.setLayoutParams(params);
             isAltSelector = true;
     }
@@ -230,5 +227,6 @@ public class Drop {
         Intent intent = new Intent(applicationContext, SettingsActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         applicationContext.startActivity(intent);
+        service.hideFloatingWindow();
     }
 }

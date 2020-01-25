@@ -11,6 +11,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
+import android.graphics.drawable.GradientDrawable;
 import android.os.*;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -21,15 +22,20 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.*;
 
-import com.google.android.material.snackbar.Snackbar;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.core.content.res.FontResourcesParserCompat;
+
 import com.google.android.material.tabs.TabLayout;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.activity.SettingsActivity;
+import com.ssyanhuo.arknightshelper.entity.ServiceNotification;
 import com.ssyanhuo.arknightshelper.module.Drop;
 import com.ssyanhuo.arknightshelper.module.Hr;
 import com.ssyanhuo.arknightshelper.module.Material;
-import com.ssyanhuo.arknightshelper.utiliy.DpUtiliy;
-import com.ssyanhuo.arknightshelper.utiliy.OCRUtility;
+import com.ssyanhuo.arknightshelper.module.More;
+import com.ssyanhuo.arknightshelper.utils.DpUtils;
+import com.ssyanhuo.arknightshelper.utils.OCRUtils;
+import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -44,13 +50,16 @@ public class OverlayService extends Service {
     LinearLayout linearLayout_hr;
     LinearLayout linearLayout_material;
     LinearLayout linearLayout_drop;
+    LinearLayout linearLayout_more;
     ScrollView scrollView_hr;
     ScrollView scrollView_exp;
     ScrollView scrollView_material;
+    ScrollView scrollView_more;
     Button button;
     final int HR = 0;
     final int MATERIAL = 1;
     final int DROP = 2;
+    final int MORE = 3;
     final String TAG = "BackgroundService";
     LinearLayout backgroundLayout;
     LinearLayout placeHolder;
@@ -61,11 +70,16 @@ public class OverlayService extends Service {
     Hr hr = new Hr();
     Material material = new Material();
     Drop drop = new Drop();
+    More more = new More();
     final String GAME_OFFICIAL = "0";
     final String GAME_BILIBILI = "1";
     final String GAME_MANUAL = "-1";
     final String PACKAGE_OFFICIAL = "com.hypergryph.arknights";
     final String PACKAGE_BILIBILI = "com.hypergryph.arknights.bilibili";
+    ContextThemeWrapper contextThemeWrapper;
+    private int backgroundColor;
+    String themeNow = "0";
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -75,7 +89,6 @@ public class OverlayService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-
         Intent notificationIntent = new Intent(this, BroadcastReceiver.class).setAction("com.ssyanhuo.arknightshelper.stopservice");
         notificationIntent.putExtra("action", "StopService");
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -86,24 +99,24 @@ public class OverlayService extends Service {
             assert notificationManager != null;
             notificationManager.createNotificationChannel(notificationChannel);
             builder
-                    .setSmallIcon(R.drawable.ic_notification)
+                    .setSmallIcon(R.drawable.ic_notification_small)
                     .setContentTitle(getString(R.string.notification_title))
                     .setContentText(getString(R.string.notification_text))
                     .setContentIntent(pendingIntent)
                     .setChannelId("notification");
         }else {
             builder
-                    .setSmallIcon(R.drawable.ic_notification)
+                    .setSmallIcon(R.drawable.ic_notification_small)
                     .setContentTitle(getString(R.string.notification_title))
                     .setContentText(getString(R.string.notification_text))
                     .setContentIntent(pendingIntent);
         }
 
         Notification notification = builder.build();
-        startForeground(1, notification);
+        startForeground(1, ServiceNotification.build(getApplicationContext(), 1));
 
         //启动悬浮窗
-
+        contextThemeWrapper = new ContextThemeWrapper(getApplicationContext(), ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_FLOATING_WINDOW, getApplicationContext()));
         windowManager = (WindowManager)getSystemService(WINDOW_SERVICE);
         floatingWindowLayoutParams = new WindowManager.LayoutParams();
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
@@ -128,7 +141,7 @@ public class OverlayService extends Service {
         startFloatingButton();
         //预处理
         floatingWindowPreProcess();
-        OCRUtility.init(getApplicationContext());
+        OCRUtils.init(getApplicationContext());
         final Handler handler = new Handler();
         Timer orientationListener = new Timer();
         orientationListener.schedule(new TimerTask() {
@@ -155,8 +168,8 @@ public class OverlayService extends Service {
     @SuppressLint("ClickableViewAccessibility")
     public void startFloatingButton(){
         floatingWindowLayoutParams.format = PixelFormat.RGBA_8888;
-        floatingWindowLayoutParams.width = DpUtiliy.dip2px(getApplicationContext(), 48);
-        floatingWindowLayoutParams.height = DpUtiliy.dip2px(getApplicationContext(), 48);
+        floatingWindowLayoutParams.width = DpUtils.dip2px(getApplicationContext(), 48);
+        floatingWindowLayoutParams.height = DpUtils.dip2px(getApplicationContext(), 48);
         floatingWindowLayoutParams.gravity = Gravity.LEFT | Gravity.TOP;
         floatingWindowLayoutParams.flags = WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
         floatingWindowLayoutParams.x = sharedPreferences.getInt("lastX", 0);
@@ -291,7 +304,12 @@ public class OverlayService extends Service {
                         editor.apply();
                         if (Math.abs(downX - upX) <= 10 && Math.abs(downY - upY) <= 10){
                             if (upTime - downTime <= 350){
-                                showFloatingWindow();
+                                if (!themeNow.equals(sharedPreferences.getString("theme", "0"))){
+                                    floatingWindowPreProcess();
+                                }
+                                if (!isFloatingWindowShowing){
+                                    showFloatingWindow();
+                                }
                             }
                         }
                     default:
@@ -305,19 +323,37 @@ public class OverlayService extends Service {
     }
 
     public void floatingWindowPreProcess(){
-        backgroundLayout = new LinearLayout(this);
-        placeHolder = new LinearLayout(this);
-        linearLayout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.overlay_main, null);
+        themeNow = String.valueOf(ThemeUtils.getThemeMode(contextThemeWrapper));
+        if (ThemeUtils.getThemeMode(getApplicationContext()) == ThemeUtils.THEME_NEW_YEAR){//太红了不好看
+            backgroundColor = ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, contextThemeWrapper) - Color.parseColor("#00501010"));
+        }else if (ThemeUtils.getThemeMode(getApplicationContext()) == ThemeUtils.THEME_LIGHT){//太蓝了也不好看
+            backgroundColor = ThemeUtils.getColorWithAlpha(0.9f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY, contextThemeWrapper));
+        } else {
+            backgroundColor = ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, contextThemeWrapper));
+        }
+        contextThemeWrapper = new ContextThemeWrapper(getApplicationContext(), ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_FLOATING_WINDOW, getApplicationContext()));
+        backgroundLayout = new LinearLayout(contextThemeWrapper);
+        placeHolder = new LinearLayout(contextThemeWrapper);
+        linearLayout = (LinearLayout) LayoutInflater.from(contextThemeWrapper).inflate(R.layout.overlay_main, null);
+        if (ThemeUtils.getThemeMode(getApplicationContext()) == ThemeUtils.THEME_LIGHT){
+            ((ImageButton)linearLayout.findViewById(R.id.overlay_close)).setColorFilter(contextThemeWrapper.getResources().getColor(R.color.colorPrimary));
+        }
+        GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, new int[]{backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, Color.TRANSPARENT});
+        gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+        linearLayout.setBackground(gradientDrawable);
         //实例化view
         scrollView_hr = linearLayout.findViewById(R.id.scroll_hr);
         scrollView_exp = linearLayout.findViewById(R.id.scroll_exp);
         scrollView_material = linearLayout.findViewById(R.id.scroll_material);
+        scrollView_more = linearLayout.findViewById(R.id.scroll_more);
         linearLayout_hr = linearLayout.findViewById(R.id.hr_content);
         linearLayout_material = linearLayout.findViewById(R.id.material_content);
         linearLayout_drop = linearLayout.findViewById(R.id.drop_content);
+        linearLayout_more = linearLayout.findViewById(R.id.more_content);
         scrollView_hr.setVisibility(View.VISIBLE);
         scrollView_exp.setVisibility(View.GONE);
         scrollView_material.setVisibility(View.GONE);
+        scrollView_more.setVisibility(View.GONE);
         TabLayout tabLayout = linearLayout.findViewById(R.id.tab_main);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -332,6 +368,8 @@ public class OverlayService extends Service {
                     case DROP:
                         changeFloatingWindowContent(DROP);
                         break;
+                    case MORE:
+                        changeFloatingWindowContent(MORE);
                     default:
                         break;
                 }
@@ -355,16 +393,11 @@ public class OverlayService extends Service {
             }
         });
         //初始化
-        hr.init(getApplicationContext(), linearLayout_hr, backgroundLayout);
-        material.init(getApplicationContext(), linearLayout_material, backgroundLayout);
-        drop.init(getApplicationContext(), linearLayout_drop);
-        //设置按钮可以点击
-        /*button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showFloatingWindow();
-            }
-        });*/
+        hr.init(contextThemeWrapper, linearLayout_hr, backgroundLayout);
+        material.init(contextThemeWrapper, linearLayout_material, backgroundLayout);
+        drop.init(contextThemeWrapper, linearLayout_drop, this);
+        more.init(contextThemeWrapper, linearLayout_more, this);
+        floatingWindowLayoutParams.windowAnimations = R.style.AppTheme_Default_FloatingButtonAnimation;
     }
 
     private boolean checkApplication(String packageName) {
@@ -389,6 +422,7 @@ public class OverlayService extends Service {
         floatingWindowLayoutParams.gravity = Gravity.RIGHT | Gravity.TOP;
         floatingWindowLayoutParams.x = 0;
         floatingWindowLayoutParams.y = 0;
+        backgroundLayoutParams.windowAnimations = R.style.AppTheme_Default_FloatingWindowAnimation;
         //检测屏幕方向和是否全屏
         if(rotation == 1 || rotation == 3){//横
             floatingWindowLayoutParams.height = displayMetrics.heightPixels;
@@ -400,7 +434,7 @@ public class OverlayService extends Service {
             backgroundLayoutParams.width = displayMetrics.widthPixels + sharedPreferences.getInt("margin_fix", 0);
             //是否优化状态栏区域的显示效果
             if (rotation == 1){
-                linearLayout.setBackgroundColor(Color.parseColor("#aa000000"));
+                linearLayout.setBackgroundColor(backgroundColor);
             }
         }else {//竖
             floatingWindowLayoutParams.height = displayMetrics.heightPixels / 2;
@@ -411,7 +445,7 @@ public class OverlayService extends Service {
             backgroundLayoutParams.width = displayMetrics.widthPixels;
             backgroundLayout.setOrientation(LinearLayout.VERTICAL);
             //关闭背景渐变
-            linearLayout.setBackgroundColor(Color.parseColor("#aa000000"));
+            linearLayout.setBackgroundColor(backgroundColor);
         }
         linearLayout.setLayoutParams(floatingWindowLayoutParams);
         backgroundLayoutParams.x = 0;
@@ -465,6 +499,7 @@ public class OverlayService extends Service {
                 scrollView_hr.setVisibility(View.VISIBLE);
                 scrollView_exp.setVisibility(View.GONE);
                 scrollView_material.setVisibility(View.GONE);
+                scrollView_more.setVisibility(View.GONE);
                 hr.isCurrentWindow(true);
                 material.isCurrentWindow(false);
                 break;
@@ -472,6 +507,7 @@ public class OverlayService extends Service {
                 scrollView_hr.setVisibility(View.GONE);
                 scrollView_exp.setVisibility(View.VISIBLE);
                 scrollView_material.setVisibility(View.GONE);
+                scrollView_more.setVisibility(View.GONE);
                 hr.isCurrentWindow(false);
                 material.isCurrentWindow(true);
                 break;
@@ -479,6 +515,15 @@ public class OverlayService extends Service {
                 scrollView_hr.setVisibility(View.GONE);
                 scrollView_exp.setVisibility(View.GONE);
                 scrollView_material.setVisibility(View.VISIBLE);
+                scrollView_more.setVisibility(View.GONE);
+                hr.isCurrentWindow(false);
+                material.isCurrentWindow(false);
+                break;
+            case MORE:
+                scrollView_hr.setVisibility(View.GONE);
+                scrollView_exp.setVisibility(View.GONE);
+                scrollView_material.setVisibility(View.GONE);
+                scrollView_more.setVisibility(View.VISIBLE);
                 hr.isCurrentWindow(false);
                 material.isCurrentWindow(false);
                 break;
@@ -487,8 +532,11 @@ public class OverlayService extends Service {
         }
     }
     public void hideFloatingWindow(){
-        isFloatingWindowShowing = false;
-        windowManager.removeView(backgroundLayout);
+        try{
+            windowManager.removeView(backgroundLayout);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         startFloatingButton();
         final Handler handler = new Handler();
         Timer timer = new Timer();
@@ -499,10 +547,11 @@ public class OverlayService extends Service {
                 @Override
                 public void run() {
                     floatingWindowPreProcess();
+                    isFloatingWindowShowing = false;
                 }
             });
         }
-        }, 250);
+        }, 500);
     }
     @Override
     public void onDestroy() {
@@ -517,7 +566,7 @@ public class OverlayService extends Service {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.exit(0);
+        //System.exit(0);
         System.gc();
     }
 }

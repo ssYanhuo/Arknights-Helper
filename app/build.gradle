@@ -6,9 +6,9 @@ android {
     defaultConfig {
         applicationId "com.ssyanhuo.arknightshelper"
         minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 17
-        versionName "β-2.1.5-EarlyWinter"
+        targetSdkVersion 28
+        versionCode 18
+        versionName "β-2.1.6-NewYear"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -17,18 +17,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets { main { res.srcDirs = ['src/main/res'] } }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'com.google.android.material:material:1.2.0-alpha03'
+    implementation 'com.google.android.material:material:1.2.0-alpha04'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'junit:junit:4.13-beta-3'
     implementation 'androidx.test:runner:1.3.0-alpha03'
     implementation 'androidx.test.espresso:espresso-core:3.3.0-alpha03'
-    implementation 'androidx.fragment:fragment:1.2.0-rc04'
+    implementation 'androidx.fragment:fragment:1.2.0'
     implementation 'com.alibaba:fastjson:1.2.58'
     implementation 'com.github.deano2390:MaterialShowcaseView:1.3.4'
     implementation 'com.github.zyyoona7:EasyPopup:1.1.2'

@@ -1,4 +1,4 @@
-package com.ssyanhuo.arknightshelper.utiliy;
+package com.ssyanhuo.arknightshelper.utils;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,15 +7,14 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-public class FileUtility {
-    private final static String TAG = "FileUtility";
+public class FileUtils {
+    private final static String TAG = "FileUtils";
 
     public static void writeFile(String data, String name, Context context) throws IOException {
         FileOutputStream fileOutputStream = context.openFileOutput(name, Context.MODE_PRIVATE);

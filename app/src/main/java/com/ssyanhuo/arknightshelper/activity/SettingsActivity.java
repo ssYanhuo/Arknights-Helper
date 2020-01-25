@@ -1,7 +1,6 @@
 package com.ssyanhuo.arknightshelper.activity;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
@@ -20,14 +19,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreference;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.android.material.snackbar.Snackbar;
 import com.ssyanhuo.arknightshelper.R;
-import com.ssyanhuo.arknightshelper.utiliy.FileUtility;
+import com.ssyanhuo.arknightshelper.utils.FileUtils;
+import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -52,12 +54,17 @@ public class SettingsActivity extends AppCompatActivity {
     static LinearLayout updateLayout;
     static AlertDialog updateDialog;
     static final String TAG = "SettingsActivity";
-    static boolean updateSuccessed = false;
+    static boolean updateSucceed = false;
+
+    private void preNotifyThemeChanged(){
+        setTheme(ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_MAIN, getApplicationContext()));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        preNotifyThemeChanged();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_activity);
+        setContentView(R.layout.activity_settings);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.settings, new SettingsFragment())
@@ -82,6 +89,8 @@ public class SettingsActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
     public static class SettingsFragment extends PreferenceFragmentCompat {
 
         @Override
@@ -93,6 +102,7 @@ public class SettingsActivity extends AppCompatActivity {
             final SwitchPreference use_builtin_data = findPreference("use_builtin_data");
             final Preference update_site = findPreference("update_site");
             final Preference update_data = findPreference("update_data");
+            final ListPreference theme = findPreference("theme");
             margin_fix.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
@@ -118,14 +128,14 @@ public class SettingsActivity extends AppCompatActivity {
                         update_data.setEnabled(false);
                     }else {
                         try{
-                            FileUtility.readData("akhr.json", getContext(), false);
-                            FileUtility.readData("aklevel.json", getContext(), false);
-                            FileUtility.readData("charMaterials.json", getContext(), false);
-                            FileUtility.readData("datainfo.json", getContext(), false);
-                            FileUtility.readData("items.json", getContext(), false);
-                            FileUtility.readData("material.json", getContext(), false);
-                            FileUtility.readData("matrix.json", getContext(), false);
-                            FileUtility.readData("stages.json", getContext(), false);
+                            FileUtils.readData("akhr.json", getContext(), false);
+                            FileUtils.readData("aklevel.json", getContext(), false);
+                            FileUtils.readData("charMaterials.json", getContext(), false);
+                            FileUtils.readData("datainfo.json", getContext(), false);
+                            FileUtils.readData("items.json", getContext(), false);
+                            FileUtils.readData("material.json", getContext(), false);
+                            FileUtils.readData("matrix.json", getContext(), false);
+                            FileUtils.readData("stages.json", getContext(), false);
                         } catch (IOException e) {
                             e.printStackTrace();
                             updateLayout = (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.content_data_updater, null);
@@ -141,7 +151,7 @@ public class SettingsActivity extends AppCompatActivity {
                             timer.schedule(new TimerTask() {
                                 @Override
                                 public void run() {
-                                    if (updateSuccessed){
+                                    if (updateSucceed){
                                         handler.post(new Runnable() {
                                             @Override
                                             public void run() {
@@ -174,6 +184,18 @@ public class SettingsActivity extends AppCompatActivity {
                     return false;
                 }
             });
+            theme.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    preferences.edit().putBoolean("allowAutoTheme", false).apply();
+                    try {
+                        getActivity().recreate();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    return true;
+                }
+            });
         }
         private class UpdateRunnable implements Runnable{
             String BASE_URL_GITEE = "https://gitee.com/ssYanhuo/Arknights-Helper-Data/raw/master";
@@ -201,12 +223,12 @@ public class SettingsActivity extends AppCompatActivity {
                         JSONObject selectedObj = selectedArray.getJSONObject(i);
                         String objURL = selectedObj.getString("name");
                         String result = URLRequest(spec + selectedVersion + objURL);
-                        FileUtility.writeFile(result, objURL.substring(1), getContext());
+                        FileUtils.writeFile(result, objURL.substring(1), getContext());
                     }
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
-                            updateSuccessed = true;
+                            updateSucceed = true;
                             try{
                                 updateDialog.dismiss();
                             }catch (Exception e){

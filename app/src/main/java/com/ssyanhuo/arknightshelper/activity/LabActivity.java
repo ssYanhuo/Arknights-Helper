@@ -2,32 +2,27 @@ package com.ssyanhuo.arknightshelper.activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.DialogCompat;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
-import android.util.TimeUtils;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.ssyanhuo.arknightshelper.R;
-import com.ssyanhuo.arknightshelper.utiliy.FileUtility;
+import com.ssyanhuo.arknightshelper.utils.FileUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class LabActivity extends AppCompatActivity {
 
@@ -60,7 +55,7 @@ public class LabActivity extends AppCompatActivity {
 
     public void readTest(View view){
         try {
-            String data = FileUtility.readFile("Test.log", this);
+            String data = FileUtils.readFile("Test.log", this);
             if (data == null){ throw new IOException("File is null.");}
             Toast.makeText(this, "读取Test.log成功:" + data, Toast.LENGTH_SHORT).show();
         }catch (Exception e){
@@ -72,7 +67,7 @@ public class LabActivity extends AppCompatActivity {
     public void writeTest(View view){
         try {
             String data = String.valueOf(System.currentTimeMillis());
-            FileUtility.writeFile(data, "Test.log", this);
+            FileUtils.writeFile(data, "Test.log", this);
             Toast.makeText(this, "写入Test.log成功:" + data, Toast.LENGTH_SHORT).show();
         }catch (Exception e){
             Log.e(TAG, String.valueOf(e));

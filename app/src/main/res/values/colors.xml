@@ -6,6 +6,10 @@
     <color name="colorPrimaryDark">#1A1A1A</color>
     <color name="colorSurface">#1A1A1A</color>
     <color name="colorAccent">#FF9800</color>
+    <color name="colorPrimaryNewYear">#C62828</color>
+    <color name="colorPrimaryDarkNewYear">#B71C1C</color>
+    <color name="colorPrimaryLight">#E1F5FE</color>
+    <color name="colorPrimaryDarkLight">#81D4FA</color>
     <color name="colorError">#E91E1E</color>
     <color name="colorCheckBoxChecked">#FFFFFF</color>
     <color name="colorCheckBoxBlue">#03A9F4</color>

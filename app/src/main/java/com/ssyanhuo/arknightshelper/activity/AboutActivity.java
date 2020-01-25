@@ -3,14 +3,17 @@ package com.ssyanhuo.arknightshelper.activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.ssyanhuo.arknightshelper.R;
+import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Handler;
@@ -33,8 +36,31 @@ public class AboutActivity extends AppCompatActivity {
     boolean showedEaster;
     Handler easterHandler;
     ScrollView scrollView;
+
+    private void preNotifyThemeChanged(){
+        setTheme(ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_NO_ACTION_BAR, getApplicationContext()));
+    }
+
+    private void notifyThemeChanged(Toolbar toolbar){
+        toolbar.setBackgroundColor(getResources().getColor(ThemeUtils.getColorId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY, getApplicationContext())));
+        if (ThemeUtils.getThemeMode(getApplicationContext()) == ThemeUtils.THEME_LIGHT){
+            AppCompatImageButton navBtn = (AppCompatImageButton) toolbar.getChildAt(1);
+            Drawable drawable = navBtn.getDrawable();
+            drawable.setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.MULTIPLY);
+            toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            navBtn.setImageDrawable(drawable);
+        }else {
+            AppCompatImageButton navBtn = (AppCompatImageButton) toolbar.getChildAt(1);
+            Drawable drawable = navBtn.getDrawable();
+            drawable.setColorFilter(Color.WHITE, PorterDuff.Mode.MULTIPLY);
+            toolbar.setTitleTextColor(Color.WHITE);
+            navBtn.setImageDrawable(drawable);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        preNotifyThemeChanged();
         count = 0;
         line = 0;
         cancelEasterTimer = false;
@@ -43,7 +69,7 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         scrollView = findViewById(R.id.about_scroll);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar_about);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -112,6 +138,7 @@ public class AboutActivity extends AppCompatActivity {
                 }
             }
         });
+        notifyThemeChanged(toolbar);
     }
 
     private int getEasterString(){

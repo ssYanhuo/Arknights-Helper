@@ -6,6 +6,8 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,23 +27,27 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.ssyanhuo.arknightshelper.BuildConfig;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.service.OverlayService;
+import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -67,8 +73,11 @@ public class MainActivity extends AppCompatActivity
     final String SITE_GITHUB = "1";
     private SharedPreferences preferences;
     private ContextThemeWrapper contextThemeWrapper;
+    String themeNow = "0";
+    int versionLast = -1;
 
     private void startEngine(final View view, final boolean startGame){
+        //new DataUpdateDialog().showDialog(getApplicationContext());
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
                 AlertDialog.Builder builder=new AlertDialog.Builder(this);
@@ -156,7 +165,7 @@ public class MainActivity extends AppCompatActivity
                             }
                             settingPreferenceEditor.putString("game_version", GAME_MANUAL);
                             settingPreferenceEditor.apply();
-                            contextThemeWrapper = new ContextThemeWrapper(MainActivity.this, R.style.AppTheme);
+                            contextThemeWrapper = new ContextThemeWrapper(MainActivity.this, R.style.AppTheme_Default);
                             AlertDialog.Builder builder = new AlertDialog.Builder(contextThemeWrapper);
                             final CheckBox checkBox = new CheckBox(contextThemeWrapper);
                             checkBox.setText(R.string.start_game_remember_selection);
@@ -215,7 +224,11 @@ public class MainActivity extends AppCompatActivity
                 Looper.loop();
             }
         }, 500);
-
+        versionLast = preferences.getInt("versionLast", -1);
+        if (versionLast == -1 && versionLast != BuildConfig.VERSION_CODE){
+            //TODO do-something
+            preferences.edit().putInt("versionLast", BuildConfig.VERSION_CODE).apply();
+        }
     }
     private boolean checkApplication(String packageName) {
         if (packageName == null || "".equals(packageName)){
@@ -228,17 +241,43 @@ public class MainActivity extends AppCompatActivity
             return false;
         }
     }
+
+    private void preNotifyThemeChanged(){
+        setTheme(ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_NO_ACTION_BAR, getApplicationContext()));
+        themeNow = String.valueOf(ThemeUtils.getThemeMode(getApplicationContext()));
+    }
+
+    private void notifyThemeChanged(Toolbar toolbar){
+        if (ThemeUtils.getThemeMode(getApplicationContext()) == ThemeUtils.THEME_LIGHT){
+            AppCompatImageButton navBtn = (AppCompatImageButton) toolbar.getChildAt(1);
+            Drawable drawable = navBtn.getDrawable();
+            drawable.setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.DARKEN);
+            toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            navBtn.setImageDrawable(drawable);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        preferences = getSharedPreferences("com.ssyanhuo.arknightshelper_preferences", MODE_PRIVATE);
+        if (System.currentTimeMillis() >= 1579881600000.0 && System.currentTimeMillis() <= 1581177600000.0 && preferences.getBoolean("allowAutoTheme", true)){
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("theme", "1");
+            editor.apply();
+        }else if(preferences.getBoolean("allowAutoTheme", true)){
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("theme", "0");
+            editor.apply();
+        }
+        preNotifyThemeChanged();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 startEngine(view, true);
             }
         });
@@ -249,7 +288,6 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        preferences = getSharedPreferences("com.ssyanhuo.arknightshelper_preferences", MODE_PRIVATE);
         LinearLayout linearLayout = findViewById(R.id.main_start_without_game);
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -265,6 +303,8 @@ public class MainActivity extends AppCompatActivity
         //View的更新并非线程安全，需要从子线程post一个Runnable，下面是这个Runnable的Handler
         handler = new Handler();
         checkApplicationUpdate();
+        //修改主题
+        notifyThemeChanged(toolbar);
         MaterialShowcaseSequence materialShowcaseSequence = new MaterialShowcaseSequence(this);
 
         materialShowcaseSequence.addSequenceItem(new MaterialShowcaseView.Builder(this)
@@ -333,7 +373,7 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_exit) {
-            System.exit(0);
+            finish();
         } else if (id == R.id.nav_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
@@ -344,11 +384,19 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-
     private void checkApplicationUpdate(){
         UpdateRunnable updateRunnable = new UpdateRunnable();
         new Thread(updateRunnable).start();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!preferences.getString("theme", "0").equals(themeNow)) {
+            recreate();
+        }
+    }
+
     private void changeUpdateState(int state, @Nullable final String versionName, @Nullable final String releaseNote){
         TextView textView = findViewById(R.id.main_state_text);
         ImageView imageView = findViewById(R.id.main_state_img);
@@ -583,7 +631,8 @@ public class MainActivity extends AppCompatActivity
                     }
                 };
                 handler.post(runnable1);
-                Log.e(TAG, "Version check failed: " + e);
+                Log.e(TAG, "Version check failed: ");
+                e.printStackTrace();
             }
         }
     }
