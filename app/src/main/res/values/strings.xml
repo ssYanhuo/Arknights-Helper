@@ -76,10 +76,10 @@
     <string name="go_release">前往项目发布页</string>
     <string name="go_release_desc">获取最新版本</string>
     <string name="about_thanks">鸣谢</string>
-    <string name="about_thanks_list">\@Graue Neko, @明日方舟WIKI, @deano2390, @teisun, @zyyoona7, @企鹅数据, @tomcat\n以及所有的Doctor们。</string>
+    <string name="about_thanks_list">\@Graue Neko, @明日方舟WIKI, @deano2390, @teisun, @zyyoona7, @企鹅数据, @tomcat, @ycremar\n以及所有的Doctor们。</string>
     <string name="about_version">版本号</string>
     <string name="about_version_desc">正在获取……</string>
-    <string name="start_two_apps">检测到多个客户端，请手动选择</string>
+    <string name="start_multiple_apps">检测到多个客户端，请手动选择</string>
     <string name="game_official">官方</string>
     <string name="game_bilibili">"哔哩哔哩 "</string>
     <string name="overlay_coming">即将到来……</string>
@@ -167,11 +167,11 @@
     <string name="settings_category_general">常规</string>
     <string name="settings_summary_long_press_back_to_game">长按悬浮窗按钮返回游戏</string>
     <string name="settings_title_game_version">游戏渠道</string>
-    <string name="start_game_remember_selection">记住本次选择</string>
+    <string name="start_game_remember_selection_yes">记住本次选择</string>
     <string name="settings_summary_game_version">仅在安装多个客户端时可用</string>
     <string name="settings_title_long_press_back_to_game">快速返回</string>
     <string name="resume_game">正在拉起游戏……</string>
-    <string name="hr_tag_zhiyuanjixie" translatable="false">机械支援</string>
+    <string name="hr_tag_zhiyuanjixie" translatable="false">支援机械</string>
     <string name="update_state_beta_finished">正式版已经发布，请点击此处更新到稳定版本</string>
     <string name="settings_category_compatibility">兼容性</string>
     <string name="settings_title_use_builtin_data">强制使用内置的数据文件</string>
@@ -208,4 +208,20 @@
     <string name="more_go_planner_summary" translatable="false">By ycremar</string>
     <string name="more_go_about_title">关于</string>
     <string name="more_go_about_summary">更多你想知道的信息</string>
+    <string name="shortcut_start_long_name">启动服务</string>
+    <string name="shortcut_start_short_name">启动</string>
+    <string name="settings_title_floating_button_opacity">悬浮按钮透明度</string>
+    <string name="settings_title_attach_to_edge">自动吸附</string>
+    <string name="settings_summary_attach_to_edge">保持悬浮按钮吸附在屏幕左右边缘</string>
+    <string name="settings_title_game_language">游戏语言</string>
+    <string name="settings_summary_game_language">仅翻译与游戏内容相关的文本，并隐藏国际版尚未实装的干员和材料</string>
+    <string name="ocr_not_available_in_other_languages">截图识别 在非简体中文环境下暂不可用</string>
+    <string name="meizu_floating_window_permission">魅族用户请手动前往系统设置授予应用悬浮窗权限</string>
+    <string name="start_game_remember_selection_no">不要记住</string>
+    <string name="get_permission_background_activity">如果部分操作没有响应，请授予应用“后台弹出界面”的权限</string>
+    <string name="game_english">国际服 (英语)</string>
+    <string name="game_japanese">国际服 (日语)</string>
+    <string name="game_korean">国际服 (韩语)</string>
+    <string name="game_manual">手动选择</string>
+    <string name="undo">撤销</string>
 </resources>

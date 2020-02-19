@@ -64,10 +64,18 @@
         "source":"ssYanhuo"
     },
     {
+        "name":"/i18n.json",
+        "nameFriendly":"i18n.json",
+        "date":"2020-2-20",
+        "dateraw":20200220,
+        "desc":"干员信息翻译",
+        "source":"ssYanhuo"
+    },
+    {
         "name":"/datainfo.json",
         "nameFriendly":"datainfo.json",
-        "date":"2020-1-25",
-        "dateraw":20200125,
+        "date":"2020-2-20",
+        "dateraw":20200220,
         "desc":"数据文件索引",
         "source":"ssYanhuo"
     }

@@ -1,10 +1,13 @@
 package com.ssyanhuo.arknightshelper.activity;
 
 import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -13,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -22,14 +24,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SeekBarPreference;
 import androidx.preference.SwitchPreference;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.android.material.snackbar.Snackbar;
+import com.ssyanhuo.arknightshelper.BuildConfig;
 import com.ssyanhuo.arknightshelper.R;
+import com.ssyanhuo.arknightshelper.entity.StaticData;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
+import com.ssyanhuo.arknightshelper.utils.PackageUtils;
 import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
+import com.ssyanhuo.arknightshelper.utils.I18nUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -37,6 +44,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -97,12 +105,14 @@ public class SettingsActivity extends AppCompatActivity {
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.preferences, rootKey);
             Preference long_press_back_to_game = findPreference("long_press_back_to_game");
-            Preference game_version = findPreference("game_version");
+            ListPreference game_version = findPreference("game_version");
             Preference margin_fix = findPreference("margin_fix");
             final SwitchPreference use_builtin_data = findPreference("use_builtin_data");
             final Preference update_site = findPreference("update_site");
             final Preference update_data = findPreference("update_data");
             final ListPreference theme = findPreference("theme");
+            final SeekBarPreference floating_button_opacity = findPreference("floating_button_opacity");
+            final ListPreference game_language = findPreference("game_language");
             margin_fix.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
@@ -115,9 +125,66 @@ public class SettingsActivity extends AppCompatActivity {
                     return false;
                 }
             });
-            if (!checkApplication(PACKAGE_OFFICIAL) || !checkApplication(PACKAGE_BILIBILI)){
-                game_version.setEnabled(false);
+            if (PackageUtils.getGameCount(getContext()) < 2){
+                game_version.setVisible(false);
+            }else {
+                ArrayList<Integer> index = new ArrayList<>();
+                CharSequence[] entryValues = game_version.getEntryValues();
+                for (int i = 0; i < entryValues.length; i++) {
+                    CharSequence packageName = entryValues[i];
+                    if (packageName == StaticData.Const.PACKAGE_MANUAL){continue;}
+                    if (checkApplication((String) packageName)) {
+                        index.add(i);
+                    }
+                }
+                CharSequence[] e = new CharSequence[index.size() + 1];
+                CharSequence[] v = new CharSequence[index.size() + 1];
+                for (int i = 0; i < index.size(); i++) {
+                    e[i] = game_version.getEntries()[index.get(i)];
+                    v[i] = game_version.getEntryValues()[index.get(i)];
+                }
+                e[index.size()] = getString(R.string.game_manual);
+                v[index.size()] = StaticData.Const.PACKAGE_MANUAL;
+                game_version.setEntries(e);
+                game_version.setEntryValues(v);
+
+                game_version.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                    @Override
+                    public boolean onPreferenceChange(Preference preference, Object newValue) {
+                        final String oldLang = preferences.getString("game_language", I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE);
+                        if (newValue.equals(StaticData.Const.PACKAGE_ENGLISH)){
+                            preferences.edit().putString("game_language", I18nUtils.LANGUAGE_ENGLISH).putBoolean("need_reload",true).apply();
+                            game_language.setValue(I18nUtils.LANGUAGE_ENGLISH);
+                            Snackbar.make(getView(), "游戏语言已自动设置为英语", Snackbar.LENGTH_LONG)
+                                    .setAction(R.string.undo, new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            preferences.edit().putString("game_language", oldLang).putBoolean("need_reload",true).apply();
+                                            game_language.setValue(oldLang);
+                                        }
+                                    })
+                                    .show();
+                        }else if (newValue.equals(StaticData.Const.PACKAGE_JAPANESE)){
+                            preferences.edit().putString("game_language", I18nUtils.LANGUAGE_ENGLISH).putBoolean("need_reload",true).apply();
+                            game_language.setValue(I18nUtils.LANGUAGE_JAPANESE);
+                            Snackbar.make(getView(), "游戏语言已自动设置为日文", Snackbar.LENGTH_LONG)
+                                    .setAction(R.string.undo, new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            preferences.edit().putString("game_language", oldLang).putBoolean("need_reload",true).apply();
+                                            game_language.setValue(oldLang);
+                                        }
+                                    })
+                                    .show();
+                        }else if (newValue.equals(StaticData.Const.PACKAGE_KOREAN)){
+                            //TODO Unfinished
+                        }
+
+                        return true;
+                    }
+                });
             }
+
             if (use_builtin_data.isChecked()){
                 update_data.setEnabled(false);
             }
@@ -136,7 +203,37 @@ public class SettingsActivity extends AppCompatActivity {
                             FileUtils.readData("material.json", getContext(), false);
                             FileUtils.readData("matrix.json", getContext(), false);
                             FileUtils.readData("stages.json", getContext(), false);
-                        } catch (IOException e) {
+                            FileUtils.readData("i18n.json", getContext(), false);
+                            JSONObject versionInfo = JSONObject.parseObject(FileUtils.readData("versionInfo.json", getContext(), true));
+                            if (versionInfo.getInteger("versionCode") > BuildConfig.VERSION_CODE){
+                                new AlertDialog.Builder(getContext())
+                                        .setMessage("客户端已经过时，无法使用在线数据")
+                                        .setPositiveButton(R.string.update_dialog_yes, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                try{
+                                                    Uri uri = Uri.parse("market://details?id=" + getContext().getPackageName());
+                                                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                                    intent.setPackage("com.coolapk.market");
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                    startActivity(intent);
+                                                    startActivity(intent);
+                                                }catch (Exception e){
+                                                    Log.e(TAG, "Call Coolapk failed:" + e);
+                                                    Intent intent = new Intent();
+                                                    intent.setAction(Intent.ACTION_VIEW);
+                                                    intent.setData(Uri.parse("http://www.coolapk.com/apk/com.ssyanhuo.arknightshelper"));
+                                                    startActivity(intent);
+                                                }
+                                            }
+                                        })
+                                        .show();
+                                return false;
+                            }else if (versionInfo.getInteger("versionCode") < BuildConfig.VERSION_CODE){
+                                throw new Exception("Out-dated data");
+                                //TODO 可能由过时更新到超前
+                            }
+                        } catch (Exception e) {
                             e.printStackTrace();
                             updateLayout = (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.content_data_updater, null);
                             updateDialog = new AlertDialog.Builder(getContext())
@@ -189,6 +286,7 @@ public class SettingsActivity extends AppCompatActivity {
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     preferences.edit().putBoolean("allowAutoTheme", false).apply();
                     try {
+                        preferences.edit().putBoolean("need_reload",true).apply();
                         getActivity().recreate();
                     }catch (Exception e){
                         e.printStackTrace();
@@ -196,10 +294,20 @@ public class SettingsActivity extends AppCompatActivity {
                     return true;
                 }
             });
+            game_language.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    if (!newValue.equals(I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE)){
+                        preferences.edit().putBoolean("need_reload",true).apply();
+                        Snackbar.make(getView(), R.string.ocr_not_available_in_other_languages, Snackbar.LENGTH_SHORT).show();
+                    }
+                    return true;
+                }
+            });
         }
         private class UpdateRunnable implements Runnable{
-            String BASE_URL_GITEE = "https://gitee.com/ssYanhuo/Arknights-Helper-Data/raw/master";
-            String BASE_URL_GITHUB = "https://raw.githubusercontent.com/ssYanhuo/Arknights-Helper-Data/master";
+            String BASE_URL_GITEE = "http://ssyanhuo.gitee.io/arknights-helper-data/";
+            String BASE_URL_GITHUB = "https://ssyanhuo.github.io/Arknights-Helper-Data/";
             @Override
             public void run() {
                 String site = preferences.getString("update_site", "0");
@@ -234,7 +342,7 @@ public class SettingsActivity extends AppCompatActivity {
                             }catch (Exception e){
                                 e.printStackTrace();
                             }
-                            Toast.makeText(getContext(), R.string.settings_data_update_success, Toast.LENGTH_SHORT).show();
+                            Snackbar.make(getView(), R.string.settings_data_update_success, Snackbar.LENGTH_SHORT).show();
 
                         }
                     });

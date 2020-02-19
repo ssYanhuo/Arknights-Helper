@@ -51,10 +51,10 @@
     <string name="go_release">Visit this project\'s release page</string>
     <string name="go_release_desc">Get lastest version</string>
     <string name="about_thanks">Thanks</string>
-    <string name="about_thanks_list">\@Graue Neko, @Arknights WIKI, @deano2390, @teisun, @zyyoona7, @企鹅数据, @tomcat\nAnd all Doctors.</string>
+    <string name="about_thanks_list">\@Graue Neko, @Arknights WIKI, @deano2390, @teisun, @zyyoona7, @企鹅数据, @tomcat, @ycremar\nAnd all Doctors.</string>
     <string name="about_version">Version</string>
     <string name="about_version_desc">Loading…</string>
-    <string name="start_two_apps">More than one game were found, please select one</string>
+    <string name="start_multiple_apps">More than one game were found, please select one</string>
     <string name="game_official">Official</string>
     <string name="game_bilibili">Bilibili</string>
     <string name="overlay_coming">Coming soon…</string>
@@ -125,8 +125,8 @@
     <string name="settings_category_general">General</string>
     <string name="settings_summary_long_press_back_to_game">Long press floating button to back to game</string>
     <string name="settings_title_game_version">Game version</string>
-    <string name="start_game_remember_selection">Remember</string>
-    <string name="settings_summary_game_version">Available when you installed more than one game</string>
+    <string name="start_game_remember_selection_yes">Remember</string>
+    <string name="settings_summary_game_version">Available when you installed more than one games</string>
     <string name="settings_title_long_press_back_to_game">Fast switch</string>
     <string name="resume_game">Starting game…</string>
     <string name="update_state_beta_finished">Beta test finished, click here to update to stable version</string>
@@ -148,7 +148,7 @@
     <string name="notification_action_home">Back to application</string>
     <string name="notification_ticker">Service running</string>
     <string name="tab_title_more">More</string>
-    <string name="more_go_about_summary">More infomation you want to know</string>
+    <string name="more_go_about_summary">More information you want to know</string>
     <string name="more_go_about_title">About</string>
     <string name="more_go_main_summary">Go to main activity</string>
     <string name="more_go_main_title">Back to application</string>
@@ -161,4 +161,19 @@
     <string name="more_go_tool_title">Aktools™</string>
     <string name="more_go_wiki_summary">Operators\' info and latest update notes</string>
     <string name="more_go_wiki_title">PRTS™</string>
+    <string name="shortcut_start_long_name">Start service</string>
+    <string name="shortcut_start_short_name">Start</string>
+    <string name="settings_title_floating_button_opacity">Floating button opacity</string>
+    <string name="settings_title_attach_to_edge">Always on the edge</string>
+    <string name="settings_summary_attach_to_edge">Attach to the screen\'s left or right edge</string>
+    <string name="settings_title_game_language">Game language</string>
+    <string name="settings_summary_game_language">Only affect some proper nouns in the game, operators and materials unavailable currently will be hidden</string>
+    <string name="ocr_not_available_in_other_languages">Screenshot recognition is not available in languages other than Simplified Chinese</string>
+    <string name="meizu_floating_window_permission">Meizu user please go to system settings to grant floating window permission manually</string>
+    <string name="start_game_remember_selection_no">Do not remember</string>
+    <string name="get_permission_background_activity">Please grant \"Allow pop-up from background\" permission if some functions not working properly</string>
+    <string name="game_english">English</string>
+    <string name="game_japanese">Japanese</string>
+    <string name="game_korean">Korean</string>
+    <string name="game_manual">Choose manually</string>
 </resources>

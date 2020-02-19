@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_notification_small"
+        android:shortcutId="startService"
+        android:shortcutLongLabel="@string/shortcut_start_long_name"
+        android:shortcutShortLabel="@string/shortcut_start_short_name"
+        tools:targetApi="n_mr1">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.ssyanhuo.arknightshelper.activity.MainActivity"
+            android:targetPackage="com.ssyanhuo.arknightshelper" />
+        <categories android:name="android.shortcut.conversion" />
+    </shortcut>
+
+</shortcuts>

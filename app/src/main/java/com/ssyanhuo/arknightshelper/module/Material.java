@@ -26,6 +26,7 @@ import com.ssyanhuo.arknightshelper.entity.StaticData;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
 import com.ssyanhuo.arknightshelper.utils.JSONUtils;
 import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
+import com.ssyanhuo.arknightshelper.utils.I18nUtils;
 import com.ssyanhuo.arknightshelper.widget.ItemDetailView;
 import com.ssyanhuo.arknightshelper.widget.LineWrapLayout;
 import com.ssyanhuo.arknightshelper.widget.NumberSelector;
@@ -63,6 +64,7 @@ public class Material {
     private boolean builtin;
     private ContextThemeWrapper contextThemeWrapper;
     WindowManager windowManager;
+    I18nUtils.Helper nameHelper;
     public void getAllNumberSelectors(View view){
         ViewGroup viewGroup = (ViewGroup)view;
         for(int i = 0; i < viewGroup.getChildCount(); i++){
@@ -114,16 +116,24 @@ public class Material {
                 }
             });
         }
+        try {
+            nameHelper = new I18nUtils().getHelper(applicationContext, builtin, I18nUtils.CATEGORY_NAME);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         windowManager = (WindowManager) applicationContext.getSystemService(Context.WINDOW_SERVICE);
         selector = (ScrollView)LayoutInflater.from(contextThemeWrapper).inflate(R.layout.overlay_material_sub_selector, null);
         ArrayList<String> characters = new ArrayList<>(characterJsonObject.keySet());
         for(int i = 0; i < characters.size(); i++){
             String name = characters.get(i);
+            if (nameHelper.isHidden(name, I18nUtils.FILTER_ALL)){
+                continue;
+            }
             JSONObject jsonObject = characterJsonObject.getJSONObject(name);
             if(jsonObject.getString("profession").equals("其它")){continue;}
             characterIndexMap.put(name, i);
             Button button = new Button(applicationContext);
-            button.setText(name);
+            button.setText(nameHelper.get(name));
             button.setMinWidth(applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin));
             button.setTextColor(Color.BLACK);
             button.setTag(jsonObject);
@@ -389,7 +399,7 @@ public class Material {
         characterBtn.setVisibility(View.VISIBLE);
         nowCharBtn.setBackground(drawable);
         nowCharBtn.setTag(jsonObject);
-        nowCharBtn.setText(jsonObject.getString("name"));
+        nowCharBtn.setText(nameHelper.get(jsonObject.getString("name")));
         contentView.findViewById(R.id.material_character_select).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -516,11 +526,14 @@ public class Material {
                 ArrayList<String> characters = new ArrayList<>(characterJsonObject.keySet());
                 for(int i = 0; i < characters.size(); i++){
                     String name = characters.get(i);
+                    if (nameHelper.isHidden(name, I18nUtils.FILTER_ALL)){
+                        continue;
+                    }
                     JSONObject jsonObject = characterJsonObject.getJSONObject(name);
                     if(jsonObject.getString("profession").equals("其它")){continue;}
                     characterIndexMap.put(name, i);
                     Button button = new Button(applicationContext);
-                    button.setText(name);
+                    button.setText(nameHelper.get(name));
                     button.setMinWidth(applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin));
                     button.setTag(jsonObject);
                     button.setTextColor(Color.BLACK);

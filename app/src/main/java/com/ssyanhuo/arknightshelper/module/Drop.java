@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.PaintDrawable;
+import android.os.Build;
 import android.os.Handler;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -123,8 +124,11 @@ public class Drop {
                 goUpdate();
             }
         };
-        spannableStringBuilder.setSpan(clickableSpan, spannableStringBuilder.length() - applicationContext.getString(R.string.drop_desc_part_4).length(), spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+        spannableStringBuilder.setSpan(clickableSpan, spannableStringBuilder.length() - applicationContext.getString(R.string.drop_desc_part_4).length(), spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         ((TextView)contentView.findViewById(R.id.drop_description)).setText(spannableStringBuilder);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
+            ((TextView)contentView.findViewById(R.id.drop_description)).append("\n" + applicationContext.getString(R.string.get_permission_background_activity));
+        }
         ((TextView)contentView.findViewById(R.id.drop_description)).setMovementMethod(LinkMovementMethod.getInstance());
     }
 

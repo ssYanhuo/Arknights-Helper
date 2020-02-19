@@ -6,6 +6,12 @@
     android:orientation="vertical"
     android:padding="@dimen/activity_horizontal_margin">
 
+    <TextView
+        android:id="@+id/more_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="" />
+
     <LinearLayout
         android:id="@+id/more_go_main"
         android:layout_width="match_parent"

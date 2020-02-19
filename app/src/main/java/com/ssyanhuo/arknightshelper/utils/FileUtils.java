@@ -4,8 +4,10 @@ import android.content.Context;
 import android.util.Log;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -59,6 +61,39 @@ public class FileUtils {
             bufferedReader.close();
             fileInputStream.close();
             return data.toString();
+        }
+    }
+
+    static public void copyFiles(Context c, String[] list){
+        for (String name:
+                list) {
+            copyFile(c, name);
+        }
+    }
+
+    static public void copyFile(Context c, String Name) {
+        File outfile = new File(c.getFilesDir(), Name);
+        BufferedOutputStream outStream = null;
+        BufferedInputStream inStream = null;
+
+        try {
+            outStream = new BufferedOutputStream(new FileOutputStream(outfile));
+            inStream = new BufferedInputStream(c.getAssets().open("data" + File.separator + Name));
+
+            byte[] buffer = new byte[1024 * 10];
+            int readLen = 0;
+            while ((readLen = inStream.read(buffer)) != -1) {
+                outStream.write(buffer, 0, readLen);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (inStream != null) inStream.close();
+                if (outStream != null) outStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

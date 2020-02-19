@@ -10,12 +10,19 @@
             android:title="@string/settings_title_long_press_back_to_game"
             android:summary="@string/settings_summary_long_press_back_to_game"/>
         <ListPreference
-            android:defaultValue="-1"
+            android:defaultValue="manual"
             android:entries="@array/settings_array_game"
             android:entryValues="@array/settings_array_game_value"
             android:key="game_version"
             android:title="@string/settings_title_game_version"
             android:summary="@string/settings_summary_game_version"/>
+        <ListPreference
+            android:defaultValue="zh-CN"
+            android:entries="@array/settings_array_game_language"
+            android:entryValues="@array/settings_array_game_language_value"
+            android:key="game_language"
+            android:title="@string/settings_title_game_language"
+            android:summary="@string/settings_summary_game_language"/>
         <ListPreference
             android:defaultValue="0"
             android:entries="@array/settings_array_theme"
@@ -23,6 +30,17 @@
             android:key="theme"
             android:title="@string/settings_title_theme"
             android:summary="@string/settings_summary_theme"/>
+        <SeekBarPreference
+            android:defaultValue="0"
+            android:key="floating_button_opacity"
+            app:min="0"
+            android:max="180"
+            android:title="@string/settings_title_floating_button_opacity"/>
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="attach_to_edge"
+            android:title="@string/settings_title_attach_to_edge"
+            android:summary="@string/settings_summary_attach_to_edge"/>
 
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/settings_category_compatibility" android:icon="@drawable/ic_settings_compatibility">

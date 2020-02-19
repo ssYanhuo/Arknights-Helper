@@ -3,12 +3,19 @@
     <string-array name="settings_array_game">
         <item>官方</item>
         <item>哔哩哔哩</item>
+        <item>国际服 (英语)</item>
+        <item>国际服 (日语)</item>
+        <item>国际服 (韩语)</item>
         <item>手动选择</item>
     </string-array>
     <string-array name="settings_array_game_value">
-        <item>0</item>
-        <item>1</item>
-        <item>-1</item>
+        <item>com.hypergryph.arknights</item>
+        <item>com.hypergryph.arknights.bilibili</item>
+        <item>com.YoStarEN.Arknights</item>
+        <item>com.YoStarJP.Arknights</item>
+        <item>com.YoStarKR.Arknights</item>
+        <item>manual</item>
+        <item></item>
     </string-array>
     <string-array name="settings_array_update_site">
         <item>Gitee(中国)</item>
@@ -28,5 +35,15 @@
         <item>0</item>
         <item>1</item>
         <item>2</item>
+    </string-array>
+    <string-array name="settings_array_game_language">
+        <item>简体中文</item>
+        <item>日文(日本語)</item>
+        <item>英语(English)</item>
+    </string-array>
+    <string-array name="settings_array_game_language_value">
+        <item>zh-CN</item>
+        <item>jp</item>
+        <item>en</item>
     </string-array>
 </resources>

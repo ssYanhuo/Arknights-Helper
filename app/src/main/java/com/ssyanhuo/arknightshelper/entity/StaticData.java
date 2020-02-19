@@ -1,5 +1,7 @@
 package com.ssyanhuo.arknightshelper.entity;
 
+import android.icu.util.ChineseCalendar;
+
 public class StaticData {
     public static class Exp{
         public static class Book{
@@ -62,4 +64,26 @@ public class StaticData {
         "费用回复",
         "支援机械"};
     }
+    public static class Const{
+        static public String PREFERENCE_PATH = "com.ssyanhuo.arknightshelper_preferences";
+        static public String PACKAGE_OFFICIAL = "com.hypergryph.arknights";
+        static public String PACKAGE_BILIBILI = "com.hypergryph.arknights.bilibili";
+        static public String PACKAGE_ENGLISH = "com.YoStarEN.Arknights";
+        static public String PACKAGE_JAPANESE = "com.YoStarJP.Arknights";
+        static public String PACKAGE_KOREAN = "com.YoStarKR.Arknights";
+        static public String PACKAGE_MANUAL = "manual";
+        static public String[] PACKAGE_LIST = {PACKAGE_OFFICIAL, PACKAGE_BILIBILI, PACKAGE_ENGLISH, PACKAGE_JAPANESE, PACKAGE_KOREAN};
+        static public String[] DATA_LIST = {
+                "akhr.json",
+                "aklevel.json",
+                "charMaterials.json",
+                "datainfo.json",
+                "items.json",
+                "material.json",
+                "matrix.json",
+                "stages.json",
+                "i18n.json",
+        };
+    }
 }
+

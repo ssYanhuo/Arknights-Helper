@@ -43,7 +43,9 @@ import com.baidu.ocr.sdk.model.WordSimple;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.entity.MediaInfo;
 import com.ssyanhuo.arknightshelper.entity.StaticData;
+import com.ssyanhuo.arknightshelper.service.OverlayService;
 import com.ssyanhuo.arknightshelper.utils.*;
+import com.ssyanhuo.arknightshelper.utils.I18nUtils.Helper;
 import com.ssyanhuo.arknightshelper.widget.LineWrapLayout;
 import com.zyyoona7.popup.EasyPopup;
 import com.zyyoona7.popup.XGravity;
@@ -87,7 +89,9 @@ public class Hr {
     boolean builtin;
     private ArrayList<String> combineTempArr = new ArrayList<>();
     WindowManager windowManager;
-
+    I18nUtils translationUtils;
+    Helper tagHelper;
+    Helper nameHelper;
 
     public void init(Context context, View view, LinearLayout backgroundLayout) {
         contentView = view;
@@ -113,6 +117,13 @@ public class Hr {
         try {
             hrJson = FileUtils.readData("akhr.json", context, builtin);
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            translationUtils = new I18nUtils();
+            tagHelper = translationUtils.getHelper(applicationContext, builtin, I18nUtils.CATEGORY_TAG);
+            nameHelper = translationUtils.getHelper(applicationContext, builtin, I18nUtils.CATEGORY_NAME);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         getAllCheckboxes(checkBoxes, view);
@@ -174,15 +185,20 @@ public class Hr {
     public void getAllCheckboxes(ArrayList<CheckBox> checkBoxes, View view) {
         ViewGroup viewGroup = (ViewGroup) view;
         for (int i = 0; i < viewGroup.getChildCount(); i++) {
-            if (viewGroup.getChildAt(i) instanceof CheckBox) {
-                checkBoxes.add((CheckBox) viewGroup.getChildAt(i));
-            } else if (viewGroup.getChildAt(i) instanceof HorizontalScrollView) {
-                getAllCheckboxes(checkBoxes, viewGroup.getChildAt(i));
-            } else if (viewGroup.getChildAt(i) instanceof LinearLayout) {
-                getAllCheckboxes(checkBoxes, viewGroup.getChildAt(i));
-            } else if (viewGroup.getChildAt(i) instanceof LineWrapLayout) {
-                getAllCheckboxes(checkBoxes, viewGroup.getChildAt(i));
+            View child = viewGroup.getChildAt(i);
+            if (child instanceof CheckBox) {
+                checkBoxes.add((CheckBox) child);
+            } else if (child instanceof HorizontalScrollView) {
+                getAllCheckboxes(checkBoxes, child);
+            } else if (child instanceof LinearLayout) {
+                getAllCheckboxes(checkBoxes, child);
+            } else if (child instanceof LineWrapLayout) {
+                getAllCheckboxes(checkBoxes, child);
             }
+        }
+        for (CheckBox checkBox :
+                checkBoxes) {
+            checkBox.setText(tagHelper.get(checkBox.getText().toString()));
         }
     }
 
@@ -254,13 +270,14 @@ public class Hr {
             tag.retainAll(selectedTag);
             type.retainAll(selectedType);
             sex.retainAll(selectedSex);
-            boolean hidden = jsonObject.getBoolean("hidden");
+            boolean hiddenInHr = jsonObject.getBoolean("hidden");
+            boolean hiddenInI18n = nameHelper.isHidden(name, I18nUtils.FILTER_HR);
             //Log.e(TAG, name + type + star + String.valueOf(tag) + String.valueOf(hidden));
             boolean typePaired = selectedType.size() == type.size() || selectedType.size() == 0;
             boolean starPaired = selectedStar.contains(star) || selectedStar.size() == 0;//星级允许多选
             boolean sexPaired = selectedSex.size() == sex.size() || selectedSex.size() == 0;
             boolean tagPaired = selectedTag.size() == tag.size() || selectedTag.size() == 0;
-            if (typePaired && starPaired && sexPaired && tagPaired && !hidden) {
+            if (typePaired && starPaired && sexPaired && tagPaired && !hiddenInHr && !hiddenInI18n) {
                 if ((!selectedStar.contains("6") && !selectedTag.contains("高级资深干员")) && star.equals("6")){continue;}
                 result.add(jsonObject);
                 Log.i(TAG, "Found:" + name);
@@ -289,12 +306,13 @@ public class Hr {
             tag.retainAll(selectedTag);
             type.retainAll(selectedType);
             sex.retainAll(selectedSex);
-            boolean hidden = jsonObject.getBoolean("hidden");
+            boolean hiddenInHr = jsonObject.getBoolean("hidden");
+            boolean hiddenInI18n = nameHelper.isHidden(name, I18nUtils.FILTER_HR);
             boolean typePaired = type.size() != 0;
             boolean starPaired = selectedStar.contains(star) || selectedStar.size() == 0;//星级允许多选
             boolean sexPaired = sex.size() != 0;
             boolean tagPaired = tag.size() != 0;
-            if ((typePaired || sexPaired || tagPaired) && !hidden && starPaired) {
+            if ((typePaired || sexPaired || tagPaired) && !hiddenInHr && !hiddenInI18n && starPaired) {
                 if ((!selectedStar.contains("6") && !selectedTag.contains("高级资深干员")) && star.equals("6")){continue;}
                 JSONArray matchedTags = new JSONArray();
                 matchedTags.addAll(JSONArray.parseArray(JSON.toJSONString(type)));
@@ -355,7 +373,7 @@ public class Hr {
                     button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_blue));
                     break;
             }
-            button.setText(jsonObject.getString("name"));
+            button.setText(nameHelper.get(jsonObject.getString("name")));
             button.setTag(jsonObject);
             button.setOnTouchListener(new View.OnTouchListener() {
                 @Override
@@ -421,7 +439,7 @@ public class Hr {
             for(int i = 0; i < jsonArray.size(); i++){
                 tags.add(jsonArray.getString(i));
             }
-            ArrayList<ArrayList<String>> matchedTags = CombinationUtils.combine(tags);
+            ArrayList<ArrayList<String>> matchedTags = combine(tags);
             for(ArrayList<String> tagCom : matchedTags){
                 //存在高级标签但未选中时，不显示按钮
                 if (!tagCom.contains("高级资深干员") && jsonObject.getInteger("level") == 6){
@@ -446,7 +464,7 @@ public class Hr {
                         button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_blue));
                         break;
                 }
-                button.setText(jsonObject.getString("name"));
+                button.setText(nameHelper.get(jsonObject.getString("name")));
                 button.setTag(jsonObject);
                 button.setOnTouchListener(new View.OnTouchListener() {
                     @Override
@@ -458,6 +476,10 @@ public class Hr {
                                 TextView textView = cardView.findViewById(R.id.detail_text);
                                 JSONArray jsonArray = jsonObject.getJSONArray("tags");
                                 String tags = "";
+
+                                if (!sharedPreferences.getString("game_language", I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE).equals(I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE)){
+                                    tags += jsonObject.getString("name") + "\n";
+                                }
                                 for (int i = 0; i < jsonArray.size(); i++) {
                                     tags += jsonArray.getString(i);
                                     if (i != jsonArray.size() - 1) {
@@ -738,16 +760,18 @@ public class Hr {
             fuzzy = false;
             TextView textView = contentView.findViewById(R.id.hr_description);
             textView.setText(R.string.hr_desc_part_1_exact);
-            textView.append(" ");
-            SpannableStringBuilder spannableStringBuilder1 = new SpannableStringBuilder(applicationContext.getResources().getString(R.string.hr_desc_part_2));
-            spannableStringBuilder1.setSpan(new ClickableSpan() {
-                @Override
-                public void onClick(View widget) {
-                    showSubWindow();
-                }
-            }, 0, spannableStringBuilder1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            textView.append(spannableStringBuilder1);
-            textView.append(" ");
+            if (sharedPreferences.getString("game_language", I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE).equals(I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE)){
+                textView.append(" ");
+                SpannableStringBuilder spannableStringBuilder1 = new SpannableStringBuilder(applicationContext.getResources().getString(R.string.hr_desc_part_2));
+                spannableStringBuilder1.setSpan(new ClickableSpan() {
+                    @Override
+                    public void onClick(View widget) {
+                        showSubWindow();
+                    }
+                }, 0, spannableStringBuilder1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                textView.append(spannableStringBuilder1);
+                textView.append(" ");
+            }
             textView.append(applicationContext.getString(R.string.hr_desc_part_3));
             textView.append(" ");
             SpannableStringBuilder spannableStringBuilder2 = new SpannableStringBuilder(applicationContext.getResources().getString(R.string.hr_desc_part_4));
@@ -767,16 +791,18 @@ public class Hr {
             fuzzy = true;
             TextView textView = contentView.findViewById(R.id.hr_description);
             textView.setText(R.string.hr_desc_part_1_fuzzy);
-            textView.append(" ");
-            SpannableStringBuilder spannableStringBuilder1 = new SpannableStringBuilder(applicationContext.getResources().getString(R.string.hr_desc_part_2));
-            spannableStringBuilder1.setSpan(new ClickableSpan() {
-                @Override
-                public void onClick(View widget) {
-                    showSubWindow();
-                }
-            }, 0, spannableStringBuilder1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            textView.append(spannableStringBuilder1);
-            textView.append(" ");
+            if (sharedPreferences.getString("game_language", I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE).equals(I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE)){
+                textView.append(" ");
+                SpannableStringBuilder spannableStringBuilder1 = new SpannableStringBuilder(applicationContext.getResources().getString(R.string.hr_desc_part_2));
+                spannableStringBuilder1.setSpan(new ClickableSpan() {
+                    @Override
+                    public void onClick(View widget) {
+                        showSubWindow();
+                    }
+                }, 0, spannableStringBuilder1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                textView.append(spannableStringBuilder1);
+                textView.append(" ");
+            }
             textView.append(applicationContext.getString(R.string.hr_desc_part_3));
             textView.append(" ");
             SpannableStringBuilder spannableStringBuilder2 = new SpannableStringBuilder(applicationContext.getResources().getString(R.string.hr_desc_part_4));
@@ -1073,5 +1099,22 @@ public class Hr {
                 }, 2000);
                 break;
         }
+    }
+    public static ArrayList<ArrayList<String>> combine (ArrayList<String> array){
+        ArrayList<ArrayList<String>> result = new ArrayList<>();
+        int size = array.size();
+        int nBit = (int) Math.pow(2, size) - 1;
+        for (int i = 1; i <= nBit; i++){
+            ArrayList<String> tmp = new ArrayList<>();
+            for(int j = 0 ; j < size; j++){
+                int bit = 1 << j;
+                if ((bit & i) != 0){
+                    tmp.add(array.get(j));
+                }
+            }
+            Collections.sort(tmp);
+            result.add(new ArrayList<String>(tmp));
+        }
+        return result;
     }
 }

@@ -3,8 +3,11 @@ package com.ssyanhuo.arknightshelper.module;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextClock;
+import android.widget.TextView;
 
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.activity.AboutActivity;
@@ -23,9 +26,11 @@ public class More {
     LinearLayout goStatistics;
     LinearLayout goPlanner;
     LinearLayout goAbout;
+    TextView textView;
     public void init(final Context context, View view, final OverlayService service){
         applicationContext = context;
         contentView = (LinearLayout) view;
+        textView = contentView.findViewById(R.id.more_description);
         goMain = contentView.findViewById(R.id.more_go_main);
         goSetting = contentView.findViewById(R.id.more_go_setting);
         goQQ = contentView.findViewById(R.id.more_go_qq);
@@ -34,6 +39,9 @@ public class More {
         goStatistics = contentView.findViewById(R.id.more_go_statistics);
         goPlanner = contentView.findViewById(R.id.more_go_planner);
         goAbout = contentView.findViewById(R.id.more_go_about);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
+            textView.append(applicationContext.getString(R.string.get_permission_background_activity));
+        }
         goMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
