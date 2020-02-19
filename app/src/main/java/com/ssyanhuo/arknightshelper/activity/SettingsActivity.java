@@ -165,7 +165,7 @@ public class SettingsActivity extends AppCompatActivity {
                                     })
                                     .show();
                         }else if (newValue.equals(StaticData.Const.PACKAGE_JAPANESE)){
-                            preferences.edit().putString("game_language", I18nUtils.LANGUAGE_ENGLISH).putBoolean("need_reload",true).apply();
+                            preferences.edit().putString("game_language", I18nUtils.LANGUAGE_JAPANESE).putBoolean("need_reload",true).apply();
                             game_language.setValue(I18nUtils.LANGUAGE_JAPANESE);
                             Snackbar.make(getView(), "游戏语言已自动设置为日文", Snackbar.LENGTH_LONG)
                                     .setAction(R.string.undo, new View.OnClickListener() {
