@@ -1,7 +1,8 @@
-versionCode 20
-versionName β-2.1.7-EarlySpring
+versionCode 22
+versionName β-2.1.8-EarlySpring
 releaseNote [New]支持国际服游戏渠道
 [New]新增干员名称及公招TAG外文翻译(Beta)，切换游戏渠道时同步切换(感谢@萝莉控の胜利、@SakuraYing)
 [New]新增悬浮按钮贴边选项和透明度调节(感谢@超级电灯泡)
+[Fix]修复掉落查询闪退的问题(感谢@my。、@esirprus、@萝莉控の胜利、@镜像潮汐)
 [Fix]修复了出现多个悬浮按钮的问题(感谢@萝莉控の胜利、@薄情V少年、@超级电灯泡)
 [New]同步最新游戏数据、新增干员、标签和材料数据

@@ -7,8 +7,8 @@ android {
         applicationId "com.ssyanhuo.arknightshelper"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 21
-        versionName "β-2.1.7.1-EarlySpring"
+        versionCode 22
+        versionName "β-2.1.8-EarlySpring"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

@@ -146,8 +146,17 @@ public class Drop {
             }
             if (id == item){//TODO 用映射
                 JSONObject object = matrix.getJSONObject(i);
-                float cost = costMap.get(object.getString("stageId")) * ((float)object.getInteger("times") / (float)object.getInteger("quantity"));
-                object.put("cost", String.valueOf(cost));
+                Log.e(TAG, object.toJSONString());
+                float cost = 0;
+                try{
+                    cost = costMap.get(object.getString("stageId")) * ((float)object.getInteger("times") / (float)object.getInteger("quantity"));
+                    object.put("cost", String.valueOf(cost));
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Log.e("",object.toJSONString());
+                    object.put("cost", "UNKNOWN_DATA");
+                }
+
                 result.add(object);
             }
             if(id == -1){
