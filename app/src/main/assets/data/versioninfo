@@ -1,6 +1,7 @@
-versionCode 23
-versionName β-2.2.0-MidSpring
-releaseNote [Mod]重绘悬浮窗UI，使用硬件加速算法来减小对游戏本体性能的影响，可能不兼容部分过时的模拟器设备
+versionCode 24
+versionName β-2.2.1-MidSpring
+releaseNote [Fix]修复部分机型启动悬浮窗时无法连接控件的问题(感谢 @超级电灯泡、@滑稽之力)
+[Mod]重绘悬浮窗UI，使用硬件加速算法来减小对游戏本体性能的影响，可能不兼容部分过时的模拟器设备
 [Mod]悬浮窗贴边支持上下边缘(感谢 @超级电灯泡)
 [Info]修改了更新检查方式，从下下次更新起，版本号低于β-2.1.8-EarlySpring的客户端将无法检查更新
 [New]公开招募查询新增快速查看结果按钮

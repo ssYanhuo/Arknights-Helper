@@ -113,8 +113,6 @@ public class Hr {
             fuzzy = true;
         }
         selector = (ScrollView) LayoutInflater.from(contextThemeWrapper).inflate(R.layout.overlay_hr_sub_ocr, null);
-        snackBarView = relativeLayout.findViewById(R.id.hr_snackbar);
-        scrollView = relativeLayout.findViewById(R.id.scroll_hr);
         checkBoxes = new ArrayList<>();
         selectedStar = new ArrayList<>();
         selectedQualification = new ArrayList<>();
@@ -205,23 +203,29 @@ public class Hr {
                 sharedPreferences.edit().putBoolean("hide_low_level", isChecked).apply();
             }
         });
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-                @Override
-                public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                    if (scrollY + scrollView.getHeight() > scrollView.findViewById(R.id.hr_result_scroll_point).getTop() + scrollView.findViewById(R.id.hr_result_title).getHeight()){
-                        snackBarView.setVisibility(View.GONE);
+        try{
+            snackBarView = relativeLayout.findViewById(R.id.hr_snackbar);
+            scrollView = relativeLayout.findViewById(R.id.scroll_hr);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+                    @Override
+                    public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                        if (scrollY + scrollView.getHeight() > scrollView.findViewById(R.id.hr_result_scroll_point).getTop() + scrollView.findViewById(R.id.hr_result_title).getHeight()){
+                            snackBarView.setVisibility(View.GONE);
+                        }
                     }
+                });
+            }
+            snackBarView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    scrollToResult();
+                    v.setVisibility(View.GONE);
                 }
             });
+        }catch (Exception ignored){
+
         }
-        snackBarView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                scrollToResult();
-                v.setVisibility(View.GONE);
-            }
-        });
         hideResult(this.contentView.findViewById(R.id.hr_result_content));
     }
 
@@ -391,7 +395,11 @@ public class Hr {
 
     public void hideResult(View view) {
         view.setVisibility(View.GONE);
-        snackBarView.setVisibility(View.GONE);
+        try{
+            snackBarView.setVisibility(View.GONE);
+        }catch (Exception ignored){
+
+        }
     }
 
     public void showResultExact(ArrayList<JSONObject> result) {
