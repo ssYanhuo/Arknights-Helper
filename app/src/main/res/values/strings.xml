@@ -69,7 +69,7 @@
     <string name="no_overlay_permission_action">授予权限</string>
     <string name="nav_header_subtitle">By 三生烟火</string>
     <string name="author_name">三生烟火</string>
-    <string name="go_github">前往我的Github主页</string>
+    <string name="go_github">前往我的 Github 主页</string>
     <string name="about_author_image_desc">作者头像</string>
     <string name="go_project">前往项目主页</string>
     <string name="go_project_desc">提交问题或数据</string>
@@ -114,7 +114,7 @@
     <string name="update_dialog_title">更新内容</string>
     <string name="update_dialog_no">取消</string>
     <string name="showcase_tile">Android 7.0 及以上用户可添加快速设置图块到通知面板</string>
-    <string name="go_qq">加入QQ群</string>
+    <string name="go_qq">加入 QQ 群</string>
     <string name="go_qq_desc">教程、测试版本、交流……</string>
     <string name="hr_method_selector_desc">选择一种查询方式。\n日后可以修改该选项。</string>
     <string name="hr_method_selector_title_fuzzy">模糊查询</string>
@@ -224,4 +224,12 @@
     <string name="game_korean">国际服 (韩语)</string>
     <string name="game_manual">手动选择</string>
     <string name="undo">撤销</string>
+    <string name="hr_hide_low_level">隐藏2★及以下干员</string>
+    <string name="py_runtime">运行时文件</string>
+    <string name="py_universal_dependencies">通用依赖</string>
+    <string name="py_download">正在准备 Python 运行时环境</string>
+    <string name="py_unsupported_arch">不支持的 CPU 架构</string>
+    <string name="py_error">发生了错误：\n</string>
+    <string name="py_arkplanner">刷图规划™ By ycremar</string>
+    <string name="hr_hide_low_level_note">注意调整招募时间为9小时</string>
 </resources>

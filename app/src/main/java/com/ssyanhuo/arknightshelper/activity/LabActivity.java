@@ -12,12 +12,14 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
+import com.ssyanhuo.arknightshelper.utils.PythonUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,6 +34,12 @@ public class LabActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lab);
+        ((LinearLayout)findViewById(R.id.lab_pytest)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PythonUtils.prepareDependencies(LabActivity.this, getWindow().getDecorView());
+            }
+        });
     }
 
     public void getDeviceInfo(View view){

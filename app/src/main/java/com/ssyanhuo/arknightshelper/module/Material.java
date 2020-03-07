@@ -61,7 +61,6 @@ public class Material {
     private JSONObject materialJsonObject;
     private boolean onlyRare;
     private SharedPreferences sharedPreferences;
-    private boolean builtin;
     private ContextThemeWrapper contextThemeWrapper;
     WindowManager windowManager;
     I18nUtils.Helper nameHelper;
@@ -85,11 +84,10 @@ public class Material {
         rootLayout = backgroundLayout;
         contentView = view;
         sharedPreferences = applicationContext.getSharedPreferences("com.ssyanhuo.arknightshelper_preferences", Context.MODE_PRIVATE);
-        builtin = sharedPreferences.getBoolean("use_builtin_data", true);
         try {
-            expJsonObject = JSONUtils.getJSONObject(applicationContext, FileUtils.readData("aklevel.json", applicationContext, builtin));
-            characterJsonObject = JSONUtils.getJSONObject(applicationContext, FileUtils.readData("charMaterials.json", applicationContext, builtin));
-            materialJsonObject = JSONUtils.getJSONObject(applicationContext, FileUtils.readData("material.json", applicationContext, builtin));
+            expJsonObject = JSONUtils.getJSONObject(applicationContext, FileUtils.readData("aklevel.json", applicationContext));
+            characterJsonObject = JSONUtils.getJSONObject(applicationContext, FileUtils.readData("charMaterials.json", applicationContext));
+            materialJsonObject = JSONUtils.getJSONObject(applicationContext, FileUtils.readData("material.json", applicationContext));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -117,7 +115,7 @@ public class Material {
             });
         }
         try {
-            nameHelper = new I18nUtils().getHelper(applicationContext, builtin, I18nUtils.CATEGORY_NAME);
+            nameHelper = new I18nUtils().getHelper(applicationContext, I18nUtils.CATEGORY_NAME);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -203,6 +201,12 @@ public class Material {
             selector.setBackgroundColor(backgroundColor);
         }
     }
+
+
+    public void refresh(){
+
+    }
+
     public void checkValue(){
         //不同星级时，精英化（目标+当前）最值随之变化，若变化前已经超出新值范围，则自动缩小为最值
         int maxStage = getMaxStage(characterStar + 1);

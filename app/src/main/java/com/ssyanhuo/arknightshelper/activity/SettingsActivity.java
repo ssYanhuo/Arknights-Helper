@@ -1,5 +1,6 @@
 package com.ssyanhuo.arknightshelper.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -107,13 +108,13 @@ public class SettingsActivity extends AppCompatActivity {
             Preference long_press_back_to_game = findPreference("long_press_back_to_game");
             ListPreference game_version = findPreference("game_version");
             Preference margin_fix = findPreference("margin_fix");
-            final SwitchPreference use_builtin_data = findPreference("use_builtin_data");
             final Preference update_site = findPreference("update_site");
             final Preference update_data = findPreference("update_data");
             final ListPreference theme = findPreference("theme");
             final SeekBarPreference floating_button_opacity = findPreference("floating_button_opacity");
             final ListPreference game_language = findPreference("game_language");
             margin_fix.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @SuppressLint("SourceLockedOrientationActivity")
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     final Activity activity = getActivity();
@@ -185,88 +186,6 @@ public class SettingsActivity extends AppCompatActivity {
                 });
             }
 
-            if (use_builtin_data.isChecked()){
-                update_data.setEnabled(false);
-            }
-            use_builtin_data.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if (newValue.equals(true)){
-                        update_data.setEnabled(false);
-                    }else {
-                        try{
-                            FileUtils.readData("akhr.json", getContext(), false);
-                            FileUtils.readData("aklevel.json", getContext(), false);
-                            FileUtils.readData("charMaterials.json", getContext(), false);
-                            FileUtils.readData("datainfo.json", getContext(), false);
-                            FileUtils.readData("items.json", getContext(), false);
-                            FileUtils.readData("material.json", getContext(), false);
-                            FileUtils.readData("matrix.json", getContext(), false);
-                            FileUtils.readData("stages.json", getContext(), false);
-                            FileUtils.readData("i18n.json", getContext(), false);
-                            JSONObject versionInfo = JSONObject.parseObject(FileUtils.readData("versionInfo.json", getContext(), true));
-                            if (versionInfo.getInteger("versionCode") > BuildConfig.VERSION_CODE){
-                                new AlertDialog.Builder(getContext())
-                                        .setMessage("客户端已经过时，无法使用在线数据")
-                                        .setPositiveButton(R.string.update_dialog_yes, new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                try{
-                                                    Uri uri = Uri.parse("market://details?id=" + getContext().getPackageName());
-                                                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                                                    intent.setPackage("com.coolapk.market");
-                                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                    startActivity(intent);
-                                                    startActivity(intent);
-                                                }catch (Exception e){
-                                                    Log.e(TAG, "Call Coolapk failed:" + e);
-                                                    Intent intent = new Intent();
-                                                    intent.setAction(Intent.ACTION_VIEW);
-                                                    intent.setData(Uri.parse("http://www.coolapk.com/apk/com.ssyanhuo.arknightshelper"));
-                                                    startActivity(intent);
-                                                }
-                                            }
-                                        })
-                                        .show();
-                                return false;
-                            }else if (versionInfo.getInteger("versionCode") < BuildConfig.VERSION_CODE){
-                                throw new Exception("Out-dated data");
-                                //TODO 可能由过时更新到超前
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            updateLayout = (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.content_data_updater, null);
-                            updateDialog = new AlertDialog.Builder(getContext())
-                                    .setView(updateLayout)
-                                    .setTitle(R.string.settings_data_update_title)
-                                    .create();
-                            updateDialog.show();
-                            Thread thread = new Thread(new UpdateRunnable());
-                            thread.start();
-                            final Handler handler = new Handler();
-                            final Timer timer = new Timer();
-                            timer.schedule(new TimerTask() {
-                                @Override
-                                public void run() {
-                                    if (updateSucceed){
-                                        handler.post(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                use_builtin_data.setChecked(false);
-                                                update_data.setEnabled(true);
-                                            }
-                                        });
-                                        timer.cancel();
-                                    }
-                                }
-                            }, 100, 100);
-                            return false;
-                        }
-                        update_data.setEnabled(true);
-                    }
-                    return true;
-                }
-            });
             update_data.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {

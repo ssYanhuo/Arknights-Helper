@@ -11,9 +11,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+
+import javax.xml.xpath.XPath;
 
 public class FileUtils {
     private final static String TAG = "FileUtils";
@@ -37,18 +38,7 @@ public class FileUtils {
         assert data != null;
         return data.toString();
     }
-    public static String readData(String name, Context context, boolean builtin) throws IOException {
-        if (builtin){
-            InputStream inputStream = context.getResources().getAssets().open("data/" + name);
-            BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
-            byte[] fileByte = new byte[bufferedInputStream.available()];
-            bufferedInputStream.read(fileByte);
-            String data = new String(fileByte);
-            Log.i(TAG, "Read builtin file \"" + name +"\" succeed, file length:" + data.length());
-            bufferedInputStream.close();
-            inputStream.close();
-            return data;
-        }else{
+    public static String readData(String name, Context context) throws IOException {
             FileInputStream fileInputStream = context.openFileInput(name);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
             String line;
@@ -61,18 +51,17 @@ public class FileUtils {
             bufferedReader.close();
             fileInputStream.close();
             return data.toString();
-        }
     }
 
-    static public void copyFiles(Context c, String[] list){
+    static public void copyFilesFromAssets(Context c, String[] list){
         for (String name:
                 list) {
-            copyFile(c, name);
+            copyFileFromAssets(c, c.getFilesDir().getPath(), name);
         }
     }
 
-    static public void copyFile(Context c, String Name) {
-        File outfile = new File(c.getFilesDir(), Name);
+    static public void copyFileFromAssets(Context c, String path, String Name) {
+        File outfile = new File(new File(path), Name);
         BufferedOutputStream outStream = null;
         BufferedInputStream inStream = null;
 
@@ -94,6 +83,34 @@ public class FileUtils {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    static public boolean checkFiles(Context context, String folderPath, String[] files){
+        for (String file :
+                files) {
+            if (!checkFile(context, folderPath + File.separator + file)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    static public boolean checkFile(Context context, String path){
+        try{
+            File file = new File(path);
+            return file.exists();
+        }catch(Exception ignored){
+            return false;
+        }
+    }
+
+    static public boolean delFile(Context context, String path){
+        File file = new File(path);
+        if (file.exists()){
+           return file.delete();
+        }else {
+            return false;
         }
     }
 }

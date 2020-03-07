@@ -37,7 +37,6 @@ public class ArkPlanner {
     String path_rules;
     JSONObject material_probs;
     JSONObject convertion_rules;
-    boolean builtin;
     SharedPreferences preferences;
     Context context;
     public void init(Context applicationContext){
@@ -57,9 +56,8 @@ public class ArkPlanner {
         path_stats = "data/matrix.json";
         path_rules = "data/formula.json";
         preferences = applicationContext.getSharedPreferences(StaticData.Const.PREFERENCE_PATH, Context.MODE_PRIVATE);
-        builtin = preferences.getBoolean("use_builtin_data", true);
         try{
-            material_probs = JSONUtils.getJSONObject(applicationContext, FileUtils.readData(path_stats, applicationContext, builtin));
+            material_probs = JSONUtils.getJSONObject(applicationContext, FileUtils.readData(path_stats, applicationContext));
             convertion_rules = JSONUtils.getJSONObject(applicationContext, JSONUtils.getJSONString(applicationContext, path_rules));
         }catch (Exception e){
             applicationContext.startActivity(new Intent(applicationContext, SettingsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
@@ -68,6 +66,12 @@ public class ArkPlanner {
             return;
         }
     }
+
+    public void refresh(){
+
+    }
+
+
     public ArrayList<Object> _pre_processing(JSONObject material_probs, JSONObject convertion_rules){
         /*Compute costs, convertion rules and items probabilities from requested dictionaries.
         Args:

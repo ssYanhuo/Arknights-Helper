@@ -24,6 +24,7 @@
             android:label="@string/title_activity_settings" />
         <activity
             android:name=".activity.LabActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_lab" />
         <activity
             android:name=".activity.AboutActivity"

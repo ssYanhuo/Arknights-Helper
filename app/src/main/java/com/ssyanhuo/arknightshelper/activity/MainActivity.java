@@ -46,12 +46,12 @@ import com.ssyanhuo.arknightshelper.utils.PackageUtils;
 import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -69,9 +69,6 @@ public class MainActivity extends AppCompatActivity
     final int STATE_BETA_FINISHED = 3;
     final int STATE_ERROR = -1;
     final int CODE_STORAGE = 1;
-    final String GAME_OFFICIAL = "0";
-    final String GAME_BILIBILI = "1";
-    final String GAME_MANUAL = "-1";
 
     final String SITE_GITEE = "0";
     final String SITE_GITHUB = "1";
@@ -111,8 +108,10 @@ public class MainActivity extends AppCompatActivity
             public void run() {
                 final SharedPreferences.Editor editor = preferences.edit();
                 Looper.prepare();
-                if (preferences.getInt("versionLast", BuildConfig.VERSION_CODE) != BuildConfig.VERSION_CODE){
-                    FileUtils.copyFiles(getApplicationContext(), StaticData.Const.DATA_LIST);
+                if (preferences.getInt("versionLast", BuildConfig.VERSION_CODE) != BuildConfig.VERSION_CODE || !FileUtils.checkFiles(getApplicationContext(), getFilesDir().getPath(), StaticData.Const.DATA_LIST) || !FileUtils.checkFiles(getApplicationContext(), getFilesDir().getPath() + File.separator + "python" + File.separator + "data", new String[]{"formula.json", "matrix.json"})){
+                    FileUtils.copyFilesFromAssets(getApplicationContext(), StaticData.Const.DATA_LIST);
+                    FileUtils.copyFileFromAssets(getApplicationContext(), getFilesDir().getPath() + File.separator + "python" + File.separator + "data", "formula.json");
+                    FileUtils.copyFileFromAssets(getApplicationContext(), getFilesDir().getPath() + File.separator + "python" + File.separator + "data", "matrix.json");
                 }
                 if((Build.BRAND.equals("Meizu") || Build.BRAND.equals("MEIZU") || Build.BRAND.equals("MeiZu") || Build.BRAND.equals("meizu")) && preferences.getBoolean("firstRun", true)){
                     Snackbar.make(view, R.string.meizu_floating_window_permission, Snackbar.LENGTH_INDEFINITE).show();
@@ -147,83 +146,6 @@ public class MainActivity extends AppCompatActivity
                         Log.e(TAG, "Start service failed!", e);
                     }
                 }
-                    /*if(startGame){
-                        if(PackageUtils.checkApplication(StaticData.Const.PACKAGE_OFFICIAL, getApplicationContext()) && PackageUtils.checkApplication(StaticData.Const.PACKAGE_BILIBILI, getApplicationContext())){
-                            Log.e(TAG, preferences.getString("game_version", GAME_MANUAL));
-                            if (preferences.getString("game_version", GAME_MANUAL).equals(GAME_OFFICIAL) || preferences.getString("game_version", GAME_MANUAL).equals(GAME_BILIBILI)){
-
-                                try{
-                                    switch (preferences.getString("game_version", GAME_MANUAL)) {
-                                        case GAME_OFFICIAL:
-                                            startActivity(getPackageManager().getLaunchIntentForPackage(StaticData.Const.PACKAGE_OFFICIAL));
-                                            break;
-                                        case GAME_BILIBILI:
-                                            startActivity(getPackageManager().getLaunchIntentForPackage(StaticData.Const.PACKAGE_BILIBILI));
-                                            break;
-                                    }
-                                }catch (Exception e){
-                                    Log.e(TAG, "Start game failed!", e);
-                                }
-                                return;
-                            }
-                            editor.putString("game_version", GAME_MANUAL);
-                            editor.apply();
-                            contextThemeWrapper = new ContextThemeWrapper(MainActivity.this, R.style.AppTheme_Default);
-                            AlertDialog.Builder builder = new AlertDialog.Builder(contextThemeWrapper);
-                            final CheckBox checkBox = new CheckBox(contextThemeWrapper);
-                            checkBox.setText(R.string.start_game_remember_selection);
-                            int padding = getResources().getDimensionPixelOffset(R.dimen.activity_horizontal_margin);
-                            LinearLayout linearLayout = new LinearLayout(contextThemeWrapper);
-                            linearLayout.setPadding(padding * 2, padding ,padding * 2, 0);
-                            linearLayout.addView(checkBox);
-                            builder.setTitle(R.string.start_two_apps)
-                                    .setView(linearLayout)
-                                    .setPositiveButton(R.string.game_official, new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            try{
-                                                if (checkBox.isChecked()){
-                                                    editor.putString("game_version", GAME_OFFICIAL);
-                                                    editor.apply();
-                                                }
-                                                startActivity(getPackageManager().getLaunchIntentForPackage(StaticData.Const.PACKAGE_OFFICIAL));
-                                            }catch (Exception e){
-                                                Log.e(TAG, "Start game failed!", e);
-                                            }
-                                        }
-                                    })
-                                    .setNeutralButton(R.string.game_bilibili, new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            try{
-                                                if (checkBox.isChecked()){
-                                                    editor.putString("game_version", GAME_BILIBILI);
-                                                    editor.apply();
-                                                }
-                                                startActivity(getPackageManager().getLaunchIntentForPackage(StaticData.Const.PACKAGE_BILIBILI));
-                                            }catch (Exception e){
-                                                Log.e(TAG, "Start game failed!", e);
-                                            }
-                                        }
-                                    }).show();
-                        }else if(PackageUtils.checkApplication(StaticData.Const.PACKAGE_OFFICIAL, getApplicationContext())){
-                            try{
-                                editor.putString("game_version", GAME_MANUAL);
-                                editor.apply();
-                                startActivity(getPackageManager().getLaunchIntentForPackage(StaticData.Const.PACKAGE_OFFICIAL));
-                            }catch (Exception e){
-                                Log.e(TAG, "Start game failed!", e);
-                            }
-                        }else if(PackageUtils.checkApplication(StaticData.Const.PACKAGE_BILIBILI, getApplicationContext())){
-                            try{
-                                editor.putString("game_version", GAME_MANUAL);
-                                editor.apply();
-                                startActivity(getPackageManager().getLaunchIntentForPackage(StaticData.Const.PACKAGE_BILIBILI));
-                            }catch (Exception e){
-                                Log.e(TAG, "Start game failed!", e);
-                            }
-                        }
-                    }*/
                 if (startGame){
                         String gameSelected = preferences.getString("game_version", StaticData.Const.PACKAGE_MANUAL);
                         final ArrayList<String> list = PackageUtils.getGameList(getApplicationContext());
@@ -379,17 +301,6 @@ public class MainActivity extends AppCompatActivity
         materialShowcaseSequence.start();
         int upCount = preferences.getInt("up_count", 0);
         switch (upCount){
-            case 2:
-                Snackbar.make(fab, R.string.tip_use_remote, Snackbar.LENGTH_INDEFINITE)
-                        .setAction(R.string.tip_use_remote_action, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-                                startActivity(intent);
-                            }
-                        })
-                        .show();
-                break;
                 default:
                     break;
         }

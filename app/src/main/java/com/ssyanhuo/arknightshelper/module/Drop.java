@@ -59,7 +59,6 @@ public class Drop {
     Map<String, String> stageMap = new HashMap<>();
     Map<String, Integer> costMap = new HashMap<>();
     boolean isAltSelector = false;
-    boolean builtin;
     SharedPreferences sharedPreferences;
     OverlayService service;
 
@@ -69,12 +68,11 @@ public class Drop {
         this.service = service;
         handler = new Handler();
         sharedPreferences = applicationContext.getSharedPreferences("com.ssyanhuo.arknightshelper_preferences", Context.MODE_PRIVATE);
-        builtin = sharedPreferences.getBoolean("use_builtin_data", true);
         try{
-            data_matrix = JSON.parseObject(FileUtils.readData("matrix.json", applicationContext, builtin));
+            data_matrix = JSON.parseObject(FileUtils.readData("matrix.json", applicationContext));
             //下面两个是数组形式
-            data_items = JSON.parseArray(FileUtils.readData("items.json", applicationContext, builtin));
-            data_stages = JSON.parseArray(FileUtils.readData("stages.json", applicationContext, builtin));
+            data_items = JSON.parseArray(FileUtils.readData("items.json", applicationContext));
+            data_stages = JSON.parseArray(FileUtils.readData("stages.json", applicationContext));
         } catch (Exception e){
             e.printStackTrace();
             Log.e(TAG, String.valueOf(e));
@@ -131,7 +129,9 @@ public class Drop {
         }
         ((TextView)contentView.findViewById(R.id.drop_description)).setMovementMethod(LinkMovementMethod.getInstance());
     }
+    public void refresh(){
 
+    }
 
     public ArrayList<JSONObject> getResult(int item){
         ArrayList<JSONObject> result = new ArrayList<>();

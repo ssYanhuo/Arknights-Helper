@@ -17,21 +17,19 @@ public class I18nUtils {
     final static public String FILTER_ALL = "all";
     final static public String FILTER_HR = "hr";
     final private String TAG = "I18nUtils";
-    public Helper getHelper(Context context, boolean builtin, String category) throws Exception {
-        return new Helper(context, builtin, category);
+    public Helper getHelper(Context context, String category) throws Exception {
+        return new Helper(context, category);
     }
     public class Helper {
         JSONObject i18nJSON;
         private Context context;
-        private boolean builtin;
         private String category;
         SharedPreferences preferences;
         private boolean hidden;
-        public Helper(Context context, boolean builtin, String category) throws Exception{
+        public Helper(Context context, String category) throws Exception{
             this.context = context;
-            this.builtin = builtin;
             this.category = category;
-            i18nJSON = JSONUtils.getJSONObject(context, FileUtils.readData("i18n.json", context, builtin)).getJSONObject(category);
+            i18nJSON = JSONUtils.getJSONObject(context, FileUtils.readData("i18n.json", context)).getJSONObject(category);
             //Log.e(TAG, i18nJSON.toJSONString());
             preferences = context.getSharedPreferences(StaticData.Const.PREFERENCE_PATH, Context.MODE_PRIVATE);
         }
@@ -84,7 +82,7 @@ public class I18nUtils {
                 }
             }catch (Exception e){
                 Log.e(TAG, "Translation of " + cnStr +" not found!");
-                return false;
+                return true;
             }
         }
     }

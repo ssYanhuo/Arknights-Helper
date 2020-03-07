@@ -12,7 +12,6 @@
     android:theme="@style/AppTheme.Default">
 
     <TextView
-        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:lineSpacingMultiplier="2"
@@ -97,7 +96,7 @@
         android:background="?android:attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
-        android:onClick="testPy">
+        android:id="@+id/lab_pytest">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

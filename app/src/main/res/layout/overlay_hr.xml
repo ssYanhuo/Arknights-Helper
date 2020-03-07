@@ -4,7 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="@dimen/activity_horizontal_margin"
+    android:paddingTop="64dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_horizontal_margin"
     android:descendantFocusability="blocksDescendants">
     <LinearLayout
         android:layout_width="match_parent"
@@ -400,6 +403,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/hr_result_scroll_point"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin">
         <LinearLayout
@@ -407,15 +411,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hr_result_title"
+                    android:text="@string/hr_result_title_part_1"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:background="?attr/selectableItemBackground"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:layout_weight="1"/>
+
+                <Switch
+                    android:id="@+id/hr_hide_low_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hr_hide_low_level" />
+
+            </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/hr_result_title"
-                android:text="@string/hr_result_title_part_1"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:background="?attr/selectableItemBackground"
-                android:focusable="true"
-                android:clickable="true"/>
+                android:id="@+id/hr_hide_low_level_note"
+                android:text="@string/hr_hide_low_level_note"
+                android:textColor="@android:color/holo_red_light"
+                android:textStyle="italic|bold"
+                android:gravity="center"
+                android:alpha="0.6" />
             <LinearLayout
                 android:id="@+id/hr_result"
                 android:layout_width="match_parent"

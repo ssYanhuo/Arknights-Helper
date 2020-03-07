@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.ssyanhuo.arknightshelper.R;
 
 /**
- * wrap layout
+ * wrap dialog_python_downloader
  * @author tomcat
  *
  */

@@ -33,36 +33,38 @@ public class StaticData {
         }
     }
     public static class HR{
-        public static String[] tagList = {"新手", 
-        "资深干员", 
-        "高级资深干员", 
-        "近战位", 
-        "远程位", 
-        "男性干员", 
-        "女性干员", 
-        "先锋干员", 
-        "狙击干员", 
-        "医疗干员", 
-        "术师干员", 
-        "近卫干员", 
-        "重装干员", 
-        "辅助干员", 
-        "特种干员", 
-        "治疗", 
-        "支援", 
-        "输出", 
-        "群攻", 
-        "减速", 
-        "生存",
-        "防护",
-        "削弱", 
-        "位移", 
-        "控场", 
-        "爆发", 
-        "召唤", 
-        "快速复活",
-        "费用回复",
-        "支援机械"};
+        public static String[] tagList = {
+                "新手",
+                "资深干员",
+                "高级资深干员",
+                "近战位",
+                "远程位",
+                "男性干员",
+                "女性干员",
+                "先锋干员",
+                "狙击干员",
+                "医疗干员",
+                "术师干员",
+                "近卫干员",
+                "重装干员",
+                "辅助干员",
+                "特种干员",
+                "治疗",
+                "支援",
+                "输出",
+                "群攻",
+                "减速",
+                "生存",
+                "防护",
+                "削弱",
+                "位移",
+                "控场",
+                "爆发",
+                "召唤",
+                "快速复活",
+                "费用回复",
+                "支援机械"
+        };
     }
     public static class Const{
         static public String PREFERENCE_PATH = "com.ssyanhuo.arknightshelper_preferences";
@@ -83,6 +85,8 @@ public class StaticData {
                 "matrix.json",
                 "stages.json",
                 "i18n.json",
+                "formula.json",
+                "versioninfo.json"
         };
     }
 }

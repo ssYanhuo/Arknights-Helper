@@ -26,9 +26,16 @@ public class ImageUtils {
         String[] selectionArgs = null;
         String sortOrder = MediaStore.Images.ImageColumns.DATE_MODIFIED;
         Cursor cursor = contentResolver.query(uri, projection, selection, selectionArgs, sortOrder);
-        cursor.moveToLast();
+        try{
+            cursor.moveToLast();
+        }catch (Exception e){
+            e.printStackTrace();
+            cursor.close();
+            return result;
+        }
+
         for(int i = 0; i < 20; i++){
-            if (cursor.moveToPrevious()){
+            if (i == 0 || cursor.moveToPrevious()){//如果是第一次获取，就不向前移动指针
                 MediaInfo mediaInfo = new MediaInfo();
                 mediaInfo.date = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATE_ADDED));
                 mediaInfo.path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
@@ -52,6 +59,7 @@ public class ImageUtils {
                 break;
             }
         }
+        cursor.close();
         return result;
     }
 }

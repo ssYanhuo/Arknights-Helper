@@ -10,7 +10,9 @@ import android.content.*;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Outline;
 import android.graphics.PixelFormat;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.*;
 import android.util.DisplayMetrics;
@@ -19,6 +21,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewOutlineProvider;
 import android.view.WindowManager;
 import android.widget.*;
 
@@ -39,6 +42,9 @@ import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import eightbitlab.com.blurview.BlurView;
+import eightbitlab.com.blurview.RenderScriptBlur;
+
 
 public class OverlayService extends Service {
     WindowManager windowManager;
@@ -46,15 +52,20 @@ public class OverlayService extends Service {
     WindowManager.LayoutParams mainLayoutParams;
     WindowManager.LayoutParams backgroundLayoutParams;
     WindowManager.LayoutParams placeHolderLayoutParams;
-    LinearLayout mainLayout;
+    RelativeLayout mainLayout;
     LinearLayout linearLayout_hr;
     LinearLayout linearLayout_material;
     LinearLayout linearLayout_drop;
     LinearLayout linearLayout_more;
     ScrollView scrollView_hr;
-    ScrollView scrollView_exp;
     ScrollView scrollView_material;
+    ScrollView scrollView_drop;
     ScrollView scrollView_more;
+    RelativeLayout relativeLayout_hr;
+    RelativeLayout relativeLayout_material;
+    RelativeLayout relativeLayout_drop;
+    RelativeLayout relativeLayout_more;
+    BlurView tabLayout;
     Button button;
     final int HR = 0;
     final int MATERIAL = 1;
@@ -319,6 +330,46 @@ public class OverlayService extends Service {
                         editor.putInt("lastX", upX);
                         editor.putInt("lastY", upY);
                         editor.apply();
+                        attachToEdge = sharedPreferences.getBoolean("attach_to_edge", true);
+                        if (attachToEdge){
+                            DisplayMetrics displayMetrics = new DisplayMetrics();
+                            windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+                            int rotation = windowManager.getDefaultDisplay().getRotation();
+                            if ((rotation == 1 || rotation == 3)) {
+                                if (upX >= displayMetrics.widthPixels * 0.75){
+                                    upX = displayMetrics.widthPixels;
+                                }else if (upX <= displayMetrics.widthPixels * 0.25){
+                                    upX = 0;
+                                }else if (upY >= displayMetrics.heightPixels / 2){
+                                    upY = displayMetrics.heightPixels;
+                                }else {
+                                    upY = 0;
+                                }
+                                buttonLayoutParams.x = upX;
+                                buttonLayoutParams.y = upY;
+                                editor.putInt("lastX", upX);
+                                editor.putInt("lastY", upY);
+                                editor.apply();
+                                windowManager.updateViewLayout(view, buttonLayoutParams);
+                            }else {
+
+                                if (upY >= displayMetrics.heightPixels * 0.75){
+                                    upY = displayMetrics.heightPixels;
+                                }else if (upY <= displayMetrics.heightPixels * 0.25){
+                                    upY = 0;
+                                }else if (upX >= displayMetrics.widthPixels / 2){
+                                    upX = displayMetrics.widthPixels;
+                                }else {
+                                    upX = 0;
+                                }
+                                buttonLayoutParams.x = upX;
+                                buttonLayoutParams.y = upY;
+                                editor.putInt("lastX", upX);
+                                editor.putInt("lastY", upY);
+                                editor.apply();
+                                windowManager.updateViewLayout(view, buttonLayoutParams);
+                            }
+                        }
                         if (Math.abs(downX - upX) <= 10 && Math.abs(downY - upY) <= 10){
                             if (upTime - downTime <= 350){
                                 if (sharedPreferences.getBoolean("need_reload", false)){
@@ -327,33 +378,6 @@ public class OverlayService extends Service {
                                 if (!isFloatingWindowShowing){
                                     showFloatingWindow();
                                 }
-                            }
-                        }
-                        attachToEdge = sharedPreferences.getBoolean("attach_to_edge", true);
-                        if (attachToEdge){
-                            DisplayMetrics displayMetrics = new DisplayMetrics();
-                            windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-                            int rotation = windowManager.getDefaultDisplay().getRotation();
-                            if (rotation == 1 || rotation == 3) {
-                                if (upY >= displayMetrics.heightPixels / 2){
-                                    upY = displayMetrics.heightPixels;
-                                }else {
-                                    upY = 0;
-                                }
-                                buttonLayoutParams.y = upY;
-                                editor.putInt("lastY", upY);
-                                editor.apply();
-                                windowManager.updateViewLayout(view, buttonLayoutParams);
-                            }else {
-                                if (upX >= displayMetrics.widthPixels / 2){
-                                    upX = displayMetrics.widthPixels;
-                                }else {
-                                    upX = 0;
-                                }
-                                buttonLayoutParams.x = upX;
-                                editor.putInt("lastX", upX);
-                                editor.apply();
-                                windowManager.updateViewLayout(view, buttonLayoutParams);
                             }
                         }
                     default:
@@ -382,7 +406,7 @@ public class OverlayService extends Service {
         contextThemeWrapper = new ContextThemeWrapper(getApplicationContext(), ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_FLOATING_WINDOW, getApplicationContext()));
         backgroundLayout = new LinearLayout(contextThemeWrapper);
         placeHolder = new LinearLayout(contextThemeWrapper);
-        mainLayout = (LinearLayout) LayoutInflater.from(contextThemeWrapper).inflate(R.layout.overlay_main, null);
+        mainLayout = (RelativeLayout) LayoutInflater.from(contextThemeWrapper).inflate(R.layout.overlay_main, null);
         if (ThemeUtils.getThemeMode(getApplicationContext()) == ThemeUtils.THEME_LIGHT){
             ((ImageButton) mainLayout.findViewById(R.id.overlay_close)).setColorFilter(contextThemeWrapper.getResources().getColor(R.color.colorPrimary));
         }
@@ -390,18 +414,22 @@ public class OverlayService extends Service {
         gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
         mainLayout.setBackground(gradientDrawable);
         //实例化view
-        scrollView_hr = mainLayout.findViewById(R.id.scroll_hr);
-        scrollView_exp = mainLayout.findViewById(R.id.scroll_exp);
-        scrollView_material = mainLayout.findViewById(R.id.scroll_material);
-        scrollView_more = mainLayout.findViewById(R.id.scroll_more);
+        relativeLayout_hr = mainLayout.findViewById(R.id.relative_hr);
+        relativeLayout_material = mainLayout.findViewById(R.id.relative_material);
+        relativeLayout_drop = mainLayout.findViewById(R.id.relative_drop);
+        relativeLayout_more = mainLayout.findViewById(R.id.relative_more);
+        //scrollView_hr = mainLayout.findViewById(R.id.scroll_hr);
+        //scrollView_material = mainLayout.findViewById(R.id.scroll_material);
+        //scrollView_drop = mainLayout.findViewById(R.id.scroll_drop);
+        //scrollView_more = mainLayout.findViewById(R.id.scroll_more);
         linearLayout_hr = mainLayout.findViewById(R.id.hr_content);
         linearLayout_material = mainLayout.findViewById(R.id.material_content);
         linearLayout_drop = mainLayout.findViewById(R.id.drop_content);
         linearLayout_more = mainLayout.findViewById(R.id.more_content);
-        scrollView_hr.setVisibility(View.VISIBLE);
-        scrollView_exp.setVisibility(View.GONE);
-        scrollView_material.setVisibility(View.GONE);
-        scrollView_more.setVisibility(View.GONE);
+        relativeLayout_hr.setVisibility(View.VISIBLE);
+        relativeLayout_material.setVisibility(View.GONE);
+        relativeLayout_drop.setVisibility(View.GONE);
+        relativeLayout_more.setVisibility(View.GONE);
         TabLayout tabLayout = mainLayout.findViewById(R.id.tab_main);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -441,7 +469,7 @@ public class OverlayService extends Service {
             }
         });
         //初始化
-        hr.init(contextThemeWrapper, linearLayout_hr, backgroundLayout);
+        hr.init(contextThemeWrapper, linearLayout_hr, relativeLayout_hr, backgroundLayout);
         material.init(contextThemeWrapper, linearLayout_material, backgroundLayout);
         drop.init(contextThemeWrapper, linearLayout_drop, this);
         more.init(contextThemeWrapper, linearLayout_more, this);
@@ -464,11 +492,9 @@ public class OverlayService extends Service {
         orientation = getApplicationContext().getResources().getConfiguration().orientation;
         isFloatingWindowShowing = true;
         try{
-            windowManager.removeView(button);
-        }catch (Exception e){
-            e.printStackTrace();
+            windowManager.removeViewImmediate(button);
+        }catch (Exception ignored){
         }
-
         DisplayMetrics displayMetrics = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         int rotation = windowManager.getDefaultDisplay().getRotation();
@@ -476,6 +502,27 @@ public class OverlayService extends Service {
         mainLayoutParams.x = 0;
         mainLayoutParams.y = 0;
         backgroundLayoutParams.windowAnimations = R.style.AppTheme_Default_FloatingWindowAnimation;
+        tabLayout = mainLayout.findViewById(R.id.overlay_tab);
+        tabLayout.setupWith(mainLayout)
+                .setBlurRadius(20f)
+                .setBlurAlgorithm(new RenderScriptBlur(contextThemeWrapper))
+                .setBlurAutoUpdate(false)
+                .setHasFixedTransformationMatrix(true)
+                .setFrameClearDrawable(new ColorDrawable(Color.BLACK))
+                .setBlurEnabled(true);
+        tabLayout.setOutlineProvider(new ViewOutlineProvider() {
+            @Override
+            public void getOutline(View view, Outline outline) {
+                outline.setRect(0, 0, view.getWidth(), view.getHeight());
+            }
+        });
+        if (ThemeUtils.getThemeMode(getApplicationContext()) == ThemeUtils.THEME_NEW_YEAR){//太红了不好看
+            tabLayout.setOverlayColor(ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, contextThemeWrapper) - Color.parseColor("#00501010")));
+        }else if (ThemeUtils.getThemeMode(getApplicationContext()) == ThemeUtils.THEME_LIGHT){//太蓝了也不好看
+            tabLayout.setOverlayColor(ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY, contextThemeWrapper)));
+        } else {
+            tabLayout.setOverlayColor(ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, contextThemeWrapper)));
+        }
         //检测屏幕方向和是否全屏
         if(rotation == 1 || rotation == 3){//横
             mainLayoutParams.height = displayMetrics.heightPixels;
@@ -548,34 +595,34 @@ public class OverlayService extends Service {
     public void changeFloatingWindowContent(int i){
         switch (i){
             case HR:
-                scrollView_hr.setVisibility(View.VISIBLE);
-                scrollView_exp.setVisibility(View.GONE);
-                scrollView_material.setVisibility(View.GONE);
-                scrollView_more.setVisibility(View.GONE);
+                relativeLayout_hr.setVisibility(View.VISIBLE);
+                relativeLayout_material.setVisibility(View.GONE);
+                relativeLayout_drop.setVisibility(View.GONE);
+                relativeLayout_more.setVisibility(View.GONE);
                 hr.isCurrentWindow(true);
                 material.isCurrentWindow(false);
                 break;
             case MATERIAL:
-                scrollView_hr.setVisibility(View.GONE);
-                scrollView_exp.setVisibility(View.VISIBLE);
-                scrollView_material.setVisibility(View.GONE);
-                scrollView_more.setVisibility(View.GONE);
+                relativeLayout_hr.setVisibility(View.GONE);
+                relativeLayout_material.setVisibility(View.VISIBLE);
+                relativeLayout_drop.setVisibility(View.GONE);
+                relativeLayout_more.setVisibility(View.GONE);
                 hr.isCurrentWindow(false);
                 material.isCurrentWindow(true);
                 break;
             case DROP:
-                scrollView_hr.setVisibility(View.GONE);
-                scrollView_exp.setVisibility(View.GONE);
-                scrollView_material.setVisibility(View.VISIBLE);
-                scrollView_more.setVisibility(View.GONE);
+                relativeLayout_hr.setVisibility(View.GONE);
+                relativeLayout_material.setVisibility(View.GONE);
+                relativeLayout_drop.setVisibility(View.VISIBLE);
+                relativeLayout_more.setVisibility(View.GONE);
                 hr.isCurrentWindow(false);
                 material.isCurrentWindow(false);
                 break;
             case MORE:
-                scrollView_hr.setVisibility(View.GONE);
-                scrollView_exp.setVisibility(View.GONE);
-                scrollView_material.setVisibility(View.GONE);
-                scrollView_more.setVisibility(View.VISIBLE);
+                relativeLayout_hr.setVisibility(View.GONE);
+                relativeLayout_material.setVisibility(View.GONE);
+                relativeLayout_drop.setVisibility(View.GONE);
+                relativeLayout_more.setVisibility(View.VISIBLE);
                 hr.isCurrentWindow(false);
                 material.isCurrentWindow(false);
                 break;
@@ -588,7 +635,12 @@ public class OverlayService extends Service {
             return;
         }
         try{
-            windowManager.removeView(backgroundLayout);
+            windowManager.removeViewImmediate(backgroundLayout);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        try{
+            windowManager.removeViewImmediate(button);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -612,12 +664,12 @@ public class OverlayService extends Service {
     public void onDestroy() {
         super.onDestroy();
         try {
-            windowManager.removeView(button);
+            windowManager.removeViewImmediate(button);
         }catch (Exception e){
             e.printStackTrace();
         }
         try {
-            windowManager.removeView(backgroundLayout);
+            windowManager.removeViewImmediate(backgroundLayout);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -9,9 +9,11 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Outline;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
@@ -43,7 +45,6 @@ import com.baidu.ocr.sdk.model.WordSimple;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.entity.MediaInfo;
 import com.ssyanhuo.arknightshelper.entity.StaticData;
-import com.ssyanhuo.arknightshelper.service.OverlayService;
 import com.ssyanhuo.arknightshelper.utils.*;
 import com.ssyanhuo.arknightshelper.utils.I18nUtils.Helper;
 import com.ssyanhuo.arknightshelper.widget.LineWrapLayout;
@@ -57,6 +58,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
 
+import eightbitlab.com.blurview.BlurView;
+import eightbitlab.com.blurview.RenderScriptBlur;
 public class Hr {
     private static final int TYPE_PROCESSING = 1;
     private static final int TYPE_NETWORK_ERROR = 283504;
@@ -86,27 +89,32 @@ public class Hr {
     ArrayList<String> tagList = new ArrayList<>();
     ContextThemeWrapper contextThemeWrapper;
     EasyPopup scrollToResultPopup;
-    boolean builtin;
     private ArrayList<String> combineTempArr = new ArrayList<>();
     WindowManager windowManager;
     I18nUtils translationUtils;
     Helper tagHelper;
     Helper nameHelper;
+    Switch hideLowLevel;
+    private TextView hideLowLevelNote;
+    private RelativeLayout relativeLayout;
+    private ScrollView scrollView;
+    private BlurView snackBarView;
 
-    public void init(Context context, View view, LinearLayout backgroundLayout) {
-        contentView = view;
+    public void init(Context context, final View contentView, RelativeLayout relativeLayout, LinearLayout backgroundLayout) {
+        this.contentView = contentView;
         applicationContext = context;
+        this.relativeLayout = relativeLayout;
         rootLayout = backgroundLayout;
         contextThemeWrapper = new ContextThemeWrapper(applicationContext, ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_FLOATING_WINDOW, applicationContext));
-        hideResult(contentView.findViewById(R.id.hr_result_content));
         sharedPreferences = applicationContext.getSharedPreferences("com.ssyanhuo.arknightshelper_preferences", Context.MODE_PRIVATE);
         if (!sharedPreferences.getBoolean("queryMethodSelected", false)) {
             selectQueryMethod();
         } else if (sharedPreferences.getBoolean("fuzzyQuery", false)) {
             fuzzy = true;
         }
-        builtin = sharedPreferences.getBoolean("use_builtin_data", true);
         selector = (ScrollView) LayoutInflater.from(contextThemeWrapper).inflate(R.layout.overlay_hr_sub_ocr, null);
+        snackBarView = relativeLayout.findViewById(R.id.hr_snackbar);
+        scrollView = relativeLayout.findViewById(R.id.scroll_hr);
         checkBoxes = new ArrayList<>();
         selectedStar = new ArrayList<>();
         selectedQualification = new ArrayList<>();
@@ -115,18 +123,18 @@ public class Hr {
         selectedType = new ArrayList<>();
         selectedTag = new ArrayList<>();
         try {
-            hrJson = FileUtils.readData("akhr.json", context, builtin);
+            hrJson = FileUtils.readData("akhr.json", context);
         } catch (IOException e) {
             e.printStackTrace();
         }
         try {
             translationUtils = new I18nUtils();
-            tagHelper = translationUtils.getHelper(applicationContext, builtin, I18nUtils.CATEGORY_TAG);
-            nameHelper = translationUtils.getHelper(applicationContext, builtin, I18nUtils.CATEGORY_NAME);
+            tagHelper = translationUtils.getHelper(applicationContext, I18nUtils.CATEGORY_TAG);
+            nameHelper = translationUtils.getHelper(applicationContext, I18nUtils.CATEGORY_NAME);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        getAllCheckboxes(checkBoxes, view);
+        getAllCheckboxes(checkBoxes, contentView);
         for (int i = 0; i < checkBoxes.size(); i++) {
             checkBoxes.get(i).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -143,7 +151,7 @@ public class Hr {
                     }
 
                     if (selectedStar.size() + selectedQualification.size() + selectedPosition.size() + selectedSex.size() + selectedType.size() + selectedTag.size() == 0) {
-                        hideResult(contentView.findViewById(R.id.hr_result_content));
+                        hideResult(Hr.this.contentView.findViewById(R.id.hr_result_content));
                     }
                 }
             });
@@ -158,7 +166,7 @@ public class Hr {
         spannableStringBuilder.setSpan(new ClickableSpan() {
             @Override
             public void onClick(View widget) {
-                LinearLayout resultLayout = contentView.findViewById(R.id.hr_result);
+                LinearLayout resultLayout = Hr.this.contentView.findViewById(R.id.hr_result);
                 resultLayout.removeAllViews();
                 for (int i = 0; i < checkBoxes.size(); i++) {
                     CheckBox checkBox = checkBoxes.get(i);
@@ -166,13 +174,61 @@ public class Hr {
                 }
             }
         }, 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ((TextView) contentView.findViewById(R.id.hr_result_title)).append(" ");
-        ((TextView) contentView.findViewById(R.id.hr_result_title)).append(spannableStringBuilder);
-        ((TextView) contentView.findViewById(R.id.hr_result_title)).setMovementMethod(LinkMovementMethod.getInstance());
+        ((TextView) this.contentView.findViewById(R.id.hr_result_title)).append(" ");
+        ((TextView) this.contentView.findViewById(R.id.hr_result_title)).append(spannableStringBuilder);
+        ((TextView) this.contentView.findViewById(R.id.hr_result_title)).setMovementMethod(LinkMovementMethod.getInstance());
         placeHolder = rootLayout.findViewWithTag("placeHolder");
         contextThemeWrapper = new ContextThemeWrapper(applicationContext, ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_FLOATING_WINDOW, applicationContext));
         windowManager = (WindowManager) applicationContext.getSystemService(Context.WINDOW_SERVICE);
+        hideLowLevel = this.contentView.findViewById(R.id.hr_hide_low_level);
+        hideLowLevelNote = this.contentView.findViewById(R.id.hr_hide_low_level_note);
+        hideLowLevel.setChecked(sharedPreferences.getBoolean("hide_low_level", false));
+        if (hideLowLevel.isChecked()){
+            hideLowLevelNote.setVisibility(View.VISIBLE);
+        }else {
+            hideLowLevelNote.setVisibility(View.GONE);
+        }
+        hideLowLevel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                getSelectedItems();
+                if (fuzzy) {
+                    getResultFuzzy();
+                } else {
+                    getResultExact();
+                }
+                if (isChecked){
+                    hideLowLevelNote.setVisibility(View.VISIBLE);
+                }else {
+                    hideLowLevelNote.setVisibility(View.GONE);
+                }
+                sharedPreferences.edit().putBoolean("hide_low_level", isChecked).apply();
+            }
+        });
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+                @Override
+                public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                    if (scrollY + scrollView.getHeight() > scrollView.findViewById(R.id.hr_result_scroll_point).getTop() + scrollView.findViewById(R.id.hr_result_title).getHeight()){
+                        snackBarView.setVisibility(View.GONE);
+                    }
+                }
+            });
+        }
+        snackBarView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scrollToResult();
+                v.setVisibility(View.GONE);
+            }
+        });
+        hideResult(this.contentView.findViewById(R.id.hr_result_content));
     }
+
+    public void refresh(){
+
+    }
+
     //按星级排序
     private class StarComparator implements Comparator<JSONObject>{
 
@@ -278,6 +334,7 @@ public class Hr {
             boolean sexPaired = selectedSex.size() == sex.size() || selectedSex.size() == 0;
             boolean tagPaired = selectedTag.size() == tag.size() || selectedTag.size() == 0;
             if (typePaired && starPaired && sexPaired && tagPaired && !hiddenInHr && !hiddenInI18n) {
+                if (Integer.parseInt(star) <= 2 && hideLowLevel.isChecked()){continue;}
                 if ((!selectedStar.contains("6") && !selectedTag.contains("高级资深干员")) && star.equals("6")){continue;}
                 result.add(jsonObject);
                 Log.i(TAG, "Found:" + name);
@@ -313,6 +370,7 @@ public class Hr {
             boolean sexPaired = sex.size() != 0;
             boolean tagPaired = tag.size() != 0;
             if ((typePaired || sexPaired || tagPaired) && !hiddenInHr && !hiddenInI18n && starPaired) {
+                if (Integer.parseInt(star) <= 2 && hideLowLevel.isChecked()){continue;}
                 if ((!selectedStar.contains("6") && !selectedTag.contains("高级资深干员")) && star.equals("6")){continue;}
                 JSONArray matchedTags = new JSONArray();
                 matchedTags.addAll(JSONArray.parseArray(JSON.toJSONString(type)));
@@ -333,6 +391,7 @@ public class Hr {
 
     public void hideResult(View view) {
         view.setVisibility(View.GONE);
+        snackBarView.setVisibility(View.GONE);
     }
 
     public void showResultExact(ArrayList<JSONObject> result) {
@@ -412,6 +471,9 @@ public class Hr {
                 }
             });
             lineWrapLayout.addView(button);
+        }
+        if (scrollView.getScrollY() + scrollView.getHeight() <= scrollView.findViewById(R.id.hr_result_scroll_point).getTop() + scrollView.findViewById(R.id.hr_result_title).getHeight()){
+            showScrollToResultSnackBar();
         }
     }
 
@@ -598,7 +660,7 @@ public class Hr {
                         }
                     }
                     if (stars.contains(5)){
-                        //Log.e(TAG, (String) ((Button) ((LineWrapLayout) layout.getChildAt(1)).getChildAt(1)).getText());
+                        //Log.e(TAG, (String) ((Button) ((LineWrapLayout) dialog_python_downloader.getChildAt(1)).getChildAt(1)).getText());
                         resultLayout.removeView(layout);
                         resultLayout.addView(layout, 0);
                     }
@@ -643,7 +705,7 @@ public class Hr {
                         }
                     }
                     if (stars.contains(6)){
-                        //Log.e(TAG, (String) ((Button) ((LineWrapLayout) layout.getChildAt(1)).getChildAt(1)).getText());
+                        //Log.e(TAG, (String) ((Button) ((LineWrapLayout) dialog_python_downloader.getChildAt(1)).getChildAt(1)).getText());
                         resultLayout.removeView(layout);
                         resultLayout.addView(layout, 0);
                     }
@@ -697,50 +759,67 @@ public class Hr {
                 }
             }
         }
-    }
-
-    public void combine(int index, int k, JSONArray arr, ArrayList<ArrayList<String>> result) {
-        if(k == 1){
-            for (int i = index; i < arr.size(); i++) {
-                combineTempArr.add(arr.getString(i));
-                result.add(new ArrayList<>(combineTempArr));
-                combineTempArr.remove((Object)arr.getString(i));
-            }
-        }else if(k > 1){
-            for (int i = index; i <= arr.size() - k; i++) {
-                combineTempArr.add(arr.getString(i)); //tmpArr都是临时性存储一下
-
-                combine(i + 1,k - 1, arr, result); //索引右移，内部循环，自然排除已经选择的元素
-                combineTempArr.remove((Object)arr.getString(i)); //tmpArr因为是临时存储的，上一个组合找出后就该释放空间，存储下一个元素继续拼接组合了
-            }
+        if (scrollView.getScrollY() + scrollView.getHeight() <= scrollView.findViewById(R.id.hr_result_scroll_point).getTop() + scrollView.findViewById(R.id.hr_result_title).getHeight()){
+            showScrollToResultSnackBar();
         }
     }
+    private void showScrollToResultSnackBar(){
+        snackBarView.setVisibility(View.VISIBLE);
+        if (ThemeUtils.getThemeMode(applicationContext) == ThemeUtils.THEME_NEW_YEAR){//太红了不好看
+            snackBarView.setOverlayColor(ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, contextThemeWrapper) - Color.parseColor("#00501010")));
+        }else if (ThemeUtils.getThemeMode(applicationContext) == ThemeUtils.THEME_LIGHT){//太蓝了也不好看
+            snackBarView.setOverlayColor(ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY, contextThemeWrapper)));
+            ((ImageView) snackBarView.findViewById(R.id.hr_snackbar_imageview)).setColorFilter(((TextView) snackBarView.findViewById(R.id.hr_snackbar_textview)).getCurrentTextColor());
+        } else {
+            snackBarView.setOverlayColor(ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, contextThemeWrapper)));
+        }
+        snackBarView.setupWith(rootLayout)
+                .setBlurRadius(20f)
+                .setFrameClearDrawable(new ColorDrawable(Color.BLACK))
+                .setHasFixedTransformationMatrix(false)
+                .setBlurAutoUpdate(true)
+                .setBlurAlgorithm(new RenderScriptBlur(applicationContext))
+                .setBlurEnabled(true);
+        snackBarView.setOutlineProvider(new ViewOutlineProvider() {
+            @Override
+            public void getOutline(View view, Outline outline) {
+                outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), 32f);
+            }
+        });
+        snackBarView.setClipToOutline(true);
+        ((TextView) snackBarView.findViewById(R.id.hr_snackbar_textview)).setText("查看结果");
+        ((ImageView) snackBarView.findViewById(R.id.hr_snackbar_imageview)).setImageDrawable(applicationContext.getResources().getDrawable(R.drawable.ic_arrow_down, null));
+    }
+
+    private void hideScrollToResultSnackBar(){
+        snackBarView.setVisibility(View.GONE);
+    }
+
 
 
 
     public void selectQueryMethod() {
         //选择
-        final RelativeLayout parentView = (RelativeLayout) contentView.getParent();
         View methodSelector = LayoutInflater.from(applicationContext).inflate(R.layout.overlay_hr_method_selector, null);
-        parentView.removeAllViews();
-        parentView.addView(methodSelector);
+        relativeLayout.removeAllViews();
+        relativeLayout.addView(methodSelector);
         //设定本次的方法
-        LinearLayout exactLinearLayout = parentView.findViewById(R.id.hr_method_selector_exact);
+        LinearLayout exactLinearLayout = relativeLayout.findViewById(R.id.hr_method_selector_exact);
         exactLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 changeQueryMethod(MODE_EXACT);
-                parentView.removeAllViews();
-                parentView.addView(contentView);
+                relativeLayout.removeAllViews();
+                relativeLayout.addView(contentView);
             }
         });
-        LinearLayout fuzzyLinearLayout = parentView.findViewById(R.id.hr_method_selector_fuzzy);
+        LinearLayout fuzzyLinearLayout = relativeLayout.findViewById(R.id.hr_method_selector_fuzzy);
         fuzzyLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 changeQueryMethod(MODE_FUZZY);
-                parentView.removeAllViews();
-                parentView.addView(contentView);
+                relativeLayout.removeAllViews();
+                relativeLayout.addView(contentView);
             }
         });
     }
@@ -1077,12 +1156,7 @@ public class Hr {
                 succeedText.setText(applicationContext.getString(R.string.hr_ocr_succeed) + tagList.size());
                 linearLayout.addView(succeedText);
                 selector.addView(linearLayout);
-                ((ScrollView)contentView.getParent().getParent()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        ((ScrollView)contentView.getParent().getParent()).smoothScrollTo(0, rootLayout.findViewById(R.id.hr_result_content).getTop() + ((ScrollView)contentView.getParent().getParent()).getHeight() - 2 * applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin));
-                    }
-                });
+                scrollToResult();
                 final Handler hideSubWindowHandler = new Handler();
                 Timer timer = new Timer();
                 timer.schedule(new TimerTask() {
@@ -1099,6 +1173,14 @@ public class Hr {
                 }, 2000);
                 break;
         }
+    }
+    private void scrollToResult(){
+        (scrollView).post(new Runnable() {
+            @Override
+            public void run() {
+                (scrollView).smoothScrollTo(0, scrollView.findViewById(R.id.hr_result_scroll_point).getTop() - applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin) * 3);
+            }
+        });
     }
     public static ArrayList<ArrayList<String>> combine (ArrayList<String> array){
         ArrayList<ArrayList<String>> result = new ArrayList<>();
