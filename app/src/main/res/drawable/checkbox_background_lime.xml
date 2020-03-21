@@ -4,12 +4,16 @@
     android:insetTop="@dimen/button_inset_vertical_material"
     android:insetRight="@dimen/button_inset_horizontal_material"
     android:insetBottom="@dimen/button_inset_vertical_material">
-    <shape android:shape="rectangle">
-        <corners android:radius="@dimen/control_corner_material" />
-        <solid android:color="@color/checkbox_color_lime" />
-        <padding android:left="@dimen/button_padding_horizontal_material"
-            android:top="@dimen/button_padding_vertical_material"
-            android:right="@dimen/button_padding_horizontal_material"
-            android:bottom="@dimen/button_padding_vertical_material" />
-    </shape>
+    <ripple android:color="@android:color/white">
+        <item>
+            <shape android:shape="rectangle">
+                <corners android:radius="@dimen/control_corner_material" />
+                <solid android:color="@color/checkbox_color_lime" />
+                <padding android:left="@dimen/button_padding_horizontal_material"
+                    android:top="@dimen/button_padding_vertical_material"
+                    android:right="@dimen/button_padding_horizontal_material"
+                    android:bottom="@dimen/button_padding_vertical_material" />
+            </shape>
+        </item>
+    </ripple>
 </inset>

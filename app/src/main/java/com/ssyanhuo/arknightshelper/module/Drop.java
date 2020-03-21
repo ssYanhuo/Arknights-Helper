@@ -146,7 +146,7 @@ public class Drop {
             }
             if (id == item){//TODO 用映射
                 JSONObject object = matrix.getJSONObject(i);
-                Log.e(TAG, object.toJSONString());
+                //Log.e(TAG, object.toJSONString());
                 float cost = 0;
                 try{
                     cost = costMap.get(object.getString("stageId")) * ((float)object.getInteger("times") / (float)object.getInteger("quantity"));

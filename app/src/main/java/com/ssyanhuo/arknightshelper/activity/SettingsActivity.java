@@ -2,26 +2,52 @@ package com.ssyanhuo.arknightshelper.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Outline;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.PictureDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
+import android.graphics.drawable.shapes.RectShape;
+import android.graphics.drawable.shapes.Shape;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
+import android.service.quicksettings.Tile;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewOutlineProvider;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -34,21 +60,29 @@ import com.google.android.material.snackbar.Snackbar;
 import com.ssyanhuo.arknightshelper.BuildConfig;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.entity.StaticData;
+import com.ssyanhuo.arknightshelper.service.OverlayService;
+import com.ssyanhuo.arknightshelper.utils.DpUtils;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
 import com.ssyanhuo.arknightshelper.utils.PackageUtils;
 import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
 import com.ssyanhuo.arknightshelper.utils.I18nUtils;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import uk.co.deanwild.materialshowcaseview.shape.CircleShape;
 
 public class SettingsActivity extends AppCompatActivity {
     final String GAME_OFFICIAL = "0";
@@ -113,6 +147,7 @@ public class SettingsActivity extends AppCompatActivity {
             final ListPreference theme = findPreference("theme");
             final SeekBarPreference floating_button_opacity = findPreference("floating_button_opacity");
             final ListPreference game_language = findPreference("game_language");
+            final Preference button_img = findPreference("button_img");
             margin_fix.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @SuppressLint("SourceLockedOrientationActivity")
                 @Override
@@ -223,7 +258,244 @@ public class SettingsActivity extends AppCompatActivity {
                     return true;
                 }
             });
+            button_img.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(final Preference preference) {
+                        showButtonImagePicker(null);
+                    return false;
+                }
+            });
         }
+
+        @Override
+        public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+            //Toast.makeText(getContext(), Uri.fromFile(new File(data.getData().getPath())).toString(), Toast.LENGTH_SHORT).show();
+            if (requestCode == 0 && data != null){
+                try{
+                    Intent intent;
+                    if (!data.getDataString().contains("com.miui.gallery.open")){
+                        intent = new Intent("com.android.camera.action.CROP");
+                        intent.setDataAndType(data.getData(), "image/*");
+                        intent.putExtra("aspectX", 256);
+                        intent.putExtra("aspectY", 256);
+                        intent.putExtra("outputX", 256);
+                        intent.putExtra("outputY", 256);
+                        intent.putExtra("scale", true);
+                        intent.putExtra("return-data", true);
+                        File outputFile = new File(getContext().getCacheDir().getPath() + File.separator + "images" + File.separator + "button.png");
+                        if (!outputFile.getParentFile().exists()){
+                            outputFile.getParentFile().mkdirs();
+                        }
+//                    if (!outputFile.exists()){
+//                        outputFile.createNewFile();
+//                    }
+                        Uri outputUri = FileProvider.getUriForFile(getContext(), "com.ssyanhuo.arknightshelper.fileprovider", outputFile);
+                        //Log.e("" ,data.toString());
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, outputUri);
+                        intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
+                        List<ResolveInfo> resolveInfoList = getContext().getPackageManager()
+                                .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+                        for (ResolveInfo info : resolveInfoList) {
+                            getContext().grantUriPermission(info.activityInfo.packageName,
+                                    outputUri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                        }
+                    }
+                    else{
+                        intent = new Intent("com.android.camera.action.CROP");
+                        intent.setComponent(new ComponentName("com.miui.gallery","com.miui.gallery.editor.photo.app.CropperActivity"));
+                        intent.setDataAndType(data.getData(), "image/*");
+                        intent.putExtra("aspectX", 256);
+                        intent.putExtra("aspectY", 256);
+                        intent.putExtra("outputX", 256);
+                        intent.putExtra("outputY", 256);
+                        intent.putExtra("scale", true);
+                        intent.putExtra("return-data", true);
+                        File outputFile = new File(getContext().getCacheDir().getPath() + File.separator + "images" + File.separator + "button.png");
+                        if (!outputFile.getParentFile().exists()){
+                            outputFile.getParentFile().mkdirs();
+                        }
+                        Uri outputUri = FileProvider.getUriForFile(getContext(), "com.ssyanhuo.arknightshelper.fileprovider", outputFile);
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, outputUri);
+                        intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
+                        List<ResolveInfo> resolveInfoList = getContext().getPackageManager()
+                                .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+                        for (ResolveInfo info : resolveInfoList) {
+                            Toast.makeText(getContext(), info.activityInfo.name, Toast.LENGTH_SHORT).show();
+                            getContext().grantUriPermission(info.activityInfo.packageName,
+                                    outputUri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                        }
+                    }
+
+//                    if(!data.getDataString().contains("com.miui.gallery.open") || true){
+//                        List<ResolveInfo> resolveInfoList = getContext().getPackageManager()
+//                                .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+//                        for (ResolveInfo info : resolveInfoList) {
+//                            getContext().grantUriPermission(info.activityInfo.packageName,
+//                                    outputUri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+//                        }
+//                    }else {
+//                        List<ResolveInfo> resolveInfoList = getContext().getPackageManager()
+//                                .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+//                        for (ResolveInfo info : resolveInfoList) {
+//                            if (info.activityInfo.packageName.contains("miui")){
+//
+////                                getContext().grantUriPermission(info.activityInfo.packageName,
+////                                        outputUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+////                                Toast.makeText(getContext(), info.activityInfo.name, Toast.LENGTH_SHORT).show();
+//                            }else {
+//                                continue;
+////                                getContext().grantUriPermission(info.activityInfo.packageName,
+////                                        outputUri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+//                            }
+//
+//                        }
+//                    }
+                    //intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                    startActivityForResult(intent, 1);
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(getContext(), "出现错误", Toast.LENGTH_SHORT);
+                }
+
+            }if (requestCode == 1 && data != null){
+                showButtonImagePicker(data);
+            }
+        }
+
+        private void showButtonImagePicker(@Nullable Intent data){
+            LinearLayout linearLayout = new LinearLayout(getActivity());
+            final ImageView imageView = new ImageView(getActivity());
+            CheckBox checkBox = new CheckBox(getActivity());
+            Bitmap bitmap = null;
+            int padding = getResources().getDimensionPixelOffset(R.dimen.activity_horizontal_margin);
+            checkBox.setText("剪切为圆形");
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked){
+                        //TODO 裁切
+                    }
+                }
+            });
+            checkBox.setChecked(true);
+            checkBox.setVisibility(View.GONE);
+            //imageView.setPadding(padding, padding, padding, padding);
+            imageView.setClickable(true);
+            imageView.setFocusable(true);
+            if (data == null){
+                if (preferences.getBoolean("button_img", false)){
+                    try{
+                        imageView.setBackground(Drawable.createFromPath(getContext().getFilesDir().getPath() + File.separator + "button.png"));
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }else {
+                    imageView.setImageResource(R.mipmap.overlay_button);
+                }
+            }else {
+                try {
+                    bitmap = BitmapFactory.decodeFile(getContext().getCacheDir().getPath() + File.separator + "images" + File.separator + "button.png");
+                    imageView.setImageBitmap(bitmap);
+                }catch (Exception e){
+                    imageView.setImageResource(R.mipmap.overlay_button);
+                }
+
+            }
+            final Bitmap finalBitmap = bitmap;
+            final AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+                    .setTitle("选择图片")
+                    .setView(linearLayout)
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if(finalBitmap != null){
+                                try {
+                                    File outPutPic = new File(getContext().getFilesDir().getPath() + File.separator + "button.png");
+                                    if (!outPutPic.exists()){
+                                        outPutPic.createNewFile();
+                                    }
+                                    FileOutputStream outputStream = new FileOutputStream(outPutPic);
+                                    finalBitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+                                    outputStream.flush();
+                                    outputStream.close();
+                                    preferences.edit().putBoolean("button_img", true).apply();
+                                    restartService();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            dialog.dismiss();
+                        }
+                    })
+                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .setNeutralButton("还原默认图片", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            preferences.edit().putBoolean("button_img", false).apply();
+                            restartService();
+                            dialog.dismiss();
+                        }
+                    })
+                    .setCancelable(false)
+                    .create();
+
+
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_PICK);
+                    intent.setType("image/*");
+                    startActivityForResult(intent, 0);
+                    alertDialog.dismiss();
+                }
+            });
+            linearLayout.setGravity(Gravity.CENTER_HORIZONTAL);
+            linearLayout.setOrientation(LinearLayout.VERTICAL);
+            linearLayout.setPadding(padding, padding, padding, padding);
+            linearLayout.addView(imageView);
+            linearLayout.addView(checkBox);
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) imageView.getLayoutParams();
+            lp.height = DpUtils.dip2px(getContext(), 48);
+            lp.width = DpUtils.dip2px(getContext(), 48);
+            lp.topMargin = padding; lp.bottomMargin = padding; lp.leftMargin = padding; lp.rightMargin = padding;
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setOutlineProvider(new ViewOutlineProvider() {
+                @Override
+                public void getOutline(View view, Outline outline) {
+                    outline.setOval(0,0, DpUtils.dip2px(getContext(), 48), DpUtils.dip2px(getContext(), 48));
+                }
+            });
+            imageView.setClipToOutline(true);
+            imageView.setElevation(8f);
+            alertDialog.show();
+        }
+
+        private Bitmap clipToCircle(Bitmap bitmap){
+            //Canvas canvas = new Canvas(bitmap);
+            return bitmap;
+        }
+
+        private void restartService(){
+            List<ActivityManager.RunningServiceInfo> runningServiceInfoList = ((ActivityManager)getContext().getSystemService(Context.ACTIVITY_SERVICE)).getRunningServices(Integer.MAX_VALUE);
+            if(runningServiceInfoList.size() > 0){
+                for (int i = 0; i < runningServiceInfoList.size(); i++){
+                    if(runningServiceInfoList.get(i).service.getClassName().equals("com.ssyanhuo.arknightshelper.service.OverlayService")){
+                        Intent intent = new Intent(getContext(), OverlayService.class);
+                        getContext().stopService(intent);
+                        getContext().startService(intent);
+                        return;
+                    }
+                }
+            }
+        }
+
         private class UpdateRunnable implements Runnable{
             String BASE_URL_GITEE = "http://ssyanhuo.gitee.io/arknights-helper-data/";
             String BASE_URL_GITHUB = "https://ssyanhuo.github.io/Arknights-Helper-Data/";

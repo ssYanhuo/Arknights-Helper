@@ -11,6 +11,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import android.widget.*;
 
 import androidx.appcompat.view.ContextThemeWrapper;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ssyanhuo.arknightshelper.R;
@@ -35,6 +37,9 @@ import com.zyyoona7.popup.EasyPopup;
 import java.io.IOException;
 import java.util.*;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 public class Material {
     public ArrayList<NumberSelector> numberSelectors;
     private NumberSelector stageNow;
@@ -42,6 +47,23 @@ public class Material {
     private NumberSelector pointNow;
     private NumberSelector stageTarget;
     private NumberSelector levelTarget;
+    private NumberSelector skillAllNow;
+    private NumberSelector skillAllTarget;
+    private NumberSelector skill1Now;
+    private NumberSelector skill1Target;
+    private NumberSelector skill2Now;
+    private NumberSelector skill2Target;
+    private NumberSelector skill3Now;
+    private NumberSelector skill3Target;
+    private LinearLayout skillAllContainer;
+    private LinearLayout skill1Container;
+    private LinearLayout skill2Container;
+    private LinearLayout skill3Container;
+    private CheckBox skillAllCheckBox;
+    private CheckBox skill1CheckBox;
+    private CheckBox skill2CheckBox;
+    private CheckBox skill3CheckBox;
+    private CheckBox levelCheckbox;
     private String expJsonString;
     private JSONObject expJsonObject;
     private String characterJsonString;
@@ -96,6 +118,57 @@ public class Material {
         levelNow = view.findViewById(R.id.material_selector_level_now);
         stageTarget = view.findViewById(R.id.material_selector_stage_target);
         levelTarget = view.findViewById(R.id.material_selector_level_target);
+        skillAllNow = view.findViewById(R.id.material_selector_skill_all_now);
+        skillAllTarget = view.findViewById(R.id.material_selector_skill_all_target);
+        skill1Now = view.findViewById(R.id.material_selector_skill_1_now);
+        skill1Target = view.findViewById(R.id.material_selector_skill_1_target);
+        skill2Now = view.findViewById(R.id.material_selector_skill_2_now);
+        skill2Target = view.findViewById(R.id.material_selector_skill_2_target);
+        skill3Now = view.findViewById(R.id.material_selector_skill_3_now);
+        skill3Target = view.findViewById(R.id.material_selector_skill_3_target);
+        skillAllContainer = view.findViewById(R.id.material_skill_all_container);
+        skill1Container = view.findViewById(R.id.material_skill_1_container);
+        skill2Container = view.findViewById(R.id.material_skill_2_container);
+        skill3Container = view.findViewById(R.id.material_skill_3_container);
+        skillAllCheckBox = view.findViewById(R.id.material_skill_all_checkBox);
+        skill1CheckBox = view.findViewById(R.id.material_skill_1_checkBox);
+        skill2CheckBox = view.findViewById(R.id.material_skill_2_checkBox);
+        skill3CheckBox = view.findViewById(R.id.material_skill_3_checkBox);
+        skillAllCheckBox.setChecked(false);
+        skill1CheckBox.setChecked(false);
+        skill2CheckBox.setChecked(false);
+        skill3CheckBox.setChecked(false);
+        skillAllCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                showResult();
+            }
+        });
+        skill1CheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                showResult();
+            }
+        });
+        skill2CheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                showResult();
+            }
+        });
+        skill3CheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                showResult();
+            }
+        });
+        levelCheckbox = view.findViewById(R.id.material_level_checkBox);
+        levelCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                showResult();
+            }
+        });
         contextThemeWrapper = new ContextThemeWrapper(applicationContext, ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_FLOATING_WINDOW, applicationContext));
         getAllNumberSelectors(view);
         for (int i = 0; i < numberSelectors.size(); i++){
@@ -207,7 +280,7 @@ public class Material {
 
     }
 
-    public void checkValue(){
+    public void checkValue(){//检查取值并解析技能
         //不同星级时，精英化（目标+当前）最值随之变化，若变化前已经超出新值范围，则自动缩小为最值
         int maxStage = getMaxStage(characterStar + 1);
         if (levelNow.getInt() == 0){
@@ -244,6 +317,19 @@ public class Material {
         if(levelTarget.getInt() > maxLevelTarget){
             levelTarget.setInt(maxLevelTarget);
         }
+
+        if (skill3Now.getInt() >= skill3Target.getInt()){
+            skill3Now.setInt(skill3Target.getInt() - 1);
+        }
+        if (skill2Now.getInt() >= skill2Target.getInt()){
+            skill2Now.setInt(skill2Target.getInt() - 1);
+        }
+        if (skill1Now.getInt() >= skill1Target.getInt()){
+            skill1Now.setInt(skill1Target.getInt() - 1);
+        }
+        if (skillAllNow.getInt() >= skillAllTarget.getInt()){
+            skillAllNow.setInt(skillAllTarget.getInt() - 1);
+        }
     }
     @SuppressLint("SetTextI18n")
     public void showResult(){
@@ -256,52 +342,56 @@ public class Material {
         int moneyStamina = 0;
         int expStamina = 0;
         int stamina = 0;
-        int stageFrom = stageNow.getInt();
-        int stageTo = stageTarget.getInt();
-        int levelFrom = levelNow.getInt();
-        int levelTo = levelTarget.getInt();
-        if (stageTo - stageFrom <= 0){
-            moneyEvolve = 0;
-        }else if(stageTo - stageFrom >= 2){
-            moneyEvolve = expJsonObject.getJSONArray("evolveGoldCost").getJSONArray(characterStar).getInteger(0) + expJsonObject.getJSONArray("evolveGoldCost").getJSONArray(characterStar).getInteger(1);
-        }else if(stageTo - stageFrom == 1){
-            if (stageFrom == 0){
-                moneyEvolve = expJsonObject.getJSONArray("evolveGoldCost").getJSONArray(characterStar).getInteger(0);
-            }else if(stageFrom == 1){
-                moneyEvolve = expJsonObject.getJSONArray("evolveGoldCost").getJSONArray(characterStar).getInteger(1);
-            }
-        }
-        for (int stage = stageFrom; stage <= stageTo; stage++){
-            boolean isLastStage = stage == stageTo;
-            boolean isFirstStage = stage ==stageFrom;
-            if(isFirstStage && isLastStage){
-                for (int i = levelFrom; i < levelTo; i++){
-                    exp += expJsonObject.getJSONArray("characterExpMap").getJSONArray(stage).getInteger(i - 1);
-                    moneyUpgrade += expJsonObject.getJSONArray("characterUpgradeCostMap").getJSONArray(stage).getInteger(i - 1);
-                }
-            }else if(isFirstStage){
-                for (int i = levelFrom; i < expJsonObject.getJSONArray("maxLevel").getJSONArray(characterStar).getInteger(stage); i++){
-                    exp += expJsonObject.getJSONArray("characterExpMap").getJSONArray(stage).getInteger(i - 1);
-                    moneyUpgrade += expJsonObject.getJSONArray("characterUpgradeCostMap").getJSONArray(stage).getInteger(i - 1);
-                }
-            }else  if(isLastStage){
-                for (int i = 1; i < levelTo; i++){
-                    exp += expJsonObject.getJSONArray("characterExpMap").getJSONArray(stage).getInteger(i - 1);
-                    moneyUpgrade += expJsonObject.getJSONArray("characterUpgradeCostMap").getJSONArray(stage).getInteger(i - 1);
-                }
-            }else {
-                for (int i = 1; i < expJsonObject.getJSONArray("maxLevel").getJSONArray(characterStar).getInteger(stage); i++){
-                    exp += expJsonObject.getJSONArray("characterExpMap").getJSONArray(stage).getInteger(i - 1);
-                    moneyUpgrade += expJsonObject.getJSONArray("characterUpgradeCostMap").getJSONArray(stage).getInteger(i - 1);
+        LinearLayout resultContent = contentView.findViewById(R.id.material_result_content);
+        resultContent.removeAllViews();
+        ItemDetailView itemDetailView;
+        if (levelCheckbox.isChecked()){
+            int stageFrom = stageNow.getInt();
+            int stageTo = stageTarget.getInt();
+            int levelFrom = levelNow.getInt();
+            int levelTo = levelTarget.getInt();
+            if (stageTo - stageFrom <= 0){
+                moneyEvolve = 0;
+            }else if(stageTo - stageFrom >= 2){
+                moneyEvolve = expJsonObject.getJSONArray("evolveGoldCost").getJSONArray(characterStar).getInteger(0) + expJsonObject.getJSONArray("evolveGoldCost").getJSONArray(characterStar).getInteger(1);
+            }else if(stageTo - stageFrom == 1){
+                if (stageFrom == 0){
+                    moneyEvolve = expJsonObject.getJSONArray("evolveGoldCost").getJSONArray(characterStar).getInteger(0);
+                }else if(stageFrom == 1){
+                    moneyEvolve = expJsonObject.getJSONArray("evolveGoldCost").getJSONArray(characterStar).getInteger(1);
                 }
             }
-        }
-        expRound = (exp % StaticData.Exp.ExpLevel.LS_5 == 0) ? (exp / StaticData.Exp.ExpLevel.LS_5) : (exp / StaticData.Exp.ExpLevel.LS_5 + 1);
-        money = moneyEvolve + moneyUpgrade;
-        moneyRound = ((money - expRound * StaticData.Exp.MoneyLevel.LS_5) % StaticData.Exp.MoneyLevel.CE_5 == 0) ? ((money - expRound * StaticData.Exp.MoneyLevel.LS_5) / StaticData.Exp.MoneyLevel.CE_5) : ((money - expRound * StaticData.Exp.MoneyLevel.LS_5) / StaticData.Exp.MoneyLevel.CE_5  + 1);
-        expStamina = expRound * StaticData.Exp.Stamina.LS_5;
-        moneyStamina = moneyRound * StaticData.Exp.Stamina.CE_5;
-        stamina = expStamina + moneyStamina;
+            for (int stage = stageFrom; stage <= stageTo; stage++){
+                boolean isLastStage = stage == stageTo;
+                boolean isFirstStage = stage ==stageFrom;
+                if(isFirstStage && isLastStage){
+                    for (int i = levelFrom; i < levelTo; i++){
+                        exp += expJsonObject.getJSONArray("characterExpMap").getJSONArray(stage).getInteger(i - 1);
+                        moneyUpgrade += expJsonObject.getJSONArray("characterUpgradeCostMap").getJSONArray(stage).getInteger(i - 1);
+                    }
+                }else if(isFirstStage){
+                    for (int i = levelFrom; i < expJsonObject.getJSONArray("maxLevel").getJSONArray(characterStar).getInteger(stage); i++){
+                        exp += expJsonObject.getJSONArray("characterExpMap").getJSONArray(stage).getInteger(i - 1);
+                        moneyUpgrade += expJsonObject.getJSONArray("characterUpgradeCostMap").getJSONArray(stage).getInteger(i - 1);
+                    }
+                }else  if(isLastStage){
+                    for (int i = 1; i < levelTo; i++){
+                        exp += expJsonObject.getJSONArray("characterExpMap").getJSONArray(stage).getInteger(i - 1);
+                        moneyUpgrade += expJsonObject.getJSONArray("characterUpgradeCostMap").getJSONArray(stage).getInteger(i - 1);
+                    }
+                }else {
+                    for (int i = 1; i < expJsonObject.getJSONArray("maxLevel").getJSONArray(characterStar).getInteger(stage); i++){
+                        exp += expJsonObject.getJSONArray("characterExpMap").getJSONArray(stage).getInteger(i - 1);
+                        moneyUpgrade += expJsonObject.getJSONArray("characterUpgradeCostMap").getJSONArray(stage).getInteger(i - 1);
+                    }
+                }
+            }
+            expRound = (exp % StaticData.Exp.ExpLevel.LS_5 == 0) ? (exp / StaticData.Exp.ExpLevel.LS_5) : (exp / StaticData.Exp.ExpLevel.LS_5 + 1);
+            money = moneyEvolve + moneyUpgrade;
+            moneyRound = ((money - expRound * StaticData.Exp.MoneyLevel.LS_5) % StaticData.Exp.MoneyLevel.CE_5 == 0) ? ((money - expRound * StaticData.Exp.MoneyLevel.LS_5) / StaticData.Exp.MoneyLevel.CE_5) : ((money - expRound * StaticData.Exp.MoneyLevel.LS_5) / StaticData.Exp.MoneyLevel.CE_5  + 1);
+            expStamina = expRound * StaticData.Exp.Stamina.LS_5;
+            moneyStamina = moneyRound * StaticData.Exp.Stamina.CE_5;
+            stamina = expStamina + moneyStamina;
         /*TextView expResult = view.findViewById(R.id.material_result_exp);
         TextView moneyResult = view.findViewById(R.id.material_result_money);
         TextView staminaResult = view.findViewById(R.id.material_result_stamina);
@@ -309,99 +399,307 @@ public class Material {
         moneyResult.setText(money + " = " + moneyUpgrade + view.getContext().getResources().getString(R.string.material_money_upgrade) + " + " + moneyEvolve + view.getContext().getResources().getString(R.string.material_money_evolve));
         staminaResult.setText(stamina + " = " + StaticData.Exp.Stamina.LS_5 + " * " + expRound + view.getContext().getResources().getString(R.string.material_round_exp) + " + " + StaticData.Exp.Stamina.CE_5 + " * " + moneyRound + view.getContext().getResources().getString(R.string.material_round_money));
         */
-        LinearLayout resultContent = contentView.findViewById(R.id.material_result_content);
-        resultContent.removeAllViews();
-        ItemDetailView itemDetailView;
 
-        itemDetailView = new ItemDetailView(applicationContext);
-        itemDetailView.setItemName("龙门币（升级）");
-        itemDetailView.setImage(applicationContext.getResources().getDrawable(R.mipmap.gold));
-        itemDetailView.setNumber(moneyUpgrade);
-        resultContent.addView(itemDetailView);
-
-        if(moneyEvolve > 0){
             itemDetailView = new ItemDetailView(applicationContext);
-            itemDetailView.setItemName("龙门币（精英化）");
+            itemDetailView.setItemName("龙门币（升级）");
             itemDetailView.setImage(applicationContext.getResources().getDrawable(R.mipmap.gold));
-            itemDetailView.setNumber(moneyEvolve);
+            itemDetailView.setNumber(moneyUpgrade);
             resultContent.addView(itemDetailView);
+
+            if(moneyEvolve > 0){
+                itemDetailView = new ItemDetailView(applicationContext);
+                itemDetailView.setItemName("龙门币（精英化）");
+                itemDetailView.setImage(applicationContext.getResources().getDrawable(R.mipmap.gold));
+                itemDetailView.setNumber(moneyEvolve);
+                resultContent.addView(itemDetailView);
+            }
+
+            itemDetailView = new ItemDetailView(applicationContext);
+            itemDetailView.setItemName("经验");
+            itemDetailView.setImage(applicationContext.getResources().getDrawable(R.mipmap.sprite_exp_card_t4));
+            itemDetailView.setNumber(exp);
+            resultContent.addView(itemDetailView);
+
+            JSONArray evolveCosts = charNow.getJSONArray("evolveCosts");
+            if(evolveCosts.size() >= 2){
+                if (stageFrom == 0 && stageTo == 1){
+                    JSONArray evolveCosts1 = evolveCosts.getJSONArray(1);
+                    for (int i = 0; i < evolveCosts1.size(); i++){
+                        JSONObject item = evolveCosts1.getJSONObject(i);
+                        JSONObject material = materialJsonObject.getJSONObject(item.getString("id"));
+                        if(onlyRare && material.getInteger("rarity") <= 3){continue;}
+                        itemDetailView = new ItemDetailView(applicationContext);
+                        itemDetailView.setItemName(material.getString("name"));
+                        Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(material.getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
+                        itemDetailView.setImage(drawable);
+                        itemDetailView.setNumber(item.getInteger("count"));
+                        resultContent.addView(itemDetailView);
+                        itemDetailView.setTag(material);
+                    }
+                }
+                if (stageFrom == 1 && stageTo == 2){
+                    JSONArray evolveCosts2 = evolveCosts.getJSONArray(2);
+                    for (int i = 0; i < evolveCosts2.size(); i++){
+                        JSONObject item = evolveCosts2.getJSONObject(i);
+                        JSONObject material = materialJsonObject.getJSONObject(item.getString("id"));
+                        if(onlyRare && material.getInteger("rarity") <= 3){continue;}
+                        itemDetailView = new ItemDetailView(applicationContext);
+                        itemDetailView.setItemName(material.getString("name"));
+                        Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(material.getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
+                        itemDetailView.setImage(drawable);
+                        itemDetailView.setNumber(item.getInteger("count"));
+                        resultContent.addView(itemDetailView);
+                        itemDetailView.setTag(material);
+                    }
+                }
+                if (stageFrom == 0 && stageTo == 2){
+                    JSONArray evolveCosts1 = evolveCosts.getJSONArray(1);
+                    for (int i = 0; i < evolveCosts1.size(); i++){
+                        JSONObject item = evolveCosts1.getJSONObject(i);
+                        JSONObject material = materialJsonObject.getJSONObject(item.getString("id"));
+                        if(onlyRare && material.getInteger("rarity") <= 3){continue;}
+                        itemDetailView = new ItemDetailView(applicationContext);
+                        itemDetailView.setItemName(material.getString("name"));
+                        Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(material.getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
+                        itemDetailView.setImage(drawable);
+                        itemDetailView.setNumber(item.getInteger("count"));
+                        resultContent.addView(itemDetailView);
+                        itemDetailView.setTag(material);
+                    }
+                    JSONArray evolveCosts2 = evolveCosts.getJSONArray(2);
+                    for (int i = 0; i < evolveCosts2.size(); i++){
+                        JSONObject item = evolveCosts2.getJSONObject(i);
+                        JSONObject material = materialJsonObject.getJSONObject(item.getString("id"));
+                        if(onlyRare && material.getInteger("rarity") <= 3){continue;}
+                        itemDetailView = new ItemDetailView(applicationContext);
+                        itemDetailView.setItemName(material.getString("name"));
+                        Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(material.getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
+                        itemDetailView.setImage(drawable);
+                        itemDetailView.setNumber(item.getInteger("count"));
+                        resultContent.addView(itemDetailView);
+                        itemDetailView.setTag(material);
+                    }
+                }
+            }
         }
 
-        itemDetailView = new ItemDetailView(applicationContext);
-        itemDetailView.setItemName("经验");
-        itemDetailView.setImage(applicationContext.getResources().getDrawable(R.mipmap.sprite_exp_card_t4));
-        itemDetailView.setNumber(exp);
-        resultContent.addView(itemDetailView);
-
-        JSONArray evolveCosts = charNow.getJSONArray("evolveCosts");
-        if(evolveCosts.size() >= 2){
-            if (stageFrom == 0 && stageTo == 1){
-                JSONArray evolveCosts1 = evolveCosts.getJSONArray(1);
-                for (int i = 0; i < evolveCosts1.size(); i++){
-                    JSONObject item = evolveCosts1.getJSONObject(i);
+        if (skillAllCheckBox.isChecked()){
+            int saFrom = skillAllNow.getInt();
+            int saTo = skillAllTarget.getInt();
+            JSONArray jsonArray = (JSONArray) skillAllContainer.getTag();
+            for (int i = saFrom - 1; i < saTo - 1; i++) {
+                JSONArray itemArray = jsonArray.getJSONObject(i).getJSONArray("lvlUpCost");
+                for (int j = 0; j < itemArray.size(); j++) {
+                    boolean find = false;
+                    JSONObject item = itemArray.getJSONObject(j);
                     JSONObject material = materialJsonObject.getJSONObject(item.getString("id"));
-                    if(onlyRare && material.getInteger("rarity") <= 3){continue;}
-                    itemDetailView = new ItemDetailView(applicationContext);
-                    itemDetailView.setItemName(material.getString("name"));
-                    Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(material.getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
-                    itemDetailView.setImage(drawable);
-                    itemDetailView.setNumber(item.getInteger("count"));
-                    resultContent.addView(itemDetailView);
-                }
-            }
-            if (stageFrom == 1 && stageTo == 2){
-                JSONArray evolveCosts2 = evolveCosts.getJSONArray(2);
-                for (int i = 0; i < evolveCosts2.size(); i++){
-                    JSONObject item = evolveCosts2.getJSONObject(i);
-                    JSONObject material = materialJsonObject.getJSONObject(item.getString("id"));
-                    if(onlyRare && material.getInteger("rarity") <= 3){continue;}
-                    itemDetailView = new ItemDetailView(applicationContext);
-                    itemDetailView.setItemName(material.getString("name"));
-                    Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(material.getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
-                    itemDetailView.setImage(drawable);
-                    itemDetailView.setNumber(item.getInteger("count"));
-                    resultContent.addView(itemDetailView);
-                }
-            }
-            if (stageFrom == 0 && stageTo == 2){
-                JSONArray evolveCosts1 = evolveCosts.getJSONArray(1);
-                for (int i = 0; i < evolveCosts1.size(); i++){
-                    JSONObject item = evolveCosts1.getJSONObject(i);
-                    JSONObject material = materialJsonObject.getJSONObject(item.getString("id"));
-                    if(onlyRare && material.getInteger("rarity") <= 3){continue;}
-                    itemDetailView = new ItemDetailView(applicationContext);
-                    itemDetailView.setItemName(material.getString("name"));
-                    Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(material.getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
-                    itemDetailView.setImage(drawable);
-                    itemDetailView.setNumber(item.getInteger("count"));
-                    resultContent.addView(itemDetailView);
-                }
-                JSONArray evolveCosts2 = evolveCosts.getJSONArray(2);
-                for (int i = 0; i < evolveCosts2.size(); i++){
-                    JSONObject item = evolveCosts2.getJSONObject(i);
-                    JSONObject material = materialJsonObject.getJSONObject(item.getString("id"));
-                    if(onlyRare && material.getInteger("rarity") <= 3){continue;}
-                    itemDetailView = new ItemDetailView(applicationContext);
-                    itemDetailView.setItemName(material.getString("name"));
-                    Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(material.getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
-                    itemDetailView.setImage(drawable);
-                    itemDetailView.setNumber(item.getInteger("count"));
-                    resultContent.addView(itemDetailView);
+                    for (int k = 0; k < resultContent.getChildCount(); k++) {
+                        ItemDetailView child = (ItemDetailView) resultContent.getChildAt(k);
+                        if (child.getTag() == null){continue;}
+                        if(child.getTag().equals(material)){
+                            child.setNumber(child.getNumber() + item.getInteger("count"));
+                            find = true;
+                            break;
+                        }
+                    }
+                    if (find){
+                        continue;
+                    }else {
+                        if(onlyRare && material.getInteger("rarity") <= 3){continue;}
+                        itemDetailView = new ItemDetailView(applicationContext);
+                        itemDetailView.setItemName(material.getString("name"));
+                        Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(material.getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
+                        itemDetailView.setImage(drawable);
+                        itemDetailView.setNumber(item.getInteger("count"));
+                        resultContent.addView(itemDetailView);
+                        itemDetailView.setTag(material);
+                    }
                 }
             }
         }
 
-        contentView.findViewById(R.id.material_result_content).setVisibility(View.VISIBLE);
+        if (skill3CheckBox.isChecked()){
+            int s3From = skill3Now.getInt();
+            int s3To = skill3Target.getInt();
+            JSONArray jsonArray = ((JSONObject) skill3Container.getTag()).getJSONArray("levelUpCost");
+            for (int i = s3From; i < s3To; i++) {
+                JSONArray itemArray = jsonArray.getJSONObject(i).getJSONArray("levelUpCost");
+                for (int j = 0; j < itemArray.size(); j++) {
+                    boolean find = false;
+                    JSONObject item = itemArray.getJSONObject(j);
+                    JSONObject material = materialJsonObject.getJSONObject(item.getString("id"));
+                    for (int k = 0; k < resultContent.getChildCount(); k++) {
+                        ItemDetailView child = (ItemDetailView) resultContent.getChildAt(k);
+                        if (child.getTag() == null){continue;}
+                        if(child.getTag().equals(material)){
+                            child.setNumber(child.getNumber() + item.getInteger("count"));
+                            find = true;
+                            break;
+                        }
+                    }
+                    if (find){
+                        continue;
+                    }else {
+                        if(onlyRare && material.getInteger("rarity") <= 3){continue;}
+                        itemDetailView = new ItemDetailView(applicationContext);
+                        itemDetailView.setItemName(material.getString("name"));
+                        Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(material.getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
+                        itemDetailView.setImage(drawable);
+                        itemDetailView.setNumber(item.getInteger("count"));
+                        resultContent.addView(itemDetailView);
+                        itemDetailView.setTag(material);
+                    }
+                }
+            }
+        }
+
+        if (skill2CheckBox.isChecked()){
+            int s2From = skill2Now.getInt();
+            int s2To = skill2Target.getInt();
+            JSONArray jsonArray = ((JSONObject) skill2Container.getTag()).getJSONArray("levelUpCost");
+            for (int i = s2From; i < s2To; i++) {
+                JSONArray itemArray = jsonArray.getJSONObject(i).getJSONArray("levelUpCost");
+                for (int j = 0; j < itemArray.size(); j++) {
+                    boolean find = false;
+                    JSONObject item = itemArray.getJSONObject(j);
+                    JSONObject material = materialJsonObject.getJSONObject(item.getString("id"));
+                    //Log.e(TAG, item.toJSONString());
+                    for (int k = 0; k < resultContent.getChildCount(); k++) {
+                        ItemDetailView child = (ItemDetailView) resultContent.getChildAt(k);
+                        if (child.getTag() == null){continue;}
+                        if(child.getTag().equals(material)){
+                            child.setNumber(child.getNumber() + item.getInteger("count"));
+                            find = true;
+                            break;
+                        }
+                    }
+                    if (find){
+                        continue;
+                    }else {
+                        if(onlyRare && material.getInteger("rarity") <= 3){continue;}
+                        itemDetailView = new ItemDetailView(applicationContext);
+                        itemDetailView.setItemName(material.getString("name"));
+                        Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(material.getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
+                        itemDetailView.setImage(drawable);
+                        itemDetailView.setNumber(item.getInteger("count"));
+                        resultContent.addView(itemDetailView);
+                        itemDetailView.setTag(material);
+                    }
+                }
+            }
+        }
+
+        if (skill1CheckBox.isChecked()){
+            int s1From = skill1Now.getInt();
+            int s1To = skill1Target.getInt();
+            JSONArray jsonArray = ((JSONObject) skill1Container.getTag()).getJSONArray("levelUpCost");
+            for (int i = s1From; i < s1To; i++) {
+                JSONArray itemArray = jsonArray.getJSONObject(i).getJSONArray("levelUpCost");
+                for (int j = 0; j < itemArray.size(); j++) {
+                    boolean find = false;
+                    JSONObject item = itemArray.getJSONObject(j);
+                    JSONObject material = materialJsonObject.getJSONObject(item.getString("id"));
+                    Log.e(TAG, item.toJSONString());
+                    for (int k = 0; k < resultContent.getChildCount(); k++) {
+                        ItemDetailView child = (ItemDetailView) resultContent.getChildAt(k);
+                        if (child.getTag() == null){continue;}
+                        if(child.getTag().equals(material)){
+                            child.setNumber(child.getNumber() + item.getInteger("count"));
+                            find = true;
+                            break;
+                        }
+                    }
+                    if (find){
+                        continue;
+                    }else {
+                        if(onlyRare && material.getInteger("rarity") <= 3){continue;}
+                        itemDetailView = new ItemDetailView(applicationContext);
+                        itemDetailView.setItemName(material.getString("name"));
+                        Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(material.getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
+                        itemDetailView.setImage(drawable);
+                        itemDetailView.setNumber(item.getInteger("count"));
+                        resultContent.addView(itemDetailView);
+                        itemDetailView.setTag(material);
+                    }
+                }
+            }
+        }
+        contentView.findViewById(R.id.material_result_content).setVisibility(VISIBLE);
 
     }
     @SuppressLint("SetTextI18n")
     public void onCharacterSelected(View characterBtn){
+        skill3Container.setVisibility(GONE);
+        skill2Container.setVisibility(GONE);
+        skill1Container.setVisibility(GONE);
+        skillAllContainer.setVisibility(GONE);
+        skill3CheckBox.setChecked(false);
+        skill2CheckBox.setChecked(false);
+        skill1CheckBox.setChecked(false);
+        skillAllCheckBox.setChecked(false);
         JSONObject jsonObject = (JSONObject) characterBtn.getTag();
         charNow = jsonObject;
-        Drawable drawable = characterBtn.getBackground();
         Button nowCharBtn = contentView.findViewById(R.id.material_character_now_btn);
-        characterBtn.setVisibility(View.VISIBLE);
-        nowCharBtn.setBackground(drawable);
+        characterStar = jsonObject.getInteger("rarity");
+        switch (characterStar){
+            case 5:
+                nowCharBtn.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_yellow));
+                break;
+            case 4:
+                nowCharBtn.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_red));
+                break;
+            case 3:
+                nowCharBtn.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_blue));
+                break;
+            case 2:
+                nowCharBtn.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_green));
+                break;
+            case 1:
+                nowCharBtn.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_lime));
+                break;
+            case 0:
+                nowCharBtn.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_lime));
+                break;
+            default:
+                nowCharBtn.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_blue));
+                break;
+        }
+        JSONArray sSkills = jsonObject.getJSONArray("sskillCosts");
+        JSONArray aSkills = jsonObject.getJSONArray("askillCosts");
+        if (sSkills.size() > 0 && sSkills.getJSONObject(0).getJSONArray("levelUpCost").size() > 0){
+                switch (sSkills.size()){
+                    case 3:
+                        skill3Container.setVisibility(VISIBLE);
+                        skill3Container.setTag(sSkills.get(2));
+                        skill2Container.setVisibility(VISIBLE);
+                        skill2Container.setTag(sSkills.get(1));
+                        skill1Container.setVisibility(VISIBLE);
+                        skill1Container.setTag(sSkills.get(0));
+                        skillAllContainer.setVisibility(VISIBLE);
+                        skillAllContainer.setTag(aSkills);
+                        break;
+                    case 2:
+                        skill2Container.setVisibility(VISIBLE);
+                        skill2Container.setTag(sSkills.get(1));
+                        skill1Container.setVisibility(VISIBLE);
+                        skill1Container.setTag(sSkills.get(0));
+                        skillAllContainer.setVisibility(VISIBLE);
+                        skillAllContainer.setTag(aSkills);
+                        break;
+                    case 1:
+                        skill1Container.setVisibility(VISIBLE);
+                        skill1Container.setTag(sSkills.get(0));
+                        skillAllContainer.setVisibility(VISIBLE);
+                        skillAllContainer.setTag(aSkills);
+                        break;
+                    default:
+                        break;
+            }
+        }else if (aSkills.size() > 0){
+            skillAllContainer.setVisibility(VISIBLE);
+            skillAllContainer.setTag(aSkills);
+        }
+        characterBtn.setVisibility(VISIBLE);
         nowCharBtn.setTag(jsonObject);
         nowCharBtn.setText(nameHelper.get(jsonObject.getString("name")));
         contentView.findViewById(R.id.material_character_select).setOnClickListener(new View.OnClickListener() {
@@ -411,7 +709,7 @@ public class Material {
                 showSubWindow();
             }
         });
-        characterStar = jsonObject.getInteger("rarity");
+
         checkValue();//检查当前值是否匹配新干员
         showResult();
         hideSubWindow();

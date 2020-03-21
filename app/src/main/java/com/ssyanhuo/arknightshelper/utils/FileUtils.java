@@ -35,6 +35,8 @@ public class FileUtils {
         while ((line = bufferedReader.readLine()) != null){
             data = (data == null ? new StringBuilder() : data).append(line);
         }
+        fileInputStream.close();
+        bufferedReader.close();
         assert data != null;
         return data.toString();
     }

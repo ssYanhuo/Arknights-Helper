@@ -15,11 +15,21 @@
         android:layout_alignParentStart="true"
         android:orientation="horizontal">
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_main"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:fadingEdge="horizontal"
+            android:requiresFadingEdge="horizontal"
+            app:tabGravity="start"
+            app:tabMinWidth="@dimen/activity_horizontal_margin"
+            app:tabMode="scrollable">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
@@ -36,10 +46,15 @@
                 android:layout_height="wrap_content"
                 android:text="@string/tab_title_drop" />
 
-            <com.google.android.material.tabs.TabItem
+            <!--<com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tab_title_more" />
+                android:text="@string/tab_title_planner" />-->
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/ic_tab_more" />
         </com.google.android.material.tabs.TabLayout>
 
         <ImageButton
@@ -145,10 +160,27 @@
 
 
     <RelativeLayout
-        android:id="@+id/relative_more"
+        android:id="@+id/relative_planner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/relative_drop">
+
+        <ScrollView
+            android:id="@+id/scroll_planner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                layout="@layout/overlay_planner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </ScrollView>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/relative_more"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/relative_planner">
 
         <ScrollView
             android:id="@+id/scroll_more"

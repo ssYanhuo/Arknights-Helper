@@ -107,9 +107,7 @@ public class Hr {
         rootLayout = backgroundLayout;
         contextThemeWrapper = new ContextThemeWrapper(applicationContext, ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_FLOATING_WINDOW, applicationContext));
         sharedPreferences = applicationContext.getSharedPreferences("com.ssyanhuo.arknightshelper_preferences", Context.MODE_PRIVATE);
-        if (!sharedPreferences.getBoolean("queryMethodSelected", false)) {
-            selectQueryMethod();
-        } else if (sharedPreferences.getBoolean("fuzzyQuery", false)) {
+        if (sharedPreferences.getBoolean("fuzzyQuery", true)) {
             fuzzy = true;
         }
         selector = (ScrollView) LayoutInflater.from(contextThemeWrapper).inflate(R.layout.overlay_hr_sub_ocr, null);
@@ -210,7 +208,7 @@ public class Hr {
                 scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
                     @Override
                     public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                        if (scrollY + scrollView.getHeight() > scrollView.findViewById(R.id.hr_result_scroll_point).getTop() + scrollView.findViewById(R.id.hr_result_title).getHeight()){
+                        if (scrollY + scrollView.getHeight() > (scrollView.findViewById(R.id.hr_result_scroll_point).getTop() + applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin) * 6)){
                             snackBarView.setVisibility(View.GONE);
                         }
                     }
@@ -480,7 +478,7 @@ public class Hr {
             });
             lineWrapLayout.addView(button);
         }
-        if (scrollView.getScrollY() + scrollView.getHeight() <= scrollView.findViewById(R.id.hr_result_scroll_point).getTop() + scrollView.findViewById(R.id.hr_result_title).getHeight()){
+        if (scrollView.getScrollY() + scrollView.getHeight() <= (scrollView.findViewById(R.id.hr_result_scroll_point).getTop() + applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin) * 6)){
             showScrollToResultSnackBar();
         }
     }
@@ -767,7 +765,7 @@ public class Hr {
                 }
             }
         }
-        if (scrollView.getScrollY() + scrollView.getHeight() <= scrollView.findViewById(R.id.hr_result_scroll_point).getTop() + scrollView.findViewById(R.id.hr_result_title).getHeight()){
+        if (scrollView.getScrollY() + scrollView.getHeight() <= (scrollView.findViewById(R.id.hr_result_scroll_point).getTop() + applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin) * 6)){
             showScrollToResultSnackBar();
         }
     }
@@ -809,16 +807,16 @@ public class Hr {
     public void selectQueryMethod() {
         //选择
         View methodSelector = LayoutInflater.from(applicationContext).inflate(R.layout.overlay_hr_method_selector, null);
-        relativeLayout.removeAllViews();
-        relativeLayout.addView(methodSelector);
+        scrollView.removeAllViews();
+        scrollView.addView(methodSelector);
         //设定本次的方法
         LinearLayout exactLinearLayout = relativeLayout.findViewById(R.id.hr_method_selector_exact);
         exactLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 changeQueryMethod(MODE_EXACT);
-                relativeLayout.removeAllViews();
-                relativeLayout.addView(contentView);
+                scrollView.removeAllViews();
+                scrollView.addView(contentView);
             }
         });
         LinearLayout fuzzyLinearLayout = relativeLayout.findViewById(R.id.hr_method_selector_fuzzy);
@@ -826,8 +824,8 @@ public class Hr {
             @Override
             public void onClick(View view) {
                 changeQueryMethod(MODE_FUZZY);
-                relativeLayout.removeAllViews();
-                relativeLayout.addView(contentView);
+                scrollView.removeAllViews();
+                scrollView.addView(contentView);
             }
         });
     }

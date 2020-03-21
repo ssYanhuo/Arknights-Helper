@@ -110,7 +110,15 @@ public class NumberSelector extends LinearLayout {
         });
     }
     public int getInt(){ return Integer.valueOf(editText.getText().toString()); }
-    public void setInt(int number){ editText.setText(String.valueOf(number)); }
+    public void setInt(int number){
+        if (number > max){
+            editText.setText(String.valueOf(max));
+        }else if (number < min){
+            editText.setText(String.valueOf(min));
+        }else{
+            editText.setText(String.valueOf(number));
+        }
+    }
     public void setMin(int min){
         this.min = min;
         if(getInt() < min){

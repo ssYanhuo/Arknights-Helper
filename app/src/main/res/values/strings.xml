@@ -178,7 +178,6 @@
     <string name="settings_summary_use_builtin_data">将无法获取最新数据</string>
     <string name="settings_title_update_site">数据源</string>
     <string name="settings_summary_update_site">切换更新内容站点</string>
-
     <string name="settings_summary_margin_fix">修正横屏游戏中悬浮窗不能完全贴边的问题，点击这里切换屏幕方向，再次点击进入全屏模式</string>
     <string name="settings_title_margin_fix">边距修正</string>
     <string name="tip_use_remote">可以连接到远程数据库来保持数据更新</string>
@@ -232,4 +231,19 @@
     <string name="py_error">发生了错误：\n</string>
     <string name="py_arkplanner">刷图规划™ By ycremar</string>
     <string name="hr_hide_low_level_note">注意调整招募时间为9小时</string>
+    <string name="more_hr_counter_title">寻访计数</string>
+    <string name="more_hr_counter_summary_empty">长按按钮十连或清空，当前6★概率2%</string>
+    <string name="more_hr_counter_summary">累计寻访%1$d次，当前6★概率%2$d%%</string>
+    <string name="more_hr_counter_summary_90">累计寻访%1$d次，当前6★概率%2$d%%，下次十连必出6★！</string>
+    <string name="more_hr_counter_summary_full">累计寻访99次，下次寻访必出6★！</string>
+    <string name="more_hr_counter_summary_overflow">寻访次数已达%d次，长按“-1”清空计数</string>
+    <string name="tab_title_planner">刷图规划</string>
+    <string name="material_skill_1_now" >技能一专精：</string>
+    <string name="material_skill_1_target" >目标：</string>
+    <string name="material_skill_2_now" >技能二专精：</string>
+    <string name="material_skill_2_target" >目标：</string>
+    <string name="material_skill_3_now" >技能三专精：</string>
+    <string name="material_skill_3_target" >目标：</string>
+    <string name="material_skill_all_now">当前全技能：</string>
+    <string name="material_skill_all_target">目标：</string>
 </resources>

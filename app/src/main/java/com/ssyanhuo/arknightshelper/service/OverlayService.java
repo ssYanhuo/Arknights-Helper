@@ -9,11 +9,15 @@ import android.app.Service;
 import android.content.*;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Outline;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.RippleDrawable;
 import android.os.*;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -28,6 +32,7 @@ import android.widget.*;
 import androidx.appcompat.view.ContextThemeWrapper;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.transition.Scale;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.activity.SettingsActivity;
 import com.ssyanhuo.arknightshelper.entity.ServiceNotification;
@@ -39,11 +44,15 @@ import com.ssyanhuo.arknightshelper.utils.DpUtils;
 import com.ssyanhuo.arknightshelper.utils.OCRUtils;
 import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
 
+import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import eightbitlab.com.blurview.BlurView;
 import eightbitlab.com.blurview.RenderScriptBlur;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 
 public class OverlayService extends Service {
@@ -56,6 +65,7 @@ public class OverlayService extends Service {
     LinearLayout linearLayout_hr;
     LinearLayout linearLayout_material;
     LinearLayout linearLayout_drop;
+    LinearLayout linearLayout_planner;
     LinearLayout linearLayout_more;
     ScrollView scrollView_hr;
     ScrollView scrollView_material;
@@ -64,12 +74,14 @@ public class OverlayService extends Service {
     RelativeLayout relativeLayout_hr;
     RelativeLayout relativeLayout_material;
     RelativeLayout relativeLayout_drop;
+    RelativeLayout relativeLayout_planner;
     RelativeLayout relativeLayout_more;
     BlurView tabLayout;
-    Button button;
+    ImageButton button;
     final int HR = 0;
     final int MATERIAL = 1;
     final int DROP = 2;
+    final int PLANNER = -1;
     final int MORE = 3;
     final String TAG = "OverlayService";
     LinearLayout backgroundLayout;
@@ -201,8 +213,26 @@ public class OverlayService extends Service {
         buttonLayoutParams.flags = WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
         buttonLayoutParams.x = sharedPreferences.getInt("lastX", 0);
         buttonLayoutParams.y = sharedPreferences.getInt("lastY", 200);
-        button = new Button(this);
-        button.setBackground(getResources().getDrawable(R.mipmap.overlay_button));
+        button = new ImageButton(this);
+        if (!sharedPreferences.getBoolean("button_img", false) || !new File(getApplicationContext().getFilesDir().getPath() + File.separator + "button.png").exists()){
+            button.setBackground(getResources().getDrawable(R.mipmap.overlay_button));
+        }else {
+            button.setBackground(Drawable.createFromPath(getApplicationContext().getFilesDir().getPath() + File.separator + "button.png"));
+        }
+
+        button.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        button.setOutlineProvider(new ViewOutlineProvider() {
+            @Override
+            public void getOutline(View view, Outline outline) {
+                outline.setOval(0,0, DpUtils.dip2px(getApplicationContext(), 48), DpUtils.dip2px(getApplicationContext(), 48));
+            }
+        });
+        button.setClipToOutline(true);
+        button.setElevation(8f);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            button.setForeground(new RippleDrawable(ColorStateList.valueOf(Color.GRAY), null, null));
+        }
         setFloatingButtonAlpha(sharedPreferences.getInt("floating_button_opacity", 0));
         button.setOnTouchListener(new View.OnTouchListener() {
             int downX;
@@ -417,6 +447,7 @@ public class OverlayService extends Service {
         relativeLayout_hr = mainLayout.findViewById(R.id.relative_hr);
         relativeLayout_material = mainLayout.findViewById(R.id.relative_material);
         relativeLayout_drop = mainLayout.findViewById(R.id.relative_drop);
+        relativeLayout_planner = mainLayout.findViewById(R.id.relative_planner);
         relativeLayout_more = mainLayout.findViewById(R.id.relative_more);
         //scrollView_hr = mainLayout.findViewById(R.id.scroll_hr);
         //scrollView_material = mainLayout.findViewById(R.id.scroll_material);
@@ -425,11 +456,13 @@ public class OverlayService extends Service {
         linearLayout_hr = mainLayout.findViewById(R.id.hr_content);
         linearLayout_material = mainLayout.findViewById(R.id.material_content);
         linearLayout_drop = mainLayout.findViewById(R.id.drop_content);
+        linearLayout_planner = mainLayout.findViewById(R.id.planner_content);
         linearLayout_more = mainLayout.findViewById(R.id.more_content);
-        relativeLayout_hr.setVisibility(View.VISIBLE);
-        relativeLayout_material.setVisibility(View.GONE);
-        relativeLayout_drop.setVisibility(View.GONE);
-        relativeLayout_more.setVisibility(View.GONE);
+        relativeLayout_hr.setVisibility(VISIBLE);
+        relativeLayout_material.setVisibility(GONE);
+        relativeLayout_drop.setVisibility(GONE);
+        relativeLayout_planner.setVisibility(GONE);
+        relativeLayout_more.setVisibility(GONE);
         TabLayout tabLayout = mainLayout.findViewById(R.id.tab_main);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -443,6 +476,9 @@ public class OverlayService extends Service {
                         break;
                     case DROP:
                         changeFloatingWindowContent(DROP);
+                        break;
+                    case PLANNER:
+                        changeFloatingWindowContent(PLANNER);
                         break;
                     case MORE:
                         changeFloatingWindowContent(MORE);
@@ -595,34 +631,47 @@ public class OverlayService extends Service {
     public void changeFloatingWindowContent(int i){
         switch (i){
             case HR:
-                relativeLayout_hr.setVisibility(View.VISIBLE);
-                relativeLayout_material.setVisibility(View.GONE);
-                relativeLayout_drop.setVisibility(View.GONE);
-                relativeLayout_more.setVisibility(View.GONE);
+                relativeLayout_hr.setVisibility(VISIBLE);
+                relativeLayout_material.setVisibility(GONE);
+                relativeLayout_drop.setVisibility(GONE);
+                //relativeLayout_planner.setVisibility(GONE);
+                relativeLayout_more.setVisibility(GONE);
                 hr.isCurrentWindow(true);
                 material.isCurrentWindow(false);
                 break;
             case MATERIAL:
-                relativeLayout_hr.setVisibility(View.GONE);
-                relativeLayout_material.setVisibility(View.VISIBLE);
-                relativeLayout_drop.setVisibility(View.GONE);
-                relativeLayout_more.setVisibility(View.GONE);
+                relativeLayout_hr.setVisibility(GONE);
+                relativeLayout_material.setVisibility(VISIBLE);
+                relativeLayout_drop.setVisibility(GONE);
+                //relativeLayout_planner.setVisibility(GONE);
+                relativeLayout_more.setVisibility(GONE);
                 hr.isCurrentWindow(false);
                 material.isCurrentWindow(true);
                 break;
             case DROP:
-                relativeLayout_hr.setVisibility(View.GONE);
-                relativeLayout_material.setVisibility(View.GONE);
-                relativeLayout_drop.setVisibility(View.VISIBLE);
-                relativeLayout_more.setVisibility(View.GONE);
+                relativeLayout_hr.setVisibility(GONE);
+                relativeLayout_material.setVisibility(GONE);
+                relativeLayout_drop.setVisibility(VISIBLE);
+                //relativeLayout_planner.setVisibility(GONE);
+                relativeLayout_more.setVisibility(GONE);
+                hr.isCurrentWindow(false);
+                material.isCurrentWindow(false);
+                break;
+            case PLANNER:
+                relativeLayout_hr.setVisibility(GONE);
+                relativeLayout_material.setVisibility(GONE);
+                relativeLayout_drop.setVisibility(GONE);
+                //relativeLayout_planner.setVisibility(VISIBLE);
+                relativeLayout_more.setVisibility(GONE);
                 hr.isCurrentWindow(false);
                 material.isCurrentWindow(false);
                 break;
             case MORE:
-                relativeLayout_hr.setVisibility(View.GONE);
-                relativeLayout_material.setVisibility(View.GONE);
-                relativeLayout_drop.setVisibility(View.GONE);
-                relativeLayout_more.setVisibility(View.VISIBLE);
+                relativeLayout_hr.setVisibility(GONE);
+                relativeLayout_material.setVisibility(GONE);
+                relativeLayout_drop.setVisibility(GONE);
+                //relativeLayout_planner.setVisibility(GONE);
+                relativeLayout_more.setVisibility(VISIBLE);
                 hr.isCurrentWindow(false);
                 material.isCurrentWindow(false);
                 break;

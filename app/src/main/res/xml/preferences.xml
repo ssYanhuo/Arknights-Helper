@@ -41,6 +41,9 @@
             android:key="attach_to_edge"
             android:title="@string/settings_title_attach_to_edge"
             android:summary="@string/settings_summary_attach_to_edge"/>
+        <Preference
+            android:key="button_img"
+            android:title="悬浮窗按钮图片"/>
 
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/settings_category_compatibility" android:icon="@drawable/ic_settings_compatibility">

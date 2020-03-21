@@ -2,9 +2,11 @@ package com.ssyanhuo.arknightshelper.module;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextClock;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.activity.AboutActivity;
 import com.ssyanhuo.arknightshelper.activity.MainActivity;
 import com.ssyanhuo.arknightshelper.activity.SettingsActivity;
+import com.ssyanhuo.arknightshelper.entity.StaticData;
 import com.ssyanhuo.arknightshelper.service.OverlayService;
 
 public class More {
@@ -26,9 +29,15 @@ public class More {
     LinearLayout goStatistics;
     LinearLayout goPlanner;
     LinearLayout goAbout;
+    TextView hrCounterSummary;
     TextView textView;
+    Button hrCounterPlus;
+    Button hrCounterMinus;
+    int hrCount;
+    SharedPreferences preferences;
     public void init(final Context context, View view, final OverlayService service){
         applicationContext = context;
+        preferences = applicationContext.getSharedPreferences(StaticData.Const.PREFERENCE_PATH, Context.MODE_PRIVATE);
         contentView = (LinearLayout) view;
         textView = contentView.findViewById(R.id.more_description);
         goMain = contentView.findViewById(R.id.more_go_main);
@@ -39,6 +48,9 @@ public class More {
         goStatistics = contentView.findViewById(R.id.more_go_statistics);
         goPlanner = contentView.findViewById(R.id.more_go_planner);
         goAbout = contentView.findViewById(R.id.more_go_about);
+        hrCounterSummary = contentView.findViewById(R.id.more_hr_counter_summary);
+        hrCounterPlus = contentView.findViewById(R.id.more_hr_counter_plus);
+        hrCounterMinus = contentView.findViewById(R.id.more_hr_counter_minus);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
             textView.append(applicationContext.getString(R.string.get_permission_background_activity));
         }
@@ -124,5 +136,69 @@ public class More {
                 service.hideFloatingWindow();
             }
         });
+        hrCount = preferences.getInt("hr_count", 0);
+        hrCounterPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (hrCount <= 0){
+                    hrCount = 0;
+                }
+                hrCount++;
+                preferences.edit().putInt("hr_count", hrCount).apply();
+                onCountChanged(hrCount);
+            }
+        });
+        hrCounterMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (hrCount > 0){
+                    hrCount--;
+                } else if (hrCount < 0){
+                    hrCount = 0;
+                }
+                preferences.edit().putInt("hr_count", hrCount).apply();
+                onCountChanged(hrCount);
+            }
+        });
+        hrCounterPlus.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (hrCount <= 0){
+                    hrCount = 0;
+                }
+                hrCount += 10;
+                preferences.edit().putInt("hr_count", hrCount).apply();
+                onCountChanged(hrCount);
+                return true;
+            }
+        });
+        hrCounterMinus.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                hrCount = 0;
+                preferences.edit().putInt("hr_count", hrCount).apply();
+                onCountChanged(hrCount);
+                return true;
+            }
+        });
+        onCountChanged(hrCount);
+    }
+    private void onCountChanged(int count){
+        if (count <= 0){
+            hrCounterSummary.setText(R.string.more_hr_counter_summary_empty);
+        }else {
+            if (count < 50){
+                hrCounterSummary.setText(applicationContext.getString(R.string.more_hr_counter_summary, count, 2));
+            }else if (count == 99){
+                hrCounterSummary.setText(R.string.more_hr_counter_summary_full);
+            }else if(count >= 100){
+                hrCounterSummary.setText(applicationContext.getString(R.string.more_hr_counter_summary_overflow, count));
+            }else if(count >= 90){
+                hrCounterSummary.setText(applicationContext.getString(R.string.more_hr_counter_summary_90, count, 2 + 2 * (count - 50)));
+            }
+            else {
+                hrCounterSummary.setText(applicationContext.getString(R.string.more_hr_counter_summary, count, 2 + 2 * (count - 50)));
+            }
+        }
     }
 }

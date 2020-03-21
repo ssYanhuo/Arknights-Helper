@@ -58,7 +58,7 @@
     "name": "高级作战记录",
     "sortId": 20001,
     "rarity": 4,
-    "itemType": "CARD_EXP",
+    "itemType": "HIDE",
     "addTimePoint": 1,
     "spriteCoord": [
       3,
@@ -939,7 +939,7 @@
     "name": "罗德岛物资补给",
     "sortId": 30005,
     "rarity": 4,
-    "itemType": "ACTIVITY_ITEM",
+    "itemType": "HIDE",
     "addTimePoint": 3,
     "spriteCoord": [
       5,
@@ -957,7 +957,7 @@
     "name": "应急理智小样",
     "sortId": 50004,
     "rarity": 4,
-    "itemType": "ACTIVITY_ITEM",
+    "itemType": "HIDE",
     "addTimePoint": 3,
     "spriteCoord": [
       0,
@@ -975,7 +975,7 @@
     "name": "岁过华灯",
     "sortId": 30005,
     "rarity": 4,
-    "itemType": "ACTIVITY_ITEM",
+    "itemType": "HIDE",
     "addTimePoint": 4,
     "spriteCoord": [
       1,
@@ -986,6 +986,74 @@
       "en": "岁过华灯",
       "zh": "岁过华灯",
       "ko": "岁过华灯"
+    }
+  },
+  {
+    "itemId": "4005",
+    "name": "资质凭证",
+    "sortId": 10007,
+    "rarity": 2,
+    "itemType": "LGG_SHD",
+    "spriteCoord": [
+      2,
+      9
+    ],
+    "name_i18n": {
+      "ja": "一般資格証",
+      "en": "Qualification Certificate",
+      "zh": "资质凭证",
+      "ko": "자격증명서"
+    }
+  },
+  {
+    "itemId": "30115",
+    "name": "聚合剂",
+    "sortId": 100003,
+    "rarity": 4,
+    "itemType": "ARKPLANNER",
+    "spriteCoord": [
+      3,
+      9
+    ],
+    "name_i18n": {
+      "ja": "融合剤",
+      "en": "Polymerization Preparation",
+      "zh": "聚合剂",
+      "ko": "중합제"
+    }
+  },
+  {
+    "itemId": "30125",
+    "name": "双极纳米片",
+    "sortId": 100002,
+    "rarity": 4,
+    "itemType": "ARKPLANNER",
+    "spriteCoord": [
+      4,
+      9
+    ],
+    "name_i18n": {
+      "ja": "ナノフレーク",
+      "en": "Bipolar Nanoflake",
+      "zh": "双极纳米片",
+      "ko": "바이폴라 나노플레이크 칩"
+    }
+  },
+  {
+    "itemId": "30135",
+    "name": "D32钢",
+    "sortId": 100001,
+    "rarity": 4,
+    "itemType": "ARKPLANNER",
+    "spriteCoord": [
+      5,
+      9
+    ],
+    "name_i18n": {
+      "ja": "D32鋼",
+      "en": "D32 Steel",
+      "zh": "D32钢",
+      "ko": "D32강"
     }
   }
 ]

@@ -3,109 +3,280 @@
     android:id="@+id/material_content"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
     android:orientation="vertical"
-    android:paddingTop="64dp"
     android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="64dp"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/activity_horizontal_margin"
-    android:descendantFocusability="blocksDescendants">
+    android:paddingBottom="@dimen/activity_horizontal_margin">
+
     <TextView
         android:id="@+id/material_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/material_desc"
         android:background="?attr/selectableItemBackground"
-        android:focusable="true"
-        android:clickable="true"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:id="@+id/material_character_select"
         android:clickable="true"
         android:focusable="true"
-        android:background="?android:attr/selectableItemBackground">
+        android:text="@string/material_desc" />
+
+    <LinearLayout
+        android:id="@+id/material_character_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/material_selector_desc"
-            android:gravity="center_vertical">
-        </TextView>
+            android:gravity="center_vertical"
+            android:text="@string/material_selector_desc"></TextView>
+
         <LinearLayout
+            android:id="@+id/material_character_now"
+            style="@style/AppTheme.Default.FloatingWindow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/material_character_now"
             android:orientation="horizontal"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            style="@style/AppTheme.Default.FloatingWindow">
+            android:paddingLeft="@dimen/activity_horizontal_margin">
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_weight="1">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minWidth="@dimen/activity_horizontal_margin"
-                android:id="@+id/material_character_now_btn"
-                android:text="@string/material_selector_none"
-                android:background="@drawable/checkbox_background_yellow"
-                android:textColor="@android:color/black"
-                android:clickable="false"
-                android:focusable="false"/>
-        </LinearLayout>
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/material_character_now_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/checkbox_background_yellow"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:minWidth="@dimen/activity_horizontal_margin"
+                    android:text="@string/material_selector_none"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+
             <Switch
+                android:id="@+id/material_rare"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/material_rare"
                 android:text="@string/material_selector_only_rare" />
         </LinearLayout>
     </LinearLayout>
-    <com.ssyanhuo.arknightshelper.widget.LineWrapLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-            <com.ssyanhuo.arknightshelper.widget.NumberSelector
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:id="@+id/material_selector_stage_now"
-                app:minValue="0"
-                app:maxValue="2"
-                app:defaultValue="0"
-                app:text="@string/material_stage_now"/>
-            <com.ssyanhuo.arknightshelper.widget.NumberSelector
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/material_selector_level_now"
-                app:minValue="1"
-                app:maxValue="30"
-                app:defaultValue="1"
-                app:text="@string/material_level_now"/>
-            <com.ssyanhuo.arknightshelper.widget.NumberSelector
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/material_selector_stage_target"
-                app:minValue="0"
-                app:maxValue="2"
-                app:defaultValue="0"
-                app:text="@string/material_stage_target"/>
-            <com.ssyanhuo.arknightshelper.widget.NumberSelector
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/material_selector_level_target"
-                app:minValue="1"
-                app:maxValue="30"
-                app:defaultValue="2"
-                app:text="@string/material_level_target"/>
-    </com.ssyanhuo.arknightshelper.widget.LineWrapLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/material_result_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:visibility="gone">
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/activity_vertical_margin">
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:id="@+id/material_level_checkBox"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/material_level_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.ssyanhuo.arknightshelper.widget.NumberSelector
+                    android:id="@+id/material_selector_stage_now"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    app:defaultNum="0"
+                    app:maxValue="2"
+                    app:minValue="0"
+                    app:text="@string/material_stage_now" />
+
+                <com.ssyanhuo.arknightshelper.widget.NumberSelector
+                    android:id="@+id/material_selector_level_now"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:defaultNum="1"
+                    app:maxValue="30"
+                    app:minValue="1"
+                    app:text="@string/material_level_now" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/material_stage_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.ssyanhuo.arknightshelper.widget.NumberSelector
+                    android:id="@+id/material_selector_stage_target"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:defaultNum="0"
+                    app:maxValue="2"
+                    app:minValue="0"
+                    app:text="@string/material_stage_target" />
+
+                <com.ssyanhuo.arknightshelper.widget.NumberSelector
+                    android:id="@+id/material_selector_level_target"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:defaultNum="2"
+                    app:maxValue="30"
+                    app:minValue="1"
+                    app:text="@string/material_level_target" />
+            </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/material_skill_all_container"
+        android:visibility="gone">
+
+        <CheckBox
+            android:id="@+id/material_skill_all_checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false" />
+
+        <com.ssyanhuo.arknightshelper.widget.NumberSelector
+            android:id="@+id/material_selector_skill_all_now"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:defaultNum="1"
+            app:maxValue="6"
+            app:minValue="1"
+            app:text="@string/material_skill_all_now" />
+
+        <com.ssyanhuo.arknightshelper.widget.NumberSelector
+            android:id="@+id/material_selector_skill_all_target"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:defaultNum="2"
+            app:maxValue="7"
+            app:minValue="2"
+            app:text="@string/material_skill_all_target" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/material_skill_1_container"
+        android:visibility="gone">
+
+        <CheckBox
+            android:id="@+id/material_skill_1_checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false" />
+
+        <com.ssyanhuo.arknightshelper.widget.NumberSelector
+            android:id="@+id/material_selector_skill_1_now"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:defaultNum="0"
+            app:maxValue="2"
+            app:minValue="0"
+            app:text="@string/material_skill_1_now" />
+
+        <com.ssyanhuo.arknightshelper.widget.NumberSelector
+            android:id="@+id/material_selector_skill_1_target"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:defaultNum="1"
+            app:maxValue="3"
+            app:minValue="1"
+            app:text="@string/material_skill_1_target" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/material_skill_2_container"
+        android:visibility="gone">
+
+        <CheckBox
+            android:id="@+id/material_skill_2_checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false" />
+
+        <com.ssyanhuo.arknightshelper.widget.NumberSelector
+            android:id="@+id/material_selector_skill_2_now"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:defaultNum="0"
+            app:maxValue="2"
+            app:minValue="0"
+            app:text="@string/material_skill_2_now" />
+
+        <com.ssyanhuo.arknightshelper.widget.NumberSelector
+            android:id="@+id/material_selector_skill_2_target"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:defaultNum="1"
+            app:maxValue="3"
+            app:minValue="1"
+            app:text="@string/material_skill_2_target" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/material_skill_3_container"
+        android:visibility="gone">
+
+        <CheckBox
+            android:id="@+id/material_skill_3_checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false" />
+
+        <com.ssyanhuo.arknightshelper.widget.NumberSelector
+            android:id="@+id/material_selector_skill_3_now"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:defaultNum="0"
+            app:maxValue="2"
+            app:minValue="0"
+            app:text="@string/material_skill_3_now" />
+
+        <com.ssyanhuo.arknightshelper.widget.NumberSelector
+            android:id="@+id/material_selector_skill_3_target"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:defaultNum="1"
+            app:maxValue="3"
+            app:minValue="1"
+            app:text="@string/material_skill_3_target" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/material_result_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:orientation="vertical"
+        android:visibility="gone"></LinearLayout>
 </LinearLayout>

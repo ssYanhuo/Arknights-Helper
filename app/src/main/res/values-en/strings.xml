@@ -185,4 +185,19 @@
     <string name="py_error">Error occured:\n</string>
     <string name="py_arkplanner">ArkPlanner™ By ycremar</string>
     <string name="hr_hide_low_level_note">Time should be 9 hours!</string>
+    <string name="more_hr_counter_title">HR counter</string>
+    <string name="more_hr_counter_summary_empty">Long press button to record a 10 combo or clear records, 6★ probability: 2%</string>
+    <string name="more_hr_counter_summary">Already %1$d times, 6★ probability: %2$d%%</string>
+    <string name="more_hr_counter_summary_full">Already 99 times, 6★ probability: 100%!</string>
+    <string name="more_hr_counter_summary_overflow">Already %d times, long press -1 button clear records</string>
+    <string name="tab_title_planner">Loot Planner</string>
+    <string name="material_skill_1_now">Skill 1 :</string>
+    <string name="material_skill_1_target">Level :</string>
+    <string name="material_skill_2_now">Skill 2 :</string>
+    <string name="material_skill_2_target">Level :</string>
+    <string name="material_skill_3_now">Skill 3 :</string>
+    <string name="material_skill_3_target">Level :</string>
+    <string name="material_skill_all_target">Level :</string>
+    <string name="material_skill_all_now">All skills :</string>
+    <string name="more_hr_counter_summary_90">Already %1$d times, 6★ probability: %2$d%%, next 10 combo will contain 6★!</string>
 </resources>
