@@ -7,8 +7,8 @@ android {
         applicationId "com.ssyanhuo.arknightshelper"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 26
-        versionName "Beta-3.0.0-LateSpring"
+        versionCode 27
+        versionName "Beta-3.0.1-LateSpring"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         renderscriptTargetApi 28
         renderscriptSupportModeEnabled true

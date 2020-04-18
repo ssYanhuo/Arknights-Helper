@@ -151,13 +151,11 @@ public class Drop {
                 try{
                     cost = costMap.get(object.getString("stageId")) * ((float)object.getInteger("times") / (float)object.getInteger("quantity"));
                     object.put("cost", String.valueOf(cost));
+                    result.add(object);
                 }catch (Exception e){
                     e.printStackTrace();
                     Log.e("",object.toJSONString());
-                    object.put("cost", "UNKNOWN_DATA");
                 }
-
-                result.add(object);
             }
             if(id == -1){
                 return null;
