@@ -1,8 +1,5 @@
-versionCode 25
-versionName Beta-2.2.2-MidSpring
-releaseNote [Mod]由于最新的编译工具对非英文字符的支持性不佳，故修改了版本命名规则(β->Beta)
-[Info]由于修改了更新服务器的数据格式，从下次更新起，版本低于 β-2.2.1-EarlySpring 的客户端将不再受支持，请尽快升级到新版本
-[Beta]新增技能升级材料查询(感谢 @萝莉控の胜利、@滑稽之力)
-[Beta]新增悬浮窗按钮图片修改(感谢 @Kataria、@超级电灯泡、@圣爹)
-[New]新增公开招募计数(感谢 @天廻之主)
-[New]同步最新干员数据
+versionCode 26
+versionName Beta-3.0.0-LateSpring
+releaseNote [Beta]新增刷图规划功能(感谢 @萝莉控の胜利、@超级电灯泡、@滑稽之力、@小周小周不会煮粥、@Kataria、@秋风)
+[Mod]同步最新数据
+[Fix]修复了材料查询未选择干员时的崩溃问题(感谢 @kkx12138、@超级电灯泡)

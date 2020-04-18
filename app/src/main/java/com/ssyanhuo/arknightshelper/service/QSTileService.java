@@ -11,6 +11,10 @@ import android.provider.Settings;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.ssyanhuo.arknightshelper.activity.MainActivity;
+import com.ssyanhuo.arknightshelper.entity.StaticData;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -90,10 +94,18 @@ public class QSTileService extends TileService {
             }
         }
         try{
-            tile.setState(Tile.STATE_ACTIVE);
-            tile.updateTile();
-            collapseStatusBar();
-            startService(intent);
+            if (getApplicationContext().getSharedPreferences(StaticData.Const.PREFERENCE_PATH, MODE_PRIVATE).getBoolean("python_finished", false)){
+                tile.setState(Tile.STATE_ACTIVE);
+                tile.updateTile();
+                collapseStatusBar();
+                startService(intent);
+            }else {
+                Toast.makeText(this, "初始化未完成，请从应用内启动", Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent(this, MainActivity.class);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                collapseStatusBar();
+                startActivity(intent1);
+            }
         }catch (Exception e){
             Log.e(TAG, "Start service failed!", e);
         }

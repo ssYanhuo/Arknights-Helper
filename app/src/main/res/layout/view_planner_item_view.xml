@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/activity_horizontal_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/planneritem_imageview" />
+    <LinearLayout
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/planneritem_textview"/>
+
+        <com.ssyanhuo.arknightshelper.widget.NumberSelector
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/planneritem_numberseletor"
+            app:defaultNum="1"
+            app:maxValue="50"
+            app:minValue="1"/>
+    </LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="移除"
+        android:textColor="@android:color/black"
+        android:background="@drawable/checkbox_background_yellow"
+        android:minWidth="@dimen/activity_horizontal_margin"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/planneritem_button"/>
+
+
+</LinearLayout>

@@ -190,7 +190,7 @@
     <string name="more_hr_counter_summary">Already %1$d times, 6★ probability: %2$d%%</string>
     <string name="more_hr_counter_summary_full">Already 99 times, 6★ probability: 100%!</string>
     <string name="more_hr_counter_summary_overflow">Already %d times, long press -1 button clear records</string>
-    <string name="tab_title_planner">Loot Planner</string>
+    <string name="tab_title_planner">Planner (Beta)</string>
     <string name="material_skill_1_now">Skill 1 :</string>
     <string name="material_skill_1_target">Level :</string>
     <string name="material_skill_2_now">Skill 2 :</string>

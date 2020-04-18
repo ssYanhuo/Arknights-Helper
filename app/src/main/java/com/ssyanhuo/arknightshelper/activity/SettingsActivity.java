@@ -64,6 +64,7 @@ import com.ssyanhuo.arknightshelper.service.OverlayService;
 import com.ssyanhuo.arknightshelper.utils.DpUtils;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
 import com.ssyanhuo.arknightshelper.utils.PackageUtils;
+import com.ssyanhuo.arknightshelper.utils.PythonUtils;
 import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
 import com.ssyanhuo.arknightshelper.utils.I18nUtils;
 
@@ -148,6 +149,7 @@ public class SettingsActivity extends AppCompatActivity {
             final SeekBarPreference floating_button_opacity = findPreference("floating_button_opacity");
             final ListPreference game_language = findPreference("game_language");
             final Preference button_img = findPreference("button_img");
+            final SwitchPreference disable_planner = findPreference("disable_planner");
             margin_fix.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @SuppressLint("SourceLockedOrientationActivity")
                 @Override
@@ -265,6 +267,9 @@ public class SettingsActivity extends AppCompatActivity {
                     return false;
                 }
             });
+            if (!PythonUtils.isAbiSupported()){
+                disable_planner.setVisible(false);
+            }
         }
 
         @Override

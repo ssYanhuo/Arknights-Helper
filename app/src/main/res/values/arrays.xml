@@ -15,7 +15,6 @@
         <item>com.YoStarJP.Arknights</item>
         <item>com.YoStarKR.Arknights</item>
         <item>manual</item>
-        <item></item>
     </string-array>
     <string-array name="settings_array_update_site">
         <item>Gitee(中国)</item>
@@ -45,5 +44,46 @@
         <item>zh-CN</item>
         <item>jp</item>
         <item>en</item>
+    </string-array>
+    <string-array name="planner_materials">
+        <item>D32钢</item>
+        <item>双极纳米片</item>
+        <item>聚合剂</item>
+        <item>白马醇</item>
+        <item>扭转醇</item>
+        <item>三水锰矿</item>
+        <item>轻锰矿</item>
+        <item>五水研磨石</item>
+        <item>研磨石</item>
+        <item>RMA70-24</item>
+        <item>RMA70-12</item>
+        <item>提纯源岩</item>
+        <item>固源岩组</item>
+        <item>固源岩</item>
+        <item>源岩</item>
+        <item>改量装置</item>
+        <item>全新装置</item>
+        <item>装置</item>
+        <item>破损装置</item>
+        <item>聚酸酯块</item>
+        <item>聚酸酯组</item>
+        <item>聚酸酯</item>
+        <item>酯原料</item>
+        <item>糖聚块</item>
+        <item>糖组</item>
+        <item>糖</item>
+        <item>代糖</item>
+        <item>异铁块</item>
+        <item>异铁组</item>
+        <item>异铁</item>
+        <item>异铁碎片</item>
+        <item>酮阵列</item>
+        <item>酮凝集组</item>
+        <item>酮凝集</item>
+        <item>双酮</item>
+        <item>聚合凝胶</item>
+        <item>凝胶</item>
+        <item>炽合金块</item>
+        <item>炽合金</item>
     </string-array>
 </resources>

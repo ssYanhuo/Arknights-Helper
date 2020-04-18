@@ -43,7 +43,7 @@
             android:summary="@string/settings_summary_attach_to_edge"/>
         <Preference
             android:key="button_img"
-            android:title="悬浮窗按钮图片"/>
+            android:title="@string/settings_title_floating_button_image"/>
 
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/settings_category_compatibility" android:icon="@drawable/ic_settings_compatibility">
@@ -66,5 +66,10 @@
             android:summary="@string/settings_summary_margin_fix"
             android:title="@string/settings_title_margin_fix"
             app:min="-256" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="disable_planner"
+            android:title="@string/settings_title_disable_planner"
+            android:summary="@string/settings_summary_disable_planner"/>
     </PreferenceCategory>
 </PreferenceScreen>

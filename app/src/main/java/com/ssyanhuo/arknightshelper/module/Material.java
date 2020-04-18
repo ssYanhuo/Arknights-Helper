@@ -345,7 +345,7 @@ public class Material {
         LinearLayout resultContent = contentView.findViewById(R.id.material_result_content);
         resultContent.removeAllViews();
         ItemDetailView itemDetailView;
-        if (levelCheckbox.isChecked()){
+        if (levelCheckbox.isChecked() && charNow != null){
             int stageFrom = stageNow.getInt();
             int stageTo = stageTarget.getInt();
             int levelFrom = levelNow.getInt();

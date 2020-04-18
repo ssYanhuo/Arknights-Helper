@@ -108,6 +108,7 @@ public class NumberSelector extends LinearLayout {
                 easyPopup.showAtAnchorView(buttonMinus, YGravity.CENTER, XGravity.ALIGN_LEFT);
             }
         });
+        typedArray.recycle();
     }
     public int getInt(){ return Integer.valueOf(editText.getText().toString()); }
     public void setInt(int number){

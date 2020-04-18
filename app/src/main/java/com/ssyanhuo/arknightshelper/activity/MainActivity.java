@@ -1,6 +1,7 @@
 package com.ssyanhuo.arknightshelper.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.*;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -15,12 +16,17 @@ import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -36,14 +42,20 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.liulishuo.okdownload.DownloadTask;
+import com.liulishuo.okdownload.core.cause.ResumeFailedCause;
+import com.liulishuo.okdownload.core.listener.DownloadListener3;
 import com.ssyanhuo.arknightshelper.BuildConfig;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.entity.StaticData;
 import com.ssyanhuo.arknightshelper.service.OverlayService;
+import com.ssyanhuo.arknightshelper.service.PythonService;
 import com.ssyanhuo.arknightshelper.utils.CompatUtils;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
 import com.ssyanhuo.arknightshelper.utils.PackageUtils;
+import com.ssyanhuo.arknightshelper.utils.PythonUtils;
 import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
+import com.ssyanhuo.arknightshelper.utils.ZipUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -100,6 +112,11 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
+        if ((!preferences.getBoolean("python_finished",false)) && PythonUtils.isAbiSupported() && !preferences.getBoolean("disable_planner", false)){
+            PythonUtils.setupEnvironment(getApplicationContext(), MainActivity.this);
+            return;
+        }
+
 
         Snackbar.make(view, R.string.start_game, Snackbar.LENGTH_LONG).show();
         Timer timer = new Timer();
@@ -107,6 +124,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void run() {
                 final SharedPreferences.Editor editor = preferences.edit();
+                Intent overlayServiceIntent = new Intent(getApplicationContext(), OverlayService.class);
+                Intent pythonServiceIntent = new Intent(getApplicationContext(), PythonService.class);
                 Looper.prepare();
                 if (preferences.getInt("versionLast", -1) != BuildConfig.VERSION_CODE || !FileUtils.checkFiles(getApplicationContext(), getFilesDir().getPath(), StaticData.Const.DATA_LIST) || !FileUtils.checkFiles(getApplicationContext(), getFilesDir().getPath() + File.separator + "python" + File.separator + "data", new String[]{"formula.json", "matrix.json"})){
                     FileUtils.copyFilesFromAssets(getApplicationContext(), StaticData.Const.DATA_LIST);
@@ -121,11 +140,14 @@ public class MainActivity extends AppCompatActivity
                 }
                 editor.putBoolean("firstRun", false);
                 editor.apply();
-                Intent intent = new Intent(getApplicationContext(), OverlayService.class);
+
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                     if(Settings.canDrawOverlays(getApplicationContext())){
                         try{
-                            startService(intent);
+                            startService(overlayServiceIntent);
+                            if(PythonUtils.isAbiSupported() && !preferences.getBoolean("disable_planner", false)){
+                                startService(pythonServiceIntent);
+                            }
                         }catch (Exception e){
                             Log.e(TAG, "Start service failed!", e);
                         }
@@ -141,7 +163,10 @@ public class MainActivity extends AppCompatActivity
                     }
                 } else {
                     try{
-                        startService(intent);
+                        startService(overlayServiceIntent);
+                        if(PythonUtils.isAbiSupported() && !preferences.getBoolean("disable_planner", false)){
+                            startService(pythonServiceIntent);
+                        }
                     }catch (Exception e){
                         Log.e(TAG, "Start service failed!", e);
                     }
@@ -492,6 +517,7 @@ public class MainActivity extends AppCompatActivity
             //TODO 补全
         }
     }
+
     private class UpdateRunnable implements Runnable{
         PackageManager packageManager = getPackageManager();
         JSONObject versionInfo;

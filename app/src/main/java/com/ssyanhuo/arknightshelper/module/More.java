@@ -1,11 +1,14 @@
 package com.ssyanhuo.arknightshelper.module;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
+import android.view.ContextThemeWrapper;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextClock;
@@ -29,6 +32,7 @@ public class More {
     LinearLayout goStatistics;
     LinearLayout goPlanner;
     LinearLayout goAbout;
+    LinearLayout setAlarm;
     TextView hrCounterSummary;
     TextView textView;
     Button hrCounterPlus;
@@ -51,6 +55,7 @@ public class More {
         hrCounterSummary = contentView.findViewById(R.id.more_hr_counter_summary);
         hrCounterPlus = contentView.findViewById(R.id.more_hr_counter_plus);
         hrCounterMinus = contentView.findViewById(R.id.more_hr_counter_minus);
+        setAlarm = contentView.findViewById(R.id.more_set_alarm);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
             textView.append(applicationContext.getString(R.string.get_permission_background_activity));
         }
@@ -182,6 +187,22 @@ public class More {
             }
         });
         onCountChanged(hrCount);
+        setAlarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(applicationContext, R.style.AppTheme_Default);
+                AlertDialog.Builder builder = new AlertDialog.Builder(contextThemeWrapper);
+                builder.setTitle("设定闹钟")
+                        .setView(R.layout.dialog_set_alarm);
+                AlertDialog dialog = builder.create();
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                    dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
+                }else {
+                    dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_PHONE);
+                }
+                dialog.show();
+            }
+        });
     }
     private void onCountChanged(int count){
         if (count <= 0){

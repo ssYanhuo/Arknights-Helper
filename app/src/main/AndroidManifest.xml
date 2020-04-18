@@ -19,15 +19,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Default"
         android:usesCleartextTraffic="true">
+        <service
+            android:name=".service.PythonService"
+            android:enabled="true"
+            android:exported="true" />
+
         <provider
-            android:authorities="com.ssyanhuo.arknightshelper.fileprovider"
             android:name="androidx.core.content.FileProvider"
+            android:authorities="com.ssyanhuo.arknightshelper.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
         <activity
             android:name=".activity.SettingsActivity"
             android:label="@string/title_activity_settings" />
@@ -52,7 +58,7 @@
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcut" />
-                -->
+            -->
         </activity>
 
         <receiver android:name=".service.BroadcastReceiver">

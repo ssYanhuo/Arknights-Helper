@@ -226,7 +226,7 @@
     <string name="hr_hide_low_level">隐藏2★及以下干员</string>
     <string name="py_runtime">运行时文件</string>
     <string name="py_universal_dependencies">通用依赖</string>
-    <string name="py_download">正在准备 Python 运行时环境</string>
+    <string name="py_download">正在准备运行时环境</string>
     <string name="py_unsupported_arch">不支持的 CPU 架构</string>
     <string name="py_error">发生了错误：\n</string>
     <string name="py_arkplanner">刷图规划™ By ycremar</string>
@@ -237,7 +237,7 @@
     <string name="more_hr_counter_summary_90">累计寻访%1$d次，当前6★概率%2$d%%，下次十连必出6★！</string>
     <string name="more_hr_counter_summary_full">累计寻访99次，下次寻访必出6★！</string>
     <string name="more_hr_counter_summary_overflow">寻访次数已达%d次，长按“-1”清空计数</string>
-    <string name="tab_title_planner">刷图规划</string>
+    <string name="tab_title_planner">刷图规划(Beta)</string>
     <string name="material_skill_1_now" >技能一专精：</string>
     <string name="material_skill_1_target" >目标：</string>
     <string name="material_skill_2_now" >技能二专精：</string>
@@ -246,4 +246,14 @@
     <string name="material_skill_3_target" >目标：</string>
     <string name="material_skill_all_now">当前全技能：</string>
     <string name="material_skill_all_target">目标：</string>
+    <string name="planner_desc">算法来自 @ycremar\n点击查询结果中的关卡名称和合成物品可以查看详情\n模块正在测试阶段，如果你遇到了应用运行不稳定的情况，请在设置中关闭这项功能</string>
+    <string name="planner_result_loot_title">作战：</string>
+    <string name="planner_result_synthesis_title">合成：</string>
+    <string name="planner_result_items_title">总计获得：</string>
+    <string name="planner_add_item">添加条目</string>
+    <string name="settings_title_floating_button_image">悬浮窗按钮图片</string>
+    <string name="settings_title_disable_planner">暂时禁用刷图规划</string>
+    <string name="settings_summary_disable_planner">刷图规划 正处于测试阶段，如果这导致应用运行不稳定，请开启此选项\n下次更新后 刷图规划 将被重新启用</string>
+    <string name="more_set_alarm_title">理智回复计时</string>
+    <string name="more_set_alarm_summary">设定闹钟来提醒理智回复</string>
 </resources>
