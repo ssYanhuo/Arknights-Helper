@@ -418,6 +418,7 @@ public class Material {
             itemDetailView.setItemName("经验");
             itemDetailView.setImage(applicationContext.getResources().getDrawable(R.mipmap.sprite_exp_card_t4));
             itemDetailView.setNumber(exp);
+            itemDetailView.appendText("  " + (int)Math.ceil(((double) exp)/((double)StaticData.Exp.Book.EXP_BOOK_1)) + " / " + (int)Math.ceil(((double) exp)/((double)StaticData.Exp.Book.EXP_BOOK_2)) + " / " + (int)Math.ceil(((double) exp)/((double)StaticData.Exp.Book.EXP_BOOK_3)) + " / " + (int)Math.ceil(((double) exp)/((double)StaticData.Exp.Book.EXP_BOOK_4)) + " pcs");
             resultContent.addView(itemDetailView);
 
             JSONArray evolveCosts = charNow.getJSONArray("evolveCosts");

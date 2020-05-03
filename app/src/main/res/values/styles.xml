@@ -1,7 +1,7 @@
 <resources>
 
     <!-- 默认主题 -->
-    <style name="AppTheme.Default" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme.Default" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -22,7 +22,7 @@
     <style name="AppTheme.Default.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <!-- 新年主题 -->
-    <style name="AppTheme.NewYear" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme.NewYear" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimaryNewYear</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkNewYear</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -43,7 +43,7 @@
     <style name="AppTheme.NewYear.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <!-- 浅色主题 -->
-    <style name="AppTheme.Light" parent="Theme.AppCompat.Light">
+    <style name="AppTheme.Light" parent="Theme.AppCompat.DayNight">
         <item name="colorPrimary">@color/colorPrimaryLight</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkLight</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -60,7 +60,6 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDarkLight</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
     <style name="AppTheme.Default.FloatingButtonAnimation">
         <item name="android:windowEnterAnimation">@animator/overlay_button_show</item>
         <item name="android:windowExitAnimation">@animator/overlay_button_hide</item>

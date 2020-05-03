@@ -31,6 +31,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -221,7 +222,7 @@ public class MainActivity extends AppCompatActivity
                     }
                     Looper.loop();
             }
-        }, 500);
+        }, 200);
         versionLast = preferences.getInt("versionLast", -1);
         if (versionLast == -1 && versionLast != BuildConfig.VERSION_CODE){
             preferences.edit().putInt("versionLast", BuildConfig.VERSION_CODE).apply();
@@ -257,6 +258,7 @@ public class MainActivity extends AppCompatActivity
         }
         preNotifyThemeChanged();
         contextThemeWrapper = new ContextThemeWrapper(MainActivity.this, R.style.AppTheme_Default);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar_main);

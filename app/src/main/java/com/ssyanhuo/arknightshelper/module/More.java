@@ -2,16 +2,19 @@ package com.ssyanhuo.arknightshelper.module;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.AlarmClock;
 import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextClock;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.ssyanhuo.arknightshelper.R;
@@ -21,8 +24,13 @@ import com.ssyanhuo.arknightshelper.activity.SettingsActivity;
 import com.ssyanhuo.arknightshelper.entity.StaticData;
 import com.ssyanhuo.arknightshelper.service.OverlayService;
 
+import java.util.Calendar;
+import java.util.TimeZone;
+
 public class More {
     Context applicationContext;
+    private OverlayService overlayService;
+    private Context originalContext;
     LinearLayout contentView;
     LinearLayout goMain;
     LinearLayout goSetting;
@@ -39,9 +47,11 @@ public class More {
     Button hrCounterMinus;
     int hrCount;
     SharedPreferences preferences;
-    public void init(final Context context, View view, final OverlayService service){
-        applicationContext = context;
-        preferences = applicationContext.getSharedPreferences(StaticData.Const.PREFERENCE_PATH, Context.MODE_PRIVATE);
+    public void init(final Context context, View view, final OverlayService service, final Context originalContext){
+        this.applicationContext = context;
+        this.overlayService = service;
+        this.originalContext = originalContext;
+        preferences = this.applicationContext.getSharedPreferences(StaticData.Const.PREFERENCE_PATH, Context.MODE_PRIVATE);
         contentView = (LinearLayout) view;
         textView = contentView.findViewById(R.id.more_description);
         goMain = contentView.findViewById(R.id.more_go_main);
@@ -57,23 +67,23 @@ public class More {
         hrCounterMinus = contentView.findViewById(R.id.more_hr_counter_minus);
         setAlarm = contentView.findViewById(R.id.more_set_alarm);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
-            textView.append(applicationContext.getString(R.string.get_permission_background_activity));
+            textView.append(this.applicationContext.getString(R.string.get_permission_background_activity));
         }
         goMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(applicationContext, MainActivity.class);
+                Intent intent = new Intent(More.this.applicationContext, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                applicationContext.startActivity(intent);
+                More.this.applicationContext.startActivity(intent);
                 service.hideFloatingWindow();
             }
         });
         goSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(applicationContext, SettingsActivity.class);
+                Intent intent = new Intent(More.this.applicationContext, SettingsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                applicationContext.startActivity(intent);
+                More.this.applicationContext.startActivity(intent);
                 service.hideFloatingWindow();
             }
         });
@@ -84,7 +94,7 @@ public class More {
                 intent.setAction(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse("http://jq.qq.com/?_wv=1027&k=5bPf1xW"));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                applicationContext.startActivity(intent);
+                More.this.applicationContext.startActivity(intent);
                 service.hideFloatingWindow();
             }
         });
@@ -95,7 +105,7 @@ public class More {
                 intent.setAction(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse("http://ak.mooncell.wiki"));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                applicationContext.startActivity(intent);
+                More.this.applicationContext.startActivity(intent);
                 service.hideFloatingWindow();
             }
         });
@@ -106,7 +116,7 @@ public class More {
                 intent.setAction(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse("https://aktools.graueneko.xyz"));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                applicationContext.startActivity(intent);
+                More.this.applicationContext.startActivity(intent);
                 service.hideFloatingWindow();
             }
         });
@@ -117,7 +127,7 @@ public class More {
                 intent.setAction(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse("http://penguin-stats.io"));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                applicationContext.startActivity(intent);
+                More.this.applicationContext.startActivity(intent);
                 service.hideFloatingWindow();
             }
         });
@@ -128,16 +138,16 @@ public class More {
                 intent.setAction(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse("https://planner.penguin-stats.io/"));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                applicationContext.startActivity(intent);
+                More.this.applicationContext.startActivity(intent);
                 service.hideFloatingWindow();
             }
         });
         goAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(applicationContext, AboutActivity.class);
+                Intent intent = new Intent(More.this.applicationContext, AboutActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                applicationContext.startActivity(intent);
+                More.this.applicationContext.startActivity(intent);
                 service.hideFloatingWindow();
             }
         });
@@ -190,16 +200,68 @@ public class More {
         setAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(applicationContext, R.style.AppTheme_Default);
+                ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(originalContext, R.style.AppTheme_Default);
+                LinearLayout interFace = (LinearLayout) LayoutInflater.from(contextThemeWrapper).inflate(R.layout.dialog_set_alarm, null);
+                final TextView note = interFace.findViewById(R.id.more_set_alarm_note);
+                final Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
                 AlertDialog.Builder builder = new AlertDialog.Builder(contextThemeWrapper);
-                builder.setTitle("设定闹钟")
-                        .setView(R.layout.dialog_set_alarm);
-                AlertDialog dialog = builder.create();
+                final NumberPicker pickerRequired = interFace.findViewById(R.id.more_set_alarm_picker_required);
+                pickerRequired.setMinValue(1);
+                pickerRequired.setMaxValue(150);
+                pickerRequired.setValue(130);
+                pickerRequired.setEnabled(true);
+                builder.setTitle("设定倒计时")
+                        .setView(interFace)
+                        .setPositiveButton("设定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                int value = pickerRequired.getValue();
+                                int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                                int minute = calendar.get(Calendar.MINUTE);
+                                minute += (value * 6) % 60;
+                                hour += (value * 6) / 60 + (minute / 60);
+                                //hour %= 24;
+//                                Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);
+//                                intent.putExtra(AlarmClock.EXTRA_MESSAGE, "明日方舟助手-理智回复");
+//                                intent.putExtra(AlarmClock.EXTRA_HOUR, hour);
+//                                intent.putExtra(AlarmClock.EXTRA_MINUTES, minute);
+//                                intent.putExtra(AlarmClock.EXTRA_SKIP_UI, false);
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                Intent intent = new Intent(AlarmClock.ACTION_SET_TIMER);
+                                intent.putExtra(AlarmClock.EXTRA_LENGTH, value * 6 * 60);
+                                intent.putExtra(AlarmClock.EXTRA_MESSAGE, "明日方舟助手-理智回复");
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                applicationContext.startActivity(intent);
+                                overlayService.hideFloatingWindow();
+                            }
+                        })
+                        .setNegativeButton("取消", null);
+                final AlertDialog dialog = builder.create();
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
                     dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
                 }else {
                     dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_PHONE);
                 }
+                pickerRequired.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+                    @Override
+                    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                        int value = newVal;
+                        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                        int minute = calendar.get(Calendar.MINUTE);
+                        minute += value * 6;
+                        minute %= 60;
+                        hour += (value * 6) / 60 + (minute / 60);
+                        if(hour >= 24){
+                            hour -= 24;
+                            note.setText(new StringBuilder().append(applicationContext.getString(R.string.more_set_alarm_note_tomorrow, hour, minute)).append(" ").toString());
+                        }else {
+                            note.setText(new StringBuilder().append(applicationContext.getString(R.string.more_set_alarm_note_today, hour, minute)).append(" ").toString());
+                        }
+                        if (hour <= 6 || hour >= 22){
+                            note.append("\n这可能会打扰到周围人的休息 ");
+                        }
+                    }
+                });
                 dialog.show();
             }
         });

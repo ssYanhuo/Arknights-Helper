@@ -567,7 +567,7 @@ public class OverlayService extends Service {
         hr.init(contextThemeWrapper, linearLayout_hr, relativeLayout_hr, backgroundLayout);
         material.init(contextThemeWrapper, linearLayout_material, backgroundLayout);
         drop.init(contextThemeWrapper, linearLayout_drop, this);
-        more.init(contextThemeWrapper, linearLayout_more, this);
+        more.init(contextThemeWrapper, linearLayout_more, this, getApplicationContext());
         planner.init(contextThemeWrapper, linearLayout_planner, relativeLayout_planner, backgroundLayout, this, pythonService);
         buttonLayoutParams.windowAnimations = R.style.AppTheme_Default_FloatingButtonAnimation;
     }

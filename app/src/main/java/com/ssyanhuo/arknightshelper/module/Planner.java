@@ -13,6 +13,7 @@ import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -124,18 +125,21 @@ public class Planner {
                     tempArray.removeAll(itemException);
                     for (String item :
                             tempArray) {
+                        final LinearLayout linearLayout = new LinearLayout(applicationContext);
+                        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+                        ImageView imageView = new ImageView(applicationContext);
                         final TextView textView = new TextView(applicationContext);
-                        textView.setPadding(padding, padding, padding, padding);
+                        linearLayout.setPadding(padding, padding, padding, padding);
                         textView.setText(item);
-                        textView.setBackground(new RippleDrawable(ColorStateList.valueOf(Color.GRAY), null, null));
-                        textView.setClickable(true);
-                        textView.setFocusable(true);
-                        textView.setTag(itemMap.get(item));
-                        textView.setOnClickListener(new View.OnClickListener() {
+                        linearLayout.setBackground(new RippleDrawable(ColorStateList.valueOf(Color.GRAY), null, null));
+                        linearLayout.setClickable(true);
+                        linearLayout.setFocusable(true);
+                        linearLayout.setTag(itemMap.get(item));
+                        linearLayout.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                CharSequence name = ((TextView)v).getText();
-                                Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(((JSONObject) textView.getTag()).getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
+                                CharSequence name = ((TextView)textView).getText();
+                                Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(((JSONObject) linearLayout.getTag()).getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
                                 PlannerItemView plannerItemView = new PlannerItemView(applicationContext, drawable, name);
                                 itemContainer.addView(plannerItemView);
                                 itemException.add((String) name);
@@ -155,13 +159,16 @@ public class Planner {
 
                             }
                         });
-                        itemSelector.addView(textView);
+                        imageView.setImageDrawable(applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(((JSONObject) linearLayout.getTag()).getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName())));
+                        linearLayout.addView(imageView);
+                        linearLayout.addView(textView);
+                        itemSelector.addView(linearLayout);
                     }
                     listScrollView.addView(itemSelector);
                     cardView.addView(listScrollView);
                     easyPopup.setContentView(cardView)
                             .setHeight(DpUtils.dip2px(applicationContext, 256))
-                            .showAsDropDown(v);
+                            .showAsDropDown(v, (v.getWidth() - cardView.getWidth()) / 2, 0);
             }
 });
 

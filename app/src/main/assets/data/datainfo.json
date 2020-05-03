@@ -2,10 +2,10 @@
     {
         "name":"/akhr.json",
         "nameFriendly":"akhr.json",
-        "date":"2019-12-25",
-        "dateraw":20191215,
+        "date":"2020-5-4",
+        "dateraw":20200504,
         "desc":"干员招募信息，用于公开招募查询",
-        "source":"Graue Neko"
+        "source":"Graue Neko & ssYanhuo"
     },
     {
         "name":"/aklevel.json",
@@ -82,8 +82,8 @@
     {
         "name":"/datainfo.json",
         "nameFriendly":"datainfo.json",
-        "date":"2020-4-18",
-        "dateraw":20200418,
+        "date":"2020-5-4",
+        "dateraw":20200504,
         "desc":"数据文件索引",
         "source":"ssYanhuo"
     }

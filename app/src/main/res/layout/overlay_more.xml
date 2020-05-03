@@ -113,8 +113,7 @@
         android:focusable="true"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        android:padding="@dimen/activity_horizontal_margin"
-        android:visibility="gone">
+        android:padding="@dimen/activity_horizontal_margin">
 
         <TextView
             android:layout_width="match_parent"

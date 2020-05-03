@@ -76,6 +76,16 @@ public class ItemDetailView extends LinearLayout{
         numberTextView.setVisibility(VISIBLE);
     }
 
+    public void setText(String text) {
+        numberTextView.setText(text);
+        numberTextView.setVisibility(VISIBLE);
+    }
+
+    public void appendText(String text) {
+        numberTextView.append(text);
+        numberTextView.setVisibility(VISIBLE);
+    }
+
     public int getNumber() {
         return number;
     }
