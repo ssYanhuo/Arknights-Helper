@@ -270,6 +270,13 @@ public class SettingsActivity extends AppCompatActivity {
             if (!PythonUtils.isAbiSupported()){
                 disable_planner.setVisible(false);
             }
+            disable_planner.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    stopService();
+                    return true;
+                }
+            });
         }
 
         @Override
@@ -495,6 +502,19 @@ public class SettingsActivity extends AppCompatActivity {
                         Intent intent = new Intent(getContext(), OverlayService.class);
                         getContext().stopService(intent);
                         getContext().startService(intent);
+                        return;
+                    }
+                }
+            }
+        }
+
+        private void stopService(){
+            List<ActivityManager.RunningServiceInfo> runningServiceInfoList = ((ActivityManager)getContext().getSystemService(Context.ACTIVITY_SERVICE)).getRunningServices(Integer.MAX_VALUE);
+            if(runningServiceInfoList.size() > 0){
+                for (int i = 0; i < runningServiceInfoList.size(); i++){
+                    if(runningServiceInfoList.get(i).service.getClassName().equals("com.ssyanhuo.arknightshelper.service.OverlayService")){
+                        Intent intent = new Intent(getContext(), OverlayService.class);
+                        getContext().stopService(intent);
                         return;
                     }
                 }

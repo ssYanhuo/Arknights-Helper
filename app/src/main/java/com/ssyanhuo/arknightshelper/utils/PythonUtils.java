@@ -2,6 +2,9 @@ package com.ssyanhuo.arknightshelper.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Looper;
 import android.util.Log;
@@ -20,6 +23,7 @@ import com.srplab.www.starcore.StarSrvGroupClass;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.FileProvider;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.liulishuo.okdownload.DownloadTask;
@@ -351,6 +355,75 @@ public class PythonUtils {
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
             dialogBuilder.setMessage(R.string.py_unsupported_arch)
                     .show();
+            return;
+        }
+        if (!PackageUtils.checkApplication("com.ssyanhuo.akrnightshelper_plannerplugin", context)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            builder.setTitle("安装插件")
+                    .setMessage("安装插件来启用刷图规划功能")
+                    .setPositiveButton("酷安", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            IntentUtils.openURL("https://www.coolapk.com/apk/263387", activity);
+                        }
+                    })
+                    .setNeutralButton("备用", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            IntentUtils.openURL("https://ww.lanzous.com/ico7bfe", activity);
+                        }
+                    })
+                    .setNegativeButton("暂时不要", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            context.getSharedPreferences(StaticData.Const.PREFERENCE_PATH, Context.MODE_PRIVATE).edit().putBoolean("disable_planner", true).apply();
+                            Snackbar.make(activity.getWindow().getDecorView().getRootView().findViewById(R.id.fab), "日后可以从设置中重新启用刷图规划功能", Snackbar.LENGTH_LONG).show();
+
+                        }
+                    })
+            .show();
+            return;
+        }
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setView(R.layout.dialog_python_init);
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final String CACHE_PATH = context.getCacheDir().toString();
+                final String ASSETS_PATH = CACHE_PATH + File.separator + "plugin" + File.separator + "assets";
+                try {
+                    PackageManager pm = context.getPackageManager();
+                    String path = pm.getApplicationInfo("com.ssyanhuo.akrnightshelper_plannerplugin", 0).sourceDir;
+                    FileUtils.copyFile(context, path, CACHE_PATH + File.separator + "plugin.apk");
+                    ZipUtils.UnZipFolder(CACHE_PATH + File.separator + "plugin.apk", CACHE_PATH + File.separator + "plugin");
+                    ZipUtils.UnZipFolder(ASSETS_PATH + File.separator + Build.SUPPORTED_ABIS[0] + ".zip", context.getFilesDir() + File.separator + "python");
+                    ZipUtils.UnZipFolder(ASSETS_PATH + File.separator + "universal" + ".zip", context.getFilesDir() + File.separator + "python");
+                    ZipUtils.UnZipFolder(ASSETS_PATH + File.separator + "ArkPlanner" + ".zip", context.getFilesDir() + File.separator + "python");
+                    ZipUtils.UnZipFolder(context.getFilesDir() + File.separator + "python" + File.separator + "numpy" + ".zip", context.getFilesDir() + File.separator + "python" + File.separator + "numpy");
+                    ZipUtils.UnZipFolder(context.getFilesDir() + File.separator + "python" + File.separator + "scipy" + ".zip", context.getFilesDir() + File.separator + "python" + File.separator + "scipy");
+                    FileUtils.delFile(context, CACHE_PATH + File.separator + "plugin.apk");
+                    FileUtils.deleteDirectory(CACHE_PATH + File.separator + "plugin");
+                    FileUtils.copyFileFromAssets(context, context.getFilesDir().getPath() + File.separator + "python" + File.separator + "data", "formula.json");
+                    FileUtils.copyFileFromAssets(context, context.getFilesDir().getPath() + File.separator + "python" + File.separator + "data", "matrix.json");
+                    Snackbar.make(activity.getWindow().getDecorView().getRootView().findViewById(R.id.fab), "组件初始化成功，请重新启动服务", Snackbar.LENGTH_LONG).show();
+                    context.getSharedPreferences(StaticData.Const.PREFERENCE_PATH, Context.MODE_PRIVATE).edit().putBoolean("python_finished", true).apply();
+                    dialog.dismiss();
+                } catch (Exception e) {
+                    Snackbar.make(activity.getWindow().getDecorView().getRootView().findViewById(R.id.fab), context.getString(R.string.py_error) + e.getMessage(), Snackbar.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+
+            }
+        });
+        thread.start();
+    }
+    public static void setupEnvironmentOld(final Context context, final Activity activity) {
+        if (!PythonUtils.isAbiSupported()) {
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+            dialogBuilder.setMessage(R.string.py_unsupported_arch)
+                    .show();
         }
         String baseUrl = context.getSharedPreferences(StaticData.Const.PREFERENCE_PATH, Context.MODE_PRIVATE).getString("update_site", "0");
         if (baseUrl.equals("1")) {
@@ -485,4 +558,5 @@ public class PythonUtils {
             }
         });
     }
+
 }

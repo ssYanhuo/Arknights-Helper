@@ -1,6 +1,4 @@
-versionCode 28
-versionName Beta-3.0.2-LateSpring
-releaseNote [Beta]适配夜间模式
-[Beta]新增理智回复提醒
-[Mod]同步公开招募数据(感谢 @Dedoga、@lonren、@小帆帆耍大牌)
-[Mod]优化刷图规划物品选择菜单(感谢 @天廻之主)
+versionCode 29
+versionName Beta-3.0.3-LateSpring
+releaseNote [Mod]同步最新数据
+[Mod]解耦刷图规划功能，安装插件后激活
