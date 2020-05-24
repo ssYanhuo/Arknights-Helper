@@ -37913,6 +37913,1045 @@
             }
         ]
     },
+    "风笛": {
+        "name": "风笛",
+        "rarity": 5,
+        "profession": "先锋",
+        "evolveCosts": [
+            null,
+            [
+                {
+                    "id": "3211",
+                    "count": 5,
+                    "type": "MATERIAL"
+                },
+                {
+                    "id": "30032",
+                    "count": 10,
+                    "type": "MATERIAL"
+                },
+                {
+                    "id": "30052",
+                    "count": 3,
+                    "type": "MATERIAL"
+                }
+            ],
+            [
+                {
+                    "id": "3213",
+                    "count": 4,
+                    "type": "MATERIAL"
+                },
+                {
+                    "id": "30115",
+                    "count": 4,
+                    "type": "MATERIAL"
+                },
+                {
+                    "id": "30014",
+                    "count": 9,
+                    "type": "MATERIAL"
+                }
+            ]
+        ],
+        "sskillCosts": [
+            {
+                "skillName": "迅捷打击·γ型",
+                "levelUpCost": [
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 28800,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
+                                "count": 8,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30074",
+                                "count": 4,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30053",
+                                "count": 8,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    },
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 57600,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
+                                "count": 12,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30104",
+                                "count": 4,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30084",
+                                "count": 7,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    },
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 86400,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
+                                "count": 15,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30125",
+                                "count": 6,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30054",
+                                "count": 5,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    }
+                ],
+                "unlockCond": {
+                    "phase": 0,
+                    "level": 1
+                }
+            },
+            {
+                "skillName": "高效冲击",
+                "levelUpCost": [
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 28800,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
+                                "count": 8,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30084",
+                                "count": 4,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30063",
+                                "count": 4,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    },
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 57600,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
+                                "count": 12,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "31024",
+                                "count": 4,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30104",
+                                "count": 8,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    },
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 86400,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
+                                "count": 15,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30135",
+                                "count": 6,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30074",
+                                "count": 7,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    }
+                ],
+                "unlockCond": {
+                    "phase": 1,
+                    "level": 1
+                }
+            },
+            {
+                "skillName": "闭膛连发",
+                "levelUpCost": [
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 28800,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
+                                "count": 8,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30094",
+                                "count": 4,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30073",
+                                "count": 7,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    },
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 57600,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
+                                "count": 12,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "31014",
+                                "count": 4,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30014",
+                                "count": 10,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    },
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 86400,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
+                                "count": 15,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30125",
+                                "count": 6,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30044",
+                                "count": 4,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    }
+                ],
+                "unlockCond": {
+                    "phase": 2,
+                    "level": 1
+                }
+            }
+        ],
+        "askillCosts": [
+            {
+                "unlockCond": {
+                    "phase": 0,
+                    "level": 1
+                },
+                "lvlUpCost": [
+                    {
+                        "id": "3301",
+                        "count": 5,
+                        "type": "MATERIAL"
+                    }
+                ]
+            },
+            {
+                "unlockCond": {
+                    "phase": 0,
+                    "level": 1
+                },
+                "lvlUpCost": [
+                    {
+                        "id": "3301",
+                        "count": 5,
+                        "type": "MATERIAL"
+                    },
+                    {
+                        "id": "30031",
+                        "count": 6,
+                        "type": "MATERIAL"
+                    },
+                    {
+                        "id": "30041",
+                        "count": 4,
+                        "type": "MATERIAL"
+                    }
+                ]
+            },
+            {
+                "unlockCond": {
+                    "phase": 0,
+                    "level": 1
+                },
+                "lvlUpCost": [
+                    {
+                        "id": "3302",
+                        "count": 8,
+                        "type": "MATERIAL"
+                    },
+                    {
+                        "id": "30042",
+                        "count": 4,
+                        "type": "MATERIAL"
+                    }
+                ]
+            },
+            {
+                "unlockCond": {
+                    "phase": 1,
+                    "level": 1
+                },
+                "lvlUpCost": [
+                    {
+                        "id": "3302",
+                        "count": 8,
+                        "type": "MATERIAL"
+                    },
+                    {
+                        "id": "30052",
+                        "count": 4,
+                        "type": "MATERIAL"
+                    },
+                    {
+                        "id": "30012",
+                        "count": 5,
+                        "type": "MATERIAL"
+                    }
+                ]
+            },
+            {
+                "unlockCond": {
+                    "phase": 1,
+                    "level": 1
+                },
+                "lvlUpCost": [
+                    {
+                        "id": "3302",
+                        "count": 8,
+                        "type": "MATERIAL"
+                    },
+                    {
+                        "id": "30043",
+                        "count": 6,
+                        "type": "MATERIAL"
+                    }
+                ]
+            },
+            {
+                "unlockCond": {
+                    "phase": 1,
+                    "level": 1
+                },
+                "lvlUpCost": [
+                    {
+                        "id": "3303",
+                        "count": 8,
+                        "type": "MATERIAL"
+                    },
+                    {
+                        "id": "30073",
+                        "count": 5,
+                        "type": "MATERIAL"
+                    },
+                    {
+                        "id": "30053",
+                        "count": 4,
+                        "type": "MATERIAL"
+                    }
+                ]
+            }
+        ]
+    }, 
+	"慑砂": {
+        "name": "慑砂",
+        "rarity": 4,
+        "profession": "狙击",
+        "evolveCosts": [
+            null,
+            [
+                {
+                    "id": "3241",
+                    "count": 4,
+                    "type": "MATERIAL"
+                },
+                {
+                    "id": "30052",
+                    "count": 4,
+                    "type": "MATERIAL"
+                },
+                {
+                    "id": "30022",
+                    "count": 2,
+                    "type": "MATERIAL"
+                }
+            ],
+            [
+                {
+                    "id": "3243",
+                    "count": 3,
+                    "type": "MATERIAL"
+                },
+                {
+                    "id": "30094",
+                    "count": 8,
+                    "type": "MATERIAL"
+                },
+                {
+                    "id": "30013",
+                    "count": 18,
+                    "type": "MATERIAL"
+                }
+            ]
+        ],
+        "sskillCosts": [
+            {
+                "skillName": "攻击力强化·γ型",
+                "levelUpCost": [
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 28800,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
+                                "count": 5,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30054",
+                                "count": 3,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "31013",
+                                "count": 2,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    },
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 57600,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
+                                "count": 6,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30104",
+                                "count": 3,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30084",
+                                "count": 5,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    },
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 86400,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
+                                "count": 10,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30135",
+                                "count": 4,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "31024",
+                                "count": 5,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    }
+                ],
+                "unlockCond": {
+                    "phase": 0,
+                    "level": 1
+                }
+            },
+            {
+                "skillName": "延时震荡零件",
+                "levelUpCost": [
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 28800,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
+                                "count": 5,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30014",
+                                "count": 3,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30093",
+                                "count": 4,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    },
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 57600,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
+                                "count": 6,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30094",
+                                "count": 3,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30074",
+                                "count": 6,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    },
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 86400,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
+                                "count": 10,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30125",
+                                "count": 4,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30084",
+                                "count": 3,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    }
+                ],
+                "unlockCond": {
+                    "phase": 1,
+                    "level": 1
+                }
+            }
+        ],
+        "askillCosts": [
+            {
+                "unlockCond": {
+                    "phase": 0,
+                    "level": 1
+                },
+                "lvlUpCost": [
+                    {
+                        "id": "3301",
+                        "count": 4,
+                        "type": "MATERIAL"
+                    }
+                ]
+            },
+            {
+                "unlockCond": {
+                    "phase": 0,
+                    "level": 1
+                },
+                "lvlUpCost": [
+                    {
+                        "id": "3301",
+                        "count": 4,
+                        "type": "MATERIAL"
+                    },
+                    {
+                        "id": "30051",
+                        "count": 5,
+                        "type": "MATERIAL"
+                    }
+                ]
+            },
+            {
+                "unlockCond": {
+                    "phase": 0,
+                    "level": 1
+                },
+                "lvlUpCost": [
+                    {
+                        "id": "3302",
+                        "count": 6,
+                        "type": "MATERIAL"
+                    },
+                    {
+                        "id": "30062",
+                        "count": 2,
+                        "type": "MATERIAL"
+                    }
+                ]
+            },
+            {
+                "unlockCond": {
+                    "phase": 1,
+                    "level": 1
+                },
+                "lvlUpCost": [
+                    {
+                        "id": "3302",
+                        "count": 6,
+                        "type": "MATERIAL"
+                    },
+                    {
+                        "id": "30012",
+                        "count": 8,
+                        "type": "MATERIAL"
+                    }
+                ]
+            },
+            {
+                "unlockCond": {
+                    "phase": 1,
+                    "level": 1
+                },
+                "lvlUpCost": [
+                    {
+                        "id": "3302",
+                        "count": 6,
+                        "type": "MATERIAL"
+                    },
+                    {
+                        "id": "30103",
+                        "count": 3,
+                        "type": "MATERIAL"
+                    }
+                ]
+            },
+            {
+                "unlockCond": {
+                    "phase": 1,
+                    "level": 1
+                },
+                "lvlUpCost": [
+                    {
+                        "id": "3303",
+                        "count": 6,
+                        "type": "MATERIAL"
+                    },
+                    {
+                        "id": "30093",
+                        "count": 2,
+                        "type": "MATERIAL"
+                    },
+                    {
+                        "id": "30013",
+                        "count": 4,
+                        "type": "MATERIAL"
+                    }
+                ]
+            }
+        ]
+    },
+	"柏喙": {
+        "name": "柏喙",
+        "rarity": 4,
+        "profession": "近卫",
+        "evolveCosts": [
+            null,
+            [
+                {
+                    "id": "3221",
+                    "count": 4,
+                    "type": "MATERIAL"
+                },
+                {
+                    "id": "30042",
+                    "count": 4,
+                    "type": "MATERIAL"
+                },
+                {
+                    "id": "30012",
+                    "count": 3,
+                    "type": "MATERIAL"
+                }
+            ],
+            [
+                {
+                    "id": "3223",
+                    "count": 3,
+                    "type": "MATERIAL"
+                },
+                {
+                    "id": "30084",
+                    "count": 8,
+                    "type": "MATERIAL"
+                },
+                {
+                    "id": "30103",
+                    "count": 8,
+                    "type": "MATERIAL"
+                }
+            ]
+        ],
+        "sskillCosts": [
+            {
+                "skillName": "飞针剑羽",
+                "levelUpCost": [
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 28800,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
+                                "count": 5,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "31014",
+                                "count": 3,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30013",
+                                "count": 6,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    },
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 57600,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
+                                "count": 6,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30084",
+                                "count": 3,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30064",
+                                "count": 4,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    },
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 86400,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
+                                "count": 10,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30125",
+                                "count": 4,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "31014",
+                                "count": 4,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    }
+                ],
+                "unlockCond": {
+                    "phase": 0,
+                    "level": 1
+                }
+            },
+            {
+                "skillName": "异刃斩",
+                "levelUpCost": [
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 28800,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
+                                "count": 5,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30044",
+                                "count": 3,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "31023",
+                                "count": 1,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    },
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 57600,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
+                                "count": 6,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30014",
+                                "count": 3,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30094",
+                                "count": 6,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    },
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 86400,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
+                                "count": 10,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30135",
+                                "count": 4,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30054",
+                                "count": 4,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    }
+                ],
+                "unlockCond": {
+                    "phase": 1,
+                    "level": 1
+                }
+            }
+        ],
+        "askillCosts": [
+            {
+                "unlockCond": {
+                    "phase": 0,
+                    "level": 1
+                },
+                "lvlUpCost": [
+                    {
+                        "id": "3301",
+                        "count": 4,
+                        "type": "MATERIAL"
+                    }
+                ]
+            },
+            {
+                "unlockCond": {
+                    "phase": 0,
+                    "level": 1
+                },
+                "lvlUpCost": [
+                    {
+                        "id": "3301",
+                        "count": 4,
+                        "type": "MATERIAL"
+                    },
+                    {
+                        "id": "30041",
+                        "count": 5,
+                        "type": "MATERIAL"
+                    }
+                ]
+            },
+            {
+                "unlockCond": {
+                    "phase": 0,
+                    "level": 1
+                },
+                "lvlUpCost": [
+                    {
+                        "id": "3302",
+                        "count": 6,
+                        "type": "MATERIAL"
+                    },
+                    {
+                        "id": "30052",
+                        "count": 3,
+                        "type": "MATERIAL"
+                    }
+                ]
+            },
+            {
+                "unlockCond": {
+                    "phase": 1,
+                    "level": 1
+                },
+                "lvlUpCost": [
+                    {
+                        "id": "3302",
+                        "count": 6,
+                        "type": "MATERIAL"
+                    },
+                    {
+                        "id": "30062",
+                        "count": 3,
+                        "type": "MATERIAL"
+                    }
+                ]
+            },
+            {
+                "unlockCond": {
+                    "phase": 1,
+                    "level": 1
+                },
+                "lvlUpCost": [
+                    {
+                        "id": "3302",
+                        "count": 6,
+                        "type": "MATERIAL"
+                    },
+                    {
+                        "id": "30083",
+                        "count": 4,
+                        "type": "MATERIAL"
+                    }
+                ]
+            },
+            {
+                "unlockCond": {
+                    "phase": 1,
+                    "level": 1
+                },
+                "lvlUpCost": [
+                    {
+                        "id": "3303",
+                        "count": 6,
+                        "type": "MATERIAL"
+                    },
+                    {
+                        "id": "30073",
+                        "count": 3,
+                        "type": "MATERIAL"
+                    },
+                    {
+                        "id": "30053",
+                        "count": 3,
+                        "type": "MATERIAL"
+                    }
+                ]
+            }
+        ]
+    },
 	"断罪者": {
         "name": "断罪者",
         "rarity": 3,
@@ -38224,18 +39263,8 @@
             }
         ]
     },
-    "THRM-EX": {
-        "name": "THRM-EX",
-        "rarity": 0,
-        "profession": "特种",
-        "evolveCosts": [
-            null
-        ],
-        "sskillCosts": [],
-        "askillCosts": []
-    },
-    "刻刀": {
-        "name": "刻刀",
+	"宴": {
+        "name": "宴",
         "rarity": 3,
         "profession": "近卫",
         "evolveCosts": [
@@ -38247,12 +39276,12 @@
                     "type": "MATERIAL"
                 },
                 {
-                    "id": "30032",
+                    "id": "30062",
                     "count": 1,
                     "type": "MATERIAL"
                 },
                 {
-                    "id": "30052",
+                    "id": "30022",
                     "count": 1,
                     "type": "MATERIAL"
                 }
@@ -38264,963 +39293,20 @@
                     "type": "MATERIAL"
                 },
                 {
-                    "id": "31013",
-                    "count": 12,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "30083",
-                    "count": 11,
-                    "type": "MATERIAL"
-                }
-            ]
-        ],
-        "sskillCosts": [
-            {
-                "skillName": "红移",
-                "levelUpCost": [
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 28800,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 2,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30054",
-                                "count": 1,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31013",
-                                "count": 3,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 57600,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30014",
-                                "count": 2,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30094",
-                                "count": 3,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 86400,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30115",
-                                "count": 2,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31024",
-                                "count": 2,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    }
-                ],
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                }
-            },
-            {
-                "skillName": "绯红刺刀",
-                "levelUpCost": [
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 28800,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 2,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31024",
-                                "count": 1,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30103",
-                                "count": 3,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 57600,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30104",
-                                "count": 2,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30084",
-                                "count": 2,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 86400,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30135",
-                                "count": 2,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31014",
-                                "count": 2,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    }
-                ],
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                }
-            }
-        ],
-        "askillCosts": [
-            {
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3301",
-                        "count": 2,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3301",
-                        "count": 2,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30051",
-                        "count": 3,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3302",
-                        "count": 3,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30062",
-                        "count": 1,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3302",
-                        "count": 3,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30012",
-                        "count": 4,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3302",
-                        "count": 3,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "31023",
-                        "count": 2,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3303",
-                        "count": 4,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30103",
-                        "count": 2,
-                        "type": "MATERIAL"
-                    }
-                ]
-            }
-        ]
-    },
-    "铸铁": {
-        "name": "铸铁",
-        "rarity": 4,
-        "profession": "近卫",
-        "evolveCosts": [
-            null,
-            [
-                {
-                    "id": "3221",
-                    "count": 4,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "30012",
-                    "count": 7,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "30062",
-                    "count": 2,
-                    "type": "MATERIAL"
-                }
-            ],
-            [
-                {
-                    "id": "3223",
-                    "count": 3,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "31014",
-                    "count": 9,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "30043",
-                    "count": 13,
-                    "type": "MATERIAL"
-                }
-            ]
-        ],
-        "sskillCosts": [
-            {
-                "skillName": "生命回复·γ型",
-                "levelUpCost": [
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 28800,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 5,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31024",
-                                "count": 3,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30103",
-                                "count": 3,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 57600,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30094",
-                                "count": 3,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30074",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 86400,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 10,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30115",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31014",
-                                "count": 5,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    }
-                ],
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                }
-            },
-            {
-                "skillName": "破浪回神",
-                "levelUpCost": [
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 28800,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 5,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30054",
-                                "count": 3,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31013",
-                                "count": 3,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 57600,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30104",
-                                "count": 3,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30084",
-                                "count": 5,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 86400,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 10,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30115",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31024",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    }
-                ],
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                }
-            }
-        ],
-        "askillCosts": [
-            {
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3301",
-                        "count": 4,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3301",
-                        "count": 4,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30011",
-                        "count": 10,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3302",
-                        "count": 6,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30022",
-                        "count": 3,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3302",
-                        "count": 6,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30033",
-                        "count": 5,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3302",
-                        "count": 6,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "31023",
-                        "count": 4,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3303",
-                        "count": 6,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30073",
-                        "count": 3,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30053",
-                        "count": 3,
-                        "type": "MATERIAL"
-                    }
-                ]
-            }
-        ]
-    },
-    "巫恋": {
-        "name": "巫恋",
-        "rarity": 4,
-        "profession": "辅助",
-        "evolveCosts": [
-            null,
-            [
-                {
-                    "id": "3271",
-                    "count": 4,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "30022",
-                    "count": 5,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "30012",
-                    "count": 3,
-                    "type": "MATERIAL"
-                }
-            ],
-            [
-                {
-                    "id": "3273",
-                    "count": 3,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "30014",
-                    "count": 8,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "31023",
-                    "count": 17,
-                    "type": "MATERIAL"
-                }
-            ]
-        ],
-        "sskillCosts": [
-            {
-                "skillName": "生命回复·γ型",
-                "levelUpCost": [
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 28800,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 5,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30104",
-                                "count": 3,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30083",
-                                "count": 2,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 57600,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30074",
-                                "count": 3,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30054",
-                                "count": 5,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 86400,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 10,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30125",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31024",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    }
-                ],
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                }
-            },
-            {
-                "skillName": "破浪回神",
-                "levelUpCost": [
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 28800,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 5,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30014",
-                                "count": 3,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30093",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 57600,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30084",
-                                "count": 3,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30064",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 86400,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 10,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30135",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31014",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    }
-                ],
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                }
-            }
-        ],
-        "askillCosts": [
-            {
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3301",
-                        "count": 4,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3301",
-                        "count": 4,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30021",
-                        "count": 7,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3302",
-                        "count": 6,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30032",
-                        "count": 3,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3302",
-                        "count": 6,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30042",
-                        "count": 4,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3302",
-                        "count": 6,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30053",
-                        "count": 4,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3303",
-                        "count": 6,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30083",
-                        "count": 2,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30103",
-                        "count": 3,
-                        "type": "MATERIAL"
-                    }
-                ]
-            }
-        ]
-    },
-    "极境": {
-        "name": "极境",
-        "rarity": 4,
-        "profession": "先锋",
-        "evolveCosts": [
-            null,
-            [
-                {
-                    "id": "3211",
-                    "count": 4,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "30032",
-                    "count": 4,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "30022",
-                    "count": 3,
-                    "type": "MATERIAL"
-                }
-            ],
-            [
-                {
-                    "id": "3213",
-                    "count": 3,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "31024",
-                    "count": 7,
-                    "type": "MATERIAL"
-                },
-                {
                     "id": "30053",
-                    "count": 16,
+                    "count": 14,
+                    "type": "MATERIAL"
+                },
+                {
+                    "id": "30013",
+                    "count": 14,
                     "type": "MATERIAL"
                 }
             ]
         ],
         "sskillCosts": [
             {
-                "skillName": "支援号令·γ型",
+                "skillName": "分神",
                 "levelUpCost": [
                     {
                         "unlockCond": {
@@ -39231,902 +39317,17 @@
                         "levelUpCost": [
                             {
                                 "id": "3303",
-                                "count": 5,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31014",
-                                "count": 3,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30013",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 57600,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31024",
-                                "count": 3,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30104",
-                                "count": 5,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 86400,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 10,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30135",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30054",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    }
-                ],
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                }
-            },
-            {
-                "skillName": "聆听",
-                "levelUpCost": [
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 28800,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 5,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30064",
                                 "count": 2,
                                 "type": "MATERIAL"
                             },
                             {
-                                "id": "30043",
-                                "count": 3,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 57600,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30054",
-                                "count": 3,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31014",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 86400,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 10,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30115",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30094",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    }
-                ],
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                }
-            }
-        ],
-        "askillCosts": [
-            {
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3301",
-                        "count": 4,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3301",
-                        "count": 4,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30031",
-                        "count": 7,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3302",
-                        "count": 6,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30042",
-                        "count": 3,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3302",
-                        "count": 6,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30052",
-                        "count": 4,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3302",
-                        "count": 6,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30063",
-                        "count": 3,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3303",
-                        "count": 6,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30093",
-                        "count": 2,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30013",
-                        "count": 4,
-                        "type": "MATERIAL"
-                    }
-                ]
-            }
-        ]
-    },
-    "傀影": {
-        "name": "傀影",
-        "rarity": 5,
-        "profession": "特种",
-        "evolveCosts": [
-            null,
-            [
-                {
-                    "id": "3281",
-                    "count": 5,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "30052",
-                    "count": 7,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "30012",
-                    "count": 7,
-                    "type": "MATERIAL"
-                }
-            ],
-            [
-                {
-                    "id": "3282",
-                    "count": 4,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "30115",
-                    "count": 4,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "31014",
-                    "count": 9,
-                    "type": "MATERIAL"
-                }
-            ]
-        ],
-        "sskillCosts": [
-            {
-                "skillName": "暗夜魅影",
-                "levelUpCost": [
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 28800,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 8,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30014",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30093",
-                                "count": 7,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 57600,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 12,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30074",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30054",
-                                "count": 8,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 86400,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 15,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30135",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31024",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    }
-                ],
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                }
-            },
-            {
-                "skillName": "血色乐章",
-                "levelUpCost": [
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 28800,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 8,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30054",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31013",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 57600,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 12,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30084",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30064",
-                                "count": 5,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 86400,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 15,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30115",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31024",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    }
-                ],
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                }
-            },
-            {
-                "skillName": "夜幕突袭",
-                "levelUpCost": [
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 28800,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 8,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30064",
-                                "count": 3,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30043",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 57600,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 12,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30094",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30074",
-                                "count": 9,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 86400,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 15,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30135",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31014",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    }
-                ],
-                "unlockCond": {
-                    "phase": 2,
-                    "level": 1
-                }
-            }
-        ],
-        "askillCosts": [
-            {
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3301",
-                        "count": 5,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3301",
-                        "count": 5,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30011",
-                        "count": 6,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30061",
-                        "count": 4,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3302",
-                        "count": 8,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30032",
-                        "count": 5,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3302",
-                        "count": 8,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30032",
-                        "count": 4,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30042",
-                        "count": 4,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3302",
-                        "count": 8,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30083",
-                        "count": 6,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3303",
-                        "count": 8,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "31013",
-                        "count": 4,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30043",
-                        "count": 4,
-                        "type": "MATERIAL"
-                    }
-                ]
-            }
-        ]
-    },
-    "温蒂": {
-        "name": "温蒂",
-        "rarity": 5,
-        "profession": "特种",
-        "evolveCosts": [
-            null,
-            [
-                {
-                    "id": "3281",
-                    "count": 5,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "30062",
-                    "count": 6,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "30022",
-                    "count": 4,
-                    "type": "MATERIAL"
-                }
-            ],
-            [
-                {
-                    "id": "3282",
-                    "count": 4,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "30135",
-                    "count": 4,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "30084",
-                    "count": 6,
-                    "type": "MATERIAL"
-                }
-            ]
-        ],
-        "sskillCosts": [
-            {
-                "skillName": "炮管敲击",
-                "levelUpCost": [
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 28800,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 8,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30084",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30063",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 57600,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 12,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30014",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30094",
-                                "count": 9,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 86400,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 15,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30125",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31024",
-                                "count": 5,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    }
-                ],
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                }
-            },
-            {
-                "skillName": "水炮模式",
-                "levelUpCost": [
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 28800,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 8,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30094",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30073",
-                                "count": 7,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 57600,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 12,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30064",
-                                "count": 3,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30044",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 86400,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 15,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30125",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31014",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    }
-                ],
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                }
-            },
-            {
-                "skillName": "液氮大炮",
-                "levelUpCost": [
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 28800,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 8,
-                                "type": "MATERIAL"
-                            },
-                            {
                                 "id": "30104",
-                                "count": 4,
+                                "count": 1,
                                 "type": "MATERIAL"
                             },
                             {
                                 "id": "30083",
-                                "count": 5,
+                                "count": 3,
                                 "type": "MATERIAL"
                             }
                         ]
@@ -40140,17 +39341,98 @@
                         "levelUpCost": [
                             {
                                 "id": "3303",
-                                "count": 12,
+                                "count": 4,
                                 "type": "MATERIAL"
                             },
                             {
-                                "id": "30074",
+                                "id": "30044",
+                                "count": 2,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "31024",
+                                "count": 2,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    },
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 86400,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
+                                "count": 6,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30115",
+                                "count": 2,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30084",
+                                "count": 2,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    }
+                ],
+                "unlockCond": {
+                    "phase": 0,
+                    "level": 1
+                }
+            },
+            {
+                "skillName": "落地斩·破门",
+                "levelUpCost": [
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 28800,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
+                                "count": 2,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "31024",
+                                "count": 1,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30103",
+                                "count": 3,
+                                "type": "MATERIAL"
+                            }
+                        ]
+                    },
+                    {
+                        "unlockCond": {
+                            "phase": 2,
+                            "level": 1
+                        },
+                        "lvlUpTime": 57600,
+                        "levelUpCost": [
+                            {
+                                "id": "3303",
                                 "count": 4,
                                 "type": "MATERIAL"
                             },
                             {
                                 "id": "30054",
-                                "count": 8,
+                                "count": 2,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "31014",
+                                "count": 2,
                                 "type": "MATERIAL"
                             }
                         ]
@@ -40164,24 +39446,24 @@
                         "levelUpCost": [
                             {
                                 "id": "3303",
-                                "count": 15,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30115",
                                 "count": 6,
                                 "type": "MATERIAL"
                             },
                             {
-                                "id": "31014",
-                                "count": 7,
+                                "id": "30125",
+                                "count": 2,
+                                "type": "MATERIAL"
+                            },
+                            {
+                                "id": "30094",
+                                "count": 2,
                                 "type": "MATERIAL"
                             }
                         ]
                     }
                 ],
                 "unlockCond": {
-                    "phase": 2,
+                    "phase": 1,
                     "level": 1
                 }
             }
@@ -40195,7 +39477,7 @@
                 "lvlUpCost": [
                     {
                         "id": "3301",
-                        "count": 5,
+                        "count": 2,
                         "type": "MATERIAL"
                     }
                 ]
@@ -40208,17 +39490,12 @@
                 "lvlUpCost": [
                     {
                         "id": "3301",
-                        "count": 5,
+                        "count": 2,
                         "type": "MATERIAL"
                     },
                     {
                         "id": "30061",
-                        "count": 4,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30031",
-                        "count": 4,
+                        "count": 2,
                         "type": "MATERIAL"
                     }
                 ]
@@ -40231,12 +39508,12 @@
                 "lvlUpCost": [
                     {
                         "id": "3302",
-                        "count": 8,
+                        "count": 3,
                         "type": "MATERIAL"
                     },
                     {
                         "id": "30012",
-                        "count": 7,
+                        "count": 2,
                         "type": "MATERIAL"
                     }
                 ]
@@ -40249,17 +39526,12 @@
                 "lvlUpCost": [
                     {
                         "id": "3302",
-                        "count": 8,
+                        "count": 3,
                         "type": "MATERIAL"
                     },
                     {
                         "id": "30022",
-                        "count": 4,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30052",
-                        "count": 4,
+                        "count": 3,
                         "type": "MATERIAL"
                     }
                 ]
@@ -40272,12 +39544,12 @@
                 "lvlUpCost": [
                     {
                         "id": "3302",
-                        "count": 8,
+                        "count": 3,
                         "type": "MATERIAL"
                     },
                     {
                         "id": "30073",
-                        "count": 7,
+                        "count": 2,
                         "type": "MATERIAL"
                     }
                 ]
@@ -40290,429 +39562,16 @@
                 "lvlUpCost": [
                     {
                         "id": "3303",
-                        "count": 8,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30013",
-                        "count": 5,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30063",
                         "count": 4,
-                        "type": "MATERIAL"
-                    }
-                ]
-            }
-        ]
-    },
-    "W": {
-        "name": "W",
-        "rarity": 5,
-        "profession": "狙击",
-        "evolveCosts": [
-            null,
-            [
-                {
-                    "id": "3241",
-                    "count": 5,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "30012",
-                    "count": 12,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "30022",
-                    "count": 5,
-                    "type": "MATERIAL"
-                }
-            ],
-            [
-                {
-                    "id": "3243",
-                    "count": 4,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "30125",
-                    "count": 4,
-                    "type": "MATERIAL"
-                },
-                {
-                    "id": "30054",
-                    "count": 7,
-                    "type": "MATERIAL"
-                }
-            ]
-        ],
-        "sskillCosts": [
-            {
-                "skillName": "红桃K",
-                "levelUpCost": [
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 28800,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 8,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31024",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30103",
-                                "count": 5,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 57600,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 12,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30104",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30084",
-                                "count": 7,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 86400,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 15,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30135",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31014",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    }
-                ],
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                }
-            },
-            {
-                "skillName": "惊吓盒子",
-                "levelUpCost": [
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 28800,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 8,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30064",
-                                "count": 3,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30043",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 57600,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 12,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31014",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30014",
-                                "count": 10,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 86400,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 15,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30125",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31024",
-                                "count": 5,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    }
-                ],
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                }
-            },
-            {
-                "skillName": "D12",
-                "levelUpCost": [
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 28800,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 8,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30074",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30053",
-                                "count": 8,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 57600,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 12,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30044",
-                                "count": 4,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31024",
-                                "count": 7,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    },
-                    {
-                        "unlockCond": {
-                            "phase": 2,
-                            "level": 1
-                        },
-                        "lvlUpTime": 86400,
-                        "levelUpCost": [
-                            {
-                                "id": "3303",
-                                "count": 15,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "30125",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            },
-                            {
-                                "id": "31014",
-                                "count": 6,
-                                "type": "MATERIAL"
-                            }
-                        ]
-                    }
-                ],
-                "unlockCond": {
-                    "phase": 2,
-                    "level": 1
-                }
-            }
-        ],
-        "askillCosts": [
-            {
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3301",
-                        "count": 5,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3301",
-                        "count": 5,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30051",
-                        "count": 6,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30011",
-                        "count": 4,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 0,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3302",
-                        "count": 8,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30062",
-                        "count": 3,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3302",
-                        "count": 8,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30012",
-                        "count": 5,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30062",
-                        "count": 3,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3302",
-                        "count": 8,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30063",
-                        "count": 4,
-                        "type": "MATERIAL"
-                    }
-                ]
-            },
-            {
-                "unlockCond": {
-                    "phase": 1,
-                    "level": 1
-                },
-                "lvlUpCost": [
-                    {
-                        "id": "3303",
-                        "count": 8,
                         "type": "MATERIAL"
                     },
                     {
                         "id": "30083",
                         "count": 3,
-                        "type": "MATERIAL"
-                    },
-                    {
-                        "id": "30103",
-                        "count": 4,
                         "type": "MATERIAL"
                     }
                 ]
             }
         ]
     }
-
 }

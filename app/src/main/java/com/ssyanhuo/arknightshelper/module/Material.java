@@ -9,7 +9,11 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.text.Editable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +22,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.*;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.view.ContextThemeWrapper;
 
 import com.alibaba.fastjson.JSON;
@@ -25,6 +30,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.entity.StaticData;
+import com.ssyanhuo.arknightshelper.service.OverlayService;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
 import com.ssyanhuo.arknightshelper.utils.JSONUtils;
 import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
@@ -86,6 +92,9 @@ public class Material {
     private ContextThemeWrapper contextThemeWrapper;
     WindowManager windowManager;
     I18nUtils.Helper nameHelper;
+    private LinearLayout resultContent;
+    private OverlayService overlayService;
+
     public void getAllNumberSelectors(View view){
         ViewGroup viewGroup = (ViewGroup)view;
         for(int i = 0; i < viewGroup.getChildCount(); i++){
@@ -100,7 +109,8 @@ public class Material {
             }
         }
     }
-    public void init(final Context context, final View view, LinearLayout backgroundLayout){
+    public void init(final Context context, final View view, LinearLayout backgroundLayout, OverlayService overlayService){
+        this.overlayService = overlayService;
         charNow = null;
         applicationContext = context;
         rootLayout = backgroundLayout;
@@ -309,9 +319,16 @@ public class Material {
         //先做精英化阶段修正，再获取最大等级，不然会GG
         int maxLevelNow = expJsonObject.getJSONArray("maxLevel").getJSONArray(characterStar).getInteger(stageNow.getInt());
         int maxLevelTarget = expJsonObject.getJSONArray("maxLevel").getJSONArray(characterStar).getInteger(stageTarget.getInt());
-        levelNow.setMax(maxLevelNow - 1);
-        if(levelNow.getInt() > maxLevelNow - 1){
-            levelNow.setInt(maxLevelNow - 1);
+        if (stageTarget.getInt() > stageNow.getInt()){
+            levelNow.setMax(maxLevelNow);
+            if(levelNow.getInt() > maxLevelNow){
+                levelNow.setInt(maxLevelNow);
+            }
+        }else {
+            levelNow.setMax(maxLevelNow - 1);
+            if(levelNow.getInt() > maxLevelNow - 1){
+                levelNow.setInt(maxLevelNow - 1);
+            }
         }
         levelTarget.setMax(maxLevelTarget);
         if(levelTarget.getInt() > maxLevelTarget){
@@ -342,8 +359,18 @@ public class Material {
         int moneyStamina = 0;
         int expStamina = 0;
         int stamina = 0;
-        LinearLayout resultContent = contentView.findViewById(R.id.material_result_content);
+        resultContent = contentView.findViewById(R.id.material_result_content);
         resultContent.removeAllViews();
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder("固定到屏幕");
+        spannableStringBuilder.setSpan(new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                overlayService.hideFloatingWindow();
+                pinWindow();
+            }
+        }, 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ((TextView) contentView.findViewById(R.id.material_pin)).setText(spannableStringBuilder);
+        ((TextView) contentView.findViewById(R.id.material_pin)).setMovementMethod(LinkMovementMethod.getInstance());
         ItemDetailView itemDetailView;
         if (levelCheckbox.isChecked() && charNow != null){
             int stageFrom = stageNow.getInt();
@@ -626,8 +653,26 @@ public class Material {
             }
         }
         contentView.findViewById(R.id.material_result_content).setVisibility(VISIBLE);
-
+        if(((LinearLayout) contentView.findViewById(R.id.material_result_content)).getChildCount() <= 0){
+            ((TextView) contentView.findViewById(R.id.material_pin)).setVisibility(GONE);
+        }else{
+            ((TextView) contentView.findViewById(R.id.material_pin)).setVisibility(VISIBLE);
+        }
     }
+
+    private void pinWindow(){
+        ArrayList<View> views = new ArrayList<>();
+        for (int i = 0; i < resultContent.getChildCount(); i++) {
+            ItemDetailView itemDetailView = new ItemDetailView(applicationContext);
+            ItemDetailView attachedView = (ItemDetailView) resultContent.getChildAt(i);
+            itemDetailView.setItemName(attachedView.getItemName());
+            itemDetailView.setImage(attachedView.getImage());
+            itemDetailView.setText(attachedView.getText());
+            views.add(itemDetailView);
+        }
+        overlayService.showPinnedWindow(views);
+    }
+
     @SuppressLint("SetTextI18n")
     public void onCharacterSelected(View characterBtn){
         skill3Container.setVisibility(GONE);

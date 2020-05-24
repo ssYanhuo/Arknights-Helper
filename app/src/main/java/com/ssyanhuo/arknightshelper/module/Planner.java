@@ -10,15 +10,22 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Handler;
 import android.os.IBinder;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.Space;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 
 import com.alibaba.fastjson.JSON;
@@ -65,7 +72,7 @@ public class Planner {
     private Map<String, Integer> requiredMaterials;
     private final String TAG = "Planner";
     private PythonService.PythonBinder[] newBinder;
-
+    JSONObject resultObject;
     private LinearLayout resultLoot;
     private LinearLayout resultSynthesis;
     public void init(final Context context, View view, RelativeLayout relativeLayout, LinearLayout backgroundLayout, final OverlayService overlayService, final IBinder pythonService){
@@ -194,6 +201,51 @@ public class Planner {
             }
         }, 1000, 1000);
     }
+    private void pinWindow(){
+        ArrayList<View> views = new ArrayList<>();
+        JSONArray lootArray = resultObject.getJSONArray("loot");
+        JSONArray synthesisArray = resultObject.getJSONArray("synthesis");
+//            JSONArray itemsArray = resultObject.getJSONArray("items");
+        int padding = applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin);
+        TextView lootText = new TextView(applicationContext);
+        lootText.setText("作战：");
+        lootText.setPadding(0, padding, 0, 0);
+        TextView synthesisText = new TextView(applicationContext);
+        synthesisText.setText("合成：");
+        synthesisText.setPadding(0, padding,0,0);
+        views.add(lootText);
+        for (int i = 0; i < lootArray.size(); i++) {
+            JSONObject obj = lootArray.getJSONObject(i);
+            PlannerDetailView plannerDetailView = new PlannerDetailView(applicationContext);
+            if (obj.getFloat("times") < 0.5){continue;}
+            plannerDetailView.setTitleText(obj.getString("stage") + " " + (int)Math.ceil(obj.getFloat("times")) + "次");
+            JSONArray items = obj.getJSONArray("items");
+            for (int j = 0; j < items.size(); j++) {
+                JSONObject item = items.getJSONObject(j);
+                Map.Entry<String, Object> entry= item.entrySet().iterator().next();
+                if (Double.parseDouble(entry.getValue().toString()) <= 0){continue;}
+                plannerDetailView.appendContent(entry.getKey() + "  " + entry.getValue());
+            }
+            views.add(plannerDetailView);
+        }
+        views.add(synthesisText);
+        for (int i = 0; i < synthesisArray.size(); i++) {
+            JSONObject obj = synthesisArray.getJSONObject(i);
+            PlannerDetailView plannerDetailView = new PlannerDetailView(applicationContext);
+            if (obj.getFloat("count") < 0.5){continue;}
+            plannerDetailView.setTitleText(obj.getString("target") + " " + (int)Math.ceil(obj.getFloat("count")) + "个");
+            JSONArray items = obj.getJSONArray("items");
+            for (int j = 0; j < items.size(); j++) {
+                JSONObject item = items.getJSONObject(j);
+                Map.Entry<String, Object> entry= item.entrySet().iterator().next();
+                if (Double.parseDouble(entry.getValue().toString()) <= 0){continue;}
+                plannerDetailView.appendContent(entry.getKey() + "  " + entry.getValue());
+            }
+            views.add(plannerDetailView);
+        }
+
+        overlayService.showPinnedWindow(views);
+    }
     private void getResult(){
         JSONObject required = new JSONObject();
         for (int i = 0; i < itemContainer.getChildCount(); i++) {
@@ -209,9 +261,19 @@ public class Planner {
             pythonService = newBinder[0];
         }
         String result = ((PythonService.PythonBinder) pythonService).callArkplanner(required.toJSONString());
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder("固定到屏幕");
+        spannableStringBuilder.setSpan(new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                overlayService.hideFloatingWindow();
+                pinWindow();
+            }
+        }, 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ((TextView) resultContainer.findViewById(R.id.planner_pin)).setText(spannableStringBuilder);
+        ((TextView) resultContainer.findViewById(R.id.planner_pin)).setMovementMethod(LinkMovementMethod.getInstance());
         try{
             ((TextView) versionInfo.findViewById(R.id.planner_error)).setText("");
-            JSONObject resultObject = JSON.parseObject(result);
+            resultObject = JSON.parseObject(result);
             JSONArray lootArray = resultObject.getJSONArray("loot");
             JSONArray synthesisArray = resultObject.getJSONArray("synthesis");
 //            JSONArray itemsArray = resultObject.getJSONArray("items");

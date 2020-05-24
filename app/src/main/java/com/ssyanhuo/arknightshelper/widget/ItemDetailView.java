@@ -80,6 +80,9 @@ public class ItemDetailView extends LinearLayout{
         numberTextView.setText(text);
         numberTextView.setVisibility(VISIBLE);
     }
+    public String getText(){
+        return numberTextView.getText().toString();
+    }
 
     public void appendText(String text) {
         numberTextView.append(text);

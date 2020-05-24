@@ -34,8 +34,8 @@
     {
         "name":"/items.json",
         "nameFriendly":"items.json",
-        "date":"2020-4-18",
-        "dateraw":20200418,
+        "date":"2020-5-10",
+        "dateraw":20200510,
         "desc":"材料映射信息，用于掉落概率查询",
         "source":"Penguin Statistics"
     },

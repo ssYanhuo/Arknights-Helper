@@ -45,6 +45,7 @@ import com.ssyanhuo.arknightshelper.utils.PythonUtils;
 import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -61,6 +62,7 @@ public class OverlayService extends Service {
     WindowManager.LayoutParams mainLayoutParams;
     WindowManager.LayoutParams backgroundLayoutParams;
     WindowManager.LayoutParams placeHolderLayoutParams;
+    WindowManager.LayoutParams pinnedWindowLayoutParams;
     RelativeLayout mainLayout;
     LinearLayout linearLayout_hr;
     LinearLayout linearLayout_material;
@@ -107,6 +109,7 @@ public class OverlayService extends Service {
     boolean attachToEdge = true;
     ServiceConnection pythonServiceConnection;
     PythonService.PythonBinder pythonService;
+    private LinearLayout pinnedWindow;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -445,6 +448,65 @@ public class OverlayService extends Service {
     public PythonService.PythonBinder getPythonService(){
         return pythonService;
     }
+    public void showPinnedWindow(ArrayList<View> contents){
+        pinnedWindow = (LinearLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.overlay_pinned_window, null);
+        pinnedWindowLayoutParams = new WindowManager.LayoutParams();
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            pinnedWindowLayoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+        }else {
+            pinnedWindowLayoutParams.type = WindowManager.LayoutParams.TYPE_PHONE;
+        }
+        pinnedWindowLayoutParams.flags = WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+        pinnedWindowLayoutParams.format = PixelFormat.RGBA_8888;
+        pinnedWindowLayoutParams.height = DpUtils.dip2px(getApplicationContext(), 256);
+        pinnedWindowLayoutParams.width = DpUtils.dip2px(getApplicationContext(), 196);
+        pinnedWindowLayoutParams.windowAnimations = R.style.AppTheme_Default_FloatingButtonAnimation;
+        pinnedWindow.setBackgroundColor(ThemeUtils.getColorWithAlpha(0.6f, Color.BLACK));
+        LinearLayout pinnedContentView = pinnedWindow.findViewById(R.id.pinned_window_content);
+        if (contents.size() > 0){
+            for (View v :
+                    contents) {
+                pinnedContentView.addView(v);
+            }
+        }
+        ImageButton closeButton = pinnedWindow.findViewById(R.id.pinned_window_close);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                windowManager.removeViewImmediate(v.getRootView());
+            }
+        });
+        LinearLayout bar = pinnedWindow.findViewById(R.id.pinned_window_bar);
+        bar.setOnTouchListener(new View.OnTouchListener() {
+            int x;
+            int y;
+            @Override
+            public boolean onTouch(View v, MotionEvent motionEvent) {
+                switch(motionEvent.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        x = (int) motionEvent.getRawX();
+                        y = (int) motionEvent.getRawY();
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        int nowX = (int) motionEvent.getRawX();
+                        int nowY = (int) motionEvent.getRawY();
+                        int movedX = nowX - x;
+                        int movedY = nowY - y;
+                        x = nowX;
+                        y = nowY;
+                        pinnedWindowLayoutParams.x = pinnedWindowLayoutParams.x + movedX;
+                        pinnedWindowLayoutParams.y = pinnedWindowLayoutParams.y + movedY;
+                        // 更新悬浮窗控件布局
+                        windowManager.updateViewLayout(pinnedWindow, pinnedWindowLayoutParams);
+                        break;
+                    default:
+                        break;
+                }
+                return false;
+            }
+        });
+        windowManager.addView(pinnedWindow, pinnedWindowLayoutParams);
+    }
 
     public void setFloatingButtonAlpha(int opacity){
         button.setAlpha((255 - ((float)opacity)) / 255);
@@ -563,9 +625,17 @@ public class OverlayService extends Service {
                 hideFloatingWindow();
             }
         });
+        imageButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                hideFloatingWindow();
+                stopSelf();
+                return true;
+            }
+        });
         //初始化
         hr.init(contextThemeWrapper, linearLayout_hr, relativeLayout_hr, backgroundLayout);
-        material.init(contextThemeWrapper, linearLayout_material, backgroundLayout);
+        material.init(contextThemeWrapper, linearLayout_material, backgroundLayout, this);
         drop.init(contextThemeWrapper, linearLayout_drop, this);
         more.init(contextThemeWrapper, linearLayout_more, this, getApplicationContext());
         planner.init(contextThemeWrapper, linearLayout_planner, relativeLayout_planner, backgroundLayout, this, pythonService);

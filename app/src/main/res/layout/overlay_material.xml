@@ -271,12 +271,20 @@
             app:minValue="1"
             app:text="@string/material_skill_3_target" />
     </LinearLayout>
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/material_pin"
+        android:gravity="right"
+        android:textAlignment="gravity"
+        android:background="?attr/selectableItemBackground"/>
     <LinearLayout
         android:id="@+id/material_result_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:orientation="vertical"
-        android:visibility="gone"></LinearLayout>
+        android:visibility="gone">
+
+    </LinearLayout>
 </LinearLayout>
