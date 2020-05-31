@@ -24,6 +24,7 @@ import android.graphics.drawable.shapes.OvalShape;
 import android.graphics.drawable.shapes.RectShape;
 import android.graphics.drawable.shapes.Shape;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -47,6 +48,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.FileProvider;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -136,9 +138,9 @@ public class SettingsActivity extends AppCompatActivity {
 
 
     public static class SettingsFragment extends PreferenceFragmentCompat {
-
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            final Activity activity = getActivity();
             setPreferencesFromResource(R.xml.preferences, rootKey);
             Preference long_press_back_to_game = findPreference("long_press_back_to_game");
             ListPreference game_version = findPreference("game_version");
@@ -150,6 +152,7 @@ public class SettingsActivity extends AppCompatActivity {
             final ListPreference game_language = findPreference("game_language");
             final Preference button_img = findPreference("button_img");
             final SwitchPreference disable_planner = findPreference("disable_planner");
+            final SwitchPreference enable_dark_mode = findPreference("enable_dark_mode");
             margin_fix.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @SuppressLint("SourceLockedOrientationActivity")
                 @Override
@@ -244,6 +247,7 @@ public class SettingsActivity extends AppCompatActivity {
                     try {
                         preferences.edit().putBoolean("need_reload",true).apply();
                         getActivity().recreate();
+                        restartService();
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -274,6 +278,22 @@ public class SettingsActivity extends AppCompatActivity {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     stopService();
+                    return true;
+                }
+            });
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){
+                enable_dark_mode.setVisible(false);
+            }
+            enable_dark_mode.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    if(Boolean.valueOf(newValue.toString())){
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                    }else {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    }
+                    activity.recreate();
+                    restartService();
                     return true;
                 }
             });

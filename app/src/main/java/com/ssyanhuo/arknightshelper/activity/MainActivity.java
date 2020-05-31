@@ -258,7 +258,11 @@ public class MainActivity extends AppCompatActivity
         }
         preNotifyThemeChanged();
         contextThemeWrapper = new ContextThemeWrapper(MainActivity.this, R.style.AppTheme_Default);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        if(preferences.getBoolean("enable_dark_mode", false)){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        }else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar_main);

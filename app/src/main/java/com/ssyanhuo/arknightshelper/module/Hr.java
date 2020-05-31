@@ -87,7 +87,7 @@ public class Hr {
     LinearLayout rootLayout;
     LinearLayout placeHolder;
     ArrayList<String> tagList = new ArrayList<>();
-    ContextThemeWrapper contextThemeWrapper;
+    androidx.appcompat.view.ContextThemeWrapper contextThemeWrapper;
     EasyPopup scrollToResultPopup;
     private ArrayList<String> combineTempArr = new ArrayList<>();
     WindowManager windowManager;
@@ -105,7 +105,7 @@ public class Hr {
         applicationContext = context;
         this.relativeLayout = relativeLayout;
         rootLayout = backgroundLayout;
-        contextThemeWrapper = new ContextThemeWrapper(applicationContext, ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_FLOATING_WINDOW, applicationContext));
+        contextThemeWrapper = new androidx.appcompat.view.ContextThemeWrapper(applicationContext, ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_FLOATING_WINDOW, applicationContext));
         sharedPreferences = applicationContext.getSharedPreferences("com.ssyanhuo.arknightshelper_preferences", Context.MODE_PRIVATE);
         if (sharedPreferences.getBoolean("fuzzyQuery", true)) {
             fuzzy = true;
@@ -174,7 +174,7 @@ public class Hr {
         ((TextView) this.contentView.findViewById(R.id.hr_result_title)).append(spannableStringBuilder);
         ((TextView) this.contentView.findViewById(R.id.hr_result_title)).setMovementMethod(LinkMovementMethod.getInstance());
         placeHolder = rootLayout.findViewWithTag("placeHolder");
-        contextThemeWrapper = new ContextThemeWrapper(applicationContext, ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_FLOATING_WINDOW, applicationContext));
+        contextThemeWrapper = new androidx.appcompat.view.ContextThemeWrapper(applicationContext, ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_FLOATING_WINDOW, applicationContext));
         windowManager = (WindowManager) applicationContext.getSystemService(Context.WINDOW_SERVICE);
         hideLowLevel = this.contentView.findViewById(R.id.hr_hide_low_level);
         hideLowLevelNote = this.contentView.findViewById(R.id.hr_hide_low_level_note);
@@ -771,14 +771,7 @@ public class Hr {
     }
     private void showScrollToResultSnackBar(){
         snackBarView.setVisibility(View.VISIBLE);
-        if (ThemeUtils.getThemeMode(applicationContext) == ThemeUtils.THEME_NEW_YEAR){//太红了不好看
-            snackBarView.setOverlayColor(ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, contextThemeWrapper) - Color.parseColor("#00501010")));
-        }else if (ThemeUtils.getThemeMode(applicationContext) == ThemeUtils.THEME_LIGHT){//太蓝了也不好看
-            snackBarView.setOverlayColor(ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY, contextThemeWrapper)));
-            ((ImageView) snackBarView.findViewById(R.id.hr_snackbar_imageview)).setColorFilter(((TextView) snackBarView.findViewById(R.id.hr_snackbar_textview)).getCurrentTextColor());
-        } else {
-            snackBarView.setOverlayColor(ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, contextThemeWrapper)));
-        }
+        snackBarView.setOverlayColor(ThemeUtils.getBackgroundColor(applicationContext, contextThemeWrapper));
         snackBarView.setupWith(rootLayout)
                 .setBlurRadius(20f)
                 .setFrameClearDrawable(new ColorDrawable(Color.BLACK))
@@ -912,14 +905,7 @@ public class Hr {
     public void showSubWindow() {
         placeHolder = rootLayout.findViewWithTag("placeHolder");
         placeHolder.removeAllViews();
-        int backgroundColor;
-        if (ThemeUtils.getThemeMode(applicationContext) == ThemeUtils.THEME_NEW_YEAR){//太红了不好看
-            backgroundColor = ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, contextThemeWrapper) - Color.parseColor("#00501010"));
-        }else if (ThemeUtils.getThemeMode(applicationContext) == ThemeUtils.THEME_LIGHT){//太蓝了也不好看
-            backgroundColor = ThemeUtils.getColorWithAlpha(0.9f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY, contextThemeWrapper));
-        } else {
-            backgroundColor = ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, contextThemeWrapper));
-        }
+        int backgroundColor = ThemeUtils.getBackgroundColor(applicationContext, contextThemeWrapper);
         selector = (ScrollView) LayoutInflater.from(contextThemeWrapper).inflate(R.layout.overlay_hr_sub_ocr, null);
         GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, new int[]{backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, Color.TRANSPARENT});
         gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);

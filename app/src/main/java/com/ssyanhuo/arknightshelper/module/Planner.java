@@ -26,6 +26,7 @@ import android.widget.Space;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.cardview.widget.CardView;
 
 import com.alibaba.fastjson.JSON;
@@ -38,6 +39,7 @@ import com.ssyanhuo.arknightshelper.service.PythonService;
 import com.ssyanhuo.arknightshelper.utils.DpUtils;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
 import com.ssyanhuo.arknightshelper.utils.JSONUtils;
+import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
 import com.ssyanhuo.arknightshelper.widget.PlannerDetailView;
 import com.ssyanhuo.arknightshelper.widget.PlannerItemView;
 import com.zyyoona7.popup.EasyPopup;
@@ -75,7 +77,7 @@ public class Planner {
     JSONObject resultObject;
     private LinearLayout resultLoot;
     private LinearLayout resultSynthesis;
-    public void init(final Context context, View view, RelativeLayout relativeLayout, LinearLayout backgroundLayout, final OverlayService overlayService, final IBinder pythonService){
+    public void init(final ContextThemeWrapper context, View view, RelativeLayout relativeLayout, LinearLayout backgroundLayout, final OverlayService overlayService, final IBinder pythonService){
 
         this.applicationContext = context;
         this.contentView = view;
@@ -124,7 +126,7 @@ public class Planner {
                     int padding = applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin) / 2;
                     final EasyPopup easyPopup = EasyPopup.create(applicationContext);
                     CardView cardView = new CardView(applicationContext);
-                    cardView.setCardBackgroundColor(applicationContext.getResources().getColor(R.color.colorPrimary));
+                    cardView.setCardBackgroundColor(ThemeUtils.getBackgroundColor(applicationContext, context));
                     LinearLayout itemSelector = new LinearLayout(applicationContext);
                     itemSelector.setOrientation(LinearLayout.VERTICAL);
                     final ScrollView listScrollView = new ScrollView(applicationContext);

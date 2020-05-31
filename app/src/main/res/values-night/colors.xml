@@ -6,8 +6,8 @@
     <color name="colorPrimaryDark">#1A1A1A</color>
     <color name="colorSurface">#1A1A1A</color>
     <color name="colorAccent">#BF7800</color>
-    <color name="colorPrimaryNewYear">#681414</color>
-    <color name="colorPrimaryDarkNewYear">#3A0A0A</color>
+    <color name="colorPrimaryNewYear">#8A1C1C</color>
+    <color name="colorPrimaryDarkNewYear">#611212</color>
     <color name="colorPrimaryLight">#0277BD</color>
     <color name="colorPrimaryDarkLight">#01579B</color>
     <color name="colorError">#B71C1C</color>

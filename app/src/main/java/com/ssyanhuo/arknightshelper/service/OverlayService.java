@@ -461,7 +461,7 @@ public class OverlayService extends Service {
         pinnedWindowLayoutParams.height = DpUtils.dip2px(getApplicationContext(), 256);
         pinnedWindowLayoutParams.width = DpUtils.dip2px(getApplicationContext(), 196);
         pinnedWindowLayoutParams.windowAnimations = R.style.AppTheme_Default_FloatingButtonAnimation;
-        pinnedWindow.setBackgroundColor(ThemeUtils.getColorWithAlpha(0.6f, Color.BLACK));
+        pinnedWindow.setBackgroundColor(ThemeUtils.getBackgroundColor(getApplicationContext(), contextThemeWrapper));
         LinearLayout pinnedContentView = pinnedWindow.findViewById(R.id.pinned_window_content);
         if (contents.size() > 0){
             for (View v :
@@ -514,13 +514,7 @@ public class OverlayService extends Service {
 
     public void floatingWindowPreProcess(){
         themeNow = String.valueOf(ThemeUtils.getThemeMode(contextThemeWrapper));
-        if (ThemeUtils.getThemeMode(getApplicationContext()) == ThemeUtils.THEME_NEW_YEAR){//太红了不好看
-            backgroundColor = ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, contextThemeWrapper) - Color.parseColor("#00501010"));
-        }else if (ThemeUtils.getThemeMode(getApplicationContext()) == ThemeUtils.THEME_LIGHT){//太蓝了也不好看
-            backgroundColor = ThemeUtils.getColorWithAlpha(0.9f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY, contextThemeWrapper));
-        } else {
-            backgroundColor = ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, contextThemeWrapper));
-        }
+        backgroundColor = ThemeUtils.getBackgroundColor(getApplicationContext(), contextThemeWrapper);
         contextThemeWrapper = new ContextThemeWrapper(getApplicationContext(), ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_FLOATING_WINDOW, getApplicationContext()));
         backgroundLayout = new LinearLayout(contextThemeWrapper);
         placeHolder = new LinearLayout(contextThemeWrapper);
@@ -682,13 +676,7 @@ public class OverlayService extends Service {
                 outline.setRect(0, 0, view.getWidth(), view.getHeight());
             }
         });
-        if (ThemeUtils.getThemeMode(getApplicationContext()) == ThemeUtils.THEME_NEW_YEAR){//太红了不好看
-            tabLayout.setOverlayColor(ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, contextThemeWrapper) - Color.parseColor("#00501010")));
-        }else if (ThemeUtils.getThemeMode(getApplicationContext()) == ThemeUtils.THEME_LIGHT){//太蓝了也不好看
-            tabLayout.setOverlayColor(ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY, contextThemeWrapper)));
-        } else {
-            tabLayout.setOverlayColor(ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, contextThemeWrapper)));
-        }
+        tabLayout.setOverlayColor(ThemeUtils.getBackgroundColor(getApplicationContext(), contextThemeWrapper));
         //检测屏幕方向和是否全屏
         if(rotation == 1 || rotation == 3){//横
             mainLayoutParams.height = displayMetrics.heightPixels;

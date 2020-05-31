@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.util.Log;
 
+import androidx.appcompat.view.ContextThemeWrapper;
+
 import com.ssyanhuo.arknightshelper.R;
 
 public class ThemeUtils {
@@ -78,6 +80,20 @@ public class ThemeUtils {
         int a = Math.min(255, Math.max(0, (int) (alpha * 255))) << 24;
         int rgb = 0x00ffffff & baseColor;
         return a + rgb;
+    }
+
+    static public int getBackgroundColor(Context context, ContextThemeWrapper contextThemeWrapper){
+
+        String themeNow = String.valueOf(ThemeUtils.getThemeMode(contextThemeWrapper));
+        int backgroundColor;
+        if (ThemeUtils.getThemeMode(context) == ThemeUtils.THEME_NEW_YEAR){//太红了不好看
+            backgroundColor = ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, contextThemeWrapper) & (- Color.parseColor("#00501010")));
+        }else if (ThemeUtils.getThemeMode(context) == ThemeUtils.THEME_LIGHT){//太蓝了也不好看
+            backgroundColor = ThemeUtils.getColorWithAlpha(0.9f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY, contextThemeWrapper));
+        } else {
+            backgroundColor = ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, contextThemeWrapper));
+        }
+        return backgroundColor;
     }
 
 

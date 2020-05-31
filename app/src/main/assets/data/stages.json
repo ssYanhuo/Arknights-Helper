@@ -4,6 +4,12 @@
     "stageId": "main_00-01",
     "zoneId": "main_0",
     "code": "0-1",
+    "code_i18n": {
+      "ko": "0-1",
+      "ja": "0-1",
+      "en": "0-1",
+      "zh": "0-1"
+    },
     "apCost": 6,
     "normalDrop": [
       "2001"
@@ -25,6 +31,12 @@
     "stageId": "main_00-02",
     "zoneId": "main_0",
     "code": "0-2",
+    "code_i18n": {
+      "ko": "0-2",
+      "ja": "0-2",
+      "en": "0-2",
+      "zh": "0-2"
+    },
     "apCost": 6,
     "normalDrop": [
       "2001"
@@ -46,6 +58,12 @@
     "stageId": "main_00-03",
     "zoneId": "main_0",
     "code": "0-3",
+    "code_i18n": {
+      "ko": "0-3",
+      "ja": "0-3",
+      "en": "0-3",
+      "zh": "0-3"
+    },
     "apCost": 6,
     "normalDrop": [
       "2001"
@@ -67,6 +85,12 @@
     "stageId": "main_00-04",
     "zoneId": "main_0",
     "code": "0-4",
+    "code_i18n": {
+      "ko": "0-4",
+      "ja": "0-4",
+      "en": "0-4",
+      "zh": "0-4"
+    },
     "apCost": 6,
     "normalDrop": [
       "2001"
@@ -88,6 +112,12 @@
     "stageId": "main_00-05",
     "zoneId": "main_0",
     "code": "0-5",
+    "code_i18n": {
+      "ko": "0-5",
+      "ja": "0-5",
+      "en": "0-5",
+      "zh": "0-5"
+    },
     "apCost": 6,
     "normalDrop": [
       "2001"
@@ -109,6 +139,12 @@
     "stageId": "main_00-06",
     "zoneId": "main_0",
     "code": "0-6",
+    "code_i18n": {
+      "ko": "0-6",
+      "ja": "0-6",
+      "en": "0-6",
+      "zh": "0-6"
+    },
     "apCost": 6,
     "normalDrop": [
       "2001"
@@ -130,6 +166,12 @@
     "stageId": "main_00-07",
     "zoneId": "main_0",
     "code": "0-7",
+    "code_i18n": {
+      "ko": "0-7",
+      "ja": "0-7",
+      "en": "0-7",
+      "zh": "0-7"
+    },
     "apCost": 6,
     "normalDrop": [
       "30021"
@@ -151,6 +193,12 @@
     "stageId": "main_00-08",
     "zoneId": "main_0",
     "code": "0-8",
+    "code_i18n": {
+      "ko": "0-8",
+      "ja": "0-8",
+      "en": "0-8",
+      "zh": "0-8"
+    },
     "apCost": 6,
     "normalDrop": [
       "2001"
@@ -172,6 +220,12 @@
     "stageId": "main_00-09",
     "zoneId": "main_0",
     "code": "0-9",
+    "code_i18n": {
+      "ko": "0-9",
+      "ja": "0-9",
+      "en": "0-9",
+      "zh": "0-9"
+    },
     "apCost": 6,
     "normalDrop": [
       "30011"
@@ -193,6 +247,12 @@
     "stageId": "main_00-10",
     "zoneId": "main_0",
     "code": "0-10",
+    "code_i18n": {
+      "ko": "0-10",
+      "ja": "0-10",
+      "en": "0-10",
+      "zh": "0-10"
+    },
     "apCost": 6,
     "normalDrop": [
       "2001"
@@ -214,6 +274,12 @@
     "stageId": "main_00-11",
     "zoneId": "main_0",
     "code": "0-11",
+    "code_i18n": {
+      "ko": "0-11",
+      "ja": "0-11",
+      "en": "0-11",
+      "zh": "0-11"
+    },
     "apCost": 6,
     "normalDrop": [
       "30031"
@@ -235,6 +301,12 @@
     "stageId": "main_01-01",
     "zoneId": "main_1",
     "code": "1-1",
+    "code_i18n": {
+      "ko": "1-1",
+      "ja": "1-1",
+      "en": "1-1",
+      "zh": "1-1"
+    },
     "apCost": 6,
     "normalDrop": [],
     "specialDrop": [],
@@ -254,6 +326,12 @@
     "stageId": "main_01-02",
     "zoneId": "main_1",
     "code": "1-2",
+    "code_i18n": {
+      "ko": "1-2",
+      "ja": "1-2",
+      "en": "1-2",
+      "zh": "1-2"
+    },
     "apCost": 0,
     "normalDrop": [],
     "specialDrop": [],
@@ -264,6 +342,12 @@
     "stageId": "main_01-03",
     "zoneId": "main_1",
     "code": "1-3",
+    "code_i18n": {
+      "ko": "1-3",
+      "ja": "1-3",
+      "en": "1-3",
+      "zh": "1-3"
+    },
     "apCost": 6,
     "normalDrop": [
       "30041"
@@ -285,6 +369,12 @@
     "stageId": "main_01-04",
     "zoneId": "main_1",
     "code": "1-4",
+    "code_i18n": {
+      "ko": "1-4",
+      "ja": "1-4",
+      "en": "1-4",
+      "zh": "1-4"
+    },
     "apCost": 6,
     "normalDrop": [],
     "specialDrop": [],
@@ -304,6 +394,12 @@
     "stageId": "main_01-05",
     "zoneId": "main_1",
     "code": "1-5",
+    "code_i18n": {
+      "ko": "1-5",
+      "ja": "1-5",
+      "en": "1-5",
+      "zh": "1-5"
+    },
     "apCost": 6,
     "normalDrop": [
       "30061"
@@ -325,6 +421,12 @@
     "stageId": "main_01-06",
     "zoneId": "main_1",
     "code": "1-6",
+    "code_i18n": {
+      "ko": "1-6",
+      "ja": "1-6",
+      "en": "1-6",
+      "zh": "1-6"
+    },
     "apCost": 6,
     "normalDrop": [
       "30051"
@@ -346,6 +448,12 @@
     "stageId": "main_01-07",
     "zoneId": "main_1",
     "code": "1-7",
+    "code_i18n": {
+      "ko": "1-7",
+      "ja": "1-7",
+      "en": "1-7",
+      "zh": "1-7"
+    },
     "apCost": 6,
     "normalDrop": [
       "30012"
@@ -367,6 +475,12 @@
     "stageId": "main_01-08",
     "zoneId": "main_1",
     "code": "1-8",
+    "code_i18n": {
+      "ko": "1-8",
+      "ja": "1-8",
+      "en": "1-8",
+      "zh": "1-8"
+    },
     "apCost": 9,
     "normalDrop": [
       "30032"
@@ -388,6 +502,12 @@
     "stageId": "main_01-09",
     "zoneId": "main_1",
     "code": "1-9",
+    "code_i18n": {
+      "ko": "1-9",
+      "ja": "1-9",
+      "en": "1-9",
+      "zh": "1-9"
+    },
     "apCost": 9,
     "normalDrop": [
       "3112"
@@ -409,6 +529,12 @@
     "stageId": "main_01-10",
     "zoneId": "main_1",
     "code": "1-10",
+    "code_i18n": {
+      "ko": "1-10",
+      "ja": "1-10",
+      "en": "1-10",
+      "zh": "1-10"
+    },
     "apCost": 9,
     "normalDrop": [
       "3301"
@@ -430,6 +556,12 @@
     "stageId": "main_01-11",
     "zoneId": "main_1",
     "code": "1-11",
+    "code_i18n": {
+      "ko": "1-11",
+      "ja": "1-11",
+      "en": "1-11",
+      "zh": "1-11"
+    },
     "apCost": 0,
     "normalDrop": [],
     "specialDrop": [],
@@ -440,6 +572,12 @@
     "stageId": "main_01-12",
     "zoneId": "main_1",
     "code": "1-12",
+    "code_i18n": {
+      "ko": "1-12",
+      "ja": "1-12",
+      "en": "1-12",
+      "zh": "1-12"
+    },
     "apCost": 9,
     "normalDrop": [
       "30062"
@@ -461,6 +599,12 @@
     "stageId": "main_02-01",
     "zoneId": "main_2",
     "code": "2-1",
+    "code_i18n": {
+      "ko": "2-1",
+      "ja": "2-1",
+      "en": "2-1",
+      "zh": "2-1"
+    },
     "apCost": 9,
     "normalDrop": [
       "30042"
@@ -482,6 +626,12 @@
     "stageId": "main_02-02",
     "zoneId": "main_2",
     "code": "2-2",
+    "code_i18n": {
+      "ko": "2-2",
+      "ja": "2-2",
+      "en": "2-2",
+      "zh": "2-2"
+    },
     "apCost": 9,
     "normalDrop": [
       "30022"
@@ -503,6 +653,12 @@
     "stageId": "main_02-03",
     "zoneId": "main_2",
     "code": "2-3",
+    "code_i18n": {
+      "ko": "2-3",
+      "ja": "2-3",
+      "en": "2-3",
+      "zh": "2-3"
+    },
     "apCost": 12,
     "normalDrop": [
       "30061"
@@ -524,6 +680,12 @@
     "stageId": "main_02-04",
     "zoneId": "main_2",
     "code": "2-4",
+    "code_i18n": {
+      "ko": "2-4",
+      "ja": "2-4",
+      "en": "2-4",
+      "zh": "2-4"
+    },
     "apCost": 12,
     "normalDrop": [
       "30013"
@@ -545,6 +707,12 @@
     "stageId": "main_02-05",
     "zoneId": "main_2",
     "code": "2-5",
+    "code_i18n": {
+      "ko": "2-5",
+      "ja": "2-5",
+      "en": "2-5",
+      "zh": "2-5"
+    },
     "apCost": 12,
     "normalDrop": [
       "30023"
@@ -566,6 +734,12 @@
     "stageId": "main_02-06",
     "zoneId": "main_2",
     "code": "2-6",
+    "code_i18n": {
+      "ko": "2-6",
+      "ja": "2-6",
+      "en": "2-6",
+      "zh": "2-6"
+    },
     "apCost": 12,
     "normalDrop": [
       "30033"
@@ -587,6 +761,12 @@
     "stageId": "main_02-07",
     "zoneId": "main_2",
     "code": "2-7",
+    "code_i18n": {
+      "ko": "2-7",
+      "ja": "2-7",
+      "en": "2-7",
+      "zh": "2-7"
+    },
     "apCost": 12,
     "normalDrop": [],
     "specialDrop": [],
@@ -606,6 +786,12 @@
     "stageId": "main_02-08",
     "zoneId": "main_2",
     "code": "2-8",
+    "code_i18n": {
+      "ko": "2-8",
+      "ja": "2-8",
+      "en": "2-8",
+      "zh": "2-8"
+    },
     "apCost": 12,
     "normalDrop": [
       "30043"
@@ -627,6 +813,12 @@
     "stageId": "main_02-09",
     "zoneId": "main_2",
     "code": "2-9",
+    "code_i18n": {
+      "ko": "2-9",
+      "ja": "2-9",
+      "en": "2-9",
+      "zh": "2-9"
+    },
     "apCost": 12,
     "normalDrop": [
       "30073"
@@ -648,6 +840,12 @@
     "stageId": "main_02-10",
     "zoneId": "main_2",
     "code": "2-10",
+    "code_i18n": {
+      "ko": "2-10",
+      "ja": "2-10",
+      "en": "2-10",
+      "zh": "2-10"
+    },
     "apCost": 15,
     "normalDrop": [
       "30103"
@@ -669,6 +867,12 @@
     "stageId": "sub_02-01",
     "zoneId": "main_2",
     "code": "S2-1",
+    "code_i18n": {
+      "ko": "S2-1",
+      "ja": "S2-1",
+      "en": "S2-1",
+      "zh": "S2-1"
+    },
     "apCost": 9,
     "normalDrop": [
       "30052"
@@ -690,6 +894,12 @@
     "stageId": "sub_02-02",
     "zoneId": "main_2",
     "code": "S2-2",
+    "code_i18n": {
+      "ko": "S2-2",
+      "ja": "S2-2",
+      "en": "S2-2",
+      "zh": "S2-2"
+    },
     "apCost": 9,
     "normalDrop": [],
     "specialDrop": [],
@@ -709,6 +919,12 @@
     "stageId": "sub_02-03",
     "zoneId": "main_2",
     "code": "S2-3",
+    "code_i18n": {
+      "ko": "S2-3",
+      "ja": "S2-3",
+      "en": "S2-3",
+      "zh": "S2-3"
+    },
     "apCost": 9,
     "normalDrop": [
       "2001"
@@ -730,6 +946,12 @@
     "stageId": "sub_02-04",
     "zoneId": "main_2",
     "code": "S2-4",
+    "code_i18n": {
+      "ko": "S2-4",
+      "ja": "S2-4",
+      "en": "S2-4",
+      "zh": "S2-4"
+    },
     "apCost": 9,
     "normalDrop": [],
     "specialDrop": [],
@@ -749,6 +971,12 @@
     "stageId": "sub_02-05",
     "zoneId": "main_2",
     "code": "S2-5",
+    "code_i18n": {
+      "ko": "S2-5",
+      "ja": "S2-5",
+      "en": "S2-5",
+      "zh": "S2-5"
+    },
     "apCost": 12,
     "normalDrop": [
       "30011"
@@ -770,6 +998,12 @@
     "stageId": "sub_02-06",
     "zoneId": "main_2",
     "code": "S2-6",
+    "code_i18n": {
+      "ko": "S2-6",
+      "ja": "S2-6",
+      "en": "S2-6",
+      "zh": "S2-6"
+    },
     "apCost": 12,
     "normalDrop": [
       "30021"
@@ -791,6 +1025,12 @@
     "stageId": "sub_02-07",
     "zoneId": "main_2",
     "code": "S2-7",
+    "code_i18n": {
+      "ko": "S2-7",
+      "ja": "S2-7",
+      "en": "S2-7",
+      "zh": "S2-7"
+    },
     "apCost": 12,
     "normalDrop": [
       "30031"
@@ -812,6 +1052,12 @@
     "stageId": "sub_02-08",
     "zoneId": "main_2",
     "code": "S2-8",
+    "code_i18n": {
+      "ko": "S2-8",
+      "ja": "S2-8",
+      "en": "S2-8",
+      "zh": "S2-8"
+    },
     "apCost": 12,
     "normalDrop": [
       "30041"
@@ -833,6 +1079,12 @@
     "stageId": "sub_02-09",
     "zoneId": "main_2",
     "code": "S2-9",
+    "code_i18n": {
+      "ko": "S2-9",
+      "ja": "S2-9",
+      "en": "S2-9",
+      "zh": "S2-9"
+    },
     "apCost": 12,
     "normalDrop": [
       "30051"
@@ -854,6 +1106,12 @@
     "stageId": "sub_02-10",
     "zoneId": "main_2",
     "code": "S2-10",
+    "code_i18n": {
+      "ko": "S2-10",
+      "ja": "S2-10",
+      "en": "S2-10",
+      "zh": "S2-10"
+    },
     "apCost": 12,
     "normalDrop": [
       "2002"
@@ -875,6 +1133,12 @@
     "stageId": "sub_02-11",
     "zoneId": "main_2",
     "code": "S2-11",
+    "code_i18n": {
+      "ko": "S2-11",
+      "ja": "S2-11",
+      "en": "S2-11",
+      "zh": "S2-11"
+    },
     "apCost": 12,
     "normalDrop": [],
     "specialDrop": [],
@@ -894,6 +1158,12 @@
     "stageId": "sub_02-12",
     "zoneId": "main_2",
     "code": "S2-12",
+    "code_i18n": {
+      "ko": "S2-12",
+      "ja": "S2-12",
+      "en": "S2-12",
+      "zh": "S2-12"
+    },
     "apCost": 15,
     "normalDrop": [
       "30012"
@@ -914,6 +1184,12 @@
     "stageId": "main_03-01",
     "zoneId": "main_3",
     "code": "3-1",
+    "code_i18n": {
+      "ko": "3-1",
+      "ja": "3-1",
+      "en": "3-1",
+      "zh": "3-1"
+    },
     "apCost": 15,
     "normalDrop": [
       "30053"
@@ -935,6 +1211,12 @@
     "stageId": "main_03-02",
     "zoneId": "main_3",
     "code": "3-2",
+    "code_i18n": {
+      "ko": "3-2",
+      "ja": "3-2",
+      "en": "3-2",
+      "zh": "3-2"
+    },
     "apCost": 15,
     "normalDrop": [
       "30083"
@@ -955,6 +1237,12 @@
     "stageId": "main_03-03",
     "zoneId": "main_3",
     "code": "3-3",
+    "code_i18n": {
+      "ko": "3-3",
+      "ja": "3-3",
+      "en": "3-3",
+      "zh": "3-3"
+    },
     "apCost": 15,
     "normalDrop": [
       "30093"
@@ -975,6 +1263,12 @@
     "stageId": "main_03-04",
     "zoneId": "main_3",
     "code": "3-4",
+    "code_i18n": {
+      "ko": "3-4",
+      "ja": "3-4",
+      "en": "3-4",
+      "zh": "3-4"
+    },
     "apCost": 15,
     "normalDrop": [
       "30063"
@@ -995,6 +1289,12 @@
     "stageId": "main_03-05",
     "zoneId": "main_3",
     "code": "3-5",
+    "code_i18n": {
+      "ko": "3-5",
+      "ja": "3-5",
+      "en": "3-5",
+      "zh": "3-5"
+    },
     "apCost": 15,
     "normalDrop": [
       "2002"
@@ -1015,6 +1315,12 @@
     "stageId": "main_03-06",
     "zoneId": "main_3",
     "code": "3-6",
+    "code_i18n": {
+      "ko": "3-6",
+      "ja": "3-6",
+      "en": "3-6",
+      "zh": "3-6"
+    },
     "apCost": 15,
     "normalDrop": [],
     "specialDrop": [],
@@ -1034,6 +1340,12 @@
     "stageId": "main_03-07",
     "zoneId": "main_3",
     "code": "3-7",
+    "code_i18n": {
+      "ko": "3-7",
+      "ja": "3-7",
+      "en": "3-7",
+      "zh": "3-7"
+    },
     "apCost": 15,
     "normalDrop": [
       "30052"
@@ -1055,6 +1367,12 @@
     "stageId": "main_03-08",
     "zoneId": "main_3",
     "code": "3-8",
+    "code_i18n": {
+      "ko": "3-8",
+      "ja": "3-8",
+      "en": "3-8",
+      "zh": "3-8"
+    },
     "apCost": 18,
     "normalDrop": [
       "30033"
@@ -1078,6 +1396,12 @@
     "stageId": "sub_03-1-1",
     "zoneId": "main_3",
     "code": "S3-1",
+    "code_i18n": {
+      "ko": "S3-1",
+      "ja": "S3-1",
+      "en": "S3-1",
+      "zh": "S3-1"
+    },
     "apCost": 15,
     "normalDrop": [
       "30022"
@@ -1099,6 +1423,12 @@
     "stageId": "sub_03-1-2",
     "zoneId": "main_3",
     "code": "S3-2",
+    "code_i18n": {
+      "ko": "S3-2",
+      "ja": "S3-2",
+      "en": "S3-2",
+      "zh": "S3-2"
+    },
     "apCost": 15,
     "normalDrop": [
       "30032"
@@ -1119,6 +1449,12 @@
     "stageId": "sub_03-2-1",
     "zoneId": "main_3",
     "code": "S3-3",
+    "code_i18n": {
+      "ko": "S3-3",
+      "ja": "S3-3",
+      "en": "S3-3",
+      "zh": "S3-3"
+    },
     "apCost": 15,
     "normalDrop": [
       "30042"
@@ -1140,6 +1476,12 @@
     "stageId": "sub_03-2-2",
     "zoneId": "main_3",
     "code": "S3-4",
+    "code_i18n": {
+      "ko": "S3-4",
+      "ja": "S3-4",
+      "en": "S3-4",
+      "zh": "S3-4"
+    },
     "apCost": 15,
     "normalDrop": [
       "30062"
@@ -1160,6 +1502,12 @@
     "stageId": "sub_03-2-3",
     "zoneId": "main_3",
     "code": "S3-5",
+    "code_i18n": {
+      "ko": "S3-5",
+      "ja": "S3-5",
+      "en": "S3-5",
+      "zh": "S3-5"
+    },
     "apCost": 15,
     "normalDrop": [],
     "specialDrop": [],
@@ -1179,6 +1527,12 @@
     "stageId": "main_04-01",
     "zoneId": "main_4",
     "code": "4-1",
+    "code_i18n": {
+      "ko": "4-1",
+      "ja": "4-1",
+      "en": "4-1",
+      "zh": "4-1"
+    },
     "apCost": 18,
     "normalDrop": [],
     "specialDrop": [],
@@ -1199,6 +1553,12 @@
     "stageId": "main_04-02",
     "zoneId": "main_4",
     "code": "4-2",
+    "code_i18n": {
+      "ko": "4-2",
+      "ja": "4-2",
+      "en": "4-2",
+      "zh": "4-2"
+    },
     "apCost": 18,
     "normalDrop": [
       "30023"
@@ -1225,6 +1585,12 @@
     "stageId": "main_04-03",
     "zoneId": "main_4",
     "code": "4-3",
+    "code_i18n": {
+      "ko": "4-3",
+      "ja": "4-3",
+      "en": "4-3",
+      "zh": "4-3"
+    },
     "apCost": 18,
     "normalDrop": [
       "2003"
@@ -1247,6 +1613,12 @@
     "stageId": "main_04-04",
     "zoneId": "main_4",
     "code": "4-4",
+    "code_i18n": {
+      "ko": "4-4",
+      "ja": "4-4",
+      "en": "4-4",
+      "zh": "4-4"
+    },
     "apCost": 18,
     "normalDrop": [
       "30073"
@@ -1271,6 +1643,12 @@
     "stageId": "main_04-05",
     "zoneId": "main_4",
     "code": "4-5",
+    "code_i18n": {
+      "ko": "4-5",
+      "ja": "4-5",
+      "en": "4-5",
+      "zh": "4-5"
+    },
     "apCost": 18,
     "normalDrop": [
       "30053"
@@ -1294,6 +1672,12 @@
     "stageId": "main_04-06",
     "zoneId": "main_4",
     "code": "4-6",
+    "code_i18n": {
+      "ko": "4-6",
+      "ja": "4-6",
+      "en": "4-6",
+      "zh": "4-6"
+    },
     "apCost": 18,
     "normalDrop": [
       "30013"
@@ -1318,6 +1702,12 @@
     "stageId": "main_04-07",
     "zoneId": "main_4",
     "code": "4-7",
+    "code_i18n": {
+      "ko": "4-7",
+      "ja": "4-7",
+      "en": "4-7",
+      "zh": "4-7"
+    },
     "apCost": 18,
     "normalDrop": [
       "30083"
@@ -1342,6 +1732,12 @@
     "stageId": "main_04-08",
     "zoneId": "main_4",
     "code": "4-8",
+    "code_i18n": {
+      "ko": "4-8",
+      "ja": "4-8",
+      "en": "4-8",
+      "zh": "4-8"
+    },
     "apCost": 21,
     "normalDrop": [
       "30093"
@@ -1365,6 +1761,12 @@
     "stageId": "main_04-09",
     "zoneId": "main_4",
     "code": "4-9",
+    "code_i18n": {
+      "ko": "4-9",
+      "ja": "4-9",
+      "en": "4-9",
+      "zh": "4-9"
+    },
     "apCost": 21,
     "normalDrop": [
       "30103"
@@ -1388,6 +1790,12 @@
     "stageId": "main_04-10",
     "zoneId": "main_4",
     "code": "4-10",
+    "code_i18n": {
+      "ko": "4-10",
+      "ja": "4-10",
+      "en": "4-10",
+      "zh": "4-10"
+    },
     "apCost": 21,
     "normalDrop": [
       "30063"
@@ -1412,6 +1820,12 @@
     "stageId": "sub_04-1-1",
     "zoneId": "main_4",
     "code": "S4-1",
+    "code_i18n": {
+      "ko": "S4-1",
+      "ja": "S4-1",
+      "en": "S4-1",
+      "zh": "S4-1"
+    },
     "apCost": 18,
     "normalDrop": [
       "30043"
@@ -1438,6 +1852,12 @@
     "stageId": "sub_04-1-2",
     "zoneId": "main_4",
     "code": "S4-2",
+    "code_i18n": {
+      "ko": "S4-2",
+      "ja": "S4-2",
+      "en": "S4-2",
+      "zh": "S4-2"
+    },
     "apCost": 18,
     "normalDrop": [],
     "specialDrop": [],
@@ -1457,6 +1877,12 @@
     "stageId": "sub_04-1-3",
     "zoneId": "main_4",
     "code": "S4-3",
+    "code_i18n": {
+      "ko": "S4-3",
+      "ja": "S4-3",
+      "en": "S4-3",
+      "zh": "S4-3"
+    },
     "apCost": 18,
     "normalDrop": [],
     "specialDrop": [],
@@ -1479,6 +1905,12 @@
     "stageId": "sub_04-2-1",
     "zoneId": "main_4",
     "code": "S4-4",
+    "code_i18n": {
+      "ko": "S4-4",
+      "ja": "S4-4",
+      "en": "S4-4",
+      "zh": "S4-4"
+    },
     "apCost": 18,
     "normalDrop": [],
     "specialDrop": [],
@@ -1501,6 +1933,12 @@
     "stageId": "sub_04-2-2",
     "zoneId": "main_4",
     "code": "S4-5",
+    "code_i18n": {
+      "ko": "S4-5",
+      "ja": "S4-5",
+      "en": "S4-5",
+      "zh": "S4-5"
+    },
     "apCost": 18,
     "normalDrop": [],
     "specialDrop": [],
@@ -1520,6 +1958,12 @@
     "stageId": "sub_04-2-3",
     "zoneId": "main_4",
     "code": "S4-6",
+    "code_i18n": {
+      "ko": "S4-6",
+      "ja": "S4-6",
+      "en": "S4-6",
+      "zh": "S4-6"
+    },
     "apCost": 21,
     "normalDrop": [],
     "specialDrop": [],
@@ -1542,6 +1986,12 @@
     "stageId": "sub_04-3-1",
     "zoneId": "main_4",
     "code": "S4-7",
+    "code_i18n": {
+      "ko": "S4-7",
+      "ja": "S4-7",
+      "en": "S4-7",
+      "zh": "S4-7"
+    },
     "apCost": 18,
     "normalDrop": [],
     "specialDrop": [],
@@ -1564,6 +2014,12 @@
     "stageId": "sub_04-3-2",
     "zoneId": "main_4",
     "code": "S4-8",
+    "code_i18n": {
+      "ko": "S4-8",
+      "ja": "S4-8",
+      "en": "S4-8",
+      "zh": "S4-8"
+    },
     "apCost": 18,
     "normalDrop": [],
     "specialDrop": [],
@@ -1583,6 +2039,12 @@
     "stageId": "sub_04-3-3",
     "zoneId": "main_4",
     "code": "S4-9",
+    "code_i18n": {
+      "ko": "S4-9",
+      "ja": "S4-9",
+      "en": "S4-9",
+      "zh": "S4-9"
+    },
     "apCost": 21,
     "normalDrop": [
       "2003"
@@ -1607,6 +2069,12 @@
     "stageId": "a001_01",
     "zoneId": "A001_zone1",
     "code": "GT-1",
+    "code_i18n": {
+      "ko": "GT-1",
+      "ja": "GT-1",
+      "en": "GT-1",
+      "zh": "GT-1"
+    },
     "apCost": 9,
     "normalDrop": [
       "30011",
@@ -1620,6 +2088,12 @@
     "stageId": "a001_02",
     "zoneId": "A001_zone1",
     "code": "GT-2",
+    "code_i18n": {
+      "ko": "GT-2",
+      "ja": "GT-2",
+      "en": "GT-2",
+      "zh": "GT-2"
+    },
     "apCost": 9,
     "normalDrop": [
       "30061",
@@ -1633,6 +2107,12 @@
     "stageId": "a001_03",
     "zoneId": "A001_zone1",
     "code": "GT-3",
+    "code_i18n": {
+      "ko": "GT-3",
+      "ja": "GT-3",
+      "en": "GT-3",
+      "zh": "GT-3"
+    },
     "apCost": 12,
     "normalDrop": [
       "30022",
@@ -1646,6 +2126,12 @@
     "stageId": "a001_04",
     "zoneId": "A001_zone1",
     "code": "GT-4",
+    "code_i18n": {
+      "ko": "GT-4",
+      "ja": "GT-4",
+      "en": "GT-4",
+      "zh": "GT-4"
+    },
     "apCost": 12,
     "normalDrop": [
       "30032",
@@ -1659,6 +2145,12 @@
     "stageId": "a001_05",
     "zoneId": "A001_zone1",
     "code": "GT-5",
+    "code_i18n": {
+      "ko": "GT-5",
+      "ja": "GT-5",
+      "en": "GT-5",
+      "zh": "GT-5"
+    },
     "apCost": 15,
     "normalDrop": [
       "30073"
@@ -1671,6 +2163,12 @@
     "stageId": "a001_06",
     "zoneId": "A001_zone1",
     "code": "GT-6",
+    "code_i18n": {
+      "ko": "GT-6",
+      "ja": "GT-6",
+      "en": "GT-6",
+      "zh": "GT-6"
+    },
     "apCost": 15,
     "normalDrop": [
       "30093"
@@ -1683,6 +2181,12 @@
     "stageId": "wk_armor_1",
     "zoneId": "weekly_8",
     "code": "SK-1",
+    "code_i18n": {
+      "ko": "SK-1",
+      "ja": "SK-1",
+      "en": "SK-1",
+      "zh": "SK-1"
+    },
     "apCost": 10,
     "normalDrop": [
       "3112"
@@ -1695,6 +2199,12 @@
     "stageId": "wk_armor_2",
     "zoneId": "weekly_8",
     "code": "SK-2",
+    "code_i18n": {
+      "ko": "SK-2",
+      "ja": "SK-2",
+      "en": "SK-2",
+      "zh": "SK-2"
+    },
     "apCost": 15,
     "normalDrop": [
       "3112"
@@ -1707,6 +2217,12 @@
     "stageId": "wk_armor_3",
     "zoneId": "weekly_8",
     "code": "SK-3",
+    "code_i18n": {
+      "ko": "SK-3",
+      "ja": "SK-3",
+      "en": "SK-3",
+      "zh": "SK-3"
+    },
     "apCost": 20,
     "normalDrop": [
       "3113",
@@ -1720,6 +2236,12 @@
     "stageId": "wk_armor_4",
     "zoneId": "weekly_8",
     "code": "SK-4",
+    "code_i18n": {
+      "ko": "SK-4",
+      "ja": "SK-4",
+      "en": "SK-4",
+      "zh": "SK-4"
+    },
     "apCost": 25,
     "normalDrop": [
       "3114",
@@ -1733,6 +2255,12 @@
     "stageId": "wk_armor_5",
     "zoneId": "weekly_8",
     "code": "SK-5",
+    "code_i18n": {
+      "ko": "SK-5",
+      "ja": "SK-5",
+      "en": "SK-5",
+      "zh": "SK-5"
+    },
     "apCost": 30,
     "normalDrop": [
       "3114",
@@ -1746,6 +2274,12 @@
     "stageId": "wk_fly_1",
     "zoneId": "weekly_6",
     "code": "CA-1",
+    "code_i18n": {
+      "ko": "CA-1",
+      "ja": "CA-1",
+      "en": "CA-1",
+      "zh": "CA-1"
+    },
     "apCost": 10,
     "normalDrop": [
       "3301"
@@ -1758,6 +2292,12 @@
     "stageId": "wk_fly_2",
     "zoneId": "weekly_6",
     "code": "CA-2",
+    "code_i18n": {
+      "ko": "CA-2",
+      "ja": "CA-2",
+      "en": "CA-2",
+      "zh": "CA-2"
+    },
     "apCost": 15,
     "normalDrop": [
       "3301"
@@ -1770,6 +2310,12 @@
     "stageId": "wk_fly_3",
     "zoneId": "weekly_6",
     "code": "CA-3",
+    "code_i18n": {
+      "ko": "CA-3",
+      "ja": "CA-3",
+      "en": "CA-3",
+      "zh": "CA-3"
+    },
     "apCost": 20,
     "normalDrop": [
       "3302",
@@ -1783,6 +2329,12 @@
     "stageId": "wk_fly_4",
     "zoneId": "weekly_6",
     "code": "CA-4",
+    "code_i18n": {
+      "ko": "CA-4",
+      "ja": "CA-4",
+      "en": "CA-4",
+      "zh": "CA-4"
+    },
     "apCost": 25,
     "normalDrop": [
       "3303",
@@ -1797,6 +2349,12 @@
     "stageId": "wk_fly_5",
     "zoneId": "weekly_6",
     "code": "CA-5",
+    "code_i18n": {
+      "ko": "CA-5",
+      "ja": "CA-5",
+      "en": "CA-5",
+      "zh": "CA-5"
+    },
     "apCost": 30,
     "normalDrop": [
       "3303",
@@ -1811,6 +2369,12 @@
     "stageId": "main_05-01",
     "zoneId": "main_5",
     "code": "5-1",
+    "code_i18n": {
+      "ko": "5-1",
+      "ja": "5-1",
+      "en": "5-1",
+      "zh": "5-1"
+    },
     "apCost": 18,
     "normalDrop": [
       "30013"
@@ -1833,6 +2397,12 @@
     "stageId": "main_05-02",
     "zoneId": "main_5",
     "code": "5-2",
+    "code_i18n": {
+      "ko": "5-2",
+      "ja": "5-2",
+      "en": "5-2",
+      "zh": "5-2"
+    },
     "apCost": 18,
     "normalDrop": [
       "30023"
@@ -1857,6 +2427,12 @@
     "stageId": "main_05-03",
     "zoneId": "main_5",
     "code": "5-3",
+    "code_i18n": {
+      "ko": "5-3",
+      "ja": "5-3",
+      "en": "5-3",
+      "zh": "5-3"
+    },
     "apCost": 18,
     "normalDrop": [
       "30033",
@@ -1870,6 +2446,12 @@
     "stageId": "main_05-04",
     "zoneId": "main_5",
     "code": "5-4",
+    "code_i18n": {
+      "ko": "5-4",
+      "ja": "5-4",
+      "en": "5-4",
+      "zh": "5-4"
+    },
     "apCost": 18,
     "normalDrop": [
       "30073"
@@ -1891,6 +2473,12 @@
     "stageId": "main_05-05",
     "zoneId": "main_5",
     "code": "5-5",
+    "code_i18n": {
+      "ko": "5-5",
+      "ja": "5-5",
+      "en": "5-5",
+      "zh": "5-5"
+    },
     "apCost": 18,
     "normalDrop": [
       "30043"
@@ -1915,6 +2503,12 @@
     "stageId": "main_05-06",
     "zoneId": "main_5",
     "code": "5-6",
+    "code_i18n": {
+      "ko": "5-6",
+      "ja": "5-6",
+      "en": "5-6",
+      "zh": "5-6"
+    },
     "apCost": 18,
     "normalDrop": [
       "30083"
@@ -1939,6 +2533,12 @@
     "stageId": "main_05-07",
     "zoneId": "main_5",
     "code": "5-7",
+    "code_i18n": {
+      "ko": "5-7",
+      "ja": "5-7",
+      "en": "5-7",
+      "zh": "5-7"
+    },
     "apCost": 21,
     "normalDrop": [
       "30093",
@@ -1952,6 +2552,12 @@
     "stageId": "main_05-08",
     "zoneId": "main_5",
     "code": "5-8",
+    "code_i18n": {
+      "ko": "5-8",
+      "ja": "5-8",
+      "en": "5-8",
+      "zh": "5-8"
+    },
     "apCost": 18,
     "normalDrop": [
       "30053"
@@ -1975,6 +2581,12 @@
     "stageId": "main_05-09",
     "zoneId": "main_5",
     "code": "5-9",
+    "code_i18n": {
+      "ko": "5-9",
+      "ja": "5-9",
+      "en": "5-9",
+      "zh": "5-9"
+    },
     "apCost": 18,
     "normalDrop": [
       "30103"
@@ -1997,6 +2609,12 @@
     "stageId": "main_05-10",
     "zoneId": "main_5",
     "code": "5-10",
+    "code_i18n": {
+      "ko": "5-10",
+      "ja": "5-10",
+      "en": "5-10",
+      "zh": "5-10"
+    },
     "apCost": 21,
     "normalDrop": [
       "30063",
@@ -2010,6 +2628,12 @@
     "stageId": "sub_05-1-1",
     "zoneId": "main_5",
     "code": "S5-1",
+    "code_i18n": {
+      "ko": "S5-1",
+      "ja": "S5-1",
+      "en": "S5-1",
+      "zh": "S5-1"
+    },
     "apCost": 18,
     "normalDrop": [
       "30012",
@@ -2023,6 +2647,12 @@
     "stageId": "sub_05-1-2",
     "zoneId": "main_5",
     "code": "S5-2",
+    "code_i18n": {
+      "ko": "S5-2",
+      "ja": "S5-2",
+      "en": "S5-2",
+      "zh": "S5-2"
+    },
     "apCost": 18,
     "normalDrop": [],
     "specialDrop": [],
@@ -2045,6 +2675,12 @@
     "stageId": "sub_05-2-1",
     "zoneId": "main_5",
     "code": "S5-3",
+    "code_i18n": {
+      "ko": "S5-3",
+      "ja": "S5-3",
+      "en": "S5-3",
+      "zh": "S5-3"
+    },
     "apCost": 18,
     "normalDrop": [
       "30032"
@@ -2057,6 +2693,12 @@
     "stageId": "sub_05-2-2",
     "zoneId": "main_5",
     "code": "S5-4",
+    "code_i18n": {
+      "ko": "S5-4",
+      "ja": "S5-4",
+      "en": "S5-4",
+      "zh": "S5-4"
+    },
     "apCost": 18,
     "normalDrop": [
       "30022",
@@ -2070,6 +2712,12 @@
     "stageId": "sub_05-3-1",
     "zoneId": "main_5",
     "code": "S5-5",
+    "code_i18n": {
+      "ko": "S5-5",
+      "ja": "S5-5",
+      "en": "S5-5",
+      "zh": "S5-5"
+    },
     "apCost": 18,
     "normalDrop": [
       "30062"
@@ -2082,6 +2730,12 @@
     "stageId": "sub_05-3-2",
     "zoneId": "main_5",
     "code": "S5-6",
+    "code_i18n": {
+      "ko": "S5-6",
+      "ja": "S5-6",
+      "en": "S5-6",
+      "zh": "S5-6"
+    },
     "apCost": 18,
     "normalDrop": [
       "2003"
@@ -2106,6 +2760,12 @@
     "stageId": "a003_01",
     "zoneId": "A003_zone1",
     "code": "OF-1",
+    "code_i18n": {
+      "ko": "OF-1",
+      "ja": "OF-1",
+      "en": "OF-1",
+      "zh": "OF-1"
+    },
     "apCost": 8,
     "normalDrop": [],
     "specialDrop": [
@@ -2119,6 +2779,12 @@
     "stageId": "a003_02",
     "zoneId": "A003_zone1",
     "code": "OF-2",
+    "code_i18n": {
+      "ko": "OF-2",
+      "ja": "OF-2",
+      "en": "OF-2",
+      "zh": "OF-2"
+    },
     "apCost": 12,
     "normalDrop": [],
     "specialDrop": [
@@ -2132,6 +2798,12 @@
     "stageId": "a003_03",
     "zoneId": "A003_zone1",
     "code": "OF-3",
+    "code_i18n": {
+      "ko": "OF-3",
+      "ja": "OF-3",
+      "en": "OF-3",
+      "zh": "OF-3"
+    },
     "apCost": 16,
     "normalDrop": [],
     "specialDrop": [
@@ -2145,6 +2817,12 @@
     "stageId": "a003_04",
     "zoneId": "A003_zone1",
     "code": "OF-4",
+    "code_i18n": {
+      "ko": "OF-4",
+      "ja": "OF-4",
+      "en": "OF-4",
+      "zh": "OF-4"
+    },
     "apCost": 16,
     "normalDrop": [],
     "specialDrop": [
@@ -2157,6 +2835,12 @@
     "stageId": "a003_05",
     "zoneId": "A003_zone1",
     "code": "OF-5",
+    "code_i18n": {
+      "ko": "OF-5",
+      "ja": "OF-5",
+      "en": "OF-5",
+      "zh": "OF-5"
+    },
     "apCost": 16,
     "normalDrop": [],
     "specialDrop": [
@@ -2169,6 +2853,12 @@
     "stageId": "a003_06",
     "zoneId": "A003_zone1",
     "code": "OF-6",
+    "code_i18n": {
+      "ko": "OF-6",
+      "ja": "OF-6",
+      "en": "OF-6",
+      "zh": "OF-6"
+    },
     "apCost": 20,
     "normalDrop": [],
     "specialDrop": [
@@ -2182,6 +2872,12 @@
     "stageId": "a003_07",
     "zoneId": "A003_zone1",
     "code": "OF-7",
+    "code_i18n": {
+      "ko": "OF-7",
+      "ja": "OF-7",
+      "en": "OF-7",
+      "zh": "OF-7"
+    },
     "apCost": 20,
     "normalDrop": [],
     "specialDrop": [
@@ -2194,6 +2890,12 @@
     "stageId": "a003_08",
     "zoneId": "A003_zone1",
     "code": "OF-8",
+    "code_i18n": {
+      "ko": "OF-8",
+      "ja": "OF-8",
+      "en": "OF-8",
+      "zh": "OF-8"
+    },
     "apCost": 20,
     "normalDrop": [],
     "specialDrop": [
@@ -2206,6 +2908,12 @@
     "stageId": "a003_f01",
     "zoneId": "A003_zone1",
     "code": "OF-F1",
+    "code_i18n": {
+      "ko": "OF-F1",
+      "ja": "OF-F1",
+      "en": "OF-F1",
+      "zh": "OF-F1"
+    },
     "apCost": 12,
     "normalDrop": [],
     "specialDrop": [
@@ -2218,6 +2926,12 @@
     "stageId": "a003_f02",
     "zoneId": "A003_zone1",
     "code": "OF-F2",
+    "code_i18n": {
+      "ko": "OF-F2",
+      "ja": "OF-F2",
+      "en": "OF-F2",
+      "zh": "OF-F2"
+    },
     "apCost": 20,
     "normalDrop": [],
     "specialDrop": [
@@ -2230,6 +2944,12 @@
     "stageId": "a003_f03",
     "zoneId": "A003_zone1",
     "code": "OF-F3",
+    "code_i18n": {
+      "ko": "OF-F3",
+      "ja": "OF-F3",
+      "en": "OF-F3",
+      "zh": "OF-F3"
+    },
     "apCost": 30,
     "normalDrop": [],
     "specialDrop": [
@@ -2242,6 +2962,12 @@
     "stageId": "a003_f04",
     "zoneId": "A003_zone1",
     "code": "OF-F4",
+    "code_i18n": {
+      "ko": "OF-F4",
+      "ja": "OF-F4",
+      "en": "OF-F4",
+      "zh": "OF-F4"
+    },
     "apCost": 40,
     "normalDrop": [],
     "specialDrop": [
@@ -2254,6 +2980,12 @@
     "stageId": "gachabox6",
     "zoneId": "A003_zone1",
     "code": "奖励扭蛋机",
+    "code_i18n": {
+      "ko": "Gacha Machine",
+      "ja": "ガチャマシン",
+      "en": "Gacha Machine",
+      "zh": "奖励扭蛋机"
+    },
     "apCost": 20,
     "normalDrop": [
       "30083",
@@ -2287,6 +3019,12 @@
     "stageId": "act4d0_01",
     "zoneId": "main_e0",
     "code": "SW-EV-1",
+    "code_i18n": {
+      "ko": "SW-EV-1",
+      "ja": "SW-EV-1",
+      "en": "SW-EV-1",
+      "zh": "SW-EV-1"
+    },
     "apCost": 6,
     "normalDrop": [
       "30021"
@@ -2307,6 +3045,12 @@
     "stageId": "act4d0_02",
     "zoneId": "main_e0",
     "code": "SW-EV-2",
+    "code_i18n": {
+      "ko": "SW-EV-2",
+      "ja": "SW-EV-2",
+      "en": "SW-EV-2",
+      "zh": "SW-EV-2"
+    },
     "apCost": 9,
     "normalDrop": [
       "30011"
@@ -2327,6 +3071,12 @@
     "stageId": "act4d0_03",
     "zoneId": "main_e0",
     "code": "SW-EV-3",
+    "code_i18n": {
+      "ko": "SW-EV-3",
+      "ja": "SW-EV-3",
+      "en": "SW-EV-3",
+      "zh": "SW-EV-3"
+    },
     "apCost": 12,
     "normalDrop": [
       "30052"
@@ -2348,6 +3098,12 @@
     "stageId": "act4d0_04",
     "zoneId": "main_e0",
     "code": "SW-EV-4",
+    "code_i18n": {
+      "ko": "SW-EV-4",
+      "ja": "SW-EV-4",
+      "en": "SW-EV-4",
+      "zh": "SW-EV-4"
+    },
     "apCost": 15,
     "normalDrop": [
       "30042"
@@ -2368,6 +3124,12 @@
     "stageId": "act4d0_05",
     "zoneId": "main_e0",
     "code": "SW-EV-5",
+    "code_i18n": {
+      "ko": "SW-EV-5",
+      "ja": "SW-EV-5",
+      "en": "SW-EV-5",
+      "zh": "SW-EV-5"
+    },
     "apCost": 18,
     "normalDrop": [
       "30033"
@@ -2389,6 +3151,12 @@
     "stageId": "act5d0_01",
     "zoneId": "act5d0_zone1",
     "code": "CB-1",
+    "code_i18n": {
+      "ko": "CB-1",
+      "ja": "CB-1",
+      "en": "CB-1",
+      "zh": "CB-1"
+    },
     "apCost": 10,
     "normalDrop": [],
     "specialDrop": [],
@@ -2399,6 +3167,12 @@
     "stageId": "act5d0_02",
     "zoneId": "act5d0_zone1",
     "code": "CB-2",
+    "code_i18n": {
+      "ko": "CB-2",
+      "ja": "CB-2",
+      "en": "CB-2",
+      "zh": "CB-2"
+    },
     "apCost": 10,
     "normalDrop": [
       "2002"
@@ -2411,6 +3185,12 @@
     "stageId": "act5d0_03",
     "zoneId": "act5d0_zone1",
     "code": "CB-3",
+    "code_i18n": {
+      "ko": "CB-3",
+      "ja": "CB-3",
+      "en": "CB-3",
+      "zh": "CB-3"
+    },
     "apCost": 10,
     "normalDrop": [],
     "specialDrop": [],
@@ -2421,6 +3201,12 @@
     "stageId": "act5d0_04",
     "zoneId": "act5d0_zone1",
     "code": "CB-4",
+    "code_i18n": {
+      "ko": "CB-4",
+      "ja": "CB-4",
+      "en": "CB-4",
+      "zh": "CB-4"
+    },
     "apCost": 10,
     "normalDrop": [
       "2002"
@@ -2433,6 +3219,12 @@
     "stageId": "act5d0_05",
     "zoneId": "act5d0_zone1",
     "code": "CB-5",
+    "code_i18n": {
+      "ko": "CB-5",
+      "ja": "CB-5",
+      "en": "CB-5",
+      "zh": "CB-5"
+    },
     "apCost": 15,
     "normalDrop": [],
     "specialDrop": [],
@@ -2443,6 +3235,12 @@
     "stageId": "act5d0_06",
     "zoneId": "act5d0_zone1",
     "code": "CB-6",
+    "code_i18n": {
+      "ko": "CB-6",
+      "ja": "CB-6",
+      "en": "CB-6",
+      "zh": "CB-6"
+    },
     "apCost": 15,
     "normalDrop": [
       "2002"
@@ -2455,6 +3253,12 @@
     "stageId": "act5d0_07",
     "zoneId": "act5d0_zone1",
     "code": "CB-7",
+    "code_i18n": {
+      "ko": "CB-7",
+      "ja": "CB-7",
+      "en": "CB-7",
+      "zh": "CB-7"
+    },
     "apCost": 15,
     "normalDrop": [],
     "specialDrop": [],
@@ -2465,6 +3269,12 @@
     "stageId": "act5d0_08",
     "zoneId": "act5d0_zone1",
     "code": "CB-8",
+    "code_i18n": {
+      "ko": "CB-8",
+      "ja": "CB-8",
+      "en": "CB-8",
+      "zh": "CB-8"
+    },
     "apCost": 15,
     "normalDrop": [
       "2002"
@@ -2477,6 +3287,12 @@
     "stageId": "act5d0_09",
     "zoneId": "act5d0_zone1",
     "code": "CB-9",
+    "code_i18n": {
+      "ko": "CB-9",
+      "ja": "CB-9",
+      "en": "CB-9",
+      "zh": "CB-9"
+    },
     "apCost": 20,
     "normalDrop": [],
     "specialDrop": [],
@@ -2487,6 +3303,12 @@
     "stageId": "act5d0_10",
     "zoneId": "act5d0_zone1",
     "code": "CB-10",
+    "code_i18n": {
+      "ko": "CB-10",
+      "ja": "CB-10",
+      "en": "CB-10",
+      "zh": "CB-10"
+    },
     "apCost": 20,
     "normalDrop": [
       "2003",
@@ -2500,6 +3322,12 @@
     "stageId": "main_06-01",
     "zoneId": "main_6",
     "code": "6-1",
+    "code_i18n": {
+      "ko": "6-1",
+      "ja": "6-1",
+      "en": "6-1",
+      "zh": "6-1"
+    },
     "apCost": 18,
     "normalDrop": [
       "30042"
@@ -2512,6 +3340,12 @@
     "stageId": "main_06-02",
     "zoneId": "main_6",
     "code": "6-2",
+    "code_i18n": {
+      "ko": "6-2",
+      "ja": "6-2",
+      "en": "6-2",
+      "zh": "6-2"
+    },
     "apCost": 18,
     "normalDrop": [
       "30083"
@@ -2535,6 +3369,12 @@
     "stageId": "main_06-03",
     "zoneId": "main_6",
     "code": "6-3",
+    "code_i18n": {
+      "ko": "6-3",
+      "ja": "6-3",
+      "en": "6-3",
+      "zh": "6-3"
+    },
     "apCost": 18,
     "normalDrop": [
       "30023"
@@ -2557,6 +3397,12 @@
     "stageId": "main_06-04",
     "zoneId": "main_6",
     "code": "6-4",
+    "code_i18n": {
+      "ko": "6-4",
+      "ja": "6-4",
+      "en": "6-4",
+      "zh": "6-4"
+    },
     "apCost": 18,
     "normalDrop": [
       "30033"
@@ -2580,6 +3426,12 @@
     "stageId": "main_06-05",
     "zoneId": "main_6",
     "code": "6-5",
+    "code_i18n": {
+      "ko": "6-5",
+      "ja": "6-5",
+      "en": "6-5",
+      "zh": "6-5"
+    },
     "apCost": 18,
     "normalDrop": [
       "30013",
@@ -2593,6 +3445,12 @@
     "stageId": "main_06-06",
     "zoneId": "main_6",
     "code": "6-7",
+    "code_i18n": {
+      "ko": "6-7",
+      "ja": "6-7",
+      "en": "6-7",
+      "zh": "6-7"
+    },
     "apCost": 0,
     "normalDrop": [],
     "specialDrop": [],
@@ -2603,6 +3461,12 @@
     "stageId": "main_06-07",
     "zoneId": "main_6",
     "code": "6-8",
+    "code_i18n": {
+      "ko": "6-8",
+      "ja": "6-8",
+      "en": "6-8",
+      "zh": "6-8"
+    },
     "apCost": 18,
     "normalDrop": [
       "30053"
@@ -2627,6 +3491,12 @@
     "stageId": "main_06-08",
     "zoneId": "main_6",
     "code": "6-9",
+    "code_i18n": {
+      "ko": "6-9",
+      "ja": "6-9",
+      "en": "6-9",
+      "zh": "6-9"
+    },
     "apCost": 18,
     "normalDrop": [
       "30032",
@@ -2640,6 +3510,12 @@
     "stageId": "main_06-09",
     "zoneId": "main_6",
     "code": "6-10",
+    "code_i18n": {
+      "ko": "6-10",
+      "ja": "6-10",
+      "en": "6-10",
+      "zh": "6-10"
+    },
     "apCost": 18,
     "normalDrop": [
       "30043"
@@ -2661,6 +3537,12 @@
     "stageId": "main_06-10",
     "zoneId": "main_6",
     "code": "6-11",
+    "code_i18n": {
+      "ko": "6-11",
+      "ja": "6-11",
+      "en": "6-11",
+      "zh": "6-11"
+    },
     "apCost": 21,
     "normalDrop": [
       "30073",
@@ -2674,6 +3556,12 @@
     "stageId": "main_06-11",
     "zoneId": "main_6",
     "code": "6-12",
+    "code_i18n": {
+      "ko": "6-12",
+      "ja": "6-12",
+      "en": "6-12",
+      "zh": "6-12"
+    },
     "apCost": 18,
     "normalDrop": [
       "31023"
@@ -2700,6 +3588,12 @@
     "stageId": "main_06-12",
     "zoneId": "main_6",
     "code": "6-14",
+    "code_i18n": {
+      "ko": "6-14",
+      "ja": "6-14",
+      "en": "6-14",
+      "zh": "6-14"
+    },
     "apCost": 18,
     "normalDrop": [
       "30093"
@@ -2722,6 +3616,12 @@
     "stageId": "main_06-13",
     "zoneId": "main_6",
     "code": "6-15",
+    "code_i18n": {
+      "ko": "6-15",
+      "ja": "6-15",
+      "en": "6-15",
+      "zh": "6-15"
+    },
     "apCost": 18,
     "normalDrop": [
       "30103"
@@ -2745,6 +3645,12 @@
     "stageId": "main_06-14",
     "zoneId": "main_6",
     "code": "6-16",
+    "code_i18n": {
+      "ko": "6-16",
+      "ja": "6-16",
+      "en": "6-16",
+      "zh": "6-16"
+    },
     "apCost": 21,
     "normalDrop": [
       "30063",
@@ -2758,6 +3664,12 @@
     "stageId": "main_06-15",
     "zoneId": "main_6",
     "code": "6-17",
+    "code_i18n": {
+      "ko": "6-17",
+      "ja": "6-17",
+      "en": "6-17",
+      "zh": "6-17"
+    },
     "apCost": 0,
     "normalDrop": [],
     "specialDrop": [],
@@ -2768,6 +3680,12 @@
     "stageId": "sub_03-3-1",
     "zoneId": "main_3",
     "code": "S3-6",
+    "code_i18n": {
+      "ko": "S3-6",
+      "ja": "S3-6",
+      "en": "S3-6",
+      "zh": "S3-6"
+    },
     "apCost": 15,
     "normalDrop": [
       "31023"
@@ -2788,6 +3706,12 @@
     "stageId": "sub_04-4-1",
     "zoneId": "main_4",
     "code": "S4-10",
+    "code_i18n": {
+      "ko": "S4-10",
+      "ja": "S4-10",
+      "en": "S4-10",
+      "zh": "S4-10"
+    },
     "apCost": 18,
     "normalDrop": [
       "31013"
@@ -2810,6 +3734,12 @@
     "stageId": "sub_05-4-1",
     "zoneId": "main_5",
     "code": "S5-7",
+    "code_i18n": {
+      "ko": "S5-7",
+      "ja": "S5-7",
+      "en": "S5-7",
+      "zh": "S5-7"
+    },
     "apCost": 18,
     "normalDrop": [
       "31013"
@@ -2833,6 +3763,12 @@
     "stageId": "sub_05-4-2",
     "zoneId": "main_5",
     "code": "S5-8",
+    "code_i18n": {
+      "ko": "S5-8",
+      "ja": "S5-8",
+      "en": "S5-8",
+      "zh": "S5-8"
+    },
     "apCost": 18,
     "normalDrop": [
       "31023"
@@ -2857,6 +3793,12 @@
     "stageId": "sub_06-1-1",
     "zoneId": "main_6",
     "code": "S6-1",
+    "code_i18n": {
+      "ko": "S6-1",
+      "ja": "S6-1",
+      "en": "S6-1",
+      "zh": "S6-1"
+    },
     "apCost": 18,
     "normalDrop": [
       "2003"
@@ -2878,6 +3820,12 @@
     "stageId": "sub_06-1-2",
     "zoneId": "main_6",
     "code": "S6-2",
+    "code_i18n": {
+      "ko": "S6-2",
+      "ja": "S6-2",
+      "en": "S6-2",
+      "zh": "S6-2"
+    },
     "apCost": 18,
     "normalDrop": [
       "30012"
@@ -2890,6 +3838,12 @@
     "stageId": "sub_06-2-1",
     "zoneId": "main_6",
     "code": "S6-3",
+    "code_i18n": {
+      "ko": "S6-3",
+      "ja": "S6-3",
+      "en": "S6-3",
+      "zh": "S6-3"
+    },
     "apCost": 18,
     "normalDrop": [
       "30052",
@@ -2903,6 +3857,12 @@
     "stageId": "sub_06-2-2",
     "zoneId": "main_6",
     "code": "S6-4",
+    "code_i18n": {
+      "ko": "S6-4",
+      "ja": "S6-4",
+      "en": "S6-4",
+      "zh": "S6-4"
+    },
     "apCost": 18,
     "normalDrop": [],
     "specialDrop": [],
@@ -2922,6 +3882,12 @@
     "stageId": "randomMaterial_1",
     "zoneId": "gachabox",
     "code": "罗德岛物资补给",
+    "code_i18n": {
+      "ko": "罗德岛物资补给",
+      "ja": "罗德岛物资补给",
+      "en": "罗德岛物资补给",
+      "zh": "罗德岛物资补给"
+    },
     "apCost": 99,
     "isGacha": true,
     "normalDrop": [
@@ -2958,6 +3924,12 @@
     "stageId": "act6d5_01",
     "zoneId": "act6d5_zone1",
     "code": "AF-1",
+    "code_i18n": {
+      "ko": "AF-1",
+      "ja": "AF-1",
+      "en": "AF-1",
+      "zh": "AF-1"
+    },
     "apCost": 6,
     "normalDrop": [
       "30031"
@@ -2978,6 +3950,12 @@
     "stageId": "act6d5_02",
     "zoneId": "act6d5_zone1",
     "code": "AF-2",
+    "code_i18n": {
+      "ko": "AF-2",
+      "ja": "AF-2",
+      "en": "AF-2",
+      "zh": "AF-2"
+    },
     "apCost": 9,
     "normalDrop": [
       "30041"
@@ -2998,6 +3976,12 @@
     "stageId": "act6d5_03",
     "zoneId": "act6d5_zone1",
     "code": "AF-3",
+    "code_i18n": {
+      "ko": "AF-3",
+      "ja": "AF-3",
+      "en": "AF-3",
+      "zh": "AF-3"
+    },
     "apCost": 12,
     "normalDrop": [
       "30012"
@@ -3018,6 +4002,12 @@
     "stageId": "act6d5_04",
     "zoneId": "act6d5_zone1",
     "code": "AF-4",
+    "code_i18n": {
+      "ko": "AF-4",
+      "ja": "AF-4",
+      "en": "AF-4",
+      "zh": "AF-4"
+    },
     "apCost": 12,
     "normalDrop": [
       "30022"
@@ -3038,6 +4028,12 @@
     "stageId": "act6d5_05",
     "zoneId": "act6d5_zone1",
     "code": "AF-5",
+    "code_i18n": {
+      "ko": "AF-5",
+      "ja": "AF-5",
+      "en": "AF-5",
+      "zh": "AF-5"
+    },
     "apCost": 15,
     "normalDrop": [
       "30062"
@@ -3059,6 +4055,12 @@
     "stageId": "act6d5_06",
     "zoneId": "act6d5_zone1",
     "code": "AF-6",
+    "code_i18n": {
+      "ko": "AF-6",
+      "ja": "AF-6",
+      "en": "AF-6",
+      "zh": "AF-6"
+    },
     "apCost": 15,
     "normalDrop": [
       "30053"
@@ -3080,6 +4082,12 @@
     "stageId": "act6d5_07",
     "zoneId": "act6d5_zone1",
     "code": "AF-7",
+    "code_i18n": {
+      "ko": "AF-7",
+      "ja": "AF-7",
+      "en": "AF-7",
+      "zh": "AF-7"
+    },
     "apCost": 15,
     "normalDrop": [
       "30073"
@@ -3101,6 +4109,12 @@
     "stageId": "act6d5_08",
     "zoneId": "act6d5_zone1",
     "code": "AF-8",
+    "code_i18n": {
+      "ko": "AF-8",
+      "ja": "AF-8",
+      "en": "AF-8",
+      "zh": "AF-8"
+    },
     "apCost": 18,
     "normalDrop": [
       "30093"
@@ -3125,6 +4139,12 @@
     "stageId": "randomMaterial_2",
     "zoneId": "gachabox",
     "code": "岁过华灯",
+    "code_i18n": {
+      "ko": "岁过华灯",
+      "ja": "岁过华灯",
+      "en": "岁过华灯",
+      "zh": "岁过华灯"
+    },
     "apCost": 99,
     "isGacha": true,
     "normalDrop": [
@@ -3161,6 +4181,12 @@
     "stageId": "wk_melee_1",
     "zoneId": "weekly_9",
     "code": "CE-1",
+    "code_i18n": {
+      "ko": "CE-1",
+      "ja": "CE-1",
+      "en": "CE-1",
+      "zh": "CE-1"
+    },
     "apCost": 10,
     "normalDrop": [],
     "specialDrop": [],
@@ -3171,6 +4197,12 @@
     "stageId": "wk_melee_2",
     "zoneId": "weekly_9",
     "code": "CE-2",
+    "code_i18n": {
+      "ko": "CE-2",
+      "ja": "CE-2",
+      "en": "CE-2",
+      "zh": "CE-2"
+    },
     "apCost": 15,
     "normalDrop": [],
     "specialDrop": [],
@@ -3181,6 +4213,12 @@
     "stageId": "wk_melee_3",
     "zoneId": "weekly_9",
     "code": "CE-3",
+    "code_i18n": {
+      "ko": "CE-3",
+      "ja": "CE-3",
+      "en": "CE-3",
+      "zh": "CE-3"
+    },
     "apCost": 20,
     "normalDrop": [],
     "specialDrop": [],
@@ -3191,6 +4229,12 @@
     "stageId": "wk_melee_4",
     "zoneId": "weekly_9",
     "code": "CE-4",
+    "code_i18n": {
+      "ko": "CE-4",
+      "ja": "CE-4",
+      "en": "CE-4",
+      "zh": "CE-4"
+    },
     "apCost": 25,
     "normalDrop": [],
     "specialDrop": [],
@@ -3201,6 +4245,12 @@
     "stageId": "wk_melee_5",
     "zoneId": "weekly_9",
     "code": "CE-5",
+    "code_i18n": {
+      "ko": "CE-5",
+      "ja": "CE-5",
+      "en": "CE-5",
+      "zh": "CE-5"
+    },
     "apCost": 30,
     "normalDrop": [],
     "specialDrop": [],
@@ -3211,6 +4261,12 @@
     "stageId": "wk_toxic_1",
     "zoneId": "weekly_5",
     "code": "AP-1",
+    "code_i18n": {
+      "ko": "AP-1",
+      "ja": "AP-1",
+      "en": "AP-1",
+      "zh": "AP-1"
+    },
     "apCost": 10,
     "normalDrop": [],
     "specialDrop": [],
@@ -3221,6 +4277,12 @@
     "stageId": "wk_toxic_2",
     "zoneId": "weekly_5",
     "code": "AP-2",
+    "code_i18n": {
+      "ko": "AP-2",
+      "ja": "AP-2",
+      "en": "AP-2",
+      "zh": "AP-2"
+    },
     "apCost": 15,
     "normalDrop": [],
     "specialDrop": [],
@@ -3231,6 +4293,12 @@
     "stageId": "wk_toxic_3",
     "zoneId": "weekly_5",
     "code": "AP-3",
+    "code_i18n": {
+      "ko": "AP-3",
+      "ja": "AP-3",
+      "en": "AP-3",
+      "zh": "AP-3"
+    },
     "apCost": 20,
     "normalDrop": [],
     "specialDrop": [],
@@ -3241,6 +4309,12 @@
     "stageId": "wk_toxic_4",
     "zoneId": "weekly_5",
     "code": "AP-4",
+    "code_i18n": {
+      "ko": "AP-4",
+      "ja": "AP-4",
+      "en": "AP-4",
+      "zh": "AP-4"
+    },
     "apCost": 25,
     "normalDrop": [],
     "specialDrop": [],
@@ -3251,6 +4325,12 @@
     "stageId": "wk_toxic_5",
     "zoneId": "weekly_5",
     "code": "AP-5",
+    "code_i18n": {
+      "ko": "AP-5",
+      "ja": "AP-5",
+      "en": "AP-5",
+      "zh": "AP-5"
+    },
     "apCost": 30,
     "normalDrop": [],
     "specialDrop": [],
@@ -3261,6 +4341,12 @@
     "stageId": "act7d5_01",
     "zoneId": "act7d5_zone1",
     "code": "SA-1",
+    "code_i18n": {
+      "ko": "SA-1",
+      "ja": "SA-1",
+      "en": "SA-1",
+      "zh": "SA-1"
+    },
     "apCost": 6,
     "normalDrop": [
       "30061"
@@ -3281,6 +4367,12 @@
     "stageId": "act7d5_02",
     "zoneId": "act7d5_zone1",
     "code": "SA-2",
+    "code_i18n": {
+      "ko": "SA-2",
+      "ja": "SA-2",
+      "en": "SA-2",
+      "zh": "SA-2"
+    },
     "apCost": 9,
     "normalDrop": [
       "30051"
@@ -3301,6 +4393,12 @@
     "stageId": "act7d5_03",
     "zoneId": "act7d5_zone1",
     "code": "SA-3",
+    "code_i18n": {
+      "ko": "SA-3",
+      "ja": "SA-3",
+      "en": "SA-3",
+      "zh": "SA-3"
+    },
     "apCost": 12,
     "normalDrop": [
       "30032"
@@ -3321,6 +4419,12 @@
     "stageId": "act7d5_04",
     "zoneId": "act7d5_zone1",
     "code": "SA-4",
+    "code_i18n": {
+      "ko": "SA-4",
+      "ja": "SA-4",
+      "en": "SA-4",
+      "zh": "SA-4"
+    },
     "apCost": 15,
     "normalDrop": [
       "30042"
@@ -3342,6 +4446,12 @@
     "stageId": "act7d5_05",
     "zoneId": "act7d5_zone1",
     "code": "SA-5",
+    "code_i18n": {
+      "ko": "SA-5",
+      "ja": "SA-5",
+      "en": "SA-5",
+      "zh": "SA-5"
+    },
     "apCost": 18,
     "normalDrop": [
       "30073"
@@ -3366,6 +4476,12 @@
     "stageId": "act7d5_06",
     "zoneId": "act7d5_zone1",
     "code": "SA-6",
+    "code_i18n": {
+      "ko": "SA-6",
+      "ja": "SA-6",
+      "en": "SA-6",
+      "zh": "SA-6"
+    },
     "apCost": 18,
     "normalDrop": [
       "31023"
@@ -3390,6 +4506,12 @@
     "stageId": "randomMaterialRune_0",
     "zoneId": "gachabox",
     "code": "荒芜行动物资补给",
+    "code_i18n": {
+      "ko": "荒芜行动物资补给",
+      "ja": "荒芜行动物资补给",
+      "en": "荒芜行动物资补给",
+      "zh": "荒芜行动物资补给"
+    },
     "apCost": 99,
     "isGacha": true,
     "normalDrop": [
@@ -3414,6 +4536,12 @@
     "stageId": "act9d0_01",
     "zoneId": "act9d0_zone1",
     "code": "DM-1",
+    "code_i18n": {
+      "ko": "DM-1",
+      "ja": "DM-1",
+      "en": "DM-1",
+      "zh": "DM-1"
+    },
     "apCost": 9,
     "normalDrop": [
       "30021",
@@ -3427,6 +4555,12 @@
     "stageId": "act9d0_02",
     "zoneId": "act9d0_zone1",
     "code": "DM-2",
+    "code_i18n": {
+      "ko": "DM-2",
+      "ja": "DM-2",
+      "en": "DM-2",
+      "zh": "DM-2"
+    },
     "apCost": 9,
     "normalDrop": [
       "30031",
@@ -3440,6 +4574,12 @@
     "stageId": "act9d0_03",
     "zoneId": "act9d0_zone1",
     "code": "DM-3",
+    "code_i18n": {
+      "ko": "DM-3",
+      "ja": "DM-3",
+      "en": "DM-3",
+      "zh": "DM-3"
+    },
     "apCost": 12,
     "normalDrop": [
       "30041",
@@ -3453,6 +4593,12 @@
     "stageId": "act9d0_04",
     "zoneId": "act9d0_zone1",
     "code": "DM-4",
+    "code_i18n": {
+      "ko": "DM-4",
+      "ja": "DM-4",
+      "en": "DM-4",
+      "zh": "DM-4"
+    },
     "apCost": 12,
     "normalDrop": [
       "30012",
@@ -3466,6 +4612,12 @@
     "stageId": "act9d0_05",
     "zoneId": "act9d0_zone1",
     "code": "DM-5",
+    "code_i18n": {
+      "ko": "DM-5",
+      "ja": "DM-5",
+      "en": "DM-5",
+      "zh": "DM-5"
+    },
     "apCost": 15,
     "normalDrop": [
       "30022",
@@ -3479,6 +4631,12 @@
     "stageId": "act9d0_06",
     "zoneId": "act9d0_zone1",
     "code": "DM-6",
+    "code_i18n": {
+      "ko": "DM-6",
+      "ja": "DM-6",
+      "en": "DM-6",
+      "zh": "DM-6"
+    },
     "apCost": 15,
     "normalDrop": [
       "30023"
@@ -3491,6 +4649,12 @@
     "stageId": "act9d0_07",
     "zoneId": "act9d0_zone1",
     "code": "DM-7",
+    "code_i18n": {
+      "ko": "DM-7",
+      "ja": "DM-7",
+      "en": "DM-7",
+      "zh": "DM-7"
+    },
     "apCost": 18,
     "normalDrop": [
       "30073"
@@ -3503,6 +4667,12 @@
     "stageId": "act9d0_08",
     "zoneId": "act9d0_zone1",
     "code": "DM-8",
+    "code_i18n": {
+      "ko": "DM-8",
+      "ja": "DM-8",
+      "en": "DM-8",
+      "zh": "DM-8"
+    },
     "apCost": 18,
     "normalDrop": [
       "30043"
@@ -3515,6 +4685,12 @@
     "stageId": "main_07-01",
     "zoneId": "main_7",
     "code": "7-2",
+    "code_i18n": {
+      "ko": "7-2",
+      "ja": "7-2",
+      "en": "7-2",
+      "zh": "7-2"
+    },
     "apCost": 18,
     "normalDrop": [
       "30013"
@@ -3538,6 +4714,12 @@
     "stageId": "main_07-02",
     "zoneId": "main_7",
     "code": "7-3",
+    "code_i18n": {
+      "ko": "7-3",
+      "ja": "7-3",
+      "en": "7-3",
+      "zh": "7-3"
+    },
     "apCost": 18,
     "normalDrop": [
       "30022"
@@ -3550,6 +4732,12 @@
     "stageId": "main_07-03",
     "zoneId": "main_7",
     "code": "7-4",
+    "code_i18n": {
+      "ko": "7-4",
+      "ja": "7-4",
+      "en": "7-4",
+      "zh": "7-4"
+    },
     "apCost": 18,
     "normalDrop": [
       "30033"
@@ -3574,6 +4762,12 @@
     "stageId": "main_07-04",
     "zoneId": "main_7",
     "code": "7-5",
+    "code_i18n": {
+      "ko": "7-5",
+      "ja": "7-5",
+      "en": "7-5",
+      "zh": "7-5"
+    },
     "apCost": 18,
     "normalDrop": [
       "30073"
@@ -3597,6 +4791,12 @@
     "stageId": "main_07-05",
     "zoneId": "main_7",
     "code": "7-6",
+    "code_i18n": {
+      "ko": "7-6",
+      "ja": "7-6",
+      "en": "7-6",
+      "zh": "7-6"
+    },
     "apCost": 18,
     "normalDrop": [
       "30013",
@@ -3610,6 +4810,12 @@
     "stageId": "main_07-06",
     "zoneId": "main_7",
     "code": "7-8",
+    "code_i18n": {
+      "ko": "7-8",
+      "ja": "7-8",
+      "en": "7-8",
+      "zh": "7-8"
+    },
     "apCost": 18,
     "normalDrop": [
       "31013"
@@ -3636,6 +4842,12 @@
     "stageId": "main_07-07",
     "zoneId": "main_7",
     "code": "7-9",
+    "code_i18n": {
+      "ko": "7-9",
+      "ja": "7-9",
+      "en": "7-9",
+      "zh": "7-9"
+    },
     "apCost": 21,
     "normalDrop": [
       "30063"
@@ -3659,6 +4871,12 @@
     "stageId": "main_07-08",
     "zoneId": "main_7",
     "code": "7-10",
+    "code_i18n": {
+      "ko": "7-10",
+      "ja": "7-10",
+      "en": "7-10",
+      "zh": "7-10"
+    },
     "apCost": 18,
     "normalDrop": [
       "30103"
@@ -3680,6 +4898,12 @@
     "stageId": "main_07-09",
     "zoneId": "main_7",
     "code": "7-11",
+    "code_i18n": {
+      "ko": "7-11",
+      "ja": "7-11",
+      "en": "7-11",
+      "zh": "7-11"
+    },
     "apCost": 18,
     "normalDrop": [
       "30042",
@@ -3693,6 +4917,12 @@
     "stageId": "main_07-10",
     "zoneId": "main_7",
     "code": "7-12",
+    "code_i18n": {
+      "ko": "7-12",
+      "ja": "7-12",
+      "en": "7-12",
+      "zh": "7-12"
+    },
     "apCost": 18,
     "normalDrop": [
       "30023",
@@ -3706,6 +4936,12 @@
     "stageId": "main_07-11",
     "zoneId": "main_7",
     "code": "7-13",
+    "code_i18n": {
+      "ko": "7-13",
+      "ja": "7-13",
+      "en": "7-13",
+      "zh": "7-13"
+    },
     "apCost": 18,
     "normalDrop": [
       "2003"
@@ -3728,6 +4964,12 @@
     "stageId": "main_07-12",
     "zoneId": "main_7",
     "code": "7-14",
+    "code_i18n": {
+      "ko": "7-14",
+      "ja": "7-14",
+      "en": "7-14",
+      "zh": "7-14"
+    },
     "apCost": 18,
     "normalDrop": [
       "30053"
@@ -3749,6 +4991,12 @@
     "stageId": "main_07-13",
     "zoneId": "main_7",
     "code": "7-15",
+    "code_i18n": {
+      "ko": "7-15",
+      "ja": "7-15",
+      "en": "7-15",
+      "zh": "7-15"
+    },
     "apCost": 18,
     "normalDrop": [
       "30063"
@@ -3773,6 +5021,12 @@
     "stageId": "main_07-14",
     "zoneId": "main_7",
     "code": "7-16",
+    "code_i18n": {
+      "ko": "7-16",
+      "ja": "7-16",
+      "en": "7-16",
+      "zh": "7-16"
+    },
     "apCost": 18,
     "normalDrop": [
       "30083",
@@ -3786,6 +5040,12 @@
     "stageId": "main_07-15",
     "zoneId": "main_7",
     "code": "7-17",
+    "code_i18n": {
+      "ko": "7-17",
+      "ja": "7-17",
+      "en": "7-17",
+      "zh": "7-17"
+    },
     "apCost": 21,
     "normalDrop": [
       "30093"
@@ -3812,6 +5072,12 @@
     "stageId": "main_07-16",
     "zoneId": "main_7",
     "code": "7-18",
+    "code_i18n": {
+      "ko": "7-18",
+      "ja": "7-18",
+      "en": "7-18",
+      "zh": "7-18"
+    },
     "apCost": 21,
     "normalDrop": [
       "30043",
@@ -3825,6 +5091,12 @@
     "stageId": "sub_07-1-1",
     "zoneId": "main_7",
     "code": "S7-1",
+    "code_i18n": {
+      "ko": "S7-1",
+      "ja": "S7-1",
+      "en": "S7-1",
+      "zh": "S7-1"
+    },
     "apCost": 18,
     "normalDrop": [],
     "specialDrop": [],
@@ -3845,9 +5117,278 @@
     "stageId": "sub_07-1-2",
     "zoneId": "main_7",
     "code": "S7-2",
+    "code_i18n": {
+      "ko": "S7-2",
+      "ja": "S7-2",
+      "en": "S7-2",
+      "zh": "S7-2"
+    },
     "apCost": 18,
     "normalDrop": [
       "30052"
+    ],
+    "specialDrop": [],
+    "extraDrop": []
+  },
+  {
+    "stageType": "ACTIVITY",
+    "stageId": "randomMaterial_3",
+    "zoneId": "gachabox",
+    "code": "32h战略配给",
+    "code_i18n": {
+      "ko": "32h战略配给",
+      "ja": "32h战略配给",
+      "en": "32h战略配给",
+      "zh": "32h战略配给"
+    },
+    "apCost": 99,
+    "isGacha": true,
+    "normalDrop": [
+      "30073",
+      "30083",
+      "30093",
+      "30103",
+      "30013",
+      "30012",
+      "30063",
+      "30062",
+      "30033",
+      "30032",
+      "30023",
+      "30022",
+      "30043",
+      "30042",
+      "30053",
+      "30052",
+      "31013",
+      "31023"
+    ],
+    "specialDrop": [],
+    "extraDrop": []
+  },
+  {
+    "stageType": "DAILY",
+    "stageId": "pro_a_1",
+    "zoneId": "weekly_1",
+    "code": "PR-A-1",
+    "code_i18n": {
+      "ko": "PR-A-1",
+      "ja": "PR-A-1",
+      "en": "PR-A-1",
+      "zh": "PR-A-1"
+    },
+    "apCost": 18,
+    "normalDrop": [],
+    "specialDrop": [],
+    "extraDrop": []
+  },
+  {
+    "stageType": "DAILY",
+    "stageId": "pro_a_2",
+    "zoneId": "weekly_1",
+    "code": "PR-A-2",
+    "code_i18n": {
+      "ko": "PR-A-2",
+      "ja": "PR-A-2",
+      "en": "PR-A-2",
+      "zh": "PR-A-2"
+    },
+    "apCost": 36,
+    "normalDrop": [],
+    "specialDrop": [],
+    "extraDrop": []
+  },
+  {
+    "stageType": "DAILY",
+    "stageId": "pro_b_1",
+    "zoneId": "weekly_1",
+    "code": "PR-B-1",
+    "code_i18n": {
+      "ko": "PR-B-1",
+      "ja": "PR-B-1",
+      "en": "PR-B-1",
+      "zh": "PR-B-1"
+    },
+    "apCost": 18,
+    "normalDrop": [],
+    "specialDrop": [],
+    "extraDrop": []
+  },
+  {
+    "stageType": "DAILY",
+    "stageId": "pro_b_2",
+    "zoneId": "weekly_1",
+    "code": "PR-B-2",
+    "code_i18n": {
+      "ko": "PR-B-2",
+      "ja": "PR-B-2",
+      "en": "PR-B-2",
+      "zh": "PR-B-2"
+    },
+    "apCost": 36,
+    "normalDrop": [],
+    "specialDrop": [],
+    "extraDrop": []
+  },
+  {
+    "stageType": "DAILY",
+    "stageId": "pro_c_1",
+    "zoneId": "weekly_1",
+    "code": "PR-C-1",
+    "code_i18n": {
+      "ko": "PR-C-1",
+      "ja": "PR-C-1",
+      "en": "PR-C-1",
+      "zh": "PR-C-1"
+    },
+    "apCost": 18,
+    "normalDrop": [],
+    "specialDrop": [],
+    "extraDrop": []
+  },
+  {
+    "stageType": "DAILY",
+    "stageId": "pro_c_2",
+    "zoneId": "weekly_1",
+    "code": "PR-C-2",
+    "code_i18n": {
+      "ko": "PR-C-2",
+      "ja": "PR-C-2",
+      "en": "PR-C-2",
+      "zh": "PR-C-2"
+    },
+    "apCost": 36,
+    "normalDrop": [],
+    "specialDrop": [],
+    "extraDrop": []
+  },
+  {
+    "stageType": "DAILY",
+    "stageId": "pro_d_1",
+    "zoneId": "weekly_1",
+    "code": "PR-D-1",
+    "code_i18n": {
+      "ko": "PR-D-1",
+      "ja": "PR-D-1",
+      "en": "PR-D-1",
+      "zh": "PR-D-1"
+    },
+    "apCost": 18,
+    "normalDrop": [],
+    "specialDrop": [],
+    "extraDrop": []
+  },
+  {
+    "stageType": "DAILY",
+    "stageId": "pro_d_2",
+    "zoneId": "weekly_1",
+    "code": "PR-D-2",
+    "code_i18n": {
+      "ko": "PR-D-2",
+      "ja": "PR-D-2",
+      "en": "PR-D-2",
+      "zh": "PR-D-2"
+    },
+    "apCost": 36,
+    "normalDrop": [],
+    "specialDrop": [],
+    "extraDrop": []
+  },
+  {
+    "stageType": "DAILY",
+    "stageId": "wk_kc_1",
+    "zoneId": "weekly_7",
+    "code": "LS-1",
+    "code_i18n": {
+      "ko": "LS-1",
+      "ja": "LS-1",
+      "en": "LS-1",
+      "zh": "LS-1"
+    },
+    "apCost": 10,
+    "normalDrop": [
+      "2002",
+      "2001"
+    ],
+    "specialDrop": [],
+    "extraDrop": []
+  },
+  {
+    "stageType": "DAILY",
+    "stageId": "wk_kc_2",
+    "zoneId": "weekly_7",
+    "code": "LS-2",
+    "code_i18n": {
+      "ko": "LS-2",
+      "ja": "LS-2",
+      "en": "LS-2",
+      "zh": "LS-2"
+    },
+    "apCost": 15,
+    "normalDrop": [
+      "2002",
+      "2001"
+    ],
+    "specialDrop": [],
+    "extraDrop": []
+  },
+  {
+    "stageType": "DAILY",
+    "stageId": "wk_kc_3",
+    "zoneId": "weekly_7",
+    "code": "LS-3",
+    "code_i18n": {
+      "ko": "LS-3",
+      "ja": "LS-3",
+      "en": "LS-3",
+      "zh": "LS-3"
+    },
+    "apCost": 20,
+    "normalDrop": [
+      "2003",
+      "2002",
+      "2001"
+    ],
+    "specialDrop": [],
+    "extraDrop": []
+  },
+  {
+    "stageType": "DAILY",
+    "stageId": "wk_kc_4",
+    "zoneId": "weekly_7",
+    "code": "LS-4",
+    "code_i18n": {
+      "ko": "LS-4",
+      "ja": "LS-4",
+      "en": "LS-4",
+      "zh": "LS-4"
+    },
+    "apCost": 25,
+    "normalDrop": [
+      "2004",
+      "2003",
+      "2002",
+      "2001"
+    ],
+    "specialDrop": [],
+    "extraDrop": []
+  },
+  {
+    "stageType": "DAILY",
+    "stageId": "wk_kc_5",
+    "zoneId": "weekly_7",
+    "code": "LS-5",
+    "code_i18n": {
+      "ko": "LS-5",
+      "ja": "LS-5",
+      "en": "LS-5",
+      "zh": "LS-5"
+    },
+    "apCost": 30,
+    "normalDrop": [
+      "2004",
+      "2003",
+      "2002"
     ],
     "specialDrop": [],
     "extraDrop": []

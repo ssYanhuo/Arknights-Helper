@@ -385,7 +385,8 @@ public class PythonUtils {
             return;
         }
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setView(R.layout.dialog_python_init);
+        builder.setView(R.layout.dialog_python_init)
+                .setCancelable(false);
         final AlertDialog dialog = builder.create();
         dialog.show();
         Thread thread = new Thread(new Runnable() {

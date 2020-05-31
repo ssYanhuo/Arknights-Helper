@@ -220,13 +220,6 @@ public class More {
                                 int minute = calendar.get(Calendar.MINUTE);
                                 minute += (value * 6) % 60;
                                 hour += (value * 6) / 60 + (minute / 60);
-                                //hour %= 24;
-//                                Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);
-//                                intent.putExtra(AlarmClock.EXTRA_MESSAGE, "明日方舟助手-理智回复");
-//                                intent.putExtra(AlarmClock.EXTRA_HOUR, hour);
-//                                intent.putExtra(AlarmClock.EXTRA_MINUTES, minute);
-//                                intent.putExtra(AlarmClock.EXTRA_SKIP_UI, false);
-//                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 Intent intent = new Intent(AlarmClock.ACTION_SET_TIMER);
                                 intent.putExtra(AlarmClock.EXTRA_LENGTH, value * 6 * 60);
                                 intent.putExtra(AlarmClock.EXTRA_MESSAGE, "明日方舟助手-理智回复");
@@ -249,8 +242,8 @@ public class More {
                         int hour = calendar.get(Calendar.HOUR_OF_DAY);
                         int minute = calendar.get(Calendar.MINUTE);
                         minute += value * 6;
+                        hour += (minute / 60);
                         minute %= 60;
-                        hour += (value * 6) / 60 + (minute / 60);
                         if(hour >= 24){
                             hour -= 24;
                             note.setText(new StringBuilder().append(applicationContext.getString(R.string.more_set_alarm_note_tomorrow, hour, minute)).append(" ").toString());

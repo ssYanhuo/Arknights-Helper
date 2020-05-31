@@ -264,14 +264,7 @@ public class Material {
                 }
             }
         });
-        int backgroundColor;
-        if (ThemeUtils.getThemeMode(applicationContext) == ThemeUtils.THEME_NEW_YEAR){//太红了不好看
-            backgroundColor = ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, applicationContext) - Color.parseColor("#00501010"));
-        }else if (ThemeUtils.getThemeMode(applicationContext) == ThemeUtils.THEME_LIGHT){//太蓝了也不好看
-            backgroundColor = ThemeUtils.getColorWithAlpha(0.9f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY, applicationContext));
-        } else {
-            backgroundColor = ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, applicationContext));
-        }
+        int backgroundColor = ThemeUtils.getBackgroundColor(applicationContext, contextThemeWrapper);
         GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, new int[]{backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, Color.TRANSPARENT});
         gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
         selector.setBackground(gradientDrawable);
@@ -798,14 +791,7 @@ public class Material {
         assert windowManager != null;
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         int rotation = windowManager.getDefaultDisplay().getRotation();
-        int backgroundColor;
-        if (ThemeUtils.getThemeMode(applicationContext) == ThemeUtils.THEME_NEW_YEAR){//太红了不好看
-            backgroundColor = ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, applicationContext) - Color.parseColor("#00501010"));
-        }else if (ThemeUtils.getThemeMode(applicationContext) == ThemeUtils.THEME_LIGHT){//太蓝了也不好看
-            backgroundColor = ThemeUtils.getColorWithAlpha(0.9f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY, applicationContext));
-        } else {
-            backgroundColor = ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, applicationContext));
-        }
+        int backgroundColor = ThemeUtils.getBackgroundColor(applicationContext, contextThemeWrapper);
         GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, new int[]{backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, Color.TRANSPARENT});
         gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
         selector.setBackground(gradientDrawable);
@@ -852,14 +838,7 @@ public class Material {
                 ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_3)).removeAllViews();
                 ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_2)).removeAllViews();
                 ((LineWrapLayout)selector.findViewById(R.id.material_character_selector_1)).removeAllViews();
-                int backgroundColor;
-                if (ThemeUtils.getThemeMode(applicationContext) == ThemeUtils.THEME_NEW_YEAR){//太红了不好看
-                    backgroundColor = ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, applicationContext) - Color.parseColor("#00501010"));
-                }else if (ThemeUtils.getThemeMode(applicationContext) == ThemeUtils.THEME_LIGHT){//太蓝了也不好看
-                    backgroundColor = ThemeUtils.getColorWithAlpha(0.9f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY, applicationContext));
-                } else {
-                    backgroundColor = ThemeUtils.getColorWithAlpha(0.7f, ThemeUtils.getColor(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_PRIMARY_DARK, applicationContext));
-                }
+                int backgroundColor = ThemeUtils.getBackgroundColor(applicationContext, contextThemeWrapper);
                 GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, new int[]{backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, Color.TRANSPARENT});
                 gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
                 selector.setBackground(gradientDrawable);
