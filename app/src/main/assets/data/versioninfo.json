@@ -1,5 +1,5 @@
 {
-    "versionCode": 31,
-    "versionName": "OpenPreview-1.1.0",
-    "releaseNote": "[Mod]同步最新数据\n[New]Android 10+新增夜间模式开关\n[Fix]修复部分界面在浅色主题下显示异常的问题(感谢 @Annenlim)\n[Fix]修复理智回复计时偶发性的计时偏移(感谢 @无生)"
+    "versionCode": 32,
+    "versionName": "OpenPreview-1.2.0",
+    "releaseNote": "[Mod]同步最新数据\n[New]设置新增模拟器兼容模式，适配部分非标准分辨率模拟器"
 }

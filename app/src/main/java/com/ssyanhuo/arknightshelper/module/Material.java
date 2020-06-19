@@ -800,6 +800,13 @@ public class Material {
         placeHolder.removeAllViews();
         placeHolder.addView(selector);
         Animator animator;
+        if (sharedPreferences.getBoolean("emulator_mode", false)){
+            if (rotation == 0 || rotation == 2){
+                rotation = 3;
+            }else {
+                rotation = 0;
+            }
+        }
         if (rotation == 0 || rotation == 2){
             animator = AnimatorInflater.loadAnimator(applicationContext, R.animator.overlay_sub_show_portrait);
         }else {
@@ -816,6 +823,13 @@ public class Material {
         int rotation = windowManager.getDefaultDisplay().getRotation();
         placeHolder = rootLayout.findViewWithTag("placeHolder");
         Animator animator;
+        if (sharedPreferences.getBoolean("emulator_mode", false)){
+            if (rotation == 0 || rotation == 2){
+                rotation = 3;
+            }else {
+                rotation = 0;
+            }
+        }
         if (rotation == 0 || rotation == 2){
             animator = AnimatorInflater.loadAnimator(applicationContext, R.animator.overlay_sub_hide_portrait);
         }else {

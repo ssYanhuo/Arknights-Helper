@@ -34,6 +34,12 @@ public class ImageUtils {
             return result;
         }
 
+        try{
+            cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATE_ADDED));
+        }catch (Exception e){
+            return result;
+        }
+
         for(int i = 0; i < 20; i++){
             if (i == 0 || cursor.moveToPrevious()){//如果是第一次获取，就不向前移动指针
                 MediaInfo mediaInfo = new MediaInfo();

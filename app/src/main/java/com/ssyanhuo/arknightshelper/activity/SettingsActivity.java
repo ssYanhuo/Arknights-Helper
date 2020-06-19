@@ -153,6 +153,7 @@ public class SettingsActivity extends AppCompatActivity {
             final Preference button_img = findPreference("button_img");
             final SwitchPreference disable_planner = findPreference("disable_planner");
             final SwitchPreference enable_dark_mode = findPreference("enable_dark_mode");
+            final SwitchPreference emulator_mode = findPreference("emulator_mode");
             margin_fix.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @SuppressLint("SourceLockedOrientationActivity")
                 @Override
@@ -293,6 +294,13 @@ public class SettingsActivity extends AppCompatActivity {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     }
                     activity.recreate();
+                    restartService();
+                    return true;
+                }
+            });
+            emulator_mode.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
                     restartService();
                     return true;
                 }

@@ -5392,5 +5392,223 @@
     ],
     "specialDrop": [],
     "extraDrop": []
+  },
+  {
+    "stageType": "ACTIVITY",
+    "stageId": "randomMaterialRune_1",
+    "zoneId": "gachabox",
+    "code": "黄铁行动物资补给",
+    "code_i18n": {
+      "ko": "黄铁行动物资补给",
+      "ja": "黄铁行动物资补给",
+      "en": "黄铁行动物资补给",
+      "zh": "黄铁行动物资补给"
+    },
+    "apCost": 99,
+    "isGacha": true,
+    "normalDrop": [
+      "30073",
+      "30083",
+      "30093",
+      "30103",
+      "30013",
+      "30063",
+      "30033",
+      "30023",
+      "30043",
+      "30053",
+      "31013",
+      "31023"
+    ],
+    "specialDrop": [],
+    "extraDrop": []
+  },
+  {
+    "stageType": "ACTIVITY",
+    "stageId": "act10d5_01",
+    "zoneId": "act10d5_zone1",
+    "code": "SV-1",
+    "code_i18n": {
+      "ko": "SV-1",
+      "ja": "SV-1",
+      "en": "SV-1",
+      "zh": "SV-1"
+    },
+    "apCost": 6,
+    "normalDrop": [
+      "30021"
+    ],
+    "specialDrop": [],
+    "extraDrop": [
+      "30011",
+      "30021",
+      "30031",
+      "30041",
+      "30051",
+      "30061",
+      "3003"
+    ]
+  },
+  {
+    "stageType": "ACTIVITY",
+    "stageId": "act10d5_02",
+    "zoneId": "act10d5_zone1",
+    "code": "SV-2",
+    "code_i18n": {
+      "ko": "SV-2",
+      "ja": "SV-2",
+      "en": "SV-2",
+      "zh": "SV-2"
+    },
+    "apCost": 9,
+    "normalDrop": [
+      "30011"
+    ],
+    "specialDrop": [],
+    "extraDrop": [
+      "30011",
+      "30021",
+      "30031",
+      "30041",
+      "30051",
+      "30061",
+      "3003"
+    ]
+  },
+  {
+    "stageType": "ACTIVITY",
+    "stageId": "act10d5_03",
+    "zoneId": "act10d5_zone1",
+    "code": "SV-3",
+    "code_i18n": {
+      "ko": "SV-3",
+      "ja": "SV-3",
+      "en": "SV-3",
+      "zh": "SV-3"
+    },
+    "apCost": 9,
+    "normalDrop": [
+      "30052"
+    ],
+    "specialDrop": [],
+    "extraDrop": [
+      "30011",
+      "30021",
+      "30031",
+      "30041",
+      "30051",
+      "30061",
+      "3003"
+    ]
+  },
+  {
+    "stageType": "ACTIVITY",
+    "stageId": "act10d5_04",
+    "zoneId": "act10d5_zone1",
+    "code": "SV-4",
+    "code_i18n": {
+      "ko": "SV-4",
+      "ja": "SV-4",
+      "en": "SV-4",
+      "zh": "SV-4"
+    },
+    "apCost": 12,
+    "normalDrop": [
+      "30042"
+    ],
+    "specialDrop": [],
+    "extraDrop": [
+      "30011",
+      "30031",
+      "30061",
+      "3003",
+      "30012",
+      "30032",
+      "30062"
+    ]
+  },
+  {
+    "stageType": "ACTIVITY",
+    "stageId": "act10d5_05",
+    "zoneId": "act10d5_zone1",
+    "code": "SV-5",
+    "code_i18n": {
+      "ko": "SV-5",
+      "ja": "SV-5",
+      "en": "SV-5",
+      "zh": "SV-5"
+    },
+    "apCost": 15,
+    "normalDrop": [
+      "30033"
+    ],
+    "specialDrop": [],
+    "extraDrop": [
+      "30021",
+      "30041",
+      "30051",
+      "2001",
+      "30022",
+      "30042",
+      "30052",
+      "2002"
+    ]
+  },
+  {
+    "stageType": "ACTIVITY",
+    "stageId": "act10d5_06",
+    "zoneId": "act10d5_zone1",
+    "code": "SV-6",
+    "code_i18n": {
+      "ko": "SV-6",
+      "ja": "SV-6",
+      "en": "SV-6",
+      "zh": "SV-6"
+    },
+    "apCost": 15,
+    "normalDrop": [
+      "30043"
+    ],
+    "specialDrop": [],
+    "extraDrop": [
+      "30021",
+      "30041",
+      "30051",
+      "2001",
+      "30022",
+      "30042",
+      "30052",
+      "2002"
+    ]
+  },
+  {
+    "stageType": "ACTIVITY",
+    "stageId": "act10d5_07",
+    "zoneId": "act10d5_zone1",
+    "code": "SV-7",
+    "code_i18n": {
+      "ko": "SV-7",
+      "ja": "SV-7",
+      "en": "SV-7",
+      "zh": "SV-7"
+    },
+    "apCost": 18,
+    "normalDrop": [
+      "31013"
+    ],
+    "specialDrop": [],
+    "extraDrop": [
+      "30021",
+      "30041",
+      "2001",
+      "30022",
+      "30042",
+      "2002",
+      "30023",
+      "30043",
+      "30083",
+      "31023",
+      "2003"
+    ]
   }
 ]

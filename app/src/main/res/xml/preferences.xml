@@ -73,6 +73,11 @@
             app:min="-256" />
         <SwitchPreference
             android:defaultValue="false"
+            android:key="emulator_mode"
+            android:title="模拟器兼容模式"
+            android:summary="交换屏幕方向的检测结果，用以修正部分模拟器和平板设备的布局错误问题"/>
+        <SwitchPreference
+            android:defaultValue="false"
             android:key="disable_planner"
             android:title="@string/settings_title_disable_planner"
             android:summary="@string/settings_summary_disable_planner"/>

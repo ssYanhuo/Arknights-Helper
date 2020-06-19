@@ -1,866 +1,1945 @@
-{
-  "31013": {
-      "id": "31013",
-      "name": "凝胶",
-      "rarity": 3,
-      "source": {
-          "S4-10": "小概率",
-          "S5-7": "小概率"
+[
+    {
+      "itemId": "2001",
+      "name": "基础作战记录",
+      "name_i18n": {
+        "ko": "기초작전기록",
+        "ja": "入門作戦記録",
+        "en": "Drill Battle Record",
+        "zh": "基础作战记录"
       },
-      "madeof": {},
-      "icon": "MTL_SL_PGEL3",
-      "sort": 69
-  },
-  "31014": {
-      "id": "31014",
-      "name": "聚合凝胶",
-      "rarity": 4,
-      "source": {
-          "S5-7": "罕见"
-      },
-      "madeof": {
-          "异铁组": 1,
-          "凝胶": 1,
-          "炽合金": 1
-      },
-      "icon": "MTL_SL_PGEL4",
-      "sort": 67
-  },
-  "31023": {
-      "id": "31023",
-      "name": "炽合金",
-      "rarity": 3,
-      "source": {
-          "6-12": "小概率",
-          "S3-6": "小概率",
-          "S5-8": "小概率"
-      },
-      "madeof": {},
-      "icon": "MTL_SL_IAM3",
-      "sort": 68
-  },
-  "31024": {
-      "id": "31024",
-      "name": "炽合金块",
-      "rarity": 4,
-      "source": {
-          "6-12": "罕见",
-          "S5-8": "罕见"
-      },
-      "madeof": {
-          "全新装置": 1,
-          "研磨石": 1,
-          "炽合金": 1
-      },
-      "icon": "MTL_SL_IAM4",
-      "sort": 66
-  },
-  "30135": {
-      "id": "30135",
-      "name": "D32钢",
-      "rarity": 5,
-      "source": {},
-      "madeof": {
-          "三水锰矿": 1,
-          "五水研磨石": 1,
-          "RMA70-24": 1
-      },
-      "icon": "MTL_SL_DS",
-      "sort": 23
-  },
-  "30125": {
-      "id": "30125",
-      "name": "双极纳米片",
-      "rarity": 5,
-      "source": {},
-      "madeof": {
-          "改量装置": 1,
-          "白马醇": 2
-      },
-      "icon": "MTL_SL_BN",
-      "sort": 24
-  },
-  "30115": {
-      "id": "30115",
-      "name": "聚合剂",
-      "rarity": 5,
-      "source": {},
-      "madeof": {
-          "提纯源岩": 1,
-          "异铁块": 1,
-          "酮阵列": 1
-      },
-      "icon": "MTL_SL_PP",
-      "sort": 25
-  },
-  "30104": {
-      "id": "30104",
-      "name": "RMA70-24",
-      "rarity": 4,
-      "source": {
-          "4-9": "罕见"
-      },
-      "madeof": {
-          "RMA70-12": 1,
-          "固源岩组": 2,
-          "酮凝集组": 1
-      },
-      "icon": "MTL_SL_RMA7024",
-      "sort": 32
-  },
-  "30094": {
-      "id": "30094",
-      "name": "五水研磨石",
-      "rarity": 4,
-      "source": {
-          "4-8": "罕见"
-      },
-      "madeof": {
-          "研磨石": 1,
-          "异铁组": 1,
-          "全新装置": 1
-      },
-      "icon": "MTL_SL_PG2",
-      "sort": 30
-  },
-  "30084": {
-      "id": "30084",
-      "name": "三水锰矿",
-      "rarity": 4,
-      "source": {
-          "4-7": "罕见"
-      },
-      "madeof": {
-          "轻锰矿": 2,
-          "聚酸酯组": 1,
-          "扭转醇": 1
-      },
-      "icon": "MTL_SL_MANGANESE2",
-      "sort": 28
-  },
-  "30074": {
-      "id": "30074",
-      "name": "白马醇",
-      "rarity": 4,
-      "source": {
-          "4-4": "罕见"
-      },
-      "madeof": {
-          "扭转醇": 1,
-          "糖组": 1,
-          "RMA70-12": 1
-      },
-      "icon": "MTL_SL_ALCOHOL2",
-      "sort": 26
-  },
-  "30064": {
-      "id": "30064",
-      "name": "改量装置",
-      "rarity": 4,
-      "source": {
-          "4-10": "罕见"
-      },
-      "madeof": {
-          "全新装置": 1,
-          "固源岩组": 2,
-          "研磨石": 1
-      },
-      "icon": "MTL_SL_BOSS4",
-      "sort": 38
-  },
-  "30054": {
-      "id": "30054",
-      "name": "酮阵列",
-      "rarity": 4,
-      "source": {
-          "4-5": "罕见"
-      },
-      "madeof": {
-          "酮凝集组": 2,
-          "糖组": 1,
-          "轻锰矿": 1
-      },
-      "icon": "MTL_SL_KETONE4",
-      "sort": 54
-  },
-  "30044": {
-      "id": "30044",
-      "name": "异铁块",
-      "rarity": 4,
-      "source": {
-          "S4-1": "罕见",
-          "5-5": "罕见"
-      },
-      "madeof": {
-          "异铁组": 2,
-          "全新装置": 1,
-          "聚酸酯组": 1
-      },
-      "icon": "MTL_SL_IRON4",
-      "sort": 50
-  },
-  "30034": {
-      "id": "30034",
-      "name": "聚酸酯块",
-      "rarity": 4,
-      "source": {
-          "3-8": "罕见"
-      },
-      "madeof": {
-          "聚酸酯组": 2,
-          "酮凝集组": 1,
-          "扭转醇": 1
-      },
-      "icon": "MTL_SL_RUSH4",
-      "sort": 42
-  },
-  "30024": {
-      "id": "30024",
-      "name": "糖聚块",
-      "rarity": 4,
-      "source": {
-          "4-2": "罕见",
-          "5-2": "罕见"
-      },
-      "madeof": {
-          "糖组": 2,
-          "异铁组": 1,
-          "轻锰矿": 1
-      },
-      "icon": "MTL_SL_STRG4",
-      "sort": 46
-  },
-  "30014": {
-      "id": "30014",
-      "name": "提纯源岩",
-      "rarity": 4,
-      "source": {
-          "4-6": "罕见"
-      },
-      "madeof": {
-          "固源岩组": 4
-      },
-      "icon": "MTL_SL_G4",
-      "sort": 34
-  },
-  "30063": {
-      "id": "30063",
-      "name": "全新装置",
-      "rarity": 3,
-      "source": {
-          "3-4": "小概率",
-          "4-10": "小概率",
-          "5-10": "小概率"
-      },
-      "madeof": {
-          "装置": 4
-      },
-      "icon": "MTL_SL_BOSS3",
-      "sort": 39
-  },
-  "30053": {
-      "id": "30053",
-      "name": "酮凝集组",
-      "rarity": 3,
-      "source": {
-          "3-1": "小概率",
-          "4-5": "小概率",
-          "5-8": "小概率"
-      },
-      "madeof": {
-          "酮凝集": 4
-      },
-      "icon": "MTL_SL_KETONE3",
-      "sort": 55
-  },
-  "30043": {
-      "id": "30043",
-      "name": "异铁组",
-      "rarity": 3,
-      "source": {
-          "2-8": "小概率",
-          "S4-1": "小概率",
-          "5-5": "小概率"
-      },
-      "madeof": {
-          "异铁": 4
-      },
-      "icon": "MTL_SL_IRON3",
-      "sort": 51
-  },
-  "30033": {
-      "id": "30033",
-      "name": "聚酸酯组",
-      "rarity": 3,
-      "source": {
-          "2-6": "小概率",
-          "3-8": "小概率",
-          "5-3": "中概率"
-      },
-      "madeof": {
-          "聚酸酯": 4
-      },
-      "icon": "MTL_SL_RUSH3",
-      "sort": 43
-  },
-  "30023": {
-      "id": "30023",
-      "name": "糖组",
-      "rarity": 3,
-      "source": {
-          "2-5": "小概率",
-          "4-2": "小概率",
-          "5-2": "小概率"
-      },
-      "madeof": {
-          "糖": 4
-      },
-      "icon": "MTL_SL_STRG3",
-      "sort": 47
-  },
-  "30013": {
-      "id": "30013",
-      "name": "固源岩组",
-      "rarity": 3,
-      "source": {
-          "2-4": "小概率",
-          "4-6": "小概率",
-          "5-1": "小概率"
-      },
-      "madeof": {
-          "固源岩": 5
-      },
-      "icon": "MTL_SL_G3",
-      "sort": 35
-  },
-  "30062": {
-      "id": "30062",
-      "name": "装置",
-      "rarity": 2,
-      "source": {
-          "1-12": "中概率",
-          "S3-4": "大概率"
-      },
-      "madeof": {
-          "破损装置": 3
-      },
-      "icon": "MTL_SL_BOSS2",
-      "sort": 40
-  },
-  "30052": {
-      "id": "30052",
-      "name": "酮凝集",
-      "rarity": 2,
-      "source": {
-          "S2-1": "中概率",
-          "3-7": "固定"
-      },
-      "madeof": {
-          "双酮": 3
-      },
-      "icon": "MTL_SL_KETONE2",
-      "sort": 56
-  },
-  "30042": {
-      "id": "30042",
-      "name": "异铁",
-      "rarity": 2,
-      "source": {
-          "2-1": "中概率",
-          "S3-3": "固定"
-      },
-      "madeof": {
-          "异铁碎片": 3
-      },
-      "icon": "MTL_SL_IRON2",
-      "sort": 52
-  },
-  "30032": {
-      "id": "30032",
-      "name": "聚酸酯",
-      "rarity": 2,
-      "source": {
-          "1-8": "大概率",
-          "S3-2": "固定"
-      },
-      "madeof": {
-          "酯原料": 3
-      },
-      "icon": "MTL_SL_RUSH2",
-      "sort": 44
-  },
-  "30022": {
-      "id": "30022",
-      "name": "糖",
-      "rarity": 2,
-      "source": {
-          "2-2": "大概率",
-          "S3-1": "固定",
-          "5-3": "中概率"
-      },
-      "madeof": {
-          "代糖": 3
-      },
-      "icon": "MTL_SL_STRG2",
-      "sort": 48
-  },
-  "30012": {
-      "id": "30012",
-      "name": "固源岩",
-      "rarity": 2,
-      "source": {
-          "1-7": "固定",
-          "S2-12": "固定"
-      },
-      "madeof": {
-          "源岩": 3
-      },
-      "icon": "MTL_SL_G2",
-      "sort": 36
-  },
-  "30061": {
-      "id": "30061",
-      "name": "破损装置",
+      "sortId": 20004,
       "rarity": 1,
-      "source": {
-          "1-5": "中概率",
-          "2-3": "固定"
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
       },
-      "madeof": {},
-      "icon": "MTL_SL_BOSS1",
-      "sort": 41
-  },
-  "30051": {
-      "id": "30051",
-      "name": "双酮",
-      "rarity": 1,
-      "source": {
-          "1-6": "大概率",
-          "S2-9": "固定"
+      "itemType": "CARD_EXP",
+      "addTimePoint": 1,
+      "spriteCoord": [
+        0,
+        0
+      ]
+    },
+    {
+      "itemId": "2002",
+      "name": "初级作战记录",
+      "name_i18n": {
+        "ko": "초급작전기록",
+        "ja": "初級作戦記録",
+        "en": "Frontline Battle Record",
+        "zh": "初级作战记录"
       },
-      "madeof": {},
-      "icon": "MTL_SL_KETONE1",
-      "sort": 57
-  },
-  "30041": {
-      "id": "30041",
-      "name": "异铁碎片",
-      "rarity": 1,
-      "source": {
-          "1-3": "大概率",
-          "S2-8": "固定"
+      "sortId": 20003,
+      "rarity": 2,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
       },
-      "madeof": {},
-      "icon": "MTL_SL_IRON1",
-      "sort": 53
-  },
-  "30031": {
-      "id": "30031",
-      "name": "酯原料",
-      "rarity": 1,
-      "source": {
-          "0-11": "固定",
-          "S2-7": "固定"
+      "itemType": "CARD_EXP",
+      "addTimePoint": 1,
+      "spriteCoord": [
+        1,
+        0
+      ]
+    },
+    {
+      "itemId": "2003",
+      "name": "中级作战记录",
+      "name_i18n": {
+        "ko": "중급작전기록",
+        "ja": "中級作戦記録",
+        "en": "Tactical Battle Record",
+        "zh": "中级作战记录"
       },
-      "madeof": {},
-      "icon": "MTL_SL_RUSH1",
-      "sort": 45
-  },
-  "30021": {
-      "id": "30021",
-      "name": "代糖",
-      "rarity": 1,
-      "source": {
-          "0-7": "固定",
-          "S2-6": "固定"
+      "sortId": 20002,
+      "rarity": 3,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
       },
-      "madeof": {},
-      "icon": "MTL_SL_STRG1",
-      "sort": 49
-  },
-  "30011": {
-      "id": "30011",
+      "itemType": "CARD_EXP",
+      "addTimePoint": 1,
+      "spriteCoord": [
+        2,
+        0
+      ]
+    },
+    {
+      "itemId": "2004",
+      "name": "高级作战记录",
+      "name_i18n": {
+        "ko": "고급작전기록",
+        "ja": "上級作戦記録",
+        "en": "Strategic Battle Record",
+        "zh": "高级作战记录"
+      },
+      "sortId": 20001,
+      "rarity": 4,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "CARD_EXP",
+      "addTimePoint": 1,
+      "spriteCoord": [
+        3,
+        0
+      ]
+    },
+    {
+      "itemId": "3003",
+      "name": "赤金",
+      "name_i18n": {
+        "ko": "순금",
+        "ja": "純金",
+        "en": "Pure Gold",
+        "zh": "赤金"
+      },
+      "sortId": 10005,
+      "rarity": 3,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "addTimePoint": 1,
+      "spriteCoord": [
+        0,
+        2
+      ]
+    },
+    {
+      "itemId": "30011",
       "name": "源岩",
+      "name_i18n": {
+        "ko": "원암",
+        "ja": "源岩鉱",
+        "en": "Orirock",
+        "zh": "源岩"
+      },
+      "sortId": 100015,
+      "rarity": 0,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        4,
+        0
+      ]
+    },
+    {
+      "itemId": "30012",
+      "name": "固源岩",
+      "name_i18n": {
+        "ko": "원암 큐브",
+        "ja": "初級源岩",
+        "en": "Orirock Cube",
+        "zh": "固源岩"
+      },
+      "sortId": 100014,
       "rarity": 1,
-      "source": {
-          "0-9": "固定",
-          "S2-5": "固定"
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
       },
-      "madeof": {},
-      "icon": "MTL_SL_G1",
-      "sort": 37
-  },
-  "30073": {
-      "id": "30073",
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        5,
+        0
+      ]
+    },
+    {
+      "itemId": "30013",
+      "name": "固源岩组",
+      "name_i18n": {
+        "ko": "원암 큐브 번들",
+        "ja": "中級源岩",
+        "en": "Orirock Cluster",
+        "zh": "固源岩组"
+      },
+      "sortId": 100013,
+      "rarity": 2,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        0,
+        1
+      ]
+    },
+    {
+      "itemId": "30014",
+      "name": "提纯源岩",
+      "name_i18n": {
+        "ko": "정제 원암",
+        "ja": "上級源岩",
+        "en": "Orriock Concentration",
+        "zh": "提纯源岩"
+      },
+      "sortId": 100012,
+      "rarity": 3,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        1,
+        1
+      ]
+    },
+    {
+      "itemId": "30061",
+      "name": "破损装置",
+      "name_i18n": {
+        "ko": "파손된 장치",
+        "ja": "破損装置",
+        "en": "Damaged Device",
+        "zh": "破损装置"
+      },
+      "sortId": 100019,
+      "rarity": 0,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        1,
+        4
+      ]
+    },
+    {
+      "itemId": "30062",
+      "name": "装置",
+      "name_i18n": {
+        "ko": "장치",
+        "ja": "初級装置",
+        "en": "Device",
+        "zh": "装置"
+      },
+      "sortId": 100018,
+      "rarity": 1,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        2,
+        4
+      ]
+    },
+    {
+      "itemId": "30063",
+      "name": "全新装置",
+      "name_i18n": {
+        "ko": "리뉴얼 장치",
+        "ja": "中級装置",
+        "en": "Integrated Device",
+        "zh": "全新装置"
+      },
+      "sortId": 100017,
+      "rarity": 2,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        3,
+        4
+      ]
+    },
+    {
+      "itemId": "30064",
+      "name": "改量装置",
+      "name_i18n": {
+        "ko": "개량 장치",
+        "ja": "上級装置",
+        "en": "Optimized Device",
+        "zh": "改量装置"
+      },
+      "sortId": 100016,
+      "rarity": 3,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        4,
+        4
+      ]
+    },
+    {
+      "itemId": "30031",
+      "name": "酯原料",
+      "name_i18n": {
+        "ko": "에스테르 원료",
+        "ja": "エステル原料",
+        "en": "Ester",
+        "zh": "酯原料"
+      },
+      "sortId": 100023,
+      "rarity": 0,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        1,
+        2
+      ]
+    },
+    {
+      "itemId": "30032",
+      "name": "聚酸酯",
+      "name_i18n": {
+        "ko": "폴리에스테르",
+        "ja": "初級エステル",
+        "en": "Polyester",
+        "zh": "聚酸酯"
+      },
+      "sortId": 100022,
+      "rarity": 1,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        2,
+        2
+      ]
+    },
+    {
+      "itemId": "30033",
+      "name": "聚酸酯组",
+      "name_i18n": {
+        "ko": "폴리에스테르 번들",
+        "ja": "中級エステル",
+        "en": "Polyester Pack",
+        "zh": "聚酸酯组"
+      },
+      "sortId": 100021,
+      "rarity": 2,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        3,
+        2
+      ]
+    },
+    {
+      "itemId": "30034",
+      "name": "聚酸酯块",
+      "name_i18n": {
+        "ko": "폴리에스테르 팩",
+        "ja": "上級エステル",
+        "en": "Polyester Lump",
+        "zh": "聚酸酯块"
+      },
+      "sortId": 100020,
+      "rarity": 3,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        4,
+        2
+      ]
+    },
+    {
+      "itemId": "30021",
+      "name": "代糖",
+      "name_i18n": {
+        "ko": "대체당",
+        "ja": "ブドウ糖",
+        "en": "Sugar Substitute",
+        "zh": "代糖"
+      },
+      "sortId": 100027,
+      "rarity": 0,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        2,
+        1
+      ]
+    },
+    {
+      "itemId": "30022",
+      "name": "糖",
+      "name_i18n": {
+        "ko": "포도당",
+        "ja": "初級糖原",
+        "en": "Sugar",
+        "zh": "糖"
+      },
+      "sortId": 100026,
+      "rarity": 1,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        3,
+        1
+      ]
+    },
+    {
+      "itemId": "30023",
+      "name": "糖组",
+      "name_i18n": {
+        "ko": "포도당 번들",
+        "ja": "中級糖原",
+        "en": "Sugar Pack",
+        "zh": "糖组"
+      },
+      "sortId": 100025,
+      "rarity": 2,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        4,
+        1
+      ]
+    },
+    {
+      "itemId": "30024",
+      "name": "糖聚块",
+      "name_i18n": {
+        "ko": "포도당 팩",
+        "ja": "高級糖原",
+        "en": "Sugar Lump",
+        "zh": "糖聚块"
+      },
+      "sortId": 100024,
+      "rarity": 3,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        5,
+        1
+      ]
+    },
+    {
+      "itemId": "30041",
+      "name": "异铁碎片",
+      "name_i18n": {
+        "ko": "이철 조각",
+        "ja": "異鉄の欠片",
+        "en": "Oriron Shard",
+        "zh": "异铁碎片"
+      },
+      "sortId": 100031,
+      "rarity": 0,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        5,
+        2
+      ]
+    },
+    {
+      "itemId": "30042",
+      "name": "异铁",
+      "name_i18n": {
+        "ko": "이철",
+        "ja": "初級異鉄",
+        "en": "Oriron",
+        "zh": "异铁"
+      },
+      "sortId": 100030,
+      "rarity": 1,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        0,
+        3
+      ]
+    },
+    {
+      "itemId": "30043",
+      "name": "异铁组",
+      "name_i18n": {
+        "ko": "이철 번들",
+        "ja": "中級異鉄",
+        "en": "Oriron Cluster",
+        "zh": "异铁组"
+      },
+      "sortId": 100029,
+      "rarity": 2,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        1,
+        3
+      ]
+    },
+    {
+      "itemId": "30044",
+      "name": "异铁块",
+      "name_i18n": {
+        "ko": "이철 팩",
+        "ja": "高級異鉄",
+        "en": "Oriron Block",
+        "zh": "异铁块"
+      },
+      "sortId": 100028,
+      "rarity": 3,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        2,
+        3
+      ]
+    },
+    {
+      "itemId": "30051",
+      "name": "双酮",
+      "name_i18n": {
+        "ko": "디케톤",
+        "ja": "アケトン試剤",
+        "en": "Diketon",
+        "zh": "双酮"
+      },
+      "sortId": 100035,
+      "rarity": 0,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        3,
+        3
+      ]
+    },
+    {
+      "itemId": "30052",
+      "name": "酮凝集",
+      "name_i18n": {
+        "ko": "아케톤 응집체",
+        "ja": "初級アケトン",
+        "en": "Polyketon",
+        "zh": "酮凝集"
+      },
+      "sortId": 100034,
+      "rarity": 1,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        4,
+        3
+      ]
+    },
+    {
+      "itemId": "30053",
+      "name": "酮凝集组",
+      "name_i18n": {
+        "ko": "아케톤 응집체 번들",
+        "ja": "中級アケトン",
+        "en": "Aketon",
+        "zh": "酮凝集组"
+      },
+      "sortId": 100033,
+      "rarity": 2,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        5,
+        3
+      ]
+    },
+    {
+      "itemId": "30054",
+      "name": "酮阵列",
+      "name_i18n": {
+        "ko": "아케톤 팩",
+        "ja": "高級アケトン",
+        "en": "Keton Colloid",
+        "zh": "酮阵列"
+      },
+      "sortId": 100032,
+      "rarity": 3,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        0,
+        4
+      ]
+    },
+    {
+      "itemId": "30073",
       "name": "扭转醇",
-      "rarity": 3,
-      "source": {
-          "2-9": "小概率",
-          "4-4": "小概率",
-          "5-4": "小概率"
+      "name_i18n": {
+        "ko": "로식 콜",
+        "ja": "合成コール",
+        "en": "Loxic Kohl",
+        "zh": "扭转醇"
       },
-      "madeof": {},
-      "icon": "MTL_SL_ALCOHOL1",
-      "sort": 27
-  },
-  "30093": {
-      "id": "30093",
-      "name": "研磨石",
-      "rarity": 3,
-      "source": {
-          "3-3": "小概率",
-          "4-8": "小概率",
-          "5-7": "小概率"
+      "sortId": 100005,
+      "rarity": 2,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
       },
-      "madeof": {},
-      "icon": "MTL_SL_PG1",
-      "sort": 31
-  },
-  "30083": {
-      "id": "30083",
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        5,
+        4
+      ]
+    },
+    {
+      "itemId": "30074",
+      "name": "白马醇",
+      "name_i18n": {
+        "ko": "화이트 호스 콜",
+        "ja": "上級合成コール",
+        "en": "White Horse Kohl",
+        "zh": "白马醇"
+      },
+      "sortId": 100004,
+      "rarity": 3,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        0,
+        5
+      ]
+    },
+    {
+      "itemId": "30083",
       "name": "轻锰矿",
-      "rarity": 3,
-      "source": {
-          "3-2": "小概率",
-          "4-7": "小概率",
-          "5-6": "小概率"
+      "name_i18n": {
+        "ko": "망간 광석",
+        "ja": "マンガン",
+        "en": "Manganese Ore",
+        "zh": "轻锰矿"
       },
-      "madeof": {},
-      "icon": "MTL_SL_MANGANESE1",
-      "sort": 29
-  },
-  "30103": {
-      "id": "30103",
+      "sortId": 100007,
+      "rarity": 2,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        1,
+        5
+      ]
+    },
+    {
+      "itemId": "30084",
+      "name": "三水锰矿",
+      "name_i18n": {
+        "ko": "망간 중합체",
+        "ja": "上級マンガン",
+        "en": "Manganese Trihydrate",
+        "zh": "三水锰矿"
+      },
+      "sortId": 100006,
+      "rarity": 3,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        2,
+        5
+      ]
+    },
+    {
+      "itemId": "30093",
+      "name": "研磨石",
+      "name_i18n": {
+        "ko": "연마석",
+        "ja": "砥石",
+        "en": "Grindstone",
+        "zh": "研磨石"
+      },
+      "sortId": 100009,
+      "rarity": 2,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        3,
+        5
+      ]
+    },
+    {
+      "itemId": "30094",
+      "name": "五水研磨石",
+      "name_i18n": {
+        "ko": "고급연마석",
+        "ja": "上級砥石",
+        "en": "Grindstone Pentahydrate",
+        "zh": "五水研磨石"
+      },
+      "sortId": 100008,
+      "rarity": 3,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        4,
+        5
+      ]
+    },
+    {
+      "itemId": "30103",
       "name": "RMA70-12",
-      "rarity": 3,
-      "source": {
-          "2-10": "小概率",
-          "4-9": "小概率",
-          "5-9": "小概率"
+      "name_i18n": {
+        "ko": "RMA70-12",
+        "ja": "RMA70-12",
+        "en": "RMA70-12",
+        "zh": "RMA70-12"
       },
-      "madeof": {},
-      "icon": "MTL_SL_RMA7012",
-      "sort": 33
-  },
-  "3301": {
-      "id": "3301",
+      "sortId": 100011,
+      "rarity": 2,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        5,
+        5
+      ]
+    },
+    {
+      "itemId": "30104",
+      "name": "RMA70-24",
+      "name_i18n": {
+        "ko": "RMA70-24",
+        "ja": "RMA70-24",
+        "en": "RMA70-24",
+        "zh": "RMA70-24"
+      },
+      "sortId": 100010,
+      "rarity": 3,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "spriteCoord": [
+        0,
+        6
+      ]
+    },
+    {
+      "itemId": "furni",
+      "name": "家具",
+      "name_i18n": {
+        "ko": "가구",
+        "ja": "家具",
+        "en": "Furniture",
+        "zh": "家具"
+      },
+      "sortId": 999999,
+      "rarity": 0,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "FURN"
+    },
+    {
+      "itemId": "3112",
+      "name": "碳",
+      "name_i18n": {
+        "ko": "카본",
+        "ja": "初級炭素材",
+        "en": "Carbon Stick",
+        "zh": "碳"
+      },
+      "sortId": 200008,
+      "rarity": 1,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "addTimePoint": 2,
+      "spriteCoord": [
+        1,
+        6
+      ]
+    },
+    {
+      "itemId": "3113",
+      "name": "碳素",
+      "name_i18n": {
+        "ko": "카본 번들",
+        "ja": "中級炭素材",
+        "en": "Carbon Brick",
+        "zh": "碳素"
+      },
+      "sortId": 200007,
+      "rarity": 2,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "addTimePoint": 2,
+      "spriteCoord": [
+        2,
+        6
+      ]
+    },
+    {
+      "itemId": "3114",
+      "name": "碳素组",
+      "name_i18n": {
+        "ko": "카본 팩",
+        "ja": "上級炭素材",
+        "en": "Carbon Brick",
+        "zh": "碳素组"
+      },
+      "sortId": 200006,
+      "rarity": 3,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "addTimePoint": 2,
+      "spriteCoord": [
+        3,
+        6
+      ]
+    },
+    {
+      "itemId": "3301",
       "name": "技巧概要·卷1",
-      "rarity": 3,
-      "source": {
-          "二三五日": "",
-          "1-10": "固定"
+      "name_i18n": {
+        "ko": "스킬개론 제1권",
+        "ja": "アーツ学Ⅰ",
+        "en": "Skill Summary - 1",
+        "zh": "技巧概要·卷1"
       },
-      "madeof": {},
-      "icon": "MTL_SKILL1",
-      "sort": 72
-  },
-  "3302": {
-      "id": "3302",
+      "sortId": 300003,
+      "rarity": 1,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "MATERIAL",
+      "addTimePoint": 2,
+      "spriteCoord": [
+        4,
+        6
+      ]
+    },
+    {
+      "itemId": "3302",
       "name": "技巧概要·卷2",
-      "rarity": 4,
-      "source": {
-          "二三五日": ""
+      "name_i18n": {
+        "ko": "스킬개론 제2권",
+        "ja": "アーツ学Ⅱ",
+        "en": "Skill Summary - 2",
+        "zh": "技巧概要·卷2"
       },
-      "madeof": {
-          "技巧概要·卷1": 3
+      "sortId": 300002,
+      "rarity": 2,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
       },
-      "icon": "MTL_SKILL2",
-      "sort": 71
-  },
-  "3303": {
-      "id": "3303",
+      "itemType": "MATERIAL",
+      "addTimePoint": 2,
+      "spriteCoord": [
+        5,
+        6
+      ]
+    },
+    {
+      "itemId": "3303",
       "name": "技巧概要·卷3",
-      "rarity": 5,
-      "source": {
-          "二三五日": ""
+      "name_i18n": {
+        "ko": "스킬개론 제3권",
+        "ja": "アーツ学Ⅲ",
+        "en": "Skill Summary - 3",
+        "zh": "技巧概要·卷3"
       },
-      "madeof": {
-          "技巧概要·卷2": 3
-      },
-      "icon": "MTL_SKILL3",
-      "sort": 70
-  },
-  "32001": {
-      "id": "32001",
-      "name": "芯片助剂",
-      "rarity": 4,
-      "icon": "MTL_ASC_DI",
-      "source": {
-          "一四六日": ""
-      },
-      "madeof": {},
-      "sort": 73
-  },
-  "3211": {
-      "id": "3211",
-      "name": "先锋芯片",
+      "sortId": 300001,
       "rarity": 3,
-      "icon": "MTL_ASC_PIO1",
-      "source": {
-          "三四六日": ""
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
       },
-      "madeof": {},
-      "sort": 76
-  },
-  "3212": {
-      "id": "3212",
-      "name": "先锋芯片组",
+      "itemType": "MATERIAL",
+      "addTimePoint": 2,
+      "spriteCoord": [
+        0,
+        7
+      ]
+    },
+    {
+      "itemId": "et_ObsidianPass",
+      "name": "黑曜石节门票",
+      "name_i18n": {
+        "ko": "옵시디언 페스티벌 티켓",
+        "ja": "フェスチケット",
+        "en": "Obsidian Festival Ticket",
+        "zh": "黑曜石节门票"
+      },
+      "sortId": -10000,
       "rarity": 4,
-      "icon": "MTL_ASC_PIO2",
-      "source": {
-          "三四六日": ""
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
       },
-      "madeof": {},
-      "sort": 75
-  },
-  "3213": {
-      "id": "3213",
-      "name": "先锋双芯片",
-      "rarity": 5,
-      "icon": "MTL_ASC_PIO3",
-      "source": {},
-      "madeof": {
-          "先锋芯片组": 2,
-          "芯片助剂": 1
+      "itemType": "ACTIVITY_ITEM",
+      "addTimePoint": 0,
+      "spriteCoord": [
+        1,
+        7
+      ]
+    },
+    {
+      "itemId": "token_Obsidian",
+      "name": "汐斯塔的黑曜石",
+      "name_i18n": {
+        "ko": "시에스타의 흑요석",
+        "ja": "シエスタの黒曜石",
+        "en": "Siesta Obsidian",
+        "zh": "汐斯塔的黑曜石"
       },
-      "sort": 74
-  },
-  "3221": {
-      "id": "3221",
-      "name": "近卫芯片",
+      "sortId": -10000,
       "rarity": 3,
-      "icon": "MTL_ASC_GRD1",
-      "source": {
-          "二三六日": ""
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
       },
-      "madeof": {},
-      "sort": 79
-  },
-  "3222": {
-      "id": "3222",
-      "name": "近卫芯片组",
-      "rarity": 4,
-      "icon": "MTL_ASC_GRD2",
-      "source": {
-          "二三六日": ""
+      "itemType": "ACTIVITY_ITEM",
+      "addTimePoint": 0,
+      "spriteCoord": [
+        2,
+        7
+      ]
+    },
+    {
+      "itemId": "token_ObsidianCoin",
+      "name": "黑曜石节抽奖代币",
+      "name_i18n": {
+        "ko": "옵시디언 페스티벌 추첨 코인",
+        "ja": "ガチャコイン",
+        "en": "Obsidian Festival Token",
+        "zh": "黑曜石节抽奖代币"
       },
-      "madeof": {},
-      "sort": 78
-  },
-  "3223": {
-      "id": "3223",
-      "name": "近卫双芯片",
-      "rarity": 5,
-      "icon": "MTL_ASC_GRD3",
-      "source": {},
-      "madeof": {
-          "近卫芯片组": 2,
-          "芯片助剂": 1
-      },
-      "sort": 77
-  },
-  "3231": {
-      "id": "3231",
-      "name": "重装芯片",
+      "sortId": -10000,
       "rarity": 3,
-      "icon": "MTL_ASC_TNK1",
-      "source": {
-          "一四五日": ""
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
       },
-      "madeof": {},
-      "sort": 82
-  },
-  "3232": {
-      "id": "3232",
-      "name": "重装芯片组",
-      "rarity": 4,
-      "icon": "MTL_ASC_TNK2",
-      "source": {
-          "一四五日": ""
+      "itemType": "ACTIVITY_ITEM",
+      "addTimePoint": 0,
+      "spriteCoord": [
+        3,
+        7
+      ]
+    },
+    {
+      "itemId": "4001_2000",
+      "name": "龙门币2000",
+      "name_i18n": {
+        "ko": "용문폐2000",
+        "ja": "龍門幣2000",
+        "en": "LMD2000",
+        "zh": "龙门币2000"
       },
-      "madeof": {},
-      "sort": 81
-  },
-  "3233": {
-      "id": "3233",
-      "name": "重装双芯片",
-      "rarity": 5,
-      "icon": "MTL_ASC_TNK3",
-      "source": {},
-      "madeof": {
-          "重装芯片组": 2,
-          "芯片助剂": 1
-      },
-      "sort": 80
-  },
-  "3241": {
-      "id": "3241",
-      "name": "狙击芯片",
+      "sortId": -10000,
       "rarity": 3,
-      "icon": "MTL_ASC_SNP1",
-      "source": {
-          "一二五六": ""
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
       },
-      "madeof": {},
-      "sort": 85
-  },
-  "3242": {
-      "id": "3242",
-      "name": "狙击芯片组",
-      "rarity": 4,
-      "icon": "MTL_ASC_SNP2",
-      "source": {
-          "一二五六": ""
+      "itemType": "TEMP",
+      "addTimePoint": 0,
+      "spriteCoord": [
+        4,
+        7
+      ]
+    },
+    {
+      "itemId": "4001_1500",
+      "name": "龙门币1500",
+      "name_i18n": {
+        "ko": "용문폐1500",
+        "ja": "龍門幣1500",
+        "en": "LMD1500",
+        "zh": "龙门币1500"
       },
-      "madeof": {},
-      "sort": 84
-  },
-  "3243": {
-      "id": "3243",
-      "name": "狙击双芯片",
-      "rarity": 5,
-      "icon": "MTL_ASC_SNP3",
-      "source": {},
-      "madeof": {
-          "狙击芯片组": 2,
-          "芯片助剂": 1
-      },
-      "sort": 83
-  },
-  "3251": {
-      "id": "3251",
-      "name": "术师芯片",
+      "sortId": -10000,
       "rarity": 3,
-      "icon": "MTL_ASC_CST1",
-      "source": {
-          "一二五六": ""
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
       },
-      "madeof": {},
-      "sort": 88
-  },
-  "3252": {
-      "id": "3252",
-      "name": "术师芯片组",
-      "rarity": 4,
-      "icon": "MTL_ASC_CST2",
-      "source": {
-          "一二五六": ""
+      "itemType": "TEMP",
+      "addTimePoint": 0,
+      "spriteCoord": [
+        5,
+        7
+      ]
+    },
+    {
+      "itemId": "4001_1000",
+      "name": "龙门币1000",
+      "name_i18n": {
+        "ko": "용문폐1000",
+        "ja": "龍門幣1000",
+        "en": "LMD1000",
+        "zh": "龙门币1000"
       },
-      "madeof": {},
-      "sort": 87
-  },
-  "3253": {
-      "id": "3253",
-      "name": "术师双芯片",
-      "rarity": 5,
-      "icon": "MTL_ASC_CST3",
-      "source": {},
-      "madeof": {
-          "术师芯片组": 2,
-          "芯片助剂": 1
-      },
-      "sort": 86
-  },
-  "3261": {
-      "id": "3261",
-      "name": "医疗芯片",
+      "sortId": -10000,
       "rarity": 3,
-      "icon": "MTL_ASC_MED1",
-      "source": {
-          "一四五日": ""
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
       },
-      "madeof": {},
-      "sort": 91
-  },
-  "3262": {
-      "id": "3262",
-      "name": "医疗芯片组",
-      "rarity": 4,
-      "icon": "MTL_ASC_MED2",
-      "source": {
-          "一四五日": ""
+      "itemType": "TEMP",
+      "addTimePoint": 0,
+      "spriteCoord": [
+        0,
+        8
+      ]
+    },
+    {
+      "itemId": "31013",
+      "name": "凝胶",
+      "name_i18n": {
+        "ko": "젤",
+        "ja": "人工ゲル",
+        "en": "Coagulating Gel",
+        "zh": "凝胶"
       },
-      "madeof": {},
-      "sort": 90
-  },
-  "3263": {
-      "id": "3263",
-      "name": "医疗双芯片",
-      "rarity": 5,
-      "icon": "MTL_ASC_MED3",
-      "source": {},
-      "madeof": {
-          "医疗芯片组": 2,
-          "芯片助剂": 1
+      "sortId": 100037,
+      "rarity": 2,
+      "existence": {
+        "US": {
+          "exist": false
+        },
+        "JP": {
+          "exist": false
+        },
+        "KR": {
+          "exist": false
+        },
+        "CN": {
+          "exist": true
+        }
       },
-      "sort": 89
-  },
-  "3271": {
-      "id": "3271",
-      "name": "辅助芯片",
+      "itemType": "MATERIAL",
+      "addTimePoint": 3,
+      "spriteCoord": [
+        1,
+        8
+      ]
+    },
+    {
+      "itemId": "31014",
+      "name": "聚合凝胶",
+      "name_i18n": {
+        "ko": "중합젤",
+        "ja": "融合ゲル",
+        "en": "Polymerized Gel",
+        "zh": "聚合凝胶"
+      },
+      "sortId": 100036,
       "rarity": 3,
-      "icon": "MTL_ASC_SUP1",
-      "source": {
-          "三四六日": ""
+      "existence": {
+        "US": {
+          "exist": false
+        },
+        "JP": {
+          "exist": false
+        },
+        "KR": {
+          "exist": false
+        },
+        "CN": {
+          "exist": true
+        }
       },
-      "madeof": {},
-      "sort": 94
-  },
-  "3272": {
-      "id": "3272",
-      "name": "辅助芯片组",
-      "rarity": 4,
-      "icon": "MTL_ASC_SUP2",
-      "source": {
-          "三四六日": ""
+      "itemType": "MATERIAL",
+      "addTimePoint": 3,
+      "spriteCoord": [
+        2,
+        8
+      ]
+    },
+    {
+      "itemId": "31023",
+      "name": "炽合金",
+      "name_i18n": {
+        "ko": "열합금",
+        "ja": "熾合金",
+        "en": "Incandescent Alloy",
+        "zh": "炽合金"
       },
-      "madeof": {},
-      "sort": 93
-  },
-  "3273": {
-      "id": "3273",
-      "name": "辅助双芯片",
-      "rarity": 5,
-      "icon": "MTL_ASC_SUP3",
-      "source": {},
-      "madeof": {
-          "辅助芯片组": 2,
-          "芯片助剂": 1
+      "sortId": 100039,
+      "rarity": 2,
+      "existence": {
+        "US": {
+          "exist": false
+        },
+        "JP": {
+          "exist": false
+        },
+        "KR": {
+          "exist": false
+        },
+        "CN": {
+          "exist": true
+        }
       },
-      "sort": 92
-  },
-  "3281": {
-      "id": "3281",
-      "name": "特种芯片",
+      "itemType": "MATERIAL",
+      "addTimePoint": 3,
+      "spriteCoord": [
+        3,
+        8
+      ]
+    },
+    {
+      "itemId": "31024",
+      "name": "炽合金块",
+      "name_i18n": {
+        "ko": "열합금 팩",
+        "ja": "上級熾合金",
+        "en": "Incandescent Alloy Block",
+        "zh": "炽合金块"
+      },
+      "sortId": 100038,
       "rarity": 3,
-      "icon": "MTL_ASC_SPC1",
-      "source": {
-          "二三六日": ""
+      "existence": {
+        "US": {
+          "exist": false
+        },
+        "JP": {
+          "exist": false
+        },
+        "KR": {
+          "exist": false
+        },
+        "CN": {
+          "exist": true
+        }
       },
-      "madeof": {},
-      "sort": 97
-  },
-  "3282": {
-      "id": "3282",
-      "name": "特种芯片组",
+      "itemType": "MATERIAL",
+      "addTimePoint": 3,
+      "spriteCoord": [
+        4,
+        8
+      ]
+    },
+    {
+      "itemId": "randomMaterial_1",
+      "name": "罗德岛物资补给",
+      "name_i18n": {
+        "ko": "罗德岛物资补给",
+        "ja": "罗德岛物资补给",
+        "en": "罗德岛物资补给",
+        "zh": "罗德岛物资补给"
+      },
+      "sortId": 30005,
       "rarity": 4,
-      "icon": "MTL_ASC_SPC2",
-      "source": {
-          "二三六日": ""
+      "existence": {
+        "US": {
+          "exist": false
+        },
+        "JP": {
+          "exist": false
+        },
+        "KR": {
+          "exist": false
+        },
+        "CN": {
+          "exist": true
+        }
       },
-      "madeof": {},
-      "sort": 96
-  },
-  "3283": {
-      "id": "3283",
-      "name": "特种双芯片",
-      "rarity": 5,
-      "icon": "MTL_ASC_SPC3",
-      "source": {},
-      "madeof": {
-          "特种芯片组": 2,
-          "芯片助剂": 1
+      "itemType": "ACTIVITY_ITEM",
+      "addTimePoint": 3,
+      "spriteCoord": [
+        5,
+        8
+      ]
+    },
+    {
+      "itemId": "ap_supply_lt_010",
+      "name": "应急理智小样",
+      "name_i18n": {
+        "ko": "应急理智小样",
+        "ja": "应急理智小样",
+        "en": "应急理智小样",
+        "zh": "应急理智小样"
       },
-      "sort": 95
-  }
-}
+      "sortId": 50004,
+      "rarity": 4,
+      "existence": {
+        "US": {
+          "exist": false
+        },
+        "JP": {
+          "exist": false
+        },
+        "KR": {
+          "exist": false
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "ACTIVITY_ITEM",
+      "addTimePoint": 3,
+      "spriteCoord": [
+        0,
+        9
+      ]
+    },
+    {
+      "itemId": "randomMaterial_2",
+      "name": "岁过华灯",
+      "name_i18n": {
+        "ko": "岁过华灯",
+        "ja": "岁过华灯",
+        "en": "岁过华灯",
+        "zh": "岁过华灯"
+      },
+      "sortId": 30005,
+      "rarity": 4,
+      "existence": {
+        "US": {
+          "exist": false
+        },
+        "JP": {
+          "exist": false
+        },
+        "KR": {
+          "exist": false
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "ACTIVITY_ITEM",
+      "addTimePoint": 4,
+      "spriteCoord": [
+        1,
+        9
+      ]
+    },
+    {
+      "itemId": "4005",
+      "name": "资质凭证",
+      "name_i18n": {
+        "ko": "자격증명서",
+        "ja": "一般資格証",
+        "en": "Commendation Certificate",
+        "zh": "资质凭证"
+      },
+      "sortId": 10007,
+      "rarity": 2,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "LGG_SHD",
+      "spriteCoord": [
+        2,
+        9
+      ]
+    },
+    {
+      "itemId": "30115",
+      "name": "聚合剂",
+      "name_i18n": {
+        "ko": "중합제",
+        "ja": "融合剤",
+        "en": "Polymerization Preparation",
+        "zh": "聚合剂"
+      },
+      "sortId": 100003,
+      "rarity": 4,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "ARKPLANNER",
+      "spriteCoord": [
+        3,
+        9
+      ]
+    },
+    {
+      "itemId": "30125",
+      "name": "双极纳米片",
+      "name_i18n": {
+        "ko": "바이폴라 나노플레이크 칩",
+        "ja": "ナノフレーク",
+        "en": "Bipolar Nanoflake",
+        "zh": "双极纳米片"
+      },
+      "sortId": 100002,
+      "rarity": 4,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "ARKPLANNER",
+      "spriteCoord": [
+        4,
+        9
+      ]
+    },
+    {
+      "itemId": "30135",
+      "name": "D32钢",
+      "name_i18n": {
+        "ko": "D32강",
+        "ja": "D32鋼",
+        "en": "D32 Steel",
+        "zh": "D32钢"
+      },
+      "sortId": 100001,
+      "rarity": 4,
+      "existence": {
+        "US": {
+          "exist": true
+        },
+        "JP": {
+          "exist": true
+        },
+        "KR": {
+          "exist": true
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "ARKPLANNER",
+      "spriteCoord": [
+        5,
+        9
+      ]
+    },
+    {
+      "itemId": "randomMaterial_3",
+      "name": "32h战略配给",
+      "name_i18n": {
+        "ko": "32h战略配给",
+        "ja": "32h战略配给",
+        "en": "32h战略配给",
+        "zh": "32h战略配给"
+      },
+      "sortId": 30005,
+      "rarity": 4,
+      "existence": {
+        "US": {
+          "exist": false
+        },
+        "JP": {
+          "exist": false
+        },
+        "KR": {
+          "exist": false
+        },
+        "CN": {
+          "exist": true
+        }
+      },
+      "itemType": "ACTIVITY_ITEM",
+      "addTimePoint": 4,
+      "spriteCoord": [
+        0,
+        10
+      ]
+    }
+  ]

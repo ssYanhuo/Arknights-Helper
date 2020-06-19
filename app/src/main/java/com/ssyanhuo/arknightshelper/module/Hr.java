@@ -838,7 +838,7 @@ public class Hr {
             fuzzy = false;
             TextView textView = contentView.findViewById(R.id.hr_description);
             textView.setText(R.string.hr_desc_part_1_exact);
-            if (sharedPreferences.getString("game_language", I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE).equals(I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE)){
+            if (sharedPreferences.getString("game_language", I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE).equals(I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE) && PythonUtils.isAbiSupported()){
                 textView.append(" ");
                 SpannableStringBuilder spannableStringBuilder1 = new SpannableStringBuilder(applicationContext.getResources().getString(R.string.hr_desc_part_2));
                 spannableStringBuilder1.setSpan(new ClickableSpan() {
@@ -869,7 +869,7 @@ public class Hr {
             fuzzy = true;
             TextView textView = contentView.findViewById(R.id.hr_description);
             textView.setText(R.string.hr_desc_part_1_fuzzy);
-            if (sharedPreferences.getString("game_language", I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE).equals(I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE)){
+            if (sharedPreferences.getString("game_language", I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE).equals(I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE) && PythonUtils.isAbiSupported()){
                 textView.append(" ");
                 SpannableStringBuilder spannableStringBuilder1 = new SpannableStringBuilder(applicationContext.getResources().getString(R.string.hr_desc_part_2));
                 spannableStringBuilder1.setSpan(new ClickableSpan() {
@@ -914,6 +914,13 @@ public class Hr {
         assert windowManager != null;
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         int rotation = windowManager.getDefaultDisplay().getRotation();
+        if (sharedPreferences.getBoolean("emulator_mode", false)){
+            if (rotation == 0 || rotation == 2){
+                rotation = 3;
+            }else {
+                rotation = 0;
+            }
+        }
         if (rotation == 0 || rotation == 3) {
             selector.setBackgroundColor(backgroundColor);
         }
@@ -990,12 +997,20 @@ public class Hr {
         }, 500);
     }
 
-    public void hideSubWindow() {DisplayMetrics displayMetrics = new DisplayMetrics();
+    public void hideSubWindow() {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
         assert windowManager != null;
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         int rotation = windowManager.getDefaultDisplay().getRotation();
         placeHolder = rootLayout.findViewWithTag("placeHolder");
         Animator animator;
+        if (sharedPreferences.getBoolean("emulator_mode", false)){
+            if (rotation == 0 || rotation == 2){
+                rotation = 3;
+            }else {
+                rotation = 0;
+            }
+        }
         if (rotation == 0 || rotation == 2){
             animator = AnimatorInflater.loadAnimator(applicationContext, R.animator.overlay_sub_hide_portrait);
         }else {

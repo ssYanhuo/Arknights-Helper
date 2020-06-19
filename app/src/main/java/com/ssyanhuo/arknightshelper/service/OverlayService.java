@@ -678,6 +678,13 @@ public class OverlayService extends Service {
         });
         tabLayout.setOverlayColor(ThemeUtils.getBackgroundColor(getApplicationContext(), contextThemeWrapper));
         //检测屏幕方向和是否全屏
+        if(preferences.getBoolean("emulator_mode", false)){
+            if(rotation == 1 || rotation == 3){
+                rotation = 0;
+            }else {
+                rotation = 3;
+            }
+        }
         if(rotation == 1 || rotation == 3){//横
             mainLayoutParams.height = displayMetrics.heightPixels;
             mainLayoutParams.width = displayMetrics.widthPixels / 2 + preferences.getInt("margin_fix", 0);
