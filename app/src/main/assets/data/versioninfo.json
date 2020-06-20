@@ -1,5 +1,5 @@
 {
-    "versionCode": 32,
-    "versionName": "OpenPreview-1.2.0",
-    "releaseNote": "[Mod]同步最新数据\n[New]设置新增模拟器兼容模式，适配部分非标准分辨率模拟器"
+    "versionCode": 33,
+    "versionName": "OpenPreview-1.3.0",
+    "releaseNote": "[Mod]同步最新数据\n[New]设置新增模拟器兼容模式，适配部分非标准分辨率模拟器\n[Fix]修复部分数据错误导致的闪退问题"
 }

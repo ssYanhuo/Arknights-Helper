@@ -1,1 +1,20 @@
-[{"outputType":{"type":"APK"},"apkData":{"type":"MAIN","splits":[],"versionCode":31,"versionName":"OpenPreview-1.1.0","enabled":true,"outputFile":"app-release.apk","fullName":"release","baseName":"release","dirName":""},"path":"app-release.apk","properties":{}}]
+{
+  "version": 1,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.ssyanhuo.arknightshelper",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "properties": [],
+      "versionCode": 33,
+      "versionName": "33",
+      "enabled": true,
+      "outputFile": "app-release.apk"
+    }
+  ]
+}
