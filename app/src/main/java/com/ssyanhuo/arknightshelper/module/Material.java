@@ -33,6 +33,7 @@ import com.ssyanhuo.arknightshelper.entity.StaticData;
 import com.ssyanhuo.arknightshelper.service.OverlayService;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
 import com.ssyanhuo.arknightshelper.utils.JSONUtils;
+import com.ssyanhuo.arknightshelper.utils.PythonUtils;
 import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
 import com.ssyanhuo.arknightshelper.utils.I18nUtils;
 import com.ssyanhuo.arknightshelper.widget.ItemDetailView;
@@ -354,16 +355,29 @@ public class Material {
         int stamina = 0;
         resultContent = contentView.findViewById(R.id.material_result_content);
         resultContent.removeAllViews();
-        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder("固定到屏幕");
-        spannableStringBuilder.setSpan(new ClickableSpan() {
+        SpannableStringBuilder spannableStringBuilder1 = new SpannableStringBuilder("固定到屏幕");
+        spannableStringBuilder1.setSpan(new ClickableSpan() {
             @Override
             public void onClick(@NonNull View widget) {
                 overlayService.hideFloatingWindow();
                 pinWindow();
             }
-        }, 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ((TextView) contentView.findViewById(R.id.material_pin)).setText(spannableStringBuilder);
+        }, 0, spannableStringBuilder1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ((TextView) contentView.findViewById(R.id.material_pin)).setText(spannableStringBuilder1);
         ((TextView) contentView.findViewById(R.id.material_pin)).setMovementMethod(LinkMovementMethod.getInstance());
+        if (PythonUtils.isAbiSupported() && sharedPreferences.getBoolean("disable_planner", false)) {
+            ((TextView) contentView.findViewById(R.id.material_plan)).setVisibility(GONE);
+        } else {
+            SpannableStringBuilder spannableStringBuilder2 = new SpannableStringBuilder("刷图规划");
+            spannableStringBuilder2.setSpan(new ClickableSpan() {
+                @Override
+                public void onClick(@NonNull View widget) {
+                    plan();
+                }
+            }, 0, spannableStringBuilder2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ((TextView) contentView.findViewById(R.id.material_plan)).setText(spannableStringBuilder2);
+            ((TextView) contentView.findViewById(R.id.material_plan)).setMovementMethod(LinkMovementMethod.getInstance());
+        }
         ItemDetailView itemDetailView;
         if (levelCheckbox.isChecked() && charNow != null){
             int stageFrom = stageNow.getInt();
@@ -647,10 +661,29 @@ public class Material {
         }
         contentView.findViewById(R.id.material_result_content).setVisibility(VISIBLE);
         if(((LinearLayout) contentView.findViewById(R.id.material_result_content)).getChildCount() <= 0){
-            ((TextView) contentView.findViewById(R.id.material_pin)).setVisibility(GONE);
+            (contentView.findViewById(R.id.material_tools)).setVisibility(GONE);
         }else{
-            ((TextView) contentView.findViewById(R.id.material_pin)).setVisibility(VISIBLE);
+            (contentView.findViewById(R.id.material_tools)).setVisibility(VISIBLE);
         }
+    }
+
+    private void plan() {
+        JSONObject jsonObject = new JSONObject();
+        ArrayList<String> itemList = new ArrayList<>(Arrays.asList(applicationContext.getResources().getStringArray(R.array.planner_materials)));
+        for (int i = 0; i < resultContent.getChildCount(); i++) {
+            ItemDetailView attachedView = (ItemDetailView) resultContent.getChildAt(i);
+            if (!itemList.contains(attachedView.getItemName())){
+                continue;
+            }
+            jsonObject.put(attachedView.getItemName(), attachedView.getNumber());
+        }
+        if (jsonObject.entrySet().size() > 0){
+            overlayService.getPlan(jsonObject);
+        }else {
+            Toast.makeText(applicationContext, "没有可规划的材料", Toast.LENGTH_SHORT).show();
+        }
+        //Log.e(TAG, "plan:  " +  jsonObject.toJSONString());
+
     }
 
     private void pinWindow(){

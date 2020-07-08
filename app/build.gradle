@@ -7,11 +7,11 @@ android {
         applicationId "com.ssyanhuo.arknightshelper"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 33
-        versionName "OpenPreview-1.3.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        renderscriptTargetApi 28
-        renderscriptSupportModeEnabled true
+        versionCode 34
+    versionName "OpenPreview-1.4.0"
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    renderscriptTargetApi 28
+    renderscriptSupportModeEnabled true
 }
     buildTypes {
         release {
@@ -44,4 +44,7 @@ dependencies {
     implementation 'com.eightbitlab:blurview:1.6.3'
     implementation files('libs/ocr-sdk.jar')
     implementation files('src/main/jniLibs/starcore_android_r3.72.jar')
+    implementation 'androidx.navigation:navigation-fragment:2.3.0'
+    implementation 'androidx.navigation:navigation-ui:2.3.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 }

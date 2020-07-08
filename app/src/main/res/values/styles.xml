@@ -3,14 +3,14 @@
     <!-- 默认主题 -->
     <style name="AppTheme.Default" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+</style>
 
-    <style name="AppTheme.Default.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
+<style name="AppTheme.Default.NoActionBar">
+<item name="windowActionBar">false</item>
+<item name="windowNoTitle">true</item>
+</style>
 
     <style name="AppTheme.Default.FloatingWindow" parent="Theme.AppCompat">
         <item name="android:textColor">#E0E0E0</item>

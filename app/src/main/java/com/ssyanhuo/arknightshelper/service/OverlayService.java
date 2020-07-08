@@ -1,5 +1,7 @@
 package com.ssyanhuo.arknightshelper.service;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -30,6 +32,7 @@ import android.widget.*;
 
 import androidx.appcompat.view.ContextThemeWrapper;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.android.material.tabs.TabLayout;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.activity.SettingsActivity;
@@ -78,7 +81,7 @@ public class OverlayService extends Service {
     RelativeLayout relativeLayout_drop;
     RelativeLayout relativeLayout_planner;
     RelativeLayout relativeLayout_more;
-    BlurView tabLayout;
+    BlurView tabBlurLayout;
     ImageButton button;
     final int HR = 0;
     final int MATERIAL = 1;
@@ -110,6 +113,7 @@ public class OverlayService extends Service {
     ServiceConnection pythonServiceConnection;
     PythonService.PythonBinder pythonService;
     private LinearLayout pinnedWindow;
+    private TabLayout tabLayout;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -519,6 +523,7 @@ public class OverlayService extends Service {
         backgroundLayout = new LinearLayout(contextThemeWrapper);
         placeHolder = new LinearLayout(contextThemeWrapper);
         mainLayout = (RelativeLayout) LayoutInflater.from(contextThemeWrapper).inflate(R.layout.overlay_main, null);
+        tabLayout = mainLayout.findViewById(R.id.tab_main);
         if (ThemeUtils.getThemeMode(getApplicationContext()) == ThemeUtils.THEME_LIGHT){
             ((ImageButton) mainLayout.findViewById(R.id.overlay_close)).setColorFilter(contextThemeWrapper.getResources().getColor(R.color.colorPrimary));
         }
@@ -545,7 +550,7 @@ public class OverlayService extends Service {
         relativeLayout_drop.setVisibility(GONE);
         relativeLayout_planner.setVisibility(GONE);
         relativeLayout_more.setVisibility(GONE);
-        TabLayout tabLayout = mainLayout.findViewById(R.id.tab_main);
+
         if (!PythonUtils.isAbiSupported() || preferences.getBoolean("disable_planner", false)){
             tabLayout.removeTabAt(3);
             tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -662,21 +667,23 @@ public class OverlayService extends Service {
         mainLayoutParams.x = 0;
         mainLayoutParams.y = 0;
         backgroundLayoutParams.windowAnimations = R.style.AppTheme_Default_FloatingWindowAnimation;
-        tabLayout = mainLayout.findViewById(R.id.overlay_tab);
-        tabLayout.setupWith(mainLayout)
+        tabBlurLayout = mainLayout.findViewById(R.id.overlay_tab);
+        tabBlurLayout.setupWith(mainLayout)
                 .setBlurRadius(20f)
                 .setBlurAlgorithm(new RenderScriptBlur(contextThemeWrapper))
                 .setBlurAutoUpdate(false)
                 .setHasFixedTransformationMatrix(true)
                 .setFrameClearDrawable(new ColorDrawable(Color.BLACK))
                 .setBlurEnabled(true);
-        tabLayout.setOutlineProvider(new ViewOutlineProvider() {
+        tabBlurLayout.setOutlineProvider(new ViewOutlineProvider() {
             @Override
             public void getOutline(View view, Outline outline) {
                 outline.setRect(0, 0, view.getWidth(), view.getHeight());
             }
         });
-        tabLayout.setOverlayColor(ThemeUtils.getBackgroundColor(getApplicationContext(), contextThemeWrapper));
+
+        tabBlurLayout.setOverlayColor(ThemeUtils.getBackgroundColor(getApplicationContext(), contextThemeWrapper));
+
         //检测屏幕方向和是否全屏
         if(preferences.getBoolean("emulator_mode", false)){
             if(rotation == 1 || rotation == 3){
@@ -756,47 +763,47 @@ public class OverlayService extends Service {
     public void changeFloatingWindowContent(int i){
         switch (i){
             case HR:
-                relativeLayout_hr.setVisibility(VISIBLE);
-                relativeLayout_material.setVisibility(GONE);
-                relativeLayout_drop.setVisibility(GONE);
-                relativeLayout_planner.setVisibility(GONE);
-                relativeLayout_more.setVisibility(GONE);
+                playChangeModuleAnim(new View[]{relativeLayout_hr}, new View[]{relativeLayout_material, relativeLayout_drop, relativeLayout_planner, relativeLayout_more});
                 hr.isCurrentWindow(true);
                 material.isCurrentWindow(false);
                 break;
             case MATERIAL:
-                relativeLayout_hr.setVisibility(GONE);
-                relativeLayout_material.setVisibility(VISIBLE);
-                relativeLayout_drop.setVisibility(GONE);
-                relativeLayout_planner.setVisibility(GONE);
-                relativeLayout_more.setVisibility(GONE);
+//                relativeLayout_hr.setVisibility(GONE);
+//                relativeLayout_material.setVisibility(VISIBLE);
+//                relativeLayout_drop.setVisibility(GONE);
+//                relativeLayout_planner.setVisibility(GONE);
+//                relativeLayout_more.setVisibility(GONE);
+                playChangeModuleAnim(new View[]{relativeLayout_material}, new View[]{relativeLayout_hr, relativeLayout_drop, relativeLayout_planner, relativeLayout_more});
                 hr.isCurrentWindow(false);
                 material.isCurrentWindow(true);
                 break;
             case DROP:
-                relativeLayout_hr.setVisibility(GONE);
-                relativeLayout_material.setVisibility(GONE);
-                relativeLayout_drop.setVisibility(VISIBLE);
-                relativeLayout_planner.setVisibility(GONE);
-                relativeLayout_more.setVisibility(GONE);
+//                relativeLayout_hr.setVisibility(GONE);
+//                relativeLayout_material.setVisibility(GONE);
+//                relativeLayout_drop.setVisibility(VISIBLE);
+//                relativeLayout_planner.setVisibility(GONE);
+//                relativeLayout_more.setVisibility(GONE);
+                playChangeModuleAnim(new View[]{relativeLayout_drop}, new View[]{relativeLayout_material, relativeLayout_hr, relativeLayout_planner, relativeLayout_more});
                 hr.isCurrentWindow(false);
                 material.isCurrentWindow(false);
                 break;
             case PLANNER:
-                relativeLayout_hr.setVisibility(GONE);
-                relativeLayout_material.setVisibility(GONE);
-                relativeLayout_drop.setVisibility(GONE);
-                relativeLayout_planner.setVisibility(VISIBLE);
-                relativeLayout_more.setVisibility(GONE);
+//                relativeLayout_hr.setVisibility(GONE);
+//                relativeLayout_material.setVisibility(GONE);
+//                relativeLayout_drop.setVisibility(GONE);
+//                relativeLayout_planner.setVisibility(VISIBLE);
+//                relativeLayout_more.setVisibility(GONE);
+                playChangeModuleAnim(new View[]{relativeLayout_planner}, new View[]{relativeLayout_material, relativeLayout_drop, relativeLayout_hr, relativeLayout_more});
                 hr.isCurrentWindow(false);
                 material.isCurrentWindow(false);
                 break;
             case MORE:
-                relativeLayout_hr.setVisibility(GONE);
-                relativeLayout_material.setVisibility(GONE);
-                relativeLayout_drop.setVisibility(GONE);
-                relativeLayout_planner.setVisibility(GONE);
-                relativeLayout_more.setVisibility(VISIBLE);
+//                relativeLayout_hr.setVisibility(GONE);
+//                relativeLayout_material.setVisibility(GONE);
+//                relativeLayout_drop.setVisibility(GONE);
+//                relativeLayout_planner.setVisibility(GONE);
+//                relativeLayout_more.setVisibility(VISIBLE);
+                playChangeModuleAnim(new View[]{relativeLayout_more}, new View[]{relativeLayout_material, relativeLayout_drop, relativeLayout_planner, relativeLayout_hr});
                 hr.isCurrentWindow(false);
                 material.isCurrentWindow(false);
                 break;
@@ -854,5 +861,52 @@ public class OverlayService extends Service {
         }
         //System.exit(0);
         System.gc();
+    }
+    public void playChangeModuleAnim(View[] in, View[] out){
+        for (View v :
+                in) {
+            if (v.getVisibility() != VISIBLE) {
+                v.setVisibility(VISIBLE);
+                Animator inAnimation = AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.overlay_module_fade_in);
+                inAnimation.setTarget(v);
+                inAnimation.start();
+            }
+        }
+        for (final View v :
+                out) {
+            if (v.getVisibility() == VISIBLE){
+                Animator outAnimation = AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.overlay_module_fade_out);
+                outAnimation.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        v.setVisibility(GONE);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
+                outAnimation.setTarget(v);
+                outAnimation.start();
+            }
+        }
+
+    }
+
+    public void getPlan(JSONObject jsonObject) {
+        changeFloatingWindowContent(PLANNER);
+        tabLayout.selectTab(tabLayout.getTabAt(PLANNER));
+        planner.addItems(jsonObject.entrySet());
     }
 }

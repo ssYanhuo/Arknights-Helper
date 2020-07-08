@@ -49,6 +49,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -247,6 +248,18 @@ public class Planner {
         }
 
         overlayService.showPinnedWindow(views);
+    }
+    public void addItems(Set<Map.Entry<String, Object>> items){
+        for (Map.Entry entry :
+                items) {
+            CharSequence name = (CharSequence) entry.getKey();
+            Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(((JSONObject) itemMap.get(name)).getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
+            PlannerItemView plannerItemView = new PlannerItemView(applicationContext, drawable, name);
+            plannerItemView.setNum((Integer) entry.getValue());
+            itemContainer.addView(plannerItemView);
+            itemException.add((String) name);
+        }
+
     }
     private void getResult(){
         JSONObject required = new JSONObject();

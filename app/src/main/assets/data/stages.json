@@ -3883,9 +3883,9 @@
     "zoneId": "gachabox",
     "code": "罗德岛物资补给",
     "code_i18n": {
-      "ko": "罗德岛物资补给",
-      "ja": "罗德岛物资补给",
-      "en": "罗德岛物资补给",
+      "ko": "로도스 아일랜드 보급 물자",
+      "ja": "補給物資・ロドス",
+      "en": "Rhodes Island Supplies",
       "zh": "罗德岛物资补给"
     },
     "apCost": 99,

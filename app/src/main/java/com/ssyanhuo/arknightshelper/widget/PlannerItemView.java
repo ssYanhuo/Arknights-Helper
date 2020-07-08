@@ -72,6 +72,9 @@ public class PlannerItemView extends LinearLayout {
     public int getNum(){
         return numberSelector.getInt();
     }
+    public void setNum(int num){
+        numberSelector.setInt(num);
+    }
     public String getName(){
         return (String) textView.getText();
     }

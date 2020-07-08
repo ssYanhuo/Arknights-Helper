@@ -238,12 +238,12 @@
     <string name="more_hr_counter_summary_full">累计寻访99次，下次寻访必出6★！</string>
     <string name="more_hr_counter_summary_overflow">寻访次数已达%d次，长按“-1”清空计数</string>
     <string name="tab_title_planner">刷图规划(Beta)</string>
-    <string name="material_skill_1_now" >技能一专精：</string>
-    <string name="material_skill_1_target" >目标：</string>
-    <string name="material_skill_2_now" >技能二专精：</string>
-    <string name="material_skill_2_target" >目标：</string>
-    <string name="material_skill_3_now" >技能三专精：</string>
-    <string name="material_skill_3_target" >目标：</string>
+    <string name="material_skill_1_now">技能一专精：</string>
+    <string name="material_skill_1_target">目标：</string>
+    <string name="material_skill_2_now">技能二专精：</string>
+    <string name="material_skill_2_target">目标：</string>
+    <string name="material_skill_3_now">技能三专精：</string>
+    <string name="material_skill_3_target">目标：</string>
     <string name="material_skill_all_now">当前全技能：</string>
     <string name="material_skill_all_target">目标：</string>
     <string name="planner_desc">算法来自 @ycremar\n点击查询结果中的关卡名称和合成物品可以查看详情\n模块正在测试阶段，如果你遇到了应用运行不稳定的情况，请在设置中关闭这项功能</string>
@@ -253,11 +253,15 @@
     <string name="planner_add_item">添加条目</string>
     <string name="settings_title_floating_button_image">悬浮窗按钮图片</string>
     <string name="settings_title_disable_planner">暂时禁用刷图规划</string>
-    <string name="settings_summary_disable_planner">刷图规划 正处于测试阶段，如果这导致应用运行不稳定，请开启此选项\n下次更新后 刷图规划 将被重新启用</string>
+    <string name="settings_summary_disable_planner">刷图规划 正处于测试阶段，如果这导致应用运行不稳定，请开启此选项</string>
     <string name="more_set_alarm_title">理智回复计时</string>
     <string name="more_set_alarm_summary">设定倒计时来提醒理智回复</string>
     <string name="more_set_alarm_note_today">倒计时将在 %1$d时%2$d分 结束</string>
     <string name="more_set_alarm_note_tomorrow">倒计时将在 明天的 %1$d时%2$d分 结束</string>
     <string name="settings_title_enable_dark_mode">使用暗色模式</string>
     <string name="settings_summary_enable_dark_mode">跟随系统自动切换</string>
+    <string name="title_activity_main2">MainActivity</string>
+    <string name="title_home">home</string>
+    <string name="title_dashboard">dashboard</string>
+    <string name="title_notifications">notifications</string>
 </resources>

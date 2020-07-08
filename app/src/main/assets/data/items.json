@@ -1575,13 +1575,13 @@
     "rarity": 2,
     "existence": {
       "US": {
-        "exist": false
+        "exist": true
       },
       "JP": {
-        "exist": false
+        "exist": true
       },
       "KR": {
-        "exist": false
+        "exist": true
       },
       "CN": {
         "exist": true
@@ -1607,13 +1607,13 @@
     "rarity": 3,
     "existence": {
       "US": {
-        "exist": false
+        "exist": true
       },
       "JP": {
-        "exist": false
+        "exist": true
       },
       "KR": {
-        "exist": false
+        "exist": true
       },
       "CN": {
         "exist": true
@@ -1639,13 +1639,13 @@
     "rarity": 2,
     "existence": {
       "US": {
-        "exist": false
+        "exist": true
       },
       "JP": {
-        "exist": false
+        "exist": true
       },
       "KR": {
-        "exist": false
+        "exist": true
       },
       "CN": {
         "exist": true
@@ -1671,13 +1671,13 @@
     "rarity": 3,
     "existence": {
       "US": {
-        "exist": false
+        "exist": true
       },
       "JP": {
-        "exist": false
+        "exist": true
       },
       "KR": {
-        "exist": false
+        "exist": true
       },
       "CN": {
         "exist": true
@@ -1694,22 +1694,22 @@
     "itemId": "randomMaterial_1",
     "name": "罗德岛物资补给",
     "name_i18n": {
-      "ko": "罗德岛物资补给",
-      "ja": "罗德岛物资补给",
-      "en": "罗德岛物资补给",
+      "ko": "로도스 아일랜드 보급 물자",
+      "ja": "補給物資・ロドス",
+      "en": "Rhodes Island Supplies",
       "zh": "罗德岛物资补给"
     },
     "sortId": 30005,
     "rarity": 4,
     "existence": {
       "US": {
-        "exist": false
+        "exist": true
       },
       "JP": {
-        "exist": false
+        "exist": true
       },
       "KR": {
-        "exist": false
+        "exist": true
       },
       "CN": {
         "exist": true
@@ -1726,22 +1726,22 @@
     "itemId": "ap_supply_lt_010",
     "name": "应急理智小样",
     "name_i18n": {
-      "ko": "应急理智小样",
-      "ja": "应急理智小样",
-      "en": "应急理智小样",
+      "ko": "응급 이성 샘플",
+      "ja": "試供理性回復剤",
+      "en": "Emergency Sanity Sampler",
       "zh": "应急理智小样"
     },
     "sortId": 50004,
     "rarity": 4,
     "existence": {
       "US": {
-        "exist": false
+        "exist": true
       },
       "JP": {
-        "exist": false
+        "exist": true
       },
       "KR": {
-        "exist": false
+        "exist": true
       },
       "CN": {
         "exist": true
