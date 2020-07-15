@@ -1,16 +1,16 @@
 <resources>
 
     <!-- 默认主题 -->
-    <style name="AppTheme.Default" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="AppTheme.Default" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
-    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-    <item name="colorAccent">@color/colorAccent</item>
-</style>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
 
-<style name="AppTheme.Default.NoActionBar">
-<item name="windowActionBar">false</item>
-<item name="windowNoTitle">true</item>
-</style>
+    <style name="AppTheme.Default.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
     <style name="AppTheme.Default.FloatingWindow" parent="Theme.AppCompat">
         <item name="android:textColor">#E0E0E0</item>
@@ -19,10 +19,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.Default.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.Default.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
     <!-- 新年主题 -->
-    <style name="AppTheme.NewYear" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="AppTheme.NewYear" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimaryNewYear</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkNewYear</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -40,7 +40,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.NewYear.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.NewYear.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
     <!-- 浅色主题 -->
     <style name="AppTheme.Light" parent="Theme.AppCompat.DayNight">
@@ -69,8 +69,8 @@
         <item name="android:windowExitAnimation">@animator/overlay_main_hide</item>
     </style>
 
-    <style name="AppTheme.Light.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar" />
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.Light.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 
     <style name="AppTheme.CheckBox.Blue" parent="Widget.AppCompat.Button.Colored">
         <item name="android:background">@drawable/checkbox_background_blue</item>
@@ -119,4 +119,5 @@
         <item name="android:textColor">@android:color/black</item>
         <item name="android:minWidth">@dimen/activity_horizontal_margin</item>
     </style>
+
 </resources>

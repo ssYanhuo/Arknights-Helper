@@ -18,4 +18,6 @@
     <color name="colorCheckBoxRed">#E91E63</color>
     <color name="colorCheckBoxCyan">#009688</color>
     <color name="colorCheckBoxLime">#CDDC39</color>
+    <color name="colorAppBar">#FFFFFF</color>
+    <color name="colorAppBarDark">#BBBBBB</color>
 </resources>

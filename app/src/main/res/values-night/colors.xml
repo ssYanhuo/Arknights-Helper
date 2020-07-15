@@ -11,4 +11,6 @@
     <color name="colorPrimaryLight">#0277BD</color>
     <color name="colorPrimaryDarkLight">#01579B</color>
     <color name="colorError">#B71C1C</color>
+    <color name="colorAppBar">@color/colorPrimary</color>
+    <color name="colorAppBarDark">@color/colorPrimaryDark</color>
 </resources>

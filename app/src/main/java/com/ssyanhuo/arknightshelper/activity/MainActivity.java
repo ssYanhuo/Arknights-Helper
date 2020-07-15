@@ -1,12 +1,27 @@
 package com.ssyanhuo.arknightshelper.activity;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.view.menu.ActionMenuItemView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
+import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -19,25 +34,15 @@ import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import com.alibaba.fastjson.JSONObject;
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.ssyanhuo.arknightshelper.BuildConfig;
 import com.ssyanhuo.arknightshelper.R;
@@ -45,6 +50,7 @@ import com.ssyanhuo.arknightshelper.entity.StaticData;
 import com.ssyanhuo.arknightshelper.service.OverlayService;
 import com.ssyanhuo.arknightshelper.service.PythonService;
 import com.ssyanhuo.arknightshelper.utils.CompatUtils;
+import com.ssyanhuo.arknightshelper.utils.DpUtils;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
 import com.ssyanhuo.arknightshelper.utils.PackageUtils;
 import com.ssyanhuo.arknightshelper.utils.PythonUtils;
@@ -54,6 +60,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.ProtocolFamily;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -61,11 +68,8 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence;
-import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView;
+public class MainActivity extends AppCompatActivity {
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
     final String TAG = "MainActivity";
     Handler handler;
     final int STATE_UP_TO_DATE = 0;
@@ -81,6 +85,12 @@ public class MainActivity extends AppCompatActivity
     private ContextThemeWrapper contextThemeWrapper;
     String themeNow = "0";
     int versionLast = -1;
+    private LinearLayout startWithoutGame;
+    CoordinatorLayout snackbarContainer;
+    Activity activity;
+    private BottomAppBar bottomAppBar;
+    private FloatingActionButton fab;
+    private ProgressBar bottomProgressBar;
 
     private void startEngine(final View view, final boolean startGame){
         //new DataUpdateDialog().showDialog(getApplicationContext());
@@ -106,13 +116,14 @@ public class MainActivity extends AppCompatActivity
         }
 
         if ((!preferences.getBoolean("python_finished",false)) && PythonUtils.isAbiSupported() && !preferences.getBoolean("disable_planner", false)){
-            PythonUtils.setupEnvironment(getApplicationContext(), MainActivity.this);
+            PythonUtils.setupEnvironment(getApplicationContext(), MainActivity.this, snackbarContainer);
             return;
         }
 
 
-        Snackbar.make(view, R.string.start_game, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(snackbarContainer, R.string.start_game, Snackbar.LENGTH_LONG).show();
         Timer timer = new Timer();
+        final Handler handler = new Handler();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -126,7 +137,7 @@ public class MainActivity extends AppCompatActivity
                     FileUtils.copyFileFromAssets(getApplicationContext(), getFilesDir().getPath() + File.separator + "python" + File.separator + "data", "matrix.json");
                 }
                 if((Build.BRAND.equals("Meizu") || Build.BRAND.equals("MEIZU") || Build.BRAND.equals("MeiZu") || Build.BRAND.equals("meizu")) && preferences.getBoolean("firstRun", true)){
-                    Snackbar.make(view, R.string.meizu_floating_window_permission, Snackbar.LENGTH_INDEFINITE).show();
+                    Snackbar.make(snackbarContainer, R.string.meizu_floating_window_permission, Snackbar.LENGTH_INDEFINITE).show();
                     editor.putBoolean("firstRun", false);
                     editor.apply();
                     return;
@@ -137,6 +148,13 @@ public class MainActivity extends AppCompatActivity
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                     if(Settings.canDrawOverlays(getApplicationContext())){
                         try{
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    //changeProgressbarMode(false);
+                                }
+                            });
+
                             startService(overlayServiceIntent);
                             if(PythonUtils.isAbiSupported() && !preferences.getBoolean("disable_planner", false)){
                                 startService(pythonServiceIntent);
@@ -145,7 +163,7 @@ public class MainActivity extends AppCompatActivity
                             Log.e(TAG, "Start service failed!", e);
                         }
                     }else {
-                        Snackbar.make(view, R.string.no_overlay_permission_error, Snackbar.LENGTH_INDEFINITE).setAction(R.string.no_overlay_permission_action, new View.OnClickListener() {
+                        Snackbar.make(snackbarContainer, R.string.no_overlay_permission_error, Snackbar.LENGTH_INDEFINITE).setAction(R.string.no_overlay_permission_action, new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
@@ -156,6 +174,12 @@ public class MainActivity extends AppCompatActivity
                     }
                 } else {
                     try{
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                //changeProgressbarMode(false);
+                            }
+                        });
                         startService(overlayServiceIntent);
                         if(PythonUtils.isAbiSupported() && !preferences.getBoolean("disable_planner", false)){
                             startService(pythonServiceIntent);
@@ -165,54 +189,54 @@ public class MainActivity extends AppCompatActivity
                     }
                 }
                 if (startGame){
-                        String gameSelected = preferences.getString("game_version", StaticData.Const.PACKAGE_MANUAL);
-                        final ArrayList<String> list = PackageUtils.getGameList(getApplicationContext());
-                        if (!gameSelected.equals(StaticData.Const.PACKAGE_MANUAL) && !list.contains(gameSelected)){
-                            preferences.edit().putString("game_version", StaticData.Const.PACKAGE_MANUAL).apply();
-                            gameSelected = StaticData.Const.PACKAGE_MANUAL;
-                        }
-                        if (list.size() == 1){
-                            PackageUtils.startApplication(list.get(0), getApplicationContext());
-                        }else if (list.size() >= 2){
-                            if(!gameSelected.equals(StaticData.Const.PACKAGE_MANUAL)){
-                                PackageUtils.startApplication(gameSelected, getApplicationContext());
-                            }else {
-                                String[] nameArray = new String[list.size()];
-                                for (String packageName :
-                                        list) {
-                                    nameArray[list.indexOf(packageName)] = PackageUtils.getName(packageName, getApplicationContext());
-                                }
-                                final String[] game = {""};
-                                String[] packageArray = new String[list.size()];
-                                list.toArray(packageArray);
-                                //Log.e("", Arrays.toString(arr));
-                                new AlertDialog.Builder(contextThemeWrapper)
-                                        .setTitle(R.string.start_multiple_apps)
-                                        .setSingleChoiceItems(nameArray, 0, new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                game[0] = list.get(which);
-                                            }
-                                        })
-                                        .setPositiveButton(R.string.start_game_remember_selection_yes, new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                preferences.edit().putString("game_version", game[0]).apply();
-                                                PackageUtils.startApplication(game[0], getApplicationContext());
-                                            }
-                                        })
-                                        .setNegativeButton(R.string.start_game_remember_selection_no, new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                PackageUtils.startApplication(game[0], getApplicationContext());
-                                            }
-                                        })
-                                        .create()
-                                        .show();
+                    String gameSelected = preferences.getString("game_version", StaticData.Const.PACKAGE_MANUAL);
+                    final ArrayList<String> list = PackageUtils.getGameList(getApplicationContext());
+                    if (!gameSelected.equals(StaticData.Const.PACKAGE_MANUAL) && !list.contains(gameSelected)){
+                        preferences.edit().putString("game_version", StaticData.Const.PACKAGE_MANUAL).apply();
+                        gameSelected = StaticData.Const.PACKAGE_MANUAL;
+                    }
+                    if (list.size() == 1){
+                        PackageUtils.startApplication(list.get(0), getApplicationContext());
+                    }else if (list.size() >= 2){
+                        if(!gameSelected.equals(StaticData.Const.PACKAGE_MANUAL)){
+                            PackageUtils.startApplication(gameSelected, getApplicationContext());
+                        }else {
+                            String[] nameArray = new String[list.size()];
+                            for (String packageName :
+                                    list) {
+                                nameArray[list.indexOf(packageName)] = PackageUtils.getName(packageName, getApplicationContext());
                             }
+                            final String[] game = {""};
+                            String[] packageArray = new String[list.size()];
+                            list.toArray(packageArray);
+                            //Log.e("", Arrays.toString(arr));
+                            new AlertDialog.Builder(contextThemeWrapper)
+                                    .setTitle(R.string.start_multiple_apps)
+                                    .setSingleChoiceItems(nameArray, 0, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            game[0] = list.get(which);
+                                        }
+                                    })
+                                    .setPositiveButton(R.string.start_game_remember_selection_yes, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            preferences.edit().putString("game_version", game[0]).apply();
+                                            PackageUtils.startApplication(game[0], getApplicationContext());
+                                        }
+                                    })
+                                    .setNegativeButton(R.string.start_game_remember_selection_no, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            PackageUtils.startApplication(game[0], getApplicationContext());
+                                        }
+                                    })
+                                    .create()
+                                    .show();
                         }
                     }
-                    Looper.loop();
+                }
+                Looper.loop();
             }
         }, 200);
         versionLast = preferences.getInt("versionLast", -1);
@@ -221,23 +245,27 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+
     private void preNotifyThemeChanged(){
-        setTheme(ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_NO_ACTION_BAR, getApplicationContext()));
+        setTheme(ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_MAIN, getApplicationContext()));
         themeNow = String.valueOf(ThemeUtils.getThemeMode(getApplicationContext()));
     }
 
-    private void notifyThemeChanged(Toolbar toolbar){
+    private void notifyThemeChanged(){
         if (ThemeUtils.getThemeMode(getApplicationContext()) == ThemeUtils.THEME_LIGHT){
-            AppCompatImageButton navBtn = (AppCompatImageButton) toolbar.getChildAt(1);
-            Drawable drawable = navBtn.getDrawable();
-            drawable.setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.DARKEN);
-            toolbar.setTitleTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            navBtn.setImageDrawable(drawable);
+            bottomAppBar.replaceMenu(R.menu.activity_main_appbar_light);
         }
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        preNotifyThemeChanged();
+        setContentView(R.layout.activity_main2);
+        activity = this;
+        bottomAppBar = findViewById(R.id.bottomAppBar);
+        bottomProgressBar = findViewById(R.id.bottom_progressBar);
         preferences = getSharedPreferences("com.ssyanhuo.arknightshelper_preferences", MODE_PRIVATE);
         if (System.currentTimeMillis() >= 1579881600000.0 && System.currentTimeMillis() <= 1581177600000.0 && preferences.getBoolean("allowAutoTheme", true)){
             SharedPreferences.Editor editor = preferences.edit();
@@ -248,36 +276,48 @@ public class MainActivity extends AppCompatActivity
             editor.putString("theme", "0");
             editor.apply();
         }
-        preNotifyThemeChanged();
+
         contextThemeWrapper = new ContextThemeWrapper(MainActivity.this, R.style.AppTheme_Default);
         if(preferences.getBoolean("enable_dark_mode", false)){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
         }else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar_main);
-        setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startEngine(view, true);
             }
         });
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
-        LinearLayout linearLayout = findViewById(R.id.main_start_without_game);
-        linearLayout.setOnClickListener(new View.OnClickListener() {
+        snackbarContainer = findViewById(R.id.snackbar_container);
+        startWithoutGame = findViewById(R.id.main_start_without_game);
+        startWithoutGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startEngine(view, false);
+            }
+        });
+        notifyThemeChanged();
+        bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.nav_settings:
+                        startActivity(new Intent(activity, SettingsActivity.class));
+                        break;
+                    case R.id.nav_about:
+                        startActivity(new Intent(activity, AboutActivity.class));
+                        break;
+                    case R.id.nav_exit:
+                        finish();
+                        break;
+                    default:
+                        break;
+                }
+
+
+                return true;
             }
         });
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
@@ -289,89 +329,61 @@ public class MainActivity extends AppCompatActivity
         handler = new Handler();
         checkApplicationUpdate();
         //修改主题
-        notifyThemeChanged(toolbar);
-        MaterialShowcaseSequence materialShowcaseSequence = new MaterialShowcaseSequence(this);
-
-        materialShowcaseSequence.addSequenceItem(new MaterialShowcaseView.Builder(this)
-                .setTarget(fab)
-                .setContentText(R.string.showcase_start)
-                .setShapePadding((int) getResources().getDimension(R.dimen.activity_horizontal_margin))
-                .setDelay(500)
-                .setMaskColour(Color.parseColor("#DD1A1A1A"))
-                .setDismissOnTouch(true)
-                .renderOverNavigationBar()
-                .build());
-        materialShowcaseSequence.addSequenceItem(new MaterialShowcaseView.Builder(this)
-                .setTarget(toolbar.getChildAt(1))
-                .setContentText(R.string.showcase_menu)
-                .setShapePadding((int) getResources().getDimension(R.dimen.activity_horizontal_margin))
-                .setDelay(500)
-                .setMaskColour(Color.parseColor("#DD1A1A1A"))
-                .setDismissOnTouch(true)
-                .renderOverNavigationBar()
-                .build());
-        materialShowcaseSequence.addSequenceItem(new MaterialShowcaseView.Builder(this)
-                .setTarget(toolbar)
-                .setContentText(R.string.showcase_tile)
-                .setShapePadding((int) getResources().getDimension(R.dimen.activity_horizontal_margin))
-                .setDelay(500)
-                .setMaskColour(Color.parseColor("#DD1A1A1A"))
-                .setDismissOnTouch(true)
-                .renderOverNavigationBar()
-                .build());
-
-        materialShowcaseSequence.singleUse("FIRST_RUN");
-        materialShowcaseSequence.start();
+//        MaterialShowcaseSequence materialShowcaseSequence = new MaterialShowcaseSequence(this);
+//
+//        materialShowcaseSequence.addSequenceItem(new MaterialShowcaseView.Builder(this)
+//                .setTarget(fab)
+//                .setContentText(R.string.showcase_start)
+//                .setShapePadding((int) getResources().getDimension(R.dimen.activity_horizontal_margin))
+//                .setDelay(500)
+//                .setMaskColour(Color.parseColor("#DD1A1A1A"))
+//                .setDismissOnTouch(true)
+//                .renderOverNavigationBar()
+//                .build());
+//        materialShowcaseSequence.addSequenceItem(new MaterialShowcaseView.Builder(this)
+//                .setTarget(toolbar.getChildAt(1))
+//                .setContentText(R.string.showcase_menu)
+//                .setShapePadding((int) getResources().getDimension(R.dimen.activity_horizontal_margin))
+//                .setDelay(500)
+//                .setMaskColour(Color.parseColor("#DD1A1A1A"))
+//                .setDismissOnTouch(true)
+//                .renderOverNavigationBar()
+//                .build());
+//        materialShowcaseSequence.addSequenceItem(new MaterialShowcaseView.Builder(this)
+//                .setTarget(toolbar)
+//                .setContentText(R.string.showcase_tile)
+//                .setShapePadding((int) getResources().getDimension(R.dimen.activity_horizontal_margin))
+//                .setDelay(500)
+//                .setMaskColour(Color.parseColor("#DD1A1A1A"))
+//                .setDismissOnTouch(true)
+//                .renderOverNavigationBar()
+//                .build());
+//
+//        materialShowcaseSequence.singleUse("FIRST_RUN");
+//        materialShowcaseSequence.start();
         int upCount = preferences.getInt("up_count", 0);
         switch (upCount){
-                default:
-                    break;
+            default:
+                break;
         }
         CompatUtils.check(getApplicationContext());
-//        fab.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View v) {
-//                Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                startActivity(intent);
-//                return true;
-//            }
-//        });
-    }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        bottomAppBar.post(new Runnable() {
+            @Override
+            public void run() {
+                bottomProgressBar.setPadding(0, 0 ,0, bottomAppBar.getHeight() - DpUtils.dip2px(activity, 8.0f));
+                ((ViewGroup.MarginLayoutParams) snackbarContainer.getLayoutParams()).setMargins(0,0,0,bottomAppBar.getHeight());
+            }
+        });
 
-        if (id == R.id.nav_about) {
-            Intent intent = new Intent(this, AboutActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_exit) {
-            finish();
-        } else if (id == R.id.nav_settings) {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
-        }
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     private void checkApplicationUpdate(){
         UpdateRunnable updateRunnable = new UpdateRunnable();
         new Thread(updateRunnable).start();
     }
+
+
 
     @Override
     protected void onResume() {
@@ -380,6 +392,7 @@ public class MainActivity extends AppCompatActivity
             recreate();
         }
     }
+
 
     private void changeUpdateState(int state, @Nullable final String versionName, @Nullable final String releaseNote){
         TextView textView = findViewById(R.id.main_state_text);
@@ -393,9 +406,9 @@ public class MainActivity extends AppCompatActivity
                     imageView.setBackground(getDrawable(R.color.colorAccent));
                     if (System.currentTimeMillis() >= 1579881600000.0 && System.currentTimeMillis() <= 1581177600000.0){
                         boolean inChina = false;
-                            if (Locale.getDefault().getLanguage().contains("zh")){
-                                inChina = true;
-                            }
+                        if (Locale.getDefault().getLanguage().contains("zh")){
+                            inChina = true;
+                        }
                         if (inChina){
                             textView.setText("祝各位刀客塔新年快乐！");
                         }
@@ -516,15 +529,6 @@ public class MainActivity extends AppCompatActivity
                 break;
         }
     }
-    private void checkDataUpdate(){
-        boolean local = preferences.getBoolean("use_builtin_data", false);
-        if (local){
-            return;
-        }else {
-            //TODO 补全
-        }
-    }
-
     private class UpdateRunnable implements Runnable{
         PackageManager packageManager = getPackageManager();
         JSONObject versionInfo;
@@ -582,19 +586,19 @@ public class MainActivity extends AppCompatActivity
                     };
                     runnable.run();
                 }else if(versionCurrent < versionLatest){
-                        Runnable runnable = new Runnable() {
-                            @Override
-                            public void run() {
-                                Runnable runnable1 = new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        changeUpdateState(STATE_NEED_UPDATE, versionName, releaseNote);
-                                    }
-                                };
-                                handler.post(runnable1);
-                            }
-                        };
-                        runnable.run();
+                    Runnable runnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            Runnable runnable1 = new Runnable() {
+                                @Override
+                                public void run() {
+                                    changeUpdateState(STATE_NEED_UPDATE, versionName, releaseNote);
+                                }
+                            };
+                            handler.post(runnable1);
+                        }
+                    };
+                    runnable.run();
                 }else if(versionCurrent == versionLatest){
                     Runnable runnable = new Runnable() {
                         @Override
@@ -632,4 +636,14 @@ public class MainActivity extends AppCompatActivity
             }
         }
     }
+    private void changeProgressbarMode(boolean canStart){
+        if (canStart){
+            fab.setClickable(true);
+            bottomProgressBar.setVisibility(View.INVISIBLE);
+        }else {
+            fab.setClickable(false);
+            bottomProgressBar.setVisibility(View.VISIBLE);
+        }
+    }
+
 }

@@ -1,5 +1,5 @@
 {
-    "versionCode": 34,
-    "versionName": "OpenPreview-1.4.0",
-    "releaseNote": "[Mod]同步最新数据\n[Mod]改善悬浮窗动画效果\n[New]材料查询结果可一键转移至刷图规划"
+    "versionCode": 35,
+    "versionName": "OpenPreview-2.0.0",
+    "releaseNote": "[Mod]同步最新数据\n[New]更新部分UI以适配新的 Material Design 标准"
 }

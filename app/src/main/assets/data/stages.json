@@ -24,7 +24,22 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    },
+    "minClearTime": 63700
   },
   {
     "stageType": "MAIN",
@@ -51,7 +66,22 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    },
+    "minClearTime": 73000
   },
   {
     "stageType": "MAIN",
@@ -78,7 +108,22 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    },
+    "minClearTime": 88600
   },
   {
     "stageType": "MAIN",
@@ -105,7 +150,22 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    },
+    "minClearTime": 120600
   },
   {
     "stageType": "MAIN",
@@ -132,7 +192,22 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    },
+    "minClearTime": 95000
   },
   {
     "stageType": "MAIN",
@@ -159,7 +234,22 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    },
+    "minClearTime": 101800
   },
   {
     "stageType": "MAIN",
@@ -186,7 +276,22 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    },
+    "minClearTime": 92000
   },
   {
     "stageType": "MAIN",
@@ -213,7 +318,22 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    },
+    "minClearTime": 102000
   },
   {
     "stageType": "MAIN",
@@ -240,7 +360,22 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    },
+    "minClearTime": 102000
   },
   {
     "stageType": "MAIN",
@@ -267,7 +402,22 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    },
+    "minClearTime": 113600
   },
   {
     "stageType": "MAIN",
@@ -294,7 +444,22 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    },
+    "minClearTime": 103000
   },
   {
     "stageType": "MAIN",
@@ -319,7 +484,21 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -335,7 +514,21 @@
     "apCost": 0,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -362,7 +555,21 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -387,7 +594,21 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -414,7 +635,21 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -441,7 +676,21 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -468,7 +717,21 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -495,7 +758,21 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -522,7 +799,21 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -549,7 +840,21 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -565,7 +870,21 @@
     "apCost": 0,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -592,7 +911,21 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -619,7 +952,21 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -646,7 +993,21 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -673,7 +1034,21 @@
       "30032",
       "30062",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -700,7 +1075,21 @@
       "30032",
       "30062",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -727,7 +1116,21 @@
       "30042",
       "30052",
       "2002"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -754,7 +1157,21 @@
       "30032",
       "30062",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -779,7 +1196,21 @@
       "30042",
       "30052",
       "2002"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -806,7 +1237,21 @@
       "30042",
       "30052",
       "2002"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -833,7 +1278,21 @@
       "30032",
       "30062",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -860,7 +1319,21 @@
       "30042",
       "30052",
       "2002"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -887,7 +1360,21 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -912,7 +1399,21 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -939,7 +1440,21 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -964,7 +1479,21 @@
       "30061",
       "3003",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -991,7 +1520,21 @@
       "30032",
       "30062",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1018,7 +1561,21 @@
       "30042",
       "30052",
       "2002"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1045,7 +1602,21 @@
       "30032",
       "30062",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1072,7 +1643,21 @@
       "30042",
       "30052",
       "2002"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1099,7 +1684,21 @@
       "30042",
       "30052",
       "2002"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1126,7 +1725,21 @@
       "30032",
       "30062",
       "2001"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1151,7 +1764,21 @@
       "30042",
       "30052",
       "2002"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1177,7 +1804,21 @@
       "30012",
       "30032",
       "30062"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1204,7 +1845,21 @@
       "30042",
       "30052",
       "2002"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1230,7 +1885,21 @@
       "30012",
       "30032",
       "30062"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1256,7 +1925,21 @@
       "30012",
       "30032",
       "30062"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1282,7 +1965,21 @@
       "30012",
       "30032",
       "30062"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1308,7 +2005,21 @@
       "30012",
       "30032",
       "30062"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1333,7 +2044,21 @@
       "30042",
       "30052",
       "2002"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1360,7 +2085,21 @@
       "30042",
       "30052",
       "2002"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1389,7 +2128,21 @@
       "30053",
       "30093",
       "30103"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -1416,7 +2169,21 @@
       "30042",
       "30052",
       "2002"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -1442,7 +2209,21 @@
       "30012",
       "30032",
       "30062"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -1469,7 +2250,21 @@
       "30042",
       "30052",
       "2002"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -1495,7 +2290,21 @@
       "30012",
       "30032",
       "30062"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -1520,7 +2329,21 @@
       "30042",
       "30052",
       "2002"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1546,7 +2369,21 @@
       "30073",
       "31013",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1578,7 +2415,21 @@
       "30083",
       "31023",
       "2003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1606,7 +2457,21 @@
       "30073",
       "31013",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1636,7 +2501,21 @@
       "30073",
       "31013",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1665,7 +2544,21 @@
       "30053",
       "30093",
       "30103"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1695,7 +2588,21 @@
       "30073",
       "31013",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1725,7 +2632,21 @@
       "30073",
       "31013",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1754,7 +2675,21 @@
       "30053",
       "30093",
       "30103"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1783,7 +2718,21 @@
       "30053",
       "30093",
       "30103"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -1813,7 +2762,21 @@
       "30073",
       "31013",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -1845,7 +2808,21 @@
       "30083",
       "31023",
       "2003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -1870,7 +2847,21 @@
       "30053",
       "30093",
       "30103"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -1898,7 +2889,21 @@
       "30083",
       "31023",
       "2003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -1926,7 +2931,21 @@
       "30083",
       "31023",
       "2003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -1951,7 +2970,21 @@
       "30053",
       "30093",
       "30103"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -1979,7 +3012,21 @@
       "30083",
       "31023",
       "2003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -2007,7 +3054,21 @@
       "30083",
       "31023",
       "2003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -2032,7 +3093,21 @@
       "30053",
       "30093",
       "30103"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -2062,7 +3137,21 @@
       "30083",
       "31023",
       "2003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -2081,7 +3170,29 @@
       "30031"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1580922000000,
+        "closeTime": 1582110000000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1580864400000,
+        "closeTime": 1582052400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1559181600000,
+        "closeTime": 1560369599000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1580864400000,
+        "closeTime": 1582052400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -2100,7 +3211,29 @@
       "30021"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1580922000000,
+        "closeTime": 1582110000000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1580864400000,
+        "closeTime": 1582052400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1559181600000,
+        "closeTime": 1560369599000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1580864400000,
+        "closeTime": 1582052400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -2119,7 +3252,29 @@
       "30042"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1580922000000,
+        "closeTime": 1582110000000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1580864400000,
+        "closeTime": 1582052400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1559181600000,
+        "closeTime": 1560369599000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1580864400000,
+        "closeTime": 1582052400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -2138,7 +3293,29 @@
       "30052"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1580922000000,
+        "closeTime": 1582110000000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1580864400000,
+        "closeTime": 1582052400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1559181600000,
+        "closeTime": 1560369599000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1580864400000,
+        "closeTime": 1582052400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -2156,7 +3333,29 @@
       "30073"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1580922000000,
+        "closeTime": 1582110000000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1580864400000,
+        "closeTime": 1582052400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1559181600000,
+        "closeTime": 1560369599000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1580864400000,
+        "closeTime": 1582052400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -2174,7 +3373,29 @@
       "30093"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1580922000000,
+        "closeTime": 1582110000000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1580864400000,
+        "closeTime": 1582052400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1559181600000,
+        "closeTime": 1560369599000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1580864400000,
+        "closeTime": 1582052400000
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -2192,7 +3413,21 @@
       "3112"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -2210,7 +3445,21 @@
       "3112"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -2229,7 +3478,21 @@
       "3112"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -2248,7 +3511,21 @@
       "3113"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -2267,7 +3544,21 @@
       "3113"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -2285,7 +3576,21 @@
       "3301"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -2303,7 +3608,21 @@
       "3301"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -2322,7 +3641,21 @@
       "3301"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -2342,7 +3675,21 @@
       "3301"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -2362,7 +3709,21 @@
       "3301"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -2390,7 +3751,25 @@
       "30073",
       "31013",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1582736400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1582700400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1562659200000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1582700400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -2420,7 +3799,25 @@
       "30073",
       "31013",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1582736400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1582700400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1562659200000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1582700400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -2439,7 +3836,25 @@
       "30022"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1582736400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1582700400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1562659200000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1582700400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -2466,7 +3881,25 @@
       "30053",
       "30093",
       "30103"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1582736400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1582700400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1562659200000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1582700400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -2496,7 +3929,25 @@
       "30073",
       "31013",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1582736400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1582700400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1562659200000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1582700400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -2526,7 +3977,25 @@
       "30083",
       "31023",
       "2003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1582736400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1582700400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1562659200000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1582700400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -2545,7 +4014,25 @@
       "30042"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1582736400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1582700400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1562659200000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1582700400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -2574,7 +4061,25 @@
       "30053",
       "30093",
       "30103"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1582736400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1582700400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1562659200000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1582700400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -2602,7 +4107,25 @@
       "30073",
       "31013",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1582736400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1582700400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1562659200000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1582700400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -2621,7 +4144,25 @@
       "30012"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1582736400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1582700400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1562659200000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1582700400000
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -2640,7 +4181,25 @@
       "2003"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1582736400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1582700400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1562659200000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1582700400000
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -2668,7 +4227,25 @@
       "30083",
       "31023",
       "2003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1582736400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1582700400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1562659200000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1582700400000
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -2686,7 +4263,25 @@
       "30032"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1582736400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1582700400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1562659200000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1582700400000
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -2705,7 +4300,25 @@
       "2003"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1582736400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1582700400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1562659200000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1582700400000
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -2723,7 +4336,25 @@
       "30062"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1582736400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1582700400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1562659200000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1582700400000
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -2753,7 +4384,25 @@
       "30083",
       "31023",
       "2003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1582736400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1582700400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1562659200000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1582700400000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -2772,7 +4421,29 @@
       "token_Obsidian",
       "et_ObsidianPass"
     ],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1588179600000,
+        "closeTime": 1589972400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1566892800000,
+        "closeTime": 1568664000000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -2791,7 +4462,29 @@
       "token_Obsidian",
       "et_ObsidianPass"
     ],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1588179600000,
+        "closeTime": 1589972400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1566892800000,
+        "closeTime": 1568664000000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -2810,7 +4503,29 @@
       "token_Obsidian",
       "et_ObsidianPass"
     ],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1588179600000,
+        "closeTime": 1589972400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1566892800000,
+        "closeTime": 1568664000000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -2828,7 +4543,29 @@
     "specialDrop": [
       "token_Obsidian"
     ],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1588179600000,
+        "closeTime": 1589972400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1566892800000,
+        "closeTime": 1568664000000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -2846,7 +4583,29 @@
     "specialDrop": [
       "et_ObsidianPass"
     ],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1588179600000,
+        "closeTime": 1589972400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1566892800000,
+        "closeTime": 1568664000000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -2865,7 +4624,29 @@
       "token_Obsidian",
       "et_ObsidianPass"
     ],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1588179600000,
+        "closeTime": 1589972400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1566892800000,
+        "closeTime": 1568664000000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -2883,7 +4664,29 @@
     "specialDrop": [
       "token_Obsidian"
     ],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1588179600000,
+        "closeTime": 1589972400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1566892800000,
+        "closeTime": 1568664000000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -2901,7 +4704,29 @@
     "specialDrop": [
       "et_ObsidianPass"
     ],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1588179600000,
+        "closeTime": 1589972400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1566892800000,
+        "closeTime": 1568664000000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -2919,7 +4744,29 @@
     "specialDrop": [
       "token_ObsidianCoin"
     ],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1588179600000,
+        "closeTime": 1589972400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1566892800000,
+        "closeTime": 1568664000000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -2937,7 +4784,29 @@
     "specialDrop": [
       "token_ObsidianCoin"
     ],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1588179600000,
+        "closeTime": 1589972400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1566892800000,
+        "closeTime": 1568664000000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -2955,7 +4824,29 @@
     "specialDrop": [
       "token_ObsidianCoin"
     ],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1588179600000,
+        "closeTime": 1589972400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1566892800000,
+        "closeTime": 1568664000000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -2973,7 +4864,29 @@
     "specialDrop": [
       "token_ObsidianCoin"
     ],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1588179600000,
+        "closeTime": 1589972400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1566892800000,
+        "closeTime": 1568664000000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -3012,7 +4925,29 @@
       "30062"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1588179600000,
+        "closeTime": 1589972400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1566892800000,
+        "closeTime": 1568664000000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1588143600000,
+        "closeTime": 1589914800000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -3038,7 +4973,29 @@
       "30051",
       "30061",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1585155600000,
+        "closeTime": 1586343600000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1585098000000,
+        "closeTime": 1586286000000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1571126400000,
+        "closeTime": 1571687999000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1585098000000,
+        "closeTime": 1586286000000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -3064,7 +5021,29 @@
       "30051",
       "30061",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1585155600000,
+        "closeTime": 1586343600000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1585098000000,
+        "closeTime": 1586286000000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1571126400000,
+        "closeTime": 1571687999000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1585098000000,
+        "closeTime": 1586286000000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -3091,7 +5070,29 @@
       "30042",
       "30052",
       "2002"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1585155600000,
+        "closeTime": 1586343600000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1585098000000,
+        "closeTime": 1586286000000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1571126400000,
+        "closeTime": 1571687999000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1585098000000,
+        "closeTime": 1586286000000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -3117,7 +5118,29 @@
       "30012",
       "30032",
       "30062"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1585155600000,
+        "closeTime": 1586343600000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1585098000000,
+        "closeTime": 1586286000000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1571126400000,
+        "closeTime": 1571687999000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1585098000000,
+        "closeTime": 1586286000000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -3144,7 +5167,29 @@
       "30063",
       "30073",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1585155600000,
+        "closeTime": 1586343600000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1585098000000,
+        "closeTime": 1586286000000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1571126400000,
+        "closeTime": 1571687999000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1585098000000,
+        "closeTime": 1586286000000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -3160,7 +5205,29 @@
     "apCost": 10,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1590598800000,
+        "closeTime": 1591786800000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1590562800000,
+        "closeTime": 1591729200000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1574150400000,
+        "closeTime": 1575316799000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1590562800000,
+        "closeTime": 1591729200000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -3178,7 +5245,29 @@
       "2002"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1590598800000,
+        "closeTime": 1591786800000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1590562800000,
+        "closeTime": 1591729200000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1574150400000,
+        "closeTime": 1575316799000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1590562800000,
+        "closeTime": 1591729200000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -3194,7 +5283,29 @@
     "apCost": 10,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1590598800000,
+        "closeTime": 1591786800000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1590562800000,
+        "closeTime": 1591729200000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1574150400000,
+        "closeTime": 1575316799000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1590562800000,
+        "closeTime": 1591729200000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -3212,7 +5323,29 @@
       "2002"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1590598800000,
+        "closeTime": 1591786800000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1590562800000,
+        "closeTime": 1591729200000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1574150400000,
+        "closeTime": 1575316799000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1590562800000,
+        "closeTime": 1591729200000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -3228,7 +5361,29 @@
     "apCost": 15,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1590598800000,
+        "closeTime": 1591786800000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1590562800000,
+        "closeTime": 1591729200000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1574150400000,
+        "closeTime": 1575316799000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1590562800000,
+        "closeTime": 1591729200000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -3246,7 +5401,29 @@
       "2002"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1590598800000,
+        "closeTime": 1591786800000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1590562800000,
+        "closeTime": 1591729200000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1574150400000,
+        "closeTime": 1575316799000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1590562800000,
+        "closeTime": 1591729200000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -3262,7 +5439,29 @@
     "apCost": 15,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1590598800000,
+        "closeTime": 1591786800000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1590562800000,
+        "closeTime": 1591729200000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1574150400000,
+        "closeTime": 1575316799000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1590562800000,
+        "closeTime": 1591729200000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -3280,7 +5479,29 @@
       "2002"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1590598800000,
+        "closeTime": 1591786800000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1590562800000,
+        "closeTime": 1591729200000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1574150400000,
+        "closeTime": 1575316799000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1590562800000,
+        "closeTime": 1591729200000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -3296,7 +5517,29 @@
     "apCost": 20,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1590598800000,
+        "closeTime": 1591786800000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1590562800000,
+        "closeTime": 1591729200000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1574150400000,
+        "closeTime": 1575316799000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1590562800000,
+        "closeTime": 1591729200000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -3315,7 +5558,29 @@
       "2002"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1590598800000,
+        "closeTime": 1591786800000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1590562800000,
+        "closeTime": 1591729200000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1574150400000,
+        "closeTime": 1575316799000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1590562800000,
+        "closeTime": 1591729200000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -3333,7 +5598,25 @@
       "30042"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1593536400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1593500400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1577174400000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1593500400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -3362,7 +5645,25 @@
       "30053",
       "30093",
       "30103"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1593536400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1593500400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1577174400000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1593500400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -3390,7 +5691,25 @@
       "30073",
       "31013",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1593536400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1593500400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1577174400000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1593500400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -3419,7 +5738,25 @@
       "30053",
       "30093",
       "30103"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1593536400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1593500400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1577174400000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1593500400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -3438,7 +5775,25 @@
       "30032"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1593536400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1593500400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1577174400000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1593500400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -3454,7 +5809,25 @@
     "apCost": 0,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1593536400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1593500400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1577174400000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1593500400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -3484,7 +5857,25 @@
       "30083",
       "31023",
       "2003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1593536400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1593500400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1577174400000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1593500400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -3503,7 +5894,25 @@
       "2003"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1593536400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1593500400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1577174400000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1593500400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -3530,7 +5939,25 @@
       "30053",
       "30093",
       "30103"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1593536400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1593500400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1577174400000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1593500400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -3549,7 +5976,25 @@
       "30062"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1593536400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1593500400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1577174400000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1593500400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -3581,7 +6026,25 @@
       "30083",
       "31023",
       "2003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1593536400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1593500400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1577174400000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1593500400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -3609,7 +6072,25 @@
       "30073",
       "31013",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1593536400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1593500400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1577174400000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1593500400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -3638,7 +6119,25 @@
       "30053",
       "30093",
       "30103"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1593536400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1593500400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1577174400000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1593500400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -3657,7 +6156,25 @@
       "30052"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1593536400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1593500400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1577174400000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1593500400000
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -3673,7 +6190,25 @@
     "apCost": 0,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1593536400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1593500400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1577174400000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1593500400000
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -3699,7 +6234,21 @@
       "30012",
       "30032",
       "30062"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -3727,7 +6276,21 @@
       "30073",
       "31013",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -3756,7 +6319,25 @@
       "30053",
       "30093",
       "30103"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1582736400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1582700400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1562659200000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1582700400000
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -3786,7 +6367,25 @@
       "30073",
       "31013",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1582736400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1582700400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1562659200000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1582700400000
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -3813,7 +6412,25 @@
       "30053",
       "30093",
       "30103"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1593536400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1593500400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1577174400000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1593500400000
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -3831,7 +6448,25 @@
       "30012"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1593536400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1593500400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1577174400000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1593500400000
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -3850,7 +6485,25 @@
       "2003"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1593536400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1593500400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1577174400000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1593500400000
+      }
+    }
   },
   {
     "stageType": "SUB",
@@ -3875,7 +6528,25 @@
       "30053",
       "30093",
       "30103"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": true,
+        "openTime": 1593536400000
+      },
+      "JP": {
+        "exist": true,
+        "openTime": 1593500400000
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1577174400000
+      },
+      "KR": {
+        "exist": true,
+        "openTime": 1593500400000
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -3917,7 +6588,21 @@
       "31023"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -3943,7 +6628,23 @@
       "30051",
       "30061",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1578513600000,
+        "closeTime": 1579118399000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -3969,7 +6670,23 @@
       "30051",
       "30061",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1578513600000,
+        "closeTime": 1579118399000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -3995,7 +6712,23 @@
       "30012",
       "30032",
       "30062"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1578513600000,
+        "closeTime": 1579118399000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -4021,7 +6754,23 @@
       "30012",
       "30032",
       "30062"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1578513600000,
+        "closeTime": 1579118399000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -4048,7 +6797,23 @@
       "30042",
       "30052",
       "2002"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1578513600000,
+        "closeTime": 1579118399000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -4075,7 +6840,23 @@
       "30042",
       "30052",
       "2002"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1578513600000,
+        "closeTime": 1579118399000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -4102,7 +6883,23 @@
       "30042",
       "30052",
       "2002"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1578513600000,
+        "closeTime": 1579118399000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -4132,7 +6929,23 @@
       "30083",
       "31023",
       "2003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1578513600000,
+        "closeTime": 1579118399000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -4174,7 +6987,21 @@
       "31023"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -4190,7 +7017,21 @@
     "apCost": 10,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -4206,7 +7047,21 @@
     "apCost": 15,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -4222,7 +7077,21 @@
     "apCost": 20,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -4238,7 +7107,21 @@
     "apCost": 25,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -4254,7 +7137,21 @@
     "apCost": 30,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -4270,7 +7167,21 @@
     "apCost": 10,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -4286,7 +7197,21 @@
     "apCost": 15,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -4302,7 +7227,21 @@
     "apCost": 20,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -4318,7 +7257,21 @@
     "apCost": 25,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -4334,7 +7287,21 @@
     "apCost": 30,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -4360,7 +7327,23 @@
       "30051",
       "30061",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1582617600000,
+        "closeTime": 1583179199000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -4386,7 +7369,23 @@
       "30051",
       "30061",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1582617600000,
+        "closeTime": 1583179199000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -4412,7 +7411,23 @@
       "30012",
       "30032",
       "30062"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1582617600000,
+        "closeTime": 1583179199000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -4439,7 +7454,23 @@
       "30042",
       "30052",
       "2002"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1582617600000,
+        "closeTime": 1583179199000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -4469,7 +7500,23 @@
       "30083",
       "31023",
       "2003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1582617600000,
+        "closeTime": 1583179199000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -4499,7 +7546,23 @@
       "30083",
       "31023",
       "2003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1582617600000,
+        "closeTime": 1583179199000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -4529,7 +7592,21 @@
       "31023"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -4548,7 +7625,23 @@
       "30011"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1587456000000,
+        "closeTime": 1589486400000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -4567,7 +7660,23 @@
       "30061"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1587456000000,
+        "closeTime": 1589486400000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -4586,7 +7695,23 @@
       "30051"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1587456000000,
+        "closeTime": 1589486400000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -4605,7 +7730,23 @@
       "30042"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1587456000000,
+        "closeTime": 1589486400000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -4624,7 +7765,23 @@
       "30062"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1587456000000,
+        "closeTime": 1589486400000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -4642,7 +7799,23 @@
       "30023"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1587456000000,
+        "closeTime": 1589486400000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -4660,7 +7833,23 @@
       "30073"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1587456000000,
+        "closeTime": 1589486400000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -4678,7 +7867,23 @@
       "30043"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1587456000000,
+        "closeTime": 1589486400000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -4707,7 +7912,22 @@
       "30053",
       "30093",
       "30103"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1588320000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -4725,7 +7945,22 @@
       "30022"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1588320000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -4755,7 +7990,22 @@
       "30083",
       "31023",
       "2003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1588320000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -4784,7 +8034,22 @@
       "30053",
       "30093",
       "30103"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1588320000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -4803,7 +8068,22 @@
       "30022"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1588320000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -4835,7 +8115,22 @@
       "30083",
       "31023",
       "2003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1588320000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -4864,7 +8159,22 @@
       "30053",
       "30093",
       "30103"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1588320000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -4891,7 +8201,22 @@
       "30053",
       "30093",
       "30103"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1588320000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -4910,7 +8235,22 @@
       "2003"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1588320000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -4929,7 +8269,22 @@
       "30052"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1588320000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -4957,7 +8312,22 @@
       "30073",
       "31013",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1588320000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -4984,7 +8354,22 @@
       "30053",
       "30093",
       "30103"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1588320000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -5014,7 +8399,22 @@
       "30083",
       "31023",
       "2003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1588320000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -5033,7 +8433,22 @@
       "30012"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1588320000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -5065,7 +8480,22 @@
       "30083",
       "31023",
       "2003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1588320000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -5084,7 +8514,22 @@
       "30052"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1588320000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -5110,7 +8555,22 @@
       "30073",
       "31013",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1588320000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "MAIN",
@@ -5128,7 +8588,22 @@
       "30052"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1588320000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -5164,7 +8639,21 @@
       "31023"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -5180,7 +8669,21 @@
     "apCost": 18,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -5196,7 +8699,21 @@
     "apCost": 36,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -5212,7 +8729,21 @@
     "apCost": 18,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -5228,7 +8759,21 @@
     "apCost": 36,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -5244,7 +8789,21 @@
     "apCost": 18,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -5260,7 +8819,21 @@
     "apCost": 36,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -5276,7 +8849,21 @@
     "apCost": 18,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -5292,7 +8879,21 @@
     "apCost": 36,
     "normalDrop": [],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -5311,7 +8912,21 @@
       "2001"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -5330,7 +8945,21 @@
       "2001"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -5350,7 +8979,21 @@
       "2001"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -5371,7 +9014,21 @@
       "2001"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "DAILY",
@@ -5391,7 +9048,21 @@
       "2002"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -5421,7 +9092,21 @@
       "31023"
     ],
     "specialDrop": [],
-    "extraDrop": []
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": true
+      },
+      "JP": {
+        "exist": true
+      },
+      "CN": {
+        "exist": true
+      },
+      "KR": {
+        "exist": true
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -5447,7 +9132,23 @@
       "30051",
       "30061",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1592467200000,
+        "closeTime": 1593028800000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -5473,7 +9174,23 @@
       "30051",
       "30061",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1592467200000,
+        "closeTime": 1593028800000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -5499,7 +9216,23 @@
       "30051",
       "30061",
       "3003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1592467200000,
+        "closeTime": 1593028800000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -5525,7 +9258,23 @@
       "30012",
       "30032",
       "30062"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1592467200000,
+        "closeTime": 1593028800000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -5552,7 +9301,23 @@
       "30042",
       "30052",
       "2002"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1592467200000,
+        "closeTime": 1593028800000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -5579,7 +9344,23 @@
       "30042",
       "30052",
       "2002"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1592467200000,
+        "closeTime": 1593028800000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   },
   {
     "stageType": "ACTIVITY",
@@ -5609,6 +9390,299 @@
       "30083",
       "31023",
       "2003"
-    ]
+    ],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1592467200000,
+        "closeTime": 1593028800000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
+  },
+  {
+    "stageType": "ACTIVITY",
+    "stageId": "act11d0_01",
+    "zoneId": "act11d0_zone1",
+    "code": "TW-1",
+    "code_i18n": {
+      "ko": "TW-1",
+      "ja": "TW-1",
+      "en": "TW-1",
+      "zh": "TW-1"
+    },
+    "apCost": 9,
+    "normalDrop": [
+      "30021",
+      "30061"
+    ],
+    "specialDrop": [],
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1594281600000,
+        "closeTime": 1595448000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
+  },
+  {
+    "stageType": "ACTIVITY",
+    "stageId": "act11d0_02",
+    "zoneId": "act11d0_zone1",
+    "code": "TW-2",
+    "code_i18n": {
+      "ko": "TW-2",
+      "ja": "TW-2",
+      "en": "TW-2",
+      "zh": "TW-2"
+    },
+    "apCost": 9,
+    "normalDrop": [
+      "30031",
+      "30051"
+    ],
+    "specialDrop": [],
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1594281600000,
+        "closeTime": 1595448000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
+  },
+  {
+    "stageType": "ACTIVITY",
+    "stageId": "act11d0_03",
+    "zoneId": "act11d0_zone1",
+    "code": "TW-3",
+    "code_i18n": {
+      "ko": "TW-3",
+      "ja": "TW-3",
+      "en": "TW-3",
+      "zh": "TW-3"
+    },
+    "apCost": 12,
+    "normalDrop": [
+      "30041",
+      "30011"
+    ],
+    "specialDrop": [],
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1594281600000,
+        "closeTime": 1595448000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
+  },
+  {
+    "stageType": "ACTIVITY",
+    "stageId": "act11d0_04",
+    "zoneId": "act11d0_zone1",
+    "code": "TW-4",
+    "code_i18n": {
+      "ko": "TW-4",
+      "ja": "TW-4",
+      "en": "TW-4",
+      "zh": "TW-4"
+    },
+    "apCost": 12,
+    "normalDrop": [
+      "30032",
+      "30012"
+    ],
+    "specialDrop": [],
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1594281600000,
+        "closeTime": 1595448000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
+  },
+  {
+    "stageType": "ACTIVITY",
+    "stageId": "act11d0_05",
+    "zoneId": "act11d0_zone1",
+    "code": "TW-5",
+    "code_i18n": {
+      "ko": "TW-5",
+      "ja": "TW-5",
+      "en": "TW-5",
+      "zh": "TW-5"
+    },
+    "apCost": 15,
+    "normalDrop": [
+      "30052",
+      "30062"
+    ],
+    "specialDrop": [],
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1594281600000,
+        "closeTime": 1595448000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
+  },
+  {
+    "stageType": "ACTIVITY",
+    "stageId": "act11d0_06",
+    "zoneId": "act11d0_zone1",
+    "code": "TW-6",
+    "code_i18n": {
+      "ko": "TW-6",
+      "ja": "TW-6",
+      "en": "TW-6",
+      "zh": "TW-6"
+    },
+    "apCost": 15,
+    "normalDrop": [
+      "31023"
+    ],
+    "specialDrop": [],
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1594281600000,
+        "closeTime": 1595448000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
+  },
+  {
+    "stageType": "ACTIVITY",
+    "stageId": "act11d0_07",
+    "zoneId": "act11d0_zone1",
+    "code": "TW-7",
+    "code_i18n": {
+      "ko": "TW-7",
+      "ja": "TW-7",
+      "en": "TW-7",
+      "zh": "TW-7"
+    },
+    "apCost": 18,
+    "normalDrop": [
+      "30053"
+    ],
+    "specialDrop": [],
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1594281600000,
+        "closeTime": 1595448000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
+  },
+  {
+    "stageType": "ACTIVITY",
+    "stageId": "act11d0_08",
+    "zoneId": "act11d0_zone1",
+    "code": "TW-8",
+    "code_i18n": {
+      "ko": "TW-8",
+      "ja": "TW-8",
+      "en": "TW-8",
+      "zh": "TW-8"
+    },
+    "apCost": 18,
+    "normalDrop": [
+      "30093"
+    ],
+    "specialDrop": [],
+    "extraDrop": [],
+    "existence": {
+      "US": {
+        "exist": false
+      },
+      "JP": {
+        "exist": false
+      },
+      "CN": {
+        "exist": true,
+        "openTime": 1594281600000,
+        "closeTime": 1595448000000
+      },
+      "KR": {
+        "exist": false
+      }
+    }
   }
 ]

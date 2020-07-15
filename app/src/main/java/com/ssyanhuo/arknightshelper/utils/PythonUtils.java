@@ -350,7 +350,7 @@ public class PythonUtils {
             return false;
         }
     }
-    public static void setupEnvironment(final Context context, final Activity activity) {
+    public static void setupEnvironment(final Context context, final Activity activity, final View snackbarView) {
         if (!PythonUtils.isAbiSupported()) {
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
             dialogBuilder.setMessage(R.string.py_unsupported_arch)
@@ -377,7 +377,7 @@ public class PythonUtils {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             context.getSharedPreferences(StaticData.Const.PREFERENCE_PATH, Context.MODE_PRIVATE).edit().putBoolean("disable_planner", true).apply();
-                            Snackbar.make(activity.getWindow().getDecorView().getRootView().findViewById(R.id.fab), "日后可以从设置中重新启用刷图规划功能", Snackbar.LENGTH_LONG).show();
+                            Snackbar.make(snackbarView, "日后可以从设置中重新启用刷图规划功能", Snackbar.LENGTH_LONG).show();
 
                         }
                     })
@@ -408,11 +408,11 @@ public class PythonUtils {
                     FileUtils.deleteDirectory(CACHE_PATH + File.separator + "plugin");
                     FileUtils.copyFileFromAssets(context, context.getFilesDir().getPath() + File.separator + "python" + File.separator + "data", "formula.json");
                     FileUtils.copyFileFromAssets(context, context.getFilesDir().getPath() + File.separator + "python" + File.separator + "data", "matrix.json");
-                    Snackbar.make(activity.getWindow().getDecorView().getRootView().findViewById(R.id.fab), "组件初始化成功，请重新启动服务", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(snackbarView, "组件初始化成功，请重新启动服务", Snackbar.LENGTH_LONG).show();
                     context.getSharedPreferences(StaticData.Const.PREFERENCE_PATH, Context.MODE_PRIVATE).edit().putBoolean("python_finished", true).apply();
                     dialog.dismiss();
                 } catch (Exception e) {
-                    Snackbar.make(activity.getWindow().getDecorView().getRootView().findViewById(R.id.fab), context.getString(R.string.py_error) + e.getMessage(), Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(snackbarView, context.getString(R.string.py_error) + e.getMessage(), Snackbar.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
 
@@ -420,144 +420,144 @@ public class PythonUtils {
         });
         thread.start();
     }
-    public static void setupEnvironmentOld(final Context context, final Activity activity) {
-        if (!PythonUtils.isAbiSupported()) {
-            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
-            dialogBuilder.setMessage(R.string.py_unsupported_arch)
-                    .show();
-        }
-        String baseUrl = context.getSharedPreferences(StaticData.Const.PREFERENCE_PATH, Context.MODE_PRIVATE).getString("update_site", "0");
-        if (baseUrl.equals("1")) {
-            baseUrl = "https://ssyanhuo.github.io/Arknights-Helper-Dependencies/";
-        } else {
-            baseUrl = "http://ssyanhuo.gitee.io/arknights-helper-dependencies/";
-        }
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
-        LinearLayout pythonDownloader = (LinearLayout) LayoutInflater.from(activity).inflate(R.layout.dialog_python_downloader, null);
-        final ProgressBar progressBar1 = pythonDownloader.findViewById(R.id.pythonDownloader_progressBar_1);
-        final ProgressBar progressBar2 = pythonDownloader.findViewById(R.id.pythonDownloader_progressBar_2);
-        final ProgressBar progressBar3 = pythonDownloader.findViewById(R.id.pythonDownloader_progressBar_3);
-        dialogBuilder.setTitle(R.string.py_download)
-                .setCancelable(false)
-                .setView(pythonDownloader);
-        final AlertDialog dialog = dialogBuilder.create();
-        dialog.show();
-
-        final DownloadTask task1 = new DownloadTask.Builder(baseUrl + Build.SUPPORTED_ABIS[0] + ".zip", context.getCacheDir())
-                .setFilename(Build.SUPPORTED_ABIS[0] + ".zip")
-                .setPassIfAlreadyCompleted(true)
-                .build();
-        final DownloadTask task2 = new DownloadTask.Builder(baseUrl + "universal" + ".zip", context.getCacheDir())
-                .setFilename("universal" + ".zip")
-                .setPassIfAlreadyCompleted(true)
-                .build();
-        final DownloadTask task3 = new DownloadTask.Builder(baseUrl + "ArkPlanner" + ".zip", context.getCacheDir())
-                .setFilename("ArkPlanner" + ".zip")
-                .setPassIfAlreadyCompleted(true)
-                .build();
-        DownloadTask[] list = {task1, task2, task3};
-        DownloadTask.enqueue(list, new DownloadListener3() {
-            int completedCount = 0;
-
-            @Override
-            protected void started(@NonNull DownloadTask task) {
-
-            }
-
-            @Override
-            protected void completed(@NonNull DownloadTask task) {
-                completedCount++;
-                if (task.equals(task1)) {
-                    progressBar1.setIndeterminate(true);
-                } else if (task.equals(task2)) {
-                    progressBar2.setIndeterminate(true);
-                } else if (task.equals(task3)) {
-                    progressBar3.setIndeterminate(true);
-                }
-                if (completedCount >= 3) {
-                    Thread thread = new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                ZipUtils.UnZipFolder(context.getCacheDir() + File.separator + Build.SUPPORTED_ABIS[0] + ".zip", context.getFilesDir() + File.separator + "python");
-                                ZipUtils.UnZipFolder(context.getCacheDir() + File.separator + "universal" + ".zip", context.getFilesDir() + File.separator + "python");
-                                ZipUtils.UnZipFolder(context.getCacheDir() + File.separator + "ArkPlanner" + ".zip", context.getFilesDir() + File.separator + "python");
-                                ZipUtils.UnZipFolder(context.getFilesDir() + File.separator + "python" + File.separator + "numpy" + ".zip", context.getFilesDir() + File.separator + "python" + File.separator + "numpy");
-                                ZipUtils.UnZipFolder(context.getFilesDir() + File.separator + "python" + File.separator + "scipy" + ".zip", context.getFilesDir() + File.separator + "python" + File.separator + "scipy");
-                                FileUtils.delFile(context, context.getCacheDir() + File.separator + Build.SUPPORTED_ABIS[0] + ".zip");
-                                FileUtils.delFile(context, context.getCacheDir() + File.separator + "universal" + ".zip");
-                                FileUtils.delFile(context, context.getCacheDir() + File.separator + "ArkPlanner" + ".zip");
-                                //String result = getArkPlannerString(context, "{\"聚合剂\":192}", "{\"聚合剂\":0}");
-                                dialog.dismiss();
-                                //new AlertDialog.Builder(activity).setMessage(result).show();
-                                //Log.e("TAG", result);
-                                Snackbar.make(activity.getWindow().getDecorView().getRootView().findViewById(R.id.fab), "组件初始化成功，请重新启动服务", Snackbar.LENGTH_LONG).show();
-                                context.getSharedPreferences(StaticData.Const.PREFERENCE_PATH, Context.MODE_PRIVATE).edit().putBoolean("python_finished", true).apply();
-                            } catch (Exception e) {
-                                dialog.dismiss();
-                                FileUtils.delFile(context, context.getCacheDir() + File.separator + Build.SUPPORTED_ABIS[0] + ".zip");
-                                FileUtils.delFile(context, context.getCacheDir() + File.separator + "universal" + ".zip");
-                                FileUtils.delFile(context, context.getCacheDir() + File.separator + "ArkPlanner" + ".zip");
-                                Snackbar.make(activity.getWindow().getDecorView().getRootView().findViewById(R.id.fab), context.getString(R.string.py_error) + e.getMessage(), Snackbar.LENGTH_LONG).show();
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-                    thread.start();
-                }
-            }
-
-            @Override
-            protected void canceled(@NonNull DownloadTask task) {
-
-            }
-
-            @Override
-            protected void error(@NonNull DownloadTask task, @NonNull Exception e) {
-                dialog.dismiss();
-                Snackbar.make(activity.getWindow().getDecorView().getRootView().findViewById(R.id.fab), context.getString(R.string.py_error) + e.getMessage(), Snackbar.LENGTH_LONG).show();
-                e.printStackTrace();
-            }
-
-            @Override
-            protected void warn(@NonNull DownloadTask task) {
-
-            }
-
-            @Override
-            public void retry(@NonNull DownloadTask task, @NonNull ResumeFailedCause cause) {
-
-            }
-
-            @Override
-            public void connected(@NonNull DownloadTask task, int blockCount, long currentOffset, long totalLength) {
-
-            }
-
-            @Override
-            public void progress(@NonNull DownloadTask task, long currentOffset, long totalLength) {
-                if (task.equals(task1)) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        progressBar1.setProgress((int) (((float) currentOffset) / ((float) totalLength) * 100), true);
-                    } else {
-                        progressBar1.setProgress((int) (((float) currentOffset) / ((float) totalLength) * 100));
-                    }
-                } else if (task.equals(task2)) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        progressBar2.setProgress((int) (((float) currentOffset) / ((float) totalLength) * 100), true);
-                    } else {
-                        progressBar2.setProgress((int) (((float) currentOffset) / ((float) totalLength) * 100));
-                    }
-                } else if (task.equals(task3)) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        progressBar3.setProgress((int) (((float) currentOffset) / ((float) totalLength) * 100), true);
-                    } else {
-                        progressBar3.setProgress((int) (((float) currentOffset) / ((float) totalLength) * 100));
-                    }
-                }
-                //Log.e("", String.valueOf(currentOffset) + ' ' + String.valueOf(totalLength) + " " + ((int) (((float)currentOffset) / ((float)totalLength) * 100)));
-            }
-        });
-    }
+//    public static void setupEnvironmentOld(final Context context, final Activity activity) {
+//        if (!PythonUtils.isAbiSupported()) {
+//            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+//            dialogBuilder.setMessage(R.string.py_unsupported_arch)
+//                    .show();
+//        }
+//        String baseUrl = context.getSharedPreferences(StaticData.Const.PREFERENCE_PATH, Context.MODE_PRIVATE).getString("update_site", "0");
+//        if (baseUrl.equals("1")) {
+//            baseUrl = "https://ssyanhuo.github.io/Arknights-Helper-Dependencies/";
+//        } else {
+//            baseUrl = "http://ssyanhuo.gitee.io/arknights-helper-dependencies/";
+//        }
+//        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+//        LinearLayout pythonDownloader = (LinearLayout) LayoutInflater.from(activity).inflate(R.layout.dialog_python_downloader, null);
+//        final ProgressBar progressBar1 = pythonDownloader.findViewById(R.id.pythonDownloader_progressBar_1);
+//        final ProgressBar progressBar2 = pythonDownloader.findViewById(R.id.pythonDownloader_progressBar_2);
+//        final ProgressBar progressBar3 = pythonDownloader.findViewById(R.id.pythonDownloader_progressBar_3);
+//        dialogBuilder.setTitle(R.string.py_download)
+//                .setCancelable(false)
+//                .setView(pythonDownloader);
+//        final AlertDialog dialog = dialogBuilder.create();
+//        dialog.show();
+//
+//        final DownloadTask task1 = new DownloadTask.Builder(baseUrl + Build.SUPPORTED_ABIS[0] + ".zip", context.getCacheDir())
+//                .setFilename(Build.SUPPORTED_ABIS[0] + ".zip")
+//                .setPassIfAlreadyCompleted(true)
+//                .build();
+//        final DownloadTask task2 = new DownloadTask.Builder(baseUrl + "universal" + ".zip", context.getCacheDir())
+//                .setFilename("universal" + ".zip")
+//                .setPassIfAlreadyCompleted(true)
+//                .build();
+//        final DownloadTask task3 = new DownloadTask.Builder(baseUrl + "ArkPlanner" + ".zip", context.getCacheDir())
+//                .setFilename("ArkPlanner" + ".zip")
+//                .setPassIfAlreadyCompleted(true)
+//                .build();
+//        DownloadTask[] list = {task1, task2, task3};
+//        DownloadTask.enqueue(list, new DownloadListener3() {
+//            int completedCount = 0;
+//
+//            @Override
+//            protected void started(@NonNull DownloadTask task) {
+//
+//            }
+//
+//            @Override
+//            protected void completed(@NonNull DownloadTask task) {
+//                completedCount++;
+//                if (task.equals(task1)) {
+//                    progressBar1.setIndeterminate(true);
+//                } else if (task.equals(task2)) {
+//                    progressBar2.setIndeterminate(true);
+//                } else if (task.equals(task3)) {
+//                    progressBar3.setIndeterminate(true);
+//                }
+//                if (completedCount >= 3) {
+//                    Thread thread = new Thread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            try {
+//                                ZipUtils.UnZipFolder(context.getCacheDir() + File.separator + Build.SUPPORTED_ABIS[0] + ".zip", context.getFilesDir() + File.separator + "python");
+//                                ZipUtils.UnZipFolder(context.getCacheDir() + File.separator + "universal" + ".zip", context.getFilesDir() + File.separator + "python");
+//                                ZipUtils.UnZipFolder(context.getCacheDir() + File.separator + "ArkPlanner" + ".zip", context.getFilesDir() + File.separator + "python");
+//                                ZipUtils.UnZipFolder(context.getFilesDir() + File.separator + "python" + File.separator + "numpy" + ".zip", context.getFilesDir() + File.separator + "python" + File.separator + "numpy");
+//                                ZipUtils.UnZipFolder(context.getFilesDir() + File.separator + "python" + File.separator + "scipy" + ".zip", context.getFilesDir() + File.separator + "python" + File.separator + "scipy");
+//                                FileUtils.delFile(context, context.getCacheDir() + File.separator + Build.SUPPORTED_ABIS[0] + ".zip");
+//                                FileUtils.delFile(context, context.getCacheDir() + File.separator + "universal" + ".zip");
+//                                FileUtils.delFile(context, context.getCacheDir() + File.separator + "ArkPlanner" + ".zip");
+//                                //String result = getArkPlannerString(context, "{\"聚合剂\":192}", "{\"聚合剂\":0}");
+//                                dialog.dismiss();
+//                                //new AlertDialog.Builder(activity).setMessage(result).show();
+//                                //Log.e("TAG", result);
+//                                Snackbar.make(activity.getWindow().getDecorView().getRootView().findViewById(R.id.fab), "组件初始化成功，请重新启动服务", Snackbar.LENGTH_LONG).show();
+//                                context.getSharedPreferences(StaticData.Const.PREFERENCE_PATH, Context.MODE_PRIVATE).edit().putBoolean("python_finished", true).apply();
+//                            } catch (Exception e) {
+//                                dialog.dismiss();
+//                                FileUtils.delFile(context, context.getCacheDir() + File.separator + Build.SUPPORTED_ABIS[0] + ".zip");
+//                                FileUtils.delFile(context, context.getCacheDir() + File.separator + "universal" + ".zip");
+//                                FileUtils.delFile(context, context.getCacheDir() + File.separator + "ArkPlanner" + ".zip");
+//                                Snackbar.make(activity.getWindow().getDecorView().getRootView().findViewById(R.id.fab), context.getString(R.string.py_error) + e.getMessage(), Snackbar.LENGTH_LONG).show();
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    });
+//                    thread.start();
+//                }
+//            }
+//
+//            @Override
+//            protected void canceled(@NonNull DownloadTask task) {
+//
+//            }
+//
+//            @Override
+//            protected void error(@NonNull DownloadTask task, @NonNull Exception e) {
+//                dialog.dismiss();
+//                Snackbar.make(activity.getWindow().getDecorView().getRootView().findViewById(R.id.fab), context.getString(R.string.py_error) + e.getMessage(), Snackbar.LENGTH_LONG).show();
+//                e.printStackTrace();
+//            }
+//
+//            @Override
+//            protected void warn(@NonNull DownloadTask task) {
+//
+//            }
+//
+//            @Override
+//            public void retry(@NonNull DownloadTask task, @NonNull ResumeFailedCause cause) {
+//
+//            }
+//
+//            @Override
+//            public void connected(@NonNull DownloadTask task, int blockCount, long currentOffset, long totalLength) {
+//
+//            }
+//
+//            @Override
+//            public void progress(@NonNull DownloadTask task, long currentOffset, long totalLength) {
+//                if (task.equals(task1)) {
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                        progressBar1.setProgress((int) (((float) currentOffset) / ((float) totalLength) * 100), true);
+//                    } else {
+//                        progressBar1.setProgress((int) (((float) currentOffset) / ((float) totalLength) * 100));
+//                    }
+//                } else if (task.equals(task2)) {
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                        progressBar2.setProgress((int) (((float) currentOffset) / ((float) totalLength) * 100), true);
+//                    } else {
+//                        progressBar2.setProgress((int) (((float) currentOffset) / ((float) totalLength) * 100));
+//                    }
+//                } else if (task.equals(task3)) {
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                        progressBar3.setProgress((int) (((float) currentOffset) / ((float) totalLength) * 100), true);
+//                    } else {
+//                        progressBar3.setProgress((int) (((float) currentOffset) / ((float) totalLength) * 100));
+//                    }
+//                }
+//                //Log.e("", String.valueOf(currentOffset) + ' ' + String.valueOf(totalLength) + " " + ((int) (((float)currentOffset) / ((float)totalLength) * 100)));
+//            }
+//        });
+//    }
 
 }
