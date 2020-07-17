@@ -3,6 +3,7 @@
     <string-array name="settings_array_game">
         <item>官方</item>
         <item>哔哩哔哩</item>
+        <item>中国台湾</item>
         <item>国际服 (英语)</item>
         <item>国际服 (日语)</item>
         <item>国际服 (韩语)</item>
@@ -11,6 +12,7 @@
     <string-array name="settings_array_game_value">
         <item>com.hypergryph.arknights</item>
         <item>com.hypergryph.arknights.bilibili</item>
+        <item>tw.txwy.and.arknights</item>
         <item>com.YoStarEN.Arknights</item>
         <item>com.YoStarJP.Arknights</item>
         <item>com.YoStarKR.Arknights</item>

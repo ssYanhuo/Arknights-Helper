@@ -1,5 +1,5 @@
 {
-    "versionCode": 35,
-    "versionName": "OpenPreview-2.0.0",
-    "releaseNote": "[Mod]同步最新数据\n[New]更新部分UI以适配新的 Material Design 标准"
+    "versionCode": 36,
+    "versionName": "OpenPreview-2.1.0",
+    "releaseNote": "[Mod]同步最新数据\n[New]长按启动按钮可快速选择要启动的客户端\n[New]掉落查询页面选择物品后可展示合成表\n[New]支持启动台服客户端"
 }

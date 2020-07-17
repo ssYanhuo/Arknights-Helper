@@ -264,4 +264,5 @@
     <string name="title_home">home</string>
     <string name="title_dashboard">dashboard</string>
     <string name="title_notifications">notifications</string>
+    <string name="game_taiwanese">中国台湾</string>
 </resources>

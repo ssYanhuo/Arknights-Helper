@@ -48,6 +48,7 @@ public class Drop {
     final static String API_ITEMS = "/api/items";
     final static String API_STAGES = "/api/stages";
     JSONObject data_matrix;
+    JSONObject data_material;
     JSONArray data_items;
     JSONArray data_stages;
     Context applicationContext;
@@ -70,6 +71,7 @@ public class Drop {
         sharedPreferences = applicationContext.getSharedPreferences("com.ssyanhuo.arknightshelper_preferences", Context.MODE_PRIVATE);
         try{
             data_matrix = JSON.parseObject(FileUtils.readData("matrix.json", applicationContext));
+            data_material = JSON.parseObject(FileUtils.readData("material.json", applicationContext));
             //下面两个是数组形式
             data_items = JSON.parseArray(FileUtils.readData("items.json", applicationContext));
             data_stages = JSON.parseArray(FileUtils.readData("stages.json", applicationContext));
@@ -183,6 +185,26 @@ public class Drop {
         LinearLayout resultLayout = contentView.findViewById(R.id.drop_result_content);
         resultLayout.removeAllViews();
         TableItem tableTitle = new TableItem(applicationContext, "关卡", "提交次数", "总共获得", "单个理智");
+        int padding = applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
+        tableTitle.setPadding(0, padding, 0, 0);
+        try {
+            JSONObject formula = data_material.getJSONObject(String.valueOf(item)).getJSONObject("madeof");
+            if (formula != null && formula.size() > 0){
+                TextView textView = new TextView(applicationContext);
+                textView.setPadding(DpUtils.dip2px(applicationContext, 8), padding, padding, 0);
+                textView.setText("合成：");
+                for (Map.Entry<String, Object> entry:
+                     formula.entrySet()) {
+                    textView.append("\n\t\t" + entry.getKey() + ": " + entry.getValue());
+                }
+                tableTitle.setPadding(0, 0, 0, 0);
+                resultLayout.addView(textView);
+
+            }
+        } catch (Exception ignored) {
+
+        }
+
         resultLayout.addView(tableTitle);
         for (int i = 0; i < result.size(); i++){
             JSONObject object = result.get(i);

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/game_official"
+        android:id="@+id/game_selector_official" />
+    <item android:title="@string/game_bilibili"
+        android:id="@+id/game_selector_bilibili" />
+    <item android:title="@string/game_taiwanese"
+        android:id="@+id/game_selector_taiwanese"/>
+    <item android:title="@string/game_english"
+        android:id="@+id/game_selector_english"/>
+    <item android:title="@string/game_japanese"
+        android:id="@+id/game_selector_japanese" />
+    <item android:title="@string/game_korean"
+        android:id="@+id/game_selector_korean"/>
+</menu>

@@ -41,6 +41,9 @@ public class PackageUtils {
         if (checkApplication(StaticData.Const.PACKAGE_BILIBILI, context)){
             count++;
         }
+        if (checkApplication(StaticData.Const.PACKAGE_TAIWANESE, context)){
+            count++;
+        }
         if (checkApplication(StaticData.Const.PACKAGE_JAPANESE, context)){
             count++;
         }
@@ -77,7 +80,9 @@ public class PackageUtils {
             return context.getString(R.string.game_official);
         }else if (packageName.equals(StaticData.Const.PACKAGE_BILIBILI)){
             return context.getString(R.string.game_bilibili);
-        }else if (packageName.equals(StaticData.Const.PACKAGE_ENGLISH)){
+        }else if (packageName.equals(StaticData.Const.PACKAGE_TAIWANESE)){
+            return context.getString(R.string.game_taiwanese);
+        } else if (packageName.equals(StaticData.Const.PACKAGE_ENGLISH)){
             return context.getString(R.string.game_english);
         }else if (packageName.equals(StaticData.Const.PACKAGE_JAPANESE)){
             return context.getString(R.string.game_japanese);

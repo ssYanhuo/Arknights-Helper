@@ -4,26 +4,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.view.menu.ActionMenuItemView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.animation.Animator;
-import android.animation.AnimatorInflater;
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.res.ColorStateList;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,13 +24,16 @@ import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.android.material.bottomappbar.BottomAppBar;
@@ -60,7 +55,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.ProtocolFamily;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -92,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     private ProgressBar bottomProgressBar;
 
-    private void startEngine(final View view, final boolean startGame){
+    private void startEngine(final boolean startGame){
         //new DataUpdateDialog().showDialog(getApplicationContext());
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
@@ -245,6 +239,112 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void startEngine(final String game){
+        //new DataUpdateDialog().showDialog(getApplicationContext());
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+                AlertDialog.Builder builder=new AlertDialog.Builder(this);
+                builder.setCancelable(false)
+                        .setTitle(R.string.get_permission_storage_title)
+                        .setMessage(R.string.get_permission_storage_content)
+                        .setPositiveButton(R.string.get_permission_manually, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent();
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+                                intent.setData(Uri.fromParts("package", getPackageName(), null));
+                                startActivity(intent);
+                            }
+                        });
+                builder.show();
+                return;
+            }
+        }
+
+        if ((!preferences.getBoolean("python_finished",false)) && PythonUtils.isAbiSupported() && !preferences.getBoolean("disable_planner", false)){
+            PythonUtils.setupEnvironment(getApplicationContext(), MainActivity.this, snackbarContainer);
+            return;
+        }
+
+
+        Snackbar.make(snackbarContainer, R.string.start_game, Snackbar.LENGTH_LONG).show();
+        Timer timer = new Timer();
+        final Handler handler = new Handler();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                final SharedPreferences.Editor editor = preferences.edit();
+                Intent overlayServiceIntent = new Intent(getApplicationContext(), OverlayService.class);
+                Intent pythonServiceIntent = new Intent(getApplicationContext(), PythonService.class);
+                Looper.prepare();
+                if (preferences.getInt("versionLast", -1) != BuildConfig.VERSION_CODE || !FileUtils.checkFiles(getApplicationContext(), getFilesDir().getPath(), StaticData.Const.DATA_LIST) || ((!FileUtils.checkFiles(getApplicationContext(), getFilesDir().getPath() + File.separator + "python" + File.separator + "data", new String[]{"formula.json", "matrix.json"})) && preferences.getBoolean("disable_planner", false))){
+                    FileUtils.copyFilesFromAssets(getApplicationContext(), StaticData.Const.DATA_LIST);
+                    FileUtils.copyFileFromAssets(getApplicationContext(), getFilesDir().getPath() + File.separator + "python" + File.separator + "data", "formula.json");
+                    FileUtils.copyFileFromAssets(getApplicationContext(), getFilesDir().getPath() + File.separator + "python" + File.separator + "data", "matrix.json");
+                }
+                if((Build.BRAND.equals("Meizu") || Build.BRAND.equals("MEIZU") || Build.BRAND.equals("MeiZu") || Build.BRAND.equals("meizu")) && preferences.getBoolean("firstRun", true)){
+                    Snackbar.make(snackbarContainer, R.string.meizu_floating_window_permission, Snackbar.LENGTH_INDEFINITE).show();
+                    editor.putBoolean("firstRun", false);
+                    editor.apply();
+                    return;
+                }
+                editor.putBoolean("firstRun", false);
+                editor.apply();
+
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    if(Settings.canDrawOverlays(getApplicationContext())){
+                        try{
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    //changeProgressbarMode(false);
+                                }
+                            });
+
+                            startService(overlayServiceIntent);
+                            if(PythonUtils.isAbiSupported() && !preferences.getBoolean("disable_planner", false)){
+                                startService(pythonServiceIntent);
+                            }
+                        }catch (Exception e){
+                            Log.e(TAG, "Start service failed!", e);
+                        }
+                    }else {
+                        Snackbar.make(snackbarContainer, R.string.no_overlay_permission_error, Snackbar.LENGTH_INDEFINITE).setAction(R.string.no_overlay_permission_action, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
+                                startActivity(intent);
+                            }
+                        }).show();
+                        return;
+                    }
+                } else {
+                    try{
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                //changeProgressbarMode(false);
+                            }
+                        });
+                        startService(overlayServiceIntent);
+                        if(PythonUtils.isAbiSupported() && !preferences.getBoolean("disable_planner", false)){
+                            startService(pythonServiceIntent);
+                        }
+                    }catch (Exception e){
+                        Log.e(TAG, "Start service failed!", e);
+                    }
+                }
+                PackageUtils.startApplication(game, activity);
+                Looper.loop();
+            }
+        }, 200);
+        versionLast = preferences.getInt("versionLast", -1);
+        if (versionLast == -1 && versionLast != BuildConfig.VERSION_CODE){
+            preferences.edit().putInt("versionLast", BuildConfig.VERSION_CODE).apply();
+        }
+    }
+
 
     private void preNotifyThemeChanged(){
         setTheme(ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_MAIN, getApplicationContext()));
@@ -287,7 +387,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startEngine(view, true);
+                startEngine(true);
             }
         });
         snackbarContainer = findViewById(R.id.snackbar_container);
@@ -295,9 +395,74 @@ public class MainActivity extends AppCompatActivity {
         startWithoutGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startEngine(view, false);
+                startEngine(false);
             }
         });
+        fab.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                ArrayList<String> gameList = PackageUtils.getGameList(activity);
+                if (gameList.size() > 0){
+                    PopupMenu popupMenu = new PopupMenu(activity, v);
+                    popupMenu.getMenuInflater().inflate(R.menu.activity_main_game_selector, popupMenu.getMenu());
+                    Menu menu = popupMenu.getMenu();
+                    for (int i = 0; i < menu.size(); i++) {
+                        menu.getItem(i).setVisible(false);
+                    }
+                    for (String game :
+                            gameList) {
+                            if (StaticData.Const.PACKAGE_OFFICIAL.equals(game)) {
+                                menu.findItem(R.id.game_selector_official).setVisible(true);
+                            } else if (StaticData.Const.PACKAGE_BILIBILI.equals(game)) {
+                                menu.findItem(R.id.game_selector_bilibili).setVisible(true);
+                            } else if (StaticData.Const.PACKAGE_TAIWANESE.equals(game)) {
+                                menu.findItem(R.id.game_selector_taiwanese).setVisible(true);
+                            } else if (StaticData.Const.PACKAGE_ENGLISH.equals(game)) {
+                                menu.findItem(R.id.game_selector_english).setVisible(true);
+                            } else if (StaticData.Const.PACKAGE_JAPANESE.equals(game)) {
+                                menu.findItem(R.id.game_selector_japanese).setVisible(true);
+                            } else if (StaticData.Const.PACKAGE_KOREAN.equals(game)) {
+                                menu.findItem(R.id.game_selector_korean).setVisible(true);
+                            }
+                        }
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            switch (item.getItemId()){
+                                case R.id.game_selector_official:
+                                    startEngine(StaticData.Const.PACKAGE_OFFICIAL);
+                                    break;
+                                case R.id.game_selector_bilibili:
+                                    startEngine(StaticData.Const.PACKAGE_BILIBILI);
+                                    break;
+                                case R.id.game_selector_taiwanese:
+                                    startEngine(StaticData.Const.PACKAGE_TAIWANESE);
+                                    break;
+                                case R.id.game_selector_english:
+                                    startEngine(StaticData.Const.PACKAGE_ENGLISH);
+                                    break;
+                                case R.id.game_selector_japanese:
+                                    startEngine(StaticData.Const.PACKAGE_JAPANESE);
+                                    break;
+                                case R.id.game_selector_korean:
+                                    startEngine(StaticData.Const.PACKAGE_KOREAN);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            return true;
+                        }
+                    });
+                    popupMenu.show();
+                }else {
+                    Toast.makeText(activity, "没有可选择的游戏", Toast.LENGTH_SHORT).show();
+                }
+
+                return true;
+            }
+        });
+
+
         notifyThemeChanged();
         bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -375,7 +540,6 @@ public class MainActivity extends AppCompatActivity {
                 ((ViewGroup.MarginLayoutParams) snackbarContainer.getLayoutParams()).setMargins(0,0,0,bottomAppBar.getHeight());
             }
         });
-
     }
 
     private void checkApplicationUpdate(){

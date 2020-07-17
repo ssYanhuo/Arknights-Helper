@@ -70,11 +70,12 @@ public class StaticData {
         static public String PREFERENCE_PATH = "com.ssyanhuo.arknightshelper_preferences";
         static public String PACKAGE_OFFICIAL = "com.hypergryph.arknights";
         static public String PACKAGE_BILIBILI = "com.hypergryph.arknights.bilibili";
+        static public String PACKAGE_TAIWANESE = "tw.txwy.and.arknights";
         static public String PACKAGE_ENGLISH = "com.YoStarEN.Arknights";
         static public String PACKAGE_JAPANESE = "com.YoStarJP.Arknights";
         static public String PACKAGE_KOREAN = "com.YoStarKR.Arknights";
         static public String PACKAGE_MANUAL = "manual";
-        static public String[] PACKAGE_LIST = {PACKAGE_OFFICIAL, PACKAGE_BILIBILI, PACKAGE_ENGLISH, PACKAGE_JAPANESE, PACKAGE_KOREAN};
+        static public String[] PACKAGE_LIST = {PACKAGE_OFFICIAL, PACKAGE_BILIBILI, PACKAGE_TAIWANESE, PACKAGE_ENGLISH, PACKAGE_JAPANESE, PACKAGE_KOREAN};
         static public String[] DATA_LIST = {
                 "akhr.json",
                 "aklevel.json",
