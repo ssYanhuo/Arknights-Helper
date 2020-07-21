@@ -210,11 +210,14 @@ public class MainActivity extends AppCompatActivity {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             game[0] = list.get(which);
-                                        }
+                                    }
                                     })
                                     .setPositiveButton(R.string.start_game_remember_selection_yes, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
+                                            if (game[0].equals("")){
+                                                game[0] = list.get(0);
+                                            }
                                             preferences.edit().putString("game_version", game[0]).apply();
                                             PackageUtils.startApplication(game[0], getApplicationContext());
                                         }
@@ -222,6 +225,9 @@ public class MainActivity extends AppCompatActivity {
                                     .setNegativeButton(R.string.start_game_remember_selection_no, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
+                                            if (game[0].equals("")){
+                                                game[0] = list.get(0);
+                                            }
                                             PackageUtils.startApplication(game[0], getApplicationContext());
                                         }
                                     })
@@ -236,6 +242,7 @@ public class MainActivity extends AppCompatActivity {
         versionLast = preferences.getInt("versionLast", -1);
         if (versionLast == -1 && versionLast != BuildConfig.VERSION_CODE){
             preferences.edit().putInt("versionLast", BuildConfig.VERSION_CODE).apply();
+            preferences.edit().putInt("up_count_from_last_update", 0).apply();
         }
     }
 
@@ -362,7 +369,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         preNotifyThemeChanged();
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_main);
         activity = this;
         bottomAppBar = findViewById(R.id.bottomAppBar);
         bottomProgressBar = findViewById(R.id.bottom_progressBar);
@@ -531,6 +538,25 @@ public class MainActivity extends AppCompatActivity {
             default:
                 break;
         }
+
+        int upCountFromLastUpdate = preferences.getInt("up_count_from_last_update", 0);
+
+        switch (upCountFromLastUpdate){
+            case 1:
+                Snackbar.make(snackbarContainer, "添加快捷方式到桌面来快速启动游戏和悬浮窗", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("去添加", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startActivity(new Intent(activity, SettingsActivity.class));
+
+                            }
+                        })
+                        .show();
+                break;
+            default:
+                break;
+        }
+
         CompatUtils.check(getApplicationContext());
 
         bottomAppBar.post(new Runnable() {

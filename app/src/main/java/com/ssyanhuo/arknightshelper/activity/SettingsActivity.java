@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
@@ -35,9 +36,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -50,6 +54,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -143,7 +148,7 @@ public class SettingsActivity extends AppCompatActivity {
             setPreferencesFromResource(R.xml.preferences, rootKey);
             Preference long_press_back_to_game = findPreference("long_press_back_to_game");
             ListPreference game_version = findPreference("game_version");
-            Preference margin_fix = findPreference("margin_fix");
+            final Preference margin_fix = findPreference("margin_fix");
             final Preference update_site = findPreference("update_site");
             final Preference update_data = findPreference("update_data");
             final ListPreference theme = findPreference("theme");
@@ -153,6 +158,7 @@ public class SettingsActivity extends AppCompatActivity {
             final SwitchPreference disable_planner = findPreference("disable_planner");
             final SwitchPreference enable_dark_mode = findPreference("enable_dark_mode");
             final SwitchPreference emulator_mode = findPreference("emulator_mode");
+            final Preference add_shortcut = findPreference("add_shortcut");
             margin_fix.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @SuppressLint("SourceLockedOrientationActivity")
                 @Override
@@ -301,6 +307,57 @@ public class SettingsActivity extends AppCompatActivity {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     restartService();
+                    return true;
+                }
+            });
+            if (PackageUtils.getGameCount(getContext()) <= 0){
+                add_shortcut.setVisible(false);
+            }
+            add_shortcut.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        final ArrayList<String> packageList = PackageUtils.getGameList(getContext());
+                        final ArrayList<String> nameList = PackageUtils.getGameNameList(getContext());
+                        builder.setSingleChoiceItems(nameList.toArray(new String[nameList.size()]), 0, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                final int index = which;
+                                int padding = activity.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
+                                final EditText editText = new EditText(activity);
+                                editText.setHint("明日方舟 " + nameList.get(index));
+                                //editText.setPadding(padding, padding, padding, padding);
+                                AlertDialog dialog1 = new AlertDialog.Builder(activity)
+                                        .setTitle("设置快捷方式名")
+                                        .setView(editText)
+                                        .setPositiveButton("好", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                if (editText.getText().toString().equals("")){
+                                                    PackageUtils.addShortCut(getContext(), packageList.get(index), "明日方舟 " + nameList.get(index));
+                                                }else {
+                                                    PackageUtils.addShortCut(getContext(), packageList.get(index), editText.getText().toString());
+                                                }
+
+                                            }
+                                        })
+                                        .create();
+
+                                dialog1.show();
+                                FrameLayout.MarginLayoutParams marginLayoutParams = (FrameLayout.MarginLayoutParams) editText.getLayoutParams();
+                                marginLayoutParams.setMargins(padding,0, padding, 0);
+                                editText.setLayoutParams(marginLayoutParams);
+
+                                dialog1.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(activity, R.color.colorAccent));
+
+                                dialog.dismiss();
+                            }
+                        })
+                                .setTitle("选择要启动的游戏")
+                                .show();
+
+
                     return true;
                 }
             });
@@ -514,6 +571,10 @@ public class SettingsActivity extends AppCompatActivity {
             imageView.setClipToOutline(true);
             imageView.setElevation(8f);
             alertDialog.show();
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
+            alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
+
         }
 
         private Bitmap clipToCircle(Bitmap bitmap){

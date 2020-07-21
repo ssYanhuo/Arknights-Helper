@@ -2,16 +2,32 @@ package com.ssyanhuo.arknightshelper.utils;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.AdaptiveIconDrawable;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.os.Build;
 import android.util.Log;
+import android.widget.Toast;
 
+import androidx.core.content.pm.ShortcutInfoCompat;
+import androidx.core.content.pm.ShortcutManagerCompat;
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.preference.ListPreference;
 
 import com.ssyanhuo.arknightshelper.R;
+import com.ssyanhuo.arknightshelper.activity.LaunchGameActivity;
 import com.ssyanhuo.arknightshelper.entity.StaticData;
+import com.ssyanhuo.arknightshelper.service.OverlayService;
 
 import java.lang.reflect.Array;
+import java.nio.channels.OverlappingFileLockException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -72,7 +88,7 @@ public class PackageUtils {
             context.startActivity(context.getPackageManager().getLaunchIntentForPackage(packageName));
         }
         catch (Exception e){
-            Log.e(TAG, "Start game failed!", e);
+            Log.e(TAG, "Start game failed!" + packageName, e);
         }
     }
     static public String getName(String packageName, Context context){
@@ -90,6 +106,80 @@ public class PackageUtils {
             return context.getString(R.string.game_korean);
         }else {
             return "未知的游戏版本";
+        }
+    }
+
+    static public ArrayList<String> getGameNameList(Context context){
+        ArrayList<String> result = new ArrayList<>();
+        for (String packageName :
+                getGameList(context)) {
+            result.add(getName(packageName, context));
+        }
+        return result;
+    }
+
+    static public Bitmap getAppIconBitmap(Context context, String packageName) {
+        if (context == null) {
+            return null;
+        }
+
+        try {
+            PackageManager packageManager = context.getApplicationContext().getPackageManager();
+            Drawable drawable = packageManager.getApplicationIcon(packageName);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                if (drawable instanceof BitmapDrawable) {
+                    LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{drawable});
+                    int width = layerDrawable.getIntrinsicWidth();
+                    int height = layerDrawable.getIntrinsicHeight();
+
+                    Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+                    Canvas canvas = new Canvas(bitmap);
+                    layerDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+                    layerDrawable.draw(canvas);
+                    return bitmap;
+                } else if (drawable instanceof AdaptiveIconDrawable) {
+                    Drawable[] drr = new Drawable[2];
+                    drr[0] = ((AdaptiveIconDrawable) drawable).getBackground();
+                    drr[1] = ((AdaptiveIconDrawable) drawable).getForeground();
+
+                    LayerDrawable layerDrawable = new LayerDrawable(drr);
+                    int width = layerDrawable.getIntrinsicWidth();
+                    int height = layerDrawable.getIntrinsicHeight();
+
+                    Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+                    Canvas canvas = new Canvas(bitmap);
+                    layerDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+                    layerDrawable.draw(canvas);
+                    return bitmap;
+                }
+            } else {
+                return ((BitmapDrawable) drawable).getBitmap();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    static public void addShortCut(Context context, String packageName, String shortcutName){
+        try {
+            if (ShortcutManagerCompat.isRequestPinShortcutSupported(context)){
+                Intent intent = new Intent(context, LaunchGameActivity.class);
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("packageName", packageName);
+                ShortcutInfoCompat shortcutInfo = new ShortcutInfoCompat.Builder(context, packageName)
+                        .setShortLabel(shortcutName)
+                        .setLongLabel(shortcutName)
+                        .setIcon(IconCompat.createWithResource(context, R.drawable.shortcut_icon))
+                        .setIntent(intent)
+                        .build();
+                ShortcutManagerCompat.requestPinShortcut(context, shortcutInfo, null);
+            }
+        } catch (Exception e) {
+            Toast.makeText(context, "出现了错误", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         }
     }
 }

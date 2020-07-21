@@ -194,6 +194,9 @@ public class OverlayService extends Service {
         int upCount = preferences.getInt("up_count", 0) + 1;
         editor.putInt("up_count", upCount);
         editor.apply();
+        int upCountFromLastUpdate = preferences.getInt("up_count_from_last_update", 0) + 1;
+        editor.putInt("up_count_from_last_update", upCountFromLastUpdate);
+        editor.apply();
         startFloatingButton();
         //预处理
         floatingButtonOpacity = preferences.getInt("floating_button_opacity", 0);

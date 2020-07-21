@@ -8,8 +8,13 @@ import java.util.Objects;
 public class BroadcastReceiver extends android.content.BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        Intent intent1 = new Intent(context, OverlayService.class);
+        String action = intent.getAction();
+//        if (action.equals(Intent.ACTION_BOOT_COMPLETED)){
+//            Intent serviceIntent = new Intent(context, AutoStartService.class);
+//            context.startService(serviceIntent);
+//        }
         if(Objects.requireNonNull(intent.getStringExtra("action")).equals("StopService")){
+            Intent intent1 = new Intent(context, OverlayService.class);
             context.stopService(intent1);
         }
     }

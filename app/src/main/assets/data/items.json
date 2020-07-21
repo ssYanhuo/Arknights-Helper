@@ -29,7 +29,8 @@
     "spriteCoord": [
       0,
       0
-    ]
+    ],
+    "groupID": "exp"
   },
   {
     "itemId": "2002",
@@ -61,7 +62,8 @@
     "spriteCoord": [
       1,
       0
-    ]
+    ],
+    "groupID": "exp"
   },
   {
     "itemId": "2003",
@@ -93,7 +95,8 @@
     "spriteCoord": [
       2,
       0
-    ]
+    ],
+    "groupID": "exp"
   },
   {
     "itemId": "2004",
@@ -125,7 +128,8 @@
     "spriteCoord": [
       3,
       0
-    ]
+    ],
+    "groupID": "exp"
   },
   {
     "itemId": "3003",
@@ -188,7 +192,8 @@
     "spriteCoord": [
       4,
       0
-    ]
+    ],
+    "groupID": "orirock"
   },
   {
     "itemId": "30012",
@@ -219,7 +224,8 @@
     "spriteCoord": [
       5,
       0
-    ]
+    ],
+    "groupID": "orirock"
   },
   {
     "itemId": "30013",
@@ -250,7 +256,8 @@
     "spriteCoord": [
       0,
       1
-    ]
+    ],
+    "groupID": "orirock"
   },
   {
     "itemId": "30014",
@@ -281,7 +288,8 @@
     "spriteCoord": [
       1,
       1
-    ]
+    ],
+    "groupID": "orirock"
   },
   {
     "itemId": "30061",
@@ -312,7 +320,8 @@
     "spriteCoord": [
       1,
       4
-    ]
+    ],
+    "groupID": "device"
   },
   {
     "itemId": "30062",
@@ -343,7 +352,8 @@
     "spriteCoord": [
       2,
       4
-    ]
+    ],
+    "groupID": "device"
   },
   {
     "itemId": "30063",
@@ -374,7 +384,8 @@
     "spriteCoord": [
       3,
       4
-    ]
+    ],
+    "groupID": "device"
   },
   {
     "itemId": "30064",
@@ -405,7 +416,8 @@
     "spriteCoord": [
       4,
       4
-    ]
+    ],
+    "groupID": "device"
   },
   {
     "itemId": "30031",
@@ -436,7 +448,8 @@
     "spriteCoord": [
       1,
       2
-    ]
+    ],
+    "groupID": "ester"
   },
   {
     "itemId": "30032",
@@ -467,7 +480,8 @@
     "spriteCoord": [
       2,
       2
-    ]
+    ],
+    "groupID": "ester"
   },
   {
     "itemId": "30033",
@@ -498,7 +512,8 @@
     "spriteCoord": [
       3,
       2
-    ]
+    ],
+    "groupID": "ester"
   },
   {
     "itemId": "30034",
@@ -529,7 +544,8 @@
     "spriteCoord": [
       4,
       2
-    ]
+    ],
+    "groupID": "ester"
   },
   {
     "itemId": "30021",
@@ -560,7 +576,8 @@
     "spriteCoord": [
       2,
       1
-    ]
+    ],
+    "groupID": "sugar"
   },
   {
     "itemId": "30022",
@@ -591,7 +608,8 @@
     "spriteCoord": [
       3,
       1
-    ]
+    ],
+    "groupID": "sugar"
   },
   {
     "itemId": "30023",
@@ -622,7 +640,8 @@
     "spriteCoord": [
       4,
       1
-    ]
+    ],
+    "groupID": "sugar"
   },
   {
     "itemId": "30024",
@@ -653,7 +672,8 @@
     "spriteCoord": [
       5,
       1
-    ]
+    ],
+    "groupID": "sugar"
   },
   {
     "itemId": "30041",
@@ -684,7 +704,8 @@
     "spriteCoord": [
       5,
       2
-    ]
+    ],
+    "groupID": "oriron"
   },
   {
     "itemId": "30042",
@@ -715,7 +736,8 @@
     "spriteCoord": [
       0,
       3
-    ]
+    ],
+    "groupID": "oriron"
   },
   {
     "itemId": "30043",
@@ -746,7 +768,8 @@
     "spriteCoord": [
       1,
       3
-    ]
+    ],
+    "groupID": "oriron"
   },
   {
     "itemId": "30044",
@@ -777,7 +800,8 @@
     "spriteCoord": [
       2,
       3
-    ]
+    ],
+    "groupID": "oriron"
   },
   {
     "itemId": "30051",
@@ -808,7 +832,8 @@
     "spriteCoord": [
       3,
       3
-    ]
+    ],
+    "groupID": "keton"
   },
   {
     "itemId": "30052",
@@ -839,7 +864,8 @@
     "spriteCoord": [
       4,
       3
-    ]
+    ],
+    "groupID": "keton"
   },
   {
     "itemId": "30053",
@@ -870,7 +896,8 @@
     "spriteCoord": [
       5,
       3
-    ]
+    ],
+    "groupID": "keton"
   },
   {
     "itemId": "30054",
@@ -901,7 +928,8 @@
     "spriteCoord": [
       0,
       4
-    ]
+    ],
+    "groupID": "keton"
   },
   {
     "itemId": "30073",
@@ -932,7 +960,8 @@
     "spriteCoord": [
       5,
       4
-    ]
+    ],
+    "groupID": "kohl"
   },
   {
     "itemId": "30074",
@@ -963,7 +992,8 @@
     "spriteCoord": [
       0,
       5
-    ]
+    ],
+    "groupID": "kohl"
   },
   {
     "itemId": "30083",
@@ -994,7 +1024,8 @@
     "spriteCoord": [
       1,
       5
-    ]
+    ],
+    "groupID": "manganese"
   },
   {
     "itemId": "30084",
@@ -1025,7 +1056,8 @@
     "spriteCoord": [
       2,
       5
-    ]
+    ],
+    "groupID": "manganese"
   },
   {
     "itemId": "30093",
@@ -1056,7 +1088,8 @@
     "spriteCoord": [
       3,
       5
-    ]
+    ],
+    "groupID": "grindstone"
   },
   {
     "itemId": "30094",
@@ -1087,7 +1120,8 @@
     "spriteCoord": [
       4,
       5
-    ]
+    ],
+    "groupID": "grindstone"
   },
   {
     "itemId": "30103",
@@ -1118,7 +1152,8 @@
     "spriteCoord": [
       5,
       5
-    ]
+    ],
+    "groupID": "rma"
   },
   {
     "itemId": "30104",
@@ -1149,7 +1184,8 @@
     "spriteCoord": [
       0,
       6
-    ]
+    ],
+    "groupID": "rma"
   },
   {
     "itemId": "furni",
@@ -1208,7 +1244,8 @@
     "spriteCoord": [
       1,
       6
-    ]
+    ],
+    "groupID": "carbon"
   },
   {
     "itemId": "3113",
@@ -1240,7 +1277,8 @@
     "spriteCoord": [
       2,
       6
-    ]
+    ],
+    "groupID": "carbon"
   },
   {
     "itemId": "3114",
@@ -1272,7 +1310,8 @@
     "spriteCoord": [
       3,
       6
-    ]
+    ],
+    "groupID": "carbon"
   },
   {
     "itemId": "3301",
@@ -1304,7 +1343,8 @@
     "spriteCoord": [
       4,
       6
-    ]
+    ],
+    "groupID": "skillbook"
   },
   {
     "itemId": "3302",
@@ -1336,7 +1376,8 @@
     "spriteCoord": [
       5,
       6
-    ]
+    ],
+    "groupID": "skillbook"
   },
   {
     "itemId": "3303",
@@ -1368,7 +1409,8 @@
     "spriteCoord": [
       0,
       7
-    ]
+    ],
+    "groupID": "skillbook"
   },
   {
     "itemId": "et_ObsidianPass",
@@ -1592,7 +1634,8 @@
     "spriteCoord": [
       1,
       8
-    ]
+    ],
+    "groupID": "gel"
   },
   {
     "itemId": "31014",
@@ -1624,7 +1667,8 @@
     "spriteCoord": [
       2,
       8
-    ]
+    ],
+    "groupID": "gel"
   },
   {
     "itemId": "31023",
@@ -1656,7 +1700,8 @@
     "spriteCoord": [
       3,
       8
-    ]
+    ],
+    "groupID": "alloy"
   },
   {
     "itemId": "31024",
@@ -1688,7 +1733,8 @@
     "spriteCoord": [
       4,
       8
-    ]
+    ],
+    "groupID": "alloy"
   },
   {
     "itemId": "randomMaterial_1",

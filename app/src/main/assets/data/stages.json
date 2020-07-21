@@ -498,7 +498,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 137000
   },
   {
     "stageType": "MAIN",
@@ -528,7 +529,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 114000
   },
   {
     "stageType": "MAIN",
@@ -569,7 +571,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 112000
   },
   {
     "stageType": "MAIN",
@@ -608,7 +611,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 135000
   },
   {
     "stageType": "MAIN",
@@ -649,7 +653,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 165000
   },
   {
     "stageType": "MAIN",
@@ -690,7 +695,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 174000
   },
   {
     "stageType": "MAIN",
@@ -731,7 +737,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 118000
   },
   {
     "stageType": "MAIN",
@@ -772,7 +779,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 130100
   },
   {
     "stageType": "MAIN",
@@ -813,7 +821,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 120000
   },
   {
     "stageType": "MAIN",
@@ -854,7 +863,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 120000
   },
   {
     "stageType": "MAIN",
@@ -884,7 +894,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 182000
   },
   {
     "stageType": "MAIN",
@@ -925,7 +936,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 144000
   },
   {
     "stageType": "MAIN",
@@ -966,7 +978,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 184000
   },
   {
     "stageType": "MAIN",
@@ -1007,7 +1020,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 166700
   },
   {
     "stageType": "MAIN",
@@ -1048,7 +1062,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 218700
   },
   {
     "stageType": "MAIN",
@@ -1089,7 +1104,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 149000
   },
   {
     "stageType": "MAIN",
@@ -1130,7 +1146,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 170500
   },
   {
     "stageType": "MAIN",
@@ -1171,7 +1188,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 174000
   },
   {
     "stageType": "MAIN",
@@ -1210,7 +1228,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 176000
   },
   {
     "stageType": "MAIN",
@@ -1251,7 +1270,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 187000
   },
   {
     "stageType": "MAIN",
@@ -1292,7 +1312,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 193000
   },
   {
     "stageType": "MAIN",
@@ -1333,7 +1354,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 171000
   },
   {
     "stageType": "MAIN",
@@ -1374,7 +1396,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 113000
   },
   {
     "stageType": "MAIN",
@@ -1413,7 +1436,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 132000
   },
   {
     "stageType": "MAIN",
@@ -1454,7 +1478,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 130000
   },
   {
     "stageType": "MAIN",
@@ -1493,7 +1518,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 144000
   },
   {
     "stageType": "MAIN",
@@ -1534,7 +1560,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 178000
   },
   {
     "stageType": "MAIN",
@@ -1575,7 +1602,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 142000
   },
   {
     "stageType": "MAIN",
@@ -1616,7 +1644,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 166000
   },
   {
     "stageType": "MAIN",
@@ -1657,7 +1686,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 110000
   },
   {
     "stageType": "MAIN",
@@ -1698,7 +1728,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 142000
   },
   {
     "stageType": "MAIN",
@@ -1739,7 +1770,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 172000
   },
   {
     "stageType": "MAIN",
@@ -1778,7 +1810,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 179000
   },
   {
     "stageType": "MAIN",
@@ -1818,7 +1851,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 135000
   },
   {
     "stageType": "MAIN",
@@ -1859,7 +1893,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 181000
   },
   {
     "stageType": "MAIN",
@@ -1899,7 +1934,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 173000
   },
   {
     "stageType": "MAIN",
@@ -1939,7 +1975,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 172700
   },
   {
     "stageType": "MAIN",
@@ -1979,7 +2016,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 216400
   },
   {
     "stageType": "MAIN",
@@ -2019,7 +2057,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 165000
   },
   {
     "stageType": "MAIN",
@@ -2058,7 +2097,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 138000
   },
   {
     "stageType": "MAIN",
@@ -2099,7 +2139,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 238700
   },
   {
     "stageType": "MAIN",
@@ -2142,7 +2183,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 205000
   },
   {
     "stageType": "SUB",
@@ -2183,7 +2225,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 130000
   },
   {
     "stageType": "SUB",
@@ -2223,7 +2266,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 125000
   },
   {
     "stageType": "SUB",
@@ -2264,7 +2308,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 208000
   },
   {
     "stageType": "SUB",
@@ -2304,7 +2349,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 136000
   },
   {
     "stageType": "SUB",
@@ -2343,7 +2389,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 147200
   },
   {
     "stageType": "MAIN",
@@ -2383,7 +2430,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 201000
   },
   {
     "stageType": "MAIN",
@@ -2429,7 +2477,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 140000
   },
   {
     "stageType": "MAIN",
@@ -2471,7 +2520,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 217500
   },
   {
     "stageType": "MAIN",
@@ -2515,7 +2565,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 174000
   },
   {
     "stageType": "MAIN",
@@ -2558,7 +2609,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 173000
   },
   {
     "stageType": "MAIN",
@@ -2602,7 +2654,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 198000
   },
   {
     "stageType": "MAIN",
@@ -2646,7 +2699,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 200000
   },
   {
     "stageType": "MAIN",
@@ -2689,7 +2743,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 166000
   },
   {
     "stageType": "MAIN",
@@ -2732,7 +2787,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 216500
   },
   {
     "stageType": "MAIN",
@@ -2776,7 +2832,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 240500
   },
   {
     "stageType": "SUB",
@@ -2822,7 +2879,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 179000
   },
   {
     "stageType": "SUB",
@@ -2861,7 +2919,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 214000
   },
   {
     "stageType": "SUB",
@@ -2903,7 +2962,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 160000
   },
   {
     "stageType": "SUB",
@@ -2945,7 +3005,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 181000
   },
   {
     "stageType": "SUB",
@@ -2984,7 +3045,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 150000
   },
   {
     "stageType": "SUB",
@@ -3026,7 +3088,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 120000
   },
   {
     "stageType": "SUB",
@@ -3068,7 +3131,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 199000
   },
   {
     "stageType": "SUB",
@@ -3107,7 +3171,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 195000
   },
   {
     "stageType": "SUB",
@@ -3151,12 +3216,13 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 247000
   },
   {
-    "stageType": "MAIN",
+    "stageType": "ACTIVITY",
     "stageId": "a001_01",
-    "zoneId": "A001_zone1",
+    "zoneId": "1stact_zone1",
     "code": "GT-1",
     "code_i18n": {
       "ko": "GT-1",
@@ -3192,12 +3258,13 @@
         "openTime": 1580864400000,
         "closeTime": 1582052400000
       }
-    }
+    },
+    "minClearTime": 139000
   },
   {
-    "stageType": "MAIN",
+    "stageType": "ACTIVITY",
     "stageId": "a001_02",
-    "zoneId": "A001_zone1",
+    "zoneId": "1stact_zone1",
     "code": "GT-2",
     "code_i18n": {
       "ko": "GT-2",
@@ -3233,12 +3300,13 @@
         "openTime": 1580864400000,
         "closeTime": 1582052400000
       }
-    }
+    },
+    "minClearTime": 147000
   },
   {
-    "stageType": "MAIN",
+    "stageType": "ACTIVITY",
     "stageId": "a001_03",
-    "zoneId": "A001_zone1",
+    "zoneId": "1stact_zone1",
     "code": "GT-3",
     "code_i18n": {
       "ko": "GT-3",
@@ -3274,12 +3342,13 @@
         "openTime": 1580864400000,
         "closeTime": 1582052400000
       }
-    }
+    },
+    "minClearTime": 213000
   },
   {
-    "stageType": "MAIN",
+    "stageType": "ACTIVITY",
     "stageId": "a001_04",
-    "zoneId": "A001_zone1",
+    "zoneId": "1stact_zone1",
     "code": "GT-4",
     "code_i18n": {
       "ko": "GT-4",
@@ -3315,12 +3384,13 @@
         "openTime": 1580864400000,
         "closeTime": 1582052400000
       }
-    }
+    },
+    "minClearTime": 166000
   },
   {
-    "stageType": "MAIN",
+    "stageType": "ACTIVITY",
     "stageId": "a001_05",
-    "zoneId": "A001_zone1",
+    "zoneId": "1stact_zone1",
     "code": "GT-5",
     "code_i18n": {
       "ko": "GT-5",
@@ -3355,12 +3425,13 @@
         "openTime": 1580864400000,
         "closeTime": 1582052400000
       }
-    }
+    },
+    "minClearTime": 166000
   },
   {
-    "stageType": "MAIN",
+    "stageType": "ACTIVITY",
     "stageId": "a001_06",
-    "zoneId": "A001_zone1",
+    "zoneId": "1stact_zone1",
     "code": "GT-6",
     "code_i18n": {
       "ko": "GT-6",
@@ -3395,7 +3466,8 @@
         "openTime": 1580864400000,
         "closeTime": 1582052400000
       }
-    }
+    },
+    "minClearTime": 258300
   },
   {
     "stageType": "DAILY",
@@ -3427,7 +3499,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 99000
   },
   {
     "stageType": "DAILY",
@@ -3459,7 +3532,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 118000
   },
   {
     "stageType": "DAILY",
@@ -3492,7 +3566,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 136000
   },
   {
     "stageType": "DAILY",
@@ -3525,7 +3600,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 121000
   },
   {
     "stageType": "DAILY",
@@ -3558,7 +3634,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 204000
   },
   {
     "stageType": "DAILY",
@@ -3590,7 +3667,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 97000
   },
   {
     "stageType": "DAILY",
@@ -3622,7 +3700,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 101000
   },
   {
     "stageType": "DAILY",
@@ -3655,7 +3734,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 152000
   },
   {
     "stageType": "DAILY",
@@ -3689,7 +3769,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 191000
   },
   {
     "stageType": "DAILY",
@@ -3723,7 +3804,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 173000
   },
   {
     "stageType": "MAIN",
@@ -3769,7 +3851,8 @@
         "exist": true,
         "openTime": 1582700400000
       }
-    }
+    },
+    "minClearTime": 166000
   },
   {
     "stageType": "MAIN",
@@ -3817,7 +3900,8 @@
         "exist": true,
         "openTime": 1582700400000
       }
-    }
+    },
+    "minClearTime": 187000
   },
   {
     "stageType": "MAIN",
@@ -3854,7 +3938,8 @@
         "exist": true,
         "openTime": 1582700400000
       }
-    }
+    },
+    "minClearTime": 218000
   },
   {
     "stageType": "MAIN",
@@ -3899,7 +3984,8 @@
         "exist": true,
         "openTime": 1582700400000
       }
-    }
+    },
+    "minClearTime": 176000
   },
   {
     "stageType": "MAIN",
@@ -3947,7 +4033,8 @@
         "exist": true,
         "openTime": 1582700400000
       }
-    }
+    },
+    "minClearTime": 193000
   },
   {
     "stageType": "MAIN",
@@ -3995,7 +4082,8 @@
         "exist": true,
         "openTime": 1582700400000
       }
-    }
+    },
+    "minClearTime": 314000
   },
   {
     "stageType": "MAIN",
@@ -4032,7 +4120,8 @@
         "exist": true,
         "openTime": 1582700400000
       }
-    }
+    },
+    "minClearTime": 182800
   },
   {
     "stageType": "MAIN",
@@ -4079,7 +4168,8 @@
         "exist": true,
         "openTime": 1582700400000
       }
-    }
+    },
+    "minClearTime": 188000
   },
   {
     "stageType": "MAIN",
@@ -4125,7 +4215,8 @@
         "exist": true,
         "openTime": 1582700400000
       }
-    }
+    },
+    "minClearTime": 194000
   },
   {
     "stageType": "MAIN",
@@ -4162,7 +4253,8 @@
         "exist": true,
         "openTime": 1582700400000
       }
-    }
+    },
+    "minClearTime": 337000
   },
   {
     "stageType": "SUB",
@@ -4199,7 +4291,8 @@
         "exist": true,
         "openTime": 1582700400000
       }
-    }
+    },
+    "minClearTime": 193000
   },
   {
     "stageType": "SUB",
@@ -4245,7 +4338,8 @@
         "exist": true,
         "openTime": 1582700400000
       }
-    }
+    },
+    "minClearTime": 176000
   },
   {
     "stageType": "SUB",
@@ -4281,7 +4375,8 @@
         "exist": true,
         "openTime": 1582700400000
       }
-    }
+    },
+    "minClearTime": 180000
   },
   {
     "stageType": "SUB",
@@ -4318,7 +4413,8 @@
         "exist": true,
         "openTime": 1582700400000
       }
-    }
+    },
+    "minClearTime": 184000
   },
   {
     "stageType": "SUB",
@@ -4354,7 +4450,8 @@
         "exist": true,
         "openTime": 1582700400000
       }
-    }
+    },
+    "minClearTime": 208000
   },
   {
     "stageType": "SUB",
@@ -4402,12 +4499,13 @@
         "exist": true,
         "openTime": 1582700400000
       }
-    }
+    },
+    "minClearTime": 196000
   },
   {
     "stageType": "ACTIVITY",
     "stageId": "a003_01",
-    "zoneId": "A003_zone1",
+    "zoneId": "act3d0_zone1",
     "code": "OF-1",
     "code_i18n": {
       "ko": "OF-1",
@@ -4443,12 +4541,13 @@
         "openTime": 1588143600000,
         "closeTime": 1589914800000
       }
-    }
+    },
+    "minClearTime": 181000
   },
   {
     "stageType": "ACTIVITY",
     "stageId": "a003_02",
-    "zoneId": "A003_zone1",
+    "zoneId": "act3d0_zone1",
     "code": "OF-2",
     "code_i18n": {
       "ko": "OF-2",
@@ -4484,12 +4583,13 @@
         "openTime": 1588143600000,
         "closeTime": 1589914800000
       }
-    }
+    },
+    "minClearTime": 196000
   },
   {
     "stageType": "ACTIVITY",
     "stageId": "a003_03",
-    "zoneId": "A003_zone1",
+    "zoneId": "act3d0_zone1",
     "code": "OF-3",
     "code_i18n": {
       "ko": "OF-3",
@@ -4525,12 +4625,13 @@
         "openTime": 1588143600000,
         "closeTime": 1589914800000
       }
-    }
+    },
+    "minClearTime": 212000
   },
   {
     "stageType": "ACTIVITY",
     "stageId": "a003_04",
-    "zoneId": "A003_zone1",
+    "zoneId": "act3d0_zone1",
     "code": "OF-4",
     "code_i18n": {
       "ko": "OF-4",
@@ -4565,12 +4666,13 @@
         "openTime": 1588143600000,
         "closeTime": 1589914800000
       }
-    }
+    },
+    "minClearTime": 168000
   },
   {
     "stageType": "ACTIVITY",
     "stageId": "a003_05",
-    "zoneId": "A003_zone1",
+    "zoneId": "act3d0_zone1",
     "code": "OF-5",
     "code_i18n": {
       "ko": "OF-5",
@@ -4605,12 +4707,13 @@
         "openTime": 1588143600000,
         "closeTime": 1589914800000
       }
-    }
+    },
+    "minClearTime": 221400
   },
   {
     "stageType": "ACTIVITY",
     "stageId": "a003_06",
-    "zoneId": "A003_zone1",
+    "zoneId": "act3d0_zone1",
     "code": "OF-6",
     "code_i18n": {
       "ko": "OF-6",
@@ -4646,12 +4749,13 @@
         "openTime": 1588143600000,
         "closeTime": 1589914800000
       }
-    }
+    },
+    "minClearTime": 228000
   },
   {
     "stageType": "ACTIVITY",
     "stageId": "a003_07",
-    "zoneId": "A003_zone1",
+    "zoneId": "act3d0_zone1",
     "code": "OF-7",
     "code_i18n": {
       "ko": "OF-7",
@@ -4686,12 +4790,13 @@
         "openTime": 1588143600000,
         "closeTime": 1589914800000
       }
-    }
+    },
+    "minClearTime": 189000
   },
   {
     "stageType": "ACTIVITY",
     "stageId": "a003_08",
-    "zoneId": "A003_zone1",
+    "zoneId": "act3d0_zone1",
     "code": "OF-8",
     "code_i18n": {
       "ko": "OF-8",
@@ -4726,12 +4831,13 @@
         "openTime": 1588143600000,
         "closeTime": 1589914800000
       }
-    }
+    },
+    "minClearTime": 290000
   },
   {
     "stageType": "ACTIVITY",
     "stageId": "a003_f01",
-    "zoneId": "A003_zone1",
+    "zoneId": "act3d0_zone1",
     "code": "OF-F1",
     "code_i18n": {
       "ko": "OF-F1",
@@ -4766,12 +4872,13 @@
         "openTime": 1588143600000,
         "closeTime": 1589914800000
       }
-    }
+    },
+    "minClearTime": 162000
   },
   {
     "stageType": "ACTIVITY",
     "stageId": "a003_f02",
-    "zoneId": "A003_zone1",
+    "zoneId": "act3d0_zone1",
     "code": "OF-F2",
     "code_i18n": {
       "ko": "OF-F2",
@@ -4806,12 +4913,13 @@
         "openTime": 1588143600000,
         "closeTime": 1589914800000
       }
-    }
+    },
+    "minClearTime": 181000
   },
   {
     "stageType": "ACTIVITY",
     "stageId": "a003_f03",
-    "zoneId": "A003_zone1",
+    "zoneId": "act3d0_zone1",
     "code": "OF-F3",
     "code_i18n": {
       "ko": "OF-F3",
@@ -4846,12 +4954,13 @@
         "openTime": 1588143600000,
         "closeTime": 1589914800000
       }
-    }
+    },
+    "minClearTime": 171000
   },
   {
     "stageType": "ACTIVITY",
     "stageId": "a003_f04",
-    "zoneId": "A003_zone1",
+    "zoneId": "act3d0_zone1",
     "code": "OF-F4",
     "code_i18n": {
       "ko": "OF-F4",
@@ -4886,12 +4995,13 @@
         "openTime": 1588143600000,
         "closeTime": 1589914800000
       }
-    }
+    },
+    "minClearTime": 195000
   },
   {
     "stageType": "ACTIVITY",
     "stageId": "gachabox6",
-    "zoneId": "A003_zone1",
+    "zoneId": "act3d0_zone1",
     "code": "奖励扭蛋机",
     "code_i18n": {
       "ko": "Gacha Machine",
@@ -4952,7 +5062,7 @@
   {
     "stageType": "ACTIVITY",
     "stageId": "act4d0_01",
-    "zoneId": "main_e0",
+    "zoneId": "act4d0_zone1",
     "code": "SW-EV-1",
     "code_i18n": {
       "ko": "SW-EV-1",
@@ -4995,12 +5105,13 @@
         "openTime": 1585098000000,
         "closeTime": 1586286000000
       }
-    }
+    },
+    "minClearTime": 155000
   },
   {
     "stageType": "ACTIVITY",
     "stageId": "act4d0_02",
-    "zoneId": "main_e0",
+    "zoneId": "act4d0_zone1",
     "code": "SW-EV-2",
     "code_i18n": {
       "ko": "SW-EV-2",
@@ -5043,12 +5154,13 @@
         "openTime": 1585098000000,
         "closeTime": 1586286000000
       }
-    }
+    },
+    "minClearTime": 188000
   },
   {
     "stageType": "ACTIVITY",
     "stageId": "act4d0_03",
-    "zoneId": "main_e0",
+    "zoneId": "act4d0_zone1",
     "code": "SW-EV-3",
     "code_i18n": {
       "ko": "SW-EV-3",
@@ -5092,12 +5204,13 @@
         "openTime": 1585098000000,
         "closeTime": 1586286000000
       }
-    }
+    },
+    "minClearTime": 188000
   },
   {
     "stageType": "ACTIVITY",
     "stageId": "act4d0_04",
-    "zoneId": "main_e0",
+    "zoneId": "act4d0_zone1",
     "code": "SW-EV-4",
     "code_i18n": {
       "ko": "SW-EV-4",
@@ -5140,12 +5253,13 @@
         "openTime": 1585098000000,
         "closeTime": 1586286000000
       }
-    }
+    },
+    "minClearTime": 166000
   },
   {
     "stageType": "ACTIVITY",
     "stageId": "act4d0_05",
-    "zoneId": "main_e0",
+    "zoneId": "act4d0_zone1",
     "code": "SW-EV-5",
     "code_i18n": {
       "ko": "SW-EV-5",
@@ -5189,7 +5303,8 @@
         "openTime": 1585098000000,
         "closeTime": 1586286000000
       }
-    }
+    },
+    "minClearTime": 214000
   },
   {
     "stageType": "ACTIVITY",
@@ -5227,7 +5342,8 @@
         "openTime": 1590562800000,
         "closeTime": 1591729200000
       }
-    }
+    },
+    "minClearTime": 140000
   },
   {
     "stageType": "ACTIVITY",
@@ -5267,7 +5383,8 @@
         "openTime": 1590562800000,
         "closeTime": 1591729200000
       }
-    }
+    },
+    "minClearTime": 171000
   },
   {
     "stageType": "ACTIVITY",
@@ -5305,7 +5422,8 @@
         "openTime": 1590562800000,
         "closeTime": 1591729200000
       }
-    }
+    },
+    "minClearTime": 168000
   },
   {
     "stageType": "ACTIVITY",
@@ -5345,7 +5463,8 @@
         "openTime": 1590562800000,
         "closeTime": 1591729200000
       }
-    }
+    },
+    "minClearTime": 168000
   },
   {
     "stageType": "ACTIVITY",
@@ -5383,7 +5502,8 @@
         "openTime": 1590562800000,
         "closeTime": 1591729200000
       }
-    }
+    },
+    "minClearTime": 184000
   },
   {
     "stageType": "ACTIVITY",
@@ -5423,7 +5543,8 @@
         "openTime": 1590562800000,
         "closeTime": 1591729200000
       }
-    }
+    },
+    "minClearTime": 182000
   },
   {
     "stageType": "ACTIVITY",
@@ -5461,7 +5582,8 @@
         "openTime": 1590562800000,
         "closeTime": 1591729200000
       }
-    }
+    },
+    "minClearTime": 201000
   },
   {
     "stageType": "ACTIVITY",
@@ -5501,7 +5623,8 @@
         "openTime": 1590562800000,
         "closeTime": 1591729200000
       }
-    }
+    },
+    "minClearTime": 189000
   },
   {
     "stageType": "ACTIVITY",
@@ -5539,7 +5662,8 @@
         "openTime": 1590562800000,
         "closeTime": 1591729200000
       }
-    }
+    },
+    "minClearTime": 176000
   },
   {
     "stageType": "ACTIVITY",
@@ -5580,7 +5704,8 @@
         "openTime": 1590562800000,
         "closeTime": 1591729200000
       }
-    }
+    },
+    "minClearTime": 180000
   },
   {
     "stageType": "MAIN",
@@ -5616,7 +5741,8 @@
         "exist": true,
         "openTime": 1593500400000
       }
-    }
+    },
+    "minClearTime": 183000
   },
   {
     "stageType": "MAIN",
@@ -5663,7 +5789,8 @@
         "exist": true,
         "openTime": 1593500400000
       }
-    }
+    },
+    "minClearTime": 206000
   },
   {
     "stageType": "MAIN",
@@ -5709,7 +5836,8 @@
         "exist": true,
         "openTime": 1593500400000
       }
-    }
+    },
+    "minClearTime": 172000
   },
   {
     "stageType": "MAIN",
@@ -5756,7 +5884,8 @@
         "exist": true,
         "openTime": 1593500400000
       }
-    }
+    },
+    "minClearTime": 155000
   },
   {
     "stageType": "MAIN",
@@ -5793,7 +5922,8 @@
         "exist": true,
         "openTime": 1593500400000
       }
-    }
+    },
+    "minClearTime": 241000
   },
   {
     "stageType": "MAIN",
@@ -5827,7 +5957,8 @@
         "exist": true,
         "openTime": 1593500400000
       }
-    }
+    },
+    "minClearTime": 218000
   },
   {
     "stageType": "MAIN",
@@ -5875,7 +6006,8 @@
         "exist": true,
         "openTime": 1593500400000
       }
-    }
+    },
+    "minClearTime": 140000
   },
   {
     "stageType": "MAIN",
@@ -5912,7 +6044,8 @@
         "exist": true,
         "openTime": 1593500400000
       }
-    }
+    },
+    "minClearTime": 158000
   },
   {
     "stageType": "MAIN",
@@ -5957,7 +6090,8 @@
         "exist": true,
         "openTime": 1593500400000
       }
-    }
+    },
+    "minClearTime": 174200
   },
   {
     "stageType": "MAIN",
@@ -5994,7 +6128,8 @@
         "exist": true,
         "openTime": 1593500400000
       }
-    }
+    },
+    "minClearTime": 236000
   },
   {
     "stageType": "MAIN",
@@ -6044,7 +6179,8 @@
         "exist": true,
         "openTime": 1593500400000
       }
-    }
+    },
+    "minClearTime": 171000
   },
   {
     "stageType": "MAIN",
@@ -6090,7 +6226,8 @@
         "exist": true,
         "openTime": 1593500400000
       }
-    }
+    },
+    "minClearTime": 194000
   },
   {
     "stageType": "MAIN",
@@ -6137,7 +6274,8 @@
         "exist": true,
         "openTime": 1593500400000
       }
-    }
+    },
+    "minClearTime": 184000
   },
   {
     "stageType": "MAIN",
@@ -6174,7 +6312,8 @@
         "exist": true,
         "openTime": 1593500400000
       }
-    }
+    },
+    "minClearTime": 312000
   },
   {
     "stageType": "MAIN",
@@ -6208,7 +6347,8 @@
         "exist": true,
         "openTime": 1593500400000
       }
-    }
+    },
+    "minClearTime": 22400
   },
   {
     "stageType": "SUB",
@@ -6248,7 +6388,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 122000
   },
   {
     "stageType": "SUB",
@@ -6290,7 +6431,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 129000
   },
   {
     "stageType": "SUB",
@@ -6337,7 +6479,8 @@
         "exist": true,
         "openTime": 1582700400000
       }
-    }
+    },
+    "minClearTime": 148000
   },
   {
     "stageType": "SUB",
@@ -6385,7 +6528,8 @@
         "exist": true,
         "openTime": 1582700400000
       }
-    }
+    },
+    "minClearTime": 148000
   },
   {
     "stageType": "SUB",
@@ -6430,7 +6574,8 @@
         "exist": true,
         "openTime": 1593500400000
       }
-    }
+    },
+    "minClearTime": 172000
   },
   {
     "stageType": "SUB",
@@ -6466,7 +6611,8 @@
         "exist": true,
         "openTime": 1593500400000
       }
-    }
+    },
+    "minClearTime": 203000
   },
   {
     "stageType": "SUB",
@@ -6503,7 +6649,8 @@
         "exist": true,
         "openTime": 1593500400000
       }
-    }
+    },
+    "minClearTime": 195000
   },
   {
     "stageType": "SUB",
@@ -6546,7 +6693,8 @@
         "exist": true,
         "openTime": 1593500400000
       }
-    }
+    },
+    "minClearTime": 180000
   },
   {
     "stageType": "ACTIVITY",
@@ -6648,7 +6796,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 180000
   },
   {
     "stageType": "ACTIVITY",
@@ -6690,7 +6839,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 199000
   },
   {
     "stageType": "ACTIVITY",
@@ -6732,7 +6882,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 171500
   },
   {
     "stageType": "ACTIVITY",
@@ -6774,7 +6925,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 177000
   },
   {
     "stageType": "ACTIVITY",
@@ -6817,7 +6969,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 180000
   },
   {
     "stageType": "ACTIVITY",
@@ -6860,7 +7013,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 193000
   },
   {
     "stageType": "ACTIVITY",
@@ -6903,7 +7057,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 195000
   },
   {
     "stageType": "ACTIVITY",
@@ -6949,7 +7104,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 136000
   },
   {
     "stageType": "ACTIVITY",
@@ -7035,7 +7191,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 125000
   },
   {
     "stageType": "DAILY",
@@ -7065,7 +7222,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 144000
   },
   {
     "stageType": "DAILY",
@@ -7095,7 +7253,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 141000
   },
   {
     "stageType": "DAILY",
@@ -7125,7 +7284,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 172800
   },
   {
     "stageType": "DAILY",
@@ -7155,7 +7315,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 196000
   },
   {
     "stageType": "DAILY",
@@ -7185,7 +7346,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 83000
   },
   {
     "stageType": "DAILY",
@@ -7215,7 +7377,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 139000
   },
   {
     "stageType": "DAILY",
@@ -7245,7 +7408,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 160000
   },
   {
     "stageType": "DAILY",
@@ -7275,7 +7439,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 123000
   },
   {
     "stageType": "DAILY",
@@ -7305,7 +7470,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 208000
   },
   {
     "stageType": "ACTIVITY",
@@ -7347,7 +7513,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 173000
   },
   {
     "stageType": "ACTIVITY",
@@ -7389,7 +7556,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 163000
   },
   {
     "stageType": "ACTIVITY",
@@ -7431,7 +7599,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 193000
   },
   {
     "stageType": "ACTIVITY",
@@ -7474,7 +7643,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 199000
   },
   {
     "stageType": "ACTIVITY",
@@ -7520,7 +7690,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 186000
   },
   {
     "stageType": "ACTIVITY",
@@ -7566,7 +7737,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 235000
   },
   {
     "stageType": "ACTIVITY",
@@ -7645,7 +7817,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 171000
   },
   {
     "stageType": "ACTIVITY",
@@ -7680,7 +7853,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 184000
   },
   {
     "stageType": "ACTIVITY",
@@ -7715,7 +7889,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 187000
   },
   {
     "stageType": "ACTIVITY",
@@ -7750,7 +7925,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 141000
   },
   {
     "stageType": "ACTIVITY",
@@ -7785,7 +7961,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 132000
   },
   {
     "stageType": "ACTIVITY",
@@ -7819,7 +7996,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 160000
   },
   {
     "stageType": "ACTIVITY",
@@ -7853,7 +8031,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 176000
   },
   {
     "stageType": "ACTIVITY",
@@ -7887,7 +8066,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 165000
   },
   {
     "stageType": "MAIN",
@@ -7931,7 +8111,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 175000
   },
   {
     "stageType": "MAIN",
@@ -7964,7 +8145,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 233000
   },
   {
     "stageType": "MAIN",
@@ -8009,7 +8191,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 184000
   },
   {
     "stageType": "MAIN",
@@ -8053,7 +8236,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 213000
   },
   {
     "stageType": "MAIN",
@@ -8087,7 +8271,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 209000
   },
   {
     "stageType": "MAIN",
@@ -8134,7 +8319,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 182000
   },
   {
     "stageType": "MAIN",
@@ -8178,7 +8364,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 207000
   },
   {
     "stageType": "MAIN",
@@ -8220,7 +8407,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 170000
   },
   {
     "stageType": "MAIN",
@@ -8254,7 +8442,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 199000
   },
   {
     "stageType": "MAIN",
@@ -8288,7 +8477,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 226000
   },
   {
     "stageType": "MAIN",
@@ -8331,7 +8521,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 183000
   },
   {
     "stageType": "MAIN",
@@ -8373,7 +8564,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 196000
   },
   {
     "stageType": "MAIN",
@@ -8418,7 +8610,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 200000
   },
   {
     "stageType": "MAIN",
@@ -8452,7 +8645,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 195000
   },
   {
     "stageType": "MAIN",
@@ -8499,7 +8693,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 219000
   },
   {
     "stageType": "MAIN",
@@ -8533,7 +8728,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 227000
   },
   {
     "stageType": "MAIN",
@@ -8574,7 +8770,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 141000
   },
   {
     "stageType": "MAIN",
@@ -8607,7 +8804,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 188000
   },
   {
     "stageType": "ACTIVITY",
@@ -8687,7 +8885,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 167800
   },
   {
     "stageType": "DAILY",
@@ -8717,7 +8916,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 214500
   },
   {
     "stageType": "DAILY",
@@ -8747,7 +8947,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 151000
   },
   {
     "stageType": "DAILY",
@@ -8777,7 +8978,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 213000
   },
   {
     "stageType": "DAILY",
@@ -8807,7 +9009,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 145000
   },
   {
     "stageType": "DAILY",
@@ -8837,7 +9040,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 179000
   },
   {
     "stageType": "DAILY",
@@ -8867,7 +9071,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 173800
   },
   {
     "stageType": "DAILY",
@@ -8897,7 +9102,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 205000
   },
   {
     "stageType": "DAILY",
@@ -8930,7 +9136,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 112000
   },
   {
     "stageType": "DAILY",
@@ -8963,7 +9170,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 111000
   },
   {
     "stageType": "DAILY",
@@ -8997,7 +9205,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 140000
   },
   {
     "stageType": "DAILY",
@@ -9032,7 +9241,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 130000
   },
   {
     "stageType": "DAILY",
@@ -9066,7 +9276,8 @@
       "KR": {
         "exist": true
       }
-    }
+    },
+    "minClearTime": 174500
   },
   {
     "stageType": "ACTIVITY",
@@ -9152,7 +9363,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 176000
   },
   {
     "stageType": "ACTIVITY",
@@ -9194,7 +9406,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 185000
   },
   {
     "stageType": "ACTIVITY",
@@ -9236,7 +9449,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 197000
   },
   {
     "stageType": "ACTIVITY",
@@ -9278,7 +9492,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 219000
   },
   {
     "stageType": "ACTIVITY",
@@ -9321,7 +9536,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 185000
   },
   {
     "stageType": "ACTIVITY",
@@ -9364,7 +9580,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 215000
   },
   {
     "stageType": "ACTIVITY",
@@ -9410,7 +9627,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 223000
   },
   {
     "stageType": "ACTIVITY",
@@ -9445,7 +9663,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 150000
   },
   {
     "stageType": "ACTIVITY",
@@ -9480,7 +9699,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 184000
   },
   {
     "stageType": "ACTIVITY",
@@ -9515,7 +9735,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 192000
   },
   {
     "stageType": "ACTIVITY",
@@ -9550,7 +9771,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 175000
   },
   {
     "stageType": "ACTIVITY",
@@ -9585,7 +9807,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 184000
   },
   {
     "stageType": "ACTIVITY",
@@ -9619,7 +9842,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 190000
   },
   {
     "stageType": "ACTIVITY",
@@ -9653,7 +9877,8 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 169000
   },
   {
     "stageType": "ACTIVITY",
@@ -9687,6 +9912,7 @@
       "KR": {
         "exist": false
       }
-    }
+    },
+    "minClearTime": 252000
   }
 ]

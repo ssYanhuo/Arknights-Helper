@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -20,6 +21,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Default"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activity.LaunchGameActivity"
+            android:theme="@style/DialogActivity"/>
+
+        <service
+            android:name=".service.AutoStartService"
+            android:enabled="true"
+            android:exported="true" />
+
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name">
@@ -65,6 +74,7 @@
         <receiver android:name=".service.BroadcastReceiver">
             <intent-filter>
                 <action android:name="com.ssyanhuo.arknightshelper.stopservice" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 

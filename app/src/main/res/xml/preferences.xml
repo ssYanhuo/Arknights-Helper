@@ -49,6 +49,10 @@
         <Preference
             android:key="button_img"
             android:title="@string/settings_title_floating_button_image"/>
+        <Preference
+            android:key="add_shortcut"
+            android:title="创建快捷方式"
+            android:summary="快速启动游戏和悬浮窗"/>
 
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/settings_category_compatibility" android:icon="@drawable/ic_settings_compatibility">
