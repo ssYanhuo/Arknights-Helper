@@ -1,0 +1,113 @@
+package com.ssyanhuo.arknightshelper.activity;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.ImageFormat;
+import android.graphics.PixelFormat;
+import android.hardware.display.DisplayManager;
+import android.hardware.display.VirtualDisplay;
+import android.media.Image;
+import android.media.ImageReader;
+import android.media.projection.MediaProjection;
+import android.media.projection.MediaProjectionManager;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.ssyanhuo.arknightshelper.utils.ScreenUtils;
+
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.sql.Time;
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class ScreenCaptureActivity extends AppCompatActivity {
+
+    final int REQUEST_CODE_SCREEN_CAPTURE = 0;
+    private MediaProjectionManager mediaProjectionManager;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+//        Bundle bundle = getIntent().getBundleExtra("bundle");
+//        if (bundle != null){
+//            Hr hr = ((CaptureScreenSerializable) bundle.getSerializable("serializable")).getModule();
+//            OverlayService overlayService = ((CaptureScreenSerializable) bundle.getSerializable("serializable")).getService();
+//            Log.e("SC", hr.toString());
+//            Log.e("SC", overlayService.toString());
+//        }else {
+//            finish();
+//        }
+        mediaProjectionManager = (MediaProjectionManager) getSystemService(MEDIA_PROJECTION_SERVICE);
+        Intent intent = mediaProjectionManager.createScreenCaptureIntent();
+        startActivityForResult(intent,0);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, final int resultCode, @Nullable final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_SCREEN_CAPTURE && resultCode == RESULT_OK) {
+            final int screenDensityDpi = ScreenUtils.getDensityDpi(ScreenCaptureActivity.this);
+            final int screenWidth = ScreenUtils.getScreenWidth(ScreenCaptureActivity.this);
+            final int screenHeight = ScreenUtils.getScreenHeight(ScreenCaptureActivity.this);
+            @SuppressLint("WrongConstant") ImageReader imageReader = ImageReader.newInstance(screenWidth, screenHeight, PixelFormat.RGBA_8888, 2);
+            final MediaProjection mediaProjection = mediaProjectionManager.getMediaProjection(resultCode, data);
+            final VirtualDisplay virtualDisplay = mediaProjection.createVirtualDisplay("ScreenCapture", screenWidth, screenHeight, screenDensityDpi, DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR, imageReader.getSurface(), null, null);
+            imageReader.setOnImageAvailableListener(new ImageReader.OnImageAvailableListener() {
+                @Override
+                public void onImageAvailable(final ImageReader reader) {
+
+                    Timer timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            try {
+                                Image image = reader.acquireLatestImage();
+                                Image.Plane[] planes = image.getPlanes();
+                                ByteBuffer byteBuffer = planes[0].getBuffer();
+                                int pixelStride = planes[0].getPixelStride();
+                                int rowStride = planes[0].getRowStride();
+                                int rowPadding = rowStride - pixelStride * screenWidth;
+                                int width = screenWidth + rowPadding / pixelStride;
+                                int height = screenHeight;
+                                Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_4444);
+                                bitmap.copyPixelsFromBuffer(byteBuffer);
+                                reader.close();
+                                String compressedPath = getExternalCacheDir() + File.separator + "ScreenCapture.jpg.processing";
+                                BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(compressedPath));
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
+                                outputStream.flush();
+                                outputStream.close();
+                                virtualDisplay.release();
+                                mediaProjection.stop();
+                                File oldFile = new File(compressedPath);
+                                File newFile = new File(getExternalCacheDir() + File.separator + "ScreenCapture.jpg");
+                                oldFile.renameTo(newFile);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    },1000);
+
+                    finish();
+                }
+            }, null);
+
+
+        }else if (requestCode == REQUEST_CODE_SCREEN_CAPTURE){
+            Toast.makeText(this, "出现错误", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
+    }
+}

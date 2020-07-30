@@ -66,8 +66,12 @@
             android:summary="@string/settings_summary_update_site"/>
         <Preference
             android:key="update_data"
-            android:title="@string/settings_title_update_data">
-        </Preference>
+            android:title="@string/settings_title_update_data" />
+        <SwitchPreference
+            android:key="auto_catch_screen"
+            android:defaultValue="true"
+            android:title="自动获取屏幕截图"
+            android:summary="点击截图识别后自动获取一张当前屏幕的截图，仅兼容部分操作系统"/>
         <SeekBarPreference
             android:defaultValue="0"
             android:key="margin_fix"

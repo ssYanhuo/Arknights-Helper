@@ -30,7 +30,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.service.OverlayService;
 import com.ssyanhuo.arknightshelper.service.PythonService;
-import com.ssyanhuo.arknightshelper.utils.DpUtils;
+import com.ssyanhuo.arknightshelper.utils.ScreenUtils;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
 import com.ssyanhuo.arknightshelper.utils.JSONUtils;
 import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
@@ -151,7 +151,7 @@ public class Planner {
                                     @Override
                                     public void run() {
                                         int y;
-                                        y = itemContainer.getBottom() - scrollView.getHeight() + DpUtils.dip2px(applicationContext, 64);
+                                        y = itemContainer.getBottom() - scrollView.getHeight() + ScreenUtils.dip2px(applicationContext, 64);
                                         if (y > 0){
                                             scrollView.smoothScrollTo(0, y);
                                         }
@@ -169,7 +169,7 @@ public class Planner {
                     listScrollView.addView(itemSelector);
                     cardView.addView(listScrollView);
                     easyPopup.setContentView(cardView)
-                            .setHeight(DpUtils.dip2px(applicationContext, 256))
+                            .setHeight(ScreenUtils.dip2px(applicationContext, 256))
                             .showAsDropDown(v, (v.getWidth() - cardView.getWidth()) / 2, 0);
             }
 });

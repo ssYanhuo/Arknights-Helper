@@ -10,33 +10,22 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Outline;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.PictureDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
-import android.graphics.drawable.shapes.RectShape;
-import android.graphics.drawable.shapes.Shape;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
-import android.service.quicksettings.Tile;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -46,7 +35,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -65,11 +53,10 @@ import androidx.preference.SwitchPreference;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.android.material.snackbar.Snackbar;
-import com.ssyanhuo.arknightshelper.BuildConfig;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.entity.StaticData;
 import com.ssyanhuo.arknightshelper.service.OverlayService;
-import com.ssyanhuo.arknightshelper.utils.DpUtils;
+import com.ssyanhuo.arknightshelper.utils.ScreenUtils;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
 import com.ssyanhuo.arknightshelper.utils.PackageUtils;
 import com.ssyanhuo.arknightshelper.utils.PythonUtils;
@@ -78,7 +65,6 @@ import com.ssyanhuo.arknightshelper.utils.I18nUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -87,11 +73,6 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import uk.co.deanwild.materialshowcaseview.shape.CircleShape;
 
 public class SettingsActivity extends AppCompatActivity {
     final String GAME_OFFICIAL = "0";
@@ -558,14 +539,14 @@ public class SettingsActivity extends AppCompatActivity {
             linearLayout.addView(imageView);
             linearLayout.addView(checkBox);
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) imageView.getLayoutParams();
-            lp.height = DpUtils.dip2px(getContext(), 48);
-            lp.width = DpUtils.dip2px(getContext(), 48);
+            lp.height = ScreenUtils.dip2px(getContext(), 48);
+            lp.width = ScreenUtils.dip2px(getContext(), 48);
             lp.topMargin = padding; lp.bottomMargin = padding; lp.leftMargin = padding; lp.rightMargin = padding;
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setOutlineProvider(new ViewOutlineProvider() {
                 @Override
                 public void getOutline(View view, Outline outline) {
-                    outline.setOval(0,0, DpUtils.dip2px(getContext(), 48), DpUtils.dip2px(getContext(), 48));
+                    outline.setOval(0,0, ScreenUtils.dip2px(getContext(), 48), ScreenUtils.dip2px(getContext(), 48));
                 }
             });
             imageView.setClipToOutline(true);

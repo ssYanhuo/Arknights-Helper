@@ -3,8 +3,12 @@ package com.ssyanhuo.arknightshelper.module;
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +23,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -43,8 +48,10 @@ import com.baidu.ocr.sdk.model.GeneralParams;
 import com.baidu.ocr.sdk.model.GeneralResult;
 import com.baidu.ocr.sdk.model.WordSimple;
 import com.ssyanhuo.arknightshelper.R;
+import com.ssyanhuo.arknightshelper.activity.ScreenCaptureActivity;
 import com.ssyanhuo.arknightshelper.entity.MediaInfo;
 import com.ssyanhuo.arknightshelper.entity.StaticData;
+import com.ssyanhuo.arknightshelper.service.OverlayService;
 import com.ssyanhuo.arknightshelper.utils.*;
 import com.ssyanhuo.arknightshelper.utils.I18nUtils.Helper;
 import com.ssyanhuo.arknightshelper.widget.LineWrapLayout;
@@ -60,6 +67,7 @@ import java.util.*;
 
 import eightbitlab.com.blurview.BlurView;
 import eightbitlab.com.blurview.RenderScriptBlur;
+
 public class Hr {
     private static final int TYPE_PROCESSING = 1;
     private static final int TYPE_NETWORK_ERROR = 283504;
@@ -85,6 +93,7 @@ public class Hr {
     final int MODE_FUZZY = 1;
     private ScrollView selector;
     LinearLayout rootLayout;
+    private OverlayService overlayService;
     LinearLayout placeHolder;
     ArrayList<String> tagList = new ArrayList<>();
     androidx.appcompat.view.ContextThemeWrapper contextThemeWrapper;
@@ -99,12 +108,15 @@ public class Hr {
     private RelativeLayout relativeLayout;
     private ScrollView scrollView;
     private BlurView snackBarView;
+    Handler handler = new Handler();
 
-    public void init(Context context, final View contentView, RelativeLayout relativeLayout, LinearLayout backgroundLayout) {
+    public void init(Context context, final View contentView, RelativeLayout relativeLayout, LinearLayout backgroundLayout, OverlayService overlayService) {
         this.contentView = contentView;
         applicationContext = context;
         this.relativeLayout = relativeLayout;
         rootLayout = backgroundLayout;
+        this.overlayService = overlayService;
+
         contextThemeWrapper = new androidx.appcompat.view.ContextThemeWrapper(applicationContext, ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_FLOATING_WINDOW, applicationContext));
         sharedPreferences = applicationContext.getSharedPreferences("com.ssyanhuo.arknightshelper_preferences", Context.MODE_PRIVATE);
         if (sharedPreferences.getBoolean("fuzzyQuery", true)) {
@@ -232,7 +244,7 @@ public class Hr {
     }
 
     //按星级排序
-    private class StarComparator implements Comparator<JSONObject>{
+    private static class StarComparator implements Comparator<JSONObject>{
 
         @Override
         public int compare(JSONObject o1, JSONObject o2) {
@@ -844,7 +856,7 @@ public class Hr {
                 spannableStringBuilder1.setSpan(new ClickableSpan() {
                     @Override
                     public void onClick(View widget) {
-                        showSubWindow();
+                        OCR();
                     }
                 }, 0, spannableStringBuilder1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 textView.append(spannableStringBuilder1);
@@ -875,7 +887,7 @@ public class Hr {
                 spannableStringBuilder1.setSpan(new ClickableSpan() {
                     @Override
                     public void onClick(View widget) {
-                        showSubWindow();
+                        OCR();
                     }
                 }, 0, spannableStringBuilder1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 textView.append(spannableStringBuilder1);
@@ -902,99 +914,163 @@ public class Hr {
         }
     }
 
-    public void showSubWindow() {
-        placeHolder = rootLayout.findViewWithTag("placeHolder");
-        placeHolder.removeAllViews();
-        int backgroundColor = ThemeUtils.getBackgroundColor(applicationContext, contextThemeWrapper);
-        selector = (ScrollView) LayoutInflater.from(contextThemeWrapper).inflate(R.layout.overlay_hr_sub_ocr, null);
-        GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, new int[]{backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, Color.TRANSPARENT});
-        gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
-        selector.setBackground(gradientDrawable);
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        assert windowManager != null;
-        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-        int rotation = windowManager.getDefaultDisplay().getRotation();
-        if (sharedPreferences.getBoolean("emulator_mode", false)){
-            if (rotation == 0 || rotation == 2){
-                rotation = 3;
-            }else {
-                rotation = 0;
-            }
-        }
-        if (rotation == 0 || rotation == 3) {
-            selector.setBackgroundColor(backgroundColor);
-        }
-        int width = placeHolder.getWidth();
-        int height = placeHolder.getHeight();
-        selector.setMinimumHeight(height);
-        selector.setMinimumWidth(width);
-        selector.getChildAt(0).setMinimumWidth(width);
-        selector.getChildAt(0).setMinimumHeight(height);
-        placeHolder.addView(selector);
-        ((GridLayout) selector.findViewById(R.id.hr_ocr_selector)).removeAllViews();
-        Animator animator;
-        if (rotation == 0 || rotation == 2){
-            animator = AnimatorInflater.loadAnimator(applicationContext, R.animator.overlay_sub_show_portrait);
-        }else {
-            animator = AnimatorInflater.loadAnimator(applicationContext, R.animator.overlay_sub_show_landspace);
-        }
-        animator.setDuration(150);
-        animator.setTarget(selector);
-        animator.start();
-        final Handler getPictureHandler = new Handler(){
-            @Override
-            public void handleMessage(@NonNull Message msg) {
-                super.handleMessage(msg);
-                selector.findViewById(R.id.hr_ocr_loading).setVisibility(View.GONE);
-                ArrayList<MediaInfo> mediaInfos = (ArrayList<MediaInfo>) msg.obj;
-                for (int i = 0; i < mediaInfos.size(); i++) {
-                    MediaInfo mediaInfo = mediaInfos.get(i);
-                    final ImageView imageView = new ImageView(applicationContext);
-                    imageView.setImageBitmap(mediaInfo.thumbnail);
-                    imageView.setClickable(true);
-                    imageView.setFocusable(true);
-                    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                    TypedValue typedValue = new TypedValue();
-                    applicationContext.getTheme()
-                            .resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true);
-                    int[] attribute = new int[]{android.R.attr.selectableItemBackground};
-                    TypedArray typedArray = applicationContext.getTheme().obtainStyledAttributes(typedValue.resourceId, attribute);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        imageView.setForeground(typedArray.getDrawable(0));
+    public void OCR() {
+        try {
+            if (!sharedPreferences.getBoolean("auto_catch_screen", true)) {
+                placeHolder = rootLayout.findViewWithTag("placeHolder");
+                placeHolder.removeAllViews();
+                int backgroundColor = ThemeUtils.getBackgroundColor(applicationContext, contextThemeWrapper);
+                selector = (ScrollView) LayoutInflater.from(contextThemeWrapper).inflate(R.layout.overlay_hr_sub_ocr, null);
+                GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, new int[]{backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, Color.TRANSPARENT});
+                gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                assert windowManager != null;
+                windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+                int rotation = windowManager.getDefaultDisplay().getRotation();
+                if (sharedPreferences.getBoolean("emulator_mode", false)){
+                    if (rotation == 0 || rotation == 2){
+                        rotation = 3;
+                    }else {
+                        rotation = 0;
                     }
-                    int margin = applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin) / 2;
-                    int childWidth = (placeHolder.getWidth() - 4 * margin) / 4 - 2 * margin;
-                    int childHeight = (placeHolder.getWidth() - 4 * margin) / 4 - 2 * margin;
-                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(childWidth, childHeight);
-                    layoutParams.setMargins(margin, margin, margin, margin);
-                    imageView.setLayoutParams(layoutParams);
-                    imageView.setTag(mediaInfo.uri);
-                    imageView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            getOCRResult((Uri) v.getTag(), applicationContext);
-
-                        }
-                    });
-                    ((GridLayout) selector.findViewById(R.id.hr_ocr_selector)).addView(imageView);
                 }
-            }
-        };
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                Thread getPictureThread = new Thread(){
+                if (rotation == 0 || rotation == 3) {
+                    selector.setBackgroundColor(backgroundColor);
+                }
+                int width = placeHolder.getWidth();
+                int height = placeHolder.getHeight();
+                selector.setBackground(gradientDrawable);
+                selector.setMinimumHeight(height);
+                selector.setMinimumWidth(width);
+                selector.getChildAt(0).setMinimumWidth(width);
+                selector.getChildAt(0).setMinimumHeight(height);
+                placeHolder.addView(selector);
+                ((GridLayout) selector.findViewById(R.id.hr_ocr_selector)).removeAllViews();
+                Animator animator;
+                if (rotation == 0 || rotation == 2){
+                    animator = AnimatorInflater.loadAnimator(applicationContext, R.animator.overlay_sub_show_portrait);
+                }else {
+                    animator = AnimatorInflater.loadAnimator(applicationContext, R.animator.overlay_sub_show_landspace);
+                }
+                animator.setDuration(150);
+                animator.setTarget(selector);
+                animator.start();
+                final Handler getPictureHandler = new Handler(){
                     @Override
-                    public void run() {
-                        super.run();
-                        ArrayList<MediaInfo> mediaInfos = ImageUtils.getPictures(applicationContext);
-                        getPictureHandler.sendMessage(getPictureHandler.obtainMessage(0, mediaInfos));
+                    public void handleMessage(@NonNull Message msg) {
+                        super.handleMessage(msg);
+                        selector.findViewById(R.id.hr_ocr_loading).setVisibility(View.GONE);
+                        ArrayList<MediaInfo> mediaInfos = (ArrayList<MediaInfo>) msg.obj;
+                        for (int i = 0; i < mediaInfos.size(); i++) {
+                            MediaInfo mediaInfo = mediaInfos.get(i);
+                            final ImageView imageView = new ImageView(applicationContext);
+                            imageView.setImageBitmap(mediaInfo.thumbnail);
+                            imageView.setClickable(true);
+                            imageView.setFocusable(true);
+                            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                            TypedValue typedValue = new TypedValue();
+                            applicationContext.getTheme()
+                                    .resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true);
+                            int[] attribute = new int[]{android.R.attr.selectableItemBackground};
+                            TypedArray typedArray = applicationContext.getTheme().obtainStyledAttributes(typedValue.resourceId, attribute);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                imageView.setForeground(typedArray.getDrawable(0));
+                            }
+                            int margin = applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin) / 2;
+                            int childWidth = (placeHolder.getWidth() - 4 * margin) / 4 - 2 * margin;
+                            int childHeight = (placeHolder.getWidth() - 4 * margin) / 4 - 2 * margin;
+                            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(childWidth, childHeight);
+                            layoutParams.setMargins(margin, margin, margin, margin);
+                            imageView.setLayoutParams(layoutParams);
+                            imageView.setTag(mediaInfo.uri);
+                            imageView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    getOCRResult((Uri) v.getTag(), applicationContext, false);
+
+                                }
+                            });
+                            ((GridLayout) selector.findViewById(R.id.hr_ocr_selector)).addView(imageView);
+                        }
                     }
                 };
-                getPictureThread.start();
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        Thread getPictureThread = new Thread(){
+                            @Override
+                            public void run() {
+                                super.run();
+                                ArrayList<MediaInfo> mediaInfos = ImageUtils.getPictures(applicationContext);
+                                getPictureHandler.sendMessage(getPictureHandler.obtainMessage(0, mediaInfos));
+                            }
+                        };
+                        getPictureThread.start();
+                    }
+                }, 500);
+            }else {
+                File file = new File(applicationContext.getExternalCacheDir() + File.separator + "ScreenCapture.jpg");
+                if (file.exists()){file.delete();}
+                if (!sharedPreferences.getBoolean("tip_allow_background_window", false)){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(contextThemeWrapper);
+                    AlertDialog dialog = builder.setMessage("请授予应用“从后台弹出窗口”的权限，否则自动截图可能无法正常运行\n如果出现问题，你可以在设置中关闭“自动获取屏幕截图”的选项")
+                            .setPositiveButton("我知道了", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    sharedPreferences.edit().putBoolean("tip_allow_background_window", true).apply();
+                                }
+                            })
+                            .create();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
+                    }else {
+                        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_PHONE);
+                    }
+                    dialog.show();
+
+                }else {
+                    overlayService.hideAllComponentsTemporarily();
+                    Intent captureIntent = new Intent(applicationContext, ScreenCaptureActivity.class);
+                    captureIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    applicationContext.startActivity(captureIntent);
+                    final int[] count = {0};
+                    Timer timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+
+                            if (count[0] >= 30){
+                                Looper.prepare();
+                                Toast.makeText(applicationContext, "操作超时", Toast.LENGTH_SHORT).show();
+                                overlayService.resumeFloatingWindow();
+                                this.cancel();
+                                Looper.loop();
+                            }
+                            final File file = new File(applicationContext.getExternalCacheDir() + File.separator + "ScreenCapture.jpg");
+                            if (!file.exists()){
+                                count[0]++;
+                                return;
+                            }
+
+
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    getOCRResult(Uri.fromFile(file), contextThemeWrapper, true);
+                                }
+                            });
+                            this.cancel();
+                        }
+                    }, 1000, 500);
+                }
+
+
             }
-        }, 500);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void hideSubWindow() {
@@ -1042,7 +1118,7 @@ public class Hr {
         animator.start();
     }
 
-    public void getOCRResult(Uri uri, Context context) {
+    public void getOCRResult(Uri uri, Context context, final boolean autoCapture) {
         final Handler onResultHandler = new Handler() {
             @Override
             public void handleMessage(@NonNull Message msg) {
@@ -1056,6 +1132,7 @@ public class Hr {
             BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(compressedPath));
             bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
             outputStream.flush();
+            outputStream.close();
         }catch (Exception e){
             e.printStackTrace();
             return;
@@ -1067,39 +1144,50 @@ public class Hr {
         final File compressedFile = new File(compressedPath);
         params.setImageFile(compressedFile);
         tagList.clear();
+        changeQueryMethod(MODE_FUZZY);
         OCR.getInstance(context).recognizeGeneral(params, new OnResultListener<GeneralResult>() {
             @Override
-            public void onResult(GeneralResult generalResult) {
-                for (WordSimple wordSimple : generalResult.getWordList()) {
-                    Log.i(TAG, wordSimple.getWords());
-                    //wordList.add(wordSimple.getWords());
-                    for (String tag : StaticData.HR.tagList){
-                        if (wordSimple.getWords().contains(tag)){
-                            tagList.add(wordSimple.getWords());
+            public void onResult(final GeneralResult generalResult) {
+                        for (WordSimple wordSimple : generalResult.getWordList()) {
+                            Log.i(TAG, wordSimple.getWords());
+                            //wordList.add(wordSimple.getWords());
+                            for (String tag : StaticData.HR.tagList){
+                                if (wordSimple.getWords().contains(tag)){
+                                    tagList.add(wordSimple.getWords());
+                                }
+                            }
                         }
-                    }
-                }
-                Log.i(TAG, "OCR result: " + tagList.toString());
-                if (tagList.size() <= 0){
-                    onResultHandler.sendMessage(onResultHandler.obtainMessage(0, TYPE_EMPTY_ERROR , 0));
-                    return;
-                }
-                showOcrResult(TYPE_SUCCEED);
-                changeQueryMethod(MODE_FUZZY);
-                for (CheckBox checkBox : checkBoxes) {
-                    checkBox.setChecked(false);
-                    for (String result : tagList) {
-                        if (result.equals(checkBox.getText().toString())) {
-                            checkBox.setChecked(true);
+                        Log.i(TAG, "OCR result: " + tagList.toString());
+                        if (tagList.size() <= 0){
+                            overlayService.resumeFloatingWindow();
+                            onResultHandler.sendMessage(onResultHandler.obtainMessage(0, TYPE_EMPTY_ERROR , 0));
+                            return;
                         }
-                    }
-                }
-                //hideSubWindow();
-                compressedFile.delete();
+                        showOcrResult(TYPE_SUCCEED);
+                        for (CheckBox checkBox : checkBoxes) {
+                            checkBox.setChecked(false);
+                            for (String result : tagList) {
+                                if (result.equals(checkBox.getText().toString())) {
+                                    checkBox.setChecked(true);
+                                }
+                            }
+                        }
+                        if (autoCapture){
+                            overlayService.resumeFloatingWindow();
+                        }
+                        scrollToResult();
+                        //hideSubWindow();
+                        compressedFile.delete();
+                        File file = new File(applicationContext.getExternalCacheDir() + File.separator + "ScreenCapture.jpg");
+                        if (file.exists()){file.delete();}
+
             }
 
             @Override
             public void onError(OCRError ocrError) {
+                if (autoCapture){
+                    overlayService.resumeFloatingWindow();
+                }
                 ocrError.printStackTrace();
                 int errorCode = ocrError.getErrorCode();
                 onResultHandler.sendMessage(onResultHandler.obtainMessage(0, errorCode, 0));
@@ -1107,6 +1195,8 @@ public class Hr {
         });
 
     }
+
+
 
     public void showOcrResult(int type) {
         selector.removeAllViews();
@@ -1127,8 +1217,8 @@ public class Hr {
             case TYPE_EMPTY_ERROR:
                 ImageView errorImage = new ImageView(contextThemeWrapper);
                 errorImage.setImageDrawable(applicationContext.getDrawable(R.drawable.ic_ocr_error));
-                errorImage.setMinimumHeight(DpUtils.dip2px(applicationContext,144));
-                errorImage.setMinimumWidth(DpUtils.dip2px(applicationContext,144));
+                errorImage.setMinimumHeight(ScreenUtils.dip2px(applicationContext,144));
+                errorImage.setMinimumWidth(ScreenUtils.dip2px(applicationContext,144));
                 errorImage.setPadding(padding, padding, padding, padding);
                 linearLayout.addView(errorImage);
                 TextView errorText = new TextView(contextThemeWrapper);
@@ -1154,8 +1244,8 @@ public class Hr {
                     succeedDrawable.setColorFilter(new PorterDuffColorFilter(applicationContext.getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.MULTIPLY));
                 }
                 succeedImage.setImageDrawable(succeedDrawable);
-                succeedImage.setMinimumHeight(DpUtils.dip2px(applicationContext,144));
-                succeedImage.setMinimumWidth(DpUtils.dip2px(applicationContext,144));
+                succeedImage.setMinimumHeight(ScreenUtils.dip2px(applicationContext,144));
+                succeedImage.setMinimumWidth(ScreenUtils.dip2px(applicationContext,144));
                 succeedImage.setPadding(padding, padding, padding, padding);
                 linearLayout.addView(succeedImage);
                 TextView succeedText = new TextView(contextThemeWrapper);
@@ -1163,7 +1253,6 @@ public class Hr {
                 succeedText.setText(applicationContext.getString(R.string.hr_ocr_succeed) + tagList.size());
                 linearLayout.addView(succeedText);
                 selector.addView(linearLayout);
-                scrollToResult();
                 final Handler hideSubWindowHandler = new Handler();
                 Timer timer = new Timer();
                 timer.schedule(new TimerTask() {

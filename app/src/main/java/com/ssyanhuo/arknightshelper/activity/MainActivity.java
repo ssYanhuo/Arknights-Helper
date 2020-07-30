@@ -45,7 +45,7 @@ import com.ssyanhuo.arknightshelper.entity.StaticData;
 import com.ssyanhuo.arknightshelper.service.OverlayService;
 import com.ssyanhuo.arknightshelper.service.PythonService;
 import com.ssyanhuo.arknightshelper.utils.CompatUtils;
-import com.ssyanhuo.arknightshelper.utils.DpUtils;
+import com.ssyanhuo.arknightshelper.utils.ScreenUtils;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
 import com.ssyanhuo.arknightshelper.utils.PackageUtils;
 import com.ssyanhuo.arknightshelper.utils.PythonUtils;
@@ -562,7 +562,7 @@ public class MainActivity extends AppCompatActivity {
         bottomAppBar.post(new Runnable() {
             @Override
             public void run() {
-                bottomProgressBar.setPadding(0, 0 ,0, bottomAppBar.getHeight() - DpUtils.dip2px(activity, 8.0f));
+                bottomProgressBar.setPadding(0, 0 ,0, bottomAppBar.getHeight() - ScreenUtils.dip2px(activity, 8.0f));
                 ((ViewGroup.MarginLayoutParams) snackbarContainer.getLayoutParams()).setMargins(0,0,0,bottomAppBar.getHeight());
             }
         });

@@ -42,7 +42,7 @@ import com.ssyanhuo.arknightshelper.module.Hr;
 import com.ssyanhuo.arknightshelper.module.Material;
 import com.ssyanhuo.arknightshelper.module.More;
 import com.ssyanhuo.arknightshelper.module.Planner;
-import com.ssyanhuo.arknightshelper.utils.DpUtils;
+import com.ssyanhuo.arknightshelper.utils.ScreenUtils;
 import com.ssyanhuo.arknightshelper.utils.OCRUtils;
 import com.ssyanhuo.arknightshelper.utils.PythonUtils;
 import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
@@ -239,8 +239,8 @@ public class OverlayService extends Service {
     @SuppressLint("ClickableViewAccessibility")
     public void startFloatingButton(){
         buttonLayoutParams.format = PixelFormat.RGBA_8888;
-        buttonLayoutParams.width = DpUtils.dip2px(getApplicationContext(), 48);
-        buttonLayoutParams.height = DpUtils.dip2px(getApplicationContext(), 48);
+        buttonLayoutParams.width = ScreenUtils.dip2px(getApplicationContext(), 48);
+        buttonLayoutParams.height = ScreenUtils.dip2px(getApplicationContext(), 48);
         buttonLayoutParams.gravity = Gravity.LEFT | Gravity.TOP;
         buttonLayoutParams.flags = WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
         buttonLayoutParams.x = preferences.getInt("lastX", 0);
@@ -256,7 +256,7 @@ public class OverlayService extends Service {
         button.setOutlineProvider(new ViewOutlineProvider() {
             @Override
             public void getOutline(View view, Outline outline) {
-                outline.setOval(0,0, DpUtils.dip2px(getApplicationContext(), 48), DpUtils.dip2px(getApplicationContext(), 48));
+                outline.setOval(0,0, ScreenUtils.dip2px(getApplicationContext(), 48), ScreenUtils.dip2px(getApplicationContext(), 48));
             }
         });
         button.setClipToOutline(true);
@@ -465,8 +465,8 @@ public class OverlayService extends Service {
         }
         pinnedWindowLayoutParams.flags = WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
         pinnedWindowLayoutParams.format = PixelFormat.RGBA_8888;
-        pinnedWindowLayoutParams.height = DpUtils.dip2px(getApplicationContext(), 256);
-        pinnedWindowLayoutParams.width = DpUtils.dip2px(getApplicationContext(), 196);
+        pinnedWindowLayoutParams.height = ScreenUtils.dip2px(getApplicationContext(), 256);
+        pinnedWindowLayoutParams.width = ScreenUtils.dip2px(getApplicationContext(), 196);
         pinnedWindowLayoutParams.windowAnimations = R.style.AppTheme_Default_FloatingButtonAnimation;
         pinnedWindow.setBackgroundColor(ThemeUtils.getBackgroundColor(getApplicationContext(), contextThemeWrapper));
         LinearLayout pinnedContentView = pinnedWindow.findViewById(R.id.pinned_window_content);
@@ -636,13 +636,34 @@ public class OverlayService extends Service {
             }
         });
         //初始化
-        hr.init(contextThemeWrapper, linearLayout_hr, relativeLayout_hr, backgroundLayout);
+        hr.init(contextThemeWrapper, linearLayout_hr, relativeLayout_hr, backgroundLayout, this);
         material.init(contextThemeWrapper, linearLayout_material, backgroundLayout, this);
         drop.init(contextThemeWrapper, linearLayout_drop, this);
         more.init(contextThemeWrapper, linearLayout_more, this, getApplicationContext());
         planner.init(contextThemeWrapper, linearLayout_planner, relativeLayout_planner, backgroundLayout, this, pythonService);
         buttonLayoutParams.windowAnimations = R.style.AppTheme_Default_FloatingButtonAnimation;
     }
+    public void hideAllComponentsTemporarily(){
+        try {
+            windowManager.removeViewImmediate(backgroundLayout);
+        } catch (Exception ignored) {
+
+        }
+        try {
+            windowManager.removeViewImmediate(button);
+        } catch (Exception ignored) {
+
+        }
+    }
+
+    public void resumeFloatingWindow(){
+        try {
+            windowManager.addView(backgroundLayout, backgroundLayoutParams);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private boolean checkApplication(String packageName) {
         if (packageName == null || "".equals(packageName)){

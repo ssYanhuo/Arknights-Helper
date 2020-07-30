@@ -29,7 +29,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.activity.SettingsActivity;
 import com.ssyanhuo.arknightshelper.service.OverlayService;
-import com.ssyanhuo.arknightshelper.utils.DpUtils;
+import com.ssyanhuo.arknightshelper.utils.ScreenUtils;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
 import com.ssyanhuo.arknightshelper.widget.ChildScrollView;
 import com.ssyanhuo.arknightshelper.widget.LineWrapLayout;
@@ -191,7 +191,7 @@ public class Drop {
             JSONObject formula = data_material.getJSONObject(String.valueOf(item)).getJSONObject("madeof");
             if (formula != null && formula.size() > 0){
                 TextView textView = new TextView(applicationContext);
-                textView.setPadding(DpUtils.dip2px(applicationContext, 8), padding, padding, 0);
+                textView.setPadding(ScreenUtils.dip2px(applicationContext, 8), padding, padding, 0);
                 textView.setText("合成：");
                 for (Map.Entry<String, Object> entry:
                      formula.entrySet()) {
@@ -235,7 +235,7 @@ public class Drop {
     public void setAltSelector(){
             ScrollView scrollView = contentView.findViewById(R.id.drop_selector_scroll);
             ViewGroup.LayoutParams params = scrollView.getLayoutParams();
-            params.height = DpUtils.dip2px(applicationContext, 128);
+            params.height = ScreenUtils.dip2px(applicationContext, 128);
             scrollView.setLayoutParams(params);
             isAltSelector = true;
     }
