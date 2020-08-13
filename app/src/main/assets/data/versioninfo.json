@@ -1,5 +1,5 @@
 {
-    "versionCode": 38,
-    "versionName": "OpenPreview-2.3.0",
-    "releaseNote": "[Beta]公开招募屏幕识别支持自动截图"
+    "versionCode": 39,
+    "versionName": "RC-1.0",
+    "releaseNote": "[Info]更新到该版本建议清除软件数据后再使用\n[Mod]同步最新数据\n[Mod]自动截图识别时可随时取消识别\n[Mod]对数据文件进行了压缩，加快了读取速度\n[Fix]修复截图识别有时检测不到标签的问题\n[Fix]修复一些奇怪的用户操作而导致的崩溃"
 }

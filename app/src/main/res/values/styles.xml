@@ -68,6 +68,10 @@
         <item name="android:windowEnterAnimation">@animator/overlay_main_show</item>
         <item name="android:windowExitAnimation">@animator/overlay_main_hide</item>
     </style>
+    <style name="AppTheme.Default.AutoOCRProgressAnimation">
+        <item name="android:windowEnterAnimation">@animator/overlay_auto_ocr_progress_show</item>
+        <item name="android:windowExitAnimation">@animator/overlay_auto_ocr_progress_hide</item>
+    </style>
 
     <style name="AppTheme.Light.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />

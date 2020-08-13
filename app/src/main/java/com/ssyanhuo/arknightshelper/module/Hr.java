@@ -3,17 +3,18 @@ package com.ssyanhuo.arknightshelper.module;
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Outline;
+import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Typeface;
@@ -44,6 +45,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baidu.ocr.sdk.OCR;
 import com.baidu.ocr.sdk.OnResultListener;
 import com.baidu.ocr.sdk.exception.OCRError;
+import com.baidu.ocr.sdk.model.GeneralBasicParams;
 import com.baidu.ocr.sdk.model.GeneralParams;
 import com.baidu.ocr.sdk.model.GeneralResult;
 import com.baidu.ocr.sdk.model.WordSimple;
@@ -109,6 +111,8 @@ public class Hr {
     private ScrollView scrollView;
     private BlurView snackBarView;
     Handler handler = new Handler();
+    private LinearLayout autoOCRProgressLayout;
+    private boolean canceled = false;
 
     public void init(Context context, final View contentView, RelativeLayout relativeLayout, LinearLayout backgroundLayout, OverlayService overlayService) {
         this.contentView = contentView;
@@ -1023,13 +1027,13 @@ public class Hr {
                             })
                             .create();
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
-                    }else {
-                        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_PHONE);
-                    }
-                    dialog.show();
-
+                    dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
                 }else {
+                    dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_PHONE);
+                }
+                dialog.show();
+
+            }else {
                     overlayService.hideAllComponentsTemporarily();
                     Intent captureIntent = new Intent(applicationContext, ScreenCaptureActivity.class);
                     captureIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1057,7 +1061,7 @@ public class Hr {
                             handler.post(new Runnable() {
                                 @Override
                                 public void run() {
-
+                                    showAutoOCRProgress();
                                     getOCRResult(Uri.fromFile(file), contextThemeWrapper, true);
                                 }
                             });
@@ -1126,11 +1130,11 @@ public class Hr {
                 showOcrResult(msg.arg1);
             }
         };
-        String compressedPath = context.getExternalCacheDir() + String.valueOf((int)(Math.random()*100000000));
+        String compressedPath = context.getExternalCacheDir() + String.valueOf((int)(Math.random()*100000000)) + ".png";
         try{
             Bitmap bitmap = BitmapFactory.decodeStream(applicationContext.getContentResolver().openInputStream(uri));
             BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(compressedPath));
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
             outputStream.flush();
             outputStream.close();
         }catch (Exception e){
@@ -1139,15 +1143,25 @@ public class Hr {
         }
         selector.removeAllViews();
         showOcrResult(TYPE_PROCESSING);
-        GeneralParams params = new GeneralParams();
+        GeneralBasicParams params = new GeneralParams();
         params.setDetectDirection(true);
         final File compressedFile = new File(compressedPath);
         params.setImageFile(compressedFile);
         tagList.clear();
         changeQueryMethod(MODE_FUZZY);
-        OCR.getInstance(context).recognizeGeneral(params, new OnResultListener<GeneralResult>() {
+        OCR.getInstance(context).recognizeGeneralBasic(params, new OnResultListener<GeneralResult>() {
             @Override
             public void onResult(final GeneralResult generalResult) {
+                if (autoCapture){
+                    if (canceled){
+                        canceled = false;
+                        overlayService.resumeFloatingWindow();
+                        return;
+                    }
+                }
+                if(compressedFile.exists()){
+                    compressedFile.delete();
+                }
                         for (WordSimple wordSimple : generalResult.getWordList()) {
                             Log.i(TAG, wordSimple.getWords());
                             //wordList.add(wordSimple.getWords());
@@ -1159,6 +1173,7 @@ public class Hr {
                         }
                         Log.i(TAG, "OCR result: " + tagList.toString());
                         if (tagList.size() <= 0){
+                            hideAutoOCRProgress();
                             overlayService.resumeFloatingWindow();
                             onResultHandler.sendMessage(onResultHandler.obtainMessage(0, TYPE_EMPTY_ERROR , 0));
                             return;
@@ -1173,6 +1188,7 @@ public class Hr {
                             }
                         }
                         if (autoCapture){
+                            hideAutoOCRProgress();
                             overlayService.resumeFloatingWindow();
                         }
                         scrollToResult();
@@ -1186,7 +1202,15 @@ public class Hr {
             @Override
             public void onError(OCRError ocrError) {
                 if (autoCapture){
+                    if (canceled){
+                        canceled = false;
+                        overlayService.resumeFloatingWindow();
+                        return;
+                    }
                     overlayService.resumeFloatingWindow();
+                }
+                if(compressedFile.exists()){
+                    compressedFile.delete();
                 }
                 ocrError.printStackTrace();
                 int errorCode = ocrError.getErrorCode();
@@ -1197,78 +1221,150 @@ public class Hr {
     }
 
 
+    public void showAutoOCRProgress(){
+        autoOCRProgressLayout = (LinearLayout) LayoutInflater.from(contextThemeWrapper).inflate(R.layout.view_auto_ocr_progress, null);
+        ProgressBar progressBar = (ProgressBar) autoOCRProgressLayout.findViewById(R.id.auto_ocr_progress);
+        Button button = (Button) autoOCRProgressLayout.findViewById(R.id.auto_ocr_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancelAutoOCR();
+            }
+        });
+
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            layoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+        }else {
+            layoutParams.type = WindowManager.LayoutParams.TYPE_PHONE;
+        }
+        layoutParams.flags = WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+        layoutParams.format = PixelFormat.RGBA_8888;
+        layoutParams.x = 0;
+        layoutParams.y = ScreenUtils.getScreenHeight(applicationContext);
+        layoutParams.windowAnimations = R.style.AppTheme_Default_FloatingWindowAnimation;
+        autoOCRProgressLayout.setBackground(new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, new int[]{Color.TRANSPARENT, Color.TRANSPARENT, Color.BLACK}));
+        windowManager.addView(autoOCRProgressLayout, layoutParams);
+    }
+
+    public void cancelAutoOCR(){
+        hideAutoOCRProgress();
+        canceled = true;
+    }
+
+    public void hideAutoOCRProgress(){
+        try{
+            windowManager.removeViewImmediate(autoOCRProgressLayout);
+        }
+        catch (Exception ignored) {}
+    }
+
+    private void restartService(){
+        List<ActivityManager.RunningServiceInfo> runningServiceInfoList = ((ActivityManager)applicationContext.getSystemService(Context.ACTIVITY_SERVICE)).getRunningServices(Integer.MAX_VALUE);
+        if(runningServiceInfoList.size() > 0){
+            for (int i = 0; i < runningServiceInfoList.size(); i++){
+                if(runningServiceInfoList.get(i).service.getClassName().equals("com.ssyanhuo.arknightshelper.service.OverlayService")){
+                    Intent intent = new Intent(applicationContext, OverlayService.class);
+                    applicationContext.stopService(intent);
+                    applicationContext.startService(intent);
+                    return;
+                }
+            }
+        }
+    }
+
+    private void stopService(){
+        List<ActivityManager.RunningServiceInfo> runningServiceInfoList = ((ActivityManager)applicationContext.getSystemService(Context.ACTIVITY_SERVICE)).getRunningServices(Integer.MAX_VALUE);
+        if(runningServiceInfoList.size() > 0){
+            for (int i = 0; i < runningServiceInfoList.size(); i++){
+                if(runningServiceInfoList.get(i).service.getClassName().equals("com.ssyanhuo.arknightshelper.service.OverlayService")){
+                    Intent intent = new Intent(applicationContext, OverlayService.class);
+                    applicationContext.stopService(intent);
+                    return;
+                }
+            }
+        }
+    }
+
+
 
     public void showOcrResult(int type) {
-        selector.removeAllViews();
-        LinearLayout linearLayout = new LinearLayout(applicationContext, null, ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_FLOATING_WINDOW, applicationContext));
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        lp.width = selector.getWidth();
-        lp.height = selector.getHeight();
-        linearLayout.setLayoutParams(lp);
-        linearLayout.setMinimumWidth(selector.getWidth());
-        linearLayout.setMinimumHeight(selector.getHeight() - selector.getPaddingBottom() - selector.getPaddingTop());
-        linearLayout.setVerticalGravity(Gravity.CENTER_VERTICAL);
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
-        int padding = applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
-        switch (type){
-            case TYPE_IMAGE_SIZE_ERROR:
-            case TYPE_NETWORK_ERROR:
-            case TYPE_RECOGNIZE_ERROR:
-            case TYPE_EMPTY_ERROR:
-                ImageView errorImage = new ImageView(contextThemeWrapper);
-                errorImage.setImageDrawable(applicationContext.getDrawable(R.drawable.ic_ocr_error));
-                errorImage.setMinimumHeight(ScreenUtils.dip2px(applicationContext,144));
-                errorImage.setMinimumWidth(ScreenUtils.dip2px(applicationContext,144));
-                errorImage.setPadding(padding, padding, padding, padding);
-                linearLayout.addView(errorImage);
-                TextView errorText = new TextView(contextThemeWrapper);
-                errorText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                errorText.setText(applicationContext.getString(R.string.hr_ocr_error) + "(" + type + ")");
-                linearLayout.addView(errorText);
-                selector.addView(linearLayout);
-                break;
-            case TYPE_PROCESSING:
-                ProgressBar progressBar = new ProgressBar(contextThemeWrapper);
-                progressBar.setPadding(padding, padding, padding, padding);
-                linearLayout.addView(progressBar);
-                TextView processingText = new TextView(contextThemeWrapper);
-                processingText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                processingText.setText(R.string.hr_ocr_getting_result);
-                linearLayout.addView(processingText);
-                selector.addView(linearLayout);
-                break;
-            case TYPE_SUCCEED:
-                ImageView succeedImage = new ImageView(contextThemeWrapper);
-                Drawable succeedDrawable = applicationContext.getDrawable(R.drawable.ic_ocr_succeed);
-                if (ThemeUtils.getThemeMode(applicationContext) == ThemeUtils.THEME_LIGHT){
-                    succeedDrawable.setColorFilter(new PorterDuffColorFilter(applicationContext.getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.MULTIPLY));
-                }
-                succeedImage.setImageDrawable(succeedDrawable);
-                succeedImage.setMinimumHeight(ScreenUtils.dip2px(applicationContext,144));
-                succeedImage.setMinimumWidth(ScreenUtils.dip2px(applicationContext,144));
-                succeedImage.setPadding(padding, padding, padding, padding);
-                linearLayout.addView(succeedImage);
-                TextView succeedText = new TextView(contextThemeWrapper);
-                succeedText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                succeedText.setText(applicationContext.getString(R.string.hr_ocr_succeed) + tagList.size());
-                linearLayout.addView(succeedText);
-                selector.addView(linearLayout);
-                final Handler hideSubWindowHandler = new Handler();
-                Timer timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        Runnable runnable = new Runnable() {
-                            @Override
-                            public void run() {
-                                hideSubWindow();
-                            }
-                        };
-                        hideSubWindowHandler.post(runnable);
+        try{
+            selector.removeAllViews();
+            LinearLayout linearLayout = new LinearLayout(applicationContext, null, ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_FLOATING_WINDOW, applicationContext));
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+            lp.width = selector.getWidth();
+            lp.height = selector.getHeight();
+            linearLayout.setLayoutParams(lp);
+            linearLayout.setMinimumWidth(selector.getWidth());
+            linearLayout.setMinimumHeight(selector.getHeight() - selector.getPaddingBottom() - selector.getPaddingTop());
+            linearLayout.setVerticalGravity(Gravity.CENTER_VERTICAL);
+            linearLayout.setOrientation(LinearLayout.VERTICAL);
+            int padding = applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
+            switch (type){
+                case TYPE_IMAGE_SIZE_ERROR:
+                case TYPE_NETWORK_ERROR:
+                case TYPE_RECOGNIZE_ERROR:
+                case TYPE_EMPTY_ERROR:
+                    ImageView errorImage = new ImageView(contextThemeWrapper);
+                    errorImage.setImageDrawable(applicationContext.getDrawable(R.drawable.ic_ocr_error));
+                    errorImage.setMinimumHeight(ScreenUtils.dip2px(applicationContext,144));
+                    errorImage.setMinimumWidth(ScreenUtils.dip2px(applicationContext,144));
+                    errorImage.setPadding(padding, padding, padding, padding);
+                    linearLayout.addView(errorImage);
+                    TextView errorText = new TextView(contextThemeWrapper);
+                    errorText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    errorText.setText(applicationContext.getString(R.string.hr_ocr_error) + "(" + type + ")");
+                    linearLayout.addView(errorText);
+                    selector.addView(linearLayout);
+                    break;
+                case TYPE_PROCESSING:
+                    ProgressBar progressBar = new ProgressBar(contextThemeWrapper);
+                    progressBar.setPadding(padding, padding, padding, padding);
+                    linearLayout.addView(progressBar);
+                    TextView processingText = new TextView(contextThemeWrapper);
+                    processingText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    processingText.setText(R.string.hr_ocr_getting_result);
+                    linearLayout.addView(processingText);
+                    selector.addView(linearLayout);
+                    break;
+                case TYPE_SUCCEED:
+                    ImageView succeedImage = new ImageView(contextThemeWrapper);
+                    Drawable succeedDrawable = applicationContext.getDrawable(R.drawable.ic_ocr_succeed);
+                    if (ThemeUtils.getThemeMode(applicationContext) == ThemeUtils.THEME_LIGHT){
+                        succeedDrawable.setColorFilter(new PorterDuffColorFilter(applicationContext.getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.MULTIPLY));
                     }
-                }, 2000);
-                break;
+                    succeedImage.setImageDrawable(succeedDrawable);
+                    succeedImage.setMinimumHeight(ScreenUtils.dip2px(applicationContext,144));
+                    succeedImage.setMinimumWidth(ScreenUtils.dip2px(applicationContext,144));
+                    succeedImage.setPadding(padding, padding, padding, padding);
+                    linearLayout.addView(succeedImage);
+                    TextView succeedText = new TextView(contextThemeWrapper);
+                    succeedText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    succeedText.setText(applicationContext.getString(R.string.hr_ocr_succeed) + tagList.size());
+                    linearLayout.addView(succeedText);
+                    selector.addView(linearLayout);
+                    final Handler hideSubWindowHandler = new Handler();
+                    Timer timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            Runnable runnable = new Runnable() {
+                                @Override
+                                public void run() {
+                                    hideSubWindow();
+                                }
+                            };
+                            hideSubWindowHandler.post(runnable);
+                        }
+                    }, 2000);
+                    break;
+            }
         }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
     private void scrollToResult(){
         (scrollView).post(new Runnable() {
