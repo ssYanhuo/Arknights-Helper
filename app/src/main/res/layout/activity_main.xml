@@ -24,18 +24,6 @@
         app:menu="@menu/activity_main_appbar"
         android:gravity="start">
 
-        <TextView
-            android:id="@+id/main_bottom_stat"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="0dp"
-            android:gravity="end"
-            android:textAlignment="viewEnd"
-            android:text="正在初始化"
-            android:visibility="gone"
-            android:textColor="?attr/colorControlNormal"/>
-
-
     </com.google.android.material.bottomappbar.BottomAppBar>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

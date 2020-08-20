@@ -11,9 +11,9 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="正在初始化依赖文件"
+            android:text="@string/python_init"
             android:layout_weight="1"
             android:textAlignment="gravity"
             android:gravity="center_vertical"/>

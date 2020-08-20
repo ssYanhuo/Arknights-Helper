@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="所需理智：" />
+            android:text="@string/timer_sanity" />
 
         <NumberPicker
             android:layout_width="wrap_content"
@@ -30,6 +30,6 @@
         android:textSize="12sp"
         android:gravity="right"
         android:textAlignment="gravity"
-        android:text="请合理使用本功能，以免引起不必要的尴尬 "
+        android:text="@string/timer_note"
         android:layout_marginTop="@dimen/activity_vertical_margin"/>
 </LinearLayout>

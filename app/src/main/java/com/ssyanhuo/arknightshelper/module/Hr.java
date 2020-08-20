@@ -802,7 +802,7 @@ public class Hr {
             }
         });
         snackBarView.setClipToOutline(true);
-        ((TextView) snackBarView.findViewById(R.id.hr_snackbar_textview)).setText("查看结果");
+        ((TextView) snackBarView.findViewById(R.id.hr_snackbar_textview)).setText(R.string.hr_go_result);
         ((ImageView) snackBarView.findViewById(R.id.hr_snackbar_imageview)).setImageDrawable(applicationContext.getResources().getDrawable(R.drawable.ic_arrow_down, null));
     }
 
@@ -854,7 +854,7 @@ public class Hr {
             fuzzy = false;
             TextView textView = contentView.findViewById(R.id.hr_description);
             textView.setText(R.string.hr_desc_part_1_exact);
-            if (sharedPreferences.getString("game_language", I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE).equals(I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE) && PythonUtils.isAbiSupported()){
+            if (sharedPreferences.getString("game_language", I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE).equals(I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE) && OCRUtils.isAbiSupported()){
                 textView.append(" ");
                 SpannableStringBuilder spannableStringBuilder1 = new SpannableStringBuilder(applicationContext.getResources().getString(R.string.hr_desc_part_2));
                 spannableStringBuilder1.setSpan(new ClickableSpan() {
@@ -1018,8 +1018,8 @@ public class Hr {
                 if (file.exists()){file.delete();}
                 if (!sharedPreferences.getBoolean("tip_allow_background_window", false)){
                     AlertDialog.Builder builder = new AlertDialog.Builder(contextThemeWrapper);
-                    AlertDialog dialog = builder.setMessage("请授予应用“从后台弹出窗口”的权限，否则自动截图可能无法正常运行\n如果出现问题，你可以在设置中关闭“自动获取屏幕截图”的选项")
-                            .setPositiveButton("我知道了", new DialogInterface.OnClickListener() {
+                    AlertDialog dialog = builder.setMessage(R.string.hr_auto_capture_note)
+                            .setPositiveButton(R.string.hr_auto_capture_note_confirm, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     sharedPreferences.edit().putBoolean("tip_allow_background_window", true).apply();
@@ -1046,7 +1046,7 @@ public class Hr {
 
                             if (count[0] >= 30){
                                 Looper.prepare();
-                                Toast.makeText(applicationContext, "操作超时", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(applicationContext, R.string.hr_time_out, Toast.LENGTH_SHORT).show();
                                 overlayService.resumeFloatingWindow();
                                 this.cancel();
                                 Looper.loop();

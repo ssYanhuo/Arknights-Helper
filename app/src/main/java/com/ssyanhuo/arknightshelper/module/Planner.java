@@ -203,17 +203,17 @@ public class Planner {
 //            JSONArray itemsArray = resultObject.getJSONArray("items");
         int padding = applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin);
         TextView lootText = new TextView(applicationContext);
-        lootText.setText("作战：");
+        lootText.setText(R.string.planner_result_loot_title);
         lootText.setPadding(0, padding, 0, 0);
         TextView synthesisText = new TextView(applicationContext);
-        synthesisText.setText("合成：");
+        synthesisText.setText(R.string.planner_result_synthesis_title);
         synthesisText.setPadding(0, padding,0,0);
         views.add(lootText);
         for (int i = 0; i < lootArray.size(); i++) {
             JSONObject obj = lootArray.getJSONObject(i);
             PlannerDetailView plannerDetailView = new PlannerDetailView(applicationContext);
             if (obj.getFloat("times") < 0.5){continue;}
-            plannerDetailView.setTitleText(obj.getString("stage") + " " + (int)Math.ceil(obj.getFloat("times")) + "次");
+            plannerDetailView.setTitleText(obj.getString("stage") + " " + (int)Math.ceil(obj.getFloat("times")) + applicationContext.getString(R.string.planner_times));
             JSONArray items = obj.getJSONArray("items");
             for (int j = 0; j < items.size(); j++) {
                 JSONObject item = items.getJSONObject(j);
@@ -228,7 +228,7 @@ public class Planner {
             JSONObject obj = synthesisArray.getJSONObject(i);
             PlannerDetailView plannerDetailView = new PlannerDetailView(applicationContext);
             if (obj.getFloat("count") < 0.5){continue;}
-            plannerDetailView.setTitleText(obj.getString("target") + " " + (int)Math.ceil(obj.getFloat("count")) + "个");
+            plannerDetailView.setTitleText(obj.getString("target") + " " + (int)Math.ceil(obj.getFloat("count")) + applicationContext.getString(R.string.planner_pcs));
             JSONArray items = obj.getJSONArray("items");
             for (int j = 0; j < items.size(); j++) {
                 JSONObject item = items.getJSONObject(j);
@@ -268,7 +268,7 @@ public class Planner {
             pythonService = newBinder[0];
         }
         String result = ((PythonService.PythonBinder) pythonService).callArkplanner(required.toJSONString());
-        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder("固定到屏幕");
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(applicationContext.getString(R.string.planner_pin));
         spannableStringBuilder.setSpan(new ClickableSpan() {
             @Override
             public void onClick(@NonNull View widget) {
@@ -288,7 +288,9 @@ public class Planner {
                 JSONObject obj = lootArray.getJSONObject(i);
                 PlannerDetailView plannerDetailView = new PlannerDetailView(applicationContext);
                 if (obj.getFloat("times") < 0.5){continue;}
-                plannerDetailView.setTitleText(obj.getString("stage") + " " + (int)Math.ceil(obj.getFloat("times")) + "次");
+                //我不知道为啥结果里面有LS-5
+                if(obj.getString("stage").equals("LS-5")){continue;}
+                plannerDetailView.setTitleText(obj.getString("stage") + " " + (int)Math.ceil(obj.getFloat("times")) + applicationContext.getString(R.string.planner_times));
                 JSONArray items = obj.getJSONArray("items");
                 for (int j = 0; j < items.size(); j++) {
                     JSONObject item = items.getJSONObject(j);
@@ -302,7 +304,7 @@ public class Planner {
                 JSONObject obj = synthesisArray.getJSONObject(i);
                 PlannerDetailView plannerDetailView = new PlannerDetailView(applicationContext);
                 if (obj.getFloat("count") < 0.5){continue;}
-                plannerDetailView.setTitleText(obj.getString("target") + " " + (int)Math.ceil(obj.getFloat("count")) + "个");
+                plannerDetailView.setTitleText(obj.getString("target") + " " + (int)Math.ceil(obj.getFloat("count")) + applicationContext.getString(R.string.planner_pcs));
                 JSONArray items = obj.getJSONArray("items");
                 for (int j = 0; j < items.size(); j++) {
                     JSONObject item = items.getJSONObject(j);

@@ -7,7 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/auto_ocr_button"
-        android:text="取消"
+        android:text="@string/hr_ocr_cancel"
         android:clickable="true"
         android:focusable="true"/>
     <ProgressBar

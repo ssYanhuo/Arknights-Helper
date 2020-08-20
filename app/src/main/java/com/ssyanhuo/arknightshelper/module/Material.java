@@ -355,7 +355,7 @@ public class Material {
         int stamina = 0;
         resultContent = contentView.findViewById(R.id.material_result_content);
         resultContent.removeAllViews();
-        SpannableStringBuilder spannableStringBuilder1 = new SpannableStringBuilder("固定到屏幕");
+        SpannableStringBuilder spannableStringBuilder1 = new SpannableStringBuilder(applicationContext.getString(R.string.material_pin));
         spannableStringBuilder1.setSpan(new ClickableSpan() {
             @Override
             public void onClick(@NonNull View widget) {
@@ -368,7 +368,7 @@ public class Material {
         if (PythonUtils.isAbiSupported() && sharedPreferences.getBoolean("disable_planner", false)) {
             ((TextView) contentView.findViewById(R.id.material_plan)).setVisibility(GONE);
         } else {
-            SpannableStringBuilder spannableStringBuilder2 = new SpannableStringBuilder("刷图规划");
+            SpannableStringBuilder spannableStringBuilder2 = new SpannableStringBuilder(applicationContext.getString(R.string.material_go_planner));
             spannableStringBuilder2.setSpan(new ClickableSpan() {
                 @Override
                 public void onClick(@NonNull View widget) {
@@ -435,21 +435,21 @@ public class Material {
         */
 
             itemDetailView = new ItemDetailView(applicationContext);
-            itemDetailView.setItemName("龙门币（升级）");
+            itemDetailView.setItemName(applicationContext.getString(R.string.material_money_upgrade));
             itemDetailView.setImage(applicationContext.getResources().getDrawable(R.mipmap.gold));
             itemDetailView.setNumber(moneyUpgrade);
             resultContent.addView(itemDetailView);
 
             if(moneyEvolve > 0){
                 itemDetailView = new ItemDetailView(applicationContext);
-                itemDetailView.setItemName("龙门币（精英化）");
+                itemDetailView.setItemName(applicationContext.getString(R.string.material_money_evolve));
                 itemDetailView.setImage(applicationContext.getResources().getDrawable(R.mipmap.gold));
                 itemDetailView.setNumber(moneyEvolve);
                 resultContent.addView(itemDetailView);
             }
 
             itemDetailView = new ItemDetailView(applicationContext);
-            itemDetailView.setItemName("经验");
+            itemDetailView.setItemName(applicationContext.getString(R.string.material_exp));
             itemDetailView.setImage(applicationContext.getResources().getDrawable(R.mipmap.sprite_exp_card_t4));
             itemDetailView.setNumber(exp);
             itemDetailView.appendText("  " + (int)Math.ceil(((double) exp)/((double)StaticData.Exp.Book.EXP_BOOK_1)) + " / " + (int)Math.ceil(((double) exp)/((double)StaticData.Exp.Book.EXP_BOOK_2)) + " / " + (int)Math.ceil(((double) exp)/((double)StaticData.Exp.Book.EXP_BOOK_3)) + " / " + (int)Math.ceil(((double) exp)/((double)StaticData.Exp.Book.EXP_BOOK_4)) + " pcs");
@@ -680,7 +680,7 @@ public class Material {
         if (jsonObject.entrySet().size() > 0){
             overlayService.getPlan(jsonObject);
         }else {
-            Toast.makeText(applicationContext, "没有可规划的材料", Toast.LENGTH_SHORT).show();
+            Toast.makeText(applicationContext, R.string.material_nothing_plannable, Toast.LENGTH_SHORT).show();
         }
         //Log.e(TAG, "plan:  " +  jsonObject.toJSONString());
 

@@ -56,6 +56,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.entity.StaticData;
 import com.ssyanhuo.arknightshelper.service.OverlayService;
+import com.ssyanhuo.arknightshelper.utils.OCRUtils;
 import com.ssyanhuo.arknightshelper.utils.ScreenUtils;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
 import com.ssyanhuo.arknightshelper.utils.PackageUtils;
@@ -140,6 +141,7 @@ public class SettingsActivity extends AppCompatActivity {
             final SwitchPreference enable_dark_mode = findPreference("enable_dark_mode");
             final SwitchPreference emulator_mode = findPreference("emulator_mode");
             final Preference add_shortcut = findPreference("add_shortcut");
+            final SwitchPreference auto_catch_screen = findPreference("auto_catch_screen");
             margin_fix.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @SuppressLint("SourceLockedOrientationActivity")
                 @Override
@@ -342,6 +344,9 @@ public class SettingsActivity extends AppCompatActivity {
                     return true;
                 }
             });
+            if (!OCRUtils.isAbiSupported() || !OCRUtils.isLanguageSupported(getActivity())){
+                auto_catch_screen.setVisible(false);
+            }
         }
 
         @Override
@@ -432,7 +437,7 @@ public class SettingsActivity extends AppCompatActivity {
                     startActivityForResult(intent, 1);
                 }catch (Exception e){
                     e.printStackTrace();
-                    Toast.makeText(getContext(), "出现错误", Toast.LENGTH_SHORT);
+                    Toast.makeText(getContext(), R.string.setting_button_image_error, Toast.LENGTH_SHORT).show();
                 }
 
             }if (requestCode == 1 && data != null){
@@ -446,7 +451,7 @@ public class SettingsActivity extends AppCompatActivity {
             CheckBox checkBox = new CheckBox(getActivity());
             Bitmap bitmap = null;
             int padding = getResources().getDimensionPixelOffset(R.dimen.activity_horizontal_margin);
-            checkBox.setText("剪切为圆形");
+            checkBox.setText(R.string.setting_button_image_crop_to_circle);
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -481,9 +486,9 @@ public class SettingsActivity extends AppCompatActivity {
             }
             final Bitmap finalBitmap = bitmap;
             final AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-                    .setTitle("选择图片")
+                    .setTitle(R.string.setting_button_image_pick_image)
                     .setView(linearLayout)
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    .setPositiveButton(R.string.setting_button_image_pick_image_confirm, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             if(finalBitmap != null){
@@ -506,13 +511,13 @@ public class SettingsActivity extends AppCompatActivity {
                             dialog.dismiss();
                         }
                     })
-                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    .setNegativeButton(R.string.setting_button_image_pick_image_cancel, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                         }
                     })
-                    .setNeutralButton("还原默认图片", new DialogInterface.OnClickListener() {
+                    .setNeutralButton(R.string.setting_button_image_resume, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             preferences.edit().putBoolean("button_img", false).apply();

@@ -51,8 +51,8 @@
             android:title="@string/settings_title_floating_button_image"/>
         <Preference
             android:key="add_shortcut"
-            android:title="创建快捷方式"
-            android:summary="快速启动游戏和悬浮窗"/>
+            android:title="@string/settings_title_create_shortcut"
+            android:summary="@string/settings_summary_create_shortcut"/>
 
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/settings_category_compatibility" android:icon="@drawable/ic_settings_compatibility">
@@ -70,8 +70,8 @@
         <SwitchPreference
             android:key="auto_catch_screen"
             android:defaultValue="true"
-            android:title="自动获取屏幕截图"
-            android:summary="点击截图识别后自动获取一张当前屏幕的截图，仅兼容部分操作系统"/>
+            android:title="@string/settings_title_auto_capture_screen"
+            android:summary="@string/settings_summary_auto_capture_screen"/>
         <SeekBarPreference
             android:defaultValue="0"
             android:key="margin_fix"
@@ -82,8 +82,8 @@
         <SwitchPreference
             android:defaultValue="false"
             android:key="emulator_mode"
-            android:title="模拟器兼容模式"
-            android:summary="交换屏幕方向的检测结果，用以修正部分模拟器和平板设备的布局错误问题"/>
+            android:title="@string/settings_title_emulator_mode"
+            android:summary="@string/settings_summary_emulator_mode"/>
         <SwitchPreference
             android:defaultValue="false"
             android:key="disable_planner"

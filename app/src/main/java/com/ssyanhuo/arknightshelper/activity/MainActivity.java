@@ -462,7 +462,7 @@ public class MainActivity extends AppCompatActivity {
                     });
                     popupMenu.show();
                 }else {
-                    Toast.makeText(activity, "没有可选择的游戏", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, R.string.no_game_selectable, Toast.LENGTH_SHORT).show();
                 }
 
                 return true;
@@ -540,18 +540,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
         int upCountFromLastUpdate = preferences.getInt("up_count_from_last_update", 0);
-
-        switch (upCountFromLastUpdate){
+        //TODO 用两个变量保存上次和这次的版本号
+        switch (upCount){
             case 1:
-                Snackbar.make(snackbarContainer, "添加快捷方式到桌面来快速启动游戏和悬浮窗", Snackbar.LENGTH_INDEFINITE)
-                        .setAction("去添加", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                startActivity(new Intent(activity, SettingsActivity.class));
+                if (PackageUtils.getGameCount(this) > 0){
+                    Snackbar.make(snackbarContainer, R.string.tip_create_shortcut, Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.tip_create_shortcut_confirm, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(activity, SettingsActivity.class));
 
-                            }
-                        })
-                        .show();
+                                }
+                            })
+                            .show();
+                }
                 break;
             default:
                 break;

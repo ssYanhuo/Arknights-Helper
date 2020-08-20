@@ -105,7 +105,7 @@ public class PackageUtils {
         }else if (packageName.equals(StaticData.Const.PACKAGE_KOREAN)){
             return context.getString(R.string.game_korean);
         }else {
-            return "未知的游戏版本";
+            return context.getString(R.string.game_unknow);
         }
     }
 
@@ -178,7 +178,7 @@ public class PackageUtils {
                 ShortcutManagerCompat.requestPinShortcut(context, shortcutInfo, null);
             }
         } catch (Exception e) {
-            Toast.makeText(context, "出现了错误", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.add_shortcut_error, Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }

@@ -15,7 +15,7 @@
         android:id="@+id/planneritem_imageview" />
     <LinearLayout
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_weight="1">
@@ -36,7 +36,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="移除"
+        android:text="@string/planner_delete"
         android:textColor="@android:color/black"
         android:background="@drawable/checkbox_background_yellow"
         android:minWidth="@dimen/activity_horizontal_margin"

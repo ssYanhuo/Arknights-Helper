@@ -184,7 +184,7 @@ public class Drop {
         ArrayList<Float> costs = new ArrayList<>();
         LinearLayout resultLayout = contentView.findViewById(R.id.drop_result_content);
         resultLayout.removeAllViews();
-        TableItem tableTitle = new TableItem(applicationContext, "关卡", "提交次数", "总共获得", "单个理智");
+        TableItem tableTitle = new TableItem(applicationContext, applicationContext.getString(R.string.drop_stage), applicationContext.getString(R.string.drop_times), applicationContext.getString(R.string.drop_count), applicationContext.getString(R.string.drop_unit_price));
         int padding = applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
         tableTitle.setPadding(0, padding, 0, 0);
         try {
@@ -192,7 +192,7 @@ public class Drop {
             if (formula != null && formula.size() > 0){
                 TextView textView = new TextView(applicationContext);
                 textView.setPadding(ScreenUtils.dip2px(applicationContext, 8), padding, padding, 0);
-                textView.setText("合成：");
+                textView.setText(R.string.drop_synthesis);
                 for (Map.Entry<String, Object> entry:
                      formula.entrySet()) {
                     textView.append("\n\t\t" + entry.getKey() + ": " + entry.getValue());
@@ -226,7 +226,7 @@ public class Drop {
         if (stages.size() == 0){
             resultLayout.removeAllViews();
             TextView textView =new TextView(applicationContext);
-            textView.setText("并没有找到结果");
+            textView.setText(R.string.drop_nothing_found);
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         }
         setAltSelector();

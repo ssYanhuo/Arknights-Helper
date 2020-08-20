@@ -13,6 +13,7 @@ import android.service.quicksettings.TileService;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.activity.MainActivity;
 import com.ssyanhuo.arknightshelper.entity.StaticData;
 
@@ -94,13 +95,13 @@ public class QSTileService extends TileService {
             }
         }
         try{
-            if (getApplicationContext().getSharedPreferences(StaticData.Const.PREFERENCE_PATH, MODE_PRIVATE).getBoolean("python_finished", false)){
+            if (getApplicationContext().getSharedPreferences(StaticData.Const.PREFERENCE_PATH, MODE_PRIVATE).getBoolean("python_finished", false) && getApplicationContext().getSharedPreferences(StaticData.Const.PREFERENCE_PATH, MODE_PRIVATE).getInt("up_count_from_last_update", 0) >= 1){
                 tile.setState(Tile.STATE_ACTIVE);
                 tile.updateTile();
                 collapseStatusBar();
                 startService(intent);
             }else {
-                Toast.makeText(this, "初始化未完成，请从应用内启动", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.tile_init_note, Toast.LENGTH_SHORT).show();
                 Intent intent1 = new Intent(this, MainActivity.class);
                 intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 collapseStatusBar();
