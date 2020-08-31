@@ -17,6 +17,7 @@ import android.text.style.ClickableSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -34,6 +35,7 @@ import com.ssyanhuo.arknightshelper.service.OverlayService;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
 import com.ssyanhuo.arknightshelper.utils.JSONUtils;
 import com.ssyanhuo.arknightshelper.utils.PythonUtils;
+import com.ssyanhuo.arknightshelper.utils.ScreenUtils;
 import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
 import com.ssyanhuo.arknightshelper.utils.I18nUtils;
 import com.ssyanhuo.arknightshelper.widget.ItemDetailView;
@@ -823,24 +825,17 @@ public class Material {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         assert windowManager != null;
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-        int rotation = windowManager.getDefaultDisplay().getRotation();
+        int rotation = ScreenUtils.getScreenRotation(applicationContext);
         int backgroundColor = ThemeUtils.getBackgroundColor(applicationContext, contextThemeWrapper);
         GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, new int[]{backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, Color.TRANSPARENT});
         gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
-        selector.setBackground(gradientDrawable);
-        if(rotation == 0 || rotation == 3){selector.setBackgroundColor(backgroundColor);}
+        selector.setBackgroundColor(backgroundColor);
+        if(rotation == Surface.ROTATION_90){selector.setBackground(gradientDrawable);}
         placeHolder = rootLayout.findViewWithTag("placeHolder");
         placeHolder.removeAllViews();
         placeHolder.addView(selector);
         Animator animator;
-        if (sharedPreferences.getBoolean("emulator_mode", false)){
-            if (rotation == 0 || rotation == 2){
-                rotation = 3;
-            }else {
-                rotation = 0;
-            }
-        }
-        if (rotation == 0 || rotation == 2){
+        if (ScreenUtils.getScreenRotationMode(rotation) == ScreenUtils.MODE_PORTRAIT){
             animator = AnimatorInflater.loadAnimator(applicationContext, R.animator.overlay_sub_show_portrait);
         }else {
             animator = AnimatorInflater.loadAnimator(applicationContext, R.animator.overlay_sub_show_landspace);
@@ -853,17 +848,10 @@ public class Material {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         assert windowManager != null;
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-        int rotation = windowManager.getDefaultDisplay().getRotation();
+        int rotation = ScreenUtils.getScreenRotation(applicationContext);
         placeHolder = rootLayout.findViewWithTag("placeHolder");
         Animator animator;
-        if (sharedPreferences.getBoolean("emulator_mode", false)){
-            if (rotation == 0 || rotation == 2){
-                rotation = 3;
-            }else {
-                rotation = 0;
-            }
-        }
-        if (rotation == 0 || rotation == 2){
+        if (ScreenUtils.getScreenRotationMode(rotation) == ScreenUtils.MODE_PORTRAIT){
             animator = AnimatorInflater.loadAnimator(applicationContext, R.animator.overlay_sub_hide_portrait);
         }else {
             animator = AnimatorInflater.loadAnimator(applicationContext, R.animator.overlay_sub_hide_landspace);

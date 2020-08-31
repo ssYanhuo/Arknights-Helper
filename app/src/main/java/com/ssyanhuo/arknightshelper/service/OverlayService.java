@@ -25,11 +25,13 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.view.WindowManager;
 import android.widget.*;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.view.ContextThemeWrapper;
 
 import com.alibaba.fastjson.JSONObject;
@@ -37,11 +39,13 @@ import com.google.android.material.tabs.TabLayout;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.activity.SettingsActivity;
 import com.ssyanhuo.arknightshelper.entity.ServiceNotification;
+import com.ssyanhuo.arknightshelper.entity.StaticData;
 import com.ssyanhuo.arknightshelper.module.Drop;
 import com.ssyanhuo.arknightshelper.module.Hr;
 import com.ssyanhuo.arknightshelper.module.Material;
 import com.ssyanhuo.arknightshelper.module.More;
 import com.ssyanhuo.arknightshelper.module.Planner;
+import com.ssyanhuo.arknightshelper.utils.PackageUtils;
 import com.ssyanhuo.arknightshelper.utils.ScreenUtils;
 import com.ssyanhuo.arknightshelper.utils.OCRUtils;
 import com.ssyanhuo.arknightshelper.utils.PythonUtils;
@@ -136,14 +140,14 @@ public class OverlayService extends Service {
             assert notificationManager != null;
             notificationManager.createNotificationChannel(notificationChannel);
             builder
-                    .setSmallIcon(R.drawable.ic_notification_small)
+                    .setSmallIcon(R.drawable.ic_notification)
                     .setContentTitle(getString(R.string.notification_title))
                     .setContentText(getString(R.string.notification_text))
                     .setContentIntent(pendingIntent)
                     .setChannelId("notification");
         }else {
             builder
-                    .setSmallIcon(R.drawable.ic_notification_small)
+                    .setSmallIcon(R.drawable.ic_notification)
                     .setContentTitle(getString(R.string.notification_title))
                     .setContentText(getString(R.string.notification_text))
                     .setContentIntent(pendingIntent);
@@ -167,6 +171,11 @@ public class OverlayService extends Service {
             };
             Intent pythonIntent = new Intent(getApplicationContext(), PythonService.class);
             bindService(pythonIntent, pythonServiceConnection, BIND_AUTO_CREATE);
+        }
+        if(preferences.getBoolean("enable_dark_mode", false)){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        }else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
         //启动悬浮窗
         contextThemeWrapper = new ContextThemeWrapper(getApplicationContext(), ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_FLOATING_WINDOW, getApplicationContext()));
@@ -284,7 +293,7 @@ public class OverlayService extends Service {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 final SharedPreferences sharedPreferences;
-                sharedPreferences = getSharedPreferences("com.ssyanhuo.arknightshelper_preferences", MODE_PRIVATE);
+                sharedPreferences = getSharedPreferences(StaticData.Const.PREFERENCE_PATH, MODE_PRIVATE);
                 handler = new Handler();
                 if (sharedPreferences.getBoolean("long_press_back_to_game", true)){
                     timer = new Timer();
@@ -296,9 +305,6 @@ public class OverlayService extends Service {
                                     @Override
                                     public void run() {
                                         touching = false;
-                                        final SharedPreferences.Editor editor = sharedPreferences.edit();
-                                        boolean hasOfficial = checkApplication(PACKAGE_OFFICIAL);
-                                        boolean hasBilibili = checkApplication(PACKAGE_BILIBILI);
                                         Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
                                         assert vibrator != null;
                                         if (vibrator.hasVibrator()){
@@ -308,44 +314,17 @@ public class OverlayService extends Service {
                                                 vibrator.vibrate(32);
                                             }
                                         }
-                                        if (sharedPreferences.getString("game_version", GAME_MANUAL).equals(GAME_OFFICIAL) || sharedPreferences.getString("game_version", GAME_MANUAL).equals(GAME_BILIBILI)){
+                                        if(PackageUtils.getGameCount(getApplicationContext()) == 1){
+                                            startActivity(getPackageManager().getLaunchIntentForPackage(PackageUtils.getGamePackageNameList(getApplicationContext()).get(0)));
+                                        }else if (!sharedPreferences.getString("game_version", StaticData.Const.PACKAGE_MANUAL).equals(StaticData.Const.PACKAGE_MANUAL) && PackageUtils.getGameCount(getApplicationContext()) > 1){
                                             String game = sharedPreferences.getString("game_version", GAME_MANUAL);
                                             Toast.makeText(getApplicationContext(), R.string.resume_game, Toast.LENGTH_SHORT).show();
-                                            switch (game){
-                                                case GAME_OFFICIAL:
-                                                    startActivity(getPackageManager().getLaunchIntentForPackage(PACKAGE_OFFICIAL));
-                                                    break;
-                                                case GAME_BILIBILI:
-                                                    startActivity(getPackageManager().getLaunchIntentForPackage(PACKAGE_BILIBILI));
-                                                    break;
-                                                default:
-                                                    break;
-                                            }
-                                        }else{
-                                            if (hasOfficial && hasBilibili){
-                                                Toast.makeText(getApplicationContext(), R.string.start_multiple_apps, Toast.LENGTH_SHORT).show();
-                                                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                startActivity(intent);
-                                            }else if (hasOfficial){
-                                                try{
-                                                    editor.putString("game_version", GAME_MANUAL);
-                                                    editor.apply();
-                                                    Toast.makeText(getApplicationContext(), R.string.resume_game, Toast.LENGTH_SHORT).show();
-                                                    startActivity(getPackageManager().getLaunchIntentForPackage(PACKAGE_OFFICIAL));
-                                                }catch (Exception e){
-                                                    Log.e(TAG, "Start game failed!", e);
-                                                }
-                                            }else if (hasBilibili){
-                                                try{
-                                                    editor.putString("game_version", GAME_MANUAL);
-                                                    editor.apply();
-                                                    Toast.makeText(getApplicationContext(), R.string.resume_game, Toast.LENGTH_SHORT).show();
-                                                    startActivity(getPackageManager().getLaunchIntentForPackage(PACKAGE_BILIBILI));
-                                                }catch (Exception e){
-                                                    Log.e(TAG, "Start game failed!", e);
-                                                }
-                                            }
+                                            startActivity(getPackageManager().getLaunchIntentForPackage(game));
+                                        }else if (sharedPreferences.getString("game_version", StaticData.Const.PACKAGE_MANUAL).equals(StaticData.Const.PACKAGE_MANUAL) && PackageUtils.getGameCount(getApplicationContext()) > 1){
+                                            Toast.makeText(getApplicationContext(), R.string.start_multiple_apps, Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            startActivity(intent);
                                         }
                                     }
                                 });
@@ -686,7 +665,7 @@ public class OverlayService extends Service {
         }
         DisplayMetrics displayMetrics = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-        int rotation = windowManager.getDefaultDisplay().getRotation();
+        int rotation = ScreenUtils.getScreenRotation(getApplicationContext());
         mainLayoutParams.gravity = Gravity.RIGHT | Gravity.TOP;
         mainLayoutParams.x = 0;
         mainLayoutParams.y = 0;
@@ -707,16 +686,7 @@ public class OverlayService extends Service {
         });
 
         tabBlurLayout.setOverlayColor(ThemeUtils.getBackgroundColor(getApplicationContext(), contextThemeWrapper));
-
-        //检测屏幕方向和是否全屏
-        if(preferences.getBoolean("emulator_mode", false)){
-            if(rotation == 1 || rotation == 3){
-                rotation = 0;
-            }else {
-                rotation = 3;
-            }
-        }
-        if(rotation == 1 || rotation == 3){//横
+        if(ScreenUtils.getScreenRotationMode(rotation) == ScreenUtils.MODE_LANDSCAPE){//横
             mainLayoutParams.height = displayMetrics.heightPixels;
             mainLayoutParams.width = displayMetrics.widthPixels / 2 + preferences.getInt("margin_fix", 0);
             placeHolderLayoutParams.height = displayMetrics.heightPixels;
@@ -725,7 +695,7 @@ public class OverlayService extends Service {
             backgroundLayoutParams.height = displayMetrics.heightPixels;
             backgroundLayoutParams.width = displayMetrics.widthPixels + preferences.getInt("margin_fix", 0);
             //是否优化状态栏区域的显示效果
-            if (rotation == 1){
+            if (rotation == Surface.ROTATION_90){
                 mainLayout.setBackgroundColor(backgroundColor);
             }
         }else {//竖
@@ -751,7 +721,7 @@ public class OverlayService extends Service {
         phContent.setLayoutParams(layoutParams);
         placeHolder.addView(phContent);
         backgroundLayout.removeAllViews();
-        if(rotation == 1 || rotation == 3){
+        if(ScreenUtils.getScreenRotationMode(rotation) == ScreenUtils.MODE_LANDSCAPE){
             backgroundLayout.addView(placeHolder);
             backgroundLayout.addView(mainLayout);
         }else {

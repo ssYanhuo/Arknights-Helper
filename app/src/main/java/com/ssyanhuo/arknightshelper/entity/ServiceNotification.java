@@ -71,7 +71,7 @@ public class ServiceNotification {
 
                 // Set required fields, including the small icon, the
                 // notification title, and text.
-                .setSmallIcon(R.drawable.ic_notification_small)
+                .setSmallIcon(R.drawable.ic_notification)
                 .setContentTitle(title)
                 .setContentText(text)
 

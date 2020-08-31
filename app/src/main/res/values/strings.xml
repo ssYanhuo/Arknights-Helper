@@ -211,7 +211,7 @@
     <string name="shortcut_start_short_name">启动</string>
     <string name="settings_title_floating_button_opacity">悬浮按钮透明度</string>
     <string name="settings_title_attach_to_edge">自动吸附</string>
-    <string name="settings_summary_attach_to_edge">保持悬浮按钮吸附在屏幕左右边缘</string>
+    <string name="settings_summary_attach_to_edge">保持悬浮按钮吸附在屏幕边缘</string>
     <string name="settings_title_game_language">游戏语言</string>
     <string name="settings_summary_game_language">仅翻译与游戏内容相关的文本，并隐藏国际版尚未实装的干员和材料</string>
     <string name="ocr_not_available_in_other_languages">截图识别 在非简体中文环境下暂不可用</string>
@@ -300,4 +300,6 @@
     <string name="setting_button_image_pick_image_cancel">取消</string>
     <string name="setting_button_image_resume">还原默认图片</string>
     <string name="tile_init_note">初始化未完成，请从至少应用内成功启动引擎一次</string>
+    <string name="planner_query">查询</string>
+    <string name="planner_loading">正在连接到刷图规划服务进程……</string>
 </resources>

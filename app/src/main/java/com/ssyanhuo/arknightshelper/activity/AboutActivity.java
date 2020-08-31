@@ -1,6 +1,7 @@
 package com.ssyanhuo.arknightshelper.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -10,9 +11,11 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.ssyanhuo.arknightshelper.R;
+import com.ssyanhuo.arknightshelper.entity.StaticData;
 import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.Toolbar;
 
@@ -73,6 +76,12 @@ public class AboutActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        SharedPreferences preferences = getSharedPreferences(StaticData.Const.PREFERENCE_PATH, MODE_PRIVATE);
+        if(preferences.getBoolean("enable_dark_mode", false)){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        }else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

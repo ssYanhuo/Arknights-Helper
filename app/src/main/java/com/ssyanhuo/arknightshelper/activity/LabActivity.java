@@ -2,11 +2,13 @@ package com.ssyanhuo.arknightshelper.activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.ssyanhuo.arknightshelper.R;
+import com.ssyanhuo.arknightshelper.entity.StaticData;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
 import com.ssyanhuo.arknightshelper.utils.PythonUtils;
 
@@ -40,6 +43,12 @@ public class LabActivity extends AppCompatActivity {
                 PythonUtils.prepareDependencies(LabActivity.this, getWindow().getDecorView());
             }
         });
+        SharedPreferences preferences = getSharedPreferences(StaticData.Const.PREFERENCE_PATH, MODE_PRIVATE);
+        if(preferences.getBoolean("enable_dark_mode", false)){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        }else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 
     public void getDeviceInfo(View view){
@@ -110,7 +119,7 @@ public class LabActivity extends AppCompatActivity {
             materialAlertDialogBuilder.setView(textView);
             AlertDialog alertDialog = materialAlertDialogBuilder.create();
             alertDialog.show();
-            Process process = Runtime.getRuntime().exec("logcat -t 4096 | grep \'arknights\'");
+            Process process = Runtime.getRuntime().exec("logcat -t 4096 | grep 'arknights'");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             StringBuilder log = new StringBuilder();
             String line;

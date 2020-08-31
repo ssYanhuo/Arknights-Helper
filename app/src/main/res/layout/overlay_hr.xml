@@ -427,7 +427,7 @@
                     android:clickable="true"
                     android:layout_weight="1"/>
 
-                <Switch
+                <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/hr_hide_low_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

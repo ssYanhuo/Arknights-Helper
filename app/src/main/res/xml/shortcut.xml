@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <shortcut
         android:enabled="true"
-        android:icon="@drawable/ic_notification_small"
+        android:icon="@drawable/ic_notification"
         android:shortcutId="startService"
         android:shortcutLongLabel="@string/shortcut_start_long_name"
         android:shortcutShortLabel="@string/shortcut_start_short_name"

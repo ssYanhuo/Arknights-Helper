@@ -1,0 +1,76 @@
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:name="vector"
+            android:width="128dp"
+            android:height="128dp"
+            android:viewportWidth="128"
+            android:viewportHeight="128">
+            <group
+                android:name="expand"
+                android:pivotX="32"
+                android:pivotY="32"
+                android:translateX="32"
+                android:translateY="32"
+                android:scaleX="1.25"
+                android:scaleY="1.25">
+                <path
+                    android:name="alpha"
+                    android:pathData="M 32 9.373 L 54.627 32 L 32 54.627 L 9.373 32 Z"
+                    android:strokeColor="?attr/colorControlNormal"
+                    android:strokeWidth="1.5"/>
+            </group>
+            <group
+                android:name="group"
+                android:translateX="32"
+                android:translateY="32">
+                <path
+                    android:name="main"
+                    android:pathData="M 32 9.373 L 54.627 32 L 32 54.627 L 9.373 32 Z"
+                    android:strokeColor="?attr/colorControlNormal"
+                    android:strokeWidth="6"/>
+            </group>
+        </vector>
+    </aapt:attr>
+    <target android:name="expand">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:repeatMode="restart"
+                    android:repeatCount="infinite"
+                    android:propertyName="scaleX"
+                    android:duration="1500"
+                    android:valueFrom="1"
+                    android:valueTo="2"
+                    android:valueType="floatType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"/>
+                <objectAnimator
+                    android:repeatMode="restart"
+                    android:repeatCount="infinite"
+                    android:propertyName="scaleY"
+                    android:duration="1500"
+                    android:valueFrom="1"
+                    android:valueTo="2"
+                    android:valueType="floatType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"/>
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="alpha">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:repeatMode="reverse"
+                    android:repeatCount="infinite"
+                    android:propertyName="strokeAlpha"
+                    android:duration="750"
+                    android:valueFrom="0"
+                    android:valueTo="1"
+                    android:valueType="floatType"
+                    android:interpolator="@android:anim/accelerate_interpolator"/>
+            </set>
+        </aapt:attr>
+    </target>
+</animated-vector>

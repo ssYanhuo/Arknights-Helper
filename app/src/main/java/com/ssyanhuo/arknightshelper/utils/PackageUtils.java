@@ -1,10 +1,8 @@
 package com.ssyanhuo.arknightshelper.utils;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -19,24 +17,17 @@ import android.widget.Toast;
 import androidx.core.content.pm.ShortcutInfoCompat;
 import androidx.core.content.pm.ShortcutManagerCompat;
 import androidx.core.graphics.drawable.IconCompat;
-import androidx.preference.ListPreference;
 
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.activity.LaunchGameActivity;
 import com.ssyanhuo.arknightshelper.entity.StaticData;
-import com.ssyanhuo.arknightshelper.service.OverlayService;
 
-import java.lang.reflect.Array;
-import java.nio.channels.OverlappingFileLockException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class PackageUtils {
     static final String TAG = "PackageUtils";
-    static public ArrayList<String> getGameList(Context context){
+    static public ArrayList<String> getGamePackageNameList(Context context){
         ArrayList<String> list = new ArrayList<>(Arrays.asList(StaticData.Const.PACKAGE_LIST));
         ArrayList<String> notFound = new ArrayList<>();
         for (String game :
@@ -112,7 +103,7 @@ public class PackageUtils {
     static public ArrayList<String> getGameNameList(Context context){
         ArrayList<String> result = new ArrayList<>();
         for (String packageName :
-                getGameList(context)) {
+                getGamePackageNameList(context)) {
             result.add(getName(packageName, context));
         }
         return result;

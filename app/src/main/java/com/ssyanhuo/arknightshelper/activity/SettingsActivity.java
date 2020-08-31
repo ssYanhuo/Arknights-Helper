@@ -128,6 +128,11 @@ public class SettingsActivity extends AppCompatActivity {
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             final Activity activity = getActivity();
             setPreferencesFromResource(R.xml.preferences, rootKey);
+            if(preferences.getBoolean("enable_dark_mode", false)){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+            }else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
             Preference long_press_back_to_game = findPreference("long_press_back_to_game");
             ListPreference game_version = findPreference("game_version");
             final Preference margin_fix = findPreference("margin_fix");
@@ -218,7 +223,7 @@ public class SettingsActivity extends AppCompatActivity {
             update_data.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    updateLayout = (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.content_data_updater, null);
+                    updateLayout = (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.dialog_data_updater, null);
                     updateDialog = new AlertDialog.Builder(getContext())
                             .setView(updateLayout)
                             .setTitle(R.string.settings_data_update_title)
@@ -301,8 +306,8 @@ public class SettingsActivity extends AppCompatActivity {
                 public boolean onPreferenceClick(Preference preference) {
 
                         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                        final ArrayList<String> packageList = PackageUtils.getGameList(getContext());
-                        final ArrayList<String> nameList = PackageUtils.getGameNameList(getContext());
+                        final ArrayList<String> packageList = PackageUtils.getGamePackageNameList(getContext());
+                        final ArrayList<String> nameList = PackageUtils.getGamePackageNameList(getContext());
                         builder.setSingleChoiceItems(nameList.toArray(new String[nameList.size()]), 0, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

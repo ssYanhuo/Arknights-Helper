@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,6 +19,7 @@ import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Typeface;
+import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -38,6 +40,7 @@ import android.widget.*;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -49,6 +52,7 @@ import com.baidu.ocr.sdk.model.GeneralBasicParams;
 import com.baidu.ocr.sdk.model.GeneralParams;
 import com.baidu.ocr.sdk.model.GeneralResult;
 import com.baidu.ocr.sdk.model.WordSimple;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.activity.ScreenCaptureActivity;
 import com.ssyanhuo.arknightshelper.entity.MediaInfo;
@@ -56,6 +60,7 @@ import com.ssyanhuo.arknightshelper.entity.StaticData;
 import com.ssyanhuo.arknightshelper.service.OverlayService;
 import com.ssyanhuo.arknightshelper.utils.*;
 import com.ssyanhuo.arknightshelper.utils.I18nUtils.Helper;
+import com.ssyanhuo.arknightshelper.widget.AnimatedProgressBar;
 import com.ssyanhuo.arknightshelper.widget.LineWrapLayout;
 import com.zyyoona7.popup.EasyPopup;
 import com.zyyoona7.popup.XGravity;
@@ -105,7 +110,7 @@ public class Hr {
     I18nUtils translationUtils;
     Helper tagHelper;
     Helper nameHelper;
-    Switch hideLowLevel;
+    SwitchMaterial hideLowLevel;
     private TextView hideLowLevelNote;
     private RelativeLayout relativeLayout;
     private ScrollView scrollView;
@@ -204,6 +209,9 @@ public class Hr {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 getSelectedItems();
+                LinearLayout linearLayout = contentView.findViewById(R.id.hr_result_content);
+                LinearLayout resultLayout = linearLayout.findViewById(R.id.hr_result);
+                resultLayout.removeAllViews();
                 if (fuzzy) {
                     getResultFuzzy();
                 } else {
@@ -756,14 +764,6 @@ public class Hr {
                 }
             }
         }
-        GradientDrawable drawableLight = new GradientDrawable();
-        drawableLight.setGradientType(GradientDrawable.LINEAR_GRADIENT);
-        drawableLight.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
-        drawableLight.setColors(new int[]{Color.parseColor("#aaff9800"), Color.TRANSPARENT});
-        GradientDrawable drawableDark = new GradientDrawable();
-        drawableDark.setGradientType(GradientDrawable.LINEAR_GRADIENT);
-        drawableDark.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
-        drawableDark.setColors(new int[]{Color.parseColor("#aaad6700"), Color.TRANSPARENT});
         for(int i = 0; i < resultLayout.getChildCount(); i++){
             if(resultLayout.getChildAt(i) instanceof LinearLayout){
                 LinearLayout layout = (LinearLayout) resultLayout.getChildAt(i);
@@ -774,8 +774,16 @@ public class Hr {
                     }
                 }else {
                     if(i % 2 == 1){
+                        GradientDrawable drawableDark = new GradientDrawable();
+                        drawableDark.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+                        drawableDark.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
+                        drawableDark.setColors(new int[]{Color.parseColor("#aaad6700"), Color.TRANSPARENT});
                         layout.setBackground(drawableDark);
                     }else {
+                        GradientDrawable drawableLight = new GradientDrawable();
+                        drawableLight.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+                        drawableLight.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
+                        drawableLight.setColors(new int[]{Color.parseColor("#aaff9800"), Color.TRANSPARENT});
                         layout.setBackground(drawableLight);
                     }
                 }
@@ -930,20 +938,13 @@ public class Hr {
                 DisplayMetrics displayMetrics = new DisplayMetrics();
                 assert windowManager != null;
                 windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-                int rotation = windowManager.getDefaultDisplay().getRotation();
-                if (sharedPreferences.getBoolean("emulator_mode", false)){
-                    if (rotation == 0 || rotation == 2){
-                        rotation = 3;
-                    }else {
-                        rotation = 0;
-                    }
-                }
-                if (rotation == 0 || rotation == 3) {
-                    selector.setBackgroundColor(backgroundColor);
-                }
+                int rotation = ScreenUtils.getScreenRotation(applicationContext);
+                selector.setBackgroundColor(backgroundColor);
                 int width = placeHolder.getWidth();
                 int height = placeHolder.getHeight();
-                selector.setBackground(gradientDrawable);
+                if (rotation == Surface.ROTATION_90){
+                    selector.setBackground(gradientDrawable);
+                }
                 selector.setMinimumHeight(height);
                 selector.setMinimumWidth(width);
                 selector.getChildAt(0).setMinimumWidth(width);
@@ -951,7 +952,7 @@ public class Hr {
                 placeHolder.addView(selector);
                 ((GridLayout) selector.findViewById(R.id.hr_ocr_selector)).removeAllViews();
                 Animator animator;
-                if (rotation == 0 || rotation == 2){
+                if (ScreenUtils.getScreenRotationMode(rotation) == ScreenUtils.MODE_PORTRAIT){
                     animator = AnimatorInflater.loadAnimator(applicationContext, R.animator.overlay_sub_show_portrait);
                 }else {
                     animator = AnimatorInflater.loadAnimator(applicationContext, R.animator.overlay_sub_show_landspace);
@@ -990,7 +991,7 @@ public class Hr {
                             imageView.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    getOCRResult((Uri) v.getTag(), applicationContext, false);
+                                    getOCRResult((Uri) v.getTag(), contextThemeWrapper, false);
 
                                 }
                             });
@@ -1081,17 +1082,10 @@ public class Hr {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         assert windowManager != null;
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-        int rotation = windowManager.getDefaultDisplay().getRotation();
+        int rotation = ScreenUtils.getScreenRotation(applicationContext);
         placeHolder = rootLayout.findViewWithTag("placeHolder");
         Animator animator;
-        if (sharedPreferences.getBoolean("emulator_mode", false)){
-            if (rotation == 0 || rotation == 2){
-                rotation = 3;
-            }else {
-                rotation = 0;
-            }
-        }
-        if (rotation == 0 || rotation == 2){
+        if (ScreenUtils.getScreenRotationMode(rotation) == ScreenUtils.MODE_PORTRAIT){
             animator = AnimatorInflater.loadAnimator(applicationContext, R.animator.overlay_sub_hide_portrait);
         }else {
             animator = AnimatorInflater.loadAnimator(applicationContext, R.animator.overlay_sub_hide_landspace);
@@ -1171,6 +1165,7 @@ public class Hr {
                                 }
                             }
                         }
+                        tagList = new ArrayList<>(new HashSet<>(tagList));//去重
                         Log.i(TAG, "OCR result: " + tagList.toString());
                         if (tagList.size() <= 0){
                             hideAutoOCRProgress();
@@ -1319,9 +1314,8 @@ public class Hr {
                     selector.addView(linearLayout);
                     break;
                 case TYPE_PROCESSING:
-                    ProgressBar progressBar = new ProgressBar(contextThemeWrapper);
-                    progressBar.setPadding(padding, padding, padding, padding);
-                    linearLayout.addView(progressBar);
+                    AnimatedProgressBar animatedProgressBar = new AnimatedProgressBar(contextThemeWrapper);
+                    linearLayout.addView(animatedProgressBar);
                     TextView processingText = new TextView(contextThemeWrapper);
                     processingText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                     processingText.setText(R.string.hr_ocr_getting_result);

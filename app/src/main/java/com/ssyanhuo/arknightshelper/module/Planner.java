@@ -101,13 +101,14 @@ public class Planner {
         scrollView = relativeLayout.findViewById(R.id.scroll_planner);
             addItemLinearLayout = contentView.findViewById(R.id.planner_add_item);
             itemContainer = contentView.findViewById(R.id.planner_item_container);
-        final Button testButton = contentView.findViewById(R.id.planner_request);
+        final Button queryButton = contentView.findViewById(R.id.planner_request);
+        final LinearLayout loadingNote = contentView.findViewById(R.id.planner_loading);
         resultContainer = contentView.findViewById(R.id.planner_result);
         versionInfo = contentView.findViewById(R.id.planner_version_info);
         resultLoot = contentView.findViewById(R.id.planner_result_loot);
         resultSynthesis = contentView.findViewById(R.id.planner_result_synthesis);
 //        resultItems = contentView.findViewById(R.id.planner_result_items);
-        testButton.setOnClickListener(new View.OnClickListener() {
+        queryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getResult();
@@ -187,7 +188,8 @@ public class Planner {
                     Runnable runnable = new Runnable() {
                         @Override
                         public void run() {
-                            testButton.setEnabled(true);
+                            queryButton.setEnabled(true);
+                            loadingNote.setVisibility(View.GONE);
                         }
                     };
                     enableButtonHandler.post(runnable);

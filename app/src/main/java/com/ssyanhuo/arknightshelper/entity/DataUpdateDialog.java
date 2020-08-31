@@ -15,7 +15,7 @@ public class DataUpdateDialog{
     public void showDialog(Context context){
         ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(context, R.style.AppTheme_Default);
         AlertDialog.Builder builder = new AlertDialog.Builder(contextThemeWrapper);
-        LinearLayout content = (LinearLayout) LayoutInflater.from(contextThemeWrapper).inflate(R.layout.content_data_updater, null);
+        LinearLayout content = (LinearLayout) LayoutInflater.from(contextThemeWrapper).inflate(R.layout.dialog_data_updater, null);
         AlertDialog dialog = builder.setTitle(R.string.settings_data_update_title)
                 .setView(content)
                 .create();

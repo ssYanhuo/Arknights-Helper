@@ -165,7 +165,7 @@
     <string name="shortcut_start_short_name">Start</string>
     <string name="settings_title_floating_button_opacity">Floating button opacity</string>
     <string name="settings_title_attach_to_edge">Always on the edge</string>
-    <string name="settings_summary_attach_to_edge">Attach to the screen\'s left or right edge</string>
+    <string name="settings_summary_attach_to_edge">Attach to the screen\'s edges</string>
     <string name="settings_title_game_language">Game language</string>
     <string name="settings_summary_game_language">Only affect some proper nouns in the game, operators and materials unavailable currently will be hidden</string>
     <string name="ocr_not_available_in_other_languages">Screenshot recognition is not available in languages other than Simplified Chinese</string>
@@ -189,7 +189,7 @@
     <string name="more_hr_counter_summary_empty">Long press button to record a 10 combo or clear records, 6★ probability: 2%</string>
     <string name="more_hr_counter_summary">Already %1$d times, 6★ probability: %2$d%%</string>
     <string name="more_hr_counter_summary_full">Already 99 times, 6★ probability: 100%!</string>
-    <string name="more_hr_counter_summary_overflow">Already %d times, long press -1 button clear records</string>
+    <string name="more_hr_counter_summary_overflow">Already %d times, long press -1 button to clean records</string>
     <string name="tab_title_planner">Planner (Beta)</string>
     <string name="material_skill_1_now">Skill 1 :</string>
     <string name="material_skill_1_target">Level :</string>
@@ -254,4 +254,6 @@
     <string name="setting_button_image_pick_image_cancel">Cancel</string>
     <string name="setting_button_image_resume">Default</string>
     <string name="tile_init_note">Please start the engine successfully from the app at least once!</string>
+    <string name="planner_query">Query</string>
+    <string name="planner_loading">Loading…</string>
 </resources>

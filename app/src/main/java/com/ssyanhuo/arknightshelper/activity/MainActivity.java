@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -184,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (startGame){
                     String gameSelected = preferences.getString("game_version", StaticData.Const.PACKAGE_MANUAL);
-                    final ArrayList<String> list = PackageUtils.getGameList(getApplicationContext());
+                    final ArrayList<String> list = PackageUtils.getGamePackageNameList(getApplicationContext());
                     if (!gameSelected.equals(StaticData.Const.PACKAGE_MANUAL) && !list.contains(gameSelected)){
                         preferences.edit().putString("game_version", StaticData.Const.PACKAGE_MANUAL).apply();
                         gameSelected = StaticData.Const.PACKAGE_MANUAL;
@@ -362,6 +363,9 @@ public class MainActivity extends AppCompatActivity {
         if (ThemeUtils.getThemeMode(getApplicationContext()) == ThemeUtils.THEME_LIGHT){
             bottomAppBar.replaceMenu(R.menu.activity_main_appbar_light);
         }
+//        if ((getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES && ThemeUtils.getThemeMode(getApplicationContext()) != ThemeUtils.THEME_LIGHT){
+//            bottomAppBar.replaceMenu(R.menu.activity_main_appbar);
+//        }
     }
 
 
@@ -408,7 +412,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                ArrayList<String> gameList = PackageUtils.getGameList(activity);
+                ArrayList<String> gameList = PackageUtils.getGamePackageNameList(activity);
                 if (gameList.size() > 0){
                     PopupMenu popupMenu = new PopupMenu(activity, v);
                     popupMenu.getMenuInflater().inflate(R.menu.activity_main_game_selector, popupMenu.getMenu());
@@ -564,13 +568,21 @@ public class MainActivity extends AppCompatActivity {
         bottomAppBar.post(new Runnable() {
             @Override
             public void run() {
-                bottomProgressBar.setPadding(0, 0 ,0, bottomAppBar.getHeight() - ScreenUtils.dip2px(activity, 8.0f));
-                ((ViewGroup.MarginLayoutParams) snackbarContainer.getLayoutParams()).setMargins(0,0,0,bottomAppBar.getHeight());
+                int bottomBarHeight = bottomAppBar.getHeight();
+                if (bottomBarHeight <= 0){
+                    bottomBarHeight = 184;
+                }
+                bottomProgressBar.setPadding(0, 0 ,0, bottomBarHeight - ScreenUtils.dip2px(activity, 8.0f));
+                ((ViewGroup.MarginLayoutParams) snackbarContainer.getLayoutParams()).setMargins(0,0,0, bottomBarHeight);
             }
         });
     }
 
     private void checkApplicationUpdate(){
+//        ImageView imageView = findViewById(R.id.main_state_img);
+//        if(imageView.getDrawable() instanceof AnimatedVectorDrawable){
+//            ((AnimatedVectorDrawable) imageView.getDrawable()).start();
+//        }
         UpdateRunnable updateRunnable = new UpdateRunnable();
         new Thread(updateRunnable).start();
     }
