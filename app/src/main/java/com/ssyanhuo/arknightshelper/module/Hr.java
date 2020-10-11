@@ -893,7 +893,7 @@ public class Hr {
             fuzzy = true;
             TextView textView = contentView.findViewById(R.id.hr_description);
             textView.setText(R.string.hr_desc_part_1_fuzzy);
-            if (sharedPreferences.getString("game_language", I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE).equals(I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE) && PythonUtils.isAbiSupported()){
+            if (sharedPreferences.getString("game_language", I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE).equals(I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE) && OCRUtils.isAbiSupported()){
                 textView.append(" ");
                 SpannableStringBuilder spannableStringBuilder1 = new SpannableStringBuilder(applicationContext.getResources().getString(R.string.hr_desc_part_2));
                 spannableStringBuilder1.setSpan(new ClickableSpan() {

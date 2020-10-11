@@ -43,6 +43,7 @@ public class PythonService extends Service {
         if (PythonUtils.checkEnvironment(getApplicationContext())){
             python = PythonUtils.init(getApplicationContext());
         }else if (PythonUtils.isAbiSupported()) {
+            //TODO 忘了这是干啥的
             //PythonUtils.setupEnvironment(getApplicationContext());
             //service = PythonUtils.init(getApplicationContext());
         }else {

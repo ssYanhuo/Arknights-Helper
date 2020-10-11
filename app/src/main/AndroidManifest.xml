@@ -21,11 +21,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Default"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.ScreenCaptureActivity"
-            android:theme="@style/DialogActivity"
-            android:taskAffinity="com.ssyanhuo.arknightshelper.screencapturetask"
+        <activity android:name=".activity.IntroActivity"
+            android:theme="@style/AppTheme.Default.Intro" />
+        <activity
+            android:name=".activity.ScreenCaptureActivity"
+            android:excludeFromRecents="true"
             android:launchMode="singleTask"
-            android:excludeFromRecents="true"/>
+            android:taskAffinity="com.ssyanhuo.arknightshelper.screencapturetask"
+            android:theme="@style/DialogActivity" />
         <activity
             android:name=".activity.LaunchGameActivity"
             android:theme="@style/DialogActivity" />

@@ -3,7 +3,6 @@ package com.ssyanhuo.arknightshelper.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Looper;
@@ -23,7 +22,6 @@ import com.srplab.www.starcore.StarSrvGroupClass;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.FileProvider;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.liulishuo.okdownload.DownloadTask;
@@ -70,6 +68,18 @@ public class PythonUtils {
 
     };
 
+    public static boolean isSupported(){
+        return isOSVersionSupported() && isAbiSupported();
+    }
+
+    public static boolean isOSVersionSupported(){
+        return isOSVersionSupported(Build.VERSION.SDK_INT);
+    }
+
+    public static boolean isOSVersionSupported(int v){
+        return v >= Build.VERSION_CODES.LOLLIPOP && v <= Build.VERSION_CODES.Q;
+    }
+
     public static boolean isAbiSupported(){
         return isAbiSupported(Build.SUPPORTED_ABIS[0]);
     }
@@ -86,9 +96,9 @@ public class PythonUtils {
 
     public static void prepareDependencies(final Activity activity, @Nullable final View view){
         final Context context = activity.getApplicationContext();
-        if (!PythonUtils.isAbiSupported()){
+        if (!PythonUtils.isSupported()){
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
-            dialogBuilder.setMessage(R.string.py_unsupported_arch)
+            dialogBuilder.setMessage(R.string.py_unsupported)
                     .show();
         }
         String baseUrl = context.getSharedPreferences(StaticData.Const.PREFERENCE_PATH, Context.MODE_PRIVATE).getString("update_site", "0");
@@ -351,13 +361,13 @@ public class PythonUtils {
         }
     }
     public static void setupEnvironment(final Context context, final Activity activity, final View snackbarView) {
-        if (!PythonUtils.isAbiSupported()) {
+        if (!PythonUtils.isSupported()) {
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
-            dialogBuilder.setMessage(R.string.py_unsupported_arch)
+            dialogBuilder.setMessage(R.string.py_unsupported)
                     .show();
             return;
         }
-        if (!PackageUtils.checkApplication("com.ssyanhuo.akrnightshelper_plannerplugin", context)) {
+        if (!PackageUtils.checkApplication(StaticData.Const.PLANNER_PLUGIN_PACKAGE_NAME, context)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             builder.setTitle("安装插件")
                     .setMessage("安装插件来启用刷图规划功能")

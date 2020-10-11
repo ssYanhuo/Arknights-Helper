@@ -18,8 +18,8 @@
     {
         "name": "/charMaterials.json",
         "nameFriendly": "charMaterials.json",
-        "date": "2020-8-31",
-        "dateraw": 20200831,
+        "date": "2020-10-10",
+        "dateraw": 20201010,
         "desc": "干员材料信息，用于升级材料查询",
         "source": "Graue Neko & ssYanhuo"
     },
@@ -34,32 +34,32 @@
     {
         "name": "/items.json",
         "nameFriendly": "items.json",
-        "date": "2020-8-31",
-        "dateraw": 20200831,
+        "date": "2020-10-10",
+        "dateraw": 20201010,
         "desc": "材料映射信息，用于掉落概率查询",
         "source": "Penguin Statistics"
     },
     {
         "name": "/matrix.json",
         "nameFriendly": "maxrix.json",
-        "date": "2020-8-31",
-        "dateraw": 20200831,
+        "date": "2020-10-10",
+        "dateraw": 20201010,
         "desc": "材料掉落信息，用于掉落概率查询",
         "source": "Penguin Statistics"
     },
     {
         "name": "/stages.json",
         "nameFriendly": "stages.json",
-        "date": "2020-8-31",
-        "dateraw": 20200831,
+        "date": "2020-10-10",
+        "dateraw": 20201010,
         "desc": "关卡映射信息，用于掉落概率查询",
         "source": "Penguin Statistics"
     },
     {
         "name": "/formula.json",
         "nameFriendly": "formula.json",
-        "date": "2020-8-31",
-        "dateraw": 20200831,
+        "date": "2020-10-10",
+        "dateraw": 20201010,
         "desc": "材料合成数据，用于刷图规划",
         "source": "Penguin Statistics"
     },
@@ -82,8 +82,8 @@
     {
         "name": "/datainfo.json",
         "nameFriendly": "datainfo.json",
-        "date": "2020-8-21",
-        "dateraw": 20200831,
+        "date": "2020-10-10",
+        "dateraw": 20201010,
         "desc": "数据文件索引",
         "source": "ssYanhuo"
     }

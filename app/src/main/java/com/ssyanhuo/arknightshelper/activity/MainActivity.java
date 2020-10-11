@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        if ((!preferences.getBoolean("python_finished",false)) && PythonUtils.isAbiSupported() && !preferences.getBoolean("disable_planner", false)){
+        if ((!preferences.getBoolean("python_finished",false)) && PythonUtils.isSupported() && !preferences.getBoolean("disable_planner", false)){
             PythonUtils.setupEnvironment(getApplicationContext(), MainActivity.this, snackbarContainer);
             return;
         }
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                             });
 
                             startService(overlayServiceIntent);
-                            if(PythonUtils.isAbiSupported() && !preferences.getBoolean("disable_planner", false)){
+                            if(PythonUtils.isSupported() && !preferences.getBoolean("disable_planner", false)){
                                 startService(pythonServiceIntent);
                             }
                         }catch (Exception e){
@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
                         startService(overlayServiceIntent);
-                        if(PythonUtils.isAbiSupported() && !preferences.getBoolean("disable_planner", false)){
+                        if(PythonUtils.isSupported() && !preferences.getBoolean("disable_planner", false)){
                             startService(pythonServiceIntent);
                         }
                     }catch (Exception e){
@@ -270,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        if ((!preferences.getBoolean("python_finished",false)) && PythonUtils.isAbiSupported() && !preferences.getBoolean("disable_planner", false)){
+        if ((!preferences.getBoolean("python_finished",false)) && PythonUtils.isSupported() && !preferences.getBoolean("disable_planner", false)){
             PythonUtils.setupEnvironment(getApplicationContext(), MainActivity.this, snackbarContainer);
             return;
         }
@@ -311,7 +311,7 @@ public class MainActivity extends AppCompatActivity {
                             });
 
                             startService(overlayServiceIntent);
-                            if(PythonUtils.isAbiSupported() && !preferences.getBoolean("disable_planner", false)){
+                            if(PythonUtils.isSupported() && !preferences.getBoolean("disable_planner", false)){
                                 startService(pythonServiceIntent);
                             }
                         }catch (Exception e){
@@ -336,7 +336,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
                         startService(overlayServiceIntent);
-                        if(PythonUtils.isAbiSupported() && !preferences.getBoolean("disable_planner", false)){
+                        if(PythonUtils.isSupported() && !preferences.getBoolean("disable_planner", false)){
                             startService(pythonServiceIntent);
                         }
                     }catch (Exception e){
@@ -374,6 +374,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         preNotifyThemeChanged();
         setContentView(R.layout.activity_main);
+//        Intent intent = new Intent(this, IntroActivity.class);
+//        startActivity(intent);
+//        finish();
         activity = this;
         bottomAppBar = findViewById(R.id.bottomAppBar);
         bottomProgressBar = findViewById(R.id.bottom_progressBar);

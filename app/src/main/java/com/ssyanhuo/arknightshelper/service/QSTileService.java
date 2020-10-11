@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.activity.MainActivity;
 import com.ssyanhuo.arknightshelper.entity.StaticData;
+import com.ssyanhuo.arknightshelper.utils.PythonUtils;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -95,7 +96,7 @@ public class QSTileService extends TileService {
             }
         }
         try{
-            if (getApplicationContext().getSharedPreferences(StaticData.Const.PREFERENCE_PATH, MODE_PRIVATE).getBoolean("python_finished", false) && getApplicationContext().getSharedPreferences(StaticData.Const.PREFERENCE_PATH, MODE_PRIVATE).getInt("up_count_from_last_update", 0) >= 1){
+            if ((getApplicationContext().getSharedPreferences(StaticData.Const.PREFERENCE_PATH, MODE_PRIVATE).getBoolean("python_finished", false) || !getApplicationContext().getSharedPreferences(StaticData.Const.PREFERENCE_PATH, MODE_PRIVATE).getBoolean("disable_planner", false) || !PythonUtils.isSupported() && getApplicationContext().getSharedPreferences(StaticData.Const.PREFERENCE_PATH, MODE_PRIVATE).getInt("up_count_from_last_update", 0) >= 1)){
                 tile.setState(Tile.STATE_ACTIVE);
                 tile.updateTile();
                 collapseStatusBar();

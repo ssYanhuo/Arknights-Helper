@@ -89,6 +89,7 @@ public class StaticData {
                 "formula.json",
                 "versioninfo.json"
         };
+        static public String PLANNER_PLUGIN_PACKAGE_NAME = "com.ssyanhuo.akrnightshelper_plannerplugin";
     }
 }
 

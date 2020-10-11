@@ -227,7 +227,7 @@
     <string name="py_runtime">运行时文件</string>
     <string name="py_universal_dependencies">通用依赖</string>
     <string name="py_download">正在准备运行时环境</string>
-    <string name="py_unsupported_arch">不支持的 CPU 架构</string>
+    <string name="py_unsupported">不支持的 CPU 架构或系统版本</string>
     <string name="py_error">发生了错误：\n</string>
     <string name="py_arkplanner">刷图规划™ By ycremar</string>
     <string name="hr_hide_low_level_note">注意调整招募时间为9小时</string>
@@ -302,4 +302,7 @@
     <string name="tile_init_note">初始化未完成，请从至少应用内成功启动引擎一次</string>
     <string name="planner_query">查询</string>
     <string name="planner_loading">正在连接到刷图规划服务进程……</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="intro_startup_desc">高效的游戏内辅助查询工具</string>
 </resources>

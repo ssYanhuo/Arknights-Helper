@@ -156,7 +156,7 @@ public class OverlayService extends Service {
         Notification notification = builder.build();
         startForeground(1, ServiceNotification.build(getApplicationContext(), 1));
         //绑定到Python服务
-        if(PythonUtils.isAbiSupported() && !preferences.getBoolean("disable_planner", false)){
+        if(PythonUtils.isSupported() && !preferences.getBoolean("disable_planner", false)){
             pythonServiceConnection = new ServiceConnection() {
                 @Override
                 public void onServiceConnected(ComponentName name, IBinder service) {
@@ -533,7 +533,7 @@ public class OverlayService extends Service {
         relativeLayout_planner.setVisibility(GONE);
         relativeLayout_more.setVisibility(GONE);
 
-        if (!PythonUtils.isAbiSupported() || preferences.getBoolean("disable_planner", false)){
+        if (!PythonUtils.isSupported() || preferences.getBoolean("disable_planner", false)){
             tabLayout.removeTabAt(3);
             tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                 @Override

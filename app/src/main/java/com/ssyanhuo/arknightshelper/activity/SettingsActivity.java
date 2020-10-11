@@ -265,7 +265,7 @@ public class SettingsActivity extends AppCompatActivity {
                     return false;
                 }
             });
-            if (!PythonUtils.isAbiSupported()){
+            if (!PythonUtils.isSupported()){
                 disable_planner.setVisible(false);
             }
             disable_planner.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {

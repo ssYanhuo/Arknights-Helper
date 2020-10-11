@@ -27,6 +27,12 @@ public class OCRUtils {
             }
         },context);
     }
+
+    public static boolean isSupported(Context context){
+        return isAbiSupported() && isLanguageSupported(context);
+    }
+
+
     public static boolean isAbiSupported(){
         return isAbiSupported(Build.SUPPORTED_ABIS[0]);
     }

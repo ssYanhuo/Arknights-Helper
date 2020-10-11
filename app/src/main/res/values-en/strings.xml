@@ -181,7 +181,7 @@
     <string name="py_runtime">Runtime files</string>
     <string name="py_universal_dependencies">Universal dependencies</string>
     <string name="py_download">Preparing Python runtime environment</string>
-    <string name="py_unsupported_arch">Sorry, but your cpu arch is not supported yet</string>
+    <string name="py_unsupported">Sorry, but your cpu arch or OS version is not supported yet</string>
     <string name="py_error">Error occurred:\n</string>
     <string name="py_arkplanner">ArkPlanner™ By ycremar</string>
     <string name="hr_hide_low_level_note">Time should be 9 hours!</string>
