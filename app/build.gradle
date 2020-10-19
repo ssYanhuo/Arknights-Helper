@@ -7,8 +7,8 @@ android {
         applicationId "com.ssyanhuo.arknightshelper"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 42
-    versionName "RC-4.0"
+        versionCode 43
+    versionName "RC-5.0"
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     renderscriptTargetApi 28
         renderscriptSupportModeEnabled true
@@ -44,7 +44,7 @@ dependencies {
     implementation 'com.eightbitlab:blurview:1.6.3'
     implementation files('libs/ocr-sdk.jar')
     implementation files('src/main/jniLibs/starcore_android_r3.73.jar')
-    implementation 'androidx.navigation:navigation-fragment:2.3.0'
-    implementation 'androidx.navigation:navigation-ui:2.3.0'
+    implementation 'androidx.navigation:navigation-fragment:2.3.1'
+    implementation 'androidx.navigation:navigation-ui:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 }

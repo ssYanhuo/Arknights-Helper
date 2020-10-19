@@ -307,7 +307,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                         final ArrayList<String> packageList = PackageUtils.getGamePackageNameList(getContext());
-                        final ArrayList<String> nameList = PackageUtils.getGamePackageNameList(getContext());
+                        final ArrayList<String> nameList = PackageUtils.getGameNameList(getContext());
                         builder.setSingleChoiceItems(nameList.toArray(new String[nameList.size()]), 0, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

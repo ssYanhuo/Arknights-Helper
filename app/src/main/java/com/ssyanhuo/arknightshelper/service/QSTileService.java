@@ -96,7 +96,10 @@ public class QSTileService extends TileService {
             }
         }
         try{
-            if ((getApplicationContext().getSharedPreferences(StaticData.Const.PREFERENCE_PATH, MODE_PRIVATE).getBoolean("python_finished", false) || !getApplicationContext().getSharedPreferences(StaticData.Const.PREFERENCE_PATH, MODE_PRIVATE).getBoolean("disable_planner", false) || !PythonUtils.isSupported() && getApplicationContext().getSharedPreferences(StaticData.Const.PREFERENCE_PATH, MODE_PRIVATE).getInt("up_count_from_last_update", 0) >= 1)){
+            if ((getApplicationContext().getSharedPreferences(StaticData.Const.PREFERENCE_PATH, MODE_PRIVATE).getBoolean("python_finished", false)
+                    || getApplicationContext().getSharedPreferences(StaticData.Const.PREFERENCE_PATH, MODE_PRIVATE).getBoolean("disable_planner", false)
+                    || !PythonUtils.isSupported())
+                    && getApplicationContext().getSharedPreferences(StaticData.Const.PREFERENCE_PATH, MODE_PRIVATE).getInt("up_count_from_last_update", 0) >= 1){
                 tile.setState(Tile.STATE_ACTIVE);
                 tile.updateTile();
                 collapseStatusBar();
