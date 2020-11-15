@@ -362,6 +362,30 @@
                 android:tag="31024" />
 
             <RadioButton
+                android:id="@+id/drop_item_oc3"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/mtl_sl_oc3"
+                android:button="@null"
+                android:tag="31033" />
+
+            <RadioButton
+                android:id="@+id/drop_item_oc4"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/mtl_sl_oc4"
+                android:button="@null"
+                android:tag="31034" />
+
+            <RadioButton
+                android:id="@+id/drop_item_oeu"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@mipmap/mtl_sl_oeu"
+                android:button="@null"
+                android:tag="30145" />
+
+            <RadioButton
                 android:id="@+id/drop_item_carbon_1"
                 android:layout_width="48dp"
                 android:layout_height="48dp"

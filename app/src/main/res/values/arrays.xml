@@ -87,5 +87,8 @@
         <item>凝胶</item>
         <item>炽合金块</item>
         <item>炽合金</item>
+<!--        <item>晶体元件</item>-->
+<!--        <item>晶体电路</item>-->
+<!--        <item>晶体电子单元</item>-->
     </string-array>
 </resources>

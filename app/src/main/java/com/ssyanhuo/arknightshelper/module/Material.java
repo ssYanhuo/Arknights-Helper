@@ -367,7 +367,7 @@ public class Material {
         }, 0, spannableStringBuilder1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         ((TextView) contentView.findViewById(R.id.material_pin)).setText(spannableStringBuilder1);
         ((TextView) contentView.findViewById(R.id.material_pin)).setMovementMethod(LinkMovementMethod.getInstance());
-        if (PythonUtils.isSupported() && sharedPreferences.getBoolean("disable_planner", false)) {
+        if ((PythonUtils.isSupported() && sharedPreferences.getBoolean("disable_planner", false)) || true) {//TODO 暂时禁用了刷图规划，逻辑似乎有问题
             ((TextView) contentView.findViewById(R.id.material_plan)).setVisibility(GONE);
         } else {
             SpannableStringBuilder spannableStringBuilder2 = new SpannableStringBuilder(applicationContext.getString(R.string.material_go_planner));
@@ -784,14 +784,14 @@ public class Material {
             }
         });
 
-        checkValue();//检查当前值是否匹配新干员
-        showResult();
-        hideSubWindow();
-    }
-    public int getMaxStage(int star){
-        switch (star){
-            case 1:
-                return StaticData.Exp.Limit.Stage.STAR_1;
+            checkValue();//检查当前值是否匹配新干员
+            showResult();
+            hideSubWindow();
+        }
+        public int getMaxStage(int star){
+            switch (star){
+                case 1:
+                    return StaticData.Exp.Limit.Stage.STAR_1;
             case 2:
                 return StaticData.Exp.Limit.Stage.STAR_2;
             case 3:

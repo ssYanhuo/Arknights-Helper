@@ -1,5 +1,5 @@
 {
-    "versionCode": 43,
-    "versionName": "RC-5.0",
-    "releaseNote": "[Info]更新到该版本建议清除软件数据后再使用\n[Mod]同步最新数据\n[Fix]修复了快捷方式显示包名的问题\n[Fix]修复未启用刷图规划时无法从磁贴启动服务的问题"
+    "versionCode": 44,
+    "versionName": "RC-6.0",
+    "releaseNote": "[Info]更新到该版本建议清除软件数据后再使用\n[Info]由于游戏本次更新改动较大，软件的少部分功能将暂时被禁用，我们正在加紧适配\n[Mod]同步最新公开招募和材料数据"
 }

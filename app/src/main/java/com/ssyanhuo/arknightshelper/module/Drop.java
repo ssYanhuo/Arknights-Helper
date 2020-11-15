@@ -199,7 +199,6 @@ public class Drop {
                 }
                 tableTitle.setPadding(0, 0, 0, 0);
                 resultLayout.addView(textView);
-
             }
         } catch (Exception ignored) {
 
@@ -223,11 +222,12 @@ public class Drop {
             TableItem tableItem = new TableItem(applicationContext, stage, time, quantity, cost);
             resultLayout.addView(tableItem);
         }
-        if (stages.size() == 0){
-            resultLayout.removeAllViews();
+        if (stages.size() == 0){//TODO 修改条件
+            resultLayout.removeViewAt(resultLayout.getChildCount() - 1);
             TextView textView =new TextView(applicationContext);
             textView.setText(R.string.drop_nothing_found);
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            resultLayout.addView(textView);
         }
         setAltSelector();
     }

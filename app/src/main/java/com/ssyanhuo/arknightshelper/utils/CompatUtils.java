@@ -20,9 +20,8 @@ public class CompatUtils {
                 }
             }
         }else if (versionLast <= 0){
-            //TODO Do Something
+
         }else {
-            //TODO Do Something
 
         }
     }
