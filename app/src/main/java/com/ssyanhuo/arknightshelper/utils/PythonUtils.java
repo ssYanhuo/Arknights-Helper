@@ -389,10 +389,10 @@ public class PythonUtils {
                             IntentUtils.openURL("https://www.coolapk.com/apk/263387", activity);
                         }
                     })
-                    .setNeutralButton("备用", new DialogInterface.OnClickListener() {
+                    .setNeutralButton("备用（密码: 9vf7）", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            IntentUtils.openURL("https://ww.lanzous.com/ico7bfe", activity);
+                            IntentUtils.openURL("https://wwe.lanzous.com/b01c1mm4d", activity);
                         }
                     })
                     .setNegativeButton("暂时不要", new DialogInterface.OnClickListener() {
