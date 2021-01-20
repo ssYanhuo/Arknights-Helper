@@ -90,6 +90,7 @@ public class StaticData {
                 "versioninfo.json"
         };
         static public String PLANNER_PLUGIN_PACKAGE_NAME = "com.ssyanhuo.akrnightshelper_plannerplugin";
+        static public int PLANNER_PLUGIN_MIN_VERSION = 3;
     }
 }
 

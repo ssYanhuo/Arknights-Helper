@@ -114,6 +114,10 @@ public class MainActivity extends AppCompatActivity {
             PythonUtils.setupEnvironment(getApplicationContext(), MainActivity.this, snackbarContainer);
             return;
         }
+        if((preferences.getBoolean("python_finished",false)) && PythonUtils.isSupported() && !preferences.getBoolean("disable_planner", false) && PythonUtils.getPluginVersion(getApplicationContext()) < StaticData.Const.PLANNER_PLUGIN_MIN_VERSION){
+            PythonUtils.setupEnvironment(getApplicationContext(), MainActivity.this, snackbarContainer);
+            return;
+        }
 
 
         Snackbar.make(snackbarContainer, R.string.start_game, Snackbar.LENGTH_LONG).show();

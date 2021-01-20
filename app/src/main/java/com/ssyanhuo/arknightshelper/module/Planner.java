@@ -70,7 +70,8 @@ public class Planner {
     JSONObject resultObject;
     private LinearLayout resultLoot;
     private LinearLayout resultSynthesis;
-    public void init(final ContextThemeWrapper context, View view, RelativeLayout relativeLayout, LinearLayout backgroundLayout, final OverlayService overlayService, final IBinder pythonService){
+
+    public void init(final ContextThemeWrapper context, View view, RelativeLayout relativeLayout, LinearLayout backgroundLayout, final OverlayService overlayService, final IBinder pythonService) {
 
         this.applicationContext = context;
         this.contentView = view;
@@ -83,24 +84,23 @@ public class Planner {
         requiredMaterials = new HashMap<>();
         materials = new ArrayList<>();
         itemException = new ArrayList<>();
-            try {
-                itemList = new ArrayList<>(Arrays.asList(applicationContext.getResources().getStringArray(R.array.planner_materials)));
-                material = JSONUtils.getJSONObject(applicationContext, FileUtils.readData("material.json", applicationContext));
-                for (Map.Entry entry :
-                        material.entrySet()) {
-                    materials.add((JSONObject) entry.getValue());
-                }
-                for (int i = 0; i < materials.size(); i++) {
-                    if (itemList.contains(materials.get(i).getString("name"))){
-                        itemMap.put(materials.get(i).getString("name"), materials.get(i));
-                    }
-                }
-            } catch (IOException ignored) {
-
+        try {
+            itemList = new ArrayList<>(Arrays.asList(applicationContext.getResources().getStringArray(R.array.planner_materials)));
+            material = JSONUtils.getJSONObject(applicationContext, FileUtils.readData("material.json", applicationContext));
+            for (Map.Entry entry :
+                    material.entrySet()) {
+                materials.add((JSONObject) entry.getValue());
             }
+            for (int i = 0; i < materials.size(); i++) {
+                if (itemList.contains(materials.get(i).getString("name"))) {
+                    itemMap.put(materials.get(i).getString("name"), materials.get(i));
+                }
+            }
+        } catch (IOException ignored) {
+        }
         scrollView = relativeLayout.findViewById(R.id.scroll_planner);
-            addItemLinearLayout = contentView.findViewById(R.id.planner_add_item);
-            itemContainer = contentView.findViewById(R.id.planner_item_container);
+        addItemLinearLayout = contentView.findViewById(R.id.planner_add_item);
+        itemContainer = contentView.findViewById(R.id.planner_item_container);
         final Button queryButton = contentView.findViewById(R.id.planner_request);
         final LinearLayout loadingNote = contentView.findViewById(R.id.planner_loading);
         resultContainer = contentView.findViewById(R.id.planner_result);
@@ -108,82 +108,81 @@ public class Planner {
         resultLoot = contentView.findViewById(R.id.planner_result_loot);
         resultSynthesis = contentView.findViewById(R.id.planner_result_synthesis);
 //        resultItems = contentView.findViewById(R.id.planner_result_items);
+        Log.e(TAG, "init: " + itemList.toString());
         queryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getResult();
             }
         });
-            addItemLinearLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int padding = applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin) / 2;
-                    final EasyPopup easyPopup = EasyPopup.create(applicationContext);
-                    CardView cardView = new CardView(applicationContext);
-                    cardView.setCardBackgroundColor(ThemeUtils.getBackgroundColor(applicationContext, context));
-                    LinearLayout itemSelector = new LinearLayout(applicationContext);
-                    itemSelector.setOrientation(LinearLayout.VERTICAL);
-                    final ScrollView listScrollView = new ScrollView(applicationContext);
-                    ArrayList<String> tempArray = (ArrayList<String>) itemList.clone();
-                    tempArray.removeAll(itemException);
-                    for (String item :
-                            tempArray) {
-                        final LinearLayout linearLayout = new LinearLayout(applicationContext);
-                        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-                        ImageView imageView = new ImageView(applicationContext);
-                        final TextView textView = new TextView(applicationContext);
-                        linearLayout.setPadding(padding, padding, padding, padding);
-                        textView.setText(item);
-                        linearLayout.setBackground(new RippleDrawable(ColorStateList.valueOf(Color.GRAY), null, null));
-                        linearLayout.setClickable(true);
-                        linearLayout.setFocusable(true);
-                        linearLayout.setTag(itemMap.get(item));
-                        linearLayout.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                CharSequence name = ((TextView)textView).getText();
-                                Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(((JSONObject) linearLayout.getTag()).getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
-                                PlannerItemView plannerItemView = new PlannerItemView(applicationContext, drawable, name);
-                                itemContainer.addView(plannerItemView);
-                                itemException.add((String) name);
-                                easyPopup.dismiss();
-                                //getResult();
-                                scrollView.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        int y;
-                                        y = itemContainer.getBottom() - scrollView.getHeight() + ScreenUtils.dip2px(applicationContext, 64);
-                                        if (y > 0){
-                                            scrollView.smoothScrollTo(0, y);
-                                        }
-
+        addItemLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int padding = applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin) / 2;
+                final EasyPopup easyPopup = EasyPopup.create(applicationContext);
+                CardView cardView = new CardView(applicationContext);
+                cardView.setCardBackgroundColor(ThemeUtils.getBackgroundColor(applicationContext, context));
+                LinearLayout itemSelector = new LinearLayout(applicationContext);
+                itemSelector.setOrientation(LinearLayout.VERTICAL);
+                final ScrollView listScrollView = new ScrollView(applicationContext);
+                ArrayList<String> tempArray = (ArrayList<String>) itemList.clone();
+                tempArray.removeAll(itemException);
+                for (String item :
+                        tempArray) {
+                    final LinearLayout linearLayout = new LinearLayout(applicationContext);
+                    linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+                    ImageView imageView = new ImageView(applicationContext);
+                    final TextView textView = new TextView(applicationContext);
+                    linearLayout.setPadding(padding, padding, padding, padding);
+                    textView.setText(item);
+                    linearLayout.setBackground(new RippleDrawable(ColorStateList.valueOf(Color.GRAY), null, null));
+                    linearLayout.setClickable(true);
+                    linearLayout.setFocusable(true);
+                    linearLayout.setTag(itemMap.get(item));
+                    linearLayout.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            CharSequence name = ((TextView) textView).getText();
+                            Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(((JSONObject) linearLayout.getTag()).getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
+                            PlannerItemView plannerItemView = new PlannerItemView(applicationContext, drawable, name);
+                            itemContainer.addView(plannerItemView);
+                            itemException.add((String) name);
+                            easyPopup.dismiss();
+                            //getResult();
+                            scrollView.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    int y;
+                                    y = itemContainer.getBottom() - scrollView.getHeight() + ScreenUtils.dip2px(applicationContext, 64);
+                                    if (y > 0) {
+                                        scrollView.smoothScrollTo(0, y);
                                     }
-                                });
 
-                            }
-                        });
-                        imageView.setImageDrawable(applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(((JSONObject) linearLayout.getTag()).getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName())));
-                        linearLayout.addView(imageView);
-                        linearLayout.addView(textView);
-                        itemSelector.addView(linearLayout);
-                    }
-                    listScrollView.addView(itemSelector);
-                    cardView.addView(listScrollView);
-                    easyPopup.setContentView(cardView)
-                            .setHeight(ScreenUtils.dip2px(applicationContext, 256))
-                            .showAsDropDown(v, (v.getWidth() - cardView.getWidth()) / 2, 0);
+                                }
+                            });
+
+                        }
+                    });
+                    imageView.setImageDrawable(applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(((JSONObject) linearLayout.getTag()).getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName())));
+                    linearLayout.addView(imageView);
+                    linearLayout.addView(textView);
+                    itemSelector.addView(linearLayout);
+                }
+                listScrollView.addView(itemSelector);
+                cardView.addView(listScrollView);
+                easyPopup.setContentView(cardView)
+                        .setHeight(ScreenUtils.dip2px(applicationContext, 256))
+                        .showAsDropDown(v, (v.getWidth() - cardView.getWidth()) / 2, 0);
             }
-});
-
-            final Handler enableButtonHandler = new Handler();
-
+        });
+        final Handler enableButtonHandler = new Handler();
         newBinder = new PythonService.PythonBinder[1];
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 PythonService.PythonBinder pythonBinder = overlayService.getPythonService();
-                if (pythonBinder != null){
+                if (pythonBinder != null) {
                     newBinder[0] = pythonBinder;
                     Runnable runnable = new Runnable() {
                         @Override
@@ -198,7 +197,8 @@ public class Planner {
             }
         }, 1000, 1000);
     }
-    private void pinWindow(){
+
+    private void pinWindow() {
         ArrayList<View> views = new ArrayList<>();
         JSONArray lootArray = resultObject.getJSONArray("loot");
         JSONArray synthesisArray = resultObject.getJSONArray("synthesis");
@@ -209,18 +209,22 @@ public class Planner {
         lootText.setPadding(0, padding, 0, 0);
         TextView synthesisText = new TextView(applicationContext);
         synthesisText.setText(R.string.planner_result_synthesis_title);
-        synthesisText.setPadding(0, padding,0,0);
+        synthesisText.setPadding(0, padding, 0, 0);
         views.add(lootText);
         for (int i = 0; i < lootArray.size(); i++) {
             JSONObject obj = lootArray.getJSONObject(i);
             PlannerDetailView plannerDetailView = new PlannerDetailView(applicationContext);
-            if (obj.getFloat("times") < 0.5){continue;}
-            plannerDetailView.setTitleText(obj.getString("stage") + " " + (int)Math.ceil(obj.getFloat("times")) + applicationContext.getString(R.string.planner_times));
+            if (obj.getFloat("times") < 0.5) {
+                continue;
+            }
+            plannerDetailView.setTitleText(obj.getString("stage") + " " + (int) Math.ceil(obj.getFloat("times")) + applicationContext.getString(R.string.planner_times));
             JSONArray items = obj.getJSONArray("items");
             for (int j = 0; j < items.size(); j++) {
                 JSONObject item = items.getJSONObject(j);
-                Map.Entry<String, Object> entry= item.entrySet().iterator().next();
-                if (Double.parseDouble(entry.getValue().toString()) <= 0){continue;}
+                Map.Entry<String, Object> entry = item.entrySet().iterator().next();
+                if (Double.parseDouble(entry.getValue().toString()) <= 0) {
+                    continue;
+                }
                 plannerDetailView.appendContent(entry.getKey() + "  " + entry.getValue());
             }
             views.add(plannerDetailView);
@@ -229,13 +233,17 @@ public class Planner {
         for (int i = 0; i < synthesisArray.size(); i++) {
             JSONObject obj = synthesisArray.getJSONObject(i);
             PlannerDetailView plannerDetailView = new PlannerDetailView(applicationContext);
-            if (obj.getFloat("count") < 0.5){continue;}
-            plannerDetailView.setTitleText(obj.getString("target") + " " + (int)Math.ceil(obj.getFloat("count")) + applicationContext.getString(R.string.planner_pcs));
+            if (obj.getFloat("count") < 0.5) {
+                continue;
+            }
+            plannerDetailView.setTitleText(obj.getString("target") + " " + (int) Math.ceil(obj.getFloat("count")) + applicationContext.getString(R.string.planner_pcs));
             JSONArray items = obj.getJSONArray("items");
             for (int j = 0; j < items.size(); j++) {
                 JSONObject item = items.getJSONObject(j);
-                Map.Entry<String, Object> entry= item.entrySet().iterator().next();
-                if (Double.parseDouble(entry.getValue().toString()) <= 0){continue;}
+                Map.Entry<String, Object> entry = item.entrySet().iterator().next();
+                if (Double.parseDouble(entry.getValue().toString()) <= 0) {
+                    continue;
+                }
                 plannerDetailView.appendContent(entry.getKey() + "  " + entry.getValue());
             }
             views.add(plannerDetailView);
@@ -243,7 +251,8 @@ public class Planner {
 
         overlayService.showPinnedWindow(views);
     }
-    public void addItems(Set<Map.Entry<String, Object>> items){
+
+    public void addItems(Set<Map.Entry<String, Object>> items) {
         for (Map.Entry entry :
                 items) {
             CharSequence name = (CharSequence) entry.getKey();
@@ -255,18 +264,19 @@ public class Planner {
         }
 
     }
-    private void getResult(){
+
+    private void getResult() {
         JSONObject required = new JSONObject();
         for (int i = 0; i < itemContainer.getChildCount(); i++) {
             PlannerItemView plannerItemView = (PlannerItemView) itemContainer.getChildAt(i);
             requiredMaterials.put(plannerItemView.getName(), plannerItemView.getNum());
             required.put(plannerItemView.getName(), plannerItemView.getNum());
         }
-        if (required.size() == 0){
+        if (required.size() == 0) {
             return;
         }
         Log.e("", required.toString());
-        if (pythonService == null){
+        if (pythonService == null) {
             pythonService = newBinder[0];
         }
         String result = ((PythonService.PythonBinder) pythonService).callArkplanner(required.toJSONString());
@@ -280,7 +290,7 @@ public class Planner {
         }, 0, spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         ((TextView) resultContainer.findViewById(R.id.planner_pin)).setText(spannableStringBuilder);
         ((TextView) resultContainer.findViewById(R.id.planner_pin)).setMovementMethod(LinkMovementMethod.getInstance());
-        try{
+        try {
             ((TextView) versionInfo.findViewById(R.id.planner_error)).setText("");
             resultObject = JSON.parseObject(result);
             JSONArray lootArray = resultObject.getJSONArray("loot");
@@ -289,15 +299,21 @@ public class Planner {
             for (int i = 0; i < lootArray.size(); i++) {
                 JSONObject obj = lootArray.getJSONObject(i);
                 PlannerDetailView plannerDetailView = new PlannerDetailView(applicationContext);
-                if (obj.getFloat("times") < 0.5){continue;}
+                if (obj.getFloat("times") < 0.5) {
+                    continue;
+                }
                 //我不知道为啥结果里面有LS-5
-                if(obj.getString("stage").equals("LS-5")){continue;}
-                plannerDetailView.setTitleText(obj.getString("stage") + " " + (int)Math.ceil(obj.getFloat("times")) + applicationContext.getString(R.string.planner_times));
+                if (obj.getString("stage").equals("LS-5")) {
+                    continue;
+                }
+                plannerDetailView.setTitleText(obj.getString("stage") + " " + (int) Math.ceil(obj.getFloat("times")) + applicationContext.getString(R.string.planner_times));
                 JSONArray items = obj.getJSONArray("items");
                 for (int j = 0; j < items.size(); j++) {
                     JSONObject item = items.getJSONObject(j);
-                    Map.Entry<String, Object> entry= item.entrySet().iterator().next();
-                    if (Double.parseDouble(entry.getValue().toString()) <= 0){continue;}
+                    Map.Entry<String, Object> entry = item.entrySet().iterator().next();
+                    if (Double.parseDouble(entry.getValue().toString()) <= 0) {
+                        continue;
+                    }
                     plannerDetailView.appendContent(entry.getKey() + "  " + entry.getValue());
                 }
                 resultLoot.addView(plannerDetailView);
@@ -305,13 +321,17 @@ public class Planner {
             for (int i = 0; i < synthesisArray.size(); i++) {
                 JSONObject obj = synthesisArray.getJSONObject(i);
                 PlannerDetailView plannerDetailView = new PlannerDetailView(applicationContext);
-                if (obj.getFloat("count") < 0.5){continue;}
-                plannerDetailView.setTitleText(obj.getString("target") + " " + (int)Math.ceil(obj.getFloat("count")) + applicationContext.getString(R.string.planner_pcs));
+                if (obj.getFloat("count") < 0.5) {
+                    continue;
+                }
+                plannerDetailView.setTitleText(obj.getString("target") + " " + (int) Math.ceil(obj.getFloat("count")) + applicationContext.getString(R.string.planner_pcs));
                 JSONArray items = obj.getJSONArray("items");
                 for (int j = 0; j < items.size(); j++) {
                     JSONObject item = items.getJSONObject(j);
-                    Map.Entry<String, Object> entry= item.entrySet().iterator().next();
-                    if (Double.parseDouble(entry.getValue().toString()) <= 0){continue;}
+                    Map.Entry<String, Object> entry = item.entrySet().iterator().next();
+                    if (Double.parseDouble(entry.getValue().toString()) <= 0) {
+                        continue;
+                    }
                     plannerDetailView.appendContent(entry.getKey() + "  " + entry.getValue());
                 }
                 resultSynthesis.addView(plannerDetailView);
@@ -323,7 +343,7 @@ public class Planner {
 //                Map.Entry<String, Object> entry= item.entrySet().iterator().next();
 //                resultItems.append(entry.getKey() + "  " + entry.getValue() + "\n");
 //            }
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.e(TAG, "Get result failed:" + "\n" + result);
             e.printStackTrace();
             resultContainer.setVisibility(View.GONE);

@@ -2,8 +2,8 @@
     {
         "name": "/akhr.json",
         "nameFriendly": "akhr.json",
-        "date": "2020-11-22",
-        "dateraw": 20201122,
+        "date": "2021-01-21",
+        "dateraw": 20210121,
         "desc": "干员招募信息，用于公开招募查询",
         "source": "Graue Neko & ssYanhuo"
     },
@@ -18,8 +18,8 @@
     {
         "name": "/charMaterials.json",
         "nameFriendly": "charMaterials.json",
-        "date": "2020-11-15",
-        "dateraw": 20201115,
+        "date": "2021-01-21",
+        "dateraw": 20210121,
         "desc": "干员材料信息，用于升级材料查询",
         "source": "Graue Neko & ssYanhuo"
     },

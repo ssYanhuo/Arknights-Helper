@@ -3,6 +3,7 @@ package com.ssyanhuo.arknightshelper.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Looper;
@@ -67,6 +68,17 @@ public class PythonUtils {
             "libssl.so"
 
     };
+
+    public static int getPluginVersion(Context context){
+        PackageManager packageManager = context.getPackageManager();
+        try{
+            PackageInfo packageInfo = packageManager.getPackageInfo(StaticData.Const.PLANNER_PLUGIN_PACKAGE_NAME, 0);
+            return packageInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 
     public static boolean isSupported(){
         return isOSVersionSupported() && isAbiSupported();
@@ -367,10 +379,10 @@ public class PythonUtils {
                     .show();
             return;
         }
-        if (!PackageUtils.checkApplication(StaticData.Const.PLANNER_PLUGIN_PACKAGE_NAME, context)) {
+        if (!PackageUtils.checkApplication(StaticData.Const.PLANNER_PLUGIN_PACKAGE_NAME, context) || PythonUtils.getPluginVersion(context) < StaticData.Const.PLANNER_PLUGIN_MIN_VERSION) {
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-            builder.setTitle("安装插件")
-                    .setMessage("安装插件来启用刷图规划功能")
+            builder.setTitle("安装或升级插件")
+                    .setMessage("安装或升级插件来启用刷图规划功能")// TODO: 2021/1/21 翻译
                     .setPositiveButton("酷安", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
