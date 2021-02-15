@@ -2,6 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ssyanhuo.arknightshelper">
 
+    <queries>
+        <package android:name="com.ssyanhuo.akrnightshelper_plannerplugin"/>
+        <package android:name="com.hypergryph.arknights"/>
+        <package android:name="com.hypergryph.arknights.bilibili"/>
+        <package android:name="tw.txwy.and.arknights"/>
+        <package android:name="com.YoStarEN.Arknights"/>
+        <package android:name="com.YoStarJP.Arknights"/>
+        <package android:name="com.YoStarKR.Arknights"/>
+    </queries>
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

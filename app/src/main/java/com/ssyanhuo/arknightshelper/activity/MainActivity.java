@@ -251,6 +251,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Deprecated
     private void startEngine(final String game){
         //new DataUpdateDialog().showDialog(getApplicationContext());
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
@@ -416,69 +417,69 @@ public class MainActivity extends AppCompatActivity {
                 startEngine(false);
             }
         });
-        fab.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                ArrayList<String> gameList = PackageUtils.getGamePackageNameList(activity);
-                if (gameList.size() > 0){
-                    PopupMenu popupMenu = new PopupMenu(activity, v);
-                    popupMenu.getMenuInflater().inflate(R.menu.activity_main_game_selector, popupMenu.getMenu());
-                    Menu menu = popupMenu.getMenu();
-                    for (int i = 0; i < menu.size(); i++) {
-                        menu.getItem(i).setVisible(false);
-                    }
-                    for (String game :
-                            gameList) {
-                            if (StaticData.Const.PACKAGE_OFFICIAL.equals(game)) {
-                                menu.findItem(R.id.game_selector_official).setVisible(true);
-                            } else if (StaticData.Const.PACKAGE_BILIBILI.equals(game)) {
-                                menu.findItem(R.id.game_selector_bilibili).setVisible(true);
-                            } else if (StaticData.Const.PACKAGE_TAIWANESE.equals(game)) {
-                                menu.findItem(R.id.game_selector_taiwanese).setVisible(true);
-                            } else if (StaticData.Const.PACKAGE_ENGLISH.equals(game)) {
-                                menu.findItem(R.id.game_selector_english).setVisible(true);
-                            } else if (StaticData.Const.PACKAGE_JAPANESE.equals(game)) {
-                                menu.findItem(R.id.game_selector_japanese).setVisible(true);
-                            } else if (StaticData.Const.PACKAGE_KOREAN.equals(game)) {
-                                menu.findItem(R.id.game_selector_korean).setVisible(true);
-                            }
-                        }
-                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                        @Override
-                        public boolean onMenuItemClick(MenuItem item) {
-                            switch (item.getItemId()){
-                                case R.id.game_selector_official:
-                                    startEngine(StaticData.Const.PACKAGE_OFFICIAL);
-                                    break;
-                                case R.id.game_selector_bilibili:
-                                    startEngine(StaticData.Const.PACKAGE_BILIBILI);
-                                    break;
-                                case R.id.game_selector_taiwanese:
-                                    startEngine(StaticData.Const.PACKAGE_TAIWANESE);
-                                    break;
-                                case R.id.game_selector_english:
-                                    startEngine(StaticData.Const.PACKAGE_ENGLISH);
-                                    break;
-                                case R.id.game_selector_japanese:
-                                    startEngine(StaticData.Const.PACKAGE_JAPANESE);
-                                    break;
-                                case R.id.game_selector_korean:
-                                    startEngine(StaticData.Const.PACKAGE_KOREAN);
-                                    break;
-                                default:
-                                    break;
-                            }
-                            return true;
-                        }
-                    });
-                    popupMenu.show();
-                }else {
-                    Toast.makeText(activity, R.string.no_game_selectable, Toast.LENGTH_SHORT).show();
-                }
-
-                return true;
-            }
-        });
+//        fab.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View v) {
+//                ArrayList<String> gameList = PackageUtils.getGamePackageNameList(activity);
+//                if (gameList.size() > 0){
+//                    PopupMenu popupMenu = new PopupMenu(activity, v);
+//                    popupMenu.getMenuInflater().inflate(R.menu.activity_main_game_selector, popupMenu.getMenu());
+//                    Menu menu = popupMenu.getMenu();
+//                    for (int i = 0; i < menu.size(); i++) {
+//                        menu.getItem(i).setVisible(false);
+//                    }
+//                    for (String game :
+//                            gameList) {
+//                            if (StaticData.Const.PACKAGE_OFFICIAL.equals(game)) {
+//                                menu.findItem(R.id.game_selector_official).setVisible(true);
+//                            } else if (StaticData.Const.PACKAGE_BILIBILI.equals(game)) {
+//                                menu.findItem(R.id.game_selector_bilibili).setVisible(true);
+//                            } else if (StaticData.Const.PACKAGE_TAIWANESE.equals(game)) {
+//                                menu.findItem(R.id.game_selector_taiwanese).setVisible(true);
+//                            } else if (StaticData.Const.PACKAGE_ENGLISH.equals(game)) {
+//                                menu.findItem(R.id.game_selector_english).setVisible(true);
+//                            } else if (StaticData.Const.PACKAGE_JAPANESE.equals(game)) {
+//                                menu.findItem(R.id.game_selector_japanese).setVisible(true);
+//                            } else if (StaticData.Const.PACKAGE_KOREAN.equals(game)) {
+//                                menu.findItem(R.id.game_selector_korean).setVisible(true);
+//                            }
+//                        }
+//                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                        @Override
+//                        public boolean onMenuItemClick(MenuItem item) {
+//                            switch (item.getItemId()){
+//                                case R.id.game_selector_official:
+//                                    startEngine(StaticData.Const.PACKAGE_OFFICIAL);
+//                                    break;
+//                                case R.id.game_selector_bilibili:
+//                                    startEngine(StaticData.Const.PACKAGE_BILIBILI);
+//                                    break;
+//                                case R.id.game_selector_taiwanese:
+//                                    startEngine(StaticData.Const.PACKAGE_TAIWANESE);
+//                                    break;
+//                                case R.id.game_selector_english:
+//                                    startEngine(StaticData.Const.PACKAGE_ENGLISH);
+//                                    break;
+//                                case R.id.game_selector_japanese:
+//                                    startEngine(StaticData.Const.PACKAGE_JAPANESE);
+//                                    break;
+//                                case R.id.game_selector_korean:
+//                                    startEngine(StaticData.Const.PACKAGE_KOREAN);
+//                                    break;
+//                                default:
+//                                    break;
+//                            }
+//                            return true;
+//                        }
+//                    });
+//                    popupMenu.show();
+//                }else {
+//                    Toast.makeText(activity, R.string.no_game_selectable, Toast.LENGTH_SHORT).show();
+//                }
+//
+//                return true;
+//            }
+//        });
 
 
         notifyThemeChanged();

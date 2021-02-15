@@ -85,4 +85,7 @@ public class PlannerItemView extends LinearLayout {
 
         }
     }
+    public void setOnButtonClickListener(OnClickListener l){
+        button.setOnClickListener(l);
+    }
 }

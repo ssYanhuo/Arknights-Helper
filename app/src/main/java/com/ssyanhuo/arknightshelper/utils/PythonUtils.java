@@ -89,7 +89,7 @@ public class PythonUtils {
     }
 
     public static boolean isOSVersionSupported(int v){
-        return v >= Build.VERSION_CODES.LOLLIPOP && v <= Build.VERSION_CODES.Q;
+        return v >= Build.VERSION_CODES.LOLLIPOP;
     }
 
     public static boolean isAbiSupported(){
@@ -379,6 +379,7 @@ public class PythonUtils {
                     .show();
             return;
         }
+        Log.e(TAG, "setupEnvironment: " + PackageUtils.checkApplication(StaticData.Const.PLANNER_PLUGIN_PACKAGE_NAME, context) + PythonUtils.getPluginVersion(context) + StaticData.Const.PLANNER_PLUGIN_MIN_VERSION);
         if (!PackageUtils.checkApplication(StaticData.Const.PLANNER_PLUGIN_PACKAGE_NAME, context) || PythonUtils.getPluginVersion(context) < StaticData.Const.PLANNER_PLUGIN_MIN_VERSION) {
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             builder.setTitle("安装或升级插件")

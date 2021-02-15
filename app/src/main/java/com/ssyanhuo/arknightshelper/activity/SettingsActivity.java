@@ -14,8 +14,12 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Outline;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -53,6 +57,7 @@ import androidx.preference.SwitchPreference;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.android.material.snackbar.Snackbar;
+import com.ssyanhuo.arknightshelper.BuildConfig;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.entity.StaticData;
 import com.ssyanhuo.arknightshelper.service.OverlayService;
@@ -473,7 +478,10 @@ public class SettingsActivity extends AppCompatActivity {
             if (data == null){
                 if (preferences.getBoolean("button_img", false)){
                     try{
-                        imageView.setBackground(Drawable.createFromPath(getContext().getFilesDir().getPath() + File.separator + "button.png"));
+                        ColorDrawable drawable1 = new ColorDrawable();
+                        drawable1.setColor(Color.WHITE);
+                        Drawable drawable2 = Drawable.createFromPath(getContext().getFilesDir().getPath() + File.separator + "button.png");
+                        imageView.setBackground(new LayerDrawable(new Drawable[]{drawable1, drawable2}));
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -482,8 +490,10 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             }else {
                 try {
-                    bitmap = BitmapFactory.decodeFile(getContext().getCacheDir().getPath() + File.separator + "images" + File.separator + "button.png");
-                    imageView.setImageBitmap(bitmap);
+                    ColorDrawable drawable1 = new ColorDrawable();
+                    drawable1.setColor(Color.WHITE);
+                    Drawable drawable2 = BitmapDrawable.createFromPath(getContext().getCacheDir().getPath() + File.separator + "images" + File.separator + "button.png");
+                    imageView.setBackground(new LayerDrawable(new Drawable[]{drawable1, drawable2}));
                 }catch (Exception e){
                     imageView.setImageResource(R.mipmap.overlay_button);
                 }
@@ -606,26 +616,30 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void run() {
                 String site = preferences.getString("update_site", "0");
-                String spec;
+                String BaseURL;
                 if (site.equals(SITE_GITEE)){
-                    spec = BASE_URL_GITEE;
+                    BaseURL = BASE_URL_GITEE;
                 }else {
-                    spec = BASE_URL_GITHUB;
+                    BaseURL = BASE_URL_GITHUB;
                 }
                 Log.e(TAG, site);
                 try {
-                    String indexString = URLRequest(spec + "/index.json");
+                    String indexString = URLRequest(BaseURL + "/index.json");
                     JSONArray indexArray = JSONArray.parseArray(indexString);
                     JSONObject latestObject = indexArray.getJSONObject(0);
+                    if (latestObject.getIntValue("versionMax") > BuildConfig.VERSION_CODE){
+                        Snackbar.make(getView(), R.string.settings_data_update_success, Snackbar.LENGTH_SHORT).show();
+                        throw new IllegalStateException("Please update application.");
+                    }
                     String selectedVersion = latestObject.getString("dir");
                     //获取指定的目录
-                    String selectedList = URLRequest(spec + selectedVersion + "/datainfo.json");
+                    String selectedList = URLRequest(BaseURL + selectedVersion + "/datainfo.json");
                     //获取文件
                     JSONArray selectedArray = JSONArray.parseArray(selectedList);
                     for(int i = 0; i < selectedArray.size(); i++){
                         JSONObject selectedObj = selectedArray.getJSONObject(i);
                         String objURL = selectedObj.getString("name");
-                        String result = URLRequest(spec + selectedVersion + objURL);
+                        String result = URLRequest(BaseURL + selectedVersion + objURL);
                         FileUtils.writeFile(result, objURL.substring(1), getContext());
                     }
                     handler.post(new Runnable() {

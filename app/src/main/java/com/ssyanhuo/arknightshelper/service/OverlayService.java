@@ -18,6 +18,7 @@ import android.graphics.PixelFormat;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.*;
 import android.util.DisplayMetrics;
@@ -258,7 +259,10 @@ public class OverlayService extends Service {
         if (!preferences.getBoolean("button_img", false) || !new File(getApplicationContext().getFilesDir().getPath() + File.separator + "button.png").exists()){
             button.setBackground(getResources().getDrawable(R.mipmap.overlay_button));
         }else {
-            button.setBackground(Drawable.createFromPath(getApplicationContext().getFilesDir().getPath() + File.separator + "button.png"));
+            ColorDrawable drawable1 = new ColorDrawable();
+            drawable1.setColor(Color.WHITE);
+            Drawable drawable2 = Drawable.createFromPath(getApplicationContext().getFilesDir().getPath() + File.separator + "button.png");
+            button.setBackground(new LayerDrawable(new Drawable[]{drawable1, drawable2}));
         }
 
         button.setScaleType(ImageView.ScaleType.CENTER_CROP);

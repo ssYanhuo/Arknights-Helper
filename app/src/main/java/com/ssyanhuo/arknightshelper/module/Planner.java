@@ -142,9 +142,16 @@ public class Planner {
                     linearLayout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            CharSequence name = ((TextView) textView).getText();
+                            final CharSequence name = ((TextView) textView).getText();
                             Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(((JSONObject) linearLayout.getTag()).getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
-                            PlannerItemView plannerItemView = new PlannerItemView(applicationContext, drawable, name);
+                            final PlannerItemView plannerItemView = new PlannerItemView(applicationContext, drawable, name);
+                            plannerItemView.setOnButtonClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    plannerItemView.removeItem();
+                                    itemException.remove((String) name);
+                                }
+                            });
                             itemContainer.addView(plannerItemView);
                             itemException.add((String) name);
                             easyPopup.dismiss();

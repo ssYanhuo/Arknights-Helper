@@ -51,7 +51,7 @@
     <string name="go_release">Visit this project\'s release page</string>
     <string name="go_release_desc">Get lastest version</string>
     <string name="about_thanks">Thanks</string>
-    <string name="about_thanks_list">\@Graue Neko, @Arknights WIKI, @deano2390, @teisun, @zyyoona7, @企鹅数据, @tomcat, @ycremar\nAnd all Doctors.</string>
+    <string name="about_thanks_list">\Graue Neko, Arknights WIKI, deano2390, teisun, zyyoona7, Penguin Statics, tomcat, ycremar\nAnd all Doctors.</string>
     <string name="about_version">Version</string>
     <string name="about_version_desc">Loading…</string>
     <string name="start_multiple_apps">More than one game were found, please select one</string>
@@ -63,7 +63,7 @@
     <string name="material_exp">EXP Level:</string>
     <string name="material_money">Money Level:</string>
     <string name="material_stage_now">Your stage:</string>
-    <string name="material_desc">Long press button to select max or min number, click number editor to use a keyboard.\nData from @Graue Neko</string>
+    <string name="material_desc">Long press button to select max or min number, click number editor to use a keyboard.\nData from Graue Neko &amp; ssYanhuo</string>
     <string name="material_level_now">Your level:</string>
     <string name="material_point_now">Your EXP points (roundup):</string>
     <string name="material_stage_target">Target stage:</string>
@@ -98,7 +98,7 @@
     <string name="hr_method_selector_button_to_fuzzy">Change to fuzzy mode</string>
     <string name="hr_method_selector_button_to_exact">Change to exact mode</string>
     <string name="title_activity_lab">Dreamland</string>
-    <string name="drop_updater_desc">No data found, data not usable or need a update.\nPlease update your data.\nData from @Penguin Statics (penguin-stats.io)</string>
+    <string name="drop_updater_desc">No data found, data not usable or need a update.\nPlease update your data.\nData from Penguin Statics (penguin-stats.io)</string>
     <string name="drop_updater_update">Update</string>
     <string name="drop_desc_part_1" >Data from penguin-stats.io</string>
     <string name="material_select">Select a character</string>
@@ -112,7 +112,7 @@
     <string name="get_permission_storage_content">Permission WRITE_EXTERNAL_STORAGE is needed</string>
     <string name="get_permission_storage_grant">Grant</string>
     <string name="get_permission_manually">Grant manually</string>
-    <string name="hr_desc_part_3">\nData from @Graue Neko</string>
+    <string name="hr_desc_part_3">\nData from Graue Neko &amp; ssYanhuo</string>
     <string name="hr_desc_part_2">Screenshot recognition</string>
     <string name="hr_ocr_desc">Select a screenshot:</string>
     <string name="hr_ocr_getting_result">Fetching result…</string>
@@ -200,7 +200,7 @@
     <string name="material_skill_all_target">Level :</string>
     <string name="material_skill_all_now">All skills :</string>
     <string name="more_hr_counter_summary_90">Already %1$d times, 6★ probability: %2$d%%, next 10 combo will contain 6★!</string>
-    <string name="planner_desc">Source: @ycremar\nCilck level or material to show more.\nIt\'s a part of beta project, and it may cause the application not run normally, in this case, you can disable it in application settings.</string>
+    <string name="planner_desc">Source: ycremar\nCilck level or material to show more.\nIt\'s a part of beta project, and it may cause the application not run normally, in this case, you can disable it in application settings.</string>
     <string name="planner_result_loot_title">"Loot in these levels: "</string>
     <string name="planner_result_synthesis_title">"Synthesis: "</string>
     <string name="planner_result_items_title">"Summary: "</string>
