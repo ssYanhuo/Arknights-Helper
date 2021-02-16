@@ -3,14 +3,15 @@
     package="com.ssyanhuo.arknightshelper">
 
     <queries>
-        <package android:name="com.ssyanhuo.akrnightshelper_plannerplugin"/>
-        <package android:name="com.hypergryph.arknights"/>
-        <package android:name="com.hypergryph.arknights.bilibili"/>
-        <package android:name="tw.txwy.and.arknights"/>
-        <package android:name="com.YoStarEN.Arknights"/>
-        <package android:name="com.YoStarJP.Arknights"/>
-        <package android:name="com.YoStarKR.Arknights"/>
+        <package android:name="com.ssyanhuo.akrnightshelper_plannerplugin" />
+        <package android:name="com.hypergryph.arknights" />
+        <package android:name="com.hypergryph.arknights.bilibili" />
+        <package android:name="tw.txwy.and.arknights" />
+        <package android:name="com.YoStarEN.Arknights" />
+        <package android:name="com.YoStarJP.Arknights" />
+        <package android:name="com.YoStarKR.Arknights" />
     </queries>
+
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -30,7 +31,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Default"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.IntroActivity"
+        <service
+            android:name=".service.ScreenCaptureService"
+            android:enabled="true"
+            android:exported="true"
+            android:foregroundServiceType="mediaProjection" />
+
+        <activity
+            android:name=".activity.IntroActivity"
             android:theme="@style/AppTheme.Default.Intro" />
         <activity
             android:name=".activity.ScreenCaptureActivity"

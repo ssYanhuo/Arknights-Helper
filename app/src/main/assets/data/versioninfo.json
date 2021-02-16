@@ -1,5 +1,5 @@
 {
-    "versionCode": 47,
-    "versionName": "RC-9.0",
-    "releaseNote": "[Info]更新到该版本建议清除软件数据后再使用\n[Fix]增加刷图规划对Android R的支持，需要更新刷图规划插件到最新版本\n[Fix]修复了刷图规划中移除的物品无法再次添加的问题\n[Fix]修复设置透明图片为按钮皮肤时周围出现不规则阴影的问题\n[Mod]更新Target SDK为30\n[Mod]修改了一些文本表述\n[Mod]同步最新干员数据"
+    "versionCode": 48,
+    "versionName": "RC-9.1",
+    "releaseNote": "[Info]更新到该版本建议清除软件数据后再使用\n[Fix]修复了在Android R上解析安装包失败的问题\n[Fix]增加刷图规划对Android R的支持，需要更新刷图规划插件到最新版本\n[Fix]修复了刷图规划中移除的物品无法再次添加的问题\n[Fix]修复设置透明图片为按钮皮肤时周围出现不规则阴影的问题\n[Mod]更新Target SDK为30\n[Mod]修改了一些文本表述\n[Mod]同步最新干员数据"
 }

@@ -6,6 +6,7 @@
     <string name="notification_title">已连接到 Arknights Helper™</string>
     <string name="notification_text">点击来结束服务</string>
     <string name="notification_channel">悬浮窗通知</string>
+    <string name="notification_title_recording">正在捕获屏幕</string>
     <string name="tab_title_hr">公开招募</string>
     <string name="tab_title_drop">掉落查询</string>
     <string name="tab_title_material">材料计算</string>
