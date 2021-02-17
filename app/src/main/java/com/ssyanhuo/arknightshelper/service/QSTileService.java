@@ -118,8 +118,7 @@ public class QSTileService extends TileService {
     private void collapseStatusBar(){
         try {
             @SuppressLint("WrongConstant") Object statusBarManager = getApplicationContext().getSystemService("statusbar");
-            Method collapse;
-            collapse = statusBarManager.getClass().getMethod("collapsePanels");
+            Method collapse = statusBarManager.getClass().getMethod("collapsePanels");
             collapse.invoke(statusBarManager);
         }catch (Exception e){
             e.printStackTrace();

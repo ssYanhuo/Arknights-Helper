@@ -499,7 +499,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }
 
             }
-            final Bitmap finalBitmap = bitmap;
+            final Bitmap finalBitmap = BitmapFactory.decodeFile(getContext().getCacheDir().getPath() + File.separator + "images" + File.separator + "button.png");;
             final AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.setting_button_image_pick_image)
                     .setView(linearLayout)
