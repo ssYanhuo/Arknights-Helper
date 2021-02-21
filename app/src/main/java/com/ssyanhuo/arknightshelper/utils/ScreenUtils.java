@@ -2,6 +2,7 @@ package com.ssyanhuo.arknightshelper.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.view.Surface;
 import android.view.WindowManager;
 
@@ -64,5 +65,11 @@ public class ScreenUtils {
         }else {
             return MODE_PORTRAIT;
         }
+    }
+    public static int getStatusBarHeight(Context context) {
+        Resources resources = context.getResources();
+        int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
+        int height = resources.getDimensionPixelSize(resourceId);
+        return height;
     }
 }

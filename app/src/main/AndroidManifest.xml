@@ -31,6 +31,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Default"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activity.MainActivity2"
+            android:theme="@style/AppTheme2">
+        </activity>
+
         <service
             android:name=".service.ScreenCaptureService"
             android:enabled="true"

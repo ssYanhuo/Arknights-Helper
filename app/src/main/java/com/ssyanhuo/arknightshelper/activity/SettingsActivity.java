@@ -61,13 +61,13 @@ import com.ssyanhuo.arknightshelper.BuildConfig;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.entity.StaticData;
 import com.ssyanhuo.arknightshelper.service.OverlayService;
-import com.ssyanhuo.arknightshelper.utils.OCRUtils;
-import com.ssyanhuo.arknightshelper.utils.ScreenUtils;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
+import com.ssyanhuo.arknightshelper.utils.I18nUtils;
+import com.ssyanhuo.arknightshelper.utils.OCRUtils;
 import com.ssyanhuo.arknightshelper.utils.PackageUtils;
 import com.ssyanhuo.arknightshelper.utils.PythonUtils;
+import com.ssyanhuo.arknightshelper.utils.ScreenUtils;
 import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
-import com.ssyanhuo.arknightshelper.utils.I18nUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -79,6 +79,8 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SettingsActivity extends AppCompatActivity {
     final String GAME_OFFICIAL = "0";
@@ -95,7 +97,7 @@ public class SettingsActivity extends AppCompatActivity {
     static final String TAG = "SettingsActivity";
     static boolean updateSucceed = false;
 
-    private void preNotifyThemeChanged(){
+    private void preNotifyThemeChanged() {
         setTheme(ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_MAIN, getApplicationContext()));
     }
 
@@ -129,29 +131,46 @@ public class SettingsActivity extends AppCompatActivity {
 
 
     public static class SettingsFragment extends PreferenceFragmentCompat {
+        Preference long_press_back_to_game;
+        ListPreference game_version;
+        Preference margin_fix;
+        Preference update_site;
+        Preference update_data;
+        ListPreference theme;
+        SeekBarPreference floating_button_opacity;
+        ListPreference game_language;
+        Preference button_img;
+        SwitchPreference disable_planner;
+        SwitchPreference enable_dark_mode;
+        SwitchPreference emulator_mode;
+        Preference add_shortcut;
+        SwitchPreference auto_catch_screen;
+
+
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             final Activity activity = getActivity();
             setPreferencesFromResource(R.xml.preferences, rootKey);
-            if(preferences.getBoolean("enable_dark_mode", false)){
+            if (preferences.getBoolean("enable_dark_mode", false)) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-            }else {
+            } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
-            Preference long_press_back_to_game = findPreference("long_press_back_to_game");
-            ListPreference game_version = findPreference("game_version");
-            final Preference margin_fix = findPreference("margin_fix");
-            final Preference update_site = findPreference("update_site");
-            final Preference update_data = findPreference("update_data");
-            final ListPreference theme = findPreference("theme");
-            final SeekBarPreference floating_button_opacity = findPreference("floating_button_opacity");
-            final ListPreference game_language = findPreference("game_language");
-            final Preference button_img = findPreference("button_img");
-            final SwitchPreference disable_planner = findPreference("disable_planner");
-            final SwitchPreference enable_dark_mode = findPreference("enable_dark_mode");
-            final SwitchPreference emulator_mode = findPreference("emulator_mode");
-            final Preference add_shortcut = findPreference("add_shortcut");
-            final SwitchPreference auto_catch_screen = findPreference("auto_catch_screen");
+
+            long_press_back_to_game = findPreference("long_press_back_to_game");
+            game_version = findPreference("game_version");
+            margin_fix = findPreference("margin_fix");
+            update_site = findPreference("update_site");
+            update_data = findPreference("update_data");
+            theme = findPreference("theme");
+            floating_button_opacity = findPreference("floating_button_opacity");
+            game_language = findPreference("game_language");
+            button_img = findPreference("button_img");
+            disable_planner = findPreference("disable_planner");
+            enable_dark_mode = findPreference("enable_dark_mode");
+            emulator_mode = findPreference("emulator_mode");
+            add_shortcut = findPreference("add_shortcut");
+            auto_catch_screen = findPreference("auto_catch_screen");
             margin_fix.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @SuppressLint("SourceLockedOrientationActivity")
                 @Override
@@ -165,14 +184,16 @@ public class SettingsActivity extends AppCompatActivity {
                     return false;
                 }
             });
-            if (PackageUtils.getGameCount(getContext()) < 2){
+            if (PackageUtils.getGameCount(getContext()) < 2) {
                 game_version.setVisible(false);
-            }else {
+            } else {
                 ArrayList<Integer> index = new ArrayList<>();
                 CharSequence[] entryValues = game_version.getEntryValues();
                 for (int i = 0; i < entryValues.length; i++) {
                     CharSequence packageName = entryValues[i];
-                    if (packageName == StaticData.Const.PACKAGE_MANUAL){continue;}
+                    if (packageName == StaticData.Const.PACKAGE_MANUAL) {
+                        continue;
+                    }
                     if (checkApplication((String) packageName)) {
                         index.add(i);
                     }
@@ -192,31 +213,31 @@ public class SettingsActivity extends AppCompatActivity {
                     @Override
                     public boolean onPreferenceChange(Preference preference, Object newValue) {
                         final String oldLang = preferences.getString("game_language", I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE);
-                        if (newValue.equals(StaticData.Const.PACKAGE_ENGLISH)){
-                            preferences.edit().putString("game_language", I18nUtils.LANGUAGE_ENGLISH).putBoolean("need_reload",true).apply();
+                        if (newValue.equals(StaticData.Const.PACKAGE_ENGLISH)) {
+                            preferences.edit().putString("game_language", I18nUtils.LANGUAGE_ENGLISH).putBoolean("need_reload", true).apply();
                             game_language.setValue(I18nUtils.LANGUAGE_ENGLISH);
                             Snackbar.make(getView(), "游戏语言已自动设置为英语", Snackbar.LENGTH_LONG)
                                     .setAction(R.string.undo, new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            preferences.edit().putString("game_language", oldLang).putBoolean("need_reload",true).apply();
+                                            preferences.edit().putString("game_language", oldLang).putBoolean("need_reload", true).apply();
                                             game_language.setValue(oldLang);
                                         }
                                     })
                                     .show();
-                        }else if (newValue.equals(StaticData.Const.PACKAGE_JAPANESE)){
-                            preferences.edit().putString("game_language", I18nUtils.LANGUAGE_JAPANESE).putBoolean("need_reload",true).apply();
+                        } else if (newValue.equals(StaticData.Const.PACKAGE_JAPANESE)) {
+                            preferences.edit().putString("game_language", I18nUtils.LANGUAGE_JAPANESE).putBoolean("need_reload", true).apply();
                             game_language.setValue(I18nUtils.LANGUAGE_JAPANESE);
                             Snackbar.make(getView(), "游戏语言已自动设置为日文", Snackbar.LENGTH_LONG)
                                     .setAction(R.string.undo, new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            preferences.edit().putString("game_language", oldLang).putBoolean("need_reload",true).apply();
+                                            preferences.edit().putString("game_language", oldLang).putBoolean("need_reload", true).apply();
                                             game_language.setValue(oldLang);
                                         }
                                     })
                                     .show();
-                        }else if (newValue.equals(StaticData.Const.PACKAGE_KOREAN)){
+                        } else if (newValue.equals(StaticData.Const.PACKAGE_KOREAN)) {
                             //TODO Unfinished
                         }
 
@@ -244,10 +265,11 @@ public class SettingsActivity extends AppCompatActivity {
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     preferences.edit().putBoolean("allowAutoTheme", false).apply();
                     try {
-                        preferences.edit().putBoolean("need_reload",true).apply();
+                        preferences.edit().putBoolean("need_reload", true).apply();
                         getActivity().recreate();
+                        freezeUISettings();
                         restartService();
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     return true;
@@ -256,8 +278,8 @@ public class SettingsActivity extends AppCompatActivity {
             game_language.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if (!newValue.equals(I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE)){
-                        preferences.edit().putBoolean("need_reload",true).apply();
+                    if (!newValue.equals(I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE)) {
+                        preferences.edit().putBoolean("need_reload", true).apply();
                         Snackbar.make(getView(), R.string.ocr_not_available_in_other_languages, Snackbar.LENGTH_SHORT).show();
                     }
                     return true;
@@ -266,11 +288,11 @@ public class SettingsActivity extends AppCompatActivity {
             button_img.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(final Preference preference) {
-                        showButtonImagePicker(null);
+                    showButtonImagePicker(null);
                     return false;
                 }
             });
-            if (!PythonUtils.isSupported()){
+            if (!PythonUtils.isSupported()) {
                 disable_planner.setVisible(false);
             }
             disable_planner.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -280,19 +302,20 @@ public class SettingsActivity extends AppCompatActivity {
                     return true;
                 }
             });
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
                 enable_dark_mode.setVisible(false);
             }
             enable_dark_mode.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if(Boolean.valueOf(newValue.toString())){
+                    if (Boolean.valueOf(newValue.toString())) {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-                    }else {
+                    } else {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     }
-                    activity.recreate();
                     restartService();
+                    freezeUISettings();
+                    activity.recreate();
                     return true;
                 }
             });
@@ -303,70 +326,111 @@ public class SettingsActivity extends AppCompatActivity {
                     return true;
                 }
             });
-            if (PackageUtils.getGameCount(getContext()) <= 0){
+            if (PackageUtils.getGameCount(getContext()) <= 0) {
                 add_shortcut.setVisible(false);
             }
             add_shortcut.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
 
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                        final ArrayList<String> packageList = PackageUtils.getGamePackageNameList(getContext());
-                        final ArrayList<String> nameList = PackageUtils.getGameNameList(getContext());
-                        builder.setSingleChoiceItems(nameList.toArray(new String[nameList.size()]), 0, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                final int index = which;
-                                int padding = activity.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
-                                final EditText editText = new EditText(activity);
-                                editText.setHint("明日方舟 " + nameList.get(index));
-                                //editText.setPadding(padding, padding, padding, padding);
-                                AlertDialog dialog1 = new AlertDialog.Builder(activity)
-                                        .setTitle("设置快捷方式名")
-                                        .setView(editText)
-                                        .setPositiveButton("好", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                if (editText.getText().toString().equals("")){
-                                                    PackageUtils.addShortCut(getContext(), packageList.get(index), "明日方舟 " + nameList.get(index));
-                                                }else {
-                                                    PackageUtils.addShortCut(getContext(), packageList.get(index), editText.getText().toString());
-                                                }
-
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    final ArrayList<String> packageList = PackageUtils.getGamePackageNameList(getContext());
+                    final ArrayList<String> nameList = PackageUtils.getGameNameList(getContext());
+                    builder.setSingleChoiceItems(nameList.toArray(new String[nameList.size()]), 0, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            final int index = which;
+                            int padding = activity.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
+                            final EditText editText = new EditText(activity);
+                            editText.setHint("明日方舟 " + nameList.get(index));
+                            //editText.setPadding(padding, padding, padding, padding);
+                            AlertDialog dialog1 = new AlertDialog.Builder(activity)
+                                    .setTitle("设置快捷方式名")
+                                    .setView(editText)
+                                    .setPositiveButton("好", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            if (editText.getText().toString().equals("")) {
+                                                PackageUtils.addShortCut(getContext(), packageList.get(index), "明日方舟 " + nameList.get(index));
+                                            } else {
+                                                PackageUtils.addShortCut(getContext(), packageList.get(index), editText.getText().toString());
                                             }
-                                        })
-                                        .create();
 
-                                dialog1.show();
-                                FrameLayout.MarginLayoutParams marginLayoutParams = (FrameLayout.MarginLayoutParams) editText.getLayoutParams();
-                                marginLayoutParams.setMargins(padding,0, padding, 0);
-                                editText.setLayoutParams(marginLayoutParams);
+                                        }
+                                    })
+                                    .create();
 
-                                dialog1.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(activity, R.color.colorAccent));
+                            dialog1.show();
+                            FrameLayout.MarginLayoutParams marginLayoutParams = (FrameLayout.MarginLayoutParams) editText.getLayoutParams();
+                            marginLayoutParams.setMargins(padding, 0, padding, 0);
+                            editText.setLayoutParams(marginLayoutParams);
 
-                                dialog.dismiss();
-                            }
-                        })
-                                .setTitle("选择要启动的游戏")
-                                .show();
+                            dialog1.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(activity, R.color.colorAccent));
+
+                            dialog.dismiss();
+                        }
+                    })
+                            .setTitle("选择要启动的游戏")
+                            .show();
 
 
                     return true;
                 }
             });
-            if (!OCRUtils.isAbiSupported() || !OCRUtils.isLanguageSupported(getActivity())){
+            floating_button_opacity.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(final Preference preference, Object newValue) {
+                    restartService();
+                    freezeUISettings();
+                    return true;
+                }
+            });
+            if (!OCRUtils.isAbiSupported() || !OCRUtils.isLanguageSupported(getActivity())) {
                 auto_catch_screen.setVisible(false);
             }
+
+        }
+
+        private void freezeUISettings() {
+            final CharSequence title1 = floating_button_opacity.getTitle();
+            final CharSequence title2 = enable_dark_mode.getTitle();
+            final CharSequence title3 = theme.getTitle();
+            floating_button_opacity.setEnabled(false);
+            enable_dark_mode.setEnabled(false);
+            theme.setEnabled(false);
+            floating_button_opacity.setTitle("正在应用……");
+            enable_dark_mode.setTitle("正在应用……");
+            theme.setTitle("正在应用……");
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    try {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                floating_button_opacity.setEnabled(true);
+                                floating_button_opacity.setTitle(title1);
+                                enable_dark_mode.setEnabled(true);
+                                enable_dark_mode.setTitle(title2);
+                                theme.setEnabled(true);
+                                theme.setTitle(title3);
+                            }
+                        });
+                    } catch (Exception ignored) {
+                    }
+
+                }
+            }, 3000);
         }
 
         @Override
         public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
             super.onActivityResult(requestCode, resultCode, data);
             //Toast.makeText(getContext(), Uri.fromFile(new File(data.getData().getPath())).toString(), Toast.LENGTH_SHORT).show();
-            if (requestCode == 0 && data != null){
-                try{
+            if (requestCode == 0 && data != null) {
+                try {
                     Intent intent;
-                    if (!data.getDataString().contains("com.miui.gallery.open")){
+                    if (!data.getDataString().contains("com.miui.gallery.open")) {
                         intent = new Intent("com.android.camera.action.CROP");
                         intent.setDataAndType(data.getData(), "image/*");
                         intent.putExtra("aspectX", 256);
@@ -376,7 +440,7 @@ public class SettingsActivity extends AppCompatActivity {
                         intent.putExtra("scale", true);
                         intent.putExtra("return-data", true);
                         File outputFile = new File(getContext().getCacheDir().getPath() + File.separator + "images" + File.separator + "button.png");
-                        if (!outputFile.getParentFile().exists()){
+                        if (!outputFile.getParentFile().exists()) {
                             outputFile.getParentFile().mkdirs();
                         }
 //                    if (!outputFile.exists()){
@@ -392,10 +456,9 @@ public class SettingsActivity extends AppCompatActivity {
                             getContext().grantUriPermission(info.activityInfo.packageName,
                                     outputUri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                         }
-                    }
-                    else{
+                    } else {
                         intent = new Intent("com.android.camera.action.CROP");
-                        intent.setComponent(new ComponentName("com.miui.gallery","com.miui.gallery.editor.photo.app.CropperActivity"));
+                        intent.setComponent(new ComponentName("com.miui.gallery", "com.miui.gallery.editor.photo.app.CropperActivity"));
                         intent.setDataAndType(data.getData(), "image/*");
                         intent.putExtra("aspectX", 256);
                         intent.putExtra("aspectY", 256);
@@ -404,7 +467,7 @@ public class SettingsActivity extends AppCompatActivity {
                         intent.putExtra("scale", true);
                         intent.putExtra("return-data", true);
                         File outputFile = new File(getContext().getCacheDir().getPath() + File.separator + "images" + File.separator + "button.png");
-                        if (!outputFile.getParentFile().exists()){
+                        if (!outputFile.getParentFile().exists()) {
                             outputFile.getParentFile().mkdirs();
                         }
                         Uri outputUri = FileProvider.getUriForFile(getContext(), "com.ssyanhuo.arknightshelper.fileprovider", outputFile);
@@ -445,17 +508,18 @@ public class SettingsActivity extends AppCompatActivity {
 //                    }
                     //intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                     startActivityForResult(intent, 1);
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(getContext(), R.string.setting_button_image_error, Toast.LENGTH_SHORT).show();
                 }
 
-            }if (requestCode == 1 && data != null){
+            }
+            if (requestCode == 1 && data != null) {
                 showButtonImagePicker(data);
             }
         }
 
-        private void showButtonImagePicker(@Nullable Intent data){
+        private void showButtonImagePicker(@Nullable Intent data) {
             LinearLayout linearLayout = new LinearLayout(getActivity());
             final ImageView imageView = new ImageView(getActivity());
             CheckBox checkBox = new CheckBox(getActivity());
@@ -465,7 +529,7 @@ public class SettingsActivity extends AppCompatActivity {
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked){
+                    if (isChecked) {
                         //TODO 裁切
                     }
                 }
@@ -475,41 +539,42 @@ public class SettingsActivity extends AppCompatActivity {
             //imageView.setPadding(padding, padding, padding, padding);
             imageView.setClickable(true);
             imageView.setFocusable(true);
-            if (data == null){
-                if (preferences.getBoolean("button_img", false)){
-                    try{
+            if (data == null) {
+                if (preferences.getBoolean("button_img", false)) {
+                    try {
                         ColorDrawable drawable1 = new ColorDrawable();
                         drawable1.setColor(Color.WHITE);
                         Drawable drawable2 = Drawable.createFromPath(getContext().getFilesDir().getPath() + File.separator + "button.png");
                         imageView.setBackground(new LayerDrawable(new Drawable[]{drawable1, drawable2}));
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }else {
+                } else {
                     imageView.setImageResource(R.mipmap.overlay_button);
                 }
-            }else {
+            } else {
                 try {
                     ColorDrawable drawable1 = new ColorDrawable();
                     drawable1.setColor(Color.WHITE);
                     Drawable drawable2 = BitmapDrawable.createFromPath(getContext().getCacheDir().getPath() + File.separator + "images" + File.separator + "button.png");
                     imageView.setBackground(new LayerDrawable(new Drawable[]{drawable1, drawable2}));
-                }catch (Exception e){
+                } catch (Exception e) {
                     imageView.setImageResource(R.mipmap.overlay_button);
                 }
 
             }
-            final Bitmap finalBitmap = BitmapFactory.decodeFile(getContext().getCacheDir().getPath() + File.separator + "images" + File.separator + "button.png");;
+            final Bitmap finalBitmap = BitmapFactory.decodeFile(getContext().getCacheDir().getPath() + File.separator + "images" + File.separator + "button.png");
+            ;
             final AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.setting_button_image_pick_image)
                     .setView(linearLayout)
                     .setPositiveButton(R.string.setting_button_image_pick_image_confirm, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            if(finalBitmap != null){
+                            if (finalBitmap != null) {
                                 try {
                                     File outPutPic = new File(getContext().getFilesDir().getPath() + File.separator + "button.png");
-                                    if (!outPutPic.exists()){
+                                    if (!outPutPic.exists()) {
                                         outPutPic.createNewFile();
                                     }
                                     FileOutputStream outputStream = new FileOutputStream(outPutPic);
@@ -561,12 +626,15 @@ public class SettingsActivity extends AppCompatActivity {
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) imageView.getLayoutParams();
             lp.height = ScreenUtils.dip2px(getContext(), 48);
             lp.width = ScreenUtils.dip2px(getContext(), 48);
-            lp.topMargin = padding; lp.bottomMargin = padding; lp.leftMargin = padding; lp.rightMargin = padding;
+            lp.topMargin = padding;
+            lp.bottomMargin = padding;
+            lp.leftMargin = padding;
+            lp.rightMargin = padding;
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setOutlineProvider(new ViewOutlineProvider() {
                 @Override
                 public void getOutline(View view, Outline outline) {
-                    outline.setOval(0,0, ScreenUtils.dip2px(getContext(), 48), ScreenUtils.dip2px(getContext(), 48));
+                    outline.setOval(0, 0, ScreenUtils.dip2px(getContext(), 48), ScreenUtils.dip2px(getContext(), 48));
                 }
             });
             imageView.setClipToOutline(true);
@@ -578,16 +646,17 @@ public class SettingsActivity extends AppCompatActivity {
 
         }
 
-        private Bitmap clipToCircle(Bitmap bitmap){
+        private Bitmap clipToCircle(Bitmap bitmap) {
             //Canvas canvas = new Canvas(bitmap);
             return bitmap;
         }
 
-        private void restartService(){
-            List<ActivityManager.RunningServiceInfo> runningServiceInfoList = ((ActivityManager)getContext().getSystemService(Context.ACTIVITY_SERVICE)).getRunningServices(Integer.MAX_VALUE);
-            if(runningServiceInfoList.size() > 0){
-                for (int i = 0; i < runningServiceInfoList.size(); i++){
-                    if(runningServiceInfoList.get(i).service.getClassName().equals("com.ssyanhuo.arknightshelper.service.OverlayService")){
+
+        private void restartService() {
+            List<ActivityManager.RunningServiceInfo> runningServiceInfoList = ((ActivityManager) getContext().getSystemService(Context.ACTIVITY_SERVICE)).getRunningServices(Integer.MAX_VALUE);
+            if (runningServiceInfoList.size() > 0) {
+                for (int i = 0; i < runningServiceInfoList.size(); i++) {
+                    if (runningServiceInfoList.get(i).service.getClassName().equals("com.ssyanhuo.arknightshelper.service.OverlayService")) {
                         Intent intent = new Intent(getContext(), OverlayService.class);
                         getContext().stopService(intent);
                         getContext().startService(intent);
@@ -597,11 +666,11 @@ public class SettingsActivity extends AppCompatActivity {
             }
         }
 
-        private void stopService(){
-            List<ActivityManager.RunningServiceInfo> runningServiceInfoList = ((ActivityManager)getContext().getSystemService(Context.ACTIVITY_SERVICE)).getRunningServices(Integer.MAX_VALUE);
-            if(runningServiceInfoList.size() > 0){
-                for (int i = 0; i < runningServiceInfoList.size(); i++){
-                    if(runningServiceInfoList.get(i).service.getClassName().equals("com.ssyanhuo.arknightshelper.service.OverlayService")){
+        private void stopService() {
+            List<ActivityManager.RunningServiceInfo> runningServiceInfoList = ((ActivityManager) getContext().getSystemService(Context.ACTIVITY_SERVICE)).getRunningServices(Integer.MAX_VALUE);
+            if (runningServiceInfoList.size() > 0) {
+                for (int i = 0; i < runningServiceInfoList.size(); i++) {
+                    if (runningServiceInfoList.get(i).service.getClassName().equals("com.ssyanhuo.arknightshelper.service.OverlayService")) {
                         Intent intent = new Intent(getContext(), OverlayService.class);
                         getContext().stopService(intent);
                         return;
@@ -610,16 +679,17 @@ public class SettingsActivity extends AppCompatActivity {
             }
         }
 
-        private class UpdateRunnable implements Runnable{
+        private class UpdateRunnable implements Runnable {
             String BASE_URL_GITEE = "http://ssyanhuo.gitee.io/arknights-helper-data/";
             String BASE_URL_GITHUB = "https://ssyanhuo.github.io/Arknights-Helper-Data/";
+
             @Override
             public void run() {
                 String site = preferences.getString("update_site", "0");
                 String BaseURL;
-                if (site.equals(SITE_GITEE)){
+                if (site.equals(SITE_GITEE)) {
                     BaseURL = BASE_URL_GITEE;
-                }else {
+                } else {
                     BaseURL = BASE_URL_GITHUB;
                 }
                 Log.e(TAG, site);
@@ -627,7 +697,7 @@ public class SettingsActivity extends AppCompatActivity {
                     String indexString = URLRequest(BaseURL + "/index.json");
                     JSONArray indexArray = JSONArray.parseArray(indexString);
                     JSONObject latestObject = indexArray.getJSONObject(0);
-                    if (latestObject.getIntValue("versionMax") > BuildConfig.VERSION_CODE){
+                    if (latestObject.getIntValue("versionMax") > BuildConfig.VERSION_CODE) {
                         Snackbar.make(getView(), R.string.settings_data_update_success, Snackbar.LENGTH_SHORT).show();
                         throw new IllegalStateException("Please update application.");
                     }
@@ -636,7 +706,7 @@ public class SettingsActivity extends AppCompatActivity {
                     String selectedList = URLRequest(BaseURL + selectedVersion + "/datainfo.json");
                     //获取文件
                     JSONArray selectedArray = JSONArray.parseArray(selectedList);
-                    for(int i = 0; i < selectedArray.size(); i++){
+                    for (int i = 0; i < selectedArray.size(); i++) {
                         JSONObject selectedObj = selectedArray.getJSONObject(i);
                         String objURL = selectedObj.getString("name");
                         String result = URLRequest(BaseURL + selectedVersion + objURL);
@@ -646,9 +716,9 @@ public class SettingsActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             updateSucceed = true;
-                            try{
+                            try {
                                 updateDialog.dismiss();
-                            }catch (Exception e){
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                             Snackbar.make(getView(), R.string.settings_data_update_success, Snackbar.LENGTH_SHORT).show();
@@ -656,7 +726,7 @@ public class SettingsActivity extends AppCompatActivity {
                         }
                     });
                     Log.i(TAG, "Update finished!");
-                }catch (final Exception e){
+                } catch (final Exception e) {
                     e.printStackTrace();
                     handler.post(new Runnable() {
                         @Override
@@ -671,6 +741,7 @@ public class SettingsActivity extends AppCompatActivity {
                     });
                 }
             }
+
             private String URLRequest(String site) throws Exception {
                 URL url = new URL(site);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -681,16 +752,17 @@ public class SettingsActivity extends AppCompatActivity {
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                 byte[] buffer = new byte[1024];
                 int len;
-                while ((len = inputStream.read(buffer)) != -1){
-                    outputStream.write(buffer, 0,len);
+                while ((len = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, len);
                 }
                 inputStream.close();
                 byte[] data = outputStream.toByteArray();
                 return new String(data, StandardCharsets.UTF_8);
             }
         }
+
         public boolean checkApplication(String packageName) {
-            if (packageName == null || "".equals(packageName)){
+            if (packageName == null || "".equals(packageName)) {
                 return false;
             }
             try {

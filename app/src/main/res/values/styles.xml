@@ -1,6 +1,46 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- 默认主题 -->
+    <style name="AppTheme2" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor" tools:ignore="NewApi">@color/colorBackground</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+        <item name="android:navigationBarColor" tools:ignore="NewApi">@color/colorBackground</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
+        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">?attr/colorControlHighlight</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
+    </style>
+    <style name="AppTheme2.CardView.Accent" parent="Widget.MaterialComponents.CardView">
+        <item name="cardElevation">2dp</item>
+        <item name="cardBackgroundColor">@color/colorAccent2</item>
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="android:padding">@dimen/activity_horizontal_margin</item>
+    </style>
+    <style name="AppTheme2.CardView.Secondary" parent="Widget.MaterialComponents.CardView">
+        <item name="cardElevation">0dp</item>
+        <item name="cardBackgroundColor">@android:color/white</item>
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="android:padding">@dimen/activity_horizontal_margin</item>
+    </style>
+    <style name="AppTheme2.CardView.Normal" parent="Widget.MaterialComponents.CardView">
+        <item name="cardElevation">2dp</item>
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="android:padding">@dimen/activity_horizontal_margin</item>
+    </style>
+    <style name="AppTheme2.CardView.Unimportant" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@android:color/transparent</item>
+        <item name="cardElevation">0dp</item>
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="android:padding">@dimen/activity_horizontal_margin</item>
+    </style>
+    <style name="AppTheme2.BottomSheetDialogFragment" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppBottomSheetStyle</item>
+    </style>
+    <style name="AppBottomSheetStyle" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="backgroundTint">@android:color/transparent</item>
+    </style>
     <style name="AppTheme.Default" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>

@@ -234,16 +234,6 @@ public class OverlayService extends Service {
                 }
             }
         }, 1000, 1000);
-        Timer opacityListener = new Timer();
-        opacityListener.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if (preferences.getInt("floating_button_opacity", 0) != floatingButtonOpacity){
-                    setFloatingButtonAlpha(preferences.getInt("floating_button_opacity", 0));
-                    floatingButtonOpacity = preferences.getInt("floating_button_opacity", 0);
-                }
-            }
-        }, 2000, 2000);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -278,7 +268,7 @@ public class OverlayService extends Service {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             button.setForeground(new RippleDrawable(ColorStateList.valueOf(Color.GRAY), null, null));
         }
-        setFloatingButtonAlpha(preferences.getInt("floating_button_opacity", 0));
+        button.setAlpha((255 - ((float)preferences.getInt("floating_button_opacity", 0))) / 255);
         button.setOnTouchListener(new View.OnTouchListener() {
             int downX;
             int downY;
@@ -348,6 +338,22 @@ public class OverlayService extends Service {
                         y = (int) motionEvent.getRawY();
                         downX = lastX = buttonLayoutParams.x;
                         downY = lastY = buttonLayoutParams.y;
+                        //对旋转屏幕后超出边界的情况做修正
+                        int screenWidth = ScreenUtils.getScreenWidth(contextThemeWrapper);
+                        int screenHeight = ScreenUtils.getScreenHeight(contextThemeWrapper);
+                        if(buttonLayoutParams.x > screenWidth){
+                            buttonLayoutParams.x = screenWidth;
+                        }
+                        if(buttonLayoutParams.x < 0){
+                            buttonLayoutParams.x = 0;
+                        }
+                        if(buttonLayoutParams.y > screenHeight){
+                            buttonLayoutParams.y = screenHeight;
+                        }
+                        if(buttonLayoutParams.y < 0){
+                            buttonLayoutParams.y = 0;
+                        }
+                        windowManager.updateViewLayout(view, buttonLayoutParams);
                         downTime = System.currentTimeMillis();
                         break;
                     case MotionEvent.ACTION_MOVE:
@@ -357,8 +363,10 @@ public class OverlayService extends Service {
                         int movedY = nowY - y;
                         x = nowX;
                         y = nowY;
-                        buttonLayoutParams.x = lastX = buttonLayoutParams.x + movedX;
-                        buttonLayoutParams.y = lastY = buttonLayoutParams.y + movedY;
+                        int[] location = new int[2];
+                        view.getLocationOnScreen(location);
+                        buttonLayoutParams.x = lastX = nowX - view.getWidth() / 2;
+                        buttonLayoutParams.y = lastY = nowY - ScreenUtils.getStatusBarHeight(contextThemeWrapper) - view.getHeight() / 2;
                         // 更新悬浮窗控件布局
                         windowManager.updateViewLayout(view, buttonLayoutParams);
                         break;
@@ -498,9 +506,6 @@ public class OverlayService extends Service {
         windowManager.addView(pinnedWindow, pinnedWindowLayoutParams);
     }
 
-    public void setFloatingButtonAlpha(int opacity){
-        button.setAlpha((255 - ((float)opacity)) / 255);
-    }
 
     public void floatingWindowPreProcess(){
         themeNow = String.valueOf(ThemeUtils.getThemeMode(contextThemeWrapper));

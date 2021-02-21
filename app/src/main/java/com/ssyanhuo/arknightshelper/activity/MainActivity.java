@@ -382,6 +382,9 @@ public class MainActivity extends AppCompatActivity {
 //        Intent intent = new Intent(this, IntroActivity.class);
 //        startActivity(intent);
 //        finish();
+//        Intent intent = new Intent(this, MainActivity2.class);
+//        startActivity(intent);
+//        finish();
         activity = this;
         bottomAppBar = findViewById(R.id.bottomAppBar);
         bottomProgressBar = findViewById(R.id.bottom_progressBar);
@@ -546,10 +549,6 @@ public class MainActivity extends AppCompatActivity {
 //        materialShowcaseSequence.singleUse("FIRST_RUN");
 //        materialShowcaseSequence.start();
         int upCount = preferences.getInt("up_count", 0);
-        switch (upCount){
-            default:
-                break;
-        }
 
         int upCountFromLastUpdate = preferences.getInt("up_count_from_last_update", 0);
         //TODO 用两个变量保存上次和这次的版本号

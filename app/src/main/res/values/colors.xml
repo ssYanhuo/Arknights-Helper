@@ -20,4 +20,10 @@
     <color name="colorCheckBoxLime">#CDDC39</color>
     <color name="colorAppBar">#FFFFFF</color>
     <color name="colorAppBarDark">#BBBBBB</color>
+    <color name="colorPrimary2">#E65100</color>
+    <color name="colorAccent2">#FB8C00</color>
+    <color name="colorCardSecondaryBackground">#FFF3E0</color>
+    <color name="colorBackground">#F2F2F2</color>
+    <color name="colorTextPrimary2">#606060</color>
+    <color name="colorCardUnimportantBackground">#E0E0E0</color>
 </resources>
