@@ -341,14 +341,14 @@ public class OverlayService extends Service {
                         //对旋转屏幕后超出边界的情况做修正
                         int screenWidth = ScreenUtils.getScreenWidth(contextThemeWrapper);
                         int screenHeight = ScreenUtils.getScreenHeight(contextThemeWrapper);
-                        if(buttonLayoutParams.x > screenWidth){
-                            buttonLayoutParams.x = screenWidth;
+                        if(buttonLayoutParams.x > screenWidth - view.getWidth()){
+                            buttonLayoutParams.x = screenWidth- view.getWidth();
                         }
                         if(buttonLayoutParams.x < 0){
                             buttonLayoutParams.x = 0;
                         }
-                        if(buttonLayoutParams.y > screenHeight){
-                            buttonLayoutParams.y = screenHeight;
+                        if(buttonLayoutParams.y > screenHeight - view.getHeight()){
+                            buttonLayoutParams.y = screenHeight - view.getHeight();
                         }
                         if(buttonLayoutParams.y < 0){
                             buttonLayoutParams.y = 0;
@@ -363,10 +363,8 @@ public class OverlayService extends Service {
                         int movedY = nowY - y;
                         x = nowX;
                         y = nowY;
-                        int[] location = new int[2];
-                        view.getLocationOnScreen(location);
-                        buttonLayoutParams.x = lastX = nowX - view.getWidth() / 2;
-                        buttonLayoutParams.y = lastY = nowY - ScreenUtils.getStatusBarHeight(contextThemeWrapper) - view.getHeight() / 2;
+                        buttonLayoutParams.x = lastX = buttonLayoutParams.x + movedX;
+                        buttonLayoutParams.y = lastY = buttonLayoutParams.y + movedY;
                         // 更新悬浮窗控件布局
                         windowManager.updateViewLayout(view, buttonLayoutParams);
                         break;
@@ -390,11 +388,11 @@ public class OverlayService extends Service {
                             int rotation = windowManager.getDefaultDisplay().getRotation();
                             if ((rotation == 1 || rotation == 3)) {
                                 if (upX >= displayMetrics.widthPixels * 0.75){
-                                    upX = displayMetrics.widthPixels;
+                                    upX = displayMetrics.widthPixels - view.getWidth();
                                 }else if (upX <= displayMetrics.widthPixels * 0.25){
                                     upX = 0;
                                 }else if (upY >= displayMetrics.heightPixels / 2){
-                                    upY = displayMetrics.heightPixels;
+                                    upY = displayMetrics.heightPixels - view.getHeight();
                                 }else {
                                     upY = 0;
                                 }
@@ -407,11 +405,11 @@ public class OverlayService extends Service {
                             }else {
 
                                 if (upY >= displayMetrics.heightPixels * 0.75){
-                                    upY = displayMetrics.heightPixels;
+                                    upY = displayMetrics.heightPixels - view.getHeight();
                                 }else if (upY <= displayMetrics.heightPixels * 0.25){
                                     upY = 0;
                                 }else if (upX >= displayMetrics.widthPixels / 2){
-                                    upX = displayMetrics.widthPixels;
+                                    upX = displayMetrics.widthPixels - view.getWidth();
                                 }else {
                                     upX = 0;
                                 }

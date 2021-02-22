@@ -1,5 +1,5 @@
 {
-    "versionCode": 50,
-    "versionName": "RC-9.3",
-    "releaseNote": "[Info]更新到该版本建议清除软件数据后再使用\n[Fix]修复部分机型调节悬浮按钮透明度时崩溃的问题"
+    "versionCode": 51,
+    "versionName": "RC-9.4",
+    "releaseNote": "[Info]更新到该版本建议清除软件数据后再使用\n[Fix]修复横屏状态下悬浮按钮偏移的问题\n[Fix]修复横竖屏切换后悬浮按钮要拖动很长距离才能移动的问题\n[Fix]修复部分机型调节悬浮按钮透明度时崩溃的问题"
 }
