@@ -89,7 +89,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     static final String SITE_GITEE = "0";
     static final String SITE_GITHUB = "1";
     static SharedPreferences preferences;
-    static Handler handler;
+    static Handler handler = new Handler();
     static LinearLayout updateLayout;
     static AlertDialog updateDialog;
     static final String TAG = "SettingsActivity";
@@ -555,7 +555,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         imageView.setOutlineProvider(new ViewOutlineProvider() {
             @Override
             public void getOutline(View view, Outline outline) {
-                outline.setOval(0,0, ScreenUtils.dip2px(getContext(), 48), ScreenUtils.dip2px(getContext(), 48));
+                outline.setOval(0,0, ScreenUtils.dip2px(getActivity(), 48), ScreenUtils.dip2px(getContext(), 48));
             }
         });
         imageView.setClipToOutline(true);

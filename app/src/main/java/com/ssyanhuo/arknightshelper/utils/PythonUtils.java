@@ -32,6 +32,9 @@ import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.entity.StaticData;
 
 import java.io.File;
+import java.util.Random;
+
+import static java.lang.System.currentTimeMillis;
 
 public class PythonUtils {
 
@@ -340,7 +343,7 @@ public class PythonUtils {
         String appLib;
         File appFile;
         StarSrvGroupClass srvGroup;
-        StarCoreFactory starcore;
+        StarCoreFactory starCore;
         StarServiceClass service;
         StarObjectClass python;
         StarObjectClass pythonSys;
@@ -351,8 +354,9 @@ public class PythonUtils {
         StarCoreFactoryPath.StarCoreCoreLibraryPath = appLib;
         StarCoreFactoryPath.StarCoreShareLibraryPath = appLib;
         StarCoreFactoryPath.StarCoreOperationPath = appFile.getPath();
-        starcore = StarCoreFactory.GetFactory();
-        service = starcore._InitSimple("python", "python", 0, 0);
+        starCore = StarCoreFactory.GetFactory();
+        int id = new Random(currentTimeMillis()).nextInt();
+        service = starCore._InitSimple("python", "python", id, id);
         srvGroup = (StarSrvGroupClass) service._Get("_ServiceGroup");
         service._CheckPassword(false);
         srvGroup._InitRaw("python36", service);

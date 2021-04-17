@@ -16,7 +16,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,16 +24,13 @@ import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.android.material.bottomappbar.BottomAppBar;
@@ -81,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     String themeNow = "0";
     int versionLast = -1;
     private LinearLayout startWithoutGame;
-    CoordinatorLayout snackbarContainer;
+    CoordinatorLayout snackBarContainer;
     Activity activity;
     private BottomAppBar bottomAppBar;
     private FloatingActionButton fab;
@@ -111,16 +107,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if ((!preferences.getBoolean("python_finished",false)) && PythonUtils.isSupported() && !preferences.getBoolean("disable_planner", false)){
-            PythonUtils.setupEnvironment(getApplicationContext(), MainActivity.this, snackbarContainer);
+            PythonUtils.setupEnvironment(getApplicationContext(), MainActivity.this, snackBarContainer);
             return;
         }
         if((preferences.getBoolean("python_finished",false)) && PythonUtils.isSupported() && !preferences.getBoolean("disable_planner", false) && PythonUtils.getPluginVersion(getApplicationContext()) < StaticData.Const.PLANNER_PLUGIN_MIN_VERSION){
-            PythonUtils.setupEnvironment(getApplicationContext(), MainActivity.this, snackbarContainer);
+            PythonUtils.setupEnvironment(getApplicationContext(), MainActivity.this, snackBarContainer);
             return;
         }
 
 
-        Snackbar.make(snackbarContainer, R.string.start_game, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(snackBarContainer, R.string.start_game, Snackbar.LENGTH_LONG).show();
         Timer timer = new Timer();
         final Handler handler = new Handler();
         timer.schedule(new TimerTask() {
@@ -136,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                     FileUtils.copyFileFromAssets(getApplicationContext(), getFilesDir().getPath() + File.separator + "python" + File.separator + "data", "matrix.json");
                 }
                 if((Build.BRAND.equals("Meizu") || Build.BRAND.equals("MEIZU") || Build.BRAND.equals("MeiZu") || Build.BRAND.equals("meizu")) && preferences.getBoolean("firstRun", true)){
-                    Snackbar.make(snackbarContainer, R.string.meizu_floating_window_permission, Snackbar.LENGTH_INDEFINITE).show();
+                    Snackbar.make(snackBarContainer, R.string.meizu_floating_window_permission, Snackbar.LENGTH_INDEFINITE).show();
                     editor.putBoolean("firstRun", false);
                     editor.apply();
                     return;
@@ -162,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                             Log.e(TAG, "Start service failed!", e);
                         }
                     }else {
-                        Snackbar.make(snackbarContainer, R.string.no_overlay_permission_error, Snackbar.LENGTH_INDEFINITE).setAction(R.string.no_overlay_permission_action, new View.OnClickListener() {
+                        Snackbar.make(snackBarContainer, R.string.no_overlay_permission_error, Snackbar.LENGTH_INDEFINITE).setAction(R.string.no_overlay_permission_action, new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
@@ -251,114 +247,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Deprecated
-    private void startEngine(final String game){
-        //new DataUpdateDialog().showDialog(getApplicationContext());
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-                AlertDialog.Builder builder=new AlertDialog.Builder(this);
-                builder.setCancelable(false)
-                        .setTitle(R.string.get_permission_storage_title)
-                        .setMessage(R.string.get_permission_storage_content)
-                        .setPositiveButton(R.string.get_permission_manually, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent();
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                intent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
-                                intent.setData(Uri.fromParts("package", getPackageName(), null));
-                                startActivity(intent);
-                            }
-                        });
-                builder.show();
-                return;
-            }
-        }
-
-        if ((!preferences.getBoolean("python_finished",false)) && PythonUtils.isSupported() && !preferences.getBoolean("disable_planner", false)){
-            PythonUtils.setupEnvironment(getApplicationContext(), MainActivity.this, snackbarContainer);
-            return;
-        }
-
-
-        Snackbar.make(snackbarContainer, R.string.start_game, Snackbar.LENGTH_LONG).show();
-        Timer timer = new Timer();
-        final Handler handler = new Handler();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                final SharedPreferences.Editor editor = preferences.edit();
-                Intent overlayServiceIntent = new Intent(getApplicationContext(), OverlayService.class);
-                Intent pythonServiceIntent = new Intent(getApplicationContext(), PythonService.class);
-                Looper.prepare();
-                if (preferences.getInt("versionLast", -1) != BuildConfig.VERSION_CODE || !FileUtils.checkFiles(getApplicationContext(), getFilesDir().getPath(), StaticData.Const.DATA_LIST) || ((!FileUtils.checkFiles(getApplicationContext(), getFilesDir().getPath() + File.separator + "python" + File.separator + "data", new String[]{"formula.json", "matrix.json"})) && preferences.getBoolean("disable_planner", false))){
-                    FileUtils.copyFilesFromAssets(getApplicationContext(), StaticData.Const.DATA_LIST);
-                    FileUtils.copyFileFromAssets(getApplicationContext(), getFilesDir().getPath() + File.separator + "python" + File.separator + "data", "formula.json");
-                    FileUtils.copyFileFromAssets(getApplicationContext(), getFilesDir().getPath() + File.separator + "python" + File.separator + "data", "matrix.json");
-                }
-                if((Build.BRAND.equals("Meizu") || Build.BRAND.equals("MEIZU") || Build.BRAND.equals("MeiZu") || Build.BRAND.equals("meizu")) && preferences.getBoolean("firstRun", true)){
-                    Snackbar.make(snackbarContainer, R.string.meizu_floating_window_permission, Snackbar.LENGTH_INDEFINITE).show();
-                    editor.putBoolean("firstRun", false);
-                    editor.apply();
-                    return;
-                }
-                editor.putBoolean("firstRun", false);
-                editor.apply();
-
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                    if(Settings.canDrawOverlays(getApplicationContext())){
-                        try{
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    //changeProgressbarMode(false);
-                                }
-                            });
-
-                            startService(overlayServiceIntent);
-                            if(PythonUtils.isSupported() && !preferences.getBoolean("disable_planner", false)){
-                                startService(pythonServiceIntent);
-                            }
-                        }catch (Exception e){
-                            Log.e(TAG, "Start service failed!", e);
-                        }
-                    }else {
-                        Snackbar.make(snackbarContainer, R.string.no_overlay_permission_error, Snackbar.LENGTH_INDEFINITE).setAction(R.string.no_overlay_permission_action, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
-                                startActivity(intent);
-                            }
-                        }).show();
-                        return;
-                    }
-                } else {
-                    try{
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                //changeProgressbarMode(false);
-                            }
-                        });
-                        startService(overlayServiceIntent);
-                        if(PythonUtils.isSupported() && !preferences.getBoolean("disable_planner", false)){
-                            startService(pythonServiceIntent);
-                        }
-                    }catch (Exception e){
-                        Log.e(TAG, "Start service failed!", e);
-                    }
-                }
-                PackageUtils.startApplication(game, activity);
-                Looper.loop();
-            }
-        }, 200);
-        versionLast = preferences.getInt("versionLast", -1);
-        if (versionLast == -1 && versionLast != BuildConfig.VERSION_CODE){
-            preferences.edit().putInt("versionLast", BuildConfig.VERSION_CODE).apply();
-        }
-    }
-
-
     private void preNotifyThemeChanged(){
         setTheme(ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_MAIN, getApplicationContext()));
         themeNow = String.valueOf(ThemeUtils.getThemeMode(getApplicationContext()));
@@ -412,7 +300,7 @@ public class MainActivity extends AppCompatActivity {
                 startEngine(true);
             }
         });
-        snackbarContainer = findViewById(R.id.snackbar_container);
+        snackBarContainer = findViewById(R.id.snackbar_container);
         startWithoutGame = findViewById(R.id.main_start_without_game);
         startWithoutGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -483,8 +371,6 @@ public class MainActivity extends AppCompatActivity {
 //                return true;
 //            }
 //        });
-
-
         notifyThemeChanged();
         bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -555,7 +441,7 @@ public class MainActivity extends AppCompatActivity {
         switch (upCount){
             case 1:
                 if (PackageUtils.getGameCount(this) > 0){
-                    Snackbar.make(snackbarContainer, R.string.tip_create_shortcut, Snackbar.LENGTH_INDEFINITE)
+                    Snackbar.make(snackBarContainer, R.string.tip_create_shortcut, Snackbar.LENGTH_INDEFINITE)
                             .setAction(R.string.tip_create_shortcut_confirm, new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -580,7 +466,7 @@ public class MainActivity extends AppCompatActivity {
                     bottomBarHeight = 184;
                 }
                 bottomProgressBar.setPadding(0, 0 ,0, bottomBarHeight - ScreenUtils.dip2px(activity, 8.0f));
-                ((ViewGroup.MarginLayoutParams) snackbarContainer.getLayoutParams()).setMargins(0,0,0, bottomBarHeight);
+                ((ViewGroup.MarginLayoutParams) snackBarContainer.getLayoutParams()).setMargins(0,0,0, bottomBarHeight);
             }
         });
     }

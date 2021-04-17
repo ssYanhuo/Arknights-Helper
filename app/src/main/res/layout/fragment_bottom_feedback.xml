@@ -30,20 +30,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="可以通过以下方式联系作者："/>
-            <GridLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:columnCount="2"
-                android:rowCount="1">
+                android:orientation="horizontal">
                 <com.google.android.material.card.MaterialCardView
-                    android:layout_row="0"
-                    android:layout_column="0"
                     android:layout_height="wrap_content"
                     style="@style/AppTheme2.CardView.Unimportant"
                     app:cardBackgroundColor="@color/colorCardUnimportantBackground"
-                    android:layout_gravity="fill"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="@dimen/activity_horizontal_margin">
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:clickable="true"
+                    android:focusable="true">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -55,6 +54,7 @@
                             android:layout_height="32dp"
                             android:src="@drawable/ic_qq"
                             app:tint="@color/colorTextPrimary2"
+                            android:alpha="0.5"
                             android:layout_margin="@dimen/activity_horizontal_margin"/>
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -76,14 +76,14 @@
 
                 </com.google.android.material.card.MaterialCardView>
                 <com.google.android.material.card.MaterialCardView
-                    android:layout_row="0"
-                    android:layout_column="1"
                     android:layout_height="wrap_content"
                     style="@style/AppTheme2.CardView.Unimportant"
                     app:cardBackgroundColor="@color/colorCardUnimportantBackground"
-                    android:layout_gravity="fill"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="@dimen/activity_horizontal_margin">
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:clickable="true"
+                    android:focusable="true">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -95,6 +95,7 @@
                             android:layout_height="32dp"
                             android:src="@drawable/ic_coolapk"
                             app:tint="@color/colorTextPrimary2"
+                            android:alpha="0.5"
                             android:layout_margin="@dimen/activity_horizontal_margin"/>
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -114,7 +115,7 @@
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
-            </GridLayout>
+            </LinearLayout>
         </LinearLayout>
 
 
