@@ -1,5 +1,5 @@
 {
-    "versionCode": 52,
-    "versionName": "RC-9.5",
-    "releaseNote": "[Info]更新到该版本建议清除软件数据后再使用\n\n[Fix]修复了多次从磁贴启动会崩溃的问题\n[Mod]同步最新干员数据"
+    "versionCode": 53,
+    "versionName": "RC-9.6",
+    "releaseNote": "[Info]更新到该版本建议清除软件数据后再使用\n[Mod]同步最新干员数据"
 }
