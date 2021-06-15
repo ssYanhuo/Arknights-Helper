@@ -1,5 +1,5 @@
 {
-    "versionCode": 54,
-    "versionName": "RC-9.7",
-    "releaseNote": "[Info]更新到该版本建议清除软件数据后再使用\n[Mod]同步最新干员数据"
+    "versionCode": 55,
+    "versionName": "RC-10",
+    "releaseNote": "[Info]更新到该版本建议清除软件数据后再使用\n[Fix]修复了刷图规划无法使用的问题"
 }

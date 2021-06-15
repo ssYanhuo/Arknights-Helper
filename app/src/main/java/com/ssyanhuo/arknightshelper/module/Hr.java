@@ -1207,7 +1207,9 @@ public class Hr {
                 if(compressedFile.exists()){
                     compressedFile.delete();
                 }
+                hideAutoOCRProgress();
                 ocrError.printStackTrace();
+                Toast.makeText(contextThemeWrapper, "出现错误：" + ocrError.getErrorCode(), Toast.LENGTH_SHORT).show();
                 int errorCode = ocrError.getErrorCode();
                 onResultHandler.sendMessage(onResultHandler.obtainMessage(0, errorCode, 0));
             }
@@ -1309,7 +1311,7 @@ public class Hr {
                     linearLayout.addView(errorImage);
                     TextView errorText = new TextView(contextThemeWrapper);
                     errorText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                    errorText.setText(applicationContext.getString(R.string.hr_ocr_error) + "(" + type + ")");
+                    errorText.setText(applicationContext.getString(R.string.hr_ocr_error) + " (" + type + ")");
                     linearLayout.addView(errorText);
                     selector.addView(linearLayout);
                     break;
