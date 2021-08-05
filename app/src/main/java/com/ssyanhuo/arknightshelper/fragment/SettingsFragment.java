@@ -55,14 +55,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.android.material.snackbar.Snackbar;
 import com.ssyanhuo.arknightshelper.BuildConfig;
 import com.ssyanhuo.arknightshelper.R;
-import com.ssyanhuo.arknightshelper.activity.SettingsActivity;
-import com.ssyanhuo.arknightshelper.entity.StaticData;
+import com.ssyanhuo.arknightshelper.misc.StaticData;
 import com.ssyanhuo.arknightshelper.service.OverlayService;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
 import com.ssyanhuo.arknightshelper.utils.I18nUtils;
 import com.ssyanhuo.arknightshelper.utils.OCRUtils;
 import com.ssyanhuo.arknightshelper.utils.PackageUtils;
-import com.ssyanhuo.arknightshelper.utils.PythonUtils;
 import com.ssyanhuo.arknightshelper.utils.ScreenUtils;
 
 import java.io.ByteArrayOutputStream;
@@ -113,7 +111,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         final SeekBarPreference floating_button_opacity = findPreference("floating_button_opacity");
         final ListPreference game_language = findPreference("game_language");
         final Preference button_img = findPreference("button_img");
-        final SwitchPreference disable_planner = findPreference("disable_planner");
         final SwitchPreference enable_dark_mode = findPreference("enable_dark_mode");
         final SwitchPreference emulator_mode = findPreference("emulator_mode");
         final Preference add_shortcut = findPreference("add_shortcut");
@@ -234,16 +231,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             public boolean onPreferenceClick(final Preference preference) {
                 showButtonImagePicker(null);
                 return false;
-            }
-        });
-        if (!PythonUtils.isSupported()){
-            disable_planner.setVisible(false);
-        }
-        disable_planner.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                stopService();
-                return true;
             }
         });
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){

@@ -1,5 +1,5 @@
 {
-    "versionCode": 55,
-    "versionName": "RC-10",
-    "releaseNote": "[Info]更新到该版本建议清除软件数据后再使用\n[Fix]修复了刷图规划无法使用的问题"
+    "versionCode": 57,
+    "versionName": "RC-11",
+    "releaseNote": "[Info]更新到该版本请清除软件数据后再使用\n[New]刷图规划新增标记功能\n[Mod]刷图规划不再依赖于特定 CPU 架构\n[Mod]刷图规划不再依赖刷图规划插件，原有插件可自行卸载\n[Mod]移除无用依赖，减小应用体积\n[Mod]重构部分方法，提高运行速度\n[Mod]更新部分 UI，减少渲染资源占用\n[New]同步最新公开招募数据\n[New]同步最新干员信息\n[Fix]提高了应用在启动悬浮窗时的稳定性"
 }

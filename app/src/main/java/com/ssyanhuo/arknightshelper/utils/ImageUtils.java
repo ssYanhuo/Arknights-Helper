@@ -10,7 +10,7 @@ import android.os.Build;
 import android.provider.MediaStore;
 import android.util.Size;
 
-import com.ssyanhuo.arknightshelper.entity.MediaInfo;
+import com.ssyanhuo.arknightshelper.misc.MediaInfo;
 
 import java.io.IOException;
 import java.util.ArrayList;

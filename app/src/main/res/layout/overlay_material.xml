@@ -5,10 +5,7 @@
     android:layout_height="wrap_content"
     android:descendantFocusability="blocksDescendants"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingTop="64dp"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/activity_horizontal_margin">
+    android:padding="@dimen/activity_horizontal_margin">
 
     <TextView
         android:id="@+id/material_description"

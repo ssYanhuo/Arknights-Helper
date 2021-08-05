@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.ssyanhuo.arknightshelper.BuildConfig;
-import com.ssyanhuo.arknightshelper.entity.StaticData;
+import com.ssyanhuo.arknightshelper.misc.StaticData;
 
 public class CompatUtils {
     static public void check(Context context){

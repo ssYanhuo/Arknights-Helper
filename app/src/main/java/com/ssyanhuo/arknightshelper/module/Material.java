@@ -26,15 +26,13 @@ import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.ContextThemeWrapper;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ssyanhuo.arknightshelper.R;
-import com.ssyanhuo.arknightshelper.entity.StaticData;
+import com.ssyanhuo.arknightshelper.misc.StaticData;
 import com.ssyanhuo.arknightshelper.service.OverlayService;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
 import com.ssyanhuo.arknightshelper.utils.JSONUtils;
-import com.ssyanhuo.arknightshelper.utils.PythonUtils;
 import com.ssyanhuo.arknightshelper.utils.ScreenUtils;
 import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
 import com.ssyanhuo.arknightshelper.utils.I18nUtils;
@@ -367,19 +365,15 @@ public class Material {
         }, 0, spannableStringBuilder1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         ((TextView) contentView.findViewById(R.id.material_pin)).setText(spannableStringBuilder1);
         ((TextView) contentView.findViewById(R.id.material_pin)).setMovementMethod(LinkMovementMethod.getInstance());
-        if ((PythonUtils.isSupported() && sharedPreferences.getBoolean("disable_planner", false)) ) {//TODO 暂时禁用了刷图规划，逻辑似乎有问题|| true
-            ((TextView) contentView.findViewById(R.id.material_plan)).setVisibility(GONE);
-        } else {
-            SpannableStringBuilder spannableStringBuilder2 = new SpannableStringBuilder(applicationContext.getString(R.string.material_go_planner));
-            spannableStringBuilder2.setSpan(new ClickableSpan() {
-                @Override
-                public void onClick(@NonNull View widget) {
-                    plan();
-                }
-            }, 0, spannableStringBuilder2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            ((TextView) contentView.findViewById(R.id.material_plan)).setText(spannableStringBuilder2);
-            ((TextView) contentView.findViewById(R.id.material_plan)).setMovementMethod(LinkMovementMethod.getInstance());
-        }
+        SpannableStringBuilder spannableStringBuilder2 = new SpannableStringBuilder(applicationContext.getString(R.string.material_go_planner));
+        spannableStringBuilder2.setSpan(new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                plan();
+            }
+        }, 0, spannableStringBuilder2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ((TextView) contentView.findViewById(R.id.material_plan)).setText(spannableStringBuilder2);
+        ((TextView) contentView.findViewById(R.id.material_plan)).setMovementMethod(LinkMovementMethod.getInstance());
         ItemDetailView itemDetailView;
         if (levelCheckbox.isChecked() && charNow != null){
             int stageFrom = stageNow.getInt();
@@ -646,9 +640,7 @@ public class Material {
                             break;
                         }
                     }
-                    if (find){
-                        continue;
-                    }else {
+                    if (!find){
                         if(onlyRare && material.getInteger("rarity") <= 3){continue;}
                         itemDetailView = new ItemDetailView(applicationContext);
                         itemDetailView.setItemName(material.getString("name"));
@@ -684,8 +676,6 @@ public class Material {
         }else {
             Toast.makeText(applicationContext, R.string.material_nothing_plannable, Toast.LENGTH_SHORT).show();
         }
-        //Log.e(TAG, "plan:  " +  jsonObject.toJSONString());
-
     }
 
     private void pinWindow(){

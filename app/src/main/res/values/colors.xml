@@ -26,4 +26,5 @@
     <color name="colorBackground">#F2F2F2</color>
     <color name="colorTextPrimary2">#606060</color>
     <color name="colorCardUnimportantBackground">#E0E0E0</color>
+    <color name="colorPrimaryWithHalfAlpha">#7F1A1A1A</color>
 </resources>

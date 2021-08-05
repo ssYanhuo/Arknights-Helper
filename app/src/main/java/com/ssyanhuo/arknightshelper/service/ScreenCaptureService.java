@@ -22,8 +22,7 @@ import android.os.IBinder;
 import androidx.annotation.RequiresApi;
 
 import com.ssyanhuo.arknightshelper.R;
-import com.ssyanhuo.arknightshelper.activity.ScreenCaptureActivity;
-import com.ssyanhuo.arknightshelper.entity.ServiceNotification;
+import com.ssyanhuo.arknightshelper.misc.ServiceNotification;
 import com.ssyanhuo.arknightshelper.utils.ScreenUtils;
 
 import java.io.BufferedOutputStream;

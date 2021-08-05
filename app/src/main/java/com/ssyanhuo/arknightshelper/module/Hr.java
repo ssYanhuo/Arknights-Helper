@@ -9,18 +9,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Outline;
 import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Typeface;
-import android.graphics.drawable.AnimatedVectorDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
@@ -40,7 +36,6 @@ import android.widget.*;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.core.content.res.ResourcesCompat;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -52,11 +47,12 @@ import com.baidu.ocr.sdk.model.GeneralBasicParams;
 import com.baidu.ocr.sdk.model.GeneralParams;
 import com.baidu.ocr.sdk.model.GeneralResult;
 import com.baidu.ocr.sdk.model.WordSimple;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.activity.ScreenCaptureActivity;
-import com.ssyanhuo.arknightshelper.entity.MediaInfo;
-import com.ssyanhuo.arknightshelper.entity.StaticData;
+import com.ssyanhuo.arknightshelper.misc.MediaInfo;
+import com.ssyanhuo.arknightshelper.misc.StaticData;
 import com.ssyanhuo.arknightshelper.service.OverlayService;
 import com.ssyanhuo.arknightshelper.utils.*;
 import com.ssyanhuo.arknightshelper.utils.I18nUtils.Helper;
@@ -72,8 +68,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
 
-import eightbitlab.com.blurview.BlurView;
-import eightbitlab.com.blurview.RenderScriptBlur;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 public class Hr {
     private static final int TYPE_PROCESSING = 1;
@@ -114,7 +110,7 @@ public class Hr {
     private TextView hideLowLevelNote;
     private RelativeLayout relativeLayout;
     private ScrollView scrollView;
-    private BlurView snackBarView;
+    private FloatingActionButton fab;
     Handler handler = new Handler();
     private LinearLayout autoOCRProgressLayout;
     private boolean canceled = false;
@@ -226,23 +222,23 @@ public class Hr {
             }
         });
         try{
-            snackBarView = relativeLayout.findViewById(R.id.hr_snackbar);
+            fab = relativeLayout.findViewById(R.id.hr_fab);
             scrollView = relativeLayout.findViewById(R.id.scroll_hr);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
                     @Override
                     public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                         if (scrollY + scrollView.getHeight() > (scrollView.findViewById(R.id.hr_result_scroll_point).getTop() + applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin) * 6)){
-                            snackBarView.setVisibility(View.GONE);
+                            hideFab(fab, contextThemeWrapper);
                         }
                     }
                 });
             }
-            snackBarView.setOnClickListener(new View.OnClickListener() {
+            fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     scrollToResult();
-                    v.setVisibility(View.GONE);
+                    hideFab(v, contextThemeWrapper);
                 }
             });
         }catch (Exception ignored){
@@ -418,7 +414,7 @@ public class Hr {
     public void hideResult(View view) {
         view.setVisibility(View.GONE);
         try{
-            snackBarView.setVisibility(View.GONE);
+            hideFab(fab, contextThemeWrapper);
         }catch (Exception ignored){
 
         }
@@ -503,7 +499,7 @@ public class Hr {
             lineWrapLayout.addView(button);
         }
         if (scrollView.getScrollY() + scrollView.getHeight() <= (scrollView.findViewById(R.id.hr_result_scroll_point).getTop() + applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin) * 6)){
-            showScrollToResultSnackBar();
+            showFab(fab, contextThemeWrapper);
         }
     }
 
@@ -790,62 +786,10 @@ public class Hr {
             }
         }
         if (scrollView.getScrollY() + scrollView.getHeight() <= (scrollView.findViewById(R.id.hr_result_scroll_point).getTop() + applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin) * 6)){
-            showScrollToResultSnackBar();
+            showFab(fab, contextThemeWrapper);
         }
     }
-    private void showScrollToResultSnackBar(){
-        snackBarView.setVisibility(View.VISIBLE);
-        snackBarView.setOverlayColor(ThemeUtils.getBackgroundColor(applicationContext, contextThemeWrapper));
-        snackBarView.setupWith(rootLayout)
-                .setBlurRadius(20f)
-                .setFrameClearDrawable(new ColorDrawable(Color.BLACK))
-                .setHasFixedTransformationMatrix(false)
-                .setBlurAutoUpdate(true)
-                .setBlurAlgorithm(new RenderScriptBlur(applicationContext))
-                .setBlurEnabled(true);
-        snackBarView.setOutlineProvider(new ViewOutlineProvider() {
-            @Override
-            public void getOutline(View view, Outline outline) {
-                outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), 32f);
-            }
-        });
-        snackBarView.setClipToOutline(true);
-        ((TextView) snackBarView.findViewById(R.id.hr_snackbar_textview)).setText(R.string.hr_go_result);
-        ((ImageView) snackBarView.findViewById(R.id.hr_snackbar_imageview)).setImageDrawable(applicationContext.getResources().getDrawable(R.drawable.ic_arrow_down, null));
-    }
 
-    private void hideScrollToResultSnackBar(){
-        snackBarView.setVisibility(View.GONE);
-    }
-
-
-
-
-    public void selectQueryMethod() {
-        //选择
-        View methodSelector = LayoutInflater.from(applicationContext).inflate(R.layout.overlay_hr_method_selector, null);
-        scrollView.removeAllViews();
-        scrollView.addView(methodSelector);
-        //设定本次的方法
-        LinearLayout exactLinearLayout = relativeLayout.findViewById(R.id.hr_method_selector_exact);
-        exactLinearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                changeQueryMethod(MODE_EXACT);
-                scrollView.removeAllViews();
-                scrollView.addView(contentView);
-            }
-        });
-        LinearLayout fuzzyLinearLayout = relativeLayout.findViewById(R.id.hr_method_selector_fuzzy);
-        fuzzyLinearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                changeQueryMethod(MODE_FUZZY);
-                scrollView.removeAllViews();
-                scrollView.addView(contentView);
-            }
-        });
-    }
 
     public void changeQueryMethod(int mode) {
         LinearLayout resultLayout = contentView.findViewById(R.id.hr_result);
@@ -1386,5 +1330,43 @@ public class Hr {
             result.add(new ArrayList<String>(tmp));
         }
         return result;
+    }
+    private void showFab(View fab, Context context){
+        fab.setEnabled(true);
+        if (fab.getVisibility() != VISIBLE) {
+            fab.setVisibility(VISIBLE);
+            Animator inAnimation = AnimatorInflater.loadAnimator(context, R.animator.overlay_module_fade_in);
+            inAnimation.setTarget(fab);
+            inAnimation.start();
+        }
+    }
+    private void hideFab(final View fab, Context context){
+        fab.setEnabled(false);
+        if (fab.getVisibility() == VISIBLE && !fab.isEnabled()){
+            Animator outAnimation = AnimatorInflater.loadAnimator(context, R.animator.overlay_module_fade_out);
+            outAnimation.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    fab.setVisibility(GONE);
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });
+            outAnimation.setTarget(fab);
+            outAnimation.start();
+        }
     }
 }

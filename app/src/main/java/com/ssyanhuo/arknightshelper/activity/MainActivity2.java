@@ -15,29 +15,23 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.preference.Preference;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
 import com.ssyanhuo.arknightshelper.BuildConfig;
 import com.ssyanhuo.arknightshelper.R;
-import com.ssyanhuo.arknightshelper.entity.StaticData;
+import com.ssyanhuo.arknightshelper.misc.StaticData;
 import com.ssyanhuo.arknightshelper.fragment.BottomAboutFragment;
 import com.ssyanhuo.arknightshelper.fragment.BottomFeedbackFragment;
 import com.ssyanhuo.arknightshelper.fragment.BottomSettingsFragment;
-import com.ssyanhuo.arknightshelper.module.Material;
 import com.ssyanhuo.arknightshelper.service.OverlayService;
-import com.ssyanhuo.arknightshelper.service.PythonService;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
 import com.ssyanhuo.arknightshelper.utils.PackageUtils;
-import com.ssyanhuo.arknightshelper.utils.PythonUtils;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -112,15 +106,6 @@ public class MainActivity2 extends AppCompatActivity {
             }
         }
 
-        if ((!preferences.getBoolean("python_finished",false)) && PythonUtils.isSupported() && !preferences.getBoolean("disable_planner", false)){
-            PythonUtils.setupEnvironment(getApplicationContext(), MainActivity2.this, rootView);
-            return;
-        }
-        if((preferences.getBoolean("python_finished",false)) && PythonUtils.isSupported() && !preferences.getBoolean("disable_planner", false) && PythonUtils.getPluginVersion(getApplicationContext()) < StaticData.Const.PLANNER_PLUGIN_MIN_VERSION){
-            PythonUtils.setupEnvironment(getApplicationContext(), MainActivity2.this, rootView);
-            return;
-        }
-
 
         Snackbar.make(rootView, R.string.start_game, Snackbar.LENGTH_LONG).show();
         Timer timer = new Timer();
@@ -130,12 +115,11 @@ public class MainActivity2 extends AppCompatActivity {
             public void run() {
                 final SharedPreferences.Editor editor = preferences.edit();
                 Intent overlayServiceIntent = new Intent(getApplicationContext(), OverlayService.class);
-                Intent pythonServiceIntent = new Intent(getApplicationContext(), PythonService.class);
                 Looper.prepare();
-                if (preferences.getInt("versionLast", -1) != BuildConfig.VERSION_CODE || !FileUtils.checkFiles(getApplicationContext(), getFilesDir().getPath(), StaticData.Const.DATA_LIST) || ((!FileUtils.checkFiles(getApplicationContext(), getFilesDir().getPath() + File.separator + "python" + File.separator + "data", new String[]{"formula.json", "matrix.json"})) && preferences.getBoolean("disable_planner", false))){
+                if (preferences.getInt("versionLast", -1) != BuildConfig.VERSION_CODE
+                        || !FileUtils.checkFiles(getApplicationContext(), getFilesDir().getPath(), StaticData.Const.DATA_LIST)
+                        || BuildConfig.BUILD_TYPE == "debug") {
                     FileUtils.copyFilesFromAssets(getApplicationContext(), StaticData.Const.DATA_LIST);
-                    FileUtils.copyFileFromAssets(getApplicationContext(), getFilesDir().getPath() + File.separator + "python" + File.separator + "data", "formula.json");
-                    FileUtils.copyFileFromAssets(getApplicationContext(), getFilesDir().getPath() + File.separator + "python" + File.separator + "data", "matrix.json");
                 }
                 if((Build.BRAND.equals("Meizu") || Build.BRAND.equals("MEIZU") || Build.BRAND.equals("MeiZu") || Build.BRAND.equals("meizu")) && preferences.getBoolean("firstRun", true)){
                     Snackbar.make(rootView, R.string.meizu_floating_window_permission, Snackbar.LENGTH_INDEFINITE).show();
@@ -157,9 +141,6 @@ public class MainActivity2 extends AppCompatActivity {
                             });
 
                             startService(overlayServiceIntent);
-                            if(PythonUtils.isSupported() && !preferences.getBoolean("disable_planner", false)){
-                                startService(pythonServiceIntent);
-                            }
                         }catch (Exception e){
                             Log.e(TAG, "Start service failed!", e);
                         }
@@ -182,9 +163,6 @@ public class MainActivity2 extends AppCompatActivity {
                             }
                         });
                         startService(overlayServiceIntent);
-                        if(PythonUtils.isSupported() && !preferences.getBoolean("disable_planner", false)){
-                            startService(pythonServiceIntent);
-                        }
                     }catch (Exception e){
                         Log.e(TAG, "Start service failed!", e);
                     }

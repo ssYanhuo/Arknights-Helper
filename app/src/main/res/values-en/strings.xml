@@ -190,7 +190,7 @@
     <string name="more_hr_counter_summary">Already %1$d times, 6★ probability: %2$d%%</string>
     <string name="more_hr_counter_summary_full">Already 99 times, 6★ probability: 100%!</string>
     <string name="more_hr_counter_summary_overflow">Already %d times, long press -1 button to clean records</string>
-    <string name="tab_title_planner">Planner (Beta)</string>
+    <string name="tab_title_planner">Planner</string>
     <string name="material_skill_1_now">Skill 1 :</string>
     <string name="material_skill_1_target">Level :</string>
     <string name="material_skill_2_now">Skill 2 :</string>
@@ -200,7 +200,7 @@
     <string name="material_skill_all_target">Level :</string>
     <string name="material_skill_all_now">All skills :</string>
     <string name="more_hr_counter_summary_90">Already %1$d times, 6★ probability: %2$d%%, next 10 combo will contain 6★!</string>
-    <string name="planner_desc">Source: ycremar\nCilck level or material to show more.\nIt\'s a part of beta project, and it may cause the application not run normally, in this case, you can disable it in application settings.</string>
+    <string name="planner_desc">Source: ycremar\nClick level or material to show more details.</string>
     <string name="planner_result_loot_title">"Loot in these levels: "</string>
     <string name="planner_result_synthesis_title">"Synthesis: "</string>
     <string name="planner_result_items_title">"Summary: "</string>

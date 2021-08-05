@@ -11,7 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.ssyanhuo.arknightshelper.R;
-import com.ssyanhuo.arknightshelper.entity.StaticData;
+import com.ssyanhuo.arknightshelper.misc.StaticData;
 import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
 
 import androidx.appcompat.app.AppCompatActivity;

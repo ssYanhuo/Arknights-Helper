@@ -1,8 +1,5 @@
 package com.ssyanhuo.arknightshelper.fragment;
 
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,11 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.ssyanhuo.arknightshelper.R;
-import com.ssyanhuo.arknightshelper.entity.StaticData;
-import com.ssyanhuo.arknightshelper.utils.FileUtils;
-import com.ssyanhuo.arknightshelper.utils.ZipUtils;
 import com.ssyanhuo.arknightshelper.widget.IntroFragment;
 
 import java.io.File;
@@ -87,26 +80,7 @@ public class IntroPlannerInitFragment extends IntroFragment {
                 final String CACHE_PATH = getContext().getCacheDir().toString();
                 final String ASSETS_PATH = CACHE_PATH + File.separator + "plugin" + File.separator + "assets";
                 try {
-                    PackageManager pm = getContext().getPackageManager();
-                    String path = pm.getApplicationInfo("com.ssyanhuo.akrnightshelper_plannerplugin", 0).sourceDir;
-                    FileUtils.copyFile(getContext(), path, CACHE_PATH + File.separator + "plugin.apk");
-                    ZipUtils.UnZipFolder(CACHE_PATH + File.separator + "plugin.apk", CACHE_PATH + File.separator + "plugin");
-                    ZipUtils.UnZipFolder(ASSETS_PATH + File.separator + Build.SUPPORTED_ABIS[0] + ".zip", getContext().getFilesDir() + File.separator + "python");
-                    ZipUtils.UnZipFolder(ASSETS_PATH + File.separator + "universal" + ".zip", getContext().getFilesDir() + File.separator + "python");
-                    ZipUtils.UnZipFolder(ASSETS_PATH + File.separator + "ArkPlanner" + ".zip", getContext().getFilesDir() + File.separator + "python");
-                    ZipUtils.UnZipFolder(getContext().getFilesDir() + File.separator + "python" + File.separator + "numpy" + ".zip", getContext().getFilesDir() + File.separator + "python" + File.separator + "numpy");
-                    ZipUtils.UnZipFolder(getContext().getFilesDir() + File.separator + "python" + File.separator + "scipy" + ".zip", getContext().getFilesDir() + File.separator + "python" + File.separator + "scipy");
-                    FileUtils.delFile(getContext(), CACHE_PATH + File.separator + "plugin.apk");
-                    FileUtils.deleteDirectory(CACHE_PATH + File.separator + "plugin");
-                    FileUtils.copyFileFromAssets(getContext(), getContext().getFilesDir().getPath() + File.separator + "python" + File.separator + "data", "formula.json");
-                    FileUtils.copyFileFromAssets(getContext(), getContext().getFilesDir().getPath() + File.separator + "python" + File.separator + "data", "matrix.json");
-                    getContext().getSharedPreferences(StaticData.Const.PREFERENCE_PATH, Context.MODE_PRIVATE).edit().putBoolean("python_finished", true).apply();
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            goNext();
-                        }
-                });
+
                 } catch (Exception e) {
                     e.printStackTrace();
                     Looper.prepare();

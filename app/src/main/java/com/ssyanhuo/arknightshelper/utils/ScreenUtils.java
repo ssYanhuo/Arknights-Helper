@@ -6,7 +6,7 @@ import android.content.res.Resources;
 import android.view.Surface;
 import android.view.WindowManager;
 
-import com.ssyanhuo.arknightshelper.entity.StaticData;
+import com.ssyanhuo.arknightshelper.misc.StaticData;
 
 public class ScreenUtils {
     public static int MODE_PORTRAIT = 0;

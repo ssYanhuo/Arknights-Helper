@@ -9,8 +9,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.*;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Outline;
@@ -22,7 +20,6 @@ import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.*;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -39,8 +36,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.android.material.tabs.TabLayout;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.activity.SettingsActivity;
-import com.ssyanhuo.arknightshelper.entity.ServiceNotification;
-import com.ssyanhuo.arknightshelper.entity.StaticData;
+import com.ssyanhuo.arknightshelper.misc.ServiceNotification;
+import com.ssyanhuo.arknightshelper.misc.StaticData;
 import com.ssyanhuo.arknightshelper.module.Drop;
 import com.ssyanhuo.arknightshelper.module.Hr;
 import com.ssyanhuo.arknightshelper.module.Material;
@@ -49,16 +46,12 @@ import com.ssyanhuo.arknightshelper.module.Planner;
 import com.ssyanhuo.arknightshelper.utils.PackageUtils;
 import com.ssyanhuo.arknightshelper.utils.ScreenUtils;
 import com.ssyanhuo.arknightshelper.utils.OCRUtils;
-import com.ssyanhuo.arknightshelper.utils.PythonUtils;
 import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import eightbitlab.com.blurview.BlurView;
-import eightbitlab.com.blurview.RenderScriptBlur;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -77,16 +70,11 @@ public class OverlayService extends Service {
     LinearLayout linearLayout_drop;
     LinearLayout linearLayout_planner;
     LinearLayout linearLayout_more;
-    ScrollView scrollView_hr;
-    ScrollView scrollView_material;
-    ScrollView scrollView_drop;
-    ScrollView scrollView_more;
     RelativeLayout relativeLayout_hr;
     RelativeLayout relativeLayout_material;
     RelativeLayout relativeLayout_drop;
     RelativeLayout relativeLayout_planner;
     RelativeLayout relativeLayout_more;
-    BlurView tabBlurLayout;
     ImageButton button;
     final int HR = 0;
     final int MATERIAL = 1;
@@ -115,8 +103,6 @@ public class OverlayService extends Service {
     String themeNow = "0";
     int floatingButtonOpacity = 0;
     boolean attachToEdge = true;
-    ServiceConnection pythonServiceConnection;
-    PythonService.PythonBinder pythonService;
     private LinearLayout pinnedWindow;
     private TabLayout tabLayout;
 
@@ -156,23 +142,6 @@ public class OverlayService extends Service {
 
         Notification notification = builder.build();
         startForeground(1, ServiceNotification.build(getApplicationContext(), 1));
-        //绑定到Python服务
-        if(PythonUtils.isSupported() && !preferences.getBoolean("disable_planner", false)){//TODO 暂时禁用了刷图规划 && false
-            pythonServiceConnection = new ServiceConnection() {
-                @Override
-                public void onServiceConnected(ComponentName name, IBinder service) {
-                    pythonService = (PythonService.PythonBinder)service;
-                    Log.e(TAG, pythonService.toString());
-                }
-
-                @Override
-                public void onServiceDisconnected(ComponentName name) {
-
-                }
-            };
-            Intent pythonIntent = new Intent(getApplicationContext(), PythonService.class);
-            bindService(pythonIntent, pythonServiceConnection, BIND_AUTO_CREATE);
-        }
         if(preferences.getBoolean("enable_dark_mode", false)){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
         }else {
@@ -195,11 +164,8 @@ public class OverlayService extends Service {
         }
 
         mainLayoutParams = new WindowManager.LayoutParams();
-
         backgroundLayoutParams.flags = WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-
         placeHolderLayoutParams = new WindowManager.LayoutParams();
-
 
         int upCount = preferences.getInt("up_count", 0) + 1;
         editor.putInt("up_count", upCount);
@@ -254,7 +220,6 @@ public class OverlayService extends Service {
             Drawable drawable2 = Drawable.createFromPath(getApplicationContext().getFilesDir().getPath() + File.separator + "button.png");
             button.setBackground(new LayerDrawable(new Drawable[]{drawable1, drawable2}));
         }
-
         button.setScaleType(ImageView.ScaleType.CENTER_CROP);
         button.setOutlineProvider(new ViewOutlineProvider() {
             @Override
@@ -396,12 +361,6 @@ public class OverlayService extends Service {
                                 }else {
                                     upY = 0;
                                 }
-                                buttonLayoutParams.x = upX;
-                                buttonLayoutParams.y = upY;
-                                editor.putInt("lastX", upX);
-                                editor.putInt("lastY", upY);
-                                editor.apply();
-                                windowManager.updateViewLayout(view, buttonLayoutParams);
                             }else {
 
                                 if (upY >= displayMetrics.heightPixels * 0.75){
@@ -413,13 +372,13 @@ public class OverlayService extends Service {
                                 }else {
                                     upX = 0;
                                 }
-                                buttonLayoutParams.x = upX;
-                                buttonLayoutParams.y = upY;
-                                editor.putInt("lastX", upX);
-                                editor.putInt("lastY", upY);
-                                editor.apply();
-                                windowManager.updateViewLayout(view, buttonLayoutParams);
                             }
+                            buttonLayoutParams.x = upX;
+                            buttonLayoutParams.y = upY;
+                            editor.putInt("lastX", upX);
+                            editor.putInt("lastY", upY);
+                            editor.apply();
+                            windowManager.updateViewLayout(view, buttonLayoutParams);
                         }
                         if (Math.abs(downX - upX) <= 10 && Math.abs(downY - upY) <= 10){
                             if (upTime - downTime <= 350){
@@ -441,9 +400,7 @@ public class OverlayService extends Service {
 
     }
 
-    public PythonService.PythonBinder getPythonService(){
-        return pythonService;
-    }
+    @SuppressLint("ClickableViewAccessibility")
     public void showPinnedWindow(ArrayList<View> contents){
         pinnedWindow = (LinearLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.overlay_pinned_window, null);
         pinnedWindowLayoutParams = new WindowManager.LayoutParams();
@@ -454,8 +411,8 @@ public class OverlayService extends Service {
         }
         pinnedWindowLayoutParams.flags = WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
         pinnedWindowLayoutParams.format = PixelFormat.RGBA_8888;
-        pinnedWindowLayoutParams.height = ScreenUtils.dip2px(getApplicationContext(), 256);
-        pinnedWindowLayoutParams.width = ScreenUtils.dip2px(getApplicationContext(), 196);
+        pinnedWindowLayoutParams.height = ScreenUtils.dip2px(getApplicationContext(), 320);
+        pinnedWindowLayoutParams.width = ScreenUtils.dip2px(getApplicationContext(), 256);
         pinnedWindowLayoutParams.windowAnimations = R.style.AppTheme_Default_FloatingButtonAnimation;
         pinnedWindow.setBackgroundColor(ThemeUtils.getBackgroundColor(getApplicationContext(), contextThemeWrapper));
         LinearLayout pinnedContentView = pinnedWindow.findViewById(R.id.pinned_window_content);
@@ -525,10 +482,6 @@ public class OverlayService extends Service {
         relativeLayout_drop = mainLayout.findViewById(R.id.relative_drop);
         relativeLayout_planner = mainLayout.findViewById(R.id.relative_planner);
         relativeLayout_more = mainLayout.findViewById(R.id.relative_more);
-        //scrollView_hr = mainLayout.findViewById(R.id.scroll_hr);
-        //scrollView_material = mainLayout.findViewById(R.id.scroll_material);
-        //scrollView_drop = mainLayout.findViewById(R.id.scroll_drop);
-        //scrollView_more = mainLayout.findViewById(R.id.scroll_more);
         linearLayout_hr = mainLayout.findViewById(R.id.hr_content);
         linearLayout_material = mainLayout.findViewById(R.id.material_content);
         linearLayout_drop = mainLayout.findViewById(R.id.drop_content);
@@ -539,40 +492,6 @@ public class OverlayService extends Service {
         relativeLayout_drop.setVisibility(GONE);
         relativeLayout_planner.setVisibility(GONE);
         relativeLayout_more.setVisibility(GONE);
-
-        if (!PythonUtils.isSupported() || preferences.getBoolean("disable_planner", false)){//TODO 暂时禁用了刷图规划 || true
-            tabLayout.removeTabAt(3);
-            tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-                @Override
-                public void onTabSelected(TabLayout.Tab tab) {
-                    switch (tab.getPosition()){
-                        case HR:
-                            changeFloatingWindowContent(HR);
-                            break;
-                        case MATERIAL:
-                            changeFloatingWindowContent(MATERIAL);
-                            break;
-                        case DROP:
-                            changeFloatingWindowContent(DROP);
-                            break;
-                        case 3:
-                            changeFloatingWindowContent(MORE);
-                        default:
-                            break;
-                    }
-                }
-
-                @Override
-                public void onTabUnselected(TabLayout.Tab tab) {
-
-                }
-
-                @Override
-                public void onTabReselected(TabLayout.Tab tab) {
-
-                }
-            });
-        }
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -626,7 +545,7 @@ public class OverlayService extends Service {
         material.init(contextThemeWrapper, linearLayout_material, backgroundLayout, this);
         drop.init(contextThemeWrapper, linearLayout_drop, this);
         more.init(contextThemeWrapper, linearLayout_more, this, getApplicationContext());
-        planner.init(contextThemeWrapper, linearLayout_planner, relativeLayout_planner, backgroundLayout, this, pythonService);
+        planner.init(contextThemeWrapper, linearLayout_planner, relativeLayout_planner, backgroundLayout, this);
         buttonLayoutParams.windowAnimations = R.style.AppTheme_Default_FloatingButtonAnimation;
     }
     public void hideAllComponentsTemporarily(){
@@ -651,18 +570,6 @@ public class OverlayService extends Service {
     }
 
 
-    private boolean checkApplication(String packageName) {
-        if (packageName == null || "".equals(packageName)){
-            return false;
-        }
-        try {
-            ApplicationInfo info = getPackageManager().getApplicationInfo(packageName, PackageManager.GET_UNINSTALLED_PACKAGES);
-            return true;
-        } catch (PackageManager.NameNotFoundException e) {
-            return false;
-        }
-    }
-
     public void showFloatingWindow(){
         orientation = getApplicationContext().getResources().getConfiguration().orientation;
         isFloatingWindowShowing = true;
@@ -677,22 +584,6 @@ public class OverlayService extends Service {
         mainLayoutParams.x = 0;
         mainLayoutParams.y = 0;
         backgroundLayoutParams.windowAnimations = R.style.AppTheme_Default_FloatingWindowAnimation;
-        tabBlurLayout = mainLayout.findViewById(R.id.overlay_tab);
-        tabBlurLayout.setupWith(mainLayout)
-                .setBlurRadius(20f)
-                .setBlurAlgorithm(new RenderScriptBlur(contextThemeWrapper))
-                .setBlurAutoUpdate(false)
-                .setHasFixedTransformationMatrix(true)
-                .setFrameClearDrawable(new ColorDrawable(Color.BLACK))
-                .setBlurEnabled(true);
-        tabBlurLayout.setOutlineProvider(new ViewOutlineProvider() {
-            @Override
-            public void getOutline(View view, Outline outline) {
-                outline.setRect(0, 0, view.getWidth(), view.getHeight());
-            }
-        });
-
-        tabBlurLayout.setOverlayColor(ThemeUtils.getBackgroundColor(getApplicationContext(), contextThemeWrapper));
         if(ScreenUtils.getScreenRotationMode(rotation) == ScreenUtils.MODE_LANDSCAPE){//横
             mainLayoutParams.height = displayMetrics.heightPixels;
             mainLayoutParams.width = displayMetrics.widthPixels / 2 + preferences.getInt("margin_fix", 0);
@@ -735,7 +626,6 @@ public class OverlayService extends Service {
             backgroundLayout.addView(mainLayout);
             backgroundLayout.addView(placeHolder);
         }
-
         try{
             windowManager.addView(backgroundLayout, backgroundLayoutParams);
             Timer timer = new Timer();
@@ -769,41 +659,21 @@ public class OverlayService extends Service {
                 material.isCurrentWindow(false);
                 break;
             case MATERIAL:
-//                relativeLayout_hr.setVisibility(GONE);
-//                relativeLayout_material.setVisibility(VISIBLE);
-//                relativeLayout_drop.setVisibility(GONE);
-//                relativeLayout_planner.setVisibility(GONE);
-//                relativeLayout_more.setVisibility(GONE);
                 playChangeModuleAnim(new View[]{relativeLayout_material}, new View[]{relativeLayout_hr, relativeLayout_drop, relativeLayout_planner, relativeLayout_more});
                 hr.isCurrentWindow(false);
                 material.isCurrentWindow(true);
                 break;
             case DROP:
-//                relativeLayout_hr.setVisibility(GONE);
-//                relativeLayout_material.setVisibility(GONE);
-//                relativeLayout_drop.setVisibility(VISIBLE);
-//                relativeLayout_planner.setVisibility(GONE);
-//                relativeLayout_more.setVisibility(GONE);
                 playChangeModuleAnim(new View[]{relativeLayout_drop}, new View[]{relativeLayout_material, relativeLayout_hr, relativeLayout_planner, relativeLayout_more});
                 hr.isCurrentWindow(false);
                 material.isCurrentWindow(false);
                 break;
             case PLANNER:
-//                relativeLayout_hr.setVisibility(GONE);
-//                relativeLayout_material.setVisibility(GONE);
-//                relativeLayout_drop.setVisibility(GONE);
-//                relativeLayout_planner.setVisibility(VISIBLE);
-//                relativeLayout_more.setVisibility(GONE);
                 playChangeModuleAnim(new View[]{relativeLayout_planner}, new View[]{relativeLayout_material, relativeLayout_drop, relativeLayout_hr, relativeLayout_more});
                 hr.isCurrentWindow(false);
                 material.isCurrentWindow(false);
                 break;
             case MORE:
-//                relativeLayout_hr.setVisibility(GONE);
-//                relativeLayout_material.setVisibility(GONE);
-//                relativeLayout_drop.setVisibility(GONE);
-//                relativeLayout_planner.setVisibility(GONE);
-//                relativeLayout_more.setVisibility(VISIBLE);
                 playChangeModuleAnim(new View[]{relativeLayout_more}, new View[]{relativeLayout_material, relativeLayout_drop, relativeLayout_planner, relativeLayout_hr});
                 hr.isCurrentWindow(false);
                 material.isCurrentWindow(false);
@@ -845,11 +715,6 @@ public class OverlayService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        try {
-            unbindService(pythonServiceConnection);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         try {
             windowManager.removeViewImmediate(button);
         }catch (Exception e){

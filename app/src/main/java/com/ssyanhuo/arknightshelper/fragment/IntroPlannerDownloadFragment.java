@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ssyanhuo.arknightshelper.R;
-import com.ssyanhuo.arknightshelper.entity.StaticData;
+import com.ssyanhuo.arknightshelper.misc.StaticData;
 import com.ssyanhuo.arknightshelper.utils.IntentUtils;
 import com.ssyanhuo.arknightshelper.utils.PackageUtils;
 import com.ssyanhuo.arknightshelper.widget.IntroFragment;

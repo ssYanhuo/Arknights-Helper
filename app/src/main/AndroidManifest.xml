@@ -74,10 +74,6 @@
             -->
         </activity>
 
-        <service
-            android:name=".service.PythonService"
-            android:enabled="true"
-            android:exported="true" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

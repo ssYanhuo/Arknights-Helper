@@ -84,10 +84,5 @@
             android:key="emulator_mode"
             android:title="@string/settings_title_emulator_mode"
             android:summary="@string/settings_summary_emulator_mode"/>
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="disable_planner"
-            android:title="@string/settings_title_disable_planner"
-            android:summary="@string/settings_summary_disable_planner"/>
     </PreferenceCategory>
 </PreferenceScreen>

@@ -21,7 +21,7 @@ import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.activity.AboutActivity;
 import com.ssyanhuo.arknightshelper.activity.MainActivity;
 import com.ssyanhuo.arknightshelper.activity.SettingsActivity;
-import com.ssyanhuo.arknightshelper.entity.StaticData;
+import com.ssyanhuo.arknightshelper.misc.StaticData;
 import com.ssyanhuo.arknightshelper.service.OverlayService;
 
 import java.util.Calendar;

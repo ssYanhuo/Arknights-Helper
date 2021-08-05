@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.activity.IntroActivity;
 import com.ssyanhuo.arknightshelper.utils.OCRUtils;
-import com.ssyanhuo.arknightshelper.utils.PythonUtils;
 import com.ssyanhuo.arknightshelper.widget.IntroFragment;
 
 import java.util.Timer;
@@ -75,7 +74,7 @@ public class IntroLoadingFragment extends IntroFragment {
     @Override
     public void onShow() {
         super.onShow();
-        ((IntroActivity) getActivity()).setPythonSupported(PythonUtils.isSupported());
+        ((IntroActivity) getActivity()).setPythonSupported(true);
         ((IntroActivity) getActivity()).setOCRSupported(OCRUtils.isAbiSupported());
         final Handler handler = new Handler();
         Timer timer = new Timer();

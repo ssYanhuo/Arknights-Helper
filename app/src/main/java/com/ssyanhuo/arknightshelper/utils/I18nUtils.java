@@ -3,10 +3,9 @@ package com.ssyanhuo.arknightshelper.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
-import android.view.WindowManager;
 
 import com.alibaba.fastjson.JSONObject;
-import com.ssyanhuo.arknightshelper.entity.StaticData;
+import com.ssyanhuo.arknightshelper.misc.StaticData;
 
 public class I18nUtils {
     final static public String CATEGORY_NAME = "name";

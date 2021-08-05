@@ -4,16 +4,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <eightbitlab.com.blurview.BlurView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/overlay_tab"
-        android:elevation="8dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/overlay_tab"
+        android:background="@color/colorPrimaryWithHalfAlpha">
 
 
         <com.google.android.material.tabs.TabLayout
@@ -62,14 +59,13 @@
             android:src="@drawable/ic_overlay_close"
             android:layout_weight="1" />
     </LinearLayout>
-    </eightbitlab.com.blurview.BlurView>
 
 
     <RelativeLayout
         android:id="@+id/relative_hr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true">
+        android:layout_below="@id/overlay_tab">
 
         <ScrollView
             android:id="@+id/scroll_hr"
@@ -81,33 +77,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </ScrollView>
-        <eightbitlab.com.blurview.BlurView
-            android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:elevation="8dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:background="?attr/selectableItemBackground"
-            android:layout_above="@id/hr_snackbar_placeholder"
-            android:id="@+id/hr_snackbar"
-            android:visibility="gone"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginBottom="32dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/hr_snackbar_textview" />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/hr_snackbar_imageview"
-                android:layout_gravity="right"/>
 
-        </eightbitlab.com.blurview.BlurView>
-        <!--这个view负责把上面的BlurView垫起来-->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/hr_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/colorCheckBoxYellow"
+            android:layout_above="@id/hr_fab_placeholder"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin_2x"
+            android:layout_marginBottom="@dimen/activity_vertical_margin_2x"
+            android:clickable="true"
+            android:elevation="8dp"
+            android:focusable="true"
+            android:visibility="gone"
+            android:src="@drawable/ic_arrow_downward"
+            app:rippleColor="?attr/colorControlNormal"/>
+
+        <!--这个view负责把上面垫起来-->
         <LinearLayout
-            android:id="@+id/hr_snackbar_placeholder"
+            android:id="@+id/hr_fab_placeholder"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_alignParentBottom="true"
@@ -119,7 +109,8 @@
         android:id="@+id/relative_material"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/relative_hr">
+        android:layout_alignTop="@id/relative_hr"
+        android:layout_below="@id/overlay_tab">
 
         <ScrollView
             android:id="@+id/scroll_material"
@@ -140,7 +131,8 @@
         android:id="@+id/relative_drop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/relative_material">
+        android:layout_alignTop="@id/relative_material"
+        android:layout_below="@id/overlay_tab">
 
         <ScrollView
             android:id="@+id/scroll_drop"
@@ -160,7 +152,8 @@
         android:id="@+id/relative_planner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/relative_drop">
+        android:layout_alignTop="@id/relative_drop"
+        android:layout_below="@id/overlay_tab">
 
         <ScrollView
             android:id="@+id/scroll_planner"
@@ -172,12 +165,46 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </ScrollView>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/planner_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/colorCheckBoxYellow"
+            android:layout_above="@id/planner_fab_placeholder"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin_2x"
+            android:layout_marginBottom="@dimen/activity_vertical_margin_2x"
+            android:clickable="true"
+            android:elevation="8dp"
+            android:focusable="true"
+            android:src="@drawable/ic_search"
+            app:rippleColor="?attr/colorControlNormal"/>
+
+        <com.ssyanhuo.arknightshelper.widget.AnimatedProgressBar
+            android:id="@+id/planner_loading"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
+            android:layout_above="@id/planner_fab_placeholder"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin_2x"
+            android:layout_marginBottom="@dimen/activity_vertical_margin_2x"
+            android:visibility="visible"
+            android:tint="@color/colorCheckBoxYellow"/>
+        <!--这个view负责把上面垫起来-->
+        <LinearLayout
+            android:id="@+id/planner_fab_placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal" />
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/relative_more"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/relative_planner">
+        android:layout_below="@id/overlay_tab">
 
         <ScrollView
             android:id="@+id/scroll_more"

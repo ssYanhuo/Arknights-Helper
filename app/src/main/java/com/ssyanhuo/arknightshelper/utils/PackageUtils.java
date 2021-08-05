@@ -20,7 +20,7 @@ import androidx.core.graphics.drawable.IconCompat;
 
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.activity.LaunchGameActivity;
-import com.ssyanhuo.arknightshelper.entity.StaticData;
+import com.ssyanhuo.arknightshelper.misc.StaticData;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -38,18 +38,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.ssyanhuo.arknightshelper.BuildConfig;
 import com.ssyanhuo.arknightshelper.R;
-import com.ssyanhuo.arknightshelper.entity.StaticData;
+import com.ssyanhuo.arknightshelper.misc.StaticData;
 import com.ssyanhuo.arknightshelper.service.OverlayService;
-import com.ssyanhuo.arknightshelper.service.PythonService;
 import com.ssyanhuo.arknightshelper.utils.CompatUtils;
 import com.ssyanhuo.arknightshelper.utils.ScreenUtils;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
 import com.ssyanhuo.arknightshelper.utils.PackageUtils;
-import com.ssyanhuo.arknightshelper.utils.PythonUtils;
 import com.ssyanhuo.arknightshelper.utils.ThemeUtils;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -106,16 +103,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        if ((!preferences.getBoolean("python_finished",false)) && PythonUtils.isSupported() && !preferences.getBoolean("disable_planner", false)){
-            PythonUtils.setupEnvironment(getApplicationContext(), MainActivity.this, snackBarContainer);
-            return;
-        }
-        if((preferences.getBoolean("python_finished",false)) && PythonUtils.isSupported() && !preferences.getBoolean("disable_planner", false) && PythonUtils.getPluginVersion(getApplicationContext()) < StaticData.Const.PLANNER_PLUGIN_MIN_VERSION){
-            PythonUtils.setupEnvironment(getApplicationContext(), MainActivity.this, snackBarContainer);
-            return;
-        }
-
-
         Snackbar.make(snackBarContainer, R.string.start_game, Snackbar.LENGTH_LONG).show();
         Timer timer = new Timer();
         final Handler handler = new Handler();
@@ -124,12 +111,11 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 final SharedPreferences.Editor editor = preferences.edit();
                 Intent overlayServiceIntent = new Intent(getApplicationContext(), OverlayService.class);
-                Intent pythonServiceIntent = new Intent(getApplicationContext(), PythonService.class);
                 Looper.prepare();
-                if (preferences.getInt("versionLast", -1) != BuildConfig.VERSION_CODE || !FileUtils.checkFiles(getApplicationContext(), getFilesDir().getPath(), StaticData.Const.DATA_LIST) || ((!FileUtils.checkFiles(getApplicationContext(), getFilesDir().getPath() + File.separator + "python" + File.separator + "data", new String[]{"formula.json", "matrix.json"})) && preferences.getBoolean("disable_planner", false))){
+                if (preferences.getInt("versionLast", -1) != BuildConfig.VERSION_CODE
+                        || !FileUtils.checkFiles(getApplicationContext(), getFilesDir().getPath(), StaticData.Const.DATA_LIST)
+                        || BuildConfig.BUILD_TYPE == "debug") {
                     FileUtils.copyFilesFromAssets(getApplicationContext(), StaticData.Const.DATA_LIST);
-                    FileUtils.copyFileFromAssets(getApplicationContext(), getFilesDir().getPath() + File.separator + "python" + File.separator + "data", "formula.json");
-                    FileUtils.copyFileFromAssets(getApplicationContext(), getFilesDir().getPath() + File.separator + "python" + File.separator + "data", "matrix.json");
                 }
                 if((Build.BRAND.equals("Meizu") || Build.BRAND.equals("MEIZU") || Build.BRAND.equals("MeiZu") || Build.BRAND.equals("meizu")) && preferences.getBoolean("firstRun", true)){
                     Snackbar.make(snackBarContainer, R.string.meizu_floating_window_permission, Snackbar.LENGTH_INDEFINITE).show();
@@ -151,9 +137,6 @@ public class MainActivity extends AppCompatActivity {
                             });
 
                             startService(overlayServiceIntent);
-                            if(PythonUtils.isSupported() && !preferences.getBoolean("disable_planner", false)){
-                                startService(pythonServiceIntent);
-                            }
                         }catch (Exception e){
                             Log.e(TAG, "Start service failed!", e);
                         }
@@ -176,9 +159,6 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
                         startService(overlayServiceIntent);
-                        if(PythonUtils.isSupported() && !preferences.getBoolean("disable_planner", false)){
-                            startService(pythonServiceIntent);
-                        }
                     }catch (Exception e){
                         Log.e(TAG, "Start service failed!", e);
                     }
@@ -401,39 +381,6 @@ public class MainActivity extends AppCompatActivity {
         //View的更新并非线程安全，需要从子线程post一个Runnable，下面是这个Runnable的Handler
         handler = new Handler();
         checkApplicationUpdate();
-        //修改主题
-//        MaterialShowcaseSequence materialShowcaseSequence = new MaterialShowcaseSequence(this);
-//
-//        materialShowcaseSequence.addSequenceItem(new MaterialShowcaseView.Builder(this)
-//                .setTarget(fab)
-//                .setContentText(R.string.showcase_start)
-//                .setShapePadding((int) getResources().getDimension(R.dimen.activity_horizontal_margin))
-//                .setDelay(500)
-//                .setMaskColour(Color.parseColor("#DD1A1A1A"))
-//                .setDismissOnTouch(true)
-//                .renderOverNavigationBar()
-//                .build());
-//        materialShowcaseSequence.addSequenceItem(new MaterialShowcaseView.Builder(this)
-//                .setTarget(toolbar.getChildAt(1))
-//                .setContentText(R.string.showcase_menu)
-//                .setShapePadding((int) getResources().getDimension(R.dimen.activity_horizontal_margin))
-//                .setDelay(500)
-//                .setMaskColour(Color.parseColor("#DD1A1A1A"))
-//                .setDismissOnTouch(true)
-//                .renderOverNavigationBar()
-//                .build());
-//        materialShowcaseSequence.addSequenceItem(new MaterialShowcaseView.Builder(this)
-//                .setTarget(toolbar)
-//                .setContentText(R.string.showcase_tile)
-//                .setShapePadding((int) getResources().getDimension(R.dimen.activity_horizontal_margin))
-//                .setDelay(500)
-//                .setMaskColour(Color.parseColor("#DD1A1A1A"))
-//                .setDismissOnTouch(true)
-//                .renderOverNavigationBar()
-//                .build());
-//
-//        materialShowcaseSequence.singleUse("FIRST_RUN");
-//        materialShowcaseSequence.start();
         int upCount = preferences.getInt("up_count", 0);
 
         int upCountFromLastUpdate = preferences.getInt("up_count_from_last_update", 0);

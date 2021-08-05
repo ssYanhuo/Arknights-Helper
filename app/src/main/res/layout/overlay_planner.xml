@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/planner_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="64dp"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/activity_horizontal_margin"
+    android:padding="@dimen/activity_horizontal_margin"
     android:descendantFocusability="blocksDescendants">
     <TextView
         android:id="@+id/planner_description"
@@ -44,15 +42,6 @@
             android:layout_height="wrap_content"
             android:text="@string/planner_add_item"/>
     </LinearLayout>
-
-    <Button
-        android:id="@+id/planner_request"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:enabled="false"
-        android:background="@drawable/checkbox_background_yellow"
-        android:textColor="@android:color/black"
-        android:text="@string/planner_query" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -98,49 +87,12 @@
                 android:id="@+id/planner_result_synthesis"
                 android:orientation="vertical" />
         </LinearLayout>
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/planner_result_items_container"-->
-<!--            android:orientation="vertical">-->
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@string/planner_result_items_title"/>-->
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:id="@+id/planner_result_items"-->
-<!--                android:paddingLeft="@dimen/activity_horizontal_margin"/>-->
-<!--        </LinearLayout>-->
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:id="@+id/planner_loading">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/planner_loading"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/planner_version_info">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Python Version: 3.6"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Interpreter Version: 3.7.2" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Connector Version: Beta v0.0.1"/>
+        android:id="@+id/planner_info">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
