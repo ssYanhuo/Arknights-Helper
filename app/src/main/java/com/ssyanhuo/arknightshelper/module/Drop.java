@@ -1,7 +1,6 @@
 package com.ssyanhuo.arknightshelper.module;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -10,9 +9,7 @@ import android.graphics.drawable.PaintDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.text.SpannableStringBuilder;
-import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +24,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ssyanhuo.arknightshelper.R;
-import com.ssyanhuo.arknightshelper.activity.SettingsActivity;
 import com.ssyanhuo.arknightshelper.service.OverlayService;
 import com.ssyanhuo.arknightshelper.utils.ScreenUtils;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
@@ -43,18 +39,13 @@ import java.util.Map;
 
 public class Drop {
     final static String TAG = "Material";
-    final static String BASE_URL = "https://penguin-stats.io/PenguinStats";
-    final static String API_MATRIX = "/api/result/matrix";
-    final static String API_ITEMS = "/api/items";
-    final static String API_STAGES = "/api/stages";
-    JSONObject data_matrix;
-    JSONObject data_material;
-    JSONArray data_items;
-    JSONArray data_stages;
+    JSONObject dataMatrix;
+    JSONObject dataMaterial;
+    JSONArray dataItems;
+    JSONArray dataStages;
     Context applicationContext;
     View contentView;
     Handler handler;
-    View updater;
     RelativeLayout parentView;
     ArrayList<RadioButton> radioButtons = new ArrayList<>();
     Map<String, String> stageMap = new HashMap<>();
@@ -70,23 +61,23 @@ public class Drop {
         handler = new Handler();
         sharedPreferences = applicationContext.getSharedPreferences("com.ssyanhuo.arknightshelper_preferences", Context.MODE_PRIVATE);
         try{
-            data_matrix = JSON.parseObject(FileUtils.readData("matrix.json", applicationContext));
-            data_material = JSON.parseObject(FileUtils.readData("material.json", applicationContext));
+            dataMatrix = JSON.parseObject(FileUtils.readData("matrix.json", applicationContext));
+            dataMaterial = JSON.parseObject(FileUtils.readData("material.json", applicationContext));
             //下面两个是数组形式
-            data_items = JSON.parseArray(FileUtils.readData("items.json", applicationContext));
-            data_stages = JSON.parseArray(FileUtils.readData("stages.json", applicationContext));
+            dataItems = JSON.parseArray(FileUtils.readData("items.json", applicationContext));
+            dataStages = JSON.parseArray(FileUtils.readData("stages.json", applicationContext));
         } catch (Exception e){
             e.printStackTrace();
             Log.e(TAG, String.valueOf(e));
-            goUpdate();
             return;
         }
 
-        for (int i =0; i < data_stages.size(); i++){
-            JSONObject object = data_stages.getJSONObject(i);
+        for (int i = 0; i < dataStages.size(); i++){
+            JSONObject object = dataStages.getJSONObject(i);
             stageMap.put(object.getString("stageId"), object.getString("code"));
             costMap.put(object.getString("stageId"), object.getInteger("apCost"));
         }
+
         getAllRadioButtons(contentView);
         for (int i = 0; i < radioButtons.size(); i++){
             radioButtons.get(i).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -110,34 +101,23 @@ public class Drop {
                     int item = Integer.parseInt(buttonView.getTag().toString());
                     ArrayList<JSONObject> result = getResult(item);
                     if (result == null){
-                        goUpdate();
                         return;
                     }
                     showResult(item, result);
                 }
             });
         }
-        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(applicationContext.getResources().getString(R.string.drop_desc_part_1) + " " + applicationContext.getString(R.string.drop_desc_part_4));
-        ClickableSpan clickableSpan = new ClickableSpan() {
-            @Override
-            public void onClick(View widget) {
-                goUpdate();
-            }
-        };
-        spannableStringBuilder.setSpan(clickableSpan, spannableStringBuilder.length() - applicationContext.getString(R.string.drop_desc_part_4).length(), spannableStringBuilder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(applicationContext.getResources().getString(R.string.drop_desc_part_1));
         ((TextView)contentView.findViewById(R.id.drop_description)).setText(spannableStringBuilder);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
             ((TextView)contentView.findViewById(R.id.drop_description)).append("\n" + applicationContext.getString(R.string.get_permission_background_activity));
         }
         ((TextView)contentView.findViewById(R.id.drop_description)).setMovementMethod(LinkMovementMethod.getInstance());
     }
-    public void refresh(){
-
-    }
 
     public ArrayList<JSONObject> getResult(int item){
         ArrayList<JSONObject> result = new ArrayList<>();
-        JSONArray matrix = data_matrix.getJSONArray("matrix");
+        JSONArray matrix = dataMatrix.getJSONArray("matrix");
 
         for (int i= 0; i < matrix.size(); i++){
             int id = -1;
@@ -188,7 +168,7 @@ public class Drop {
         int padding = applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
         tableTitle.setPadding(0, padding, 0, 0);
         try {
-            JSONObject formula = data_material.getJSONObject(String.valueOf(item)).getJSONObject("madeof");
+            JSONObject formula = dataMaterial.getJSONObject(String.valueOf(item)).getJSONObject("madeof");
             if (formula != null && formula.size() > 0){
                 TextView textView = new TextView(applicationContext);
                 textView.setPadding(ScreenUtils.dip2px(applicationContext, 8), padding, padding, 0);
@@ -255,11 +235,5 @@ public class Drop {
                 getAllRadioButtons(viewGroup.getChildAt(i));
             }
         }
-    }
-    public void goUpdate(){
-        Intent intent = new Intent(applicationContext, SettingsActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        applicationContext.startActivity(intent);
-        service.hideFloatingWindow();
     }
 }

@@ -115,18 +115,14 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         final SwitchPreference emulator_mode = findPreference("emulator_mode");
         final Preference add_shortcut = findPreference("add_shortcut");
         final SwitchPreference auto_catch_screen = findPreference("auto_catch_screen");
-        margin_fix.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @SuppressLint("SourceLockedOrientationActivity")
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                final Activity activity = getActivity();
-                activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE);
-                return false;
-            }
+        margin_fix.setOnPreferenceClickListener(preference -> {
+            final Activity activity1 = getActivity();
+            activity1.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE);
+            return false;
         });
         if (PackageUtils.getGameCount(getContext()) < 2){
             game_version.setVisible(false);
@@ -136,7 +132,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             for (int i = 0; i < entryValues.length; i++) {
                 CharSequence packageName = entryValues[i];
                 if (packageName == StaticData.Const.PACKAGE_MANUAL){continue;}
-                if (checkApplication((String) packageName)) {
+                if (PackageUtils.checkApplication((String) packageName, getContext())) {
                     index.add(i);
                 }
             }
@@ -151,184 +147,148 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             game_version.setEntries(e);
             game_version.setEntryValues(v);
 
-            game_version.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    final String oldLang = preferences.getString("game_language", I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE);
-                    if (newValue.equals(StaticData.Const.PACKAGE_ENGLISH)){
-                        preferences.edit().putString("game_language", I18nUtils.LANGUAGE_ENGLISH).putBoolean("need_reload",true).apply();
-                        game_language.setValue(I18nUtils.LANGUAGE_ENGLISH);
-                        Snackbar.make(getView(), "游戏语言已自动设置为英语", Snackbar.LENGTH_LONG)
-                                .setAction(R.string.undo, new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        preferences.edit().putString("game_language", oldLang).putBoolean("need_reload",true).apply();
-                                        game_language.setValue(oldLang);
-                                    }
-                                })
-                                .show();
-                    }else if (newValue.equals(StaticData.Const.PACKAGE_JAPANESE)){
-                        preferences.edit().putString("game_language", I18nUtils.LANGUAGE_JAPANESE).putBoolean("need_reload",true).apply();
-                        game_language.setValue(I18nUtils.LANGUAGE_JAPANESE);
-                        Snackbar.make(getView(), "游戏语言已自动设置为日文", Snackbar.LENGTH_LONG)
-                                .setAction(R.string.undo, new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        preferences.edit().putString("game_language", oldLang).putBoolean("need_reload",true).apply();
-                                        game_language.setValue(oldLang);
-                                    }
-                                })
-                                .show();
-                    }else if (newValue.equals(StaticData.Const.PACKAGE_KOREAN)){
-                        //TODO Unfinished
-                    }
-
-                    return true;
+            game_version.setOnPreferenceChangeListener((preference, newValue) -> {
+                final String oldLang = preferences.getString("game_language", I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE);
+                if (newValue.equals(StaticData.Const.PACKAGE_ENGLISH)){
+                    preferences.edit().putString("game_language", I18nUtils.LANGUAGE_ENGLISH).putBoolean("need_reload",true).apply();
+                    game_language.setValue(I18nUtils.LANGUAGE_ENGLISH);
+                    Snackbar.make(getView(), "游戏语言已自动设置为英语", Snackbar.LENGTH_LONG)
+                            .setAction(R.string.undo, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v1) {
+                                    preferences.edit().putString("game_language", oldLang).putBoolean("need_reload",true).apply();
+                                    game_language.setValue(oldLang);
+                                }
+                            })
+                            .show();
+                }else if (newValue.equals(StaticData.Const.PACKAGE_JAPANESE)){
+                    preferences.edit().putString("game_language", I18nUtils.LANGUAGE_JAPANESE).putBoolean("need_reload",true).apply();
+                    game_language.setValue(I18nUtils.LANGUAGE_JAPANESE);
+                    Snackbar.make(getView(), "游戏语言已自动设置为日文", Snackbar.LENGTH_LONG)
+                            .setAction(R.string.undo, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v1) {
+                                    preferences.edit().putString("game_language", oldLang).putBoolean("need_reload",true).apply();
+                                    game_language.setValue(oldLang);
+                                }
+                            })
+                            .show();
+                }else if (newValue.equals(StaticData.Const.PACKAGE_KOREAN)){
+                    //TODO Unfinished
                 }
+
+                return true;
             });
         }
 
-        update_data.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                updateLayout = (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.dialog_data_updater, null);
-                updateDialog = new AlertDialog.Builder(getContext())
-                        .setView(updateLayout)
-                        .setTitle(R.string.settings_data_update_title)
-                        .create();
-                updateDialog.show();
-                Thread thread = new Thread(new UpdateRunnable());
-                thread.start();
-                return false;
-            }
+        update_data.setOnPreferenceClickListener(preference -> {
+            updateLayout = (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.dialog_data_updater, null);
+            updateDialog = new AlertDialog.Builder(getContext())
+                    .setView(updateLayout)
+                    .setTitle(R.string.settings_data_update_title)
+                    .create();
+            updateDialog.show();
+            Thread thread = new Thread(new UpdateRunnable());
+            thread.start();
+            return false;
         });
-        theme.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                preferences.edit().putBoolean("allowAutoTheme", false).apply();
-                try {
-                    preferences.edit().putBoolean("need_reload",true).apply();
-                    getActivity().recreate();
-                    restartService();
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-                return true;
+        theme.setOnPreferenceChangeListener((preference, newValue) -> {
+            preferences.edit().putBoolean("allowAutoTheme", false).apply();
+            try {
+                restartService();
+            }catch (Exception e){
+                e.printStackTrace();
             }
+            return true;
         });
-        game_language.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                if (!newValue.equals(I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE)){
-                    preferences.edit().putBoolean("need_reload",true).apply();
-                    Snackbar.make(getView(), R.string.ocr_not_available_in_other_languages, Snackbar.LENGTH_SHORT).show();
-                }
-                return true;
+        game_language.setOnPreferenceChangeListener((preference, newValue) -> {
+            if (!newValue.equals(I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE)){
+                preferences.edit().putBoolean("need_reload",true).apply();
+                Snackbar.make(getView(), R.string.ocr_not_available_in_other_languages, Snackbar.LENGTH_SHORT).show();
             }
+            return true;
         });
-        button_img.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(final Preference preference) {
-                showButtonImagePicker(null);
-                return false;
-            }
+        button_img.setOnPreferenceClickListener(preference -> {
+            showButtonImagePicker(null);
+            return false;
         });
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){
             enable_dark_mode.setVisible(false);
         }
-        enable_dark_mode.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                if(Boolean.valueOf(newValue.toString())){
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-                }else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                }
-                activity.recreate();
-                restartService();
-                return true;
+        enable_dark_mode.setOnPreferenceChangeListener((preference, newValue) -> {
+            if(Boolean.valueOf(newValue.toString())){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+            }else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
+            activity.recreate();
+            restartService();
+            return true;
         });
-        emulator_mode.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                restartService();
-                return true;
-            }
+        emulator_mode.setOnPreferenceChangeListener((preference, newValue) -> {
+            restartService();
+            return true;
         });
         if (PackageUtils.getGameCount(getContext()) <= 0){
             add_shortcut.setVisible(false);
         }
-        add_shortcut.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
+        add_shortcut.setOnPreferenceClickListener(preference -> {
 
-                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                final ArrayList<String> packageList = PackageUtils.getGamePackageNameList(getContext());
-                final ArrayList<String> nameList = PackageUtils.getGameNameList(getContext());
-                builder.setSingleChoiceItems(nameList.toArray(new String[nameList.size()]), 0, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        final int index = which;
-                        int padding = activity.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
-                        final EditText editText = new EditText(activity);
-                        editText.setHint("明日方舟 " + nameList.get(index));
-                        //editText.setPadding(padding, padding, padding, padding);
-                        AlertDialog dialog1 = new AlertDialog.Builder(activity)
-                                .setTitle("设置快捷方式名")
-                                .setView(editText)
-                                .setPositiveButton("好", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        if (editText.getText().toString().equals("")){
-                                            PackageUtils.addShortCut(getContext(), packageList.get(index), "明日方舟 " + nameList.get(index));
-                                        }else {
-                                            PackageUtils.addShortCut(getContext(), packageList.get(index), editText.getText().toString());
-                                        }
-
-                                    }
-                                })
-                                .create();
-
-                        dialog1.show();
-                        FrameLayout.MarginLayoutParams marginLayoutParams = (FrameLayout.MarginLayoutParams) editText.getLayoutParams();
-                        marginLayoutParams.setMargins(padding,0, padding, 0);
-                        editText.setLayoutParams(marginLayoutParams);
-
-                        dialog1.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(activity, R.color.colorAccent));
-
-                        dialog.dismiss();
-                    }
-                })
-                        .setTitle("选择要启动的游戏")
-                        .show();
-
-
-                return true;
-            }
-        });
-        floating_button_opacity.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(final Preference preference, Object newValue) {
-                final SeekBarPreference seekBarPreference = (SeekBarPreference)preference;
-                restartService();
-                seekBarPreference.setEnabled(false);
-                final CharSequence title = seekBarPreference.getTitle();
-                seekBarPreference.setTitle("正在应用……");
-                new Timer().schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                seekBarPreference.setEnabled(true);
-                                seekBarPreference.setTitle(title);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            final ArrayList<String> packageList = PackageUtils.getGamePackageNameList(getContext());
+            final ArrayList<String> nameList = PackageUtils.getGameNameList(getContext());
+            builder.setSingleChoiceItems(nameList.toArray(new String[nameList.size()]), 0, (dialog, which) -> {
+                final int index = which;
+                int padding = activity.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
+                final EditText editText = new EditText(activity);
+                editText.setHint("明日方舟 " + nameList.get(index));
+                AlertDialog dialog1 = new AlertDialog.Builder(activity)
+                        .setTitle("设置快捷方式名")
+                        .setView(editText)
+                        .setPositiveButton("好", (dialog2, which1) -> {
+                            if (editText.getText().toString().equals("")){
+                                PackageUtils.addShortCut(getContext(), packageList.get(index), "明日方舟 " + nameList.get(index));
+                            }else {
+                                PackageUtils.addShortCut(getContext(), packageList.get(index), editText.getText().toString());
                             }
+                        })
+                        .create();
+
+                dialog1.show();
+                FrameLayout.MarginLayoutParams marginLayoutParams = (FrameLayout.MarginLayoutParams) editText.getLayoutParams();
+                marginLayoutParams.setMargins(padding,0, padding, 0);
+                editText.setLayoutParams(marginLayoutParams);
+
+                dialog1.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(activity, R.color.colorAccent));
+
+                dialog.dismiss();
+            })
+                    .setTitle("选择要启动的游戏")
+                    .show();
+
+
+            return true;
+        });
+        floating_button_opacity.setOnPreferenceChangeListener((preference, newValue) -> {
+            final SeekBarPreference seekBarPreference = (SeekBarPreference)preference;
+            restartService();
+            seekBarPreference.setEnabled(false);
+            final CharSequence title = seekBarPreference.getTitle();
+            seekBarPreference.setTitle(getString(R.string.settings_applying));
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    try {
+                        getActivity().runOnUiThread(() -> {
+                            seekBarPreference.setEnabled(true);
+                            seekBarPreference.setTitle(title);
                         });
+                    }catch (Exception ignored){
+
                     }
-                }, 3000);
-                return true;
-            }
+                }
+            }, 3000);
+            return true;
         });
         if (!OCRUtils.isAbiSupported() || !OCRUtils.isLanguageSupported(getActivity())){
             auto_catch_screen.setVisible(false);
@@ -394,32 +354,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                                 outputUri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                     }
                 }
-
-//                    if(!data.getDataString().contains("com.miui.gallery.open") || true){
-//                        List<ResolveInfo> resolveInfoList = getContext().getPackageManager()
-//                                .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
-//                        for (ResolveInfo info : resolveInfoList) {
-//                            getContext().grantUriPermission(info.activityInfo.packageName,
-//                                    outputUri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-//                        }
-//                    }else {
-//                        List<ResolveInfo> resolveInfoList = getContext().getPackageManager()
-//                                .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
-//                        for (ResolveInfo info : resolveInfoList) {
-//                            if (info.activityInfo.packageName.contains("miui")){
-//
-////                                getContext().grantUriPermission(info.activityInfo.packageName,
-////                                        outputUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-////                                Toast.makeText(getContext(), info.activityInfo.name, Toast.LENGTH_SHORT).show();
-//                            }else {
-//                                continue;
-////                                getContext().grantUriPermission(info.activityInfo.packageName,
-////                                        outputUri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-//                            }
-//
-//                        }
-//                    }
-                //intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                 startActivityForResult(intent, 1);
             }catch (Exception e){
                 e.printStackTrace();
@@ -438,17 +372,13 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         Bitmap bitmap = null;
         int padding = getResources().getDimensionPixelOffset(R.dimen.activity_horizontal_margin);
         checkBox.setText(R.string.setting_button_image_crop_to_circle);
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    //TODO 裁切
-                }
+        checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked){
+                //TODO 裁切
             }
         });
         checkBox.setChecked(true);
         checkBox.setVisibility(View.GONE);
-        //imageView.setPadding(padding, padding, padding, padding);
         imageView.setClickable(true);
         imageView.setFocusable(true);
         if (data == null){
@@ -479,55 +409,41 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         final AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.setting_button_image_pick_image)
                 .setView(linearLayout)
-                .setPositiveButton(R.string.setting_button_image_pick_image_confirm, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if(finalBitmap != null){
-                            try {
-                                File outPutPic = new File(getContext().getFilesDir().getPath() + File.separator + "button.png");
-                                if (!outPutPic.exists()){
-                                    outPutPic.createNewFile();
-                                }
-                                FileOutputStream outputStream = new FileOutputStream(outPutPic);
-                                finalBitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-                                outputStream.flush();
-                                outputStream.close();
-                                preferences.edit().putBoolean("button_img", true).apply();
-                                restartService();
-                            } catch (IOException e) {
-                                e.printStackTrace();
+                .setPositiveButton(R.string.setting_button_image_pick_image_confirm, (dialog, which) -> {
+                    if(finalBitmap != null){
+                        try {
+                            File outPutPic = new File(getContext().getFilesDir().getPath() + File.separator + "button.png");
+                            if (!outPutPic.exists()){
+                                outPutPic.createNewFile();
                             }
+                            FileOutputStream outputStream = new FileOutputStream(outPutPic);
+                            finalBitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+                            outputStream.flush();
+                            outputStream.close();
+                            preferences.edit().putBoolean("button_img", true).apply();
+                            restartService();
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
+                    }
 
-                        dialog.dismiss();
-                    }
+                    dialog.dismiss();
                 })
-                .setNegativeButton(R.string.setting_button_image_pick_image_cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .setNeutralButton(R.string.setting_button_image_resume, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        preferences.edit().putBoolean("button_img", false).apply();
-                        restartService();
-                        dialog.dismiss();
-                    }
+                .setNegativeButton(R.string.setting_button_image_pick_image_cancel, (dialog, which) -> dialog.dismiss())
+                .setNeutralButton(R.string.setting_button_image_resume, (dialog, which) -> {
+                    preferences.edit().putBoolean("button_img", false).apply();
+                    restartService();
+                    dialog.dismiss();
                 })
                 .setCancelable(false)
                 .create();
 
 
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent, 0);
-                alertDialog.dismiss();
-            }
+        imageView.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            startActivityForResult(intent, 0);
+            alertDialog.dismiss();
         });
         linearLayout.setGravity(Gravity.CENTER_HORIZONTAL);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -555,7 +471,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     private Bitmap clipToCircle(Bitmap bitmap){
-        //Canvas canvas = new Canvas(bitmap);
         return bitmap;
     }
 

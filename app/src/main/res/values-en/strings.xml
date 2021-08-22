@@ -36,7 +36,7 @@
     <string name="hr_result_title_part_2">Clear</string>
     <string name="hr_result_empty">Noting found or no meaningful tag was selected</string>
     <string name="update_state_correct">Arknights Helper™ self-checking finished, no error found.</string>
-    <string name="update_state_beta">It seems that you are using a beta version of Arknights Helper™.</string>
+    <string name="update_state_beta">Beta version</string>
     <string name="title_activity_about">About</string>
     <string name="menu_about">About</string>
     <string name="menu_exit">Exit</string>
@@ -49,12 +49,12 @@
     <string name="go_project">Visit this project\'s page</string>
     <string name="go_project_desc">Submit issues and new data</string>
     <string name="go_release">Visit this project\'s release page</string>
-    <string name="go_release_desc">Get lastest version</string>
+    <string name="go_release_desc">Get latest version</string>
     <string name="about_thanks">Thanks</string>
     <string name="about_thanks_list">\Graue Neko, Arknights WIKI, deano2390, teisun, zyyoona7, Penguin Statics, tomcat, ycremar\nAnd all Doctors.</string>
     <string name="about_version">Version</string>
     <string name="about_version_desc">Loading…</string>
-    <string name="start_multiple_apps">More than one game were found, please select one</string>
+    <string name="start_multiple_apps">Please go to settings and select a game</string>
     <string name="game_official">Official</string>
     <string name="game_bilibili">Bilibili</string>
     <string name="overlay_coming">Coming soon…</string>
@@ -78,7 +78,7 @@
     <string name="material_money_evolve">Money (Evolve)</string>
     <string name="update_state_checking">Checking updates…</string>
     <string name="update_state_error">Check for update failed</string>
-    <string name="update_state_need_update">New version for Arknights Helper™ now available, click here to update</string>
+    <string name="update_state_need_update">New version available</string>
     <string name="update_intent_error">Unable to call Coolapk to handle this update, do you want to go to Github release page?</string>
     <string name="update_go_github">Go to Github</string>
     <string name="showcase_start">Tap here to start engine</string>
@@ -88,7 +88,6 @@
     <string name="update_dialog_title">Release note</string>
     <string name="showcase_tile">For android 7.0+, you can add QS tile to notification panel</string>
     <string name="go_qq">Join QQ group</string>
-    <string name="go_qq_desc">Questions, get beta, submit issues or just chatting!</string>
     <string name="hr_method_selector_desc">Please select a query method.\nYou can change this setting later.</string>
     <string name="hr_method_selector_title_fuzzy">Fuzzy query</string>
     <string name="hr_method_selector_title_exact">Exact query</string>
@@ -97,7 +96,7 @@
     <string name="hr_desc_part_1_fuzzy">You can choose 5 tags at most execpt stars, will show all possible results.\nLong press characters for more info.</string>
     <string name="hr_method_selector_button_to_fuzzy">Change to fuzzy mode</string>
     <string name="hr_method_selector_button_to_exact">Change to exact mode</string>
-    <string name="title_activity_lab">Dreamland</string>
+    <string name="title_activity_lab">Test</string>
     <string name="drop_updater_desc">No data found, data not usable or need a update.\nPlease update your data.\nData from Penguin Statics (penguin-stats.io)</string>
     <string name="drop_updater_update">Update</string>
     <string name="drop_desc_part_1" >Data from penguin-stats.io</string>
@@ -129,13 +128,13 @@
     <string name="settings_summary_game_version">Available when you installed more than one games</string>
     <string name="settings_title_long_press_back_to_game">Fast switch</string>
     <string name="resume_game">Starting game…</string>
-    <string name="update_state_beta_finished">Beta test finished, click here to update to stable version</string>
+    <string name="update_state_beta_finished">Please update to stable version</string>
     <string name="settings_category_compatibility">Compatibility</string>
     <string name="settings_title_use_builtin_data">Only use built-in data</string>
     <string name="settings_summary_use_builtin_data">Built-in data may be out of date</string>
     <string name="settings_title_update_site">Update site</string>
     <string name="settings_summary_update_site">Choose where updates come from</string>
-    <string name="settings_summary_margin_fix">Fix the floating window position error in landspace mode, click here to rotate screen, click again to enter fullscreen mode</string>
+    <string name="settings_summary_margin_fix">Fix the floating window position error in landscape mode, click to rotate the screen</string>
     <string name="settings_title_margin_fix">Margin fix</string>
     <string name="settings_data_update_success">Update finished!</string>
     <string name="settings_data_update_title">Data update</string>
@@ -257,4 +256,11 @@
     <string name="planner_query">Query</string>
     <string name="planner_loading">Loading…</string>
     <string name="notification_title_recording">Recording screen…</string>
+    <string name="settings_applying">Loading…</string>
+    <string name="start_engine">Start</string>
+    <string name="game_selector_item_launch_behavior">Launch behavior</string>
+    <string name="game_selector_item_desc">Launch with %1$s</string>
+    <string name="game_selector_item_desc_no_game">Do not launch game</string>
+    <string name="main_settings">Settings</string>
+    <string name="main_about">About</string>
 </resources>

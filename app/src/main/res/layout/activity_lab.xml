@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:lineSpacingMultiplier="2"
-        android:text="你进入了开发者尚未具象化的领域。\n如果你并不知道自己为什么会来到这里，请点击返回离开。"
+        android:text="仅供测试使用！\n如果你并不知道自己为什么会来到这里，请点击返回离开。"
         android:textColor="@android:color/holo_red_dark"
         android:paddingBottom="@dimen/activity_horizontal_margin"/>
 

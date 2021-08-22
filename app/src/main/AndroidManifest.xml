@@ -31,8 +31,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Default"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.MainActivity2"
+        <activity android:name=".activity.MainActivity"
             android:theme="@style/AppTheme2">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <service
@@ -59,21 +64,6 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity
-            android:name=".activity.MainActivity"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <!--
-            <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcut" />
-            -->
-        </activity>
-
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -86,16 +76,9 @@
         </provider>
 
         <activity
-            android:name=".activity.SettingsActivity"
-            android:label="@string/title_activity_settings" />
-        <activity
             android:name=".activity.LabActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_lab" />
-        <activity
-            android:name=".activity.AboutActivity"
-            android:label="@string/title_activity_about"
-            android:theme="@style/AppTheme.Default.NoActionBar" />
 
         <receiver android:name=".service.BroadcastReceiver">
             <intent-filter>

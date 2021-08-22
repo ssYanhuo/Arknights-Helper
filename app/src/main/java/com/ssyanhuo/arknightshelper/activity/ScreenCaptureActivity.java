@@ -40,15 +40,6 @@ public class ScreenCaptureActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        Bundle bundle = getIntent().getBundleExtra("bundle");
-//        if (bundle != null){
-//            Hr hr = ((CaptureScreenSerializable) bundle.getSerializable("serializable")).getModule();
-//            OverlayService overlayService = ((CaptureScreenSerializable) bundle.getSerializable("serializable")).getService();
-//            Log.e("SC", hr.toString());
-//            Log.e("SC", overlayService.toString());
-//        }else {
-//            finish();
-//        }
         mediaProjectionManager = (MediaProjectionManager) getSystemService(MEDIA_PROJECTION_SERVICE);
         Intent intent = mediaProjectionManager.createScreenCaptureIntent();
         startActivityForResult(intent,0);

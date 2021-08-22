@@ -29,13 +29,14 @@ import android.view.ViewOutlineProvider;
 import android.view.WindowManager;
 import android.widget.*;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.view.ContextThemeWrapper;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.android.material.tabs.TabLayout;
 import com.ssyanhuo.arknightshelper.R;
-import com.ssyanhuo.arknightshelper.activity.SettingsActivity;
+import com.ssyanhuo.arknightshelper.activity.MainActivity;
 import com.ssyanhuo.arknightshelper.misc.ServiceNotification;
 import com.ssyanhuo.arknightshelper.misc.StaticData;
 import com.ssyanhuo.arknightshelper.module.Drop;
@@ -105,12 +106,6 @@ public class OverlayService extends Service {
     boolean attachToEdge = true;
     private LinearLayout pinnedWindow;
     private TabLayout tabLayout;
-
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
-
 
     @Override
     public void onCreate() {
@@ -260,31 +255,28 @@ public class OverlayService extends Service {
                         @Override
                         public void run() {
                             if ((Math.abs(downX - lastX) <= 10 && Math.abs(downY - lastY) <= 10) && touching){
-                                handler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        touching = false;
-                                        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-                                        assert vibrator != null;
-                                        if (vibrator.hasVibrator()){
-                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                                vibrator.vibrate(VibrationEffect.createOneShot(32, 128));
-                                            }else {
-                                                vibrator.vibrate(32);
-                                            }
+                                handler.post(() -> {
+                                    touching = false;
+                                    Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+                                    assert vibrator != null;
+                                    if (vibrator.hasVibrator()){
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                            vibrator.vibrate(VibrationEffect.createOneShot(32, 128));
+                                        }else {
+                                            vibrator.vibrate(32);
                                         }
-                                        if(PackageUtils.getGameCount(getApplicationContext()) == 1){
-                                            startActivity(getPackageManager().getLaunchIntentForPackage(PackageUtils.getGamePackageNameList(getApplicationContext()).get(0)));
-                                        }else if (!sharedPreferences.getString("game_version", StaticData.Const.PACKAGE_MANUAL).equals(StaticData.Const.PACKAGE_MANUAL) && PackageUtils.getGameCount(getApplicationContext()) > 1){
-                                            String game = sharedPreferences.getString("game_version", GAME_MANUAL);
-                                            Toast.makeText(getApplicationContext(), R.string.resume_game, Toast.LENGTH_SHORT).show();
-                                            startActivity(getPackageManager().getLaunchIntentForPackage(game));
-                                        }else if (sharedPreferences.getString("game_version", StaticData.Const.PACKAGE_MANUAL).equals(StaticData.Const.PACKAGE_MANUAL) && PackageUtils.getGameCount(getApplicationContext()) > 1){
-                                            Toast.makeText(getApplicationContext(), R.string.start_multiple_apps, Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                            startActivity(intent);
-                                        }
+                                    }
+                                    if(PackageUtils.getGameCount(getApplicationContext()) == 1){
+                                        startActivity(getPackageManager().getLaunchIntentForPackage(PackageUtils.getGamePackageNameList(getApplicationContext()).get(0)));
+                                    }else if (!sharedPreferences.getString("game_version", StaticData.Const.PACKAGE_MANUAL).equals(StaticData.Const.PACKAGE_MANUAL) && PackageUtils.getGameCount(getApplicationContext()) > 1){
+                                        String game = sharedPreferences.getString("game_version", GAME_MANUAL);
+                                        Toast.makeText(getApplicationContext(), R.string.resume_game, Toast.LENGTH_SHORT).show();
+                                        startActivity(getPackageManager().getLaunchIntentForPackage(game));
+                                    }else if (sharedPreferences.getString("game_version", StaticData.Const.PACKAGE_MANUAL).equals(StaticData.Const.PACKAGE_MANUAL) && PackageUtils.getGameCount(getApplicationContext()) > 1){
+                                        Toast.makeText(getApplicationContext(), R.string.start_multiple_apps, Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
                                     }
                                 });
 
@@ -423,12 +415,7 @@ public class OverlayService extends Service {
             }
         }
         ImageButton closeButton = pinnedWindow.findViewById(R.id.pinned_window_close);
-        closeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                windowManager.removeViewImmediate(v.getRootView());
-            }
-        });
+        closeButton.setOnClickListener(v -> windowManager.removeViewImmediate(v.getRootView()));
         LinearLayout bar = pinnedWindow.findViewById(R.id.pinned_window_bar);
         bar.setOnTouchListener(new View.OnTouchListener() {
             int x;
@@ -552,12 +539,10 @@ public class OverlayService extends Service {
         try {
             windowManager.removeViewImmediate(backgroundLayout);
         } catch (Exception ignored) {
-
         }
         try {
             windowManager.removeViewImmediate(button);
         } catch (Exception ignored) {
-
         }
     }
 
@@ -728,6 +713,13 @@ public class OverlayService extends Service {
         //System.exit(0);
         System.gc();
     }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
     public void playChangeModuleAnim(View[] in, View[] out){
         for (View v :
                 in) {

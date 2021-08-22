@@ -58,8 +58,8 @@
     <string name="hr_result_title_part_1">结果：</string>
     <string name="hr_result_title_part_2">清空全部</string>
     <string name="hr_result_empty">并没有找到结果或没有选择实例标签</string>
-    <string name="update_state_correct">Arknights Helper™ 正常运行中，未检测到错误</string>
-    <string name="update_state_beta">看起来你正在使用一个尚未发布的版本</string>
+    <string name="update_state_correct">已是最新版本</string>
+    <string name="update_state_beta">尚未发布的版本</string>
     <string name="menu_exit">退出</string>
     <string name="menu_about">关于</string>
     <string name="nav_header_image_desc">应用图标</string>
@@ -77,10 +77,10 @@
     <string name="go_release">前往项目发布页</string>
     <string name="go_release_desc">获取最新版本</string>
     <string name="about_thanks">鸣谢</string>
-    <string name="about_thanks_list">\Graue Neko, 明日方舟WIKI, deano2390, teisun, zyyoona7, 企鹅数据, tomcat, ycremar\n以及所有的Doctor们。</string>
+    <string name="about_thanks_list">\Graue Neko, 明日方舟 WIKI, deano2390, teisun, zyyoona7, 企鹅数据, tomcat, ycremar\n以及所有的 Doctor 们。</string>
     <string name="about_version">版本号</string>
     <string name="about_version_desc">正在获取……</string>
-    <string name="start_multiple_apps">检测到多个客户端，请手动选择</string>
+    <string name="start_multiple_apps">检测到多个客户端，请打开设置手动选择</string>
     <string name="game_official">官方</string>
     <string name="game_bilibili">"哔哩哔哩 "</string>
     <string name="overlay_coming">即将到来……</string>
@@ -104,9 +104,9 @@
     <string name="material_round_money">（CE场数）</string>
     <string name="material_money_upgrade">龙门币（升级）</string>
     <string name="material_money_evolve">龙门币（精英化）</string>
-    <string name="update_state_checking">正在检查更新……</string>
+    <string name="update_state_checking">正在检查更新…</string>
     <string name="update_state_error">检查更新时出现问题</string>
-    <string name="update_state_need_update">发现 Arknights Helper™ 引擎存在更新，点击获取最新版本</string>
+    <string name="update_state_need_update">发现更新</string>
     <string name="update_intent_error">无法连接到 Coolapk™ 数据中心，是否前往备用数据中心 Github™ 获取更新？</string>
     <string name="update_go_github">前往Github</string>
     <string name="showcase_start">点击这里，\n启动游戏和 Arknights Helper™ 引擎</string>
@@ -116,7 +116,7 @@
     <string name="update_dialog_no">取消</string>
     <string name="showcase_tile">Android 7.0 及以上用户可添加快速设置图块到通知面板</string>
     <string name="go_qq">加入 QQ 群</string>
-    <string name="go_qq_desc">教程、测试版本、交流……</string>
+    <string name="go_qq_desc" translatable="false">816497263</string>
     <string name="hr_method_selector_desc">选择一种查询方式。\n日后可以修改该选项。</string>
     <string name="hr_method_selector_title_fuzzy">模糊查询</string>
     <string name="hr_method_selector_title_exact">精确查询</string>
@@ -125,7 +125,7 @@
     <string name="hr_desc_part_1_fuzzy">除星级外，最多可选 5 个标签，将列出所有可能的干员组合。\n长按干员查看更多信息。</string>
     <string name="hr_method_selector_button_to_fuzzy">切换到模糊查询</string>
     <string name="hr_method_selector_button_to_exact">切换到精确查询</string>
-    <string name="title_activity_lab">梦境</string>
+    <string name="title_activity_lab">测试</string>
     <string name="drop_updater_desc">掉落数据未下载、不可用或需要更新。\n请先更新数据。\n数据来自 企鹅物流（penguin-stats.io）</string>
     <string name="drop_updater_update">更新数据</string>
     <string name="drop_desc_part_1">数据来自 企鹅数据 (penguin-stats.io)</string>
@@ -173,13 +173,13 @@
     <string name="settings_title_long_press_back_to_game">快速返回</string>
     <string name="resume_game">正在拉起游戏……</string>
     <string name="hr_tag_zhiyuanjixie" translatable="false">支援机械</string>
-    <string name="update_state_beta_finished">正式版已经发布，请点击此处更新到稳定版本</string>
+    <string name="update_state_beta_finished">请更新到稳定版本</string>
     <string name="settings_category_compatibility">兼容性</string>
     <string name="settings_title_use_builtin_data">强制使用内置的数据文件</string>
     <string name="settings_summary_use_builtin_data">将无法获取最新数据</string>
     <string name="settings_title_update_site">数据源</string>
     <string name="settings_summary_update_site">切换更新内容站点</string>
-    <string name="settings_summary_margin_fix">修正横屏游戏中悬浮窗不能完全贴边的问题，点击这里切换屏幕方向，再次点击进入全屏模式</string>
+    <string name="settings_summary_margin_fix">修正横屏游戏中悬浮窗不能完全贴边的问题，点击可切换屏幕方向</string>
     <string name="settings_title_margin_fix">边距修正</string>
     <string name="tip_use_remote">可以连接到远程数据库来保持数据更新</string>
     <string name="tip_use_remote_action">前往设置</string>
@@ -306,4 +306,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="intro_startup_desc">高效的游戏内辅助查询工具</string>
+    <string name="start_engine">启动</string>
+    <string name="game_selector_item_launch_behavior">启动行为</string>
+    <string name="game_selector_item_desc">与 %1$s 客户端一同启动</string>
+    <string name="game_selector_item_desc_no_game">不启动游戏</string>
+    <string name="settings_applying">正在应用…</string>
+    <string name="main_settings">设置</string>
+    <string name="main_about">关于</string>
 </resources>
