@@ -1,5 +1,5 @@
 {
-    "versionCode": 58,
-    "versionName": "RC-12",
-    "releaseNote": "[Info]更新到该版本请清除软件数据后再使用\n[New]主界面 UI 重绘，布局更加简洁\n[Fix]修复固定到屏幕的窗口关闭按钮难以辨认的问题"
+    "versionCode": 59,
+    "versionName": "RC-13",
+    "releaseNote": "[Info]更新到该版本请清除软件数据后再使用\n[Fix]修复部分界面夜间模式下颜色异常的问题"
 }

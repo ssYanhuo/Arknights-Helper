@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+ <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- 默认主题 -->
     <style name="AppTheme2" parent="Theme.MaterialComponents.DayNight.NoActionBar">

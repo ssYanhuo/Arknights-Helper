@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/main_about"
+        android:textColor="@color/colorTextPrimary2"
         android:textAppearance="?textAppearanceHeadline6"
         android:textStyle="bold"
         android:layout_marginHorizontal="@dimen/activity_horizontal_margin_2x"

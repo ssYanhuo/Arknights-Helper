@@ -13,4 +13,7 @@
     <color name="colorError">#B71C1C</color>
     <color name="colorAppBar">@color/colorPrimary</color>
     <color name="colorAppBarDark">@color/colorPrimaryDark</color>
+    <color name="colorBackground">#191919</color>
+    <color name="colorAccent2">#985500</color>
+    <color name="colorPrimary2">#AE3D00</color>
 </resources>

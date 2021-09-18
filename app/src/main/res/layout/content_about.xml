@@ -43,6 +43,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/colorTextPrimary2"
                             android:text="@string/go_github" />
                     </LinearLayout>
                 </LinearLayout>
@@ -69,6 +70,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/colorTextPrimary2"
                             android:text="@string/go_project_desc"/>
                     </LinearLayout>
 
@@ -89,6 +91,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/colorTextPrimary2"
                             android:text="@string/go_release_desc"/>
                     </LinearLayout>
 
@@ -109,6 +112,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/colorTextPrimary2"
                             android:text="@string/go_qq_desc"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -129,6 +133,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/colorTextPrimary2"
                             android:text="@string/about_thanks_list" />
                 </LinearLayout>
                 <LinearLayout
@@ -149,6 +154,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
+                        android:textColor="@color/colorTextPrimary2"
                         android:id="@+id/about_version_text"/>
                 </LinearLayout>
                 <LinearLayout
@@ -165,6 +171,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/about_easter_text"
+                        android:textColor="@color/colorTextPrimary2"
                         android:text="我好像做了一个梦。\n
                         \n梦里的我在天上。\n
                         \n光芒似乎被剥离了，眼前漆黑一片。\n
