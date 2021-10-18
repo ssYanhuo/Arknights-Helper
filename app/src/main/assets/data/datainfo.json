@@ -18,8 +18,8 @@
     {
         "name": "/charMaterials.json",
         "nameFriendly": "charMaterials.json",
-        "date": "2021-02-15",
-        "dateraw": 20210215,
+        "date": "2021-10-18",
+        "dateraw": 20211018,
         "desc": "干员材料信息，用于升级材料查询",
         "source": "Graue Neko & ssYanhuo"
     },
