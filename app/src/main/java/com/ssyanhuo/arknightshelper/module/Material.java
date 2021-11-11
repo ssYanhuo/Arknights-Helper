@@ -149,37 +149,12 @@ public class Material {
         skill1CheckBox.setChecked(false);
         skill2CheckBox.setChecked(false);
         skill3CheckBox.setChecked(false);
-        skillAllCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                showResult();
-            }
-        });
-        skill1CheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                showResult();
-            }
-        });
-        skill2CheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                showResult();
-            }
-        });
-        skill3CheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                showResult();
-            }
-        });
+        skillAllCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> showResult());
+        skill1CheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> showResult());
+        skill2CheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> showResult());
+        skill3CheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> showResult());
         levelCheckbox = view.findViewById(R.id.material_level_checkBox);
-        levelCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                showResult();
-            }
-        });
+        levelCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> showResult());
         contextThemeWrapper = new ContextThemeWrapper(applicationContext, ThemeUtils.getThemeId(ThemeUtils.THEME_UNSPECIFIED, ThemeUtils.TYPE_FLOATING_WINDOW, applicationContext));
         getAllNumberSelectors(view);
         for (int i = 0; i < numberSelectors.size(); i++){
@@ -219,12 +194,7 @@ public class Material {
             button.setMinWidth(applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin));
             button.setTextColor(Color.BLACK);
             button.setTag(jsonObject);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onCharacterSelected(v);
-                }
-            });
+            button.setOnClickListener(v -> onCharacterSelected(v));
             switch (jsonObject.getInteger("rarity")){
                 case 5:
                     button.setBackground(applicationContext.getResources().getDrawable(R.drawable.checkbox_background_yellow));
@@ -255,14 +225,11 @@ public class Material {
                     break;
             }
         }
-        ((Switch)contentView.findViewById(R.id.material_rare)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                onlyRare = isChecked;
-                if(charNow != null){
-                    checkValue();
-                    showResult();
-                }
+        ((Switch)contentView.findViewById(R.id.material_rare)).setOnCheckedChangeListener((buttonView, isChecked) -> {
+            onlyRare = isChecked;
+            if(charNow != null){
+                checkValue();
+                showResult();
             }
         });
         int backgroundColor = ThemeUtils.getBackgroundColor(applicationContext, contextThemeWrapper);
@@ -393,7 +360,7 @@ public class Material {
             }
             for (int stage = stageFrom; stage <= stageTo; stage++){
                 boolean isLastStage = stage == stageTo;
-                boolean isFirstStage = stage ==stageFrom;
+                boolean isFirstStage = stage == stageFrom;
                 if(isFirstStage && isLastStage){
                     for (int i = levelFrom; i < levelTo; i++){
                         exp += expJsonObject.getJSONArray("characterExpMap").getJSONArray(stage).getInteger(i - 1);
