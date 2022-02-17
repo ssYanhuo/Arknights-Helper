@@ -487,7 +487,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     private class UpdateRunnable implements Runnable{
-        String BASE_URL_GITEE = "http://ssyanhuo.gitee.io/arknights-helper-data/";
+        String BASE_URL_GITEE = "https://ssyanhuo.gitee.io/arknights-helper-data/";
         String BASE_URL_GITHUB = "https://ssyanhuo.github.io/Arknights-Helper-Data/";
         @Override
         public void run() {

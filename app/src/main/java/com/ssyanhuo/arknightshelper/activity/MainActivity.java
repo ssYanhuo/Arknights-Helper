@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
                 String site = preferences.getString("update_site", SITE_GITEE);
                 String spec;
                 if (site.equals(SITE_GITEE)){
-                    spec = "http://ssyanhuo.gitee.io/arknights-helper-data/latest/versioninfo.json";
+                    spec = "https://ssyanhuo.gitee.io/arknights-helper-data/latest/versioninfo.json";
                 }else {
                     spec ="https://ssyanhuo.github.io/Arknights-Helper-Data/latest/versioninfo.json";
                 }
