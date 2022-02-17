@@ -60,68 +60,60 @@ public class ServiceNotification {
         }
         Intent stopServiceIntent = new Intent(context, BroadcastReceiver.class).setAction("com.ssyanhuo.arknightshelper.stopservice");
         stopServiceIntent.putExtra("action", "StopService");
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, stopServiceIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            pendingIntent = PendingIntent.getBroadcast(context, 1, stopServiceIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        } else {
+            pendingIntent = PendingIntent.getBroadcast(context, 1, stopServiceIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
         Intent resumeIntent = new Intent(context, MainActivity.class);
         resumeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        final NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-
-                // Set appropriate defaults for the notification light, sound,
-                // and vibration.
-                .setDefaults(Notification.DEFAULT_ALL)
-
-                // Set required fields, including the small icon, the
-                // notification title, and text.
-                .setSmallIcon(R.drawable.ic_notification)
-                .setContentTitle(title)
-                .setContentText(text)
-
-                // All fields below this line are optional.
-
-                // Use a default priority (recognized on devices running Android
-                // 4.1 or later)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-
-                // Set ticker text (preview) information for this notification.
-                .setTicker(ticker)
-
-                // Show a number. This is useful when stacking notifications of
-                // a single type.
-                .setNumber(number)
-
-                // If this notification relates to a past or upcoming event, you
-                // should set the relevant time information using the setWhen
-                // method below. If this call is omitted, the notification's
-                // timestamp will by set to the time at which it was shown.
-                // TODO: Call setWhen if this notification relates to a past or
-                // upcoming event. The sole argument to this method should be
-                // the notification timestamp in milliseconds.
-                //.setWhen(...)
-
-                // Set the pending intent to be initiated when the user touches
-                // the notification.
-                .setContentIntent(pendingIntent)
-
-                // Show expanded text content on devices running Android 4.1 or
-                // later.
-                .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText(text)
-                        .setBigContentTitle(title)
-                        .setSummaryText(ticker))
-
-                // Example additional actions for this notification. These will
-                // only show on devices running Android 4.1 or later, so you
-                // should ensure that the activity in this notification's
-                // content intent provides access to the same actions in
-                // another way.
-                .addAction(
-                        R.drawable.ic_nofication_home,
-                        res.getString(R.string.notification_action_home),
-                        PendingIntent.getActivity(
-                                context,
-                                0,
-                                resumeIntent,
-                                PendingIntent.FLAG_UPDATE_CURRENT))
-                .setChannelId("notification");
+        final NotificationCompat.Builder builder;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            builder = new NotificationCompat.Builder(context, "notification")
+                    .setDefaults(Notification.DEFAULT_ALL)
+                    .setSmallIcon(R.drawable.ic_notification)
+                    .setContentTitle(title)
+                    .setContentText(text)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setTicker(ticker)
+                    .setNumber(number)
+                    .setContentIntent(pendingIntent)
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .bigText(text)
+                            .setBigContentTitle(title)
+                            .setSummaryText(ticker))
+                    .addAction(
+                            R.drawable.ic_nofication_home,
+                            res.getString(R.string.notification_action_home),
+                            PendingIntent.getActivity(
+                                    context,
+                                    0,
+                                    resumeIntent,
+                                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE));
+        } else {
+            builder = new NotificationCompat.Builder(context, "notification")
+                    .setDefaults(Notification.DEFAULT_ALL)
+                    .setSmallIcon(R.drawable.ic_notification)
+                    .setContentTitle(title)
+                    .setContentText(text)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setTicker(ticker)
+                    .setNumber(number)
+                    .setContentIntent(pendingIntent)
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                            .bigText(text)
+                            .setBigContentTitle(title)
+                            .setSummaryText(ticker))
+                    .addAction(
+                            R.drawable.ic_nofication_home,
+                            res.getString(R.string.notification_action_home),
+                            PendingIntent.getActivity(
+                                    context,
+                                    0,
+                                    resumeIntent,
+                                    PendingIntent.FLAG_UPDATE_CURRENT));
+        }
 
         return builder.build();
     }

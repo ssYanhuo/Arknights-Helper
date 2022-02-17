@@ -78,12 +78,7 @@ public class IntroStartupFragment extends IntroFragment {
     @Override
     public void onStart() {
         super.onStart();
-        ((FloatingActionButton) getView().findViewById(R.id.intro_startup_next)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goNext();
-            }
-        });
+        getView().findViewById(R.id.intro_startup_next).setOnClickListener(v -> goNext());
         view = (MotionLayout) getView();
         ((AnimatedVectorDrawable) ((ImageView) view.findViewById(R.id.intro_startup_logo)).getDrawable()).start();
         Timer timer1 = new Timer();

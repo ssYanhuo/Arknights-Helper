@@ -127,72 +127,58 @@ public class Planner {
         });
         progressBar = relativeLayout.findViewById(R.id.planner_loading);
 
-        addItemLinearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int padding = applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin) / 2;
-                final EasyPopup easyPopup = EasyPopup.create(applicationContext);
-                CardView cardView = new CardView(applicationContext);
-                cardView.setCardBackgroundColor(ThemeUtils.getBackgroundColor(applicationContext, context));
-                LinearLayout itemSelector = new LinearLayout(applicationContext);
-                itemSelector.setOrientation(LinearLayout.VERTICAL);
-                final ScrollView listScrollView = new ScrollView(applicationContext);
-                ArrayList<String> tempArray = (ArrayList<String>) itemList.clone();
-                tempArray.removeAll(itemException);
-                for (String item :
-                        tempArray) {
-                    final LinearLayout linearLayout = new LinearLayout(applicationContext);
-                    linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-                    ImageView imageView = new ImageView(applicationContext);
-                    final TextView textView = new TextView(applicationContext);
-                    linearLayout.setPadding(padding, padding, padding, padding);
-                    textView.setText(item);
-                    linearLayout.setBackground(new RippleDrawable(ColorStateList.valueOf(Color.GRAY), null, null));
-                    linearLayout.setClickable(true);
-                    linearLayout.setFocusable(true);
-                    linearLayout.setTag(itemMap.get(item));
-                    linearLayout.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            final CharSequence name = ((TextView) textView).getText();
-                            Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(((JSONObject) linearLayout.getTag()).getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
-                            final PlannerItemView plannerItemView = new PlannerItemView(applicationContext, drawable, name);
-                            plannerItemView.setOnButtonClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    plannerItemView.removeItem();
-                                    itemException.remove((String) name);
-                                }
-                            });
-                            itemContainer.addView(plannerItemView);
-                            itemException.add((String) name);
-                            easyPopup.dismiss();
-                            //getResult();
-                            scrollView.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    int y;
-                                    y = itemContainer.getBottom() - scrollView.getHeight() + ScreenUtils.dip2px(applicationContext, 64);
-                                    if (y > 0) {
-                                        scrollView.smoothScrollTo(0, y);
-                                    }
-
-                                }
-                            });
-
+        addItemLinearLayout.setOnClickListener(v -> {
+            int padding = applicationContext.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin) / 2;
+            final EasyPopup easyPopup = EasyPopup.create(applicationContext);
+            CardView cardView = new CardView(applicationContext);
+            cardView.setCardBackgroundColor(ThemeUtils.getBackgroundColor(applicationContext, context));
+            LinearLayout itemSelector = new LinearLayout(applicationContext);
+            itemSelector.setOrientation(LinearLayout.VERTICAL);
+            final ScrollView listScrollView = new ScrollView(applicationContext);
+            ArrayList<String> tempArray = (ArrayList<String>) itemList.clone();
+            tempArray.removeAll(itemException);
+            for (String item :
+                    tempArray) {
+                final LinearLayout linearLayout = new LinearLayout(applicationContext);
+                linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+                ImageView imageView = new ImageView(applicationContext);
+                final TextView textView = new TextView(applicationContext);
+                linearLayout.setPadding(padding, padding, padding, padding);
+                textView.setText(item);
+                linearLayout.setBackground(new RippleDrawable(ColorStateList.valueOf(Color.GRAY), null, null));
+                linearLayout.setClickable(true);
+                linearLayout.setFocusable(true);
+                linearLayout.setTag(itemMap.get(item));
+                linearLayout.setOnClickListener(v1 -> {
+                    final CharSequence name = textView.getText();
+                    Drawable drawable = applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(((JSONObject) linearLayout.getTag()).getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName()));
+                    final PlannerItemView plannerItemView = new PlannerItemView(applicationContext, drawable, name);
+                    plannerItemView.setOnButtonClickListener(v11 -> {
+                        plannerItemView.removeItem();
+                        itemException.remove(name);
+                    });
+                    itemContainer.addView(plannerItemView);
+                    itemException.add((String) name);
+                    easyPopup.dismiss();
+                    //getResult();
+                    scrollView.post(() -> {
+                        int y;
+                        y = itemContainer.getBottom() - scrollView.getHeight() + ScreenUtils.dip2px(applicationContext, 64);
+                        if (y > 0) {
+                            scrollView.smoothScrollTo(0, y);
                         }
                     });
-                    imageView.setImageDrawable(applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(((JSONObject) linearLayout.getTag()).getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName())));
-                    linearLayout.addView(imageView);
-                    linearLayout.addView(textView);
-                    itemSelector.addView(linearLayout);
-                }
-                listScrollView.addView(itemSelector);
-                cardView.addView(listScrollView);
-                easyPopup.setContentView(cardView)
-                        .setHeight(ScreenUtils.dip2px(applicationContext, 256))
-                        .showAsDropDown(v, (v.getWidth() - cardView.getWidth()) / 2, 0);
+                });
+                imageView.setImageDrawable(applicationContext.getResources().getDrawable(applicationContext.getResources().getIdentifier(((JSONObject) linearLayout.getTag()).getString("icon").toLowerCase(), "mipmap", applicationContext.getPackageName())));
+                linearLayout.addView(imageView);
+                linearLayout.addView(textView);
+                itemSelector.addView(linearLayout);
             }
+            listScrollView.addView(itemSelector);
+            cardView.addView(listScrollView);
+            easyPopup.setContentView(cardView)
+                    .setHeight(ScreenUtils.dip2px(applicationContext, 256))
+                    .showAsDropDown(v, (v.getWidth() - cardView.getWidth()) / 2, 0);
         });
     }
 

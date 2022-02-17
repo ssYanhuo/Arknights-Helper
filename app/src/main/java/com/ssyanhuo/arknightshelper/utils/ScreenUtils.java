@@ -72,4 +72,5 @@ public class ScreenUtils {
         int height = resources.getDimensionPixelSize(resourceId);
         return height;
     }
+
 }

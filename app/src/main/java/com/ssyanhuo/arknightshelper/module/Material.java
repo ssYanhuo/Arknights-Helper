@@ -42,6 +42,7 @@ import com.ssyanhuo.arknightshelper.widget.NumberSelector;
 import com.zyyoona7.popup.EasyPopup;
 
 import java.io.IOException;
+import java.text.Collator;
 import java.util.*;
 
 import static android.view.View.GONE;
@@ -181,6 +182,7 @@ public class Material {
         windowManager = (WindowManager) applicationContext.getSystemService(Context.WINDOW_SERVICE);
         selector = (ScrollView)LayoutInflater.from(contextThemeWrapper).inflate(R.layout.overlay_material_sub_selector, null);
         ArrayList<String> characters = new ArrayList<>(characterJsonObject.keySet());
+        Collections.sort(characters, (o1, o2) -> Collator.getInstance(Locale.CHINA).compare(o1, o2));
         for(int i = 0; i < characters.size(); i++){
             String name = characters.get(i);
             if (nameHelper.isHidden(name, I18nUtils.FILTER_ALL)){
@@ -733,12 +735,9 @@ public class Material {
         characterBtn.setVisibility(VISIBLE);
         nowCharBtn.setTag(jsonObject);
         nowCharBtn.setText(nameHelper.get(jsonObject.getString("name")));
-        contentView.findViewById(R.id.material_character_select).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.setClickable(false);
-                showSubWindow();
-            }
+        contentView.findViewById(R.id.material_character_select).setOnClickListener(v -> {
+            v.setClickable(false);
+            showSubWindow();
         });
 
             checkValue();//检查当前值是否匹配新干员
@@ -766,12 +765,9 @@ public class Material {
     public void isCurrentWindow(boolean current){
         if (current){
             if(charNow == null){showSubWindow();}
-            contentView.findViewById(R.id.material_character_select).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    v.setClickable(false);
-                    showSubWindow();
-                }
+            contentView.findViewById(R.id.material_character_select).setOnClickListener(v -> {
+                v.setClickable(false);
+                showSubWindow();
             });
         }else{
             placeHolder = rootLayout.findViewWithTag("placeHolder");

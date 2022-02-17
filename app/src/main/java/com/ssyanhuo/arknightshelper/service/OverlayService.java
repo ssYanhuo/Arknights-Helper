@@ -11,8 +11,10 @@ import android.app.Service;
 import android.content.*;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.Insets;
 import android.graphics.Outline;
 import android.graphics.PixelFormat;
+import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -20,12 +22,15 @@ import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.*;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.DisplayCutout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewOutlineProvider;
+import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.widget.*;
 
@@ -112,7 +117,12 @@ public class OverlayService extends Service {
         super.onCreate();
         Intent notificationIntent = new Intent(this, BroadcastReceiver.class).setAction("com.ssyanhuo.arknightshelper.stopservice");
         notificationIntent.putExtra("action", "StopService");
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        } else {
+            pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
         Notification.Builder builder = new Notification.Builder(this);
         preferences = getSharedPreferences("com.ssyanhuo.arknightshelper_preferences", MODE_PRIVATE);
         editor = preferences.edit();
@@ -513,19 +523,11 @@ public class OverlayService extends Service {
             }
         });
         ImageButton imageButton = mainLayout.findViewById(R.id.overlay_close);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideFloatingWindow();
-            }
-        });
-        imageButton.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                hideFloatingWindow();
-                stopSelf();
-                return true;
-            }
+        imageButton.setOnClickListener(v -> hideFloatingWindow());
+        imageButton.setOnLongClickListener(v -> {
+            hideFloatingWindow();
+            stopSelf();
+            return true;
         });
         //初始化
         hr.init(contextThemeWrapper, linearLayout_hr, relativeLayout_hr, backgroundLayout, this);
@@ -562,32 +564,51 @@ public class OverlayService extends Service {
             windowManager.removeViewImmediate(button);
         }catch (Exception ignored){
         }
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+
+        int width;
+        int height;
         int rotation = ScreenUtils.getScreenRotation(getApplicationContext());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            Rect rect = windowManager.getCurrentWindowMetrics().getBounds();
+            width = rect.width();
+            height = rect.height();
+            if(windowManager.getCurrentWindowMetrics().getWindowInsets().hasInsets()){
+                Insets systemBarsInsets = windowManager.getCurrentWindowMetrics().getWindowInsets().getInsets(WindowInsets.Type.systemBars());
+                Insets displayCutoutInsets = windowManager.getCurrentWindowMetrics().getWindowInsets().getInsets(WindowInsets.Type.displayCutout());
+                width -= Math.max(systemBarsInsets.left, displayCutoutInsets.left) + Math.max(systemBarsInsets.right, displayCutoutInsets.right);
+                height -= Math.max(systemBarsInsets.top, displayCutoutInsets.top) + Math.max(systemBarsInsets.bottom, displayCutoutInsets.bottom);
+            }
+        }else{
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+            width = displayMetrics.widthPixels;
+            height = displayMetrics.heightPixels;
+        }
+
         mainLayoutParams.gravity = Gravity.RIGHT | Gravity.TOP;
         mainLayoutParams.x = 0;
         mainLayoutParams.y = 0;
         backgroundLayoutParams.windowAnimations = R.style.AppTheme_Default_FloatingWindowAnimation;
         if(ScreenUtils.getScreenRotationMode(rotation) == ScreenUtils.MODE_LANDSCAPE){//横
-            mainLayoutParams.height = displayMetrics.heightPixels;
-            mainLayoutParams.width = displayMetrics.widthPixels / 2 + preferences.getInt("margin_fix", 0);
-            placeHolderLayoutParams.height = displayMetrics.heightPixels;
-            placeHolderLayoutParams.width = displayMetrics.widthPixels / 2;
+            mainLayoutParams.height = height;
+            mainLayoutParams.width = width / 2;
+            placeHolderLayoutParams.height = height;
+            placeHolderLayoutParams.width = width / 2;
             backgroundLayout.setOrientation(LinearLayout.HORIZONTAL);
-            backgroundLayoutParams.height = displayMetrics.heightPixels;
-            backgroundLayoutParams.width = displayMetrics.widthPixels + preferences.getInt("margin_fix", 0);
+            backgroundLayoutParams.height = height;
+            backgroundLayoutParams.width = width;
             //是否优化状态栏区域的显示效果
             if (rotation == Surface.ROTATION_90){
                 mainLayout.setBackgroundColor(backgroundColor);
             }
         }else {//竖
-            mainLayoutParams.height = displayMetrics.heightPixels / 2;
-            mainLayoutParams.width = displayMetrics.widthPixels;
-            placeHolderLayoutParams.height = displayMetrics.heightPixels / 2;
-            placeHolderLayoutParams.width = displayMetrics.widthPixels;
-            backgroundLayoutParams.height = displayMetrics.heightPixels;
-            backgroundLayoutParams.width = displayMetrics.widthPixels;
+            mainLayoutParams.height = height / 2;
+            mainLayoutParams.width = width;
+            placeHolderLayoutParams.height = height / 2;
+            placeHolderLayoutParams.width = width;
+            backgroundLayoutParams.height = height;
+            backgroundLayoutParams.width = width;
             backgroundLayout.setOrientation(LinearLayout.VERTICAL);
             //关闭背景渐变
             mainLayout.setBackgroundColor(backgroundColor);
@@ -618,17 +639,7 @@ public class OverlayService extends Service {
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            placeHolder.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    hideFloatingWindow();
-                                }
-                            });
-                        }
-                    });
+                    handler.post(() -> placeHolder.setOnClickListener(v -> hideFloatingWindow()));
 
                 }
             },250);
@@ -687,13 +698,10 @@ public class OverlayService extends Service {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                handler.post(new Runnable() {
-                @Override
-                public void run() {
+                handler.post(() -> {
                     floatingWindowPreProcess();
                     isFloatingWindowShowing = false;
-                }
-            });
+                });
         }
         }, 500);
     }
@@ -710,7 +718,6 @@ public class OverlayService extends Service {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //System.exit(0);
         System.gc();
     }
 

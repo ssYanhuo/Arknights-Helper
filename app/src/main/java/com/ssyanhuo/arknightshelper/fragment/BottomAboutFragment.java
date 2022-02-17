@@ -129,22 +129,19 @@ public class BottomAboutFragment extends BottomSheetDialogFragment {
             e.printStackTrace();
         }
         LinearLayout versionLayout = view.findViewById(R.id.about_version);
-        versionLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(showedEaster){return;}
-                count++;
-                if(count >= 12){
-                    count = 0;
-                    showedEaster = true;
-                    LinearLayout easterLinearLayout = view.findViewById(R.id.about_easter);
-                    easterLinearLayout.setVisibility(View.VISIBLE);
-                    easterLinearLayout.setLongClickable(true);
-                    easterLinearLayout.setOnLongClickListener(view1 -> {
-                        goLab(view1);
-                        return true;
-                    });
-                }
+        versionLayout.setOnClickListener(v -> {
+            if(showedEaster){return;}
+            count++;
+            if(count >= 12){
+                count = 0;
+                showedEaster = true;
+                LinearLayout easterLinearLayout = view.findViewById(R.id.about_easter);
+                easterLinearLayout.setVisibility(View.VISIBLE);
+                easterLinearLayout.setLongClickable(true);
+                easterLinearLayout.setOnLongClickListener(view1 -> {
+                    goLab(view1);
+                    return true;
+                });
             }
         });
     }

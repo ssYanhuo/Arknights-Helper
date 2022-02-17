@@ -214,7 +214,7 @@
     <string name="settings_title_attach_to_edge">自动吸附</string>
     <string name="settings_summary_attach_to_edge">保持悬浮按钮吸附在屏幕边缘</string>
     <string name="settings_title_game_language">游戏语言</string>
-    <string name="settings_summary_game_language">仅翻译与游戏内容相关的文本，并隐藏国际版尚未实装的干员和材料</string>
+    <string name="settings_summary_game_language">仅翻译与游戏内容相关的文本，并隐藏国际版尚未实装的干员和材料（实验性功能）</string>
     <string name="ocr_not_available_in_other_languages">截图识别 在非简体中文环境下暂不可用</string>
     <string name="meizu_floating_window_permission">魅族用户请手动前往系统设置授予应用悬浮窗权限</string>
     <string name="start_game_remember_selection_no">不要记住</string>
@@ -231,7 +231,7 @@
     <string name="py_unsupported">不支持的 CPU 架构或系统版本</string>
     <string name="py_error">发生了错误：\n</string>
     <string name="py_arkplanner">刷图规划™ By ycremar</string>
-    <string name="hr_hide_low_level_note">注意调整招募时间为9小时</string>
+    <string name="hr_hide_low_level_note">注意调整招募时间</string>
     <string name="more_hr_counter_title">寻访计数</string>
     <string name="more_hr_counter_summary_empty">长按按钮十连或清空，当前6★概率2%</string>
     <string name="more_hr_counter_summary">累计寻访%1$d次，当前6★概率%2$d%%</string>
@@ -257,8 +257,8 @@
     <string name="settings_summary_disable_planner">刷图规划 正处于测试阶段，如果这导致应用运行不稳定，请开启此选项</string>
     <string name="more_set_alarm_title">理智回复计时</string>
     <string name="more_set_alarm_summary">设定倒计时来提醒理智回复</string>
-    <string name="more_set_alarm_note_today">倒计时将在 %1$d时%2$d分 结束</string>
-    <string name="more_set_alarm_note_tomorrow">倒计时将在 明天的 %1$d时%2$d分 结束</string>
+    <string name="more_set_alarm_note_today">倒计时将在 %1$s:%2$s 结束</string>
+    <string name="more_set_alarm_note_tomorrow">倒计时将在 明天的 %1$s:%2$s 结束</string>
     <string name="settings_title_enable_dark_mode">使用暗色模式</string>
     <string name="settings_summary_enable_dark_mode">跟随系统自动切换</string>
     <string name="game_taiwanese">中国台湾</string>

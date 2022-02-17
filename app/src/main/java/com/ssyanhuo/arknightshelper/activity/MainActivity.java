@@ -1,14 +1,5 @@
 package com.ssyanhuo.arknightshelper.activity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.content.ContextCompat;
-import androidx.viewpager.widget.PagerAdapter;
-
-import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -22,18 +13,28 @@ import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.viewpager.widget.PagerAdapter;
+
 import com.alibaba.fastjson.JSONObject;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
 import com.ssyanhuo.arknightshelper.BuildConfig;
 import com.ssyanhuo.arknightshelper.R;
-import com.ssyanhuo.arknightshelper.fragment.BottomPermissionFragment;
-import com.ssyanhuo.arknightshelper.misc.StaticData;
 import com.ssyanhuo.arknightshelper.fragment.BottomAboutFragment;
+import com.ssyanhuo.arknightshelper.fragment.BottomPermissionFragment;
 import com.ssyanhuo.arknightshelper.fragment.BottomSettingsFragment;
+import com.ssyanhuo.arknightshelper.misc.StaticData;
 import com.ssyanhuo.arknightshelper.service.OverlayService;
 import com.ssyanhuo.arknightshelper.utils.FileUtils;
 import com.ssyanhuo.arknightshelper.utils.PackageUtils;
@@ -54,8 +55,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import me.kaelaela.verticalviewpager.VerticalViewPager;
-import me.kaelaela.verticalviewpager.transforms.DefaultTransformer;
-import me.kaelaela.verticalviewpager.transforms.StackTransformer;
 import me.kaelaela.verticalviewpager.transforms.ZoomOutTransformer;
 
 public class MainActivity extends AppCompatActivity {
@@ -91,7 +90,10 @@ public class MainActivity extends AppCompatActivity {
         aboutCardView = findViewById(R.id.main_about_card_view);
         gameSelector = findViewById(R.id.main_game_selector);
         updateButton = findViewById(R.id.main_update_button);
-        settingsCardView.setOnClickListener(v -> new BottomSettingsFragment().show(getSupportFragmentManager(), null));
+        settingsCardView.setOnClickListener(v -> {
+            BottomSettingsFragment bottomSettingsFragment = new BottomSettingsFragment();
+            bottomSettingsFragment.show(getSupportFragmentManager(), null);
+        });
         aboutCardView.setOnClickListener(v -> new BottomAboutFragment().show(getSupportFragmentManager(), null));
         ArrayList<String> gameList = PackageUtils.getGamePackageNameList(this);
         int selectedGame = 0;
@@ -293,7 +295,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case STATE_NEED_UPDATE:
-                textView.setText(getResources().getString(R.string.update_state_need_update) + " (" + versionName + ")");
+                textView.setText(String.format("%s (%s)", getResources().getString(R.string.update_state_need_update), versionName));
                 updateButton.setVisibility(View.VISIBLE);
                 break;
             case STATE_BETA:
@@ -301,7 +303,7 @@ public class MainActivity extends AppCompatActivity {
                 String string;
                 try {
                     PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);
-                    string = getResources().getString(R.string.update_state_beta) + " (" + packageInfo.versionName + ")";
+                    string = String.format("%s (%s)", getResources().getString(R.string.update_state_beta), packageInfo.versionName);
                 } catch (PackageManager.NameNotFoundException e) {
                     string = getResources().getString(R.string.update_state_beta);
                     e.printStackTrace();
@@ -369,7 +371,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private class GameSelectorItemData{
+    private static class GameSelectorItemData{
 
         String gameName;
         String gamePackage;

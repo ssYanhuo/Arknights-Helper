@@ -460,41 +460,36 @@ public class Hr {
             }
             button.setText(nameHelper.get(jsonObject.getString("name")));
             button.setTag(jsonObject);
-            button.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
+            button.setOnTouchListener((view, motionEvent) -> {
 
-                    switch (motionEvent.getAction()) {
-                        case MotionEvent.ACTION_DOWN:
-                            CardView cardView = (CardView) LayoutInflater.from(applicationContext).inflate(applicationContext.getResources().getLayout(R.layout.detail_popup), null);
-                            TextView textView = cardView.findViewById(R.id.detail_text);
-                            JSONArray jsonArray = jsonObject.getJSONArray("tags");
-                            String tags = "";
-                            for (int i = 0; i < jsonArray.size(); i++) {
-                                tags += jsonArray.getString(i);
-                                if (i != jsonArray.size() - 1) {
-                                    tags += " ";
-                                }
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        CardView cardView = (CardView) LayoutInflater.from(applicationContext).inflate(applicationContext.getResources().getLayout(R.layout.detail_popup), null);
+                        TextView textView = cardView.findViewById(R.id.detail_text);
+                        JSONArray jsonArray = jsonObject.getJSONArray("tags");
+                        String tags = "";
+                        for (int i = 0; i < jsonArray.size(); i++) {
+                            tags += jsonArray.getString(i);
+                            if (i != jsonArray.size() - 1) {
+                                tags += " ";
                             }
-                            tags += "\n" + jsonObject.getString("characteristic") + "\n" + jsonObject.getString("type") + "干员";
-                            textView.setText(tags);
-                            easyPopup = EasyPopup.create(applicationContext)
-                                    .setContentView(cardView)
-                                    .setFocusable(false)
-                                    .apply();
-                            easyPopup.showAtAnchorView(view, YGravity.ABOVE, XGravity.CENTER);
-                            break;
-                        case MotionEvent.ACTION_UP:
-                        case MotionEvent.ACTION_CANCEL:
-                            easyPopup.dismiss();
-                            break;
-                        default:
-                            break;
-                    }
-
-
-                    return false;
+                        }
+                        tags += "\n" + jsonObject.getString("characteristic") + "\n" + jsonObject.getString("type") + "干员";
+                        textView.setText(tags);
+                        easyPopup = EasyPopup.create(applicationContext)
+                                .setContentView(cardView)
+                                .setFocusable(false)
+                                .apply();
+                        easyPopup.showAtAnchorView(view, YGravity.ABOVE, XGravity.CENTER);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
+                        easyPopup.dismiss();
+                        break;
+                    default:
+                        break;
                 }
+                return false;
             });
             lineWrapLayout.addView(button);
         }
@@ -554,45 +549,42 @@ public class Hr {
                 }
                 button.setText(nameHelper.get(jsonObject.getString("name")));
                 button.setTag(jsonObject);
-                button.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View view, MotionEvent motionEvent) {
+                button.setOnTouchListener((view, motionEvent) -> {
 
-                        switch (motionEvent.getAction()) {
-                            case MotionEvent.ACTION_DOWN:
-                                CardView cardView = (CardView) LayoutInflater.from(applicationContext).inflate(applicationContext.getResources().getLayout(R.layout.detail_popup), null);
-                                TextView textView = cardView.findViewById(R.id.detail_text);
-                                JSONArray jsonArray = jsonObject.getJSONArray("tags");
-                                String tags = "";
+                    switch (motionEvent.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            CardView cardView = (CardView) LayoutInflater.from(applicationContext).inflate(applicationContext.getResources().getLayout(R.layout.detail_popup), null);
+                            TextView textView = cardView.findViewById(R.id.detail_text);
+                            JSONArray jsonArray1 = jsonObject.getJSONArray("tags");
+                            String tags1 = "";
 
-                                if (!sharedPreferences.getString("game_language", I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE).equals(I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE)){
-                                    tags += jsonObject.getString("name") + "\n";
+                            if (!sharedPreferences.getString("game_language", I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE).equals(I18nUtils.LANGUAGE_SIMPLIFIED_CHINESE)){
+                                tags1 += jsonObject.getString("name") + "\n";
+                            }
+                            for (int i = 0; i < jsonArray1.size(); i++) {
+                                tags1 += jsonArray1.getString(i);
+                                if (i != jsonArray1.size() - 1) {
+                                    tags1 += " ";
                                 }
-                                for (int i = 0; i < jsonArray.size(); i++) {
-                                    tags += jsonArray.getString(i);
-                                    if (i != jsonArray.size() - 1) {
-                                        tags += " ";
-                                    }
-                                }
-                                tags += "\n" + jsonObject.getString("characteristic") + "\n" + jsonObject.getString("type") + "干员";
-                                textView.setText(tags);
-                                easyPopup = EasyPopup.create(applicationContext)
-                                        .setContentView(cardView)
-                                        .setFocusable(false)
-                                        .apply();
-                                easyPopup.showAtAnchorView(view, YGravity.ABOVE, XGravity.CENTER);
-                                break;
-                            case MotionEvent.ACTION_UP:
-                            case MotionEvent.ACTION_CANCEL:
-                                easyPopup.dismiss();
-                                break;
-                            default:
-                                break;
-                        }
-
-
-                        return false;
+                            }
+                            tags1 += "\n" + jsonObject.getString("characteristic") + "\n" + jsonObject.getString("type") + "干员";
+                            textView.setText(tags1);
+                            easyPopup = EasyPopup.create(applicationContext)
+                                    .setContentView(cardView)
+                                    .setFocusable(false)
+                                    .apply();
+                            easyPopup.showAtAnchorView(view, YGravity.ABOVE, XGravity.CENTER);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_CANCEL:
+                            easyPopup.dismiss();
+                            break;
+                        default:
+                            break;
                     }
+
+
+                    return false;
                 });
                 LinearLayout resultViewWithTag = resultLayout.findViewWithTag(String.valueOf(tagCom));
                 if (resultViewWithTag != null) {
@@ -686,7 +678,6 @@ public class Hr {
                         }
                     }
                     if (stars.contains(5)){
-                        //Log.e(TAG, (String) ((Button) ((LineWrapLayout) dialog_python_downloader.getChildAt(1)).getChildAt(1)).getText());
                         resultLayout.removeView(layout);
                         resultLayout.addView(layout, 0);
                     }
@@ -731,7 +722,6 @@ public class Hr {
                         }
                     }
                     if (stars.contains(6)){
-                        //Log.e(TAG, (String) ((Button) ((LineWrapLayout) dialog_python_downloader.getChildAt(1)).getChildAt(1)).getText());
                         resultLayout.removeView(layout);
                         resultLayout.addView(layout, 0);
                     }

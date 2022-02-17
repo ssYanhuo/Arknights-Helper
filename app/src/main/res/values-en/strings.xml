@@ -166,7 +166,7 @@
     <string name="settings_title_attach_to_edge">Always on the edge</string>
     <string name="settings_summary_attach_to_edge">Attach to the screen\'s edges</string>
     <string name="settings_title_game_language">Game language</string>
-    <string name="settings_summary_game_language">Only affect some proper nouns in the game, operators and materials unavailable currently will be hidden</string>
+    <string name="settings_summary_game_language">Only affect some proper nouns in the game, operators and materials unavailable currently will be hidden (Beta)</string>
     <string name="ocr_not_available_in_other_languages">Screenshot recognition is not available in languages other than Simplified Chinese</string>
     <string name="meizu_floating_window_permission">Meizu user please go to system settings to grant floating window permission manually</string>
     <string name="start_game_remember_selection_no">Do not remember</string>
@@ -183,7 +183,7 @@
     <string name="py_unsupported">Sorry, but your cpu arch or OS version is not supported yet</string>
     <string name="py_error">Error occurred:\n</string>
     <string name="py_arkplanner">ArkPlanner™ By ycremar</string>
-    <string name="hr_hide_low_level_note">Time should be 9 hours!</string>
+    <string name="hr_hide_low_level_note">Attention HR time!</string>
     <string name="more_hr_counter_title">HR counter</string>
     <string name="more_hr_counter_summary_empty">Long press button to record a 10 combo or clear records, 6★ probability: 2%</string>
     <string name="more_hr_counter_summary">Already %1$d times, 6★ probability: %2$d%%</string>
@@ -209,8 +209,8 @@
     <string name="settings_summary_disable_planner">If ArkPlanner™ cause the application not run normally, disable it!</string>
     <string name="more_set_alarm_title">ArkTimer™</string>
     <string name="more_set_alarm_summary">Set a countdown to remind when your sanity is full</string>
-    <string name="more_set_alarm_note_today">Countdown ends at %1$d: %2$d</string>
-    <string name="more_set_alarm_note_tomorrow">Countdown ends at TOMORROW %1$d: %2$d</string>
+    <string name="more_set_alarm_note_today">Countdown ends at %1$s: %2$s</string>
+    <string name="more_set_alarm_note_tomorrow">Countdown ends at TOMORROW %1$s: %2$s</string>
     <string name="settings_title_enable_dark_mode">Use dark mode</string>
     <string name="settings_summary_enable_dark_mode">Switch with system</string>
     <string name="game_taiwanese">"Taiwan, China  "</string>

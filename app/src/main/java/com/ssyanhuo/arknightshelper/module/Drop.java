@@ -80,31 +80,28 @@ public class Drop {
 
         getAllRadioButtons(contentView);
         for (int i = 0; i < radioButtons.size(); i++){
-            radioButtons.get(i).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked){
-                        for (int j = 0; j < radioButtons.size(); j++){
-                            radioButtons.get(j).setChecked(false);
-                        }
-                        buttonView.setChecked(true);
-                        Drawable[] drawables = new Drawable[2];
-                        PaintDrawable paintDrawable = new PaintDrawable(Color.argb(127, 255,255,255));
-                        paintDrawable.setCornerRadius(8);
-                        drawables[0] = paintDrawable;
-                        drawables[1] = buttonView.getBackground();
-                        LayerDrawable layerDrawable = new LayerDrawable(drawables);
-                        buttonView.setBackground(layerDrawable);
-                    }else {
-                        LayerDrawable layerDrawable = (LayerDrawable) buttonView.getBackground();
-                        buttonView.setBackground(layerDrawable.getDrawable(1)); }
-                    int item = Integer.parseInt(buttonView.getTag().toString());
-                    ArrayList<JSONObject> result = getResult(item);
-                    if (result == null){
-                        return;
+            radioButtons.get(i).setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if (isChecked){
+                    for (int j = 0; j < radioButtons.size(); j++){
+                        radioButtons.get(j).setChecked(false);
                     }
-                    showResult(item, result);
+                    buttonView.setChecked(true);
+                    Drawable[] drawables = new Drawable[2];
+                    PaintDrawable paintDrawable = new PaintDrawable(Color.argb(127, 255,255,255));
+                    paintDrawable.setCornerRadius(8);
+                    drawables[0] = paintDrawable;
+                    drawables[1] = buttonView.getBackground();
+                    LayerDrawable layerDrawable = new LayerDrawable(drawables);
+                    buttonView.setBackground(layerDrawable);
+                }else {
+                    LayerDrawable layerDrawable = (LayerDrawable) buttonView.getBackground();
+                    buttonView.setBackground(layerDrawable.getDrawable(1)); }
+                int item = Integer.parseInt(buttonView.getTag().toString());
+                ArrayList<JSONObject> result = getResult(item);
+                if (result == null){
+                    return;
                 }
+                showResult(item, result);
             });
         }
         SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(applicationContext.getResources().getString(R.string.drop_desc_part_1));
@@ -143,16 +140,13 @@ public class Drop {
                 return null;
             }
         }
-        Collections.sort(result, new Comparator<JSONObject>() {
-            @Override
-            public int compare(JSONObject o1, JSONObject o2) {
-                float e1 = o1.getFloat("cost");
-                float e2 = o2.getFloat("cost");
-                if (e1 > e2){return 1;}
-                else if(e1 == e2){return 0;}
-                else if(e1 < e2){return -1;}
-                return 0;
-            }
+        Collections.sort(result, (o1, o2) -> {
+            float e1 = o1.getFloat("cost");
+            float e2 = o2.getFloat("cost");
+            if (e1 > e2){return 1;}
+            else if(e1 == e2){return 0;}
+            else if(e1 < e2){return -1;}
+            return 0;
         });
         return result;
     }
@@ -213,11 +207,11 @@ public class Drop {
     }
 
     public void setAltSelector(){
-            ScrollView scrollView = contentView.findViewById(R.id.drop_selector_scroll);
-            ViewGroup.LayoutParams params = scrollView.getLayoutParams();
-            params.height = ScreenUtils.dip2px(applicationContext, 128);
-            scrollView.setLayoutParams(params);
-            isAltSelector = true;
+        ScrollView scrollView = contentView.findViewById(R.id.drop_selector_scroll);
+        ViewGroup.LayoutParams params = scrollView.getLayoutParams();
+        params.height = ScreenUtils.dip2px(applicationContext, 128);
+        scrollView.setLayoutParams(params);
+        isAltSelector = true;
     }
 
     public  void getAllRadioButtons(View view){

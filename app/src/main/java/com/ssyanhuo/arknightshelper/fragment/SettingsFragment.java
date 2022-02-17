@@ -53,6 +53,7 @@ import androidx.preference.SwitchPreference;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
 import com.ssyanhuo.arknightshelper.BuildConfig;
 import com.ssyanhuo.arknightshelper.R;
 import com.ssyanhuo.arknightshelper.misc.StaticData;
@@ -104,7 +105,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         }
         Preference long_press_back_to_game = findPreference("long_press_back_to_game");
         ListPreference game_version = findPreference("game_version");
-        final Preference margin_fix = findPreference("margin_fix");
         final Preference update_site = findPreference("update_site");
         final Preference update_data = findPreference("update_data");
         final ListPreference theme = findPreference("theme");
@@ -115,15 +115,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         final SwitchPreference emulator_mode = findPreference("emulator_mode");
         final Preference add_shortcut = findPreference("add_shortcut");
         final SwitchPreference auto_catch_screen = findPreference("auto_catch_screen");
-        margin_fix.setOnPreferenceClickListener(preference -> {
-            final Activity activity1 = getActivity();
-            activity1.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER_LANDSCAPE);
-            return false;
-        });
         if (PackageUtils.getGameCount(getContext()) < 2){
             game_version.setVisible(false);
         }else {
@@ -153,24 +144,18 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                     preferences.edit().putString("game_language", I18nUtils.LANGUAGE_ENGLISH).putBoolean("need_reload",true).apply();
                     game_language.setValue(I18nUtils.LANGUAGE_ENGLISH);
                     Snackbar.make(getView(), "游戏语言已自动设置为英语", Snackbar.LENGTH_LONG)
-                            .setAction(R.string.undo, new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v1) {
-                                    preferences.edit().putString("game_language", oldLang).putBoolean("need_reload",true).apply();
-                                    game_language.setValue(oldLang);
-                                }
+                            .setAction(R.string.undo, v1 -> {
+                                preferences.edit().putString("game_language", oldLang).putBoolean("need_reload",true).apply();
+                                game_language.setValue(oldLang);
                             })
                             .show();
                 }else if (newValue.equals(StaticData.Const.PACKAGE_JAPANESE)){
                     preferences.edit().putString("game_language", I18nUtils.LANGUAGE_JAPANESE).putBoolean("need_reload",true).apply();
                     game_language.setValue(I18nUtils.LANGUAGE_JAPANESE);
                     Snackbar.make(getView(), "游戏语言已自动设置为日文", Snackbar.LENGTH_LONG)
-                            .setAction(R.string.undo, new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v1) {
-                                    preferences.edit().putString("game_language", oldLang).putBoolean("need_reload",true).apply();
-                                    game_language.setValue(oldLang);
-                                }
+                            .setAction(R.string.undo, v1 -> {
+                                preferences.edit().putString("game_language", oldLang).putBoolean("need_reload",true).apply();
+                                game_language.setValue(oldLang);
                             })
                             .show();
                 }else if (newValue.equals(StaticData.Const.PACKAGE_KOREAN)){
@@ -240,7 +225,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             builder.setSingleChoiceItems(nameList.toArray(new String[nameList.size()]), 0, (dialog, which) -> {
                 final int index = which;
                 int padding = activity.getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
-                final EditText editText = new EditText(activity);
+                final EditText editText = new TextInputEditText(activity);
                 editText.setHint("明日方舟 " + nameList.get(index));
                 AlertDialog dialog1 = new AlertDialog.Builder(activity)
                         .setTitle("设置快捷方式名")
@@ -507,15 +492,15 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         @Override
         public void run() {
             String site = preferences.getString("update_site", "0");
-            String BaseURL;
+            String baseURL;
             if (site.equals(SITE_GITEE)){
-                BaseURL = BASE_URL_GITEE;
+                baseURL = BASE_URL_GITEE;
             }else {
-                BaseURL = BASE_URL_GITHUB;
+                baseURL = BASE_URL_GITHUB;
             }
             Log.e(TAG, site);
             try {
-                String indexString = URLRequest(BaseURL + "/index.json");
+                String indexString = URLRequest(baseURL + "/index.json");
                 JSONArray indexArray = JSONArray.parseArray(indexString);
                 JSONObject latestObject = indexArray.getJSONObject(0);
                 if (latestObject.getIntValue("versionMax") > BuildConfig.VERSION_CODE){
@@ -524,41 +509,35 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 }
                 String selectedVersion = latestObject.getString("dir");
                 //获取指定的目录
-                String selectedList = URLRequest(BaseURL + selectedVersion + "/datainfo.json");
+                String selectedList = URLRequest(baseURL + selectedVersion + "/datainfo.json");
                 //获取文件
                 JSONArray selectedArray = JSONArray.parseArray(selectedList);
                 for(int i = 0; i < selectedArray.size(); i++){
                     JSONObject selectedObj = selectedArray.getJSONObject(i);
                     String objURL = selectedObj.getString("name");
-                    String result = URLRequest(BaseURL + selectedVersion + objURL);
+                    String result = URLRequest(baseURL + selectedVersion + objURL);
                     FileUtils.writeFile(result, objURL.substring(1), getContext());
                 }
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        updateSucceed = true;
-                        try{
-                            updateDialog.dismiss();
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
-                        Snackbar.make(getView(), R.string.settings_data_update_success, Snackbar.LENGTH_SHORT).show();
-
+                handler.post(() -> {
+                    updateSucceed = true;
+                    try{
+                        updateDialog.dismiss();
+                    }catch (Exception e){
+                        e.printStackTrace();
                     }
+                    Snackbar.make(getView(), R.string.settings_data_update_success, Snackbar.LENGTH_SHORT).show();
+
                 });
                 Log.i(TAG, "Update finished!");
             }catch (final Exception e){
                 e.printStackTrace();
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        updateLayout.removeAllViews();
-                        TextView textView = new TextView(getContext());
-                        textView.setText(e.toString());
-                        int padding = getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin) * 2;
-                        textView.setPadding(padding, padding, padding, padding);
-                        updateDialog.setContentView(textView);
-                    }
+                handler.post(() -> {
+                    updateLayout.removeAllViews();
+                    TextView textView = new TextView(getContext());
+                    textView.setText(e.toString());
+                    int padding = getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin) * 2;
+                    textView.setPadding(padding, padding, padding, padding);
+                    updateDialog.setContentView(textView);
                 });
             }
         }
@@ -573,22 +552,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             byte[] buffer = new byte[1024];
             int len;
             while ((len = inputStream.read(buffer)) != -1){
-                outputStream.write(buffer, 0,len);
+                outputStream.write(buffer, 0, len);
             }
             inputStream.close();
             byte[] data = outputStream.toByteArray();
             return new String(data, StandardCharsets.UTF_8);
-        }
-    }
-    public boolean checkApplication(String packageName) {
-        if (packageName == null || "".equals(packageName)){
-            return false;
-        }
-        try {
-            ApplicationInfo info = getActivity().getPackageManager().getApplicationInfo(packageName, PackageManager.GET_UNINSTALLED_PACKAGES);
-            return true;
-        } catch (PackageManager.NameNotFoundException e) {
-            return false;
         }
     }
 }

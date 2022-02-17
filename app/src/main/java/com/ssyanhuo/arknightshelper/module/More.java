@@ -147,7 +147,6 @@ public class More {
             ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(originalContext, R.style.AppTheme_Default);
             LinearLayout interFace = (LinearLayout) LayoutInflater.from(contextThemeWrapper).inflate(R.layout.dialog_set_alarm, null);
             final TextView note = interFace.findViewById(R.id.more_set_alarm_note);
-            final Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
             AlertDialog.Builder builder = new AlertDialog.Builder(contextThemeWrapper);
             final NumberPicker pickerRequired = interFace.findViewById(R.id.more_set_alarm_picker_required);
             pickerRequired.setMinValue(1);
@@ -156,21 +155,14 @@ public class More {
             pickerRequired.setEnabled(true);
             builder.setTitle("设定倒计时")
                     .setView(interFace)
-                    .setPositiveButton("设定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            int value = pickerRequired.getValue();
-                            int hour = calendar.get(Calendar.HOUR_OF_DAY);
-                            int minute = calendar.get(Calendar.MINUTE);
-                            minute += (value * 6) % 60;
-                            hour += (value * 6) / 60 + (minute / 60);
-                            Intent intent = new Intent(AlarmClock.ACTION_SET_TIMER);
-                            intent.putExtra(AlarmClock.EXTRA_LENGTH, value * 6 * 60);
-                            intent.putExtra(AlarmClock.EXTRA_MESSAGE, "明日方舟助手-理智回复");
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            applicationContext.startActivity(intent);
-                            overlayService.hideFloatingWindow();
-                        }
+                    .setPositiveButton("设定", (dialog, which) -> {
+                        int value = pickerRequired.getValue();
+                        Intent intent = new Intent(AlarmClock.ACTION_SET_TIMER);
+                        intent.putExtra(AlarmClock.EXTRA_LENGTH, value * 6 * 60);
+                        intent.putExtra(AlarmClock.EXTRA_MESSAGE, "明日方舟助手-理智回复");
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        applicationContext.startActivity(intent);
+                        overlayService.hideFloatingWindow();
                     })
                     .setNegativeButton("取消", null);
             final AlertDialog dialog = builder.create();
@@ -179,28 +171,32 @@ public class More {
             }else {
                 dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_PHONE);
             }
-            pickerRequired.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-                @Override
-                public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                    int value = newVal;
-                    int hour = calendar.get(Calendar.HOUR_OF_DAY);
-                    int minute = calendar.get(Calendar.MINUTE);
-                    minute += value * 6;
-                    hour += (minute / 60);
-                    minute %= 60;
-                    if(hour >= 24){
-                        hour -= 24;
-                        note.setText(new StringBuilder().append(applicationContext.getString(R.string.more_set_alarm_note_tomorrow, hour, minute)).append(" ").toString());
-                    }else {
-                        note.setText(new StringBuilder().append(applicationContext.getString(R.string.more_set_alarm_note_today, hour, minute)).append(" ").toString());
-                    }
-                    if (hour <= 6 || hour >= 22){
-                        note.append("\n这可能会打扰到周围人的休息 ");
-                    }
-                }
+            pickerRequired.setOnValueChangedListener((picker, oldVal, newVal) -> {
+                onTimerValueChanged(newVal, note);
             });
+            onTimerValueChanged(130, note);
             dialog.show();
         });
+    }
+    private void onTimerValueChanged(int value, TextView note){
+        final Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+        minute += value * 6;
+        hour += (minute / 60);
+        minute %= 60;
+        String minuteStr = minute < 10 ? '0' + String.valueOf(minute) : String.valueOf(minute);
+        if(hour >= 24){
+            hour -= 24;
+            String hourStr = hour < 10 ? '0' + String.valueOf(hour) : String.valueOf(hour);
+            note.setText(String.format("%s ", applicationContext.getString(R.string.more_set_alarm_note_tomorrow, hourStr, minuteStr)));
+        }else {
+            String hourStr = hour < 10 ? '0' + String.valueOf(hour) : String.valueOf(hour);
+            note.setText(String.format("%s ", applicationContext.getString(R.string.more_set_alarm_note_today, hourStr, minuteStr)));
+        }
+        if (hour <= 6 || hour >= 22){
+            note.append("\n这可能会打扰到周围的人");
+        }
     }
     private void onCountChanged(int count){
         if (count <= 0){

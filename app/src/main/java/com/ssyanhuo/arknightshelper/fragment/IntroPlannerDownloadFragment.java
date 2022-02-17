@@ -88,7 +88,7 @@ public class IntroPlannerDownloadFragment extends IntroFragment {
             downloadFromLanzou.setVisibility(View.GONE);
             notNow.setVisibility(View.GONE);
             downloadFinished.setVisibility(View.VISIBLE);
-            ((FloatingActionButton) getView().findViewById(R.id.intro_planner_download_next)).setVisibility(View.VISIBLE);
+            getView().findViewById(R.id.intro_planner_download_next).setVisibility(View.VISIBLE);
         }
     }
 
@@ -102,34 +102,16 @@ public class IntroPlannerDownloadFragment extends IntroFragment {
     public void onStart() {
         super.onStart();
         downloadFromCoolapk = getView().findViewById(R.id.intro_planner_download_from_coolapk);
-        downloadFromCoolapk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IntentUtils.openURL("https://www.coolapk.com/apk/263387", getActivity());
-            }
-        });
+        downloadFromCoolapk.setOnClickListener(v -> IntentUtils.openURL("https://www.coolapk.com/apk/263387", getActivity()));
         downloadFromLanzou = getView().findViewById(R.id.intro_planner_download_from_lanzou);
-        downloadFromLanzou.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IntentUtils.openURL("https://ww.lanzous.com/ico7bfe", getActivity());
-            }
-        });
+        downloadFromLanzou.setOnClickListener(v -> IntentUtils.openURL("https://ww.lanzous.com/ico7bfe", getActivity()));
         notNow = getView().findViewById(R.id.intro_planner_download_not_now);
-        notNow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "日后可以从设置中重新启用刷图规划功能", Toast.LENGTH_SHORT).show();
-                goNext();
-            }
+        notNow.setOnClickListener(v -> {
+            Toast.makeText(getActivity(), "日后可以从设置中重新启用刷图规划功能", Toast.LENGTH_SHORT).show();
+            goNext();
         });
         downloadFinished = getView().findViewById(R.id.intro_planner_download_finished);
-        ((FloatingActionButton) getView().findViewById(R.id.intro_planner_download_next)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goNext();
-            }
-        });
+        getView().findViewById(R.id.intro_planner_download_next).setOnClickListener(v -> goNext());
     }
 
 }

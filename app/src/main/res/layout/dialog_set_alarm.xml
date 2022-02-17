@@ -30,6 +30,6 @@
         android:textSize="12sp"
         android:gravity="right"
         android:textAlignment="gravity"
-        android:text="@string/timer_note"
+        android:text=""
         android:layout_marginTop="@dimen/activity_vertical_margin"/>
 </LinearLayout>

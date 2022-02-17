@@ -32,7 +32,8 @@
         android:theme="@style/AppTheme.Default"
         android:usesCleartextTraffic="true">
         <activity android:name=".activity.MainActivity"
-            android:theme="@style/AppTheme2">
+            android:theme="@style/AppTheme2"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -80,7 +81,8 @@
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_lab" />
 
-        <receiver android:name=".service.BroadcastReceiver">
+        <receiver android:name=".service.BroadcastReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.ssyanhuo.arknightshelper.stopservice" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -92,7 +94,8 @@
             android:name=".service.QSTileService"
             android:icon="@drawable/ic_notification"
             android:label="@string/app_name"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>

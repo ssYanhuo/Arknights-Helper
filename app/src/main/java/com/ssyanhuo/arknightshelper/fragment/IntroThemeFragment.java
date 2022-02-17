@@ -69,11 +69,6 @@ public class IntroThemeFragment extends IntroFragment {
     @Override
     public void onStart() {
         super.onStart();
-        ((FloatingActionButton) getView().findViewById(R.id.intro_theme_next)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goNext();
-            }
-        });
+        ((FloatingActionButton) getView().findViewById(R.id.intro_theme_next)).setOnClickListener(v -> goNext());
     }
 }
