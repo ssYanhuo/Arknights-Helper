@@ -423,7 +423,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 .setCancelable(false)
                 .create();
 
-
         imageView.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");

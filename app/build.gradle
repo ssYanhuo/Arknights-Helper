@@ -6,8 +6,8 @@ android {
         applicationId "com.ssyanhuo.arknightshelper"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 64
-    versionName "RC-14"
+        versionCode 65
+    versionName "RC-14.1"
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

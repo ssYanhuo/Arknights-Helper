@@ -1,5 +1,5 @@
 {
-    "versionCode": 64,
-    "versionName": "RC-14",
-    "releaseNote": "[Info]更新到该版本请清除软件数据后再使用\n[Mod]适配Android12\n[Mod]同步最新干员数据\n[Fix]修复Android12环境下悬浮窗尺寸问题"
+    "versionCode": 65,
+    "versionName": "RC-14.1",
+    "releaseNote": "[Info]更新到该版本请清除软件数据后再使用\n[Mod]同步最新干员数据"
 }
